@@ -127,12 +127,12 @@ class PostgresConnector extends Connector implements ConnectorInterface
     protected function parseSearchPath($searchPath)
     {
         if (is_string($searchPath)) {
-            preg_match_all('/[a-zA-z0-9$]{1,}/i', $searchPath, $matches);
+            preg_match_all('/[^\s,"\']+/', $searchPath, $matches);
 
             $searchPath = $matches[0];
         }
 
-        $searchPath = $searchPath ?? [];
+        $searchPath ??= [];
 
         array_walk($searchPath, function (&$schema) {
             $schema = trim($schema, '\'"');
@@ -144,7 +144,7 @@ class PostgresConnector extends Connector implements ConnectorInterface
     /**
      * Format the search path for the DSN.
      *
-     * @param  array|string  $searchPath
+     * @param  array  $searchPath
      * @return string
      */
     protected function quoteSearchPath($searchPath)
