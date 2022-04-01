@@ -56,8 +56,9 @@
                             <form role="form" class="text-start" method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="input-group input-group-outline my-3">
-                                    <label class="form-label">Correo</label>
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <label class="form-label"></label>
+
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Correo">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
