@@ -34,14 +34,17 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
+            @hasrole('Administrator')
+            <!--
             <li class="nav-item">
                 <a class="nav-link text-white active bg-gradient-primary" href="../pages/dashboard.html">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">people_alt</i>
                     </div>
-                    <span class="nav-link-text ms-1">G. de usuarios</span>
+                    <span class="nav-link-text ms-1">Administradores</span>
                 </a>
             </li>
+            -->
             <!-- <li class="nav-item">
               <a class="nav-link text-white " href="../pages/tables.html">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -68,11 +71,19 @@
             </li>-->
 
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/profile.html">
+                <a class="nav-link text-white " href="/users?role=Administrator">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">person</i>
                     </div>
-                    <span class="nav-link-text ms-1">Perfil</span>
+                    <span class="nav-link-text ms-1">Administradores</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/users?role=Supplier">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Proveedores</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -83,6 +94,7 @@
                     <span class="nav-link-text ms-1">Salir</span>
                 </a>
             </li>
+        @endhasrole
         </ul>
     </div>
 </aside>

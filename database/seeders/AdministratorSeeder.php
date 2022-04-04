@@ -1,13 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
 
-class UserSeeder extends Seeder
+class AdministratorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -23,12 +21,14 @@ class UserSeeder extends Seeder
         $user->role = "Administrator";
         $user->phone = "2345432";
         $user->commission = 20;
-        $user->transaction_limit = 40;
+        $user->document_type = "CC";
+            //$user->transaction_limit = 40;
         $user->document = "23425445";
         $user->city = "Bogota";
         $user->address = "calle 58a #90-43";
-        $user->priority = 4;
+        //$user->priority = 4;
         $user->is_enabled = 1;
         $user->save();
+        $user->assignRole('Administrator');
     }
 }
