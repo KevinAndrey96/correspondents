@@ -44,7 +44,7 @@
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
                                         <label for="isEnabled"> Desactivar producto</label>
-                                        <select id="isEnabled" name="isEnabled" class="form-selelct" aria-label="Default select example" onchange="hiddenText()">
+                                        <select id="isEnabled" name="isEnabled" class="form-control" aria-label="Default select example" onchange="hiddenText()">
                                             <option Value=1>No</option>
                                             <option Value=0>Si</option>
                                         </select>
