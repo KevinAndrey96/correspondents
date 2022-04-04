@@ -20,6 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/products', App\Http\Controllers\productController::class);
+Route::get('/balance/create/{id}', [App\Http\Controllers\balanceController::class, 'create']);
+Route::resource('/balance', App\Http\Controllers\balanceController::class);
+Route::get('/profit/create/{id}', [App\Http\Controllers\profitController::class, 'create']);
+Route::resource('/profit', App\Http\Controllers\profitController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

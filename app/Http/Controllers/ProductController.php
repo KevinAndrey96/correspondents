@@ -67,10 +67,10 @@ class ProductController extends Controller
         $product->phone_number = $request->input('phoneNumber');
         $product->code = $request->input('code');
         $product->extra = $request->input('extra');
-        
+
         $product->save();
 
-        return redirect('product');
+        return redirect('products');
         //return response()->json(request()->all());
     }
 
@@ -141,7 +141,7 @@ class ProductController extends Controller
         ];
         $product = Product::findOrFail($productId);
         product::where('id', '=', $productId)->update($productData);
-        return redirect('product');
+        return redirect('products');
     }
 
     /**
@@ -154,6 +154,6 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($productId);
         Product::destroy($productId);
-        return redirect('product');
+        return redirect('products');
     }
 }
