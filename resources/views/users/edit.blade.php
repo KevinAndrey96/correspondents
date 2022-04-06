@@ -48,9 +48,13 @@
     <input type="number" name="commission" min="1" value="{{$user->commission}}">
     <br/>
     <br/>
-    @if (isset($user->transaction_limit))
-        <label>Límite de transacciones:</label>
-        <input type="number" name="transaction_limit" min="1" value="{{$user->transaction_limit}}">
+    <label>Saldo:</label>
+    <input type="number" name="balance" min="1" value="{{$user->balance}}">
+    <br/>
+    <br/>
+    @if (isset($user->max_queue))
+        <label>Maxima cola de transacciones:</label>
+        <input type="number" name="max_queue" min="1" value="{{$user->max_queue}}">
         <br/>
         <br/>
     @endif

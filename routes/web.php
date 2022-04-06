@@ -38,4 +38,4 @@ Route::post('/user/store', [App\Http\Controllers\Users\StoreUsersController::cla
 Route::get('/user/edit/{id}', [App\Http\Controllers\Users\EditUsersController::class, 'edit'])->middleware('auth');
 Route::post('/user/update', [App\Http\Controllers\Users\UpdateUsersController::class, 'update'])->middleware('auth');
 Route::get('/user/delete/{id}', [App\Http\Controllers\Users\DeleteUsersController::class, 'delete'])->middleware('auth');
-
+Route::post('/changeStatusUser', [App\Http\Controllers\Users\ChangeStatusUsersController::class, 'changeStatus'])->middleware('auth');

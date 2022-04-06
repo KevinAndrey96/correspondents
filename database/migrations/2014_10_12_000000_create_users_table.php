@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('role');
             $table->string('phone');
             $table->float('commission')->nullable();
-            $table->integer('transaction_limit')->nullable();
+            $table->float('balance');
+            $table->integer('distributor_id')->nullable();
+            $table->integer('max_queue')->nullable();
             $table->string('document_type')->nullable();
             $table->string('document')->nullable();
             $table->string('city');

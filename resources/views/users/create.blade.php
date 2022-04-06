@@ -36,15 +36,17 @@
     <input type="number" name="commission" min="1">
     <br/>
     <br/>
-    @if ($role == 'Shopkeeper')
-        <label>Límite de transacciones:</label>
-        <input type="number" name="transaction_limit" min="1">
-        <br/>
-        <br/>
-    @endif
+    <label>Saldo:</label>
+    <input type="number" name="balance" min="1">
+    <br/>
+    <br/>
     @if ($role == 'Supplier')
         <label>Prioridad</label>
         <input type="number" name="priority" min="1">
+        <br/>
+        <br/>
+        <label>Maxima cola de transacciones:</label>
+        <input type="number" name="max_queue" min="1">
         <br/>
         <br/>
     @endif

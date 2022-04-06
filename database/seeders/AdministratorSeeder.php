@@ -28,6 +28,7 @@ class AdministratorSeeder extends Seeder
         $user->address = "calle 58a #90-43";
         //$user->priority = 4;
         $user->is_enabled = 1;
+        $user->balance = 400000;
         $user->save();
         $user->assignRole('Administrator');
     }

@@ -26,13 +26,15 @@ class User extends Authenticatable
         'role',
         'phone',
         'commission',
-        'transaction_limit',
+        'max_queue',
         'document_type',
         'document',
         'city',
         'address',
         'priority',
-        'is_enabled'
+        'is_enabled',
+        'distributor_id',
+        'balance',
     ];
 
     /**

@@ -21,12 +21,11 @@ class StoreUsersController extends Controller
         $user->city = $request->input('city');
         $user->address = $request->input('address');
         $user->commission = $request->input('commission');
+        $user->balance = $request->input('balance');
         $user->is_enabled = 1;
-        if ($request->input('role') == 'Shopkeeper') {
-            $user->transaction_limit = $request->input('transaction_limit');
-        }
         if ($request->input('role') == 'Supplier') {
             $user->priority = $request->input('priority');
+            $user->max_queue = $request->input('max_queue');
         }
         $user->password = Hash::make($request->input('password'));
         $user->save();
@@ -35,6 +34,9 @@ class StoreUsersController extends Controller
         }
         if ($request->input('role') == 'Shopkeeper') {
             $user->assignRole('Shopkeeper');
+        }
+        if ($request->input('role') == 'Distributor') {
+            $user->assignRole('Distributor');
         }
         if ($request->input('role') == 'Supplier') {
             $user->assignRole('Supplier');

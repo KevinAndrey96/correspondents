@@ -20,8 +20,9 @@ class UpdateUsersController extends Controller
         $user->document = $request->input('document');
         $user->city = $request->input('city');
         $user->address = $request->input('address');
-        if (isset($request->transaction_limit)) {
-            $user->transaction_limit = $request->input('transaction_limit');
+        $user->balance = $request->input('balance');
+        if (isset($request->max_queue)) {
+            $user->max_queue = $request->input('max_queue');
         }
         if (isset($request->priority)) {
             $user->priority = $request->input('priority');
@@ -30,7 +31,7 @@ class UpdateUsersController extends Controller
             $user->password = Hash::make($request->input('password'));
         }
         $user->save();
-        
+
         return redirect('/users?role='.$user->role);
     }
 }
