@@ -46,7 +46,7 @@
                                   </div>
                               @endif
                               <div class="text-center">
-                              <input class="btn btn-primary" type="submit" value="{{ $mode }} datos">
+                              <input class="btn btn-primary" type="submit" value="{{ $mode }}">
 
                               <a class="btn btn-info" href="{{ url('/profit') }}"> Regresar</a>
                               </div>

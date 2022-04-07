@@ -18,6 +18,14 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\ProductController' => $baseDir . '/app/Http/Controllers/ProductController.php',
+    'App\\Http\\Controllers\\ProfitController' => $baseDir . '/app/Http/Controllers/ProfitController.php',
+    'App\\Http\\Controllers\\Users\\ChangeStatusUsersController' => $baseDir . '/app/Http/Controllers/Users/ChangeStatusUsersController.php',
+    'App\\Http\\Controllers\\Users\\CreateUsersController' => $baseDir . '/app/Http/Controllers/Users/CreateUsersController.php',
+    'App\\Http\\Controllers\\Users\\DeleteUsersController' => $baseDir . '/app/Http/Controllers/Users/DeleteUsersController.php',
+    'App\\Http\\Controllers\\Users\\EditUsersController' => $baseDir . '/app/Http/Controllers/Users/EditUsersController.php',
+    'App\\Http\\Controllers\\Users\\IndexUsersController' => $baseDir . '/app/Http/Controllers/Users/IndexUsersController.php',
+    'App\\Http\\Controllers\\Users\\StoreUsersController' => $baseDir . '/app/Http/Controllers/Users/StoreUsersController.php',
+    'App\\Http\\Controllers\\Users\\UpdateUsersController' => $baseDir . '/app/Http/Controllers/Users/UpdateUsersController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
@@ -146,11 +154,7 @@ return array(
     'Database\\Factories\\UserFactory' => $baseDir . '/database/factories/UserFactory.php',
     'Database\\Seeders\\AdministratorSeeder' => $baseDir . '/database/seeders/AdministratorSeeder.php',
     'Database\\Seeders\\DatabaseSeeder' => $baseDir . '/database/seeders/DatabaseSeeder.php',
-
     'Database\\Seeders\\RoleSeeder' => $baseDir . '/database/seeders/RoleSeeder.php',
-
-    'Database\\Seeders\\UserSeeder' => $baseDir . '/database/seeders/UserSeeder.php',
-
     'DeepCopy\\DeepCopy' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
     'DeepCopy\\Exception\\CloneException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
     'DeepCopy\\Exception\\PropertyException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/PropertyException.php',

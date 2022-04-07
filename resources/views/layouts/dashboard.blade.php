@@ -35,60 +35,29 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             @hasrole('Administrator')
-            <!--
-
-<<<<<<< HEAD
-            -->
-            <!-- <li class="nav-item">
-              <a class="nav-link text-white " href="../pages/tables.html">
-=======
-
->>>>>>> 5f8ac98b724a6654e57ace022f0d1cd956dd5990
-                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                  <i class="material-icons opacity-10">table_view</i>
-                </div>
-                <span class="nav-link-text ms-1">G. Productos</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="../pages/g-distribuidores.html">
-                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                  <i class="material-icons opacity-10">people_alt</i>
-                </div>
-                <span class="nav-link-text ms-1">G. Distrubuidores</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white " href="../pages/g-tenderos.html">
-                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                  <i class="material-icons opacity-10">groups</i>
-                </div>
-                <span class="nav-link-text ms-1">G. Tenderos</span>
-              </a>
-            </li>-->
 
             <li class="nav-item">
                 <a class="nav-link text-white " href="/users?role=Administrator">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">person</i>
                     </div>
-                    <span class="nav-link-text ms-1">Administradores</span>
+                    <span class="nav-link-text ms-1">G. Administradores</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white " href="/users?role=Supplier">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
+                        <i class="material-icons opacity-10">people</i>
                     </div>
-                    <span class="nav-link-text ms-1">Proveedores</span>
+                    <span class="nav-link-text ms-1">G. Proveedores</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white " href="/users?role=Distributor">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
+                        <i class="material-icons opacity-10">groups</i>
                     </div>
-                    <span class="nav-link-text ms-1">Distribuidores</span>
+                    <span class="nav-link-text ms-1">G. Distribuidores</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -104,13 +73,14 @@
                 </form>
             </li>
         @endhasrole
+
         @hasrole('Distributor')
             <li class="nav-item">
                 <a class="nav-link text-white " href="/users?role=Shopkeeper">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
+                        <i class="material-icons opacity-10">store</i>
                     </div>
-                    <span class="nav-link-text ms-1">Tenderos</span>
+                    <span class="nav-link-text ms-1">G. Tenderos</span>
                 </a>
             </li>
             <li class="nav-item">
