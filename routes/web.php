@@ -32,6 +32,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });*/
 
+Route::get('/transactions', [App\Http\Controllers\Transactions\IndexTransactionController::class, 'index'])->middleware('auth');
+Route::get('/transaction/create/{id}', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create'])->middleware('auth');
+Route::post('/transaction/store', [App\Http\Controllers\Transactions\StoreTransactionController::class, 'store'])->middleware('auth');
+Route::post('/transaction/storeClientData', [App\Http\Controllers\Transactions\AddClientDataController::class, 'store'])->middleware('auth');
+
 Route::get('/users', [App\Http\Controllers\Users\IndexUsersController::class, 'index'])->middleware('auth');
 Route::get('/user/create', [App\Http\Controllers\Users\CreateUsersController::class, 'create'])->middleware('auth');
 Route::post('/user/store', [App\Http\Controllers\Users\StoreUsersController::class, 'store'])->middleware('auth');
