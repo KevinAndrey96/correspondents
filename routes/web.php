@@ -39,3 +39,5 @@ Route::get('/user/edit/{id}', [App\Http\Controllers\Users\EditUsersController::c
 Route::post('/user/update', [App\Http\Controllers\Users\UpdateUsersController::class, 'update'])->middleware('auth');
 Route::get('/user/delete/{id}', [App\Http\Controllers\Users\DeleteUsersController::class, 'delete'])->middleware('auth');
 Route::post('/changeStatusUser', [App\Http\Controllers\Users\ChangeStatusUsersController::class, 'changeStatus'])->middleware('auth');
+Route::get('/changePassword', [App\Http\Controllers\Users\ChangePasswordUsersController::class, 'changePassword'])->middleware('auth');
+Route::post('/updatePassword', [App\Http\Controllers\Users\UpdatePasswordUsersController::class, 'updatePassword'])->middleware('auth');

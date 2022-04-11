@@ -31,13 +31,12 @@ class BalanceController extends Controller
             'required'=>':attribute es requerido',
         ];
         $this->validate($request, $fields, $message);
-        
+
         $balanceDate = Carbon::now();
         $balance = new Balance();
         $balance->user_id = $request->input('userID');
         $balance->balance_amount = $request->input('balanceAmount');
         $balance->balance_date = $balanceDate;
-
         $balance->save();
 
         return redirect('balance');
@@ -63,7 +62,7 @@ class BalanceController extends Controller
             'required'=>':attribute es requerido',
         ];
         $this->validate($request, $fields, $message);
-        
+
         $balance = Balance::findOrFail($balanceID);
         $balanceDate = Carbon::now();
 
@@ -73,7 +72,7 @@ class BalanceController extends Controller
             'last_balance_amount' => $balance->balance_amount,
             'last_balance_date' => $balance->balance_date,
         ];
-        
+
         Balance::where('id', '=', $balanceID)->update($balanceData);
 
         return redirect('balance');
