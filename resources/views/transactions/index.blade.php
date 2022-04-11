@@ -16,6 +16,8 @@
                 <th>Distribuidor</th>
                 <th>Proveedor</th>
                 <th>Producto</th>
+                <th>Cliente</th>
+                <th>Documento Cliente</th>
                 <th>Cantidad</th>
                 <th>Fecha</th>
                 <th>Tipo de Transaccion</th>
@@ -32,6 +34,8 @@
                 <td>{{ $transaction->distributor_id }}</td>
                 <td>{{ $transaction->supplier_id }}</td>
                 <td>{{ $transaction->product_id }}</td>
+                <td>{{ $transaction->client_name }}</td>
+                <td>{{ $transaction->client_document }}</td>
                 <td>{{ $transaction->transaction_amount }}</td>
                 <td>{{ $transaction->transaction_date }}</td>
                 <td>{{ $transaction->transaction_type }}</td>

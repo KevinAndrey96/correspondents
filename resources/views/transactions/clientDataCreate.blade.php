@@ -1,3 +1,4 @@
+{{$transaction}}
 <div class="container">
 
     <form action="{{ url('/transaction/storeClientData') }}" method="post" enctype="multipart/form-data">
@@ -15,6 +16,12 @@
             <input type="hidden" class="form-control" name="productID" value="{{$transaction->product_id}}" id="productID" readonly="readonly">
         </div>
         <div class="form-group">
+            <input type="hidden" class="form-control" name="clientName" value="{{$transaction->client_name}}" id="clientName" readonly="readonly">
+        </div>
+        <div class="form-group">
+            <input type="hidden" class="form-control" name="clientDocument" value="{{$transaction->client_document}}" id="clientDocument" readonly="readonly">
+        </div>
+        <div class="form-group">
             <input type="hidden" class="form-control" name="transactionAmount" value="{{$transaction->transaction_amount}}" id="transactionAmount" readonly="readonly">
         </div>
         <div class="form-group">
@@ -27,18 +34,6 @@
             <input type="hidden" class="form-control" name="transactionState" value="{{$transaction->transaction_state}}" id="transactionState" readonly="readonly">
         </div>
 
-        @if($product->client_name == 1)
-        <div class="form-group">
-            <label for="clientName" >nombre del cliente</label>
-            <input type="text" class="form-control" name="clientName" id="clientName" placeholder="Nombre del cliente">
-        </div>
-        @endif
-        @if($product->name_field == 1)
-        <div class="form-group">
-            <label for="nameField" >Documento del Cliente</label>
-            <input type="text" class="form-control" name="nameField" id="nameField" placeholder="Documento del cliente">
-        </div>
-        @endif
         @if($product->email == 1)
         <div class="form-group">
             <label for="email" >Email</label>

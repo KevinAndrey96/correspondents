@@ -20,12 +20,14 @@ class StoreTransactionController extends Controller
             $distributorID = $shopkeeperID;//User::where('id', '=', $shopkeeperID)->get()->distributor_id;
             $productID = $request->input('productID');
             $product = Product::find($productID);
-    
+
             $transaction = new Transaction();
             $transaction->shopkeeper_id = $shopkeeperID;
             $transaction->distributor_id = $distributorID;
             $transaction->supplier_id = 2;
             $transaction->product_id = $productID;
+            $transaction->client_name = $request->input('clientName');
+            $transaction->client_document = $request->input('clientDocument');
             $transaction->transaction_amount = $request->input('transactionAmount');
             $transaction->transaction_date = $request->input('transactionDate');
             $transaction->transaction_type = $request->input('transactionType');

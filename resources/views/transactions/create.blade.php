@@ -6,6 +6,15 @@
             <input type="hidden" class="form-control" name="shopkeeperID" value="{{$shopkeeperID}}" id="shopkeeperID" readonly="readonly">
         </div>
 
+        <div class="form-group">
+            <label for="clientName" >nombre del cliente</label>
+            <input type="text" class="form-control" name="clientName" id="clientName" placeholder="Nombre del cliente">
+        </div>
+        <div class="form-group">
+            <label for="clientDocument" >Documento del Cliente</label>
+            <input type="text" class="form-control" name="clientDocument" id="clientDocument" placeholder="Documento del cliente">
+        </div>
+
         <div>
             <label for="productID"> Producto </label>
             <select id="productID" name="productID" class="form-select" aria-label="Default select example">

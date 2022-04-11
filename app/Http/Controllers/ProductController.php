@@ -59,7 +59,7 @@ class ProductController extends Controller
         $product->product_name = $request->input('productName');
         $product->product_type = $request->input('productType');
         $product->product_description = $request->input('productDescription');
-        $product->name_field = $request->input('nameField');
+        $product->client_document = $request->input('nameField');
         $product->account_type = $request->input('accountType');
         $product->account_number = $request->input('accountNumber');
         $product->email = $request->input('email');
