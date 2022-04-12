@@ -53,7 +53,7 @@
                                 @endif
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
-                                        <label for="nameField" class="ms-0"> ¿Incluye nombre?</label>
+                                        <label for="nameField" class="ms-0"> ¿Incluye Documento del Cliente?</label>
                                         <select id="namefield" name="nameField" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
                                             <option Value=1>Si</option>
                                             <option Value=0>No</option>
