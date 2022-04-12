@@ -129,7 +129,41 @@
                                             <td class="align-middle text-center text-sm">{{ $product->phone_number}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->code}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->extra}}</td>
+                                            <td class="text-center">
+                                                                                                    <!-- Button trigger modal -->
+                                                    <button style="padding: 5px; font-size: 10px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">Ver más</button>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModalMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h6 class="modal-title font-weight-normal" id="exampleModalLabel">Datos de producto</h6>
+                                                                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">×</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form>
+                                                                        <div class="input-group input-group-outline my-3">
+                                                                            <label for="recipient-name" class="col-form-label"></label>
+                                                                            <input type="text" class="form-control" id="recipient-name" placeholder="Dato 1:">
+                                                                        </div>
+                                                                        <div class="input-group input-group-outline my-3">
+                                                                            <label for="recipient-name" class="col-form-label"></label>
+                                                                            <input type="text" class="form-control" id="recipient-name" placeholder="Dato 2:">
+                                                                        </div>
+                                                                        <div class="input-group input-group-outline my-3">
+                                                                            <label for="recipient-name" class="col-form-label"></label>
+                                                                            <input type="text" class="form-control" id="recipient-name" placeholder="Dato 3:">
+                                                                        </div>
+                                                                    </form>
+                                                                  </div>
 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                            </td>
                                         </tr>
                                     @endforeach
 
