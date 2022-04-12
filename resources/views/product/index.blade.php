@@ -1,67 +1,5 @@
 @extends('layouts.dashboard')
 @section('content')
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">payments</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Saldo en red</p>
-                            <h4 class="mb-0">$15.5 M</h4>
-                        </div>
-                    </div>
-                    <div class="card-footer p-1"></div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">send</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">N° Movimientos</p>
-                            <h4 class="mb-0">8300</h4>
-                        </div>
-                    </div>
-                    <div class="card-footer p-1">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">group</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">N° Tenderos</p>
-                            <h4 class="mb-0">3462</h4>
-                        </div>
-                    </div>
-                    <div class="card-footer p-1">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">send</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Dinero en Op.</p>
-                            <h4 class="mb-0">$753.000</h4>
-                        </div>
-                    </div>
-                    <div class="card-footer p-1">
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row mt-4">
         </div>
 
@@ -116,28 +54,34 @@
                                                     {{ method_field('DELETE') }}
                                                     <button type="submit" class="btn btn-link text-danger text-gradient px-1 mb-0" onclick="return confirm('¿Seguro que deseas eliminar el producto?')"><i style="color: red;" class="material-icons opacity-10">delete</i> Borrar</button>
                                                 </form>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">{{ $product->product_name}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->product_type}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->product_description}}</td>
-                                            <td class="align-middle text-center text-sm">{{ ($product->is_enabled) ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->name_field}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->account_type}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->account_number}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->email}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->client_name}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->phone_number}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->code}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->extra}}</td>
-                                            <td class="text-center">
-                                                                                                    <!-- Button trigger modal -->
-                                                <button style="padding: 5px; font-size: 10px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-dark" data-bs-toggle="modal"
                                                         data-bs-target="#exampleModalMessage"
                                                         data-whatever="{{ $product->product_name}}"
                                                         data-email="{{ $product->email }}"
-                                                >Ver más</button>
+                                                        data-type="{{ $product->product_type}}"
+                                                        data-enabled="{{ ($product->is_enabled) }}"
+                                                        data-account_number="{{ $product->account_number }}"
+                                                        data-account_type="{{ $product->account_type }}"
+                                                        data-client_name="{{ $product->client_name }}"
+                                                        data-phone_number="{{ $product->phone_number }}"
+                                                        data-code="{{ $product->code }}"
+                                                        data-extra="{{ $product->extra }}"
 
+                                                >Ver</button>
                                             </td>
+                                            <td class="align-middle text-center text-sm">{{ $product->product_name}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->product_type ? 'Deposito' : 'Retiro'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->product_description}}</td>
+                                            <td class="align-middle text-center text-sm">{{ ($product->is_enabled) ? 'Si' : 'No'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->name_field ? 'Si' : 'No'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->account_type ? 'Si' : 'No'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->account_number ? 'Si' : 'No'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->email ? 'Si' : 'No'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->client_name ? 'Si' : 'No'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->phone_number ? 'Si' : 'No'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->code ? 'Si' : 'No'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->extra ? 'Si' : 'No'}}</td>
+
                                         </tr>
                                     @endforeach
                                     <!-- Modal -->
@@ -152,18 +96,133 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form>
-                                                        <div class="input-group input-group-outline my-3">
-                                                            <label for="recipient-name" id="product-email" class="col-form-label">Correo Electrónico: </label>
-                                                            <input type="text" class="form-control" id="recipient-name" placeholder="Dato 1:">
+                                                       <div class="row pb-2">
+                                                        <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
+                                                            <div class="card">
+                                                                <div class="card-header p-0 ">
+                                                                    <div class="icon icon-x icon-shape bg-gradient-primary shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
+                                                                        <i class="material-icons opacity-10">email</i>
+                                                                    </div>
+                                                                    <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
+                                                                        <label for="recipient-email" id="product-email" class="col-form-label">Correo:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer p-1"></div>
+                                                            </div>
                                                         </div>
-                                                        <div class="input-group input-group-outline my-3">
-                                                            <label for="recipient-name" class="col-form-label"></label>
-                                                            <input type="text" class="form-control" id="recipient-name" placeholder="Dato 2:">
+                                                        <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
+                                                            <div class="card">
+                                                                <div class="card-header p-0 ">
+                                                                    <div class="icon icon-x icon-shape bg-gradient-dark shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
+                                                                        <i class="material-icons opacity-10">credit_card</i>
+                                                                    </div>
+                                                                    <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
+                                                                        <label for="recipient-type" id="product-type" class="col-form-label">T. Producto:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer p-1"></div>
+                                                            </div>
                                                         </div>
-                                                        <div class="input-group input-group-outline my-3">
-                                                            <label for="recipient-name" class="col-form-label"></label>
-                                                            <input type="text" class="form-control" id="recipient-name" placeholder="Dato 3:">
+                                                       </div>
+                                                       <div class="row pb-2">
+                                                        <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
+                                                            <div class="card">
+                                                                <div class="card-header p-0 ">
+                                                                    <div class="icon icon-x icon-shape bg-gradient-primary shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
+                                                                        <i class="material-icons opacity-10">account_balance</i>
+                                                                    </div>
+                                                                    <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
+                                                                        <label for="recipient-account_type" id="product-account_type" class="col-form-label">T. cuenta:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer p-1"></div>
+                                                            </div>
                                                         </div>
+                                                        <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
+                                                            <div class="card">
+                                                                <div class="card-header p-0 ">
+                                                                    <div class="icon icon-x icon-shape bg-gradient-dark shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
+                                                                        <i class="material-icons opacity-10">notifications_active</i>
+                                                                    </div>
+                                                                    <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
+                                                                        <label for="recipient-enabled" id="product-enabled" class="col-form-label">Activo: </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer p-1"></div>
+                                                            </div>
+                                                        </div>
+                                                       </div>
+                                                       <div class="row pb-2">
+                                                        <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
+                                                            <div class="card">
+                                                                <div class="card-header p-0 ">
+                                                                    <div class="icon icon-x icon-shape bg-gradient-primary shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
+                                                                        <i class="material-icons opacity-10">pin</i>
+                                                                    </div>
+                                                                    <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
+                                                                        <label for="recipient-account_number" id="product-account_number" class="col-form-label">N° cuenta:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer p-1"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
+                                                            <div class="card">
+                                                                <div class="card-header p-0 ">
+                                                                    <div class="icon icon-x icon-shape bg-gradient-dark shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
+                                                                        <i class="material-icons opacity-10">person</i>
+                                                                    </div>
+                                                                    <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
+                                                                        <label for="recipient-client_name" id="product-client_name" class="col-form-label">Nombre cliente: </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer p-1"></div>
+                                                            </div>
+                                                        </div>
+                                                       </div>
+                                                       <div class="row pb-2">
+                                                            <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
+                                                                <div class="card">
+                                                                    <div class="card-header p-0 ">
+                                                                        <div class="icon icon-x icon-shape bg-gradient-primary shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
+                                                                            <i class="material-icons opacity-10">phone_forwarded</i>
+                                                                        </div>
+                                                                        <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
+                                                                            <label for="recipient-phone_number" id="product-phone_number" class="col-form-label">N° Teléfono:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-footer p-1"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
+                                                                <div class="card">
+                                                                    <div class="card-header p-0 ">
+                                                                        <div class="icon icon-x icon-shape bg-gradient-dark shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
+                                                                            <i class="material-icons opacity-10">code</i>
+                                                                        </div>
+                                                                        <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
+                                                                            <label for="recipient-code" id="product-code" class="col-form-label">Código: </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-footer p-1"></div>
+                                                                </div>
+                                                            </div>
+                                                       </div>
+                                                       <div class="row pb-2">
+                                                            <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
+                                                                <div class="card">
+                                                                    <div class="card-header p-0 ">
+                                                                        <div class="icon icon-x icon-shape bg-gradient-primary shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
+                                                                            <i class="material-icons opacity-10">add_circle_outline</i>
+                                                                        </div>
+                                                                        <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
+                                                                            <label for="recipient-extra" id="product-extra" class="col-form-label">Extra:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-footer p-1"></div>
+                                                                </div>
+                                                            </div>
+                                                       </div>
                                                     </form>
                                                 </div>
 
@@ -184,9 +243,27 @@
                                             var modal = $(this)
 
                                             var email = button.data('email')
-                                            modal.find('.modal-title').text('Producto ' + whatever)
+                                            var tipo = button.data('type')
+                                            var enabled = button.data('enabled')
+                                            var account_number = button.data('account_number')
+                                            var account_type = button.data('account_type')
+                                            var client_name = button.data('aclient_name')
+                                            var phone_number = button.data('phone_number')
+                                            var code = button.data('code')
+                                            var extra = button.data('extra')
 
-                                            modal.find('#product-email').text('Correo electrónico: ' + (email ? 'Si' : 'No'))
+                                            modal.find('.modal-title').text('Producto ' + whatever)
+                                            modal.find('#product-email').text('Correo: ' + (email ? 'Si' : 'No'))
+                                            modal.find('#product-type').text('T. Producto: ' + (tipo ? 'Deposito' : 'Retiro'))
+                                            modal.find('#product-enabled').text('Activo: ' + (enabled ? 'Si' : 'No'))
+                                            modal.find('#product-account_number').text('N° Cuenta: ' + (account_number ? 'Si' : 'No' ))
+                                            modal.find('#product-account_type').text('T. Cuenta: ' + (account_type ? 'Si' : 'No' ))
+                                            modal.find('#product-client_name').text('Cliente: ' + (client_name ? 'No' : 'Si' ))
+                                            modal.find('#product-phone_number').text('Teléfono: ' + (phone_number ? 'Si' : 'No' ))
+                                            modal.find('#product-code').text('Código: ' + (code ? 'Si' : 'No' ))
+                                            modal.find('#product-extra').text('Extra: ' + (extra ? 'Si' : 'No' ))
+
+
                                         })
                                     </script>
                                     </tbody>

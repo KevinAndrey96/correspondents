@@ -1,56 +1,70 @@
-<div class="container">
-    
-    @if(Session::has('mensaje'))
-        <div class="alert alert-warning alert-dismissible" role="alert">
-            {{ Session::get('mensaje') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
+@extends('layouts.dashboard')
+@section('content')
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Transacciones <a href="/transaction/create/4" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">currency_exchange</i></a></h6>
+
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-0">
+                            @if(Session::has('mensaje'))
+                                <div class="alert alert-warning alert-dismissible" role="alert">
+                                    {{ Session::get('mensaje') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
+                                </div>
+                            @endif
+                            <table id="my_table" class="table align-items-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tendero</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Distribuidor</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Proveedor</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Producto</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Cliente</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Documento Cliente</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Cantidad</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Fecha</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo de Transaccion</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Estado de Transaccion</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Extras</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Recibo</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach( $transactions as $transaction )
+                                    <tr>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->shopkeeper_id }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->distributor_id }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->supplier_id }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->product_id }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->client_name }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->client_document }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->transaction_amount }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->transaction_date }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->transaction_type }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->transaction_state }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->product_requirements }}</td>
+                                        <td class="align-middle text-center text-sm">
+                                            @if(isset($transaction->transaction_receipt))
+                                                <img class="img-thumbnail img-fluid" src="{{ 'http://127.0.0.1:8000/'.$transaction->transaction_receipt }}" width="100" alt = "No carga">
+                                            @else
+                                                No hay imagen
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    @endif
-
-    <br/>
-    <br/>
-    <table id= "my_table" class="table table-light">
-        <thead class="thead-light">
-            <tr>
-                <th>Tendero</th>
-                <th>Distribuidor</th>
-                <th>Proveedor</th>
-                <th>Producto</th>
-                <th>Cliente</th>
-                <th>Documento Cliente</th>
-                <th>Cantidad</th>
-                <th>Fecha</th>
-                <th>Tipo de Transaccion</th>
-                <th>Estado de Transaccion</th>
-                <th>Extras</th>
-                <th>Recibo</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach( $transactions as $transaction )
-            <tr>
-                <td>{{ $transaction->shopkeeper_id }}</td>
-                <td>{{ $transaction->distributor_id }}</td>
-                <td>{{ $transaction->supplier_id }}</td>
-                <td>{{ $transaction->product_id }}</td>
-                <td>{{ $transaction->client_name }}</td>
-                <td>{{ $transaction->client_document }}</td>
-                <td>{{ $transaction->transaction_amount }}</td>
-                <td>{{ $transaction->transaction_date }}</td>
-                <td>{{ $transaction->transaction_type }}</td>
-                <td>{{ $transaction->transaction_state }}</td>
-                <td>{{ $transaction->product_requirements }}</td>
-                <td>
-                @if(isset($transaction->transaction_receipt))
-                <img class="img-thumbnail img-fluid" src="{{ 'http://127.0.0.1:8000/'.$transaction->transaction_receipt }}" width="100" alt = "No carga">
-                @else
-                No hay imagen
-                @endif
-                </td>
-            </tr>
-            @endforeach
-
-        </tbody>
-    </table>  
-</div>
+    </div>
+@endsection

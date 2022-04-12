@@ -29,16 +29,20 @@
                             @endif
                             @csrf
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="productName" class="form-label"></label>
                                         <input type="text" class="form-control" name="productName" value="{{ isset($product->product_name)?$product->product_name:old('product_name') }}" id="productName" placeholder="Nombre del producto">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-outline  my-3">
-                                        <label for="productType" class="form-label"></label>
-                                        <input type="text" class="form-control" name="productType" value="{{ isset($product->product_type)?$product->product_type:old('product_type') }}" id="productType" placeholder="Tipo del producto">
+                                <div class="col-md-3">
+                                    <div class="input-group input-group-static mb-4">
+                                        <label for="productType" class="ms-0"> Tipo del producto</label>
+                                        <select id="productType" name="productType" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
+                                            <option Value=>Seleccionar opción</option>
+                                            <option Value=Deposit>Deposito</option>
+                                            <option Value=Withdrawal>Retiro</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

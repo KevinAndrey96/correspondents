@@ -1,42 +1,89 @@
-<div class="container">
+@extends('layouts.dashboard')
+@section('content')
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 "> <a href="/home" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a>Crear transacción</h6>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="container">
 
-    <form action="{{ url('/transaction/store') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        <div class="form-group">
+                            <form action="{{ url('/transaction/store') }}" method="post" enctype="multipart/form-data">
+                               <div class="row">
+                            @csrf
+                            <!--<div class="form-group">
             <input type="hidden" class="form-control" name="shopkeeperID" value="{{$shopkeeperID}}" id="shopkeeperID" readonly="readonly">
         </div>
 
         <div class="form-group">
             <label for="clientName" >nombre del cliente</label>
-            <input type="text" class="form-control" name="clientName" id="clientName" placeholder="Nombre del cliente">
+            <input type="hidden" class="form-control" name="clientName" id="clientName" placeholder="Nombre del cliente">
         </div>
         <div class="form-group">
             <label for="clientDocument" >Documento del Cliente</label>
-            <input type="text" class="form-control" name="clientDocument" id="clientDocument" placeholder="Documento del cliente">
-        </div>
+            <input type="hidden" class="form-control" name="clientDocument" id="clientDocument" placeholder="Documento del cliente">
+        </div>-->
+                                <div class="col-md-6">
+                                    <div class="input-group input-group-static mb-4">
+                                        <label  for="">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTipo de transacción</label>
+                                        <select id="" name="" class="form-control" aria-label="Default select example">
+                                            <option class="text-center" value="">seleccionar</option>
+                                            <option class="text-center" value="Deposit">Deposito</option>
+                                            <option class="text-center" value="Withdrawal">Retiro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class=" input-group input-group-outline my-3">
+                                        <label for="transactionAmount" class="form-label"></label>
+                                        <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="1" min="0.0" placeholder="Monto">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
+                                    <label class="custom-control-label" for="customRadio1"><img src="https://artesla.com.co/wp-content/uploads/2021/01/nequi-logo.png" height="80px" width="80px" ></label>
+                                </div>
+                               </div>
+                                <div class="col-md-3">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
+                                    <label class="custom-control-label" for="customRadio1"><img src="https://www.bancolombia.com/wps/wcm/connect/16a1f742-cf9f-4b5d-ac06-d7845c05d88e/logo-grupo-bancolombia.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-16a1f742-cf9f-4b5d-ac06-d7845c05d88e-nAfNfta" height="80px" width="160px" ></label>
+                                </div>
+                                </div>
+                                <div class="col-md-3">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
+                                    <label class="custom-control-label" for="customRadio1"><img src="https://cdn.worldvectorlogo.com/logos/daviplata.svg" height="80px" width="80px" ></label>
+                                </div>
+                                </div>
 
-        <div>
-            <label for="productID"> Producto </label>
-            <select id="productID" name="productID" class="form-select" aria-label="Default select example">
-                @foreach( $products as $product )
-                    <option value="{{ $product->id }}" > {{ $product->product_name }} </option>
-                @endforeach
-            </select>
-        </div>
+                               <!-- <div>
+                                    <label for="productID"> Producto </label>
+                                    <select id="productID" name="productID" class="form-select" aria-label="Default select example">
+                                        @foreach( $products as $product )
+                                            <option value="{{ $product->id }}" > {{ $product->product_name }} </option>
+                                        @endforeach
+                                    </select>
+                                </div>-->
 
-        <div class="form-group">
-            <label for="transactionAmount" class="form-label"> Cantidad </label>
-            <input type="number" class="form-control" name="transactionAmount" value="{{ isset($transaction->transaction_amount)?$transaction->transaction_amount:old('transaction_amount') }}" id="transactionAmount" step="1" min="0.0" placeholder="">
-        </div>
+                            <!--<div class="form-group">
+                                    <label for="transactionAmount" class="form-label"> Cantidad </label>
+                                    <input type="number" class="form-control" name="transactionAmount" value="{{ isset($transaction->transaction_amount)?$transaction->transaction_amount:old('transaction_amount') }}" id="transactionAmount" step="1" min="0.0" placeholder="">
+                                </div>
 
-        <div class="form-group">
+                            <div class="form-group">
             <label for="transactionDate"> Fecha </label>
-            <input type="date" class="form-control" name="transactionDate" value="{{ isset($transaction->transactionDate)?$transaction->transactionDate:old('transactionDate') }}" id="transactionDate" placeholder="aa/mm/dd">
+            <input type="hidden" class="form-control" name="transactionDate" value="{{ isset($transaction->transactionDate)?$transaction->transactionDate:old('transactionDate') }}" id="transactionDate" placeholder="aa/mm/dd">
         </div>
 
         <div>
             <label for="transactionType"> Tipo de transaccion </label>
-            <select id="transactionType" name="transactionType" class="form-select" aria-label="Default select example" onchange = "hiddenText()">
+            <select  id="transactionType" name="transactionType" class="form-select" aria-label="Default select example" onchange = "hiddenText()">
                 <option value="deposito"  {{ old('transactionType') == 'deposito' ? 'selected' : '' }}>
                     Deposito
                 </option>
@@ -44,16 +91,23 @@
                     Retiro
                 </option>
             </select>
-        </div>
+        </div>-->
 
-        <div class="form-group">
-            <input type="hidden" class="form-control" name="transactionState" value="en espera" id="transactionState" readonly="readonly">
-        </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" name="transactionState" value="en espera" id="transactionState" readonly="readonly">
+                                </div>
 
-        <br>
-        <input class="btn btn-success" type="submit" value="continuar">
+                                <div class="text-center">
+                                <input class="btn btn-success" type="submit" value="continuar">
 
-        <a class="btn btn-primary" href="{{ url('/transactions') }}"> Regresar</a>
-    </form>
+                                <a class="btn btn-primary" href="{{ url('/transactions') }}"> Regresar</a>
+                               </div>
+                               </div>
+                            </form>
 
-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+@endsection
