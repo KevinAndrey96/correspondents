@@ -1,4 +1,3 @@
-@extends('layouts.dashboard')
 @section('content')
 <div class="container-fluid py-4">
     <div class="row">
@@ -6,7 +5,9 @@
             <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                        <h6 class="text-white text-center text-capitalize ps-2 mx-6 "> <a href="{{ url('products') }}" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a> {{ $mode }} producto </h6>
+                        <h6 class="text-white text-center text-capitalize ps-2 mx-6 "> <a href="{{ url('products') }}"
+                          class="btn btn-block"><i style="color: white; margin-top: 13px;"
+                               class="material-icons opacity-10">keyboard_return</i></a> {{ $mode }} producto </h6>
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2">
@@ -20,7 +21,13 @@
                                 </ul>
                             </div>
                         @endif
-                        <form>
+                            @if($mode=="Crear")
+                        <form action="{{ url('/products') }}" method="post" enctype="multipart/form-data">
+                            @elseif($mode=="Editar")
+                        <form action="{{ url('/products/'.$product->id) }}" method="post" enctype="multipart/form-data">
+                            {{ method_field('PATCH') }}
+                            @endif
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class=" input-group input-group-outline my-3">
@@ -128,10 +135,9 @@
                                     <input class="btn btn-primary" type="submit" value="{{ $mode }}">
 
                                     <a class="btn btn-info" href="{{ url('/products') }}"> Regresar</a>
-
                                 </div>
                             </div>
-                        </form>
+
                     </div>
                 </div>
             </div>
