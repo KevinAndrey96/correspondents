@@ -64,8 +64,8 @@
                                 @endif
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
-                                        <label for="nameField" class="ms-0"> ¿Incluye Documento del Cliente?</label>
-                                        <select id="namefield" name="nameField" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
+                                        <label for="clientDocument" class="ms-0"> ¿Incluye Documento del Cliente?</label>
+                                        <select id="clientDocument" name="clientDocument" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
                                             <option Value=1>Si</option>
                                             <option Value=0>No</option>
                                         </select>
@@ -135,6 +135,24 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
+                                
+                                <div class="col-md-3">
+                                    <div class=" input-group input-group-outline my-3">
+                                        <label for="productCommission" class="form-label"></label>
+                                        <input type="text" class="form-control" name="productCommission" value="{{ isset($product->product_commission)?$product->product_commission:old('product_commission') }}" id="productCommission" placeholder="Comision del producto">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group input-group-static mb-4">
+                                        <label for="image"> Logo </label>
+                                        @if(isset($product->product_logo))
+                                        </br>
+                                        <img class="img-thumbnail img-fluid" src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" width="100" alt = "No carga">
+                                        </br>
+                                        @endif
+                                        <input type="file" class="form-control" name="image" value="" id="image">
+                                    </div>
+                                </div>
 
                                     <input class="btn btn-primary" type="submit" value="{{ $mode }}">
 

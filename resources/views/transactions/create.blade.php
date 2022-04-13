@@ -11,15 +11,24 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="container">
-
+                            @if(count($errors)>0)
+                                <div class="alert alert-danger" role="alert">
+                                    <ul>
+                                        @foreach( $errors->all() as $error )
+                                            <li> {{ $error }} </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <form action="{{ url('/transaction/store') }}" method="post" enctype="multipart/form-data">
-                               <div class="row">
-                            @csrf
-                            <!--<div class="form-group">
-            <input type="hidden" class="form-control" name="shopkeeperID" value="{{$shopkeeperID}}" id="shopkeeperID" readonly="readonly">
-        </div>
+                            @csrf    
+                                <div class="row">
+                                
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" name="shopkeeperID" value="{{$shopkeeperID}}" id="shopkeeperID" readonly="readonly">
+                                </div>
 
-        <div class="form-group">
+        <!--<div class="form-group">
             <label for="clientName" >nombre del cliente</label>
             <input type="hidden" class="form-control" name="clientName" id="clientName" placeholder="Nombre del cliente">
         </div>
@@ -70,28 +79,6 @@
                                         @endforeach
                                     </select>
                                 </div>-->
-
-                            <!--<div class="form-group">
-                                    <label for="transactionAmount" class="form-label"> Cantidad </label>
-                                    <input type="number" class="form-control" name="transactionAmount" value="{{ isset($transaction->transaction_amount)?$transaction->transaction_amount:old('transaction_amount') }}" id="transactionAmount" step="1" min="0.0" placeholder="">
-                                </div>
-
-                            <div class="form-group">
-            <label for="transactionDate"> Fecha </label>
-            <input type="hidden" class="form-control" name="transactionDate" value="{{ isset($transaction->transactionDate)?$transaction->transactionDate:old('transactionDate') }}" id="transactionDate" placeholder="aa/mm/dd">
-        </div>
-
-        <div>
-            <label for="transactionType"> Tipo de transaccion </label>
-            <select  id="transactionType" name="transactionType" class="form-select" aria-label="Default select example" onchange = "hiddenText()">
-                <option value="deposito"  {{ old('transactionType') == 'deposito' ? 'selected' : '' }}>
-                    Deposito
-                </option>
-                <option value="retiro" {{ old('transactionType') == 'retiro' ? 'selected' : '' }}>
-                    Retiro
-                </option>
-            </select>
-        </div>-->
 
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" name="transactionState" value="en espera" id="transactionState" readonly="readonly">

@@ -1,1 +1,5 @@
-@include('product.form', ['mode'=>'Editar'])
+@extends('layouts.dashboard')
+
+
+    @include('product.form', ['mode'=>'Editar'])
+</form>

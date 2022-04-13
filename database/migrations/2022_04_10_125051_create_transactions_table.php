@@ -20,11 +20,9 @@ return new class extends Migration
             $table->bigInteger('distributor_id')->unsigned();
             $table->bigInteger('supplier_id')->unsigned();
             $table->bigInteger('product_id')->nullable();
-            $table->string('client_name');
-            $table->string('client_document');
             $table->string('phone_number')->nullable();
             $table->string('account_number')->nullable();
-            $table->float('transaction_amount')->default(0);
+            $table->float('transaction_amount')->default(20000);
             $table->date('transaction_date');
             $table->string('transaction_type');
             $table->string('transaction_state');

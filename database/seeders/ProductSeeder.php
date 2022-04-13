@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -11,7 +11,7 @@ class ProductSeeder extends Seeder
     {
         $product = new Product();
         $product->product_name = "Bancolombia";
-        $product->product_type = "Banco";
+        $product->product_type = "Deposit";
         $product->product_description = "lorem ipsum";
         $product->product_commission = 500;
         $product->is_enabled = 1;

@@ -10,10 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CreateTransactionController extends Controller
 {
-    public function create($shopkeeperID)
+    public function create()
     {
         if (Auth::user()->role == 'Shopkeeper') {
             $products = Product::all();
+            $shopkeeperID = Auth::user()->id;
             return view('transactions.create', compact('shopkeeperID', 'products'));
         } 
     }

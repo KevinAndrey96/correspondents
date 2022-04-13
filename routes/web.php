@@ -19,11 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('/products', App\Http\Controllers\productController::class);
-Route::get('/balance/create/{id}', [App\Http\Controllers\balanceController::class, 'create']);
-Route::resource('/balance', App\Http\Controllers\balanceController::class);
-Route::get('/profit/create/{id}', [App\Http\Controllers\profitController::class, 'create']);
-Route::resource('/profit', App\Http\Controllers\profitController::class);
+
+Route::get('/balance/create/{id}', [App\Http\Controllers\BalanceController::class, 'create']);
+Route::resource('/balance', App\Http\Controllers\BlanceController::class);
+Route::get('/profit/create/{id}', [App\Http\Controllers\ProfitController::class, 'create']);
+Route::resource('/profit', App\Http\Controllers\ProfitController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -31,9 +31,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/dashboard', function () {
     return view('dashboard');
 });*/
+Route::resource('/products', App\Http\Controllers\ProductController::class);
 
 Route::get('/transactions', [App\Http\Controllers\Transactions\IndexTransactionController::class, 'index'])->middleware('auth');
-Route::get('/transaction/create/{id}', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create'])->middleware('auth');
+Route::get('/transaction/create', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create'])->middleware('auth');
 Route::post('/transaction/store', [App\Http\Controllers\Transactions\StoreTransactionController::class, 'store'])->middleware('auth');
 Route::post('/transaction/storeClientData', [App\Http\Controllers\Transactions\AddClientDataController::class, 'store'])->middleware('auth');
 

@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('product_logo')->nullable();
             $table->float('product_commission')->nullable();
             $table->boolean('is_enabled')->default(1);
-            $table->boolean('client_name')->default(1);
-            $table->boolean('client_document')->default(1);
+            $table->boolean('client_name')->default(0);
+            $table->boolean('client_document')->default(0);
             $table->boolean('phone_number')->default(0);
             $table->boolean('email')->default(0);
             $table->boolean('account_type')->default(0);

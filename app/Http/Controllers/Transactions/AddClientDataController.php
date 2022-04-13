@@ -18,6 +18,12 @@ class AddClientDataController extends Controller
             $productID = $request->input('productID');
             $product = Product::find($productID);
 
+            if($product->client_name == 1){
+                $productRequirements = $productRequirements.$request->input('clientName').'\r\n';
+            }
+            if($product->client_document == 1){
+                $productRequirements = $productRequirements.$request->input('clientDocument').'\r\n';
+            }
             if($product->account_type == 1){
                 $productRequirements = $productRequirements.$request->input('accountType').'\r\n';
             }
@@ -36,8 +42,6 @@ class AddClientDataController extends Controller
             $transaction->distributor_id = $request->input('distributorID');
             $transaction->supplier_id = $request->input('supplierID');
             $transaction->product_id = $productID;
-            $transaction->client_name = $request->input('clientName');
-            $transaction->client_document = $request->input('clientDocument');
             $transaction->phone_number = $request->input('phoneNumber');
             $transaction->account_number = $request->input('accountNumber');
             $transaction->transaction_amount = $request->input('transactionAmount');

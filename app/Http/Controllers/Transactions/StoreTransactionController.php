@@ -16,23 +16,28 @@ class StoreTransactionController extends Controller
     public function store(Request $request)
     {        
         if (Auth::user()->role == 'Shopkeeper') {
+            $fields = [
+                'transactionAmount'=>'required|numeric|min:20000|max:200000',
+            ];
+            $message = [
+                'required'=>':attribute es requerido',
+            ];
+            $this->validate($request, $fields, $message);
+
             $shopkeeperID = $request->input('shopkeeperID');
-            $distributorID = $shopkeeperID;//User::where('id', '=', $shopkeeperID)->get()->distributor_id;
-            $productID = $request->input('productID');
+            $distributorID = $shopkeeperID;//hardcode
+            $productID = '1';//$request->input('productID');
             $product = Product::find($productID);
 
             $transaction = new Transaction();
             $transaction->shopkeeper_id = $shopkeeperID;
             $transaction->distributor_id = $distributorID;
-            $transaction->supplier_id = 2;
+            $transaction->supplier_id = 2;//hardcode
             $transaction->product_id = $productID;
-            $transaction->client_name = $request->input('clientName');
-            $transaction->client_document = $request->input('clientDocument');
             $transaction->transaction_amount = $request->input('transactionAmount');
-            $transaction->transaction_date = $request->input('transactionDate');
-            $transaction->transaction_type = $request->input('transactionType');
-            $transaction->transaction_state = $request->input('transactionState');
-
+            $transaction->transaction_date = Carbon::now();
+            $transaction->transaction_type = 'Withdrawal';//hardcode
+            $transaction->transaction_state = 'hold';
             return view('transactions.clientDataCreate', compact('transaction', 'product'));   
         }
     }
