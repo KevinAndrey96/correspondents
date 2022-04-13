@@ -20,7 +20,13 @@
                                 </ul>
                             </div>
                         @endif
-                          <form>
+                        @if($mode=="Crear")
+                        <form action="{{ url('/profit') }}" method="post" enctype="multipart/form-data">
+                            @elseif($mode=="Editar")
+                        <form action="{{ url('/profit/'.$profit->id) }}" method="post" enctype="multipart/form-data">
+                            {{ method_field('PATCH') }}
+                            @endif
+                            @csrf
                             <div class="row">
 
                               @if($mode=="Crear")

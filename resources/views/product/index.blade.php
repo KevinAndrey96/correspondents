@@ -70,10 +70,14 @@
                                                 >Ver</button>
                                             </td>
                                             <td class="align-middle text-center text-sm">{{ $product->product_name}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->product_type ? 'Deposito' : 'Retiro'}}</td>
+                                            @if($product->product_type=='Deposit')
+                                                <td class="align-middle text-center text-sm">Deposito</td>
+                                            @else
+                                                <td class="align-middle text-center text-sm">Retiro</td>
+                                            @endif
                                             <td class="align-middle text-center text-sm">{{ $product->product_description}}</td>
                                             <td class="align-middle text-center text-sm">{{ ($product->is_enabled) ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->name_field ? 'Si' : 'No'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->client_document ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->account_type ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->account_number ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->email ? 'Si' : 'No'}}</td>
