@@ -21,9 +21,9 @@
                                 </div>
                             @endif
                             <form action="{{ url('/transaction/store') }}" method="post" enctype="multipart/form-data">
-                            @csrf    
+                            @csrf
                                 <div class="row">
-                                
+
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" name="shopkeeperID" value="{{$shopkeeperID}}" id="shopkeeperID" readonly="readonly">
                                 </div>
@@ -53,22 +53,22 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
-                                    <label class="custom-control-label" for="customRadio1"><img src="https://artesla.com.co/wp-content/uploads/2021/01/nequi-logo.png" height="80px" width="80px" ></label>
-                                </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
+                                        <label class="custom-control-label" for="customRadio1"><img src="https://artesla.com.co/wp-content/uploads/2021/01/nequi-logo.png" height="80px" width="80px" ></label>
+                                    </div>
                                </div>
                                 <div class="col-md-3">
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
-                                    <label class="custom-control-label" for="customRadio1"><img src="https://www.bancolombia.com/wps/wcm/connect/16a1f742-cf9f-4b5d-ac06-d7845c05d88e/logo-grupo-bancolombia.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-16a1f742-cf9f-4b5d-ac06-d7845c05d88e-nAfNfta" height="80px" width="160px" ></label>
-                                </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
+                                        <label class="custom-control-label" for="customRadio1"><img src="https://www.bancolombia.com/wps/wcm/connect/16a1f742-cf9f-4b5d-ac06-d7845c05d88e/logo-grupo-bancolombia.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-16a1f742-cf9f-4b5d-ac06-d7845c05d88e-nAfNfta" height="80px" width="160px" ></label>
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
-                                    <label class="custom-control-label" for="customRadio1"><img src="https://cdn.worldvectorlogo.com/logos/daviplata.svg" height="80px" width="80px" ></label>
-                                </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
+                                        <label class="custom-control-label" for="customRadio1"><img src="https://cdn.worldvectorlogo.com/logos/daviplata.svg" height="80px" width="80px" ></label>
+                                    </div>
                                 </div>
 
                                <!-- <div>
@@ -83,12 +83,11 @@
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" name="transactionState" value="en espera" id="transactionState" readonly="readonly">
                                 </div>
+                                    <div class="text-center">
+                                        <input class="btn btn-success" type="submit" value="continuar">
 
-                                <div class="text-center">
-                                <input class="btn btn-success" type="submit" value="continuar">
-
-                                <a class="btn btn-primary" href="{{ url('/transactions') }}"> Regresar</a>
-                               </div>
+                                        <a class="btn btn-primary" href="{{ url('/transactions') }}"> Regresar</a>
+                                   </div>
                                </div>
                             </form>
 

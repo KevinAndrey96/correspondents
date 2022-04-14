@@ -45,7 +45,13 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
+                                    <div class=" input-group input-group-outline my-3">
+                                        <label for="productCommission" class="form-label"></label>
+                                        <input type="text" class="form-control" name="productCommission" value="{{ isset($product->product_commission)?$product->product_commission:old('product_commission') }}" id="productCommission" placeholder="Comision del producto">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="input-group input-group-outline  my-3">
                                         <label for="productDescription" class="form-label"></label>
                                         <input type="text" class="form-control" name="productDescription" value="{{ isset($product->product_description)?$product->product_description:old('product_description') }}" id="productDescription" placeholder="Descripción del producto">
@@ -125,6 +131,14 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <label for="image">Logo</label>
+                                        @if(isset($product->product_logo))
+                                            <img style="border: 1px solid #000;" class="img-thumbnail img-fluid border-radius-lg" src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" height="35px" width="35px" alt="No carga">
+                                        @endif
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="input-group input-group-static mb-4">
                                         <label for="clientName" class="ms-0"> ¿Incluye nombre del cliente?</label>
@@ -134,32 +148,21 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="text-center">
-                                
-                                <div class="col-md-3">
-                                    <div class=" input-group input-group-outline my-3">
-                                        <label for="productCommission" class="form-label"></label>
-                                        <input type="text" class="form-control" name="productCommission" value="{{ isset($product->product_commission)?$product->product_commission:old('product_commission') }}" id="productCommission" placeholder="Comision del producto">
-                                    </div>
-                                </div>
                                 <div class="col-md-4">
                                     <div class="input-group input-group-static mb-4">
-                                        <label for="image"> Logo </label>
-                                        @if(isset($product->product_logo))
-                                        </br>
-                                        <img class="img-thumbnail img-fluid" src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" width="100" alt = "No carga">
-                                        </br>
-                                        @endif
-                                        <input type="file" class="form-control" name="image" value="" id="image">
+                                        <label for="image">Logo</label>
+                                        <input type="file" class="form-control-file" name="image" value="" id="image">
                                     </div>
                                 </div>
+                                <div class="text-center">
 
                                     <input class="btn btn-primary" type="submit" value="{{ $mode }}">
 
                                     <a class="btn btn-info" href="{{ url('/products') }}"> Regresar</a>
                                 </div>
                             </div>
-
+                        </form>
+                      </form>
                     </div>
                 </div>
             </div>

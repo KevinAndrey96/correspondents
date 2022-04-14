@@ -117,7 +117,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="/transactions/create/">
+                <a class="nav-link text-white " href="/transactions/create/4">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">sell</i>
                     </div>
@@ -150,7 +150,7 @@
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Página</a></li>
                     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Admin.</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Administrador</h6>
+                <h6 class="font-weight-bolder mb-0">Prueba</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -163,7 +163,7 @@
                     <li class="nav-item d-flex align-items-center">
                         <a class="nav-link text-body font-weight-bold px-0">
                             <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none">Administrador 1</span>
+                            <span class="d-sm-inline d-none">Prueba</span>
                         </a>
                     </li>
                     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -176,7 +176,7 @@
                         </a>
                     </li>
                     <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="profile.html" class="nav-link text-body p-0">
+                        <a href="#" class="nav-link text-body p-0">
                             <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
                         </a>
                     </li>

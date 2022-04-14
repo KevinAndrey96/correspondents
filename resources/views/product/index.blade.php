@@ -25,8 +25,10 @@
                                     <thead class="thead-light">
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Logo</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">nombre del producto</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">tipo del producto</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descripción del producto</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">activo?</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Documento</th>
@@ -44,9 +46,7 @@
                                     <tbody>
                                     @foreach( $products as $product )
                                         <tr>
-
                                             <td class="align-middle text-center text-sm">
-
                                                 <a style="color: darkgreen;" href="{{ url('/products/'.$product->id.'/edit') }}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Editar</a>
 
                                                 <form action="{{ url('/products/'.$product->id ) }}" class="d-inline" method="post">
@@ -66,8 +66,16 @@
                                                         data-phone_number="{{ $product->phone_number }}"
                                                         data-code="{{ $product->code }}"
                                                         data-extra="{{ $product->extra }}"
+                                                        data-commission="{{ $product->product_commission }}"
 
                                                 >Ver</button>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                @if(isset($product->product_logo))
+                                                <div>
+                                                    <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">
+                                                </div>
+                                                @endif
                                             </td>
                                             <td class="align-middle text-center text-sm">{{ $product->product_name}}</td>
                                             @if($product->product_type=='Deposit')
@@ -75,6 +83,7 @@
                                             @else
                                                 <td class="align-middle text-center text-sm">Retiro</td>
                                             @endif
+                                            <td class="align-middle text-center text-sm">{{ $product->product_commission }}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->product_description}}</td>
                                             <td class="align-middle text-center text-sm">{{ ($product->is_enabled) ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->client_document ? 'Si' : 'No'}}</td>
@@ -226,7 +235,21 @@
                                                                     <div class="card-footer p-1"></div>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
+                                                                <div class="card">
+                                                                    <div class="card-header p-0 ">
+                                                                        <div class="icon icon-x icon-shape bg-gradient-dark shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
+                                                                               <i class="material-icons opacity-10">attach_money</i>
+                                                                        </div>
+                                                                        <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
+                                                                               <label for="recipient-commission" id="product-commission" class="col-form-label">comisión:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-footer p-1"></div>
+                                                                </div>
+                                                            </div>
                                                        </div>
+
                                                     </form>
                                                 </div>
 
@@ -255,6 +278,7 @@
                                             var phone_number = button.data('phone_number')
                                             var code = button.data('code')
                                             var extra = button.data('extra')
+                                            var commission = button.data('commission')
 
                                             modal.find('.modal-title').text('Producto ' + whatever)
                                             modal.find('#product-email').text('Correo: ' + (email ? 'Si' : 'No'))
@@ -266,6 +290,7 @@
                                             modal.find('#product-phone_number').text('Teléfono: ' + (phone_number ? 'Si' : 'No' ))
                                             modal.find('#product-code').text('Código: ' + (code ? 'Si' : 'No' ))
                                             modal.find('#product-extra').text('Extra: ' + (extra ? 'Si' : 'No' ))
+                                            modal.find('#product-commission').text('Comisión: ' + (commission ))
 
 
                                         })
