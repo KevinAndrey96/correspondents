@@ -19,22 +19,19 @@ class AddClientDataController extends Controller
             $product = Product::find($productID);
 
             if($product->client_name == 1){
-                $productRequirements = $productRequirements.$request->input('clientName').'\r\n';
+                $productRequirements = $productRequirements.$request->input('clientName').',';
             }
             if($product->client_document == 1){
-                $productRequirements = $productRequirements.$request->input('clientDocument').'\r\n';
-            }
-            if($product->account_type == 1){
-                $productRequirements = $productRequirements.$request->input('accountType').'\r\n';
+                $productRequirements = $productRequirements.$request->input('clientDocument').',';
             }
             if($product->email == 1){
-                $productRequirements = $productRequirements.$request->input('email').'\r\n';
+                $productRequirements = $productRequirements.$request->input('email').',';
             }
             if($product->code == 1){
-                $productRequirements = $productRequirements.$request->input('code').'\r\n';
+                $productRequirements = $productRequirements.$request->input('code').',';
             }
             if($product->extra == 1){
-                $productRequirements = $productRequirements.$request->input('extra').'\r\n';
+                $productRequirements = $productRequirements.$request->input('extra').',';
             }
 
             $transaction = new Transaction();
@@ -44,6 +41,7 @@ class AddClientDataController extends Controller
             $transaction->product_id = $productID;
             $transaction->phone_number = $request->input('phoneNumber');
             $transaction->account_number = $request->input('accountNumber');
+            $transaction->account_type = $request->input('accountType');
             $transaction->transaction_amount = $request->input('transactionAmount');
             $transaction->transaction_date = $request->input('transactionDate');
             $transaction->transaction_type = $request->input('transactionType');
