@@ -14,12 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
+            $table->engine="InnoDB";
             $table->id();
             $table->string('product_name');
             $table->string('product_type');
             $table->string('product_description');
             $table->string('product_logo')->nullable();
-            $table->float('product_commission')->nullable();
+            $table->integer('product_commission')->nullable();
             $table->boolean('is_enabled')->default(1);
             $table->boolean('client_name')->default(0);
             $table->boolean('client_document')->default(0);

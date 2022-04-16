@@ -20,9 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('role');
             $table->string('phone');
-            $table->float('commission')->nullable();
-            $table->float('balance');
-            $table->integer('distributor_id')->nullable();
+            $table->float('balance')->nullable();
             $table->integer('max_queue')->nullable();
             $table->string('document_type')->nullable();
             $table->string('document')->nullable();
@@ -34,6 +32,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->unsignedBigInteger('distributor_id')->nullable();
+            $table->foreign('distributor_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

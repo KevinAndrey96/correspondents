@@ -15,12 +15,11 @@ class UpdateUsersController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->phone = $request->input('phone');
-        $user->commission = $request->input('commission');
         $user->document_type = $request->input('document_type');
         $user->document = $request->input('document');
         $user->city = $request->input('city');
         $user->address = $request->input('address');
-        $user->balance = $request->input('balance');
+        //$user->balance = $request->input('balance');
         if (isset($request->max_queue)) {
             $user->max_queue = $request->input('max_queue');
         }

@@ -20,9 +20,7 @@ class AdministratorSeeder extends Seeder
         $user->password = Hash::make('administrator');
         $user->role = "Administrator";
         $user->phone = "2345432";
-        $user->commission = 20;
         $user->document_type = "CC";
-            //$user->transaction_limit = 40;
         $user->document = "23425445";
         $user->city = "Bogota";
         $user->address = "calle 58a #90-43";

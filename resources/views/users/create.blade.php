@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="input-group input-group-static mb-4">
-                                            <label  for="document_type">&nbsp&nbsp&nbsp&nbspTipo de documento</label>
+                                            <label  for="document_type">Tipo de documento</label>
                                             <select id="" name="document_type" class="form-control" aria-label="Default select example">
                                                 <option class="text-center" value="CC">C.C</option>
                                                 <option class="text-center" value="TI">T.I</option>
@@ -60,18 +60,14 @@
                                             <input type="text" class="form-control" name="address" value="" id="" placeholder="Dirección">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class=" input-group input-group-outline my-3">
-                                            <label for="commission" class="form-label"></label>
-                                            <input type="number" class="form-control" name="commission" min="1" value="" id="" placeholder="Comisión">
-                                        </div>
-                                    </div>
+                                    @if ($role != 'Distributor')
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="balance" class="form-label"></label>
                                             <input type="number" class="form-control" name="balance" min="1" value="" id="" placeholder="Saldo">
                                         </div>
                                     </div>
+                                    @endif
                                     @if ($role == 'Supplier')
                                         <div class="col-md-4">
                                             <div class=" input-group input-group-outline my-3">

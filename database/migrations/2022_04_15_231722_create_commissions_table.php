@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_product', function (Blueprint $table) {
+        Schema::create('commissions', function (Blueprint $table) {
             $table->engine="InnoDB";
             $table->id();
-            /*$table->bigInteger('shopkeeper_id');
-            $table->foreign('shopkeeper_id')->references('id')->on('users')->onDelete('cascade');
-            $table->bigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->String('shopkeeper_quota');*/
+            $table->unsignedBigInteger('product_id');
+            $table->integer('com_adm');
+            $table->integer('com_dis');
+            $table->integer('com_sup');
+            $table->integer('com_shp');
             $table->timestamps();
-
-            });
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+        });
     }
 
     /**
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_product');
+        Schema::dropIfExists('commissions');
     }
 };

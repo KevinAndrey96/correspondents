@@ -14,7 +14,7 @@ class StoreTransactionController extends Controller
 {
 
     public function store(Request $request)
-    {        
+    {
         if (Auth::user()->role == 'Shopkeeper') {
             $fields = [
                 'transactionAmount'=>'required|numeric|min:20000|max:200000',
@@ -28,7 +28,6 @@ class StoreTransactionController extends Controller
             $distributorID = $shopkeeperID;//hardcode
             $productID = '1';//$request->input('productID');
             $product = Product::find($productID);
-
             $transaction = new Transaction();
             $transaction->shopkeeper_id = $shopkeeperID;
             $transaction->distributor_id = $distributorID;
@@ -38,7 +37,7 @@ class StoreTransactionController extends Controller
             $transaction->transaction_date = Carbon::now();
             $transaction->transaction_type = 'Withdrawal';//hardcode
             $transaction->transaction_state = 'hold';
-            return view('transactions.clientDataCreate', compact('transaction', 'product'));   
+            return view('transactions.clientDataCreate', compact('transaction', 'product'));
         }
     }
 

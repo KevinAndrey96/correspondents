@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class StoreUsersController extends Controller
@@ -20,12 +21,14 @@ class StoreUsersController extends Controller
         $user->document = $request->input('document');
         $user->city = $request->input('city');
         $user->address = $request->input('address');
-        $user->commission = $request->input('commission');
         $user->balance = $request->input('balance');
         $user->is_enabled = 1;
         if ($request->input('role') == 'Supplier') {
             $user->priority = $request->input('priority');
             $user->max_queue = $request->input('max_queue');
+        }
+        if (Auth::user()->role == 'Distributor') {
+            $user->distributor_id = Auth::user()->id;
         }
         $user->password = Hash::make($request->input('password'));
         $user->save();

@@ -72,18 +72,14 @@
                                             <input type="text" class="form-control" name="address" value="{{$user->address}}" id="" placeholder="Dirección">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class=" input-group input-group-outline my-3">
-                                            <label for="commission" class="form-label"></label>
-                                            <input type="number" class="form-control" name="commission" min="1" value="{{$user->commission}}" id="" placeholder="Comisión">
-                                        </div>
-                                    </div>
+                                    <!--
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="balance" class="form-label"></label>
                                             <input type="number" class="form-control" name="balance" min="1" value="{{$user->balance}}" id="" placeholder="Saldo">
                                         </div>
                                     </div>
+                                    -->
                                     @if (isset($user->max_queue))
                                         <div class="col-md-4">
                                             <div class=" input-group input-group-outline my-3">

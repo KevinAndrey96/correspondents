@@ -32,6 +32,7 @@ class StoreProductController extends Controller
             'required'=>':attribute es requerido',
         ];
         $this->validate($request, $fields, $message);
+        return $request;
 
         $product = new Product();
         $product->product_name = $request->input('productName');

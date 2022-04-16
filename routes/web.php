@@ -48,7 +48,7 @@ Route::patch('/profit/{id}', [App\Http\Controllers\Profits\WithdrawalProfitContr
 Route::delete('/profit/{id}', [App\Http\Controllers\Profits\DestroyProfitController::class, 'destroy'])->middleware('auth');
 
 Route::get('/transactions', [App\Http\Controllers\Transactions\IndexTransactionController::class, 'index'])->middleware('auth');
-Route::get('/transaction/create', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create'])->middleware('auth');
+Route::get('/transactions/create', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create'])->middleware('auth');
 Route::post('/transaction/store', [App\Http\Controllers\Transactions\StoreTransactionController::class, 'store'])->middleware('auth');
 Route::post('/transaction/storeClientData', [App\Http\Controllers\Transactions\AddClientDataController::class, 'store'])->middleware('auth');
 
@@ -61,3 +61,6 @@ Route::get('/user/delete/{id}', [App\Http\Controllers\Users\DeleteUsersControlle
 Route::post('/changeStatusUser', [App\Http\Controllers\Users\ChangeStatusUsersController::class, 'changeStatus'])->middleware('auth');
 Route::get('/changePassword', [App\Http\Controllers\Users\ChangePasswordUsersController::class, 'changePassword'])->middleware('auth');
 Route::post('/updatePassword', [App\Http\Controllers\Users\UpdatePasswordUsersController::class, 'updatePassword'])->middleware('auth');
+
+Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index'])->middleware('auth');
+

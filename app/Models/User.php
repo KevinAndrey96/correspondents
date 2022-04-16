@@ -25,7 +25,6 @@ class User extends Authenticatable
         'password',
         'role',
         'phone',
-        'commission',
         'max_queue',
         'document_type',
         'document',
@@ -64,5 +63,10 @@ class User extends Authenticatable
             'user_product',
             'shopkeeper_id',
             'product_id');
+    }
+
+    public function distributor()
+    {
+        return $this->belongsTo(User::class);
     }
 }
