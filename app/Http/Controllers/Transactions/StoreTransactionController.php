@@ -26,7 +26,7 @@ class StoreTransactionController extends Controller
 
             $shopkeeperID = $request->input('shopkeeperID');
             $distributorID = $shopkeeperID;//hardcode
-            $productID = '1';//$request->input('productID');
+            $productID = $request->input('productID');
             $product = Product::find($productID);
 
             $transaction = new Transaction();
@@ -36,7 +36,7 @@ class StoreTransactionController extends Controller
             $transaction->product_id = $productID;
             $transaction->transaction_amount = $request->input('transactionAmount');
             $transaction->transaction_date = Carbon::now();
-            $transaction->transaction_type = 'Withdrawal';//hardcode
+            $transaction->transaction_type = $request->input('transactionType');
             $transaction->transaction_state = 'hold';
             return view('transactions.clientDataCreate', compact('transaction', 'product'));   
         }

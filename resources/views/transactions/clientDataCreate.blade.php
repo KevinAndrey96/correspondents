@@ -81,7 +81,10 @@
                                             <h6 style="margin-bottom: -10px;" class="text-sm text-center">Tipo de cuenta</h6>
                                             <div class="input-group input-group-outline my-3">
                                                 <label for="accountType" ></label>
-                                                <input type="text" class="form-control" name="accountType" id="accountType" placeholder="Tipo de cuenta">
+                                                <select id="accountType" name="accountType" class="form-control" aria-label="Default select example">
+                                                    <option Value="Ahorros">Ahorros</option>
+                                                    <option Value="Corriente">Corriente</option>
+                                                </select>
                                             </div>
                                         </div>
                                     @endif

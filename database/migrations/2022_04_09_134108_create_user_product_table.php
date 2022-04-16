@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('user_product', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('shopkeeper_id');
+            $table->bigInteger('shopkeeper_id')->unsigned();
             $table->foreign('shopkeeper_id')->references('id')->on('users')->onDelete('cascade');
-            $table->bigInteger('product_id');
+            $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->String('shopkeeper_quota');
             $table->timestamps();

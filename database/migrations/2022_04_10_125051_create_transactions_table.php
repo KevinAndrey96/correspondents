@@ -22,6 +22,7 @@ return new class extends Migration
             $table->bigInteger('product_id')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('account_number')->nullable();
+            $table->string('account_type')->nullable();
             $table->float('transaction_amount')->default(20000);
             $table->date('transaction_date');
             $table->string('transaction_type');

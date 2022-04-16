@@ -28,18 +28,10 @@
                                     <input type="hidden" class="form-control" name="shopkeeperID" value="{{$shopkeeperID}}" id="shopkeeperID" readonly="readonly">
                                 </div>
 
-        <!--<div class="form-group">
-            <label for="clientName" >nombre del cliente</label>
-            <input type="hidden" class="form-control" name="clientName" id="clientName" placeholder="Nombre del cliente">
-        </div>
-        <div class="form-group">
-            <label for="clientDocument" >Documento del Cliente</label>
-            <input type="hidden" class="form-control" name="clientDocument" id="clientDocument" placeholder="Documento del cliente">
-        </div>-->
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static mb-4">
                                         <label  for="">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTipo de transacción</label>
-                                        <select id="" name="" class="form-control" aria-label="Default select example">
+                                        <select id="transactionType" name="transactionType" class="form-control" aria-label="Default select example">
                                             <option class="text-center" value="">seleccionar</option>
                                             <option class="text-center" value="Deposit">Deposito</option>
                                             <option class="text-center" value="Withdrawal">Retiro</option>
@@ -52,6 +44,16 @@
                                         <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="1" min="0.0" placeholder="Monto">
                                     </div>
                                 </div>
+
+                                <div>
+                                    <label for="productID"> Producto </label>
+                                    <select id="productID" name="productID" class="form-select" aria-label="Default select example">
+                                        @foreach( $products as $product )
+                                            <option value="{{ $product->id }}" > {{ $product->product_name}} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="col-md-3">
                                     <div class="form-check mb-3">
                                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
@@ -70,15 +72,6 @@
                                         <label class="custom-control-label" for="customRadio1"><img src="https://cdn.worldvectorlogo.com/logos/daviplata.svg" height="80px" width="80px" ></label>
                                     </div>
                                 </div>
-
-                               <!-- <div>
-                                    <label for="productID"> Producto </label>
-                                    <select id="productID" name="productID" class="form-select" aria-label="Default select example">
-                                        @foreach( $products as $product )
-                                            <option value="{{ $product->id }}" > {{ $product->product_name }} </option>
-                                        @endforeach
-                                    </select>
-                                </div>-->
 
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" name="transactionState" value="en espera" id="transactionState" readonly="readonly">
