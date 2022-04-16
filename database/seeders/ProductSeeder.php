@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
         $product->is_enabled = 1;
         $product->client_name = 1;
         $product->client_document = 1;
-        $product->phone_number = 1;
+        $product->phone_number = 0;
         $product->email = 0;
         $product->account_type = 1;
         $product->account_number = 1;

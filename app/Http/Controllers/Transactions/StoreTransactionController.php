@@ -24,19 +24,15 @@ class StoreTransactionController extends Controller
             ];
             $this->validate($request, $fields, $message);
 
-            $shopkeeperID = $request->input('shopkeeperID');
-            $distributorID = $shopkeeperID;//hardcode
             $productID = $request->input('productID');
             $product = Product::find($productID);
+            
             $transaction = new Transaction();
-            $transaction->shopkeeper_id = $shopkeeperID;
-            $transaction->distributor_id = $distributorID;
-            $transaction->supplier_id = 2;//hardcode
             $transaction->product_id = $productID;
-            $transaction->transaction_amount = $request->input('transactionAmount');
-            $transaction->transaction_date = Carbon::now();
-            $transaction->transaction_type = $request->input('transactionType');
-            $transaction->transaction_state = 'hold';
+            $transaction->amount = $request->input('transactionAmount');
+            $transaction->date = Carbon::now();
+            $transaction->type = $request->input('transactionType');
+            $transaction->status = 'hold';
             return view('transactions.clientDataCreate', compact('transaction', 'product'));
         }
     }

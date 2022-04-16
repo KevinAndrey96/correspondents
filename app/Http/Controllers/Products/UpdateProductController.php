@@ -22,10 +22,8 @@ class UpdateProductController extends Controller
             'isEnabled'=>'required|boolean',
             'clientName'=>'required|boolean',
             'clientDocument'=>'required|boolean',
-            'phoneNumber'=>'required|boolean',
             'email'=>'required|boolean',
             'accountType'=>'required|boolean',
-            'accountNumber'=>'required|boolean',
             'code'=>'required|boolean',
             'extra'=>'required|boolean',
         ];
@@ -42,10 +40,8 @@ class UpdateProductController extends Controller
             'is_enabled'=> $request->input('isEnabled'),
             'client_name'=> $request->input('clientName'),
             'client_document'=> $request->input('clientDocument'),
-            'phone_number'=> $request->input('phoneNumber'),
             'email'=> $request->input('email'),
             'account_type'=> $request->input('accountType'),
-            'account_number'=> $request->input('accountNumber'),
             'code'=> $request->input('code'),
             'extra'=> $request->input('extra'),
         ];

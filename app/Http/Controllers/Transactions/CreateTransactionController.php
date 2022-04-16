@@ -13,9 +13,10 @@ class CreateTransactionController extends Controller
     public function create()
     {
         if (Auth::user()->role == 'Shopkeeper') {
-            $products = Product::all();
-            $shopkeeperID = Auth::user()->id;
-            return view('transactions.create', compact('shopkeeperID', 'products'));
+            $productsDeposit = Product::where('product_type','=','Deposit')->get();
+            $productsWithdrawal = Product::where('product_type','=','Withdrawal')->get();
+            //dd($productsDeposit);
+            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal'));
         } 
     }
 

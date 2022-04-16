@@ -24,10 +24,6 @@
                             @csrf
                                 <div class="row">
 
-                                <div class="form-group">
-                                    <input type="hidden" class="form-control" name="shopkeeperID" value="{{$shopkeeperID}}" id="shopkeeperID" readonly="readonly">
-                                </div>
-
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static mb-4">
                                         <label  for="">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTipo de transacción</label>
@@ -45,16 +41,31 @@
                                     </div>
                                 </div>
 
-                                <div>
-                                    <label for="productID"> Producto </label>
-                                    <select id="productID" name="productID" class="form-select" aria-label="Default select example">
-                                        @foreach( $products as $product )
-                                            <option value="{{ $product->id }}" > {{ $product->product_name}} </option>
-                                        @endforeach
-                                    </select>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" name="productID" value="" id="productID" readonly="readonly">
                                 </div>
 
                                 <div class="col-md-3">
+                                    <label class="form-label">depositos</label>
+                                    <div class="form-check mb-3">
+                                        @foreach( $productsDeposit as $product )
+                                            <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}">
+                                            <label class="custom-control-label" for="customRadio1"><img src="{{$product->product_logo}}" height="80px" width="80px" >{{ $product->product_name}}</label>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="form-label">retiros</label>
+                                    <div class="form-check mb-3">
+                                        @foreach( $productsWithdrawal as $product )
+                                            <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}">
+                                            <label class="custom-control-label" for="customRadio1"><img src="{{$product->product_logo}}" height="80px" width="80px" >{{ $product->product_name}}</label>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <!--<div class="col-md-3">
                                     <div class="form-check mb-3">
                                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
                                         <label class="custom-control-label" for="customRadio1"><img src="https://artesla.com.co/wp-content/uploads/2021/01/nequi-logo.png" height="80px" width="80px" ></label>
@@ -71,11 +82,8 @@
                                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
                                         <label class="custom-control-label" for="customRadio1"><img src="https://cdn.worldvectorlogo.com/logos/daviplata.svg" height="80px" width="80px" ></label>
                                     </div>
-                                </div>
+                                </div>-->
 
-                                <div class="form-group">
-                                    <input type="hidden" class="form-control" name="transactionState" value="en espera" id="transactionState" readonly="readonly">
-                                </div>
                                     <div class="text-center">
                                         <input class="btn btn-success" type="submit" value="continuar">
 

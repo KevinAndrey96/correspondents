@@ -88,15 +88,6 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
-                                        <label for="accountNumber" class="ms-0"> Incluye número de cuenta?</label>
-                                        <select id="accountNumber" name="accountNumber" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
-                                            <option Value=1>Si</option>
-                                            <option Value=0>No</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group input-group-static mb-4">
                                         <label for="email" class="ms-0"> ¿Incluye correo electrónico?</label>
                                         <select id="email" name="email" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
                                             <option Value=1>Si</option>
@@ -108,15 +99,6 @@
                                     <div class="input-group input-group-static mb-4">
                                         <label for="extra" class="ms-0"> ¿Incluye información extra?</label>
                                         <select id="extra" name="extra" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
-                                            <option Value=1>Si</option>
-                                            <option Value=0>No</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group input-group-static mb-4">
-                                        <label for="phoneNumber" class="ms-0"> ¿Incluye número telefónico?</label>
-                                        <select id="phoneNumber" name="phoneNumber" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
                                             <option Value=1>Si</option>
                                             <option Value=0>No</option>
                                         </select>

@@ -32,7 +32,6 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo de Transaccion</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Estado de Transaccion</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Extras</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Recibo</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -44,18 +43,11 @@
                                         <td class="align-middle text-center text-sm">{{ $transaction->product_id }}</td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->client_name }}</td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->client_document }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->transaction_amount }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->transaction_date }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->transaction_type }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->transaction_state }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->product_requirements }}</td>
-                                        <td class="align-middle text-center text-sm">
-                                            @if(isset($transaction->transaction_receipt))
-                                                <img class="img-thumbnail img-fluid" src="{{ 'http://127.0.0.1:8000/'.$transaction->transaction_receipt }}" width="100" alt = "No carga">
-                                            @else
-                                                No hay imagen
-                                            @endif
-                                        </td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->amount }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->date }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->type }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->status }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->detail }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
