@@ -25,12 +25,16 @@ return new class extends Migration
             $table->string('type');
             $table->string('status');
             $table->text('detail')->nullable();
-            $table->string('voucher')->nullable();
+            $table->date('date');
+            $table->text('detail')->nullable();
+            $table->string('boucher')->nullable();
             $table->text('comment')->nullable();
             $table->float('com_adm')->nullable();
             $table->float('com_dis')->nullable();
             $table->float('com_sup')->nullable();
             $table->float('com_shp')->nullable();
+            $table->string('receipt')->nullable();
+
             $table->timestamps();
             $table->foreign('shopkeeper_id')->references('id')->on('users');
         });

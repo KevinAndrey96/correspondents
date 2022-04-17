@@ -16,30 +16,40 @@
                                 @csrf
                                 <div class="row">
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" name="shopkeeperID" value="{{$transaction->shopkeeper_id}}" id="shopkeeperID" readonly="readonly">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" class="form-control" name="distributorID" value="{{$transaction->distributor_id}}" id="distributorID" readonly="readonly">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" class="form-control" name="supplierID" value="{{$transaction->supplier_id}}" id="supplierID" readonly="readonly">
-                                    </div>
-                                    <div class="form-group">
                                         <input type="hidden" class="form-control" name="productID" value="{{$transaction->product_id}}" id="productID" readonly="readonly">
                                     </div>
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" name="transactionAmount" value="{{$transaction->transaction_amount}}" id="transactionAmount" readonly="readonly">
+                                        <input type="hidden" class="form-control" name="transactionAmount" value="{{$transaction->amount}}" id="transactionAmount" readonly="readonly">
                                     </div>
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" name="transactionDate" value="{{$transaction->transaction_date}}" id="transactionDate" readonly="readonly">
+                                        <input type="hidden" class="form-control" name="transactionDate" value="{{$transaction->date}}" id="transactionDate" readonly="readonly">
                                     </div>
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" name="transactionType" value="{{$transaction->transaction_type}}" id="transactionType" readonly="readonly">
+                                        <input type="hidden" class="form-control" name="transactionType" value="{{$transaction->type}}" id="transactionType" readonly="readonly">
                                     </div>
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" name="transactionState" value="{{$transaction->transaction_state}}" id="transactionState" readonly="readonly">
+                                        <input type="hidden" class="form-control" name="transactionState" value="{{$transaction->status}}" id="transactionState" readonly="readonly">
                                     </div>
 
+                                    <div class="col-md-3">
+                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° de cuenta</h6>
+                                        <div class="input-group input-group-outline my-3">
+                                            <label for="accountNumber" ></label>
+                                            <input type="text" class="form-control" name="accountNumber" id="accountNumber" placeholder="Número de cuenta">
+                                        </div>
+                                    </div>
+                                    @if($product->account_type == 1)
+                                        <div class="col-md-3">
+                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">Tipo de cuenta</h6>
+                                            <div class="input-group input-group-outline my-3">
+                                                <label for="accountType" ></label>
+                                                <select id="accountType" name="accountType" class="form-control" aria-label="Default select example">
+                                                    <option Value="Ahorros">Ahorros</option>
+                                                    <option Value="Corriente">Corriente</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endif
                                     @if($product->client_name == 1)
                                       <div class="col-md-4">
                                         <h6 style="margin-bottom: -10px;" class="text-sm text-center">Nombre del cliente</h6>
@@ -64,36 +74,6 @@
                                             <div class="input-group input-group-outline my-3">
                                                <label for="email" ></label>
                                                <input type="email" class="form-control" name="email" value="" id="" placeholder="Correo electrónico">
-                                            </div>
-                                        </div>
-                                    @endif
-                                    @if($product->phone_number == 1)
-                                        <div class="col-md-3">
-                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">Tel. del cliente</h6>
-                                            <div class="input-group input-group-outline my-3">
-                                                <label for="phoneNumber" ></label>
-                                                <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Teléfono del cliente">
-                                            </div>
-                                        </div>
-                                    @endif
-                                    @if($product->account_type == 1)
-                                        <div class="col-md-3">
-                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">Tipo de cuenta</h6>
-                                            <div class="input-group input-group-outline my-3">
-                                                <label for="accountType" ></label>
-                                                <select id="accountType" name="accountType" class="form-control" aria-label="Default select example">
-                                                    <option Value="Ahorros">Ahorros</option>
-                                                    <option Value="Corriente">Corriente</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    @endif
-                                    @if($product->account_number == 1)
-                                        <div class="col-md-3">
-                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° de cuenta</h6>
-                                            <div class="input-group input-group-outline my-3">
-                                                <label for="accountNumber" ></label>
-                                                <input type="text" class="form-control" name="accountNumber" id="accountNumber" placeholder="Número de cuenta">
                                             </div>
                                         </div>
                                     @endif
