@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Balances;
 use App\Models\Balance;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexBalanceController extends Controller
 {
     public function index()
     {
-        $balancesData['balances'] = Balance::all();
-        return view('balance.index',$balancesData);
+        if (Auth::user()->role == 'Administrator') {
+            $balancesData['balances'] = Balance::all();
+            return view('balance.index',$balancesData);
+        }
     }
 }

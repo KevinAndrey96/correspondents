@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class CreateBalanceController extends Controller
 {
-    public function create($userID)
+    public function create()
     {
-        return view('balance.create', compact('userID'));
+        return view('balance.addBalanceShopkeeper');
     }
 }

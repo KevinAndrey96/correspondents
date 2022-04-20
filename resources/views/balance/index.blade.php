@@ -22,10 +22,10 @@
                                 <thead class="thead-light">
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo actual</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Actual</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ultimo Saldo</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ultima fecha</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">¿Es Valido?</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recibo</th>
 
                                 </tr>
                                 </thead>
@@ -34,18 +34,31 @@
                                 @foreach( $balances as $balance )
                                     <tr>
                                         <td>{{ $balance->user_id}}</td>
-                                        <td>{{ $balance->balance_amount}}</td>
-                                        <td>{{ $balance->balance_date}}</td>
-                                        <td>{{ $balance->last_balance_amount}}</td>
-                                        <td>{{ $balance->last_balance_date}}</td>
+                                        <td>{{ $balance->amount}}</td>
+                                        <td>{{ $balance->date}}</td>
+                                        @if($balance->is_valid == 0)
+                                        <td>No</td>
+                                        @else
+                                        <td>Si</td>
+                                        @endif
+                                        <td>default.png</td>
                                         <td>
-                                            <a href="{{ url('/balance/'.$balance->id.'/edit') }}" class="btn btn-warning"> Editar saldo</a>
-
+                                            <!--<a href="{{ url('/balance/'.$balance->id.'/edit') }}" class="btn btn-warning"> Editar saldo</a>
                                             <form action="{{ url('/balance/'.$balance->id ) }}" class="d-inline" method="post">
                                                 @csrf
                                                 {{ method_field('DELETE') }}
                                                 <button type="submit" class="btn btn-danger"onclick="return confirm('¿Quieres borrar?')"> Borrar saldo</button>
+                                            </form>-->
+                                            
+                                            <form action="{{ url('/balance/validate/'.$balance->id ) }}" class="d-inline" method="post">
+                                                @csrf
+                                                @if($balance->is_valid == 0)
+                                                <button type="submit" class="btn btn-danger"onclick="return confirm('¿Quieres Validar esta recarga?')"> Validar Recarga</button>
+                                                @else
+                                                <button type="submit" class="btn btn-danger"onclick="return confirm('¿Quieres Invalidar esta recarga?')"> Invalidar Recarga</button>
+                                                @endif
                                             </form>
+                                            
                                         </td>
                                     </tr>
                                 @endforeach

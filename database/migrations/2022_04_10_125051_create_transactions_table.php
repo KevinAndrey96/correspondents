@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('status');
             $table->text('detail')->nullable();
             $table->date('date');
-            $table->text('detail')->nullable();
             $table->string('boucher')->nullable();
             $table->text('comment')->nullable();
             $table->float('com_adm')->nullable();

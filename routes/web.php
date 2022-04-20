@@ -34,10 +34,12 @@ Route::patch('/products/{id}', [App\Http\Controllers\Products\UpdateProductContr
 Route::delete('/products/{id}', [App\Http\Controllers\Products\DestroyProductController::class, 'destroy'])->middleware('auth');
 
 Route::get('/balance', [App\Http\Controllers\Balances\IndexBalanceController::class, 'index'])->middleware('auth');
-Route::get('/balance/create/{id}', [App\Http\Controllers\Balances\CreateBalanceController::class, 'create'])->middleware('auth');
-Route::post('/balance', [App\Http\Controllers\Balances\StoreBalanceController::class, 'store'])->middleware('auth');
+Route::get('/balance/create', [App\Http\Controllers\Balances\CreateBalanceController::class, 'create'])->middleware('auth');
+Route::post('/balance/store', [App\Http\Controllers\Balances\AddBalanceShopkeeperController::class, 'store'])->middleware('auth');
+Route::post('/balance/validate/{id}', [App\Http\Controllers\Balances\ValidateBalanceController::class, 'isValid'])->middleware('auth');
+
 Route::get('/balance/{id}/edit', [App\Http\Controllers\Balances\EditBalanceController::class, 'edit'])->middleware('auth');
-Route::patch('/balance/{id}', [App\Http\Controllers\Balances\UpdateBalanceController::class, 'update'])->middleware('auth');
+//Route::patch('/balance/{id}', [App\Http\Controllers\Balances\UpdateBalanceController::class, 'update'])->middleware('auth');
 Route::delete('/balance/{id}', [App\Http\Controllers\Balances\DestroyBalanceController::class, 'destroy'])->middleware('auth');
 
 Route::get('/profit', [App\Http\Controllers\Profits\IndexProfitController::class, 'index'])->middleware('auth');
