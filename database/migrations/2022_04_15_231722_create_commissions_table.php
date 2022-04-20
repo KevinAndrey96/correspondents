@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('commissions', function (Blueprint $table) {
             $table->engine="InnoDB";
             $table->id();
+            $table->float('amount');
             $table->unsignedBigInteger('product_id');
-            $table->integer('com_adm');
-            $table->integer('com_dis');
-            $table->integer('com_sup');
-            $table->integer('com_shp');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

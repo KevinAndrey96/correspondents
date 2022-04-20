@@ -65,4 +65,7 @@ Route::get('/changePassword', [App\Http\Controllers\Users\ChangePasswordUsersCon
 Route::post('/updatePassword', [App\Http\Controllers\Users\UpdatePasswordUsersController::class, 'updatePassword'])->middleware('auth');
 
 Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index'])->middleware('auth');
+Route::get('/commissions/users', [App\Http\Controllers\Commissions\UsersCommissionsController::class, 'usersCommissions'])->middleware('auth');
+Route::get('/commissions/create/{id}', [App\Http\Controllers\Commissions\CreateCommissionsController::class, 'create'])->middleware('auth');
+Route::post('/commissions/update', [App\Http\Controllers\Commissions\UpdateCommissionsController::class, 'update'])->middleware('auth');
 
