@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Commission;
 
 class Product extends Model
 {
@@ -34,5 +35,10 @@ class Product extends Model
             'user_product',
             'product_id',
             'shopkeeper_id');
+    }
+
+    public function commissions()
+    {
+        return $this->hasMany(Commission::class);
     }
 }

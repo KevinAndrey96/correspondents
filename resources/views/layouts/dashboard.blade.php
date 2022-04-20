@@ -71,7 +71,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="/commissions">
+                <a class="nav-link text-white " href="/commissions/users?id=supdis">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">credit_card</i>
                     </div>
@@ -87,6 +87,14 @@
                         <i class="material-icons opacity-10">store</i>
                     </div>
                     <span class="nav-link-text ms-1">G. Tenderos</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/commissions/users?id=shopkeeper">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">credit_card</i>
+                    </div>
+                    <span class="nav-link-text ms-1">G. Comisiones</span>
                 </a>
             </li>
         @endhasrole

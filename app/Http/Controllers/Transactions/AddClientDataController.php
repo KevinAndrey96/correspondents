@@ -51,8 +51,8 @@ class AddClientDataController extends Controller
             $transaction->status = $request->input('transactionState');
             $transaction->detail = $detail;
             $transaction->save();
-            
-            return redirect('home');   
+
+            return redirect('home');
         }
     }
 }

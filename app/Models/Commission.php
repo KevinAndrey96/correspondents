@@ -4,18 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
+use App\Models\User;
 
 class Commission extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'amount',
         'product_id',
-        'com_adm',
-        'com_dis',
-        'com_sup',
-        'com_shp'
+        'user_id'
     ];
 
-    public function pr
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
 }
