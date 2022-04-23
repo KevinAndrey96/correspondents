@@ -13,6 +13,7 @@ class AddClientDataController extends Controller
 {
     public function store(Request $request)
     {
+
         if (Auth::user()->role == 'Shopkeeper') {
             $detail = "";
             $productID = $request->input('productID');
@@ -51,7 +52,7 @@ class AddClientDataController extends Controller
             $transaction->status = $request->input('transactionState');
             $transaction->detail = $detail;
             $transaction->save();
-
+            return $transaction;
             return redirect('home');
         }
     }

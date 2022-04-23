@@ -16,7 +16,13 @@
     <thead>
         <tr>
             <th>Producto</th>
-            <th>Comisión</th>
+            @if (Auth::user()->role == 'Distributor')
+            <th>Comisión distribuidor</th>
+            @endif
+            @if (Auth::user()->role == 'Administrator')
+            <th>Comisión general</th>
+            @endif
+            <th>Comisión particular</th>
             <th>Acción</th>
         </tr>
     </thead>
@@ -24,6 +30,19 @@
         @foreach ($commissions as $commission)
             <tr>
                 <td>{{$commission->product->product_name}}</td>
+                @if (Auth::user()->role == 'Distributor')
+                <td>
+                    @foreach ($commission->user->distributor->commissions as $distCommission)
+                            @if ($distCommission->product_id == $commission->product->id)
+                                {{ $distCommission->amount }}
+                                @break
+                            @endif
+                    @endforeach
+                </td>
+                @endif
+                @if (Auth::user()->role == 'Administrator')
+                    <td>{{$commission->product->product_commission}}</td>
+                @endif
                 <td>{{$commission->amount}}</td>
                 <td>
                     <input type="number" id="amount{{$commission->id}}"

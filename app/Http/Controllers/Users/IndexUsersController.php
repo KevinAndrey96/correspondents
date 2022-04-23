@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexUsersController extends Controller
 {
@@ -16,7 +17,8 @@ class IndexUsersController extends Controller
             return view('users.index', compact('role', 'users'));
         }
         if ($role == 'Shopkeeper') {
-            $users = User::where('role', 'like', 'Shopkeeper')->get();
+            $users = User::where('role', 'like', 'Shopkeeper')
+                            ->where('distributor_id', '=', Auth::user()->id)->get();
             return view('users.index', compact('role', 'users'));
         }
         if ($role == 'Supplier') {

@@ -9,6 +9,6 @@ class IndexCommissionsController extends Controller
 {
     public function index()
     {
-        //PRUEBA
+
     }
 }
