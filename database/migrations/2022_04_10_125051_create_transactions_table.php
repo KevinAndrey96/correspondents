@@ -19,23 +19,26 @@ return new class extends Migration
             $table->unsignedBigInteger('shopkeeper_id');
             $table->unsignedBigInteger('distributor_id');
             $table->unsignedBigInteger('supplier_id')->nullable();
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->string('account_number')->nullable();
             $table->float('amount');
             $table->string('type');
             $table->string('status');
             $table->text('detail')->nullable();
             $table->date('date');
-            $table->string('boucher')->nullable();
+            $table->string('voucher')->nullable();
             $table->text('comment')->nullable();
             $table->float('com_adm')->nullable();
             $table->float('com_dis')->nullable();
             $table->float('com_sup')->nullable();
             $table->float('com_shp')->nullable();
-            $table->string('receipt')->nullable();
-
             $table->timestamps();
             $table->foreign('shopkeeper_id')->references('id')->on('users');
+            $table->foreign('distributor_id')->references('id')->on('users');
+            $table->foreign('supplier_id')->references('id')->on('users');
+            $table->foreign('admin_id')->references('id')->on('users');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
