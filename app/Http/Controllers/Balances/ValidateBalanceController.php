@@ -10,22 +10,31 @@ use Illuminate\Support\Facades\Auth;
 
 class ValidateBalanceController extends Controller
 {
-    public function isValid($balanceID)
+    public function isValid($balanceID, Request $request)
     {
         if (Auth::user()->role == 'Administrator') {
             $balance = Balance::find($balanceID);
-            if($balance->is_valid == 0){
-                $balance->is_valid = 1;
-            }elseif($balance->is_valid == 1){
-                $balance->is_valid = 0;
-            }
+            $balance->is_valid = $request->input('status');
             $balance->save();
 
-            /*$user = User::find($balance->user_id);
-            $user->balance = $user->balance+$balance->amount;
-            dd($user->balance);*/
+            $user = User::find($balance->user_id);
+            if($balance->is_valid == 1){
+                if($balance->type == 'Deposit'){
+                    $user->balance = $user->balance+$balance->amount;
+                }elseif($balance->type == 'Withdrawal'){
+                    $user->balance = $user->balance-$balance->amount;
+                }   
+            }else{
+                if($balance->type == 'Deposit'){
+                    $user->balance = $user->balance-$balance->amount;
+                }elseif($balance->type == 'Withdrawal'){
+                    $user->balance = $user->balance+$balance->amount;
+                }   
+            }
+            dd($user->balance);
+            $user->save();
             
-            return redirect('balance');
+            return back();
         }
     }
 }

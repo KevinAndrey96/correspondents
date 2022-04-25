@@ -26,6 +26,7 @@ class AddBalanceShopkeeperController extends Controller
             $balance = new Balance();
             $balance->user_id = Auth::user()->id;
             $balance->amount = $request->input('amount');
+            $balance->type = $request->input('type');
             $balance->date = $date;
             /*
             if ($request->hasFile('image')) {

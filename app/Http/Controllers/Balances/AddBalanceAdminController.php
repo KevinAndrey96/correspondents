@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Balances;
 
 use App\Models\Balance;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,9 +24,11 @@ class AddBalanceAdminController extends Controller
     
             $date = Carbon::now();
             $balance = new Balance();
-            $balance->user_id = Auth::user()->id;
+            $balance->user_id = $request->input('userID');
             $balance->amount = $request->input('amount');
             $balance->date = $date;
+            $balance->type = 'Deposit';
+            $balance->is_valid = 1;
             /*
             if ($request->hasFile('image')) {
                 $pathName = Sprintf('balances/%s.png', $balance->id);
@@ -53,6 +56,15 @@ class AddBalanceAdminController extends Controller
             }
             */
             $balance->save();
+
+            $user = User::find($balance->user_id);
+            if($user->role == 'Shopkeeper'){
+                $user->balance = $user->balance+$balance->amount;
+            }elseif($user->role == 'Supplier'){
+                $user->balance = $user->balance+$balance->amount;
+            }
+            dd($user->balance);
+            $user->save();
     
             return redirect('home');
         }

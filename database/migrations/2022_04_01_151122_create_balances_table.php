@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float('amount')->default(0);
             $table->date('date')->nullable();
             $table->boolean('is_valid')->default(0);
+            $table->string('type');
             $table->string('boucher')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
