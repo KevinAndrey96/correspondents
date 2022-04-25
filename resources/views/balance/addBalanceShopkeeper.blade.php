@@ -13,20 +13,18 @@
             </div>    
         @endif
 
+        <div class="input-group input-group-static mb-4">
+            <label  for="">Tipo de transacción</label>
+            <select id="type" name="type" class="form-control" aria-label="Default select example">
+                <option class="text-center" value="">seleccionar</option>
+                <option class="text-center" value="Deposit">Deposito</option>
+                <option class="text-center" value="Withdrawal">Retiro</option>
+            </select>
+        </div>
+
         <div class="form-group">
             <label for="amount"> Monto </label>
             <input type="number" class="form-control" name="amount" value="" id="amount" step="10000" min="20000.0" placeholder="Monto">
-        </div>
-
-        <div class="col-md-6">
-            <div class="input-group input-group-static mb-4">
-                <label  for="">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTipo de transacción</label>
-                <select id="type" name="ype" class="form-control" aria-label="Default select example">
-                    <option class="text-center" value="">seleccionar</option>
-                    <option class="text-center" value="Deposit">Deposito</option>
-                    <option class="text-center" value="Withdrawal">Retiro</option>
-                </select>
-            </div>
         </div>
 
         <div class="col-md-4">

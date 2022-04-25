@@ -39,7 +39,7 @@ Route::post('/balance/store', [App\Http\Controllers\Balances\AddBalanceShopkeepe
 Route::get('/balance/users', [App\Http\Controllers\Balances\ShowBalanceUsersController::class, 'index'])->middleware('auth');
 Route::get('/balance/add/{id}', [App\Http\Controllers\Balances\CreateBalanceAdminController::class, 'create'])->middleware('auth');
 Route::post('/balance', [App\Http\Controllers\Balances\AddBalanceAdminController::class, 'store'])->middleware('auth');
-Route::post('/balance/validate/{id}', [App\Http\Controllers\Balances\ValidateBalanceController::class, 'isValid'])->middleware('auth');
+Route::post('/balance/validate', [App\Http\Controllers\Balances\ValidateBalanceController::class, 'isValid'])->middleware('auth');
 
 Route::get('/profit', [App\Http\Controllers\Profits\IndexProfitController::class, 'index'])->middleware('auth');
 Route::get('/profit/create/{id}', [App\Http\Controllers\Profits\CreateProfitController::class, 'create'])->middleware('auth');

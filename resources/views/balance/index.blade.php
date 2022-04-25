@@ -21,8 +21,9 @@
                             <table id= "my_table" class="table align-items-center mb-0">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"># de Solicitud  </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Actual</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"># de Solicitud  </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de Solicitud</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
@@ -36,9 +37,16 @@
                                 <tbody>
                                 @foreach( $balances as $balance )
                                     <tr>
-                                        <td>{{ $balance->id}}</td>
                                         <td>{{ $balance->user->name}}</td>
-                                        <td></td>
+                                        <td>{{ $balance->user->balance}}</td>
+                                        <td>{{ $balance->id}}</td>
+                                        @if($balance->type == 'Deposit')
+                                        <td>Deposito</td>
+                                        @elseif($balance->type == 'Withdrawal')
+                                        <td>Retiro</td>
+                                        @elseif($balance->type == 'Recharge')
+                                        <td>Recarga directa</td>
+                                        @endif
                                         <td>{{ $balance->amount}}</td>
                                         <td>{{ $balance->date}}</td>
                                         @if($balance->is_valid == 0)
@@ -63,16 +71,9 @@
                                                     <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$balance->id}}"></label>
                                                 @endif
                                             </div>
-                                            <!--<form action="{{ url('/balance/validate/'.$balance->id ) }}" class="d-inline" method="post">
+                                            <form id="form-status" name="form-status" method="POST" action="{{ url('/balance/validate/' ) }}">
                                                 @csrf
-                                                @if($balance->is_valid == 0)
-                                                <button type="submit" class="btn btn-danger"onclick="return confirm('¿Quieres Validar esta recarga?')"> Validar Recarga</button>
-                                                @else
-                                                <button type="submit" class="btn btn-danger"onclick="return confirm('¿Quieres Invalidar esta recarga?')"> Invalidar Recarga</button>
-                                                @endif
-                                            </form>-->
-                                            <form id="form-status" name="form-status" method="POST" action="{{ url('/balance/validate/'.$balance->id ) }}">
-                                                @csrf
+                                                <input type="hidden" name="id" id="id">
                                                 <input type="hidden" name="status" id="status">
                                             </form>
                                             <script>
@@ -81,16 +82,17 @@
                                                     var toggle = document.getElementById("togglestatus"+id);
                                                     var status = document.getElementById("status");
                                                     var form = document.getElementById("form-status");
+                                                    var balance_id = document.getElementById("id");
 
                                                     if (toggle.checked == true) {
                                                         status.value = 1;
                                                     } else {
                                                         status.value = 0;
                                                     }
+                                                    balance_id.value = id;
                                                     form.submit();
                                                 }
-                                            </script>
-                                            
+                                            </script>   
                                         </td>
                                     </tr>
                                 @endforeach
