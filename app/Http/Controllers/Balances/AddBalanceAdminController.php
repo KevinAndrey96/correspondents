@@ -27,7 +27,7 @@ class AddBalanceAdminController extends Controller
             $balance->user_id = $request->input('userID');
             $balance->amount = $request->input('amount');
             $balance->date = $date;
-            $balance->type = 'Recharge';
+            $balance->type = $request->input('type');
             $balance->is_valid = 1;
             /*
             if ($request->hasFile('image')) {
@@ -58,15 +58,14 @@ class AddBalanceAdminController extends Controller
             $balance->save();
 
             $user = User::find($balance->user_id);
-            if($user->role == 'Shopkeeper'){
+            if($balance->type == 'Deposit'){
                 $user->balance = $user->balance+$balance->amount;
-            }elseif($user->role == 'Supplier'){
-                $user->balance = $user->balance+$balance->amount;
+            }elseif($balance->type == 'Withdrawal'){
+                $user->balance = $user->balance-$balance->amount;
             }
-            //dd($user->balance);
             $user->save();
     
-            return redirect('home');
+            return redirect('balance');
         }
     }
 }

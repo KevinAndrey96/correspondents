@@ -19,13 +19,13 @@ class ValidateBalanceController extends Controller
 
             $user = User::find($balance->user_id);
             if($balance->is_valid == 1){
-                if($balance->type == 'Deposit' || $balance->type == 'Recharge'){
+                if($balance->type == 'Deposit'){
                     $user->balance = $user->balance+$balance->amount;
                 }elseif($balance->type == 'Withdrawal'){
                     $user->balance = $user->balance-$balance->amount;
                 }
             }else{
-                if($balance->type == 'Deposit' || $balance->type == 'Recharge'){
+                if($balance->type == 'Deposit'){
                     $user->balance = $user->balance-$balance->amount;
                 }elseif($balance->type == 'Withdrawal'){
                     $user->balance = $user->balance+$balance->amount;

@@ -15,7 +15,7 @@
                 <td>{{ $user->role }}</td>
                 <td>{{ $user->balance }}</td>
                 <td>
-                    <a href="{{ url('/balance/add/'.$user->id) }}" class="btn btn-warning"> Recargar saldo</a>
+                    <a href="{{ url('/balance/add/'.$user->id) }}" class="btn btn-warning"> G. saldo</a>
                 </td>
             </tr>
             @endforeach
