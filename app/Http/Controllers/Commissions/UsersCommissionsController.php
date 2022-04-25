@@ -21,7 +21,8 @@ class UsersCommissionsController extends Controller
 
      }
      if ($role == 'Distributor') {
-         $users = User::where('role', 'like', 'Shopkeeper')->get();
+         $users = User::where('role', 'like', 'Shopkeeper')
+                        ->where('distributor_id', '=', Auth::user()->id)->get();
 
          return view('commissions.users', compact('users'));
      }

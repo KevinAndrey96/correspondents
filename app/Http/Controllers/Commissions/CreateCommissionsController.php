@@ -7,12 +7,24 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Commission;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class CreateCommissionsController extends Controller
 {
     public function create($id)
     {
         $user = User::find($id);
+        $userLogged = User::find(Auth::user()->id);
+        if ($userLogged->role == 'Distributor') {
+            if ($userLogged->id != $user->distributor_id) {
+                return redirect('/home')->with('deniedAccess', 'Acceso denegado');
+            }
+        }
+        if ($userLogged->role == 'Administrator') {
+            if ($user->role != 'Distributor' && $user->role != 'Supplier') {
+                return redirect('/home')->with('deniedAccess', 'Acceso denegado');
+            }
+        }
         $products = Product::all();
         foreach ($products as $product) {
             $commission = Commission::where('user_id', '=', $id)

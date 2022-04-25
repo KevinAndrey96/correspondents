@@ -77,5 +77,9 @@ class User extends Authenticatable
         return $this->hasMany(Commission::class);
     }
 
+    public function commission()
+    {
+        return $this->hasOne(Commission::class);
+    }
 
 }

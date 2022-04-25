@@ -1,6 +1,11 @@
 @extends('layouts.dashboard')
 
 @section('content')
+    @if(Session::has('deniedAccess'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('deniedAccess') }}
+        </div>
+    @endif
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
