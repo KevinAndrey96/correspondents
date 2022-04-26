@@ -67,8 +67,7 @@ class AddBalanceShopkeeperController extends Controller
                 $userData = 'Entidad:'.$request->input('entity').', Numero de cuenta:'.$request->input('accountNumber');
                 $balance->boucher = $userData;
             }            
-            dd($balance);
-            //$balance->save();
+            $balance->save();
     
             return redirect('home');
         }
