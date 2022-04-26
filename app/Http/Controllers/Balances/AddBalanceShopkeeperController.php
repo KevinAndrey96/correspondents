@@ -17,44 +17,58 @@ class AddBalanceShopkeeperController extends Controller
                 'amount'=>'required|numeric|min:20000',
                 'image'=>'required',
             ];
+            if($request->input('type') == 'Withdrawal'){
+                $fields = [
+                    'amount'=>'required|numeric|min:20000',
+                    'accountNumber'=>'required',
+                    'entity'=>'required',
+                ];
+            }
             $message = [
                 'required'=>':attribute es requerido',
             ];
             $this->validate($request, $fields, $message);
-    
+
             $date = Carbon::now();
             $balance = new Balance();
             $balance->user_id = Auth::user()->id;
             $balance->amount = $request->input('amount');
-            $balance->type = $request->input('type');
             $balance->date = $date;
-            /*
-            if ($request->hasFile('image')) {
-                $pathName = Sprintf('balances/%s.png', $balance->id);
-                Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
-                //dd(Storage::path('balances\\' .$balance->id . '.png'));
-                //dd(Storage::disk('public')->path('balances/' .$balance->id . '.png'));
-                $client = new Client();
-                $url = "https://corresponsales.asparecargas.net/upload.php";
-                $client->request(RequestAlias::METHOD_POST, $url, [
-                    'multipart' => [
-                        [
-                            'name' => 'image',
-                            'contents' => fopen(
-                                str_replace('\\', '/', Storage::disk('public')->path('balances/' .$balance->id . '.png')),'r'),
-                        ],
-                        [
-                            'name' => 'path',
-                            'contents' => 'balances'
+            $balance->type = $request->input('type');
+            if($balance->type == 'Deposit'){
+                /*
+                if ($request->hasFile('image')) {
+                    $pathName = Sprintf('balances/%s.png', $balance->id);
+                    Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
+                    //dd(Storage::path('balances\\' .$balance->id . '.png'));
+                    //dd(Storage::disk('public')->path('balances/' .$balance->id . '.png'));
+                    $client = new Client();
+                    $url = "https://corresponsales.asparecargas.net/upload.php";
+                    $client->request(RequestAlias::METHOD_POST, $url, [
+                        'multipart' => [
+                            [
+                                'name' => 'image',
+                                'contents' => fopen(
+                                    str_replace('\\', '/', Storage::disk('public')->path('balances/' .$balance->id . '.png')),'r'),
+                            ],
+                            [
+                                'name' => 'path',
+                                'contents' => 'balances'
+                            ]
                         ]
-                    ]
-                ]);
-                $balance->boucher = '/storage/balances/' . $balance->id . '.png';
-                $balance->save();
-                unlink(str_replace('\\', '/', storage_path('app/public/balances/'.$balance->id.'.png')));
+                    ]);
+                    $balance->boucher = '/storage/balances/' . $balance->id . '.png';
+                    $balance->save();
+                    unlink(str_replace('\\', '/', storage_path('app/public/balances/'.$balance->id.'.png')));
+                }
+                */
             }
-            */
-            $balance->save();
+            if($balance->type == 'Withdrawal'){
+                $userData = 'Entidad:'.$request->input('entity').', Numero de cuenta:'.$request->input('accountNumber');
+                $balance->boucher = $userData;
+            }            
+            dd($balance);
+            //$balance->save();
     
             return redirect('home');
         }
