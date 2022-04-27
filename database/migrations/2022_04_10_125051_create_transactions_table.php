@@ -14,28 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->engine="InnoDB";
-            $table->id();
-            $table->unsignedBigInteger('shopkeeper_id');
-            $table->unsignedBigInteger('distributor_id');
-            $table->unsignedBigInteger('supplier_id')->nullable();
-            $table->unsignedBigInteger('product_id');
-            $table->string('account_number')->nullable();
-            $table->float('amount');
-            $table->string('type');
-            $table->string('status');
-            $table->text('detail')->nullable();
-            $table->date('date');
-            $table->string('boucher')->nullable();
-            $table->text('comment')->nullable();
-            $table->float('com_adm')->nullable();
-            $table->float('com_dis')->nullable();
-            $table->float('com_sup')->nullable();
-            $table->float('com_shp')->nullable();
-            $table->string('receipt')->nullable();
 
-            $table->timestamps();
-            $table->foreign('shopkeeper_id')->references('id')->on('users');
         });
     }
 
@@ -49,3 +28,4 @@ return new class extends Migration
         Schema::dropIfExists('transactions');
     }
 };
+
