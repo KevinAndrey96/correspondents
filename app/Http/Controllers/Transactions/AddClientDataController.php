@@ -5,15 +5,16 @@ namespace App\Http\Controllers\Transactions;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 use Carbon\Carbon;
 
 class AddClientDataController extends Controller
 {
     public function store(Request $request)
     {
-
         if (Auth::user()->role == 'Shopkeeper') {
             $detail = "";
             $productID = $request->input('productID');
@@ -44,6 +45,7 @@ class AddClientDataController extends Controller
             $transaction = new Transaction();
             $transaction->shopkeeper_id = $shopkeeperID;
             $transaction->distributor_id = $distributorID;
+            $transaction->admin_id = 1;
             $transaction->product_id = $productID;
             $transaction->account_number = $request->input('accountNumber');
             $transaction->amount = $request->input('transactionAmount');
@@ -51,9 +53,20 @@ class AddClientDataController extends Controller
             $transaction->type = $request->input('transactionType');
             $transaction->status = $request->input('transactionState');
             $transaction->detail = $detail;
-            $transaction->save();
-            return $transaction;
-            return redirect('home');
+            //$transaction->save();
+
+            $suppliers = User::where('role', 'like', 'supplier')->orderBy('priority', 'asc')->get();
+
+            /*
+            foreach ($suppliers as $supplier) {
+
+
+            }
+            */
+
+
+
+            return redirect('/home');
         }
     }
 }
