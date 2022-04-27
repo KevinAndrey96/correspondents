@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Transactions;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 use Carbon\Carbon;
 
 class AddClientDataController extends Controller
@@ -51,9 +53,16 @@ class AddClientDataController extends Controller
             $transaction->type = $request->input('transactionType');
             $transaction->status = $request->input('transactionState');
             $transaction->detail = $detail;
-            $transaction->save();
+            //$transaction->save();
+
+            $suppliers = User::where('role', 'like', 'supplier')->orderBy('priority', 'asc')->get();
+
+            /*
+            foreach ($suppliers as $supplier) {
 
 
+            }
+            */
 
 
 
