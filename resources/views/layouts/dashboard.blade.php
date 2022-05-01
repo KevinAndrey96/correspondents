@@ -37,7 +37,14 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             @hasrole('Administrator')
-
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/home">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Inicio</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link text-white " href="/users?role=Administrator">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -141,6 +148,47 @@
                 </a>
             </li>
         @endhasrole
+
+        @hasrole('Supplier')
+            <div class="form-check form-switch ">
+                <label></label>
+                <label id="onlineLabel"> 
+                @if (Auth::user()->is_online == 1)
+                    Online</label>
+                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{Auth::user()->id}}" checked onchange="changeOnlineStatus({{ Auth::user()->id}})">
+                    <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{Auth::user()->id}}"></label>
+                @else
+                    Offline </label>
+                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{ Auth::user()->id }}" onchange="changeOnlineStatus({{ Auth::user()->id }})">
+                    <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{ Auth::user()->id }}"></label>
+                @endif
+            </div>
+            <form id="form-status" name="form-status" method="POST" action="{{ url('/changeOnlineStatusUser') }}">
+                @csrf
+                <input type="hidden" name="id" id="id">
+                <input type="hidden" name="status" id="status">
+            </form>
+            <script>
+                function changeOnlineStatus(id)
+                {
+                    var toggle = document.getElementById("togglestatus"+id);
+                    var status = document.getElementById("status");
+                    var form = document.getElementById("form-status");
+                    var supplier_id = document.getElementById("id");
+
+                    if (toggle.checked == true) {
+                        status.value = 1;
+                        document.getElementById("onlineLabel").innerHTML = 'Online';
+                    } else {
+                        status.value = 0;
+                        document.getElementById("onlineLabel").innerHTML = 'Offline';
+                    }
+                    supplier_id.value = id;
+                    form.submit();
+                }
+            </script>
+        @endhasrole
+
             <li class="nav-item">
                 <a class="nav-link text-white "  href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">

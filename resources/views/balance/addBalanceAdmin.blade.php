@@ -3,7 +3,7 @@ Duvan esto es un modal
 <div class="container">
     <form action="{{ url('/balance') }}" method="post" enctype="multipart/form-data">
         @csrf
-        <h1> Recargar saldo </h1>
+        <h1> Gestionar saldo </h1>
 
         @if(count($errors)>0)
             <div class="alert alert-danger" role="alert">
@@ -45,7 +45,7 @@ Duvan esto es un modal
         </div>
 
         <br>
-        <input class="btn btn-success" type="submit" value="Recargar saldo">
+        <input class="btn btn-success" type="submit" value="Gestionar saldo">
 
         <a class="btn btn-primary" href="{{ url('/balance/users') }}"> Regresar</a>
     </form>

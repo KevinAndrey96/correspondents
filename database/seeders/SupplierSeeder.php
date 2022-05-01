@@ -29,6 +29,7 @@ class SupplierSeeder extends Seeder
         $user->priority = 4;
         $user->max_queue = 5;
         $user->is_enabled = 1;
+        $user->is_online = 1;
         $user->save();
         $user->assignRole('Supplier');
 
@@ -45,6 +46,7 @@ class SupplierSeeder extends Seeder
         $user->priority = 3;
         $user->max_queue = 6;
         $user->is_enabled = 1;
+        $user->is_online = 1;
         $user->save();
         $user->assignRole('Supplier');
 
@@ -61,6 +63,7 @@ class SupplierSeeder extends Seeder
         $user->priority = 7;
         $user->max_queue = 3;
         $user->is_enabled = 1;
+        $user->is_online = 1;
         $user->save();
         $user->assignRole('Supplier');
 
@@ -77,6 +80,7 @@ class SupplierSeeder extends Seeder
         $user->priority = 5;
         $user->max_queue = 4;
         $user->is_enabled = 1;
+        $user->is_online = 1;
         $user->save();
         $user->assignRole('Supplier');
 
@@ -94,6 +98,7 @@ class SupplierSeeder extends Seeder
         $user->priority = 2;
         $user->max_queue = 9;
         $user->is_enabled = 1;
+        $user->is_online = 1;
         $user->save();
         $user->assignRole('Supplier');
     }

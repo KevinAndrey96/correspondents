@@ -62,6 +62,7 @@ Route::get('/user/delete/{id}', [App\Http\Controllers\Users\DeleteUsersControlle
 Route::post('/changeStatusUser', [App\Http\Controllers\Users\ChangeStatusUsersController::class, 'changeStatus'])->middleware('auth');
 Route::get('/changePassword', [App\Http\Controllers\Users\ChangePasswordUsersController::class, 'changePassword'])->middleware('auth');
 Route::post('/updatePassword', [App\Http\Controllers\Users\UpdatePasswordUsersController::class, 'updatePassword'])->middleware('auth');
+Route::post('/changeOnlineStatusUser', [App\Http\Controllers\Users\ChangeOnlineStatusUsersController::class, 'changeOnlineStatus'])->middleware('auth');
 
 Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index'])->middleware('auth');
 Route::get('/commissions/users', [App\Http\Controllers\Commissions\UsersCommissionsController::class, 'usersCommissions'])->middleware('auth');

@@ -22,4 +22,5 @@
 
         </tbody>
     </table>
+    <a class="btn btn-primary" href="{{ url('/home') }}"> Regresar</a>
 </div>

@@ -29,6 +29,7 @@ class AddBalanceAdminController extends Controller
             $balance->date = $date;
             $balance->type = $request->input('type');
             $balance->is_valid = 1;
+            $balance->code = 'No aplica';
             /*
             if ($request->hasFile('image')) {
                 $pathName = Sprintf('balances/%s.png', $balance->id);

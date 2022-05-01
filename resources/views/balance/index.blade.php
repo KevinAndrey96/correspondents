@@ -6,7 +6,7 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Balance<a href="{{ url('balance/create/1') }}" class="btn btn-block btn-Secondary"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">add_card</i></a></h6>
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Balance<i style="color: white; margin-top: 13px;" class="material-icons opacity-10">add_card</i></a></h6>
 
                         </div>
                     </div>
@@ -24,6 +24,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Actual</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"># de Solicitud  </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"># de Transaccion  </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de Solicitud</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
@@ -40,12 +41,11 @@
                                         <td>{{ $balance->user->name}}</td>
                                         <td>{{ $balance->user->balance}}</td>
                                         <td>{{ $balance->id}}</td>
+                                        <td>{{ $balance->code}}</td>
                                         @if($balance->type == 'Deposit')
                                         <td>Deposito</td>
                                         @elseif($balance->type == 'Withdrawal')
-                                        <td>Retiro</td>
-                                        @elseif($balance->type == 'Recharge')
-                                        <td>Recarga directa</td>
+                                        <td>Retiro por Administrador</td>
                                         @endif
                                         <td>{{ $balance->amount}}</td>
                                         <td>{{ $balance->date}}</td>
@@ -63,11 +63,11 @@
                                                 <button type="submit" class="btn btn-danger"onclick="return confirm('¿Quieres borrar?')"> Borrar saldo</button>
                                             </form>-->
                                             <div class="form-check form-switch ">
-                                            @if ($balance->is_valid == 1)
-                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" checked onchange="validate({{$balance->id}})">
+                                                @if ($balance->is_valid == 1)
+                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" onclick="return confirm('¿Esta seguro de invalidar esta solicitud?')" checked onchange="validate({{$balance->id}})">
                                                     <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{$balance->id}}"></label>
                                                 @else
-                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" onchange="validate({{$balance->id}})">
+                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" onclick="return confirm('¿Esta seguro de validar esta solicitud?')" onchange="validate({{$balance->id}})">
                                                     <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$balance->id}}"></label>
                                                 @endif
                                             </div>
