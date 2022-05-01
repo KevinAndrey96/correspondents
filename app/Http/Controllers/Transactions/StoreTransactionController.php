@@ -15,7 +15,7 @@ class StoreTransactionController extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::user()->role == 'Shopkeeper') {
+
             $fields = [
                 'transactionAmount'=>'required|numeric|min:20000|max:200000',
             ];
@@ -35,6 +35,6 @@ class StoreTransactionController extends Controller
             $transaction->status = 'Hold';
             return view('transactions.clientDataCreate', compact('transaction', 'product'));
         }
-    }
+
 
 }
