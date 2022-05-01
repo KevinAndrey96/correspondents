@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('address')->nullable();
             $table->integer('priority')->nullable();
+            $table->boolean('is_online')->nullable();
             $table->boolean('is_enabled');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

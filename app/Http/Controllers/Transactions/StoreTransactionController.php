@@ -32,7 +32,7 @@ class StoreTransactionController extends Controller
             $transaction->amount = $request->input('transactionAmount');
             $transaction->date = Carbon::now();
             $transaction->type = $request->input('transactionType');
-            $transaction->status = 'hold';
+            $transaction->status = 'Hold';
             return view('transactions.clientDataCreate', compact('transaction', 'product'));
         }
     }

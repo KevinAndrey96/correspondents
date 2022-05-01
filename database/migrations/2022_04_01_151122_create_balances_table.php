@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->boolean('is_valid')->default(0);
             $table->string('type');
-            $table->string('boucher')->nullable();
+            $table->string('code')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
         });
