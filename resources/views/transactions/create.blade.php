@@ -50,7 +50,7 @@
                                     <div class="form-check mb-3">
                                         @foreach( $productsDeposit as $product )
                                             <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}">
-                                            <label class="custom-control-label" for="customRadio1"><img src="{{$product->product_logo}}" height="80px" width="80px" >{{ $product->product_name}}</label>
+                                            <label class="custom-control-label" for="customRadio1"><img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">{{ $product->product_name}}</label>
                                         @endforeach
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                     <div class="form-check mb-3">
                                         @foreach( $productsWithdrawal as $product )
                                             <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}">
-                                            <label class="custom-control-label" for="customRadio1"><img src="{{$product->product_logo}}" height="80px" width="80px" >{{ $product->product_name}}</label>
+                                            <label class="custom-control-label" for="customRadio1"><img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">{{ $product->product_name}}</label>
                                         @endforeach
                                     </div>
                                 </div>

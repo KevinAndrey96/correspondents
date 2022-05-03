@@ -59,6 +59,11 @@ class UpdateProductController extends Controller
                         'name' => 'image',
                         'contents' => fopen(
                             str_replace('\\', '/', Storage::disk('public')->path('products/' .$product->id . '.png')),'r'),
+                        /*'contents' => fopen(
+                            Storage::disk('public')
+                                ->getDriver()
+                                ->getAdapter()
+                                ->getPathPrefix() . 'blogs/' . $blog->id . '.png', 'r'),*/ 
                     ],
                     [
                         'name' => 'path',

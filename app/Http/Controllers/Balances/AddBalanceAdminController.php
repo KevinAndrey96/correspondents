@@ -7,6 +7,9 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use GuzzleHttp\Client;
+use Symfony\Component\HttpFoundation\Request as RequestAlias;
 use Carbon\Carbon;
 
 class AddBalanceAdminController extends Controller
@@ -30,7 +33,7 @@ class AddBalanceAdminController extends Controller
             $balance->type = $request->input('type');
             $balance->is_valid = 1;
             $balance->code = 'No aplica';
-            /*
+            $balance->save();
             if ($request->hasFile('image')) {
                 $pathName = Sprintf('balances/%s.png', $balance->id);
                 Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
@@ -55,9 +58,7 @@ class AddBalanceAdminController extends Controller
                 $balance->save();
                 unlink(str_replace('\\', '/', storage_path('app/public/balances/'.$balance->id.'.png')));
             }
-            */
-            $balance->save();
-
+            
             $user = User::find($balance->user_id);
             if($balance->type == 'Deposit'){
                 $user->balance = $user->balance+$balance->amount;

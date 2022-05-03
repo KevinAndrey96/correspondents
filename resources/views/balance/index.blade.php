@@ -54,14 +54,14 @@
                                         @else
                                         <td>Si</td>
                                         @endif
-                                        <td>default.png</td>
                                         <td>
-                                            <!--<a href="{{ url('/balance/'.$balance->id.'/edit') }}" class="btn btn-warning"> Editar saldo</a>
-                                            <form action="{{ url('/balance/'.$balance->id ) }}" class="d-inline" method="post">
-                                                @csrf
-                                                {{ method_field('DELETE') }}
-                                                <button type="submit" class="btn btn-danger"onclick="return confirm('¿Quieres borrar?')"> Borrar saldo</button>
-                                            </form>-->
+                                            @if(isset($balance->boucher))
+                                            <div>
+                                                <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" alt="No carga">
+                                            </div>
+                                            @endif
+                                        </td>
+                                        <td>
                                             <div class="form-check form-switch ">
                                                 @if ($balance->is_valid == 1)
                                                     <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" onclick="return confirm('¿Esta seguro de invalidar esta solicitud?')" checked onchange="validate({{$balance->id}})">

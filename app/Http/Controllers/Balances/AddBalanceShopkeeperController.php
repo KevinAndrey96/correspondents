@@ -6,6 +6,9 @@ use App\Models\Balance;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use GuzzleHttp\Client;
+use Symfony\Component\HttpFoundation\Request as RequestAlias;
 use Carbon\Carbon;
 
 class AddBalanceShopkeeperController extends Controller
@@ -29,7 +32,7 @@ class AddBalanceShopkeeperController extends Controller
             $balance->date = $date;
             $balance->type = 'Deposit';
             $balance->code = $request->input('transactionNumber');
-            /*
+            $balance->save();
             if ($request->hasFile('image')) {
                 $pathName = Sprintf('balances/%s.png', $balance->id);
                 Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
@@ -54,8 +57,6 @@ class AddBalanceShopkeeperController extends Controller
                 $balance->save();
                 unlink(str_replace('\\', '/', storage_path('app/public/balances/'.$balance->id.'.png')));
             }
-            */
-            $balance->save();
     
             return redirect('home');
         }

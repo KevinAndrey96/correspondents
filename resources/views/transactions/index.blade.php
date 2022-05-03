@@ -25,8 +25,6 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Distribuidor</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Proveedor</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Producto</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Cliente</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Documento Cliente</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Cantidad</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Fecha</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo de Transaccion</th>
@@ -37,12 +35,10 @@
                                 <tbody>
                                 @foreach( $transactions as $transaction )
                                     <tr>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->shopkeeper_id }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->distributor_id }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->supplier_id }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->product_id }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->client_name }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->client_document }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->shopkeeper->name }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->distributor->name }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->supplier->name}}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->product->product_name }}-{{$transaction->product->product_type}}</td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->amount }}</td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->date }}</td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->type }}</td>

@@ -26,6 +26,7 @@ class StoreProductController extends Controller
             'accountType'=>'required|boolean',
             'code'=>'required|boolean',
             'extra'=>'required|boolean',
+            'image'=>'required',//
         ];
         $message = [
             'required'=>':attribute es requerido',
