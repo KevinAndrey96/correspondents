@@ -150,6 +150,14 @@
         @endhasrole
 
         @hasrole('Supplier')
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/transactions">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">currency_exchange</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Transacciones</span>
+                </a>
+            </li>
             <div class="form-check form-switch ">
                 <label></label>
                 <label id="onlineLabel"> 
@@ -188,7 +196,6 @@
                 }
             </script>
         @endhasrole
-
             <li class="nav-item">
                 <a class="nav-link text-white "  href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
@@ -283,6 +290,8 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="/assets/js/material-dashboard.min.js?v=3.0.0"></script>
+
+
 </body>
 
 </html>

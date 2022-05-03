@@ -19,29 +19,26 @@ class AddClientDataController extends Controller
             $detail = "";
             $productID = $request->input('productID');
             $product = Product::find($productID);
-
             if($product->account_type == 1){
-                $detail = $detail.'Tipo de cuenta:'.$request->input('accountType').',';
+                $detail = $detail.'Tipo de cuenta: '.$request->input('accountType').',';
             }
             if($product->client_name == 1){
-                $detail = $detail.'Nombre:'.$request->input('clientName').',';
+                $detail = $detail.'Nombre: '.$request->input('clientName').',';
             }
             if($product->client_document == 1){
-                $detail = $detail.'Documento:'.$request->input('clientDocument').',';
+                $detail = $detail.'Documento: '.$request->input('clientDocument').',';
             }
             if($product->email == 1){
-                $detail = $detail.'Email:'.$request->input('email').',';
+                $detail = $detail.'Email: '.$request->input('email').',';
             }
             if($product->code == 1){
-                $detail = $detail.'Codigo:'.$request->input('code').',';
+                $detail = $detail.'Codigo: '.$request->input('code').',';
             }
             if($product->extra == 1){
-                $detail = $detail.'Extra:'.$request->input('extra').',';
+                $detail = $detail.'Extra: '.$request->input('extra').',';
             }
-
             $shopkeeperID = Auth::user()->id;
             $distributorID = Auth::user()->distributor_id;
-
             $transaction = new Transaction();
             $transaction->shopkeeper_id = $shopkeeperID;
             $transaction->distributor_id = $distributorID;
@@ -53,20 +50,25 @@ class AddClientDataController extends Controller
             $transaction->type = $request->input('transactionType');
             $transaction->status = $request->input('transactionState');
             $transaction->detail = $detail;
-            //$transaction->save();
-
-            $suppliers = User::where('role', 'like', 'supplier')->orderBy('priority', 'asc')->get();
-
-            /*
+            $transaction->save();
+            $suppliers = User::where([
+                                        ['role', '=', 'Supplier']
+                                        /*['isOnline', '=', 1]*/
+                                        ])->orderBy('priority', 'asc')->get();
             foreach ($suppliers as $supplier) {
-
-
+                $transactions = Transaction::where([
+                                                   ['supplier_id', '=', $supplier->id],
+                                                   ['status', '=', 'hold']
+                                                   ])->get();
+                $numTransactions = $transactions->count();
+                if ($supplier->max_queue > $numTransactions) {
+                    $transaction->supplier_id = $supplier->id;
+                    $transaction->save();
+                    break;
+                }
             }
-            */
 
-
-
-            return redirect('/home');
+            return redirect('/transactions');
         }
     }
 }

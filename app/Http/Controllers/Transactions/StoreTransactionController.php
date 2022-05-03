@@ -26,7 +26,6 @@ class StoreTransactionController extends Controller
 
             $productID = $request->input('productID');
             $product = Product::find($productID);
-
             $transaction = new Transaction();
             $transaction->product_id = $productID;
             $transaction->amount = $request->input('transactionAmount');
