@@ -38,9 +38,9 @@
                                     <tr>
                                         <td class="align-middle text-center text-sm">
                                             @if ($user->is_enabled == 1)
-                                                <span class="badge badge-sm bg-gradient-success">ON</span>
+                                                <span class="badge badge-sm bg-gradient-success">OnLine</span>
                                             @else
-                                                <span class="badge badge-sm bg-gradient-secondary">OFF</span>
+                                                <span class="badge badge-sm bg-gradient-secondary">OffLine</span>
                                             @endif
                                         </td>
                                         <td class="align-middle text-center text-sm ps-0">

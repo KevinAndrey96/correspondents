@@ -30,7 +30,7 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">tipo del producto</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descripción del producto</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">activo?</th>
+                                        <!--<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">activo?</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Documento</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">tipo de cuenta</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">numero de cuenta</th>
@@ -38,7 +38,7 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">nombre cliente</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">telefono</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">codigo</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">extra</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">extra</th>-->
 
                                     </tr>
                                     </thead>
@@ -85,7 +85,7 @@
                                             @endif
                                             <td class="align-middle text-center text-sm">{{ $product->product_commission }}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->product_description}}</td>
-                                            <td class="align-middle text-center text-sm">{{ ($product->is_enabled) ? 'Si' : 'No'}}</td>
+                                            <!--<td class="align-middle text-center text-sm">{{ ($product->is_enabled) ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->client_document ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->account_type ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->account_number ? 'Si' : 'No'}}</td>
@@ -93,7 +93,7 @@
                                             <td class="align-middle text-center text-sm">{{ $product->client_name ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->phone_number ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->code ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->extra ? 'Si' : 'No'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ $product->extra ? 'Si' : 'No'}}</td>-->
 
                                         </tr>
                                     @endforeach

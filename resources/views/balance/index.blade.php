@@ -1,12 +1,15 @@
 @extends('layouts.dashboard')
 @section('content')
+    <div class="row mt-4">
+    </div>
+
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Balance<i style="color: white; margin-top: 13px;" class="material-icons opacity-10">add_card</i></a></h6>
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Saldos</h6>
 
                         </div>
                     </div>
@@ -23,14 +26,14 @@
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Actual</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"># de Solicitud  </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"># de Transaccion  </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Solicitud  </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Transaccion  </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de Solicitud</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">¿Es Valido?</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recibo</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">invalidar/validar</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Invalidar/Validar</th>
 
                                 </tr>
                                 </thead>
@@ -38,30 +41,30 @@
                                 <tbody>
                                 @foreach( $balances as $balance )
                                     <tr>
-                                        <td>{{ $balance->user->name}}</td>
-                                        <td>{{ $balance->user->balance}}</td>
-                                        <td>{{ $balance->id}}</td>
-                                        <td>{{ $balance->code}}</td>
+                                        <td class="align-middle text-center text-sm">{{ $balance->user->name}}</td>
+                                        <td class="align-middle text-center text-sm">{{ $balance->user->balance}}</td>
+                                        <td class="align-middle text-center text-sm">{{ $balance->id}}</td>
+                                        <td class="align-middle text-center text-sm">{{ $balance->code}}</td>
                                         @if($balance->type == 'Deposit')
-                                        <td>Deposito</td>
+                                        <td class="align-middle text-center text-sm">Deposito</td>
                                         @elseif($balance->type == 'Withdrawal')
-                                        <td>Retiro por Administrador</td>
+                                        <td class="align-middle text-center text-sm">Retiro por Administrador</td>
                                         @endif
-                                        <td>{{ $balance->amount}}</td>
-                                        <td>{{ $balance->date}}</td>
+                                        <td class="align-middle text-center text-sm">{{ $balance->amount}}</td>
+                                        <td class="align-middle text-center text-sm">{{ $balance->date}}</td>
                                         @if($balance->is_valid == 0)
-                                        <td>No</td>
+                                        <td class="align-middle text-center text-sm">No</td>
                                         @else
-                                        <td>Si</td>
+                                        <td class="align-middle text-center text-sm">Si</td>
                                         @endif
-                                        <td>
+                                        <td class="align-middle text-center text-sm">
                                             @if(isset($balance->boucher))
                                             <div>
                                                 <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" alt="No carga">
                                             </div>
                                             @endif
                                         </td>
-                                        <td>
+                                        <td class="align-middle text-center text-sm">
                                             <div class="form-check form-switch ">
                                                 @if ($balance->is_valid == 1)
                                                     <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" onclick="return confirm('¿Esta seguro de invalidar esta solicitud?')" checked onchange="validate({{$balance->id}})">
@@ -92,7 +95,7 @@
                                                     balance_id.value = id;
                                                     form.submit();
                                                 }
-                                            </script>   
+                                            </script>
                                         </td>
                                     </tr>
                                 @endforeach

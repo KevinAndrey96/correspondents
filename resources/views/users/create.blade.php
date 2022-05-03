@@ -20,18 +20,6 @@
                                             <input type="text" class="form-control" name="name" value="" id="" placeholder="Nombre">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class=" input-group input-group-outline my-3">
-                                            <label for="email" class="form-label"></label>
-                                            <input type="email" class="form-control" name="email" value="" id="" placeholder="Correo electrónico">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class=" input-group input-group-outline my-3">
-                                            <label for="phone" class="form-label"></label>
-                                            <input type="text" class="form-control" name="phone" value="" id="" placeholder="Teléfono">
-                                        </div>
-                                    </div>
                                     <div class="col-md-2">
                                         <div class="input-group input-group-static mb-4">
                                             <label  for="document_type">Tipo de documento</label>
@@ -42,16 +30,28 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="document" class="form-label"></label>
                                             <input type="text" class="form-control" name="document" value="" id="" placeholder="N° documento">
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
+                                        <div class=" input-group input-group-outline my-3">
+                                            <label for="phone" class="form-label"></label>
+                                            <input type="text" class="form-control" name="phone" value="" id="" placeholder="Teléfono">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="city" class="form-label"></label>
                                             <input type="text" class="form-control" name="city" value="" id="" placeholder="Ciudad">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class=" input-group input-group-outline my-3">
+                                            <label for="email" class="form-label"></label>
+                                            <input type="email" class="form-control" name="email" value="" id="" placeholder="Correo electrónico">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
