@@ -52,6 +52,10 @@ Route::get('/transactions', [App\Http\Controllers\Transactions\IndexTransactionC
 Route::get('/transactions/create', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create'])->middleware('auth');
 Route::post('/transaction/store', [App\Http\Controllers\Transactions\StoreTransactionController::class, 'store'])->middleware('auth');
 Route::post('/transaction/storeClientData', [App\Http\Controllers\Transactions\AddClientDataController::class, 'store'])->middleware('auth');
+Route::get('/transaction/detail/{id}', [App\Http\Controllers\Transactions\DetailTransactionController::class, 'detail'])->middleware('auth');
+Route::post('/transaction/update', [App\Http\Controllers\Transactions\UpdateTransactionController::class, 'update'])->middleware('auth');
+
+
 
 Route::get('/users', [App\Http\Controllers\Users\IndexUsersController::class, 'index'])->middleware('auth');
 Route::get('/user/create', [App\Http\Controllers\Users\CreateUsersController::class, 'create'])->middleware('auth');

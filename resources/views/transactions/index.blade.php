@@ -21,33 +21,69 @@
                             <table id="my_table" class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tendero</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Distribuidor</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Proveedor</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Producto</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Cliente</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Documento Cliente</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Cantidad</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Producto</th>
+                                    @if (Auth::user()->role == 'Shopkeeper')
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo</th>
+                                    @endif
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Estado</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Fecha</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo de Transaccion</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Estado de Transaccion</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Extras</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Acción</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach( $transactions as $transaction )
                                     <tr>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->shopkeeper_id }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->distributor_id }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->supplier_id }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->product_id }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->client_name }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->client_document }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->amount }}</td>
+                                        <td class="align-middle text-center text-sm">${{ number_format($transaction->amount, 2, ',', '.') }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->product->product_name }}</td>
+                                        @if (Auth::user()->role == 'Shopkeeper')
+                                        <td class="align-middle text-center text-sm">
+                                            @if ($transaction->type == 'Deposit')
+                                                Depósito
+                                            @endif
+                                                @if ($transaction->type == 'Withdrawal')
+                                                    Retiro
+                                                @endif
+                                        </td>
+                                        @endif
+                                        <td class="align-middle text-center text-sm">
+                                            @if ($transaction->status == 'hold')
+                                                <center>
+                                                    <p style="background-color:#D69012; width:70%; color:white; padding:2px; border-radius: 5px;">En espera</p>
+                                                </center>
+                                            @endif
+                                                @if ($transaction->status == 'accepted')
+                                                    <center>
+                                                        <p style="background-color:#1DAAC6; width:70%; color:white; padding:2px; border-radius: 5px;">Aceptada</p>
+                                                    </center>
+                                                @endif
+                                                @if ($transaction->status == 'successful')
+                                                    <center>
+                                                        <p style="background-color:#17BB2D; width:70%; color:white; padding:2px; border-radius: 5px;">Exitosa</p>
+                                                    </center>
+                                                @endif
+                                                @if ($transaction->status == 'failed')
+                                                    <center>
+                                                        <p style="background-color:red; width:70%; color:white; padding:2px; border-radius: 5px;">Fallida</p>
+                                                    </center>
+                                                @endif
+                                            </td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->date }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->type }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->status }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->detail }}</td>
+                                        @if (Auth::user()->role == 'Supplier')
+                                        <td class="align-middle text-center text-sm">
+                                            <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
+                                        </td>
+                                        @endif
+                                        @if (Auth::user()->role == 'Shopkeeper')
+                                            @if ($transaction->status == 'successful' || $transaction->status == 'failed')
+                                            <td class="align-middle text-center text-sm">
+                                                <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Detalle</a>
+                                            </td>
+
+                                            @endif
+                                        @endif
+
                                     </tr>
                                 @endforeach
                                 </tbody>

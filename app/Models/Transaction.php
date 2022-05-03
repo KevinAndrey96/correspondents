@@ -39,27 +39,27 @@ class Transaction extends Model
 
     public function shopkeeper()
     {
-        $this->belongsTo(User::class, 'foreign_key', 'shopkeeper_id');
+        return $this->belongsTo(User::class, 'shopkeeper_id');
     }
 
     public function distributor()
     {
-        $this->belongsTo(User::class, 'foreign_key', 'distributor_id');
+        return $this->belongsTo(User::class, 'distributor_id');
     }
 
     public function supplier()
     {
-        $this->belongsTo(User::class, 'foreign_key', 'supplier_id');
+        return $this->belongsTo(User::class,'supplier_id');
     }
 
     public function admin()
     {
-        $this->belongsTo(User::class, 'foreign_key', 'admin_id');
+        return $this->belongsTo(User::class, 'admin_id');
     }
 
     public function product()
     {
-        $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class);
     }
 
 }
