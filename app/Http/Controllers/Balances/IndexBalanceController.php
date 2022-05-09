@@ -14,7 +14,13 @@ class IndexBalanceController extends Controller
     {
         if (Auth::user()->role == 'Administrator') {
             $balancesData['balances'] = Balance::all();
-            return view('balance.index',$balancesData);
         }
+        if (Auth::user()->role == 'Shopkeeper') {
+            $balancesData['balances'] = Balance::where('user_id', '=', Auth::user()->id)->get();
+        }
+        if (Auth::user()->role == 'Supplier') {
+            $balancesData['balances'] = Balance::where('user_id', '=', Auth::user()->id)->get();
+        }
+        return view('balance.index',$balancesData,);
     }
 }

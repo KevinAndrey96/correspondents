@@ -36,7 +36,7 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            @hasrole('Administrator')
+        @hasrole('Administrator')
             <li class="nav-item">
                 <a class="nav-link text-white " href="/home">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -120,9 +120,25 @@
                     <span class="nav-link-text ms-1">G. Comisiones</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/commissions">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">sell</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Comisiones</span>
+                </a>
+            </li>
         @endhasrole
 
         @hasrole('Shopkeeper')
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/commissions">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">sell</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Comisiones</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link text-white " href="/transactions">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -147,6 +163,14 @@
                     <span class="nav-link-text ms-1">Solicitar Saldo</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/balance">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">sell</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Historial Saldos</span>
+                </a>
+            </li>
         @endhasrole
 
         @hasrole('Supplier')
@@ -156,6 +180,22 @@
                         <i class="material-icons opacity-10">currency_exchange</i>
                     </div>
                     <span class="nav-link-text ms-1">Transacciones</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/balance">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">sell</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Historial Saldos</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/commissions">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">sell</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Comisiones</span>
                 </a>
             </li>
             <div class="form-check form-switch ">

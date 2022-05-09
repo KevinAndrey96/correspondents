@@ -31,9 +31,11 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de Solicitud</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">¿Es Valido?</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">¿Validado?</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recibo</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Invalidar/Validar</th>
+                                    @hasrole('Administrator')
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Invalidar/Validar</th>
+                                    @endhasrole
 
                                 </tr>
                                 </thead>
@@ -64,6 +66,7 @@
                                             </div>
                                             @endif
                                         </td>
+                                    @hasrole('Administrator')
                                         <td class="align-middle text-center text-sm">
                                             <div class="form-check form-switch ">
                                                 @if ($balance->is_valid == 1)
@@ -97,6 +100,7 @@
                                                 }
                                             </script>
                                         </td>
+                                    @endhasrole
                                     </tr>
                                 @endforeach
 
