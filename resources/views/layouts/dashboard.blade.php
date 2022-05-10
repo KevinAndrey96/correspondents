@@ -25,7 +25,7 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" >
@@ -36,70 +36,113 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-        @hasrole('Administrator')
             <li class="nav-item">
                 <a class="nav-link text-white " href="/home">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
+                        <i class="material-icons opacity-10">home</i>
                     </div>
                     <span class="nav-link-text ms-1">Inicio</span>
                 </a>
             </li>
+        @hasrole('Administrator')
             <li class="nav-item">
-                <a class="nav-link text-white " href="/users?role=Administrator">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">G. Administradores</span>
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+						        <i style="width:30px; margin-left: -5px;" class="fas fa-user-tie"></i>
+						         </div>
+                    <span class="nav-link-text">Usuarios</span>
                 </a>
+                <div id="submenu-2" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/users?role=Administrator">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">person</i>
+                                </div>
+                                <span class="nav-link-text ms-1">G. Administradores</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/users?role=Supplier">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">people</i>
+                                </div>
+                                <span class="nav-link-text ms-1">G. Proveedores</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/users?role=Distributor">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">groups</i>
+                                </div>
+                                <span class="nav-link-text ms-1">G. Distribuidores</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="/users?role=Supplier">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-4" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">people</i>
+                        <i class="material-icons opacity-10">card_travel</i>
                     </div>
-                    <span class="nav-link-text ms-1">G. Proveedores</span>
+                    <span class="nav-link-text">Productos</span>
                 </a>
+                <div id="submenu-4" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/products">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">credit_score</i>
+                                </div>
+                                <span class="nav-link-text ms-1">G. Productos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/commissions/users?id=supdis">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">price_change</i>
+                                </div>
+                                <span class="nav-link-text ms-1">G. Comisiones</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="/users?role=Distributor">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-3" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">groups</i>
+                        <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">monetization_on</i>
+
                     </div>
-                    <span class="nav-link-text ms-1">G. Distribuidores</span>
+                    <span class="nav-link-text">Saldos</span>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="/products">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">credit_card</i>
-                    </div>
-                    <span class="nav-link-text ms-1">G. Productos</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="/commissions/users?id=supdis">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">credit_card</i>
-                    </div>
-                    <span class="nav-link-text ms-1">G. Comisiones</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="/balance">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">sell</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Saldos</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="/balance/users">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">sell</i>
-                    </div>
-                    <span class="nav-link-text ms-1">G. Saldos</span>
-                </a>
+                <div id="submenu-3" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/balance">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">payments</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Saldos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/balance/users">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">price_check</i>
+                                </div>
+                                <span class="nav-link-text ms-1">G. Saldos</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </li>
         @endhasrole
 
@@ -123,7 +166,7 @@
             <li class="nav-item">
                 <a class="nav-link text-white " href="/commissions">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">sell</i>
+                        <i class="material-icons opacity-10">payments</i>
                     </div>
                     <span class="nav-link-text ms-1">Comisiones</span>
                 </a>
@@ -134,42 +177,70 @@
             <li class="nav-item">
                 <a class="nav-link text-white " href="/commissions">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">sell</i>
+                        <i class="material-icons opacity-10">payments</i>
                     </div>
                     <span class="nav-link-text ms-1">Comisiones</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="/transactions">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-6" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">currency_exchange</i>
+                        <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">currency_exchange</i>
                     </div>
-                    <span class="nav-link-text ms-1">Transacciones</span>
+                    <span class="nav-link-text">Transacciones</span>
                 </a>
+                <div id="submenu-6" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/transactions">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Transacciones</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/transactions/create">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">post_add</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Crear Transacción</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="/transactions/create">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-5" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">sell</i>
+                        <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">monetization_on</i>
                     </div>
-                    <span class="nav-link-text ms-1">Crear Transacción</span>
+                    <span class="nav-link-text">Saldos</span>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="/balance/create">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">sell</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Solicitar Saldo</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="/balance">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">sell</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Historial Saldos</span>
-                </a>
+                <div id="submenu-5" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/balance/create">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">new_label</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Solicitar Saldo</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/balance">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">history_edu</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Historial Saldos</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </li>
         @endhasrole
 
@@ -185,7 +256,7 @@
             <li class="nav-item">
                 <a class="nav-link text-white " href="/balance">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">sell</i>
+                        <i class="material-icons opacity-10">history_edu</i>
                     </div>
                     <span class="nav-link-text ms-1">Historial Saldos</span>
                 </a>
@@ -193,48 +264,11 @@
             <li class="nav-item">
                 <a class="nav-link text-white " href="/commissions">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">sell</i>
+                        <i class="material-icons opacity-10">payments</i>
                     </div>
                     <span class="nav-link-text ms-1">Comisiones</span>
                 </a>
             </li>
-            <div class="form-check form-switch ">
-                <label></label>
-                <label id="onlineLabel"> 
-                @if (Auth::user()->is_online == 1)
-                    Online</label>
-                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{Auth::user()->id}}" checked onchange="changeOnlineStatus({{ Auth::user()->id}})">
-                    <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{Auth::user()->id}}"></label>
-                @else
-                    Offline </label>
-                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{ Auth::user()->id }}" onchange="changeOnlineStatus({{ Auth::user()->id }})">
-                    <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{ Auth::user()->id }}"></label>
-                @endif
-            </div>
-            <form id="form-status" name="form-status" method="POST" action="{{ url('/changeOnlineStatusUser') }}">
-                @csrf
-                <input type="hidden" name="id" id="id">
-                <input type="hidden" name="status" id="status">
-            </form>
-            <script>
-                function changeOnlineStatus(id)
-                {
-                    var toggle = document.getElementById("togglestatus"+id);
-                    var status = document.getElementById("status");
-                    var form = document.getElementById("form-status");
-                    var supplier_id = document.getElementById("id");
-
-                    if (toggle.checked == true) {
-                        status.value = 1;
-                        document.getElementById("onlineLabel").innerHTML = 'Online';
-                    } else {
-                        status.value = 0;
-                        document.getElementById("onlineLabel").innerHTML = 'Offline';
-                    }
-                    supplier_id.value = id;
-                    form.submit();
-                }
-            </script>
         @endhasrole
             <li class="nav-item">
                 <a class="nav-link text-white "  href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -250,6 +284,55 @@
             </li>
         </ul>
     </div>
+    @hasrole('Supplier')
+    <div class="sidenav-footer mx-3 ">
+        <div class="card card-plain shadow-none" id="sidenavCard">
+            <div class="card-body text-center p-3 w-100 pt-0">
+                <div class="form-check form-switch ">
+                    <label></label>
+                    <label id="onlineLabel">
+                        @if (Auth::user()->is_online == 1)
+                            Online</label>
+                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{Auth::user()->id}}" checked onchange="changeOnlineStatus({{ Auth::user()->id}})">
+                    <label class="form-check-label text-body ms-0 text-truncate w-80" for="togglestatus{{Auth::user()->id}}"></label>
+                    @else
+                        Offline </label>
+                        <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{ Auth::user()->id }}" onchange="changeOnlineStatus({{ Auth::user()->id }})">
+                        <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{ Auth::user()->id }}"></label>
+                    @endif
+                </div>
+                <form id="form-status" name="form-status" method="POST" action="{{ url('/changeOnlineStatusUser') }}">
+                    @csrf
+                    <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="status" id="status">
+                </form>
+                <script>
+                    function changeOnlineStatus(id)
+                    {
+                        var toggle = document.getElementById("togglestatus"+id);
+                        var status = document.getElementById("status");
+                        var form = document.getElementById("form-status");
+                        var supplier_id = document.getElementById("id");
+
+                        if (toggle.checked == true) {
+                            status.value = 1;
+                            document.getElementById("onlineLabel").innerHTML = 'Online';
+                        } else {
+                            status.value = 0;
+                            document.getElementById("onlineLabel").innerHTML = 'Offline';
+                        }
+                        supplier_id.value = id;
+                        form.submit();
+                    }
+                </script>
+                <div class="docs-info">
+                    <h6 class="mb-0 text-white">! Recuerda ¡</h6>
+                    <p class="text-xs text-white mb-0">Enciende el switch al iniciar y apágalo cuando culmines tu jornada</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endhasrole
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->

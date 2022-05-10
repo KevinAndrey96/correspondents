@@ -76,24 +76,20 @@
                                                             <input type="number" class="form-control" name="amount" value="" id="amount" step="100" min="20000.0" max="200000.0" placeholder="Monto">
                                                         </div>
                                                     </div>
-
                                                     <div class="col-md-12">
-                                                        <div class="input-group input-group-static mb-4">
-                                                            <label for="image"> Recibo </label>
+                                                        <div class="p-3">
+                                                            <label for="image" > Recibo </label>
                                                             @if(isset($balance->boucher))
-                                                            </br>
                                                             <img class="img-thumbnail img-fluid" src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" width="100" alt = "No carga">
-                                                            </br>
                                                             @endif
-                                                            <input type="file" class="form-control" name="image" value="" id="image">
+                                                            <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="image" value="" id="image">
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-12 text-center">
+                                                        <input class="btn btn-success" type="submit" value="Gestionar saldo">
 
-                                                    <br>
-                                                    <input class="btn btn-success" type="submit" value="Gestionar saldo">
-
-                                                    <a class="btn btn-primary" href="{{ url('/balance/users') }}"> Regresar</a>
-
+                                                        <a class="btn btn-primary" href="{{ url('/balance/users') }}"> Regresar</a>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

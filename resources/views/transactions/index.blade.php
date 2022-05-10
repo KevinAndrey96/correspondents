@@ -6,7 +6,7 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Transacciones <a href="/transaction/create/4" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">currency_exchange</i></a></h6>
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Transacciones <a href="/transactions/create" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">currency_exchange</i></a></h6>
 
                         </div>
                     </div>
@@ -51,22 +51,22 @@
                                         <td class="align-middle text-center text-sm">
                                             @if ($transaction->status == 'hold')
                                                 <center>
-                                                    <p style="background-color:#D69012; width:70%; color:white; padding:2px; border-radius: 5px;">En espera</p>
+                                                    <p class="text-center text-dark text-sm p-2" style="background-color:#f5df4d; width:60%; border-radius: 20px;">En espera</p>
                                                 </center>
                                             @endif
                                                 @if ($transaction->status == 'accepted')
                                                     <center>
-                                                        <p style="background-color:#1DAAC6; width:70%; color:white; padding:2px; border-radius: 5px;">Aceptada</p>
+                                                        <p class="text-center text-white text-sm p-2" style="background-color:dodgerblue; width:60%;  border-radius: 20px;">Aceptada</p>
                                                     </center>
                                                 @endif
                                                 @if ($transaction->status == 'successful')
                                                     <center>
-                                                        <p style="background-color:#17BB2D; width:70%; color:white; padding:2px; border-radius: 5px;">Exitosa</p>
+                                                        <p class="text-center text-white text-sm p-2" style="background-color:green; width:60%; border-radius: 20px;">Exitosa</p>
                                                     </center>
                                                 @endif
                                                 @if ($transaction->status == 'failed')
                                                     <center>
-                                                        <p style="background-color:red; width:70%; color:white; padding:2px; border-radius: 5px;">Fallida</p>
+                                                        <p class="text-center text-white text-sm p-2" style="background-color:red; width:60%; border-radius: 20px;">Fallida</p>
                                                     </center>
                                                 @endif
                                             </td>

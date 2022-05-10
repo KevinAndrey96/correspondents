@@ -12,7 +12,7 @@ Duvan esto es un modal
                     <li> {{ $error }} </li>
                 @endforeach
                 </ul>
-            </div>    
+            </div>
         @endif
         <div class="form-group">
             <input type="hidden" class="form-control" name="userID" value="{{$user->id}}" id="productID" readonly="readonly">
@@ -26,11 +26,12 @@ Duvan esto es un modal
                 <option class="text-center" value="Withdrawal">Retiro</option>
             </select>
         </div>
-        
+
         <div class="form-group">
             <label for="amount"> Monto </label>
             <input type="number" class="form-control" name="amount" value="" id="amount" step="100" min="20000.0" placeholder="Monto">
         </div>
+
 
         <div class="col-md-4">
             <div class="input-group input-group-static mb-4">
@@ -40,7 +41,7 @@ Duvan esto es un modal
                 <img class="img-thumbnail img-fluid" src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" width="100" alt = "No carga">
                 </br>
                 @endif
-                <input type="file" class="form-control" name="image" value="" id="image">
+                <input style="border: gray 0.5px solid; border-radius: 20px;" type="file" class="form-control form-control-sm" name="image" value="" id="image">
             </div>
         </div>
 
