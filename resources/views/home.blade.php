@@ -323,5 +323,4 @@
         @endhasrole
 
         </div>
-
-@endsections
+@endsection
