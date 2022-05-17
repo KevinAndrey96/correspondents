@@ -42,7 +42,7 @@
                                                 <form action="{{ url('/profit/'.$profit->id ) }}" class="d-inline" method="post">
                                                     @csrf
                                                     {{ method_field('DELETE') }}
-                                                    <button type="submit" class="btn btn-danger"onclick="return confirm('¿Quieres borrar?')"> Borrar Ganancia</button>
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Quieres borrar?')"> Borrar Ganancia</button>
                                                 </form>
                                             </td>
                                         </tr>

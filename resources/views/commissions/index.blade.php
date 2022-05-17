@@ -34,7 +34,7 @@
                                 @foreach( $commissions as $commission )
                                 <tr>
                                     <td class="align-middle text-center text-sm">{{ $commission->user->name}}</td>
-                                    <td class="align-middle text-center text-sm">{{ $commission->product->product_name}}-{{ $commission->product->product_type}}</td>
+                                    <td class="align-middle text-center text-sm">{{ $commission->product->product_name}} - {{ ($commission->product->product_type) == 'Deposit' ? 'Depósito' : 'Retiro'}}</td>
                                     <td class="align-middle text-center text-sm">${{ $commission->amount}}</td>
                                 </tr>
                                 @endforeach

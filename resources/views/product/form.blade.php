@@ -39,9 +39,9 @@
                                     <div class="input-group input-group-static mb-4">
                                         <label for="productType" class="ms-0"> Tipo del producto</label>
                                         <select id="productType" name="productType" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
-                                            <option Value=>Seleccionar opción</option>
-                                            <option Value=Deposit>Deposito</option>
-                                            <option Value=Withdrawal>Retiro</option>
+                                            <option value="">Seleccionar opción</option>
+                                            <option value="Deposit">Depósito</option>
+                                            <option value="Withdrawal">Retiro</option>
                                         </select>
                                     </div>
                                 </div>
@@ -62,8 +62,8 @@
                                     <div class="input-group input-group-static mb-4">
                                         <label for="isEnabled"> Desactivar producto</label>
                                         <select id="isEnabled" name="isEnabled" class="form-control" aria-label="Default select example" onchange="hiddenText()">
-                                            <option Value=1>No</option>
-                                            <option Value=0>Si</option>
+                                            <option value="1">No</option>
+                                            <option value="0">Si</option>
                                         </select>
                                     </div>
                                 </div>

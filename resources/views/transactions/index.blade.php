@@ -6,7 +6,11 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Transacciones <a href="/transactions/create" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">currency_exchange</i></a></h6>
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Transacciones <a href="/transactions/create" class="btn btn-block">
+                                    @hasrole('Shopkeeper')
+                                    <i style="color: white; margin-top: 13px;" class="material-icons opacity-10">currency_exchange</i>
+                                    @endhasrole
+                                </a></h6>
 
                         </div>
                     </div>
@@ -73,7 +77,7 @@
                                         <td class="align-middle text-center text-sm">{{ $transaction->date }}</td>
                                         @if (Auth::user()->role == 'Supplier')
                                         <td class="align-middle text-center text-sm">
-                                            <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
+                                            <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0" onclick="return confirm('¿Está seguro que desea iniciar esta transacción? Recuerde que no podrá deshacer esta acción.')" ><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
                                         </td>
                                         @endif
                                         @if (Auth::user()->role == 'Shopkeeper')

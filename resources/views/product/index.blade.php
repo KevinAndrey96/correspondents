@@ -85,7 +85,7 @@
                                             @endif
                                             <td class="align-middle text-center text-sm">{{ $product->product_commission }}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->product_description}}</td>
-                                            <!--<td class="align-middle text-center text-sm">{{ ($product->is_enabled) ? 'Si' : 'No'}}</td>
+                                            <td class="align-middle text-center text-sm">{{ ($product->is_enabled) ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->client_document ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->account_type ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->account_number ? 'Si' : 'No'}}</td>
@@ -93,7 +93,7 @@
                                             <td class="align-middle text-center text-sm">{{ $product->client_name ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->phone_number ? 'Si' : 'No'}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->code ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->extra ? 'Si' : 'No'}}</td>-->
+                                            <td class="align-middle text-center text-sm">{{ $product->extra ? 'Si' : 'No'}}</td>
 
                                         </tr>
                                     @endforeach
@@ -281,8 +281,8 @@
                                             var commission = button.data('commission')
 
                                             modal.find('.modal-title').text('Producto ' + whatever)
-                                            modal.find('#product-email').text('Correo: ' + (email ? 'Si' : 'No'))
-                                            modal.find('#product-type').text('T. Producto: ' + (tipo ? 'Deposito' : 'Retiro'))
+                                            modal.find('#product-email').text('Correo: ' + (email == 1 ? 'Si' : 'No'))
+                                            modal.find('#product-type').text('T. Producto: ' + (tipo == 'Deposit' ? 'Depósito' : 'Retiro'))
                                             modal.find('#product-enabled').text('Activo: ' + (enabled ? 'Si' : 'No'))
                                             modal.find('#product-account_number').text('N° Cuenta: ' + (account_number ? 'Si' : 'No' ))
                                             modal.find('#product-account_type').text('T. Cuenta: ' + (account_type ? 'Si' : 'No' ))
