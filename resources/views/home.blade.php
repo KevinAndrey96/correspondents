@@ -1,5 +1,4 @@
 @extends('layouts.dashboard')
-
 @section('content')
     @if(Session::has('deniedAccess'))
         <div class="alert alert-danger" role="alert">

@@ -1,5 +1,7 @@
 @if (Auth::user()->role == 'Supplier')
 <h3>Información extra</h3>
+<p>Producto: {{$transaction->product->product_name}}</p>
+<p>Número de cuenta: {{$transaction->account_number}}</p>
 @foreach ($extras as $extra)
 <p>{{$extra}}</p>
 @endforeach

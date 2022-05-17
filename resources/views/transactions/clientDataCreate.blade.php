@@ -1,5 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
+
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">

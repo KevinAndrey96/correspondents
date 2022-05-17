@@ -1,5 +1,10 @@
 @extends('layouts.dashboard')
 @section('content')
+    @if(Session::has('LimitExceeded'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('LimitExceeded') }}
+        </div>
+    @endif
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -71,20 +76,20 @@
                                                 @endif
                                             </td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->date }}</td>
-                                        @if (Auth::user()->role == 'Supplier')
+
                                         <td class="align-middle text-center text-sm">
-                                            <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
-                                        </td>
-                                        @endif
-                                        @if (Auth::user()->role == 'Shopkeeper')
-                                            @if ($transaction->status == 'successful' || $transaction->status == 'failed')
-                                            <td class="align-middle text-center text-sm">
-                                                <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Detalle</a>
-                                            </td>
-
+                                            @if (Auth::user()->role == 'Supplier')
+                                                <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
                                             @endif
-                                        @endif
-
+                                                @if (Auth::user()->role == 'Shopkeeper')
+                                                    @if ($transaction->status == 'successful' || $transaction->status == 'failed')
+                                                        <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Detalle</a>
+                                                    @endif
+                                                        @if ($transaction->status == 'hold')
+                                                            <a style="color: red;" href="/transaction/cancel/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: red;" class="material-icons opacity-10">cancel</i> Cancelar</a>
+                                                        @endif
+                                                @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
