@@ -34,6 +34,7 @@ class User extends Authenticatable
         'address',
         'priority',
         'is_enabled',
+        'is_online',
         'distributor_id',
         'balance',
     ];

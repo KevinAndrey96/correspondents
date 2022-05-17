@@ -40,20 +40,30 @@ class AddClientDataController extends Controller
             $shopkeeperID = Auth::user()->id;
             $distributorID = Auth::user()->distributor_id;
             $transaction = new Transaction();
+            date_default_timezone_set('America/Bogota');
+            //$transaction->date = substr(Carbon::now(), 9, 17);
+            $transaction->date = Carbon::now();
+            $dailyTransaction = Transaction::where([
+                ['account_number', '=', $request->input('accountNumber')],
+                ['date', '=', substr($transaction->date, 0, -9)]
+            ])->first();
+            if (! is_null($dailyTransaction)) {
+
+                return redirect('/transactions')->with('LimitExceeded', 'Esta cuenta supero él limite de transacciones por día');
+            }
             $transaction->shopkeeper_id = $shopkeeperID;
             $transaction->distributor_id = $distributorID;
             $transaction->admin_id = 1;
             $transaction->product_id = $productID;
             $transaction->account_number = $request->input('accountNumber');
             $transaction->amount = $request->input('transactionAmount');
-            $transaction->date = $request->input('transactionDate');
             $transaction->type = $request->input('transactionType');
             $transaction->status = $request->input('transactionState');
             $transaction->detail = $detail;
             $transaction->save();
             $suppliers = User::where([
-                                        ['role', '=', 'Supplier']
-                                        /*['isOnline', '=', 1]*/
+                                        ['role', '=', 'Supplier'],
+                                        ['is_online', '=', 1]
                                         ])->orderBy('priority', 'asc')->get();
             foreach ($suppliers as $supplier) {
                 $transactions = Transaction::where([
