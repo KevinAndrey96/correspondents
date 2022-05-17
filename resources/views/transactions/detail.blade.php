@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('layouts.dashboard')
 @section('content')
     <div class="container-fluid py-4">
@@ -21,6 +22,8 @@
                                                 @if (Auth::user()->role == 'Supplier')
                                                 <div class="col-md-4 d-flex flex-column ">
                                                     <h6 class="mb-3 text-sm">Información</h6>
+                                                    <p class="mb-2 text-xs font-weight-bold text-dark">Producto: {{$transaction->product->product_name}}</p>
+                                                    <p class="mb-2 text-xs font-weight-bold text-dark">Número de cuenta: {{$transaction->account_number}}</p>
                                                         @foreach ($extras as $extra)
                                                         <span class="mb-2 text-xs font-weight-bold text-dark">{{$extra}}</span>
                                                         @endforeach
@@ -57,6 +60,7 @@
                                                           <textarea class="form-control" name="comment" rows="3" placeholder="Comentario:" spellcheck="false">{{$transaction->comment}}</textarea>
                                                      </div>
                                                 @endif
+                                                </div>
                                                 </div>
                                             </li>
                                         </ul>

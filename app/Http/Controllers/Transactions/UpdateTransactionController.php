@@ -39,24 +39,26 @@ class UpdateTransactionController extends Controller
             $transaction->voucher = '/storage/voucher_images/' . $transaction->id . '.png';
             $transaction->save();
         }
-        $commissionShop = Commission::where([
-                                            ['user_id', '=', $transaction->shopkeeper_id],
-                                            ['product_id', '=', $transaction->product_id]
-                                            ])->first();
-        $commissionDist = Commission::where([
-                                            ['user_id', '=', $transaction->distributor_id],
-                                            ['product_id', '=', $transaction->product_id]
-                                            ])->first();
-        $commissionSupp = Commission::where([
-                                            ['user_id', '=', $transaction->supplier_id],
-                                            ['product_id', '=', $transaction->product_id]
-                                            ])->first();
-        $transaction->com_shp = $commissionShop->amount;
-        $transaction->com_dis = $commissionDist->amount - $commissionShop->amount;
-        $transaction->com_sup = $commissionSupp->amount;
-        $transaction->com_adm = $transaction->product->product_commission -
-                                ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup );
-        $transaction->save();
+        if ($transaction->status == 'successful') {
+            $commissionShop = Commission::where([
+                ['user_id', '=', $transaction->shopkeeper_id],
+                ['product_id', '=', $transaction->product_id]
+            ])->first();
+            $commissionDist = Commission::where([
+                ['user_id', '=', $transaction->distributor_id],
+                ['product_id', '=', $transaction->product_id]
+            ])->first();
+            $commissionSupp = Commission::where([
+                ['user_id', '=', $transaction->supplier_id],
+                ['product_id', '=', $transaction->product_id]
+            ])->first();
+            $transaction->com_shp = $commissionShop->amount;
+            $transaction->com_dis = $commissionDist->amount - $commissionShop->amount;
+            $transaction->com_sup = $commissionSupp->amount;
+            $transaction->com_adm = $transaction->product->product_commission -
+                ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup);
+            $transaction->save();
+        }
 
         return redirect('/transactions');
     }
