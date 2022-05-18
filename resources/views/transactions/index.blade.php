@@ -90,7 +90,7 @@
                                             <td class="align-middle text-center text-sm">
                                                 <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Detalle</a>
                                             </td>
-
+                                            @endif
                                         <td class="align-middle text-center text-sm">
                                             @if (Auth::user()->role == 'Supplier')
                                                 <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
@@ -104,6 +104,7 @@
                                                         @endif
                                                 @endif
                                         </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>
