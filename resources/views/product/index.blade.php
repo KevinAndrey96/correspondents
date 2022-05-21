@@ -85,16 +85,6 @@
                                             @endif
                                             <td class="align-middle text-center text-sm">{{ $product->product_commission }}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->product_description}}</td>
-                                            <td class="align-middle text-center text-sm">{{ ($product->is_enabled) ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->client_document ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->account_type ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->account_number ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->email ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->client_name ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->phone_number ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->code ? 'Si' : 'No'}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->extra ? 'Si' : 'No'}}</td>
-
                                         </tr>
                                     @endforeach
                                     <!-- Modal -->
@@ -258,7 +248,7 @@
                                     </div>
                                     <script>
                                         $('#exampleModalMessage').on('show.bs.modal', function (event) {
-                                            /*var button = $(event.relatedTarget) // Button that triggered the modal
+                                            /*var button = $(event.relatedTarget)  // Button that triggered the modal
                                             var recipient = button.data('whatever') // Extract info from data-* attributes
                                             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                                             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.

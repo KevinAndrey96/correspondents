@@ -31,8 +31,8 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class=" input-group input-group-outline my-3">
-                                        <label for="productName" class="form-label"></label>
-                                        <input type="text" class="form-control" name="productName" value="{{ isset($product->product_name)?$product->product_name:old('product_name') }}" id="productName" placeholder="Nombre del producto">
+                                        <label for="productName" class="form-label">Nombre del producto</label>
+                                        <input type="text" class="form-control" name="productName" value="{{ isset($product->product_name)?$product->product_name:old('product_name') }}" id="productName" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -47,14 +47,14 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class=" input-group input-group-outline my-3">
-                                        <label for="productCommission" class="form-label"></label>
-                                        <input type="text" class="form-control" name="productCommission" value="{{ isset($product->product_commission)?$product->product_commission:old('product_commission') }}" id="productCommission" placeholder="Comision del producto">
+                                        <label for="productCommission" class="form-label">Comisión del producto</label>
+                                        <input type="text" class="form-control" name="productCommission" value="{{ isset($product->product_commission)?$product->product_commission:old('product_commission') }}" id="productCommission" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline  my-3">
-                                        <label for="productDescription" class="form-label"></label>
-                                        <input type="text" class="form-control" name="productDescription" value="{{ isset($product->product_description)?$product->product_description:old('product_description') }}" id="productDescription" placeholder="Descripción del producto">
+                                        <label for="productDescription" class="form-label">Descripción del producto</label>
+                                        <input type="text" class="form-control" name="productDescription" value="{{ isset($product->product_description)?$product->product_description:old('product_description') }}" id="productDescription" placeholder="">
                                     </div>
                                 </div>
                                 @if($mode=="Editar")

@@ -11,12 +11,16 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Transacciones <a href="/transactions/create" class="btn btn-block">
-                                    @hasrole('Shopkeeper')
+                            @hasrole('Shopkeeper')
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6">Transacciones
+                                <a href="/transactions/create" class="btn btn-block">
                                     <i style="color: white; margin-top: 13px;" class="material-icons opacity-10">currency_exchange</i>
-                                    @endhasrole
-                                </a></h6>
-
+                                </a>
+                            </h6>
+                            @endhasrole
+                            @hasrole('Supplier')
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Transacciones</h6>
+                            @endhasrole
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">
@@ -86,11 +90,7 @@
                                         </td>
                                         @endif
                                         @if (Auth::user()->role == 'Shopkeeper')
-                                            @if ($transaction->status == 'successful' || $transaction->status == 'failed')
-                                            <td class="align-middle text-center text-sm">
-                                                <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Detalle</a>
-                                            </td>
-                                            @endif
+
                                         <td class="align-middle text-center text-sm">
                                             @if (Auth::user()->role == 'Supplier')
                                                 <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>

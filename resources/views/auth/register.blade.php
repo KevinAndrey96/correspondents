@@ -75,3 +75,5 @@
     </div>
 </div>
 @endsection
+git checkout -b "feacture/desing-view-loadclock"
+git add .

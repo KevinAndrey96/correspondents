@@ -56,9 +56,8 @@
                             <form role="form" class="text-start" method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="input-group input-group-outline my-3">
-                                    <label class="form-label"></label>
-
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Correo">
+                                    <label class="form-label">Correo</label>
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus >
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -82,7 +81,7 @@
                                     </button>
                                 </div>
                                 <p class="mt-4 text-sm text-center">
-                                    <a href="../pages/sign-up.html" class="text-primary text-gradient font-weight-bold">Recuperar</a> usuario o contraseña
+                                    <a href="/password/reset" class="text-primary text-gradient font-weight-bold">Recuperar</a> usuario o contraseña
 
                                 </p>
                             </form>

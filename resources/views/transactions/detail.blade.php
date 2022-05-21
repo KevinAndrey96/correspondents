@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 @extends('layouts.dashboard')
 @section('content')
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-2">
         <div class="row">
             <div class="col-12">
                 <div class="card my-4">
@@ -18,7 +17,7 @@
                                     <div class="card-body pt-2 p-2">
                                         <ul class="list-group">
                                             <li class="list-group-item border-0 d-flex p-4 mb-0 bg-gray-100 border-radius-lg">
-                                                <div class="row">
+                                              <div class="row">
                                                 @if (Auth::user()->role == 'Supplier')
                                                 <div class="col-md-4 d-flex flex-column ">
                                                     <h6 class="mb-3 text-sm">Información</h6>
@@ -52,19 +51,36 @@
                                                     </form>
                                                 @endif
                                                 @if (Auth::user()->role == 'Shopkeeper')
-                                                     <div class="input-group input-group-static mb-4">
-                                                         <label>Recibo:</label>
-                                                         <img width="300px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
-                                                     </div>
-                                                     <div class="input-group input-group-dynamic">
-                                                          <textarea class="form-control" name="comment" rows="3" placeholder="Comentario:" spellcheck="false">{{$transaction->comment}}</textarea>
-                                                     </div>
+                                                        <div class="col-md-6 d-flex flex-column ">
+                                                            <h6 class="mb-3 text-sm">Datos de transacción</h6>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Producto: <a class="mb-2 text-xl " style="color: darkred;">{{$transaction->product->product_name}}</a> </p>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Número de cuenta: <a class="mb-2 text-xl " style="color: darkred;">{{$transaction->account_number}}</a></p>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Tipo de cuenta: <a class="mb-2 text-xl " style="color: darkred;">Nequi</a></p>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Nombre: <a class="mb-2 text-xl " style="color: darkred;">Nombre Apellido</a></p>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Documento: <a class="mb-2 text-xl " style="color: darkred;">1234567890</a></p>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Email: <a class="mb-2 text-xl " style="color: darkred;">pruebaD@gmail.com</a></p>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Codigo: <a class="mb-2 text-xl " style="color: darkred;">123-456</a></p>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Extra: <a class="mb-2 text-xl " style="color: darkred;">estra</a></p>
+                                                        </div>
+                                                        <div class="col-md-6 d-flex flex-column ">
+                                                            <div>
+                                                            <a class="btn btn-success text-center text-xs"><i class="material-icons me-2">print</i>Imprimir comprobante</a>
+                                                            </div>
+                                                            <div class="input-group input-group-static mb-2 mt-2">
+
+                                                                <img class="" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="input-group input-group-dynamic">
+                                                                <textarea class="form-control" name="comment" rows="3" placeholder="Comentario:" spellcheck="false">{{$transaction->comment}}</textarea>
+                                                            </div>
+                                                        </div>
                                                 @endif
                                                 </div>
-                                                </div>
+                                              </div>
                                             </li>
                                         </ul>
-                                    </div>
                                     </div>
                                 </div>
                             </div>

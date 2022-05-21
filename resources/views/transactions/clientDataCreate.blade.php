@@ -32,7 +32,7 @@
                                         <input type="hidden" class="form-control" name="transactionState" value="{{$transaction->status}}" id="transactionState" readonly="readonly">
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° de cuenta</h6>
                                         <div class="input-group input-group-outline my-3">
                                             <label for="accountNumber" ></label>
@@ -52,7 +52,7 @@
                                         </div>
                                     @endif
                                     @if($product->client_name == 1)
-                                      <div class="col-md-4">
+                                      <div class="col-md-5">
                                         <h6 style="margin-bottom: -10px;" class="text-sm text-center">Nombre del cliente</h6>
                                         <div class="input-group input-group-outline my-3">
                                             <label for="clientName" ></label>
@@ -70,7 +70,7 @@
                                       </div>
                                     @endif
                                     @if($product->email == 1)
-                                        <div class="col-md-5">
+                                        <div class="col-md-6">
                                             <h6 style="margin-bottom: -10px;" class="text-sm text-center">Correo electrónico</h6>
                                             <div class="input-group input-group-outline my-3">
                                                <label for="email" ></label>
@@ -88,7 +88,7 @@
                                         </div>
                                     @endif
                                     @if($product->extra == 1)
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                             <h6 style="margin-bottom: -10px;" class="text-sm text-center">Info. extra</h6>
                                             <div class="input-group input-group-outline my-3">
                                                 <label for="extra" ></label>
