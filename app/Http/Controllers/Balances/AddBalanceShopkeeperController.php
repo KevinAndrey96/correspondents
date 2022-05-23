@@ -15,7 +15,7 @@ class AddBalanceShopkeeperController extends Controller
 {
     public function store(Request $request)
     {
-        if (Auth::user()->role == 'Shopkeeper') {
+        if (Auth::user()->role == 'Shopkeeper' or Auth::user()->role == 'Supplier') {
             $fields = [
                 'amount'=>'required|numeric|min:20000',
                 'image'=>'required',
@@ -29,6 +29,7 @@ class AddBalanceShopkeeperController extends Controller
             $balance = new Balance();
             $balance->user_id = Auth::user()->id;
             $balance->amount = $request->input('amount');
+            date_default_timezone_set('America/Bogota');
             $balance->date = $date;
             $balance->type = 'Deposit';
             $balance->code = $request->input('transactionNumber');

@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Commission;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Request as RequestAlias;
 
@@ -57,6 +58,25 @@ class UpdateTransactionController extends Controller
             $transaction->com_sup = $commissionSupp->amount;
             $transaction->com_adm = $transaction->product->product_commission -
                 ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup);
+
+            $administrator = User::find($transaction->admin_id);
+            $supplier = User::find($transaction->supplier_id);
+            $distributor = User::find($transaction->distributor_id);
+            $shopkeeper = User::find($transaction->shopkeeper_id);
+
+            $com_adm = $transaction->product->product_commission -
+                ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup);
+            if($com_adm >= 0){
+                $administrator->profit = $administrator->profit + $com_adm;
+            }
+            $supplier->profit = $supplier->profit + $commissionSupp->amount;
+            $distributor->profit = $distributor->profit + $commissionDist->amount - $commissionShop->amount;
+            $shopkeeper->profit = $shopkeeper->profit + $commissionShop->amount;
+            
+            $supplier->save();
+            $distributor->save();
+            $shopkeeper->save();
+
             $transaction->save();
         }
 

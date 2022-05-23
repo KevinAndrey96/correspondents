@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('is_valid')->default(0);
             $table->string('type');
             $table->string('boucher')->nullable();
-            $table->string('code')->nullable();
+            $table->string('code')->unique()->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
         });

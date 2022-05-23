@@ -29,6 +29,7 @@ class AddBalanceAdminController extends Controller
             $balance = new Balance();
             $balance->user_id = $request->input('userID');
             $balance->amount = $request->input('amount');
+            date_default_timezone_set('America/Bogota');
             $balance->date = $date;
             $balance->type = $request->input('type');
             $balance->is_valid = 1;

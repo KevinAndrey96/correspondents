@@ -24,8 +24,10 @@
                             <table id= "my_table" class="table align-items-center mb-0">
                                 <thead class="thead-light">
                                 <tr>
+                                @hasrole('Administrator')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Actual</th>
+                                @endhasrole
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Solicitud  </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Transaccion  </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de Solicitud</th>
@@ -43,8 +45,10 @@
                                 <tbody>
                                 @foreach( $balances as $balance )
                                     <tr>
+                                    @hasrole('Administrator')
                                         <td class="align-middle text-center text-sm">{{ $balance->user->name}}</td>
                                         <td class="align-middle text-center text-sm">{{ $balance->user->balance}}</td>
+                                    @endhasrole
                                         <td class="align-middle text-center text-sm">{{ $balance->id}}</td>
                                         <td class="align-middle text-center text-sm">{{ $balance->code}}</td>
                                         @if($balance->type == 'Deposit')
@@ -70,10 +74,10 @@
                                         <td class="align-middle text-center text-sm">
                                             <div class="form-check form-switch ">
                                                 @if ($balance->is_valid == 1)
-                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" onclick="return confirm('¿Esta seguro de invalidar esta solicitud?')" checked onchange="validate({{$balance->id}})">
+                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" onclick="return confirm('¿Esta seguro de invalidar la transacción #{{$balance->id}} por un valor de ${{$balance->amount}} para el usuario {{$balance->user->name}}?')" checked onchange="validate({{$balance->id}})">
                                                     <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{$balance->id}}"></label>
                                                 @else
-                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" onclick="return confirm('¿Esta seguro de validar esta solicitud?')" onchange="validate({{$balance->id}})">
+                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" onclick="return confirm('¿Esta seguro de validar la transacción #{{$balance->id}} por un valor de ${{$balance->amount}} para el usuario {{$balance->user->name}}?')" onchange="validate({{$balance->id}})">
                                                     <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$balance->id}}"></label>
                                                 @endif
                                             </div>

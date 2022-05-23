@@ -11,7 +11,7 @@ class CreateBalanceController extends Controller
 {
     public function create()
     {
-        if (Auth::user()->role == 'Shopkeeper') {
+        if (Auth::user()->role == 'Shopkeeper' or Auth::user()->role == 'Supplier') {
             return view('balance.addBalanceShopkeeper');
         }
     }

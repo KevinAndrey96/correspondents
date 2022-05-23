@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class CreateProfitController extends Controller
 {
-    public function create($userID)
+    public function create()
     {
-        return view('profit.create', compact('userID'));
+        return view('profit.WithdrawProfitController');
     }
 }
