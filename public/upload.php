@@ -1,5 +1,6 @@
 <?php
     $targetDir = Sprintf('storage/%s/', $_POST['path']);
+    @mkdir($targetDir, 0755);
     $targetFile = Sprintf('%s%s', $targetDir, basename($_FILES["image"]["name"]));
     $uploadOk = true;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));

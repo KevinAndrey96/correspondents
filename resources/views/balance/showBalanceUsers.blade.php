@@ -86,7 +86,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 text-center">
-                                                        <input class="btn btn-success" type="submit" value="Gestionar saldo">
+                                                        <input class="btn btn-success" type="submit" value="Gestionar saldo" onclick="return confirm('¿Esta seguro de realizar la transacción?')">
 
                                                         <a class="btn btn-primary" href="{{ url('/balance/users') }}"> Regresar</a>
                                                     </div>

@@ -17,6 +17,24 @@ class SupplierSeeder extends Seeder
     public function run()
     {
         $user = new User();
+        $user->name = "Supplier";
+        $user->email = "supplier@gmail.com";
+        $user->password = Hash::make('supplier');
+        $user->role = "Supplier";
+        $user->phone = "7110042";
+        $user->document_type = "CC";
+        $user->document = "111222333";
+        $user->city = "Bogota";
+        $user->address = "calle 69a #12-48";
+        $user->priority = 4;
+        $user->max_queue = 5;
+        $user->is_enabled = 1;
+        $user->is_online = 1;
+        $user->balance = 0;
+        $user->save();
+        $user->assignRole('Supplier');
+
+        $user = new User();
         $user->name = "Gloria Arbeláez";
         $user->email = "gloria@gmail.com";
         $user->password = Hash::make('gloria');
@@ -30,6 +48,7 @@ class SupplierSeeder extends Seeder
         $user->max_queue = 5;
         $user->is_enabled = 1;
         $user->is_online = 1;
+        $user->balance = 0;
         $user->save();
         $user->assignRole('Supplier');
 
@@ -47,6 +66,7 @@ class SupplierSeeder extends Seeder
         $user->max_queue = 6;
         $user->is_enabled = 1;
         $user->is_online = 1;
+        $user->balance = 0;
         $user->save();
         $user->assignRole('Supplier');
 
@@ -64,6 +84,7 @@ class SupplierSeeder extends Seeder
         $user->max_queue = 3;
         $user->is_enabled = 1;
         $user->is_online = 1;
+        $user->balance = 0;
         $user->save();
         $user->assignRole('Supplier');
 
@@ -81,6 +102,7 @@ class SupplierSeeder extends Seeder
         $user->max_queue = 4;
         $user->is_enabled = 1;
         $user->is_online = 1;
+        $user->balance = 0;
         $user->save();
         $user->assignRole('Supplier');
 
@@ -99,6 +121,7 @@ class SupplierSeeder extends Seeder
         $user->max_queue = 9;
         $user->is_enabled = 1;
         $user->is_online = 1;
+        $user->balance = 0;
         $user->save();
         $user->assignRole('Supplier');
     }

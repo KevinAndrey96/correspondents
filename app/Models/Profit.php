@@ -10,6 +10,10 @@ class Profit extends Model
     use HasFactory;
 
     public function user(){
-        return $this->hasOne('App/Models/User','id','user_id');
+        return $this->belongsTo(User::class);
+    }
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
     }
 }

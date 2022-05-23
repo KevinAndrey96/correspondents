@@ -62,6 +62,51 @@ class HomeController extends Controller
                 'shopkeepersBalance',
                 'suppliersBalance'));
         }
+
+        if (Auth::user()->role == 'Distributor') {
+            $transactionCount = Transaction::where('distributor_id', '=', Auth::user()->id)->count();
+
+            $shopkeeperCount = User::where('role', 'like', 'Shopkeeper')->where('distributor_id', '=', Auth::user()->id)->count();
+
+            $shopkeepers = User::where('role', 'like', 'Shopkeeper')->where('distributor_id', '=', Auth::user()->id)->get();
+            $shopkeepersBalance = 0;
+            foreach($shopkeepers as $shopkeeper){
+                $shopkeepersBalance = $shopkeepersBalance + $shopkeeper->balance;
+            }
+            return view('home', compact(
+                'transactionCount',
+                'shopkeeperCount',
+                'shopkeepersBalance',));
+        }
+
+        if (Auth::user()->role == 'Supplier') {
+            $transactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->count();
+            $successfulTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Successful')->count();
+            $failedTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Failed')->count();
+            $holdTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->count();
+            $acceptedTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->count();
+            return view('home', compact(
+                'transactionCount',
+                'successfulTransactionCount',
+                'failedTransactionCount',
+                'holdTransactionCount',
+                'acceptedTransactionCount',));
+        }
+
+        if (Auth::user()->role == 'Shopkeeper') {
+            $transactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->count();
+            $successfulTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Successful')->count();
+            $failedTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Failed')->count();
+            $holdTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->count();
+            $acceptedTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->count();
+            return view('home', compact(
+                'transactionCount',
+                'successfulTransactionCount',
+                'failedTransactionCount',
+                'holdTransactionCount',
+                'acceptedTransactionCount',));
+        }
+
         return view('home');
     }
 }

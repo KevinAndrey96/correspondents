@@ -17,21 +17,15 @@ class IndexCommissionsController extends Controller
         }
         if (Auth::user()->role == 'Distributor') {
             $commissions = Commission::where('user_id', '=', Auth::user()->id)->get();
-            $commissionsTotal= 0;
-            $commissionsTotal = Commission::where('user_id', '=', Auth::user()->id)->sum('amount');
-            return view('commissions.index', compact('commissions','commissionsTotal'));
+            return view('commissions.index', compact('commissions'));
         }
         if (Auth::user()->role == 'Shopkeeper') {
             $commissions = Commission::where('user_id', '=', Auth::user()->id)->get();
-            $commissionsTotal= 0;
-            $commissionsTotal = Commission::where('user_id', '=', Auth::user()->id)->sum('amount');
-            return view('commissions.index', compact('commissions','commissionsTotal'));
+            return view('commissions.index', compact('commissions'));
         }
         if (Auth::user()->role == 'Supplier') {
             $commissions = Commission::where('user_id', '=', Auth::user()->id)->get();
-            $commissionsTotal= 0;
-            $commissionsTotal = Commission::where('user_id', '=', Auth::user()->id)->sum('amount');
-            return view('commissions.index', compact('commissions','commissionsTotal'));
+            return view('commissions.index', compact('commissions'));
         }
     }
 }

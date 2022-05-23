@@ -24,27 +24,18 @@
                             <table id= "my_table" class="table align-items-center mb-0">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nueva comisión</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
                                 @foreach( $commissions as $commission )
                                 <tr>
-                                    <td class="align-middle text-center text-sm">{{ $commission->user->name}}</td>
                                     <td class="align-middle text-center text-sm">{{ $commission->product->product_name}} - {{ ($commission->product->product_type) == 'Deposit' ? 'Depósito' : 'Retiro'}}</td>
                                     <td class="align-middle text-center text-sm">${{ $commission->amount}}</td>
                                 </tr>
                                 @endforeach
-                                @hasanyrole('Supplier|Distributor|Shopkeeper')
-                                <tr>
-                                    <td class="align-middle text-center text-sm"></td>
-                                    <td class="align-middle text-center text-sm">Total</td>
-                                    <td class="align-middle text-center text-sm">${{$commissionsTotal}}</td>
-                                </tr>
-                                @endhasanyrole
                                 </tbody>
                             </table>
                         </div>

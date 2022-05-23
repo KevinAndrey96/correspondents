@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers\Profits;
 
-use App\Models\Profit;
-use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\Profit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IndexProfitController extends Controller
+class ShowWithdrawProfitController extends Controller
 {
     public function index(Request $request)
     {
         if (Auth::user()->role == 'Administrator') {
             $profitsData['profits'] = Profit::all()->sortByDesc('created_at');
+            return view('profit.showProfitUsers', $profitsData);
         }
-        if (Auth::user()->role != 'Administrator') {
-            $profitsData['profits'] = Profit::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        }
-        return view('profit.index', $profitsData);
     }
 }

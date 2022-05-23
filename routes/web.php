@@ -43,11 +43,11 @@ Route::group(['middleware' => ['auth', 'transactions']], function() {
     Route::post('/balance/validate', [App\Http\Controllers\Balances\ValidateBalanceController::class, 'isValid']);
 
     Route::get('/profit', [App\Http\Controllers\Profits\IndexProfitController::class, 'index']);
-    Route::get('/profit/create/{id}', [App\Http\Controllers\Profits\CreateProfitController::class, 'create']);
-    Route::post('/profit', [App\Http\Controllers\Profits\StoreProfitController::class, 'store']);
-    Route::get('/profit/{id}/edit', [App\Http\Controllers\Profits\EditProfitController::class, 'edit']);
-    Route::patch('/profit/{id}', [App\Http\Controllers\Profits\WithdrawalProfitController::class, 'update']);
-    Route::delete('/profit/{id}', [App\Http\Controllers\Profits\DestroyProfitController::class, 'destroy']);
+    Route::get('/profit/create', [App\Http\Controllers\Profits\CreateProfitController::class, 'create']);
+    Route::post('/profit/store', [App\Http\Controllers\Profits\WithdrawProfitController::class, 'store']);
+    Route::get('/profit/users', [App\Http\Controllers\Profits\ShowWithdrawProfitController::class, 'index']);
+    Route::post('/profit', [App\Http\Controllers\Profits\adminWithdrawProfitController::class, 'store']);
+    Route::post('/profit/validate', [App\Http\Controllers\Profits\validateWithdrawProfitController::class, 'isValid']);
 
     Route::get('/transactions', [App\Http\Controllers\Transactions\IndexTransactionController::class, 'index']);
     Route::get('/transactions/create', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create']);
