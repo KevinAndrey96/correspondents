@@ -40,7 +40,6 @@ class AddClientDataController extends Controller
             $shopkeeperID = Auth::user()->id;
             $distributorID = Auth::user()->distributor_id;
             $transaction = new Transaction();
-            date_default_timezone_set('America/Bogota');
             //$transaction->date = substr(Carbon::now(), 9, 17);
             $transaction->date = Carbon::now();
             $dailyTransaction = Transaction::where([
