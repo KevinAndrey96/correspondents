@@ -16,8 +16,8 @@
                                     @csrf
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
-                                            <label for="name" class="form-label"></label>
-                                            <input type="text" class="form-control" name="name" value="" id="" placeholder="Nombre">
+                                            <label for="name" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" name="name" value="" id="" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -32,52 +32,52 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class=" input-group input-group-outline my-3">
-                                            <label for="document" class="form-label"></label>
-                                            <input type="text" class="form-control" name="document" value="" id="" placeholder="N° documento">
+                                            <label for="document" class="form-label">N° documento</label>
+                                            <input type="text" class="form-control" name="document" value="" id="" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class=" input-group input-group-outline my-3">
-                                            <label for="phone" class="form-label"></label>
-                                            <input type="text" class="form-control" name="phone" value="" id="" placeholder="Teléfono">
+                                            <label for="phone" class="form-label">Teléfono</label>
+                                            <input type="text" class="form-control" name="phone" value="" id="" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class=" input-group input-group-outline my-3">
-                                            <label for="city" class="form-label"></label>
-                                            <input type="text" class="form-control" name="city" value="" id="" placeholder="Ciudad">
+                                            <label for="city" class="form-label">Ciudad</label>
+                                            <input type="text" class="form-control" name="city" value="" id="" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
-                                            <label for="email" class="form-label"></label>
-                                            <input type="email" class="form-control" name="email" value="" id="" placeholder="Correo electrónico">
+                                            <label for="email" class="form-label">Correo electrónico</label>
+                                            <input type="email" class="form-control" name="email" value="" id="" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
-                                            <label for="address" class="form-label"></label>
-                                            <input type="text" class="form-control" name="address" value="" id="" placeholder="Dirección">
+                                            <label for="address" class="form-label">Dirección</label>
+                                            <input type="text" class="form-control" name="address" value="" id="" placeholder="">
                                         </div>
                                     </div>
                                     @if ($role == 'Supplier')
                                         <div class="col-md-4">
                                             <div class=" input-group input-group-outline my-3">
-                                                <label for="priority" class="form-label"></label>
-                                                <input type="number" class="form-control" name="priority" min="1" value="" id="" placeholder="Prioridad">
+                                                <label for="priority" class="form-label">Prioridad</label>
+                                                <input type="number" class="form-control" name="priority" min="1" value="" id="" placeholder="">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class=" input-group input-group-outline my-3">
-                                                <label for="max_queue" class="form-label"></label>
-                                                <input type="number" class="form-control" name="max_queue" min="1" value="" id="" placeholder="Maxima cola de transacciones">
+                                                <label for="max_queue" class="form-label">Maxima cola de transacciones</label>
+                                                <input type="number" class="form-control" name="max_queue" min="1" value="" id="" placeholder="">
                                             </div>
                                         </div>
                                     @endif
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
-                                            <label for="max_queue" class="form-label"></label>
-                                            <input type="password" class="form-control" name="password" value="" id="" placeholder="Contraseña">
+                                            <label for="max_queue" class="form-label">Contraseña</label>
+                                            <input type="password" class="form-control" name="password" value="" id="" placeholder="">
                                         </div>
                                     </div>
                                     <div class="text-center">
