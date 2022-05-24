@@ -27,13 +27,32 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static mb-4 ">
                                         <label  for="">Tipo de transacción</label>
-                                        <select id="transactionType" name="transactionType" class="form-control" aria-label="Default select example" required>
+                                        <select id="transactionType" onchange="showProducts()" name="transactionType" class="form-control" aria-label="Default select example" required>
                                             <option class="text-center" value="">seleccionar</option>
                                             <option class="text-center" value="Deposit">Deposito</option>
                                             <option class="text-center" value="Withdrawal">Retiro</option>
                                         </select>
                                     </div>
                                 </div>
+                                    <script>
+                                        function showProducts() {
+                                            //al seleccionar el tipo de transacción mostar los productos que correspondan
+                                            //si es deposito muestra los productos de deposito y si no muestra los de retiro
+                                            //paso 1: saber que seleccionó el cliente
+                                            var transactionType = document.getElementById('transactionType').value
+                                            //paso 2: mostrar el di que corresponda
+                                            if (transactionType == 'Deposit') {
+                                                document.getElementById('deposit').style.display = 'block'
+                                                document.getElementById('withdrawal').style.display = 'none'
+                                            }
+                                            if (transactionType == 'Withdrawal') {
+                                                document.getElementById('withdrawal').style.display = 'block'
+                                                document.getElementById('deposit').style.display = 'none'
+                                            }
+
+                                        }
+
+                                    </script>
                                 <div class="col-md-6">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="transactionAmount" class="form-label"></label>
@@ -45,7 +64,7 @@
                                     <input type="hidden" class="form-control" name="productID" value="" id="productID" readonly="readonly">
                                 </div>
 
-                                <div class="col-sm-3 col-md-12 ">
+                                <div class="col-md-12" id="deposit" style="display: none;">
                                     <label class="form-label">Depositos</label>
                                     <div class="form-check mb-3">
                                         @foreach( $productsDeposit as $product )
@@ -55,7 +74,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-12" id="withdrawal" style="display: none;>
                                     <label class="form-label">Retiros</label>
                                     <div class="form-check mb-3">
                                         @foreach( $productsWithdrawal as $product )

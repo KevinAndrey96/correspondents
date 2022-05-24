@@ -60,14 +60,6 @@
                                             <input type="text" class="form-control" name="address" value="" id="" placeholder="Dirección">
                                         </div>
                                     </div>
-                                    @if ($role != 'Distributor')
-                                    <div class="col-md-4">
-                                        <div class=" input-group input-group-outline my-3">
-                                            <label for="balance" class="form-label"></label>
-                                            <input type="number" class="form-control" name="balance" min="1" value="" id="" placeholder="Saldo">
-                                        </div>
-                                    </div>
-                                    @endif
                                     @if ($role == 'Supplier')
                                         <div class="col-md-4">
                                             <div class=" input-group input-group-outline my-3">

@@ -34,7 +34,7 @@
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse  w-auto  max-height-vh-100 mb-4 " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link text-white " href="/home">
@@ -79,7 +79,6 @@
                                 <span class="nav-link-text ms-1">G. Distribuidores</span>
                             </a>
                         </li>
-
                     </ul>
                 </div>
             </li>
@@ -295,7 +294,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-9" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">currency_exchange</i>
+                        <i class="material-icons opacity-10">savings</i>
                     </div>
                     <span class="nav-link-text">Ganancias</span>
                 </a>
@@ -305,7 +304,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/profit/users">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                    <i class="material-icons opacity-10">request_quote</i>
                                 </div>
                                 <span class="nav-link-text ms-1">Solicitudes</span>
                             </a>
@@ -314,15 +313,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/profit/create">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                    <i class="material-icons opacity-10">exit_to_app</i>
                                 </div>
                                 <span class="nav-link-text ms-1">Retirar Ganancia</span>
                             </a>
                         </li>
-                        <li class="nav-item">        
+                        <li class="nav-item">
                             <a class="nav-link text-white " href="/profit">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                   <i class="material-icons opacity-10">currency_exchange</i>
+                                   <i class="material-icons opacity-10">history</i>
                                 </div>
                                 <span class="nav-link-text ms-1">Historial de Retiros</span>
                             </a>
@@ -393,6 +392,30 @@
         </div>
     </div>
     @endhasrole
+    <div class="sidenav-footer mx-3 ">
+        <div class="card card-plain shadow-none" id="sidenavCard">
+            <div class="card-body text-center p-3 w-100 pt-0">
+                @if(Auth::user()->role == 'Shopkeeper')
+                <h6 class="text-white mb-1">Tendero</h6>
+                @endif
+                @if(Auth::user()->role == 'Supplier')
+                <h6 class="text-white mb-1">Proveedor</h6>
+                @endif
+                @if(Auth::user()->role == 'Administrator')
+                <h6 class="text-white mb-1">Administrador</h6>
+                @endif
+                @if(Auth::user()->role == 'Distributor')
+                <h6 class="text-white mb-1">Distribuidor</h6>
+                @endif
+                <p class="text-xs text-white mb-1">Ganancia: ${{ Auth::user()->profit }}
+                    @hasanyrole('Supplier|Shopkeeper')
+                </br> Saldo: ${{ Auth::user()->balance }}
+                    @endhasanyrole
+                </p>
+            </div>
+        </div>
+    </div>
+
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
@@ -400,15 +423,10 @@
         <div class="container-fluid py-1 px-1">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Página</a></li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ Auth::user()->role }}.</li>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark">Bienvenido</a></li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ Auth::user()->name}}.</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">{{ Auth::user()->name }}</h6>
-                <h6 class="font-weight-bolder mb-0">Ganancia: ${{ Auth::user()->profit }}
-                @hasanyrole('Supplier|Shopkeeper')                                
-                 / Saldo: ${{ Auth::user()->balance }} 
-                @endhasanyrole
-                </h6>
+
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">

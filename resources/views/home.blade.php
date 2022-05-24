@@ -305,7 +305,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
@@ -315,14 +315,65 @@
                                     <h5 class="font-weight-bolder">
                                         {{ $failedTransactionCount }}
                                     </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. exitosas</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $successfulTransactionCount }}
                                     </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. en espera</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $holdTransactionCount }}
                                     </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. aceptadas</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $acceptedTransactionCount }}
@@ -361,7 +412,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
@@ -371,14 +422,65 @@
                                     <h5 class="font-weight-bolder">
                                         {{ $failedTransactionCount }}
                                     </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. exitosas</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $successfulTransactionCount }}
                                     </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. en espera</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $holdTransactionCount }}
                                     </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. aceptadas</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $acceptedTransactionCount }}

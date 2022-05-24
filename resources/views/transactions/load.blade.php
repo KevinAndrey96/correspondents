@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="/assets/img/favicon1.png">
     <title>
         Corresponsales
     </title>
@@ -36,13 +36,13 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="text-center mb-4">
+                            <div class="text-center mb-2">
                                 <img  src="/assets/img/RelojArena2.gif" alt="gif" height="140px" width="200px">
                             </div>
                             <div class="text-center">
-                                <p class="mb-2 text-xs font-weight-bold text-dark">Número de cuenta:<p class=" mb-2 text-xs font-weight-bold"> {{$transaction->account_number}}</p></p>
-                                <p class="mb-2 text-xs font-weight-bold text-dark">Monto: <p class=" mb-2 text-xs font-weight-bold">{{$transaction->amount}}</p></p>
-                               <p class="mb-2 text-xs font-weight-bold text-dark">Tipo: <p class=" mb-2 text-xs font-weight-bold">
+                                <p class="mb-1 text-xs font-weight-bold text-dark">Número de cuenta:<p class=" mb-2 text-xs font-weight-bold"> {{$transaction->account_number}}</p></p>
+                                <p class="mb-1 text-xs font-weight-bold text-dark">Monto: <p class=" mb-2 text-xs font-weight-bold">{{$transaction->amount}}</p></p>
+                               <p class="mb-1 text-xs font-weight-bold text-dark">Tipo: <p class=" mb-2 text-xs font-weight-bold">
                                  @if ($transaction->type == 'Deposit')
                                   Deposito
                                  @endif
@@ -50,13 +50,50 @@
                                   Retiro
                                  @endif
                                </p></p>
-                                <p class="mb-2 text-xs font-weight-bold text-dark">Producto: <p class=" mb-2 text-xs font-weight-bold">{{$transaction->product->product_name}}</p></p>
+                                <p class="mb-1 text-xs font-weight-bold text-dark">Producto: <p class=" mb-2 text-xs font-weight-bold">{{$transaction->product->product_name}}</p></p>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 text-center aling-content-middel">
+                                    <p class="text-center text-white text-sm p-2" style="background-color:dodgerblue; width:100%; border-radius: 10px;">En espera</p>
+                                </div>
+                                <div class="col-sm-6 text-center text-xs" id="out" style="display: none;">
+                                    <button type="submit" class="btn btn-danger w-100 mb-2" onclick="cancelAlert()">Cancelar
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div>
+
+        </div>
+
+        <script>
+            // Aquí se ejecuta el método onload, que dice que esto se ejecutará apenas cargue la página
+            window.onload = function() {
+                // alerta de espera
+                window.alert('Su transacción se está realizando en este momento, por favor espere unos minutos mientras esta se completa.')
+                // Aquí llama la función que está definida abajo, lo que hace es llamarla solamente y se le envia en los parentesis cuantos segundos queremos que pasen
+                timerToCancel(180)
+
+            };
+
+            // Este método lo que hace es cancelar pasados X segundos según se le diga al momento de llamarlo
+            function timerToCancel(segundos){
+// Aquí se ejecuta el código, entonces arriba recibe los segundos, abajo se le mandan
+                setTimeout(function(){
+                    // Cuando pasen los segundos que le dijimos hará estas acciones a continuación
+                    document.getElementById('out').style.display = 'block';
+
+                }, segundos * 1000);
+            }
+            function cancelAlert() {
+                window.confirm('¿Está seguro de cancelar la transacción actual? recuerde que este proceso es irreversible')
+            }
+
+        </script>
         <footer class="footer position-absolute bottom-2 py-2 w-100">
             <div class="container">
                 <div class="row justify-content-center">
@@ -92,7 +129,7 @@
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="/assets/js/material-dashboard.min.js?v=3.0.0"></script>
+
 </body>
 
 </html>
