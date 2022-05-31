@@ -19,6 +19,7 @@ class AddBalanceShopkeeperController extends Controller
             $fields = [
                 'amount'=>'required|numeric|min:20000',
                 'image'=>'required',
+                'transactionNumber'=>'required|unique',
             ];
             $message = [
                 'required'=>':attribute es requerido',
