@@ -28,7 +28,6 @@
                             <table id="my_table" class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Cantidad</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Producto</th>
                                     @if (Auth::user()->role == 'Shopkeeper')
@@ -36,8 +35,9 @@
                                     @endif
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Estado</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Fecha</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Acción</th>
-
+                                    @if (! isset($id))
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Acción</th>
+                                    @endif
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -78,31 +78,20 @@
                                                 @endif
                                             </td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->date }}</td>
-                                        @if (Auth::user()->role == 'Supplier')
-                                        <td class="align-middle text-center text-sm">
-                                            @if ($transaction->status != 'successful' and $transaction->status != 'failed')
+                                        @if (Auth::user()->role == 'Supplier' && $transaction->status != 'successful' && $transaction->status != 'failed')
+                                            <td class="align-middle text-center text-sm">
                                                 <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0" onclick="return confirm('¿Está seguro que desea iniciar esta transacción? Recuerde que no podrá deshacer esta acción.')" ><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
-                                            @endif
-                                            @if ($transaction->status == 'successful' or $transaction->status == 'failed')
-                                                <a href="/transaction/detail-pdf/{{$transaction->id}}" class="btn btn-link px-3 mb-0" target="_blank">Imp. comprobante</a>
-                                            @endif
-                                        </td>
+                                            </td>
                                         @endif
-                                        @if (Auth::user()->role == 'Shopkeeper')
-
-                                        <td class="align-middle text-center text-sm">
-                                            @if (Auth::user()->role == 'Supplier')
-                                                <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
-                                            @endif
-                                                @if (Auth::user()->role == 'Shopkeeper')
-                                                    @if ($transaction->status == 'successful' || $transaction->status == 'failed')
-                                                        <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Detalle</a>
-                                                    @endif
-                                                        @if ($transaction->status == 'hold')
-                                                            <a style="color: red;" href="/transaction/cancel/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: red;" class="material-icons opacity-10">cancel</i> Cancelar</a>
-                                                        @endif
+                                        @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Administrator')
+                                            <td class="align-middle text-center text-sm">
+                                                @if ($transaction->status == 'successful' || $transaction->status == 'failed')
+                                                    <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Detalle</a>
                                                 @endif
-                                        </td>
+                                                @if ($transaction->status == 'hold')
+                                                        <a style="color: red;" href="/transaction/cancel/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: red;" class="material-icons opacity-10">cancel</i> Cancelar</a>
+                                                    @endif
+                                            </td>
                                         @endif
                                     </tr>
                                 @endforeach

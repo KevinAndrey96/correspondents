@@ -12,21 +12,16 @@ class DetailTransactionController extends Controller
     public function detail($id)
     {
         $transaction = Transaction::find($id);
+        $extras = explode(',', $transaction->detail);
         if (Auth::user()->role == 'Supplier') {
             $transaction->status = 'accepted';
             $transaction->save();
-            $extras = explode(',', $transaction->detail);
 
             return view('transactions.detail', compact('transaction', 'extras'));
         }
+        if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Administrator') {
 
-        if (Auth::user()->role == 'Shopkeeper') {
-
-            return view('transactions.detail', compact('transaction'));
+            return view('transactions.detail', compact('transaction', 'extras'));
         }
-
-
-
-
     }
 }

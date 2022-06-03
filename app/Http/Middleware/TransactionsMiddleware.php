@@ -18,28 +18,22 @@ class TransactionsMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::user()->role == 'Shopkeeper') {
-            $transaction = Transaction::where([['shopkeeper_id', '=',  Auth::user()->id], ['status', '=', 'hold']])->first();
+            $transaction = Transaction::where([['shopkeeper_id', '=',  Auth::user()->id], ['status', '=', 'hold']])
+                                        ->orWhere([['shopkeeper_id', '=',  Auth::user()->id], ['status', '=', 'accepted']])->first();
             if (! is_null($transaction)) {
+
                 return redirect('/transactionLoad/'.$transaction->id);
             }
+
             return $next($request);
-
         }
+        if (Auth::user()->role == 'Supplier') {
+            $transaction = Transaction::where([['supplier_id', '=',  Auth::user()->id], ['status', '=', 'accepted']])->first();
+            if (! is_null($transaction)) {
 
-
-            /*$transaction = Transaction::where([['shopkeeper_id','=', Auth::user()->id], ['status', '=', 'hold']])
-                                       ->orWhere([['supplier_id','=', Auth::user()->id], ['status', '=', 'accepted']])
-                                        ->first();
-            */
-            //dd($transaction);
-            /*
-            if (! is_null($transaction) && Auth::user()->role == 'Shopkeeper') {
-
+                return redirect('/transaction/detail/' . $transaction->id);
             }
-            */
-
-
-
+        }
 
         return $next($request);
     }

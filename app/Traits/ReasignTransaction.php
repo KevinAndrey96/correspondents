@@ -14,9 +14,17 @@ trait ReasignTransaction
             $diffMinutes = $transaction->created_at->diffInMinutes(Carbon::now());
             if ($diffMinutes >= 4) {
                 $supplier = User::find($transaction->supplier_id);
-                $supplier->is_online = 0;
-                $supplier->save();
+                if (! is_null($supplier)) {
+                    $supplier->is_online = 0;
+                    $supplier->save();
+                }
                 $users = User::where('is_online', '=', 1)->orderBy('priority', 'asc')->get();
+                if (is_null($users)) {
+                    $transaction->supplier_id = null;
+                    $transaction->status = 'failed';
+                    $transaction->save();
+                    break;
+                }
                 foreach ($users as $user) {
                     $transactions = Transaction::where([
                         ['supplier_id', '=', $user->id],
