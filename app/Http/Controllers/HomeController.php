@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class HomeController extends Controller
@@ -27,12 +28,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $date = Carbon::now();
         if (Auth::user()->role == 'Administrator') {
-            $transactionCount = Transaction::all()->count();
-            $successfulTransactionCount = Transaction::where('status', 'like', 'Successful')->count();
-            $failedTransactionCount = Transaction::where('status', 'like', 'Failed')->count();
-            $holdTransactionCount = Transaction::where('status', 'like', 'Hold')->count();
-            $acceptedTransactionCount = Transaction::where('status', 'like', 'Accepted')->count();
+            $transactionCount = Transaction::whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $successfulTransactionCount = Transaction::where('status', 'like', 'Successful')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $failedTransactionCount = Transaction::where('status', 'like', 'Failed')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $holdTransactionCount = Transaction::where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $acceptedTransactionCount = Transaction::where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
 
             $administratorCount = User::where('role', 'like', 'Administrator')->count();
             $shopkeeperCount = User::where('role', 'like', 'Shopkeeper')->count();
@@ -64,7 +66,7 @@ class HomeController extends Controller
         }
 
         if (Auth::user()->role == 'Distributor') {
-            $transactionCount = Transaction::where('distributor_id', '=', Auth::user()->id)->count();
+            $transactionCount = Transaction::where('distributor_id', '=', Auth::user()->id)->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
 
             $shopkeeperCount = User::where('role', 'like', 'Shopkeeper')->where('distributor_id', '=', Auth::user()->id)->count();
 
@@ -80,11 +82,11 @@ class HomeController extends Controller
         }
 
         if (Auth::user()->role == 'Supplier') {
-            $transactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->count();
-            $successfulTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Successful')->count();
-            $failedTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Failed')->count();
-            $holdTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->count();
-            $acceptedTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->count();
+            $transactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $successfulTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Successful')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $failedTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Failed')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $holdTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $acceptedTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             return view('home', compact(
                 'transactionCount',
                 'successfulTransactionCount',
@@ -94,11 +96,11 @@ class HomeController extends Controller
         }
 
         if (Auth::user()->role == 'Shopkeeper') {
-            $transactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->count();
-            $successfulTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Successful')->count();
-            $failedTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Failed')->count();
-            $holdTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->count();
-            $acceptedTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->count();
+            $transactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $successfulTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Successful')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $failedTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Failed')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $holdTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $acceptedTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             return view('home', compact(
                 'transactionCount',
                 'successfulTransactionCount',

@@ -56,7 +56,8 @@ Route::group(['middleware' => ['auth', 'transactions']], function() {
     Route::get('/transaction/detail/{id}', [App\Http\Controllers\Transactions\DetailTransactionController::class, 'detail']);
     Route::post('/transaction/update', [App\Http\Controllers\Transactions\UpdateTransactionController::class, 'update']);
     Route::get('/transaction/cancel/{id}', [App\Http\Controllers\Transactions\CancelTransactionController::class, 'cancel']);
-
+    Route::get('/transaction/detail-pdf/{id}', [App\Http\Controllers\Transactions\DetailTransactionPDFController::class, 'detailPDF']);
+    Route::post('/transaction/excel', [App\Http\Controllers\Transactions\ExcelExportTransactionController::class, 'export']);
 
     Route::get('/users', [App\Http\Controllers\Users\IndexUsersController::class, 'index']);
     Route::get('/user/create', [App\Http\Controllers\Users\CreateUsersController::class, 'create']);

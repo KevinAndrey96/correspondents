@@ -13,10 +13,10 @@ class IndexProfitController extends Controller
     public function index(Request $request)
     {
         if (Auth::user()->role == 'Administrator') {
-            $profitsData['profits'] = Profit::all()->sortByDesc('created_at');
+            $profitsData['profits'] = Profit::where('is_valid', '=', 1)->orderBy('created_at', 'desc')->get();
         }
         if (Auth::user()->role != 'Administrator') {
-            $profitsData['profits'] = Profit::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+            $profitsData['profits'] = Profit::where('user_id', '=', Auth::user()->id)->where('is_valid', '=', 1)->orderBy('created_at', 'desc')->get();
         }
         return view('profit.index', $profitsData);
     }

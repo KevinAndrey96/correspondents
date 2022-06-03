@@ -11,16 +11,10 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            @hasrole('Shopkeeper')
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6">Transacciones
-                                <a href="/transactions/create" class="btn btn-block">
-                                    <i style="color: white; margin-top: 13px;" class="material-icons opacity-10">currency_exchange</i>
-                                </a>
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Transacciones
+                                <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal"
+                                data-bs-target="#SaldoModal"><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Excel</a></button>
                             </h6>
-                            @endhasrole
-                            @hasrole('Supplier')
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Transacciones</h6>
-                            @endhasrole
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">
@@ -86,7 +80,12 @@
                                         <td class="align-middle text-center text-sm">{{ $transaction->date }}</td>
                                         @if (Auth::user()->role == 'Supplier')
                                         <td class="align-middle text-center text-sm">
-                                            <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0" onclick="return confirm('¿Está seguro que desea iniciar esta transacción? Recuerde que no podrá deshacer esta acción.')" ><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
+                                            @if ($transaction->status != 'successful' and $transaction->status != 'failed')
+                                                <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0" onclick="return confirm('¿Está seguro que desea iniciar esta transacción? Recuerde que no podrá deshacer esta acción.')" ><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
+                                            @endif
+                                            @if ($transaction->status == 'successful' or $transaction->status == 'failed')
+                                                <a href="/transaction/detail-pdf/{{$transaction->id}}" class="btn btn-link px-3 mb-0" target="_blank">Imp. comprobante</a>
+                                            @endif
                                         </td>
                                         @endif
                                         @if (Auth::user()->role == 'Shopkeeper')
@@ -109,7 +108,46 @@
                                 @endforeach
                                 </tbody>
                             </table>
-
+                            <!-- Modal-->
+                            <div class="modal fade" id="SaldoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLabel">Seleccionar fecha</h6>
+                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ url('/transaction/excel') }}" method="post" enctype="multipart/form-data">
+                                                <div class="row">
+                                                    @csrf
+                                                    @if(count($errors)>0)
+                                                        <div class="alert alert-danger" role="alert">
+                                                            <ul>
+                                                                @foreach( $errors->all() as $error )
+                                                                    <li> {{ $error }} </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    @endif
+                                                    <div class="col-md-6">
+                                                        <div class="input-group input-group-static mb-4">
+                                                            <label>Fecha</label>
+                                                            <input type="month" id="date" name="date">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 text-center">
+                                                        <input class="btn btn-success" type="submit" value="Descargar excel">
+                                                        <a class="btn btn-primary" href="{{ url('/transactions') }}"> Regresar</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end Modal-->
                         </div>
                     </div>
                 </div>

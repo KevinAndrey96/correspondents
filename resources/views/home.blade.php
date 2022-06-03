@@ -34,7 +34,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Transacciones</p>
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Transacciones este mes</p>
                                     <h5 class="font-weight-bolder">{{ $transactionCount }}</h5>
                                 </div>
                             </div>
@@ -290,7 +290,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Transacciones</p>
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Transacciones este mes</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $transactionCount }}
                                     </h5>
@@ -397,7 +397,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Transacciones</p>
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Transacciones este mes</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $transactionCount }}
                                     </h5>
