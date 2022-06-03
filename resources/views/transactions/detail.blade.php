@@ -23,8 +23,17 @@
                                                     <h6 class="mb-3 text-sm">Información</h6>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Producto: {{$transaction->product->product_name}}</p>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Número de cuenta: {{$transaction->account_number}}</p>
+                                                    <p class="mb-2 text-xs font-weight-bold text-dark">
+                                                        @if ($transaction->type == 'Withdrawal')
+                                                            Tipo de transacción: Retiro
+                                                        @endif
+                                                            @if ($transaction->type == 'Deposit')
+                                                                Tipo de transacción: Depósito
+                                                            @endif
+                                                    </p>
+                                                    <p class="mb-2 text-xs font-weight-bold text-dark">Monto: ${{$transaction->amount}}</p>
                                                         @foreach ($extras as $extra)
-                                                        <span class="mb-2 text-xs font-weight-bold text-dark">{{$extra}}</span>
+                                                            <span class="mb-2 text-xs font-weight-bold text-dark">{{$extra}}</span>
                                                         @endforeach
                                                 </div>
                                                 <div class="col-md-8 ms-auto text-end ps-6">
@@ -50,32 +59,48 @@
                                                         </div>
                                                     </form>
                                                 @endif
-                                                @if (Auth::user()->role == 'Shopkeeper')
+                                                @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role =='Administrator')
                                                         <div class="col-md-6 d-flex flex-column ">
                                                             <h6 class="mb-3 text-sm">Datos de transacción</h6>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Producto: <a class="mb-2 text-xl " style="color: darkred;">{{$transaction->product->product_name}}</a> </p>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Número de cuenta: <a class="mb-2 text-xl " style="color: darkred;">{{$transaction->account_number}}</a></p>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">
+                                                                @if ($transaction->type == 'Withdrawal')
+                                                                    Tipo de transacción: Retiro
+                                                                @endif
+                                                                @if ($transaction->type == 'Deposit')
+                                                                    Tipo de transacción: Depósito
+                                                                @endif
+                                                            </p>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Monto: ${{$transaction->amount}}</p>
+                                                            @foreach ($extras as $extra)
+                                                                <p class="mb-2 text-xs font-weight-bold text-dark">{{$extra}}</p>
+                                                        @endforeach
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Comentario: {{$transaction->comment}}</p>
+                                                            <!--
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Tipo de cuenta: <a class="mb-2 text-xl " style="color: darkred;">Nequi</a></p>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Nombre: <a class="mb-2 text-xl " style="color: darkred;">Nombre Apellido</a></p>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Documento: <a class="mb-2 text-xl " style="color: darkred;">1234567890</a></p>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Email: <a class="mb-2 text-xl " style="color: darkred;">pruebaD@gmail.com</a></p>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Codigo: <a class="mb-2 text-xl " style="color: darkred;">123-456</a></p>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Extra: <a class="mb-2 text-xl " style="color: darkred;">estra</a></p>
+                                                            -->
                                                         </div>
                                                         <div class="col-md-6 d-flex flex-column ">
                                                             <div>
                                                             <a class="btn btn-success text-center text-xs"><i class="material-icons me-2">print</i>Imprimir comprobante</a>
                                                             </div>
                                                             <div class="input-group input-group-static mb-2 mt-2">
-
                                                                 <img class="" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
                                                             </div>
                                                         </div>
+                                                        <!--
                                                         <div class="col-md-6">
                                                             <div class="input-group input-group-dynamic">
                                                                 <textarea class="form-control" name="comment" rows="3" placeholder="Comentario:" spellcheck="false">{{$transaction->comment}}</textarea>
                                                             </div>
                                                         </div>
+                                                        -->
                                                 @endif
                                                 </div>
                                               </div>

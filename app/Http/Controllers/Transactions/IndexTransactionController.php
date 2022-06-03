@@ -9,14 +9,44 @@ use Illuminate\Support\Facades\Auth;
 
 class IndexTransactionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $id = $request->input('id');
+        if (isset($id)) {
+            if (Auth::user()->role == 'Supplier') {
+                $transactions = Transaction::where([
+                    ['supplier_id', Auth::user()->id],
+                    ['status', 'successful']
+                ])
+                    ->orWhere([
+                        ['supplier_id', Auth::user()->id],
+                        ['status', 'failed']
+                    ])
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                return view('transactions.index', compact('transactions', 'id'));
+            }
+        }
+        if (Auth::user()->role == 'Administrator') {
+            $transactions = Transaction::orderBy('created_at', 'desc')->get();
+
+            return view('transactions.index', compact('transactions'));
+        }
         if (Auth::user()->role == 'Shopkeeper') {
             $transactions = Transaction::where('shopkeeper_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+
             return view('transactions.index', compact('transactions'));
         }
         if (Auth::user()->role == 'Supplier') {
-            $transactions = Transaction::where('supplier_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+            $transactions = Transaction::where([
+                ['supplier_id', Auth::user()->id],
+                ['status',  '<>', 'successful'],
+                ['status',  '<>', 'failed']
+            ])
+                ->orderBy('created_at', 'desc')
+                ->get();
+
             return view('transactions.index', compact('transactions'));
         }
     }
