@@ -11,9 +11,9 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Transacciones
-                                <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal"
-                                data-bs-target="#SaldoModal"><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Excel</a></button>
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-1">Transacciones
+                                <button style="margin-top: 15px;" type="button" class="btn py-1 text-white" data-bs-toggle="modal"
+                                data-bs-target="#SaldoModal"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
                             </h6>
                         </div>
                     </div>

@@ -25,28 +25,28 @@
                                         </ul>
                                     </div>
                                 @endif
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class=" input-group input-group-outline my-3">
-                                        <label for="amount" class="form-label"></label>
-                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="100" min="50.0" placeholder="Monto">
+                                        <label for="amount" class="form-label">Monto</label>
+                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="100" min="50.0" placeholder="">
                                     </div>
                                 </div>
                                 @hasanyrole('Supplier|Distributor|Shopkeeper')
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class=" input-group input-group-outline my-3">
-                                        <label for="transactionNumber" id="account_label" class="form-label"></label>
-                                        <input type="text" class="form-control" name="acountNumber" value="" id="acountNumber" placeholder="Numero de Cuenta">
+                                        <label for="transactionNumber" id="account_label" class="form-label">Numero de Cuenta</label>
+                                        <input type="text" class="form-control" name="acountNumber" value="" id="acountNumber" placeholder="">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class=" input-group input-group-outline my-3">
-                                        <label for="transactionNumber" id="account_label" class="form-label"></label>
-                                        <input type="text" class="form-control" name="entity" value="" id="entity" placeholder="Entidad">
+                                        <label for="transactionNumber" id="account_label" class="form-label">Entidad</label>
+                                        <input type="text" class="form-control" name="entity" value="" id="entity" placeholder="">
                                     </div>
                                 </div>
                                 @endhasanyrole
                                 <div class="col-md-4"></div>
-                                
+
                                   <div class="text-center">
                                       <input class="btn btn-primary" type="submit" value="Enviar solicitud">
 

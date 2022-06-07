@@ -26,24 +26,15 @@
 
 <body class="g-sidenav-show  bg-gray-200">
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-dark" id="sidenav-main">
-    <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0 text-center" >
-            <img src="/assets/img/LOGO-COMPLETO.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold text-white"></span>
+    <div class="sidenav-header p-2">
+        <a class="text-center p-3" href="/home">
+            <img style="margin-top: -3px;" src="/assets/img/LOGO-COMPLETO.png" height="70px" width="195px" class="" alt="main_logo" >
+            <span class="ms-1 font-weight-bold text-white "></span>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 mb-4 " id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-white " href="/home">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">home</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Inicio</span>
-                </a>
-            </li>
         @hasrole('Administrator')
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
@@ -259,7 +250,8 @@
                 </div>
             </li>
         @endhasrole
-            @hasrole('Supplier')
+
+        @hasrole('Supplier')
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-6" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -365,18 +357,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white "  href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">login</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Salir</span>
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-            </li>
+
         </ul>
     </div>
     @hasrole('Supplier')
@@ -448,6 +429,19 @@
                 </br> Saldo: ${{ Auth::user()->balance }}
                     @endhasanyrole
                 </p>
+            </div>
+            <div style="display: none;" class="card-body text-center p-2 pt-1">
+                <a class="btn btn-white text-dark "  href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                    <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">login</i>
+                        <span class="nav-link-text ms-1 ps-2">Salir</span>
+                    </div>
+
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </div>
     </div>

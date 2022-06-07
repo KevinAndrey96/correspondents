@@ -22,7 +22,7 @@
                         @endif
                         <div class="table-responsive p-0">
                             <table id= "my_table" class="table align-items-center mb-0">
-                                <thead class="thead-light">
+                                <thead class="">
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>

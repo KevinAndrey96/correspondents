@@ -77,18 +77,11 @@
                                                                 <p class="mb-2 text-xs font-weight-bold text-dark">{{$extra}}</p>
                                                         @endforeach
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Comentario: {{$transaction->comment}}</p>
-                                                            <!--
-                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Tipo de cuenta: <a class="mb-2 text-xl " style="color: darkred;">Nequi</a></p>
-                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Nombre: <a class="mb-2 text-xl " style="color: darkred;">Nombre Apellido</a></p>
-                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Documento: <a class="mb-2 text-xl " style="color: darkred;">1234567890</a></p>
-                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Email: <a class="mb-2 text-xl " style="color: darkred;">pruebaD@gmail.com</a></p>
-                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Codigo: <a class="mb-2 text-xl " style="color: darkred;">123-456</a></p>
-                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Extra: <a class="mb-2 text-xl " style="color: darkred;">estra</a></p>
-                                                            -->
+
                                                         </div>
-                                                        <div class="col-md-6 d-flex flex-column ">
+                                                        <div class="col-md-6 d-flex flex-column">
                                                             <div>
-                                                            <a class="btn btn-success text-center text-xs"><i class="material-icons me-2">print</i>Imprimir comprobante</a>
+                                                            <a class="btn btn-success text-center text-xs" href="/transaction/detail-pdf/11"><i class="material-icons me-2">print</i>Imprimir comprobante</a>
                                                             </div>
                                                             <div class="input-group input-group-static mb-2 mt-2">
                                                                 <img class="" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">

@@ -55,8 +55,8 @@
                                     </script>
                                 <div class="col-md-6">
                                     <div class=" input-group input-group-outline my-3">
-                                        <label for="transactionAmount" class="form-label"></label>
-                                        <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="1" min="20000" max="200000" placeholder="Monto" required>
+                                        <label for="transactionAmount" class="form-label">Monto</label>
+                                        <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="1" min="20000" max="200000" placeholder="" required>
                                     </div>
                                 </div>
 
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12" id="withdrawal" style="display: none;>
+                                <div class="col-md-12" id="withdrawal" style="display: none;">
                                     <label class="form-label">Retiros</label>
                                     <div class="form-check mb-3">
                                         @foreach( $productsWithdrawal as $product )
