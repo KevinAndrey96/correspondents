@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('transaction_id')->nullable();
-            $table->float('amount')->default(0);
+            $table->double('amount')->default(0);
             $table->date('date')->nullable();
             $table->boolean('is_valid')->default(0);
             $table->string('type');

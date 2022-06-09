@@ -17,7 +17,7 @@ return new class extends Migration
             $table->engine="InnoDB";
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->float('amount')->default(0);
+            $table->double('amount')->default(0);
             $table->date('date')->nullable();
             $table->boolean('is_valid')->default(0);
             $table->string('type');
