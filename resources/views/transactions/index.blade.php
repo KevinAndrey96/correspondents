@@ -32,9 +32,7 @@
                                     @endif
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Estado</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Fecha</th>
-                                    @if (! isset($id))
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Acción</th>
-                                    @endif
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Acción</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -80,7 +78,12 @@
                                                 <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0" onclick="return confirm('¿Está seguro que desea iniciar esta transacción? Recuerde que no podrá deshacer esta acción.')" ><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
                                             </td>
                                         @endif
-                                        @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Administrator')
+                                        @if (Auth::user()->role == 'Supplier' && isset($id))
+                                        <td class="align-middle text-center text-sm">
+                                            <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}?detail=yes" class="btn btn-link px-3 mb-0" ><i style="color: darkgreen;" class="material-icons opacity-10">add</i>Detalle</a>
+                                        </td>
+                                        @endif
+                                        @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Administrator' )
                                             <td class="align-middle text-center text-sm">
                                                 @if ($transaction->status == 'successful' || $transaction->status == 'failed')
                                                     <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Detalle</a>

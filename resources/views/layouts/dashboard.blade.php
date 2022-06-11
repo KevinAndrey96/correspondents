@@ -540,6 +540,8 @@
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="/assets/js/material-dashboard.min.js?v=3.0.0"></script>
 
+<!--Import axios-->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </body>
 

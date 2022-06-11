@@ -97,7 +97,7 @@
                                         </div>
                                     @endif
                                     <div class="text-center">
-                                        <input class="btn btn-success" type="submit" value="Solicitar Transaccion">
+                                        <input class="btn btn-success" type="submit" value="Solicitar Transacción">
                                     </div>
                                 </div>
                             </form>

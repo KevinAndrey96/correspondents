@@ -28,6 +28,7 @@ return array(
     'App\\Http\\Controllers\\Commissions\\UpdateCommissionsController' => $baseDir . '/app/Http/Controllers/Commissions/UpdateCommissionsController.php',
     'App\\Http\\Controllers\\Commissions\\UsersCommissionsController' => $baseDir . '/app/Http/Controllers/Commissions/UsersCommissionsController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\GetstatusController' => $baseDir . '/app/Http/Controllers/GetstatusController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\Products\\CreateProductController' => $baseDir . '/app/Http/Controllers/Products/CreateProductController.php',
     'App\\Http\\Controllers\\Products\\DestroyProductController' => $baseDir . '/app/Http/Controllers/Products/DestroyProductController.php',

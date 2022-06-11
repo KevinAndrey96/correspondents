@@ -18,6 +18,11 @@ class UpdatePasswordUsersController extends Controller
         $oldPass2 = Auth::user()->password;
         if (Hash::check($oldPass, $oldPass2)) {
             if ($request->input('newPass1') == $request->input('newPass2')) {
+                if (strlen($request->input('newPass1')) < 7 || !preg_match('`[0-9]`',$request->input('newPass1'))
+                || !preg_match('`[a-z]`',$request->input('newPass1')) ) {
+
+                    return back()->with('unfulfilledRequirements', 'La contraseña debe tener mínimo 7 caracteres, al menos una letra y al menos un número.');
+                }
                 $user->password = Hash::make($request->input('newPass1'));
                 $user->save();
 
