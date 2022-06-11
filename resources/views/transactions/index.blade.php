@@ -11,10 +11,7 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-1">Transacciones
-                                <button style="margin-top: 15px;" type="button" class="btn py-1 text-white" data-bs-toggle="modal"
-                                data-bs-target="#SaldoModal"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
-                            </h6>
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-1">Transacciones</h6>
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">
@@ -97,46 +94,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <!-- Modal-->
-                            <div class="modal fade" id="SaldoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h6 class="modal-title" id="exampleModalLabel">Seleccionar fecha</h6>
-                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="{{ url('/transaction/excel') }}" method="post" enctype="multipart/form-data">
-                                                <div class="row">
-                                                    @csrf
-                                                    @if(count($errors)>0)
-                                                        <div class="alert alert-danger" role="alert">
-                                                            <ul>
-                                                                @foreach( $errors->all() as $error )
-                                                                    <li> {{ $error }} </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    @endif
-                                                    <div class="col-md-6">
-                                                        <div class="input-group input-group-static mb-4">
-                                                            <label>Fecha</label>
-                                                            <input type="month" id="date" name="date">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 text-center">
-                                                        <input class="btn btn-success" type="submit" value="Descargar excel">
-                                                        <a class="btn btn-primary" href="{{ url('/transactions') }}"> Regresar</a>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end Modal-->
                         </div>
                     </div>
                 </div>
