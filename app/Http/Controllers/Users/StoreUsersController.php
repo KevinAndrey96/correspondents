@@ -12,6 +12,14 @@ class StoreUsersController extends Controller
 {
     public function store(Request $request)
     {
+        $fields = [
+            'email'=>'required|unique:users,email',
+        ];
+        $message = [
+            'unique'=>':attribute debe ser unico',
+        ];
+        $this->validate($request, $fields, $message);
+
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');

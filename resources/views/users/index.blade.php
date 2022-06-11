@@ -13,7 +13,7 @@
                                     (Distribuidores)
                                 @elseif ($role == 'Supplier')
                                     (Proveedores)
-                                @elseif ($role == 'Aministrator')
+                                @elseif ($role == 'Administrator')
                                     (Administradores)
                                 @endif
                                 <a href="/user/create?role={{$role}}" class="btn btn-block btn-Secondary"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">group_add</i></a></h6>

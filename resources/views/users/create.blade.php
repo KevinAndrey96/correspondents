@@ -14,6 +14,15 @@
                             <form method="POST" action="/user/store">
                                 <div class="row">
                                     @csrf
+                                    @if(count($errors)>0)
+                                        <div class="alert alert-danger" role="alert">
+                                            <ul>
+                                            @foreach( $errors->all() as $error )
+                                                <li> {{ $error }} </li>
+                                            @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="name" class="form-label">Nombre</label>
