@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth', 'transactions']], function() {
     Route::get('/balance/add/{id}', [App\Http\Controllers\Balances\CreateBalanceAdminController::class, 'create']);
     Route::post('/balance', [App\Http\Controllers\Balances\AddBalanceAdminController::class, 'store']);
     Route::post('/balance/validate', [App\Http\Controllers\Balances\ValidateBalanceController::class, 'isValid']);
+    Route::post('/balance/excel', [App\Http\Controllers\Balances\ExcelExportBalanceController::class, 'export']);
 
     Route::get('/profit', [App\Http\Controllers\Profits\IndexProfitController::class, 'index']);
     Route::get('/profit/create', [App\Http\Controllers\Profits\CreateProfitController::class, 'create']);
@@ -48,6 +49,7 @@ Route::group(['middleware' => ['auth', 'transactions']], function() {
     Route::get('/profit/users', [App\Http\Controllers\Profits\ShowWithdrawProfitController::class, 'index']);
     Route::post('/profit', [App\Http\Controllers\Profits\adminWithdrawProfitController::class, 'store']);
     Route::post('/profit/validate', [App\Http\Controllers\Profits\validateWithdrawProfitController::class, 'isValid']);
+    Route::post('/profit/excel', [App\Http\Controllers\Profits\ExcelExportProfitController::class, 'export']);
 
     Route::get('/transactions', [App\Http\Controllers\Transactions\IndexTransactionController::class, 'index']);
     Route::get('/transactions/create', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create']);
