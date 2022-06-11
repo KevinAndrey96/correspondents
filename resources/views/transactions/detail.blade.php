@@ -18,7 +18,7 @@
                                         <ul class="list-group">
                                             <li class="list-group-item border-0 d-flex p-4 mb-0 bg-gray-100 border-radius-lg">
                                               <div class="row">
-                                                @if (Auth::user()->role == 'Supplier')
+                                                @if (Auth::user()->role == 'Supplier' && is_null($detailSupplier))
                                                 <div class="col-md-4 d-flex flex-column ">
                                                     <h6 class="mb-3 text-sm">Información</h6>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Producto: {{$transaction->product->product_name}}</p>
@@ -59,7 +59,7 @@
                                                         </div>
                                                     </form>
                                                 @endif
-                                                @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role =='Administrator')
+                                                @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role =='Administrator' || Auth::user()->role =='Supplier' && ! is_null($detailSupplier))
                                                         <div class="col-md-6 d-flex flex-column ">
                                                             <h6 class="mb-3 text-sm">Datos de transacción</h6>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Producto: <a class="mb-2 text-xl " style="color: darkred;">{{$transaction->product->product_name}}</a> </p>

@@ -1,6 +1,22 @@
 @extends('layouts.dashboard')
 @section('content')
+
     <div class="row mt-6">
+        @if(Session::has('messageSuccess'))
+            <div class="alert alert-success" role="alert">
+                {{ Session::get('messageSuccess') }}
+            </div>
+        @endif
+        @if(Session::has('failChange'))
+            <div class="alert alert-danger" role="alert">
+                {{ Session::get('failChange') }}
+            </div>
+        @endif
+        @if(Session::has('unfulfilledRequirements'))
+            <div class="alert alert-danger" role="alert">
+                {{ Session::get('unfulfilledRequirements') }}
+            </div>
+        @endif
     </div>
 
     <div class="container my-auto">
@@ -14,7 +30,6 @@
                         <div class="card-body">
                             <form method="POST" action="/updatePassword">
                               @csrf
-
                                 <div >
                                     <div class="input-group input-group-dynamic mb-4">
                                         <label class="form-label" for="oldPass">Contraseña antigua</label>
@@ -34,7 +49,6 @@
                                     </div>
                                 </div>
                                 <div class="text-center"><input type="submit" class="btn btn-primary text-center" value="Modificar"></div>
-
                             </form>
                         </div>
                     </div>

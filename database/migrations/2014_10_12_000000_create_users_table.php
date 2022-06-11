@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('role');
             $table->string('phone');
-            $table->float('balance')->default(0);
-            $table->float('profit')->default(0);
+            $table->double('balance')->default(0);
+            $table->double('profit')->default(0);
             $table->integer('max_queue')->nullable();
             $table->string('document_type')->nullable();
             $table->string('document')->nullable();
