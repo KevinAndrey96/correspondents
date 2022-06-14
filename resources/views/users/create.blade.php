@@ -6,7 +6,17 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 "> <a href="/users?role={{$role}}" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a> Crear Usuario</h6>
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 "> <a href="/users?role={{$role}}" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a> Crear Usuario
+                                @if ($role == 'Shopkeeper')
+                                    (Tenderos)
+                                @elseif ($role == 'Distributor')
+                                    (Distribuidores)
+                                @elseif ($role == 'Supplier')
+                                    (Proveedores)
+                                @elseif ($role == 'Administrator')
+                                    (Administradores)
+                                @endif
+                            </h6>
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">
