@@ -81,7 +81,7 @@
                                                         </div>
                                                         <div class="col-md-6 d-flex flex-column">
                                                             <div>
-                                                            <a class="btn btn-success text-center text-xs" href="/transaction/detail-pdf/11"><i class="material-icons me-2">print</i>Imprimir comprobante</a>
+                                                            <a class="btn btn-success text-center text-xs" href="/transaction/detail-pdf/{{$transaction->id}}"><i class="material-icons me-2">print</i>Imprimir comprobante</a>
                                                             </div>
                                                             <div class="input-group input-group-static mb-2 mt-2">
                                                                 <img class="" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">

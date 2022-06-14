@@ -18,7 +18,7 @@
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rol</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Actual</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gestionar saldo</th>
+                                <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gestionar saldo</th>-->
                             </thead>
                             <tbody>
                             @foreach( $users as $user )
@@ -26,9 +26,9 @@
                                     <td class="align-middle text-center text-sm">{{ $user->name }}</td>
                                     <td class="align-middle text-center text-sm">{{ $user->role }}</td>
                                     <td class="align-middle text-center text-sm">{{ $user->balance }}</td>
-                                    <td class="align-middle text-center text-sm"> <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal"
+                                <!-- <td class="align-middle text-center text-sm"> <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal"
                                     data-bs-target="#SaldoModal"><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Editar</a></button>
-                                    </td>
+                                    </td>-->
 
                                 </tr>
                             @endforeach
