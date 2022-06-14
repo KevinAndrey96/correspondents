@@ -31,6 +31,18 @@ class StoreUsersController extends Controller
             'password.required'=>'La contraseña es requerida',
             'unique'=>'El :attribute debe ser unico',
         ];
+        if ($request->input('role') == 'Supplier') {
+            $fields2 = [
+                'priority'=>'required',
+                'max_queue'=>'required',
+            ];
+            $fields = $fields + $fields2;
+            $message2 = [
+                'priority.required'=>'La prioridad es requerida',
+                'max_queue.required'=>'El valor de cola maximo es requerido',
+            ];
+            $message = $message + $message2;
+        }
         $this->validate($request, $fields, $message);
 
         $user = new User();
@@ -45,14 +57,6 @@ class StoreUsersController extends Controller
         //$user->balance = $request->input('balance');
         $user->is_enabled = 1;
         if ($request->input('role') == 'Supplier') {
-            $fields = [
-                'priority'=>'required',
-                'max_queue'=>'required',
-            ];
-            $message = [
-                'required'=>':attribute es requerido',
-            ];
-            $this->validate($request, $fields, $message);
             $user->priority = $request->input('priority');
             $user->max_queue = $request->input('max_queue');
         }
