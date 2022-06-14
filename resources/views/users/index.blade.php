@@ -7,7 +7,7 @@
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
                             <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Gestion de usuarios
-                                @if ($role == 'Shopkeeper')
+                                @if ($role == 'Shopkeeper' || $role == 'allShopkeepers')
                                     (Tenderos)
                                 @elseif ($role == 'Distributor')
                                     (Distribuidores)

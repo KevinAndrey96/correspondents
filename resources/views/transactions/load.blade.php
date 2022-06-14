@@ -57,8 +57,7 @@
                                     <p class="text-center text-white text-sm p-2" id="pStatus" style="background-color:#E7B615; width:100%; border-radius: 10px;">En espera</p>
                                 </div>
                                 <div class="col-sm-6 text-center text-xs" id="out" style="display: none;">
-                                    <button type="submit" class="btn btn-danger w-100 mb-2" onclick="cancelAlert()">Cancelar
-                                    </button>
+                                    <a href="/transaction/cancel/{{$transaction->id}}" class="btn btn-danger w-100 mb-2" onclick="cancelAlert()">Cancelar</a>
                                 </div>
                             </div>
                         </div>
@@ -94,33 +93,41 @@
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     // Aquí se ejecuta el método onload, que dice que esto se ejecutará apenas cargue la página
     window.onload = function() {
-        axios.get('http://127.0.0.1:8000/api/getStatus/'+{{$transaction->id}})
+        axios.get('https://corresponsales.asparecargas.net/api/getStatus/'+{{$transaction->id}})
             .then((res) => {
+                //http://127.0.0.1:8000
                 if (res.data.status == 'successful' || res.data.status == 'failed') {
-                    window.location.replace("http://127.0.0.1:8000/transaction/detail/{{$transaction->id}}");
+                    window.location.replace("https://corresponsales.asparecargas.net/transaction/detail/{{$transaction->id}}");
                 }
             });
-        //window.alert('Su transacción se está realizando en este momento, por favor espere unos minutos mientras esta se completa.')
+        window.alert('Su transacción se está realizando en este momento, por favor espere unos minutos mientras esta se completa.')
         // Aquí llama la función que está definida abajo, lo que hace es llamarla solamente y se le envia en los parentesis cuantos segundos queremos que pasen
+
         timerToCancel(180)
     };
-
     // Este método lo que hace es cancelar pasados X segundos según se le diga al momento de llamarlo
     function timerToCancel(segundos){
     // Aquí se ejecuta el código, entonces arriba recibe los segundos, abajo se le mandan
         setTimeout(function(){
             // Cuando pasen los segundos que le dijimos hará estas acciones a continuación
-            document.getElementById('out').style.display = 'block';
-
+            axios.get('https://corresponsales.asparecargas.net/api/getStatus/'+{{$transaction->id}})
+                    .then((res)=>{
+                        if (res.data.status == 'hold') {
+                            document.getElementById('out').style.display = 'block';
+                        }
+                        if (res.data.status == 'accepted') {
+                            document.getElementById('out').style.display = 'none';
+                        }
+                    });
         }, segundos * 1000);
     }
     function cancelAlert() {
         window.confirm('¿Está seguro de cancelar la transacción actual? recuerde que este proceso es irreversible')
     }
-
 </script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -135,7 +142,7 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <!--Import axios-->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script>
     setInterval(function () {
         getStatus({{$transaction->id}})
@@ -145,18 +152,18 @@
     {
         var pStatus = document.getElementById('pStatus');
         var divStatus = document.getElementById('divStatus');
-        axios.get('http://127.0.0.1:8000/api/getStatus/'+id)
+        axios.get('https://corresponsales.asparecargas.net/api/getStatus/'+id)
             .then((res)=> {
                     if (res.data.status == 'hold') {
                         pStatus.innerHTML = 'En espera';
-                        divStatus.style.backgroundColor = '#E7B615';
+                        pStatus.style.backgroundColor = '#E7B615';
                     }
                     if (res.data.status == 'accepted') {
                         pStatus.innerHTML = 'Aceptada';
-                        divStatus.style.backgroundColor = 'dodgerblue';
+                        pStatus.style.backgroundColor = 'dodgerblue';
                     }
                     if (res.data.status == 'successful' || res.data.status == 'failed') {
-                        window.location.replace("http://127.0.0.1:8000/transaction/detail/{{$transaction->id}}");
+                        window.location.replace("https://corresponsales.asparecargas.net/transaction/detail/{{$transaction->id}}");
                         //pStatus.innerHTML = 'Exitosa';
                         //pStatus.style.backgroundColor = 'green';
                     }

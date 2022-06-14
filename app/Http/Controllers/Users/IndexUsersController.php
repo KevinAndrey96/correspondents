@@ -21,6 +21,10 @@ class IndexUsersController extends Controller
                             ->where('distributor_id', '=', Auth::user()->id)->get();
             return view('users.index', compact('role', 'users'));
         }
+        if ($role == 'allShopkeepers') {
+            $users = User::where('role', 'like', 'Shopkeeper')->get();
+            return view('users.index', compact('role', 'users'));
+        }
         if ($role == 'Supplier') {
             $users = User::where('role', 'like', 'Supplier')->get();
             return view('users.index', compact('role', 'users'));

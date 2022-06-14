@@ -81,9 +81,14 @@
                                                         <p class="text-center text-white text-sm p-2" style="background-color:red; width:60%; border-radius: 20px;">Fallida</p>
                                                     </center>
                                                 @endif
+                                                @if ($transaction->status == 'cancelled')
+                                                    <center>
+                                                        <p class="text-center text-white text-sm p-2" style="background-color:#58696F; width:60%; border-radius: 20px;">Cancelada</p>
+                                                    </center>
+                                                @endif
                                             </td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->date }}</td>
-                                        @if (Auth::user()->role == 'Supplier' && $transaction->status != 'successful' && $transaction->status != 'failed')
+                                        @if (Auth::user()->role == 'Supplier' && $transaction->status != 'successful' && $transaction->status != 'failed' && $transaction->status != 'cancelled')
                                             <td class="align-middle text-center text-sm">
                                                 <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0" onclick="return confirm('¿Está seguro que desea iniciar esta transacción? Recuerde que no podrá deshacer esta acción.')" ><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Iniciar</a>
                                             </td>
@@ -95,7 +100,7 @@
                                         @endif
                                         @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Administrator' )
                                             <td class="align-middle text-center text-sm">
-                                                @if ($transaction->status == 'successful' || $transaction->status == 'failed')
+                                                @if ($transaction->status == 'successful' || $transaction->status == 'failed' || $transaction->status == 'cancelled')
                                                     <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Detalle</a>
                                                 @endif
                                                 @if ($transaction->status == 'hold')

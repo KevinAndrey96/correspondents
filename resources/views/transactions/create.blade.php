@@ -1,5 +1,20 @@
 @extends('layouts.dashboard')
 @section('content')
+    @if(Session::has('thereIsNotCommission'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('thereIsNotCommission') }}
+        </div>
+    @endif
+    @if(Session::has('cancelTransactionSuccess'))
+        <div class="alert alert-success" role="alert">
+            {{ Session::get('cancelTransactionSuccess') }}
+        </div>
+    @endif
+    @if(Session::has('insufficientBalance'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('insufficientBalance') }}
+        </div>
+    @endif
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -23,17 +38,16 @@
                             <form action="{{ url('/transaction/store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                                 <div class="row">
-
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-static mb-4 ">
-                                        <label  for="">Tipo de transacción</label>
-                                        <select id="transactionType" onchange="showProducts()" name="transactionType" class="form-control" aria-label="Default select example" required>
-                                            <option class="text-center" value="">seleccionar</option>
-                                            <option class="text-center" value="Deposit">Deposito</option>
-                                            <option class="text-center" value="Withdrawal">Retiro</option>
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-static mb-4 ">
+                                            <label  for="">Tipo de transacción</label>
+                                            <select id="transactionType" onchange="showProducts()" name="transactionType" class="form-control" aria-label="Default select example" required>
+                                                <option class="text-center" value="">seleccionar</option>
+                                                <option class="text-center" value="Deposit">Deposito</option>
+                                                <option class="text-center" value="Withdrawal">Retiro</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
                                     <script>
                                         function showProducts() {
                                             //al seleccionar el tipo de transacción mostar los productos que correspondan

@@ -79,3 +79,4 @@ Route::group(['middleware' => ['auth', 'transactions']], function() {
     Route::get('/transactionReasign', [App\Http\Controllers\Transactions\ReasignTransactionController::class, 'transactionReasign'])->middleware('auth');
     Route::get('/transaction/detail/{id}', [App\Http\Controllers\Transactions\DetailTransactionController::class, 'detail'])->middleware('auth');
     Route::post('/transaction/update', [App\Http\Controllers\Transactions\UpdateTransactionController::class, 'update'])->middleware('auth');
+    Route::get('/transaction/cancel/{id}', [App\Http\Controllers\Transactions\CancelTransactionController::class, 'cancel']);

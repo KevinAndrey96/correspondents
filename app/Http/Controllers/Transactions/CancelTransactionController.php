@@ -10,8 +10,8 @@ class CancelTransactionController extends Controller
 {
     public function cancel($id) {
         $transaction = Transaction::find($id);
-        $transaction->status = 'failed';
+        $transaction->status = 'cancelled';
         $transaction->save();
-        return back();
+        return redirect('/transactions/create')->with('cancelTransactionSuccess', 'Se ha cancelado la transacción');
     }
 }
