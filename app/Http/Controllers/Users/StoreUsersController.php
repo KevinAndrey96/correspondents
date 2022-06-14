@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\NoReplyMailable;
+use Illuminate\Support\Facades\Mail;
 
 class StoreUsersController extends Controller
 {
@@ -77,6 +79,13 @@ class StoreUsersController extends Controller
         if ($request->input('role') == 'Supplier') {
             $user->assignRole('Supplier');
         }
+        $receiverEmail = $user->email;
+        $emailBody = new \stdClass();
+        $emailBody->sender = 'Asparecargas';
+        $emailBody->receiver = $user->name;
+        $emailSubject = 'Su cuenta fue creada';
+        $emailBody->body = 'Su cuenta fue creada con éxito, gracias por elegirnos.';
+        Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
 
         return redirect('/users?role='.$user->role);
     }

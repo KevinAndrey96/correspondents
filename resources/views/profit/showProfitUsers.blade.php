@@ -39,37 +39,37 @@
                                     <td class="align-middle text-center text-sm">Si</td>
                                     @endif
                                     <td class="align-middle text-center text-sm">
-                                    <div class="form-check form-switch ">
-                                        @if ($profit->is_valid == 1)
-                                            <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$profit->id}}" onclick="return confirm('¿Esta seguro de invalidar la solicitud #{{$profit->id}} por un valor de ${{$profit->amount}} para el usuario {{$profit->user->name}}?')" checked onchange="validate({{$profit->id}})">
-                                            <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{$profit->id}}"></label>
-                                        @else
-                                            <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$profit->id}}" onclick="return confirm('¿Esta seguro de validar la solicitud #{{$profit->id}} por un valor de ${{$profit->amount}} para el usuario {{$profit->user->name}}?')" onchange="validate({{$profit->id}})">
-                                            <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$profit->id}}"></label>
-                                        @endif
-                                    </div>
-                                    <form id="form-status" name="form-status" method="POST" action="{{ url('/profit/validate/' ) }}">
-                                        @csrf
-                                        <input type="hidden" name="id" id="id">
-                                        <input type="hidden" name="status" id="status">
-                                    </form>
-                                    <script>
-                                        function validate(id)
-                                        {
-                                            var toggle = document.getElementById("togglestatus"+id);
-                                            var status = document.getElementById("status");
-                                            var form = document.getElementById("form-status");
-                                            var profit_id = document.getElementById("id");
+                                        <div class="form-check form-switch ">
+                                            @if ($profit->is_valid == 1)
+                                                <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$profit->id}}" onclick="return confirm('¿Esta seguro de invalidar la solicitud #{{$profit->id}} por un valor de ${{$profit->amount}} para el usuario {{$profit->user->name}}?')" checked onchange="validate({{$profit->id}})">
+                                                <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{$profit->id}}"></label>
+                                            @else
+                                                <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$profit->id}}" onclick="return confirm('¿Esta seguro de validar la solicitud #{{$profit->id}} por un valor de ${{$profit->amount}} para el usuario {{$profit->user->name}}?')" onchange="validate({{$profit->id}})">
+                                                <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$profit->id}}"></label>
+                                            @endif
+                                        </div>
+                                        <form id="form-status" name="form-status" method="POST" action="{{ url('/profit/validate/' ) }}">
+                                            @csrf
+                                            <input type="hidden" name="id" id="id">
+                                            <input type="hidden" name="status" id="status">
+                                        </form>
+                                        <script>
+                                            function validate(id)
+                                            {
+                                                var toggle = document.getElementById("togglestatus"+id);
+                                                var status = document.getElementById("status");
+                                                var form = document.getElementById("form-status");
+                                                var profit_id = document.getElementById("id");
 
-                                            if (toggle.checked == true) {
-                                                status.value = 1;
-                                            } else {
-                                                status.value = 0;
+                                                if (toggle.checked == true) {
+                                                    status.value = 1;
+                                                } else {
+                                                    status.value = 0;
+                                                }
+                                                profit_id.value = id;
+                                                form.submit();
                                             }
-                                            profit_id.value = id;
-                                            form.submit();
-                                        }
-                                    </script>
+                                        </script>
                                     </td>
                                     <td class="align-middle text-center text-sm"> <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal"
                                     data-bs-target="#SaldoModal"><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Gestionar</a></button>
@@ -103,7 +103,11 @@
                                                         </div>
                                                     @endif
                                                     <div class="form-group">
-                                                        <input type="hidden" class="form-control" name="profitID" value="{{$profit->id}}" id="prfitID" readonly="readonly">
+                                                        @if(count($profits)>0)
+                                                            <input type="hidden" class="form-control" name="profitID" value="{{$profit->id}}" id="profitID" readonly="readonly">
+                                                        @else
+                                                            <input type="hidden" class="form-control" name="profitID" value="" id="profitID" readonly="readonly">
+                                                        @endif
                                                     </div>                                                  
                                                     <div class="col-md-12">
                                                         <div class="p-3">

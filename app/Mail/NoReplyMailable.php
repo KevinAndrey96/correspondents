@@ -31,12 +31,6 @@ class NoReplyMailable extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.body')
-                    //->text('emails.body_plain')
-                    ->with(
-                      [
-                            'testVarOne' => '1',
-                            'testVarTwo' => '2',
-                      ]);
+        return $this->view('emails.body');//->text('emails.body_plain');
     }
 }
