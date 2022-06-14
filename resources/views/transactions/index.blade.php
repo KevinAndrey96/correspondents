@@ -27,6 +27,11 @@
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Cantidad</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Producto</th>
+                                    @hasrole('Administrator')
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tendero</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Proveedor</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Distribuidor</th>
+                                    @endhasrole
                                     @if (Auth::user()->role == 'Shopkeeper')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo</th>
                                     @endif
@@ -40,6 +45,11 @@
                                     <tr>
                                         <td class="align-middle text-center text-sm">${{ number_format($transaction->amount, 2, ',', '.') }}</td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->product->product_name }}</td>
+                                        @hasrole('Administrator')
+                                        <td class="align-middle text-center text-sm">{{ $transaction->shopkeeper->name }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->supplier->name }}</td>
+                                        <td class="align-middle text-center text-sm">{{ $transaction->distributor->name }}</td>
+                                        @endhasrole
                                         @if (Auth::user()->role == 'Shopkeeper')
                                         <td class="align-middle text-center text-sm">
                                             @if ($transaction->type == 'Deposit')

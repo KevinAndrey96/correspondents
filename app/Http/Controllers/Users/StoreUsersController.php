@@ -13,11 +13,36 @@ class StoreUsersController extends Controller
     public function store(Request $request)
     {
         $fields = [
+            'name'=>'required',
             'email'=>'required|unique:users,email',
+            'phone'=>'required',
+            'document'=>'required',
+            'city'=>'required',
+            'address'=>'required',
+            'password'=>'required',
         ];
         $message = [
-            'unique'=>':attribute debe ser unico',
+            'name.required'=>'El nombre es requerido',
+            'email.required'=>'El email es requerido',
+            'phone.required'=>'El teléfono es requerido',
+            'document.required'=>'El # de documento es requerido',
+            'city.required'=>'La ciudad es requerida',
+            'address.required'=>'La dirección es requerida',
+            'password.required'=>'La contraseña es requerida',
+            'unique'=>'El :attribute debe ser unico',
         ];
+        if ($request->input('role') == 'Supplier') {
+            $fields2 = [
+                'priority'=>'required',
+                'max_queue'=>'required',
+            ];
+            $fields = $fields + $fields2;
+            $message2 = [
+                'priority.required'=>'La prioridad es requerida',
+                'max_queue.required'=>'El valor de cola maximo es requerido',
+            ];
+            $message = $message + $message2;
+        }
         $this->validate($request, $fields, $message);
 
         $user = new User();
@@ -29,7 +54,7 @@ class StoreUsersController extends Controller
         $user->document = $request->input('document');
         $user->city = $request->input('city');
         $user->address = $request->input('address');
-        $user->balance = $request->input('balance');
+        //$user->balance = $request->input('balance');
         $user->is_enabled = 1;
         if ($request->input('role') == 'Supplier') {
             $user->priority = $request->input('priority');
