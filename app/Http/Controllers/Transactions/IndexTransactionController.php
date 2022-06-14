@@ -22,6 +22,10 @@ class IndexTransactionController extends Controller
                         ['supplier_id', Auth::user()->id],
                         ['status', 'failed']
                     ])
+                    ->orWhere([
+                        ['supplier_id', Auth::user()->id],
+                        ['status', 'cancelled']
+                    ])
                     ->orderBy('created_at', 'desc')
                     ->get();
 
@@ -42,7 +46,8 @@ class IndexTransactionController extends Controller
             $transactions = Transaction::where([
                 ['supplier_id', Auth::user()->id],
                 ['status',  '<>', 'successful'],
-                ['status',  '<>', 'failed']
+                ['status',  '<>', 'failed'],
+                ['status',  '<>', 'cancelled']
             ])
                 ->orderBy('created_at', 'desc')
                 ->get();

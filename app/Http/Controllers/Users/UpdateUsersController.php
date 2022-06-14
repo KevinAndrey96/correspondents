@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UpdateUsersController extends Controller
@@ -30,6 +31,10 @@ class UpdateUsersController extends Controller
             $user->password = Hash::make($request->input('password'));
         }
         $user->save();
+        if (Auth::user()->role == 'Administrator' && $user->role == 'Shopkeeper') {
+
+            return redirect('/users?role=allShopkeepers');
+        }
 
         return redirect('/users?role='.$user->role);
     }
