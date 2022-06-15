@@ -12,12 +12,12 @@
                     </div>
 
                     <div class="card-body px-0 pb-2">
-                        <div class=" p-0">
-                          <table id= "my_table"  class="table table-striped">
+                        <div style="margin: 30px;" class="table-responsive p-0">
+                          <table id="my_table" class="table table-striped table-responsive">
                             <thead >
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
-                                <th class="ps-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Rol</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">Saldo Actual</th>
+                                <th class="ps-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rol</th>
+                                <th width="100"  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">Saldo Actual</th>
                                 <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gestionar saldo</th>-->
                             </thead>
                             <tbody>
@@ -47,13 +47,18 @@
                             @endforeach
                             </tbody>
                         </table>
+                            <style>
+                                .form-control {
+                                    background-color: #f2f2f2 !important ;
+                                }
+                            </style>
                             <script>
                                 $(document).ready( function () {
                                     $('#my_table').DataTable({
                                         "language": {
                                             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
                                         },
-                                        "stripeClasses": [ 'strip1', 'strip2', 'strip3' ]
+                                        responsive: true
                                     });
                                 } );
                             </script>

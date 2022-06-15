@@ -36,10 +36,11 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ciudad</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dirección</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>-->
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
-                                        @if ($role != 'Distributor' and $role != 'Administrator')
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>-->
+
+                                        @if ($role != 'Distributor' && $role != 'Administrator')
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>
                                         @endif
                                         @if ($role == 'Supplier')
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cola maxima</th>
@@ -86,8 +87,10 @@
                                             <td class="align-middle text-center text-sm">{{$user->max_queue}}</td>
                                             <td class="align-middle text-center text-sm">{{$user->priority}}</td>
                                         @endif
-                                        <td class="align-middle text-center text-sm">
-                                           <!-- <button style="padding: 6px; font-size: 9px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-primary" data-bs-toggle="modal"
+
+                                            @if ($role != 'allShopkeepers' && $role != 'Administrator')
+                                            <td class="align-middle text-center text-sm">
+                                                <!-- <button style="padding: 6px; font-size: 9px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                     data-bs-target="#exampleModalMessage"
                                                     data-whatever="{{$user->name}}"
                                                     data-doc="{{$user->document_type}}"
@@ -97,11 +100,10 @@
                                                     data-address="{{$user->address}}"
                                             >Detalles</button>-->
                                                 <!--<a style="color: red;" class="btn btn-link px-3 mb-0" href="/user/delete/{{$user->id}}" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>-->
-
-                                            @if ($role != 'allShopkeepers' && $role != 'Administrator')
                                                 <a style="color: blue;" href="/commissions/create/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: blue;" class="material-icons opacity-10">price_change</i>Comisiones</a>
-                                            @endif
-                                        </td>
+                                            </td>
+
+                                        @endif
                                                <td>
                                             <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i>Editar</a>
                                             <a style="color: red;" class="btn btn-link px-3 mb-0" href="/user/delete/{{$user->id}}" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>
