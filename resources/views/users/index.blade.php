@@ -35,7 +35,9 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ciudad</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dirección</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>-->
+                                        @if ($role != 'Distributor' and $role != 'Administrator')
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>
+                                        @endif
                                         @if ($role == 'Supplier')
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cola maxima</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Prioridad</th>
@@ -72,7 +74,9 @@
                                         <td class="align-middle text-center text-sm">{{$user->city}}</td>
                                         <td class="align-middle text-center text-sm">{{$user->address}}</td>-->
                                         <!--<td class="align-middle text-center text-sm">{{$user->commission}}</td>-->
+                                        @if ($role != 'Distributor' and $role != 'Administrator')
                                         <td class="align-middle text-center text-sm">{{$user->balance}}</td>
+                                        @endif
                                         @if ($role == 'Supplier')
                                             <td class="align-middle text-center text-sm">{{$user->max_queue}}</td>
                                             <td class="align-middle text-center text-sm">{{$user->priority}}</td>
