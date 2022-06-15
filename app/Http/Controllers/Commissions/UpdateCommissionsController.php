@@ -14,6 +14,7 @@ class UpdateCommissionsController extends Controller
     public function update(Request $request)
     {
         try {
+            $j = 0;
             $ids = explode(',', $request->input('ids'));
             $amounts = explode(',', $request->input('amounts'));
             $user = User::find(Auth::user()->id);
@@ -25,7 +26,10 @@ class UpdateCommissionsController extends Controller
                         if (floatval($commission->product->product_commission) >= floatval($amounts[$i])) {
                             $commission->amount = floatval($amounts[$i]);
                             $commission->save();
+                        } else {
+                            $j++;
                         }
+
                     }
                     if (($user->role == 'Distributor' && $commission->user->role == 'Shopkeeper') &&
                         ($user->id == $commission->user->distributor_id)) {
@@ -34,12 +38,20 @@ class UpdateCommissionsController extends Controller
                         if (floatval($distCommission->amount) >= floatval($amounts[$i])) {
                             $commission->amount = floatval($amounts[$i]);
                             $commission->save();
+                        } else {
+                            $j++;
                         }
+
                     }
                 }
             }
+            if ($j > 0) {
 
-            return back()->with('UpdaCommissionSuccess', 'Comisiones actualizadas');
+                return back()->with('UpdaCommissionFailed', 'No se pudieron asignar todas la comisiones ya que algunas superan el tope máximo');
+            } else {
+
+                return back()->with('UpdaCommissionSuccess', 'Comisiones asignadas');
+            }
         } catch (Exception $e){
             echo '<h4>El distribuidor asociado no tiene comisiones asignadas</h4><br/><h4>Ha habido una excepción:</h4>'.$e->getMessage();
         }

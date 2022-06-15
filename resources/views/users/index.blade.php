@@ -16,8 +16,9 @@
                                 @elseif ($role == 'Administrator')
                                     (Administradores)
                                 @endif
-                                <a href="/user/create?role={{$role}}" class="btn btn-block btn-Secondary"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">group_add</i></a></h6>
-
+                                @if ($role != 'allShopkeepers')
+                                    <a href="/user/create?role={{$role}}" class="btn btn-block btn-Secondary"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">group_add</i></a></h6>
+                                @endif
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">
@@ -91,8 +92,11 @@
                                                     data-city="{{$user->city}}"
                                                     data-address="{{$user->address}}"
                                             >Detalles</button>
-                                                <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Editar</a>
-                                                <a style="color: red;" class="btn btn-link px-3 mb-0" href="/user/delete/{{$user->id}}" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>
+                                            @if ($role != 'allShopkeepers' && $role != 'Administrator')
+                                                <a style="color: blue;" href="/commissions/create/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: blue;" class="material-icons opacity-10">price_change</i>Comisiones</a>
+                                            @endif
+                                            <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i>Editar</a>
+                                            <a style="color: red;" class="btn btn-link px-3 mb-0" href="/user/delete/{{$user->id}}" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -217,8 +221,6 @@
                                     modal.find('#numberdoc').text('N°: ' + (numberdoc ))
                                     modal.find('#city').text('' + (city))
                                     modal.find('#address').text('' + (address))
-
-
                                 })
                             </script>
                             <script>
