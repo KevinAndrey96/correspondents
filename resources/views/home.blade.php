@@ -241,25 +241,23 @@
                     </div>
                 </div>
             </div>
-
-
-
         @endhasrole
         @hasrole('Distributor')
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+           <!-- <div  class="col-lg-3 col-sm-6 mb-xl-0 mb-4"></div>
+            <div style="margin-left: -14px;" class="col-lg-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">Saldo Tenderos</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder text-xs">
                                         ${{ $shopkeepersBalance }}
                                     </h5>
 
                                 </div>
                             </div>
-                            <div class="col-4 text-end">
+                            <div class="col-3 text-end">
                                 <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
                                     <i class="material-icons opacity-10">payments</i>
                                 </div>
@@ -268,14 +266,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="col-lg-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Tenderos</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder text-xs">
                                         {{ $shopkeeperCount }}
                                     </h5>
                                 </div>
@@ -288,7 +286,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         @endhasrole
         @hasrole('Shopkeeper')
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -505,6 +503,53 @@
             </div>
         @endhasrole
             <div class="row mt-4">
+                @hasrole('Distributor')
+                <div class="col-lg-4 row">
+                    <div class="col-lg-12 col-sm-6 mb-xl-0 mb-4">
+                        <div class="card">
+                            <div class="card-body p-3">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="numbers">
+                                            <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Tenderos</p>
+                                            <h5 class="font-weight-bolder text-xs">
+                                                {{ $shopkeeperCount }}
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <div class="icon icon-shape bg-gradient-info shadow-info text-center rounded-circle">
+                                            <i class="material-icons opacity-10">group</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-6 mb-xl-0 mb-4">
+                        <div class="card">
+                            <div class="card-body p-3">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="numbers">
+                                            <p class="text-xs mb-0 text-uppercase font-weight-bold">Saldo Tenderos</p>
+                                            <h5 class="font-weight-bolder text-xs">
+                                                ${{ $shopkeepersBalance }}
+                                            </h5>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-3 text-end">
+                                        <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                            <i class="material-icons opacity-10">payments</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endhasrole
                 <div class="col-lg-4 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2 ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">

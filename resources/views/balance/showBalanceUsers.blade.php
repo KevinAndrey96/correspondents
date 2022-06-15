@@ -6,26 +6,39 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 "><a href="/balance" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a> Gestión de saldo </h6>
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 "><a href="/balance" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a>Saldo por usuario</h6>
 
                         </div>
                     </div>
 
                     <div class="card-body px-0 pb-2">
-                        <div class="table-responsive p-0">
-                          <table id= "my_table"  class="table align-items-center mb-0">
+                        <div class=" p-0">
+                          <table id= "my_table"  class="table table-striped">
                             <thead >
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rol</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Actual</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
+                                <th class="ps-1 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Rol</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">Saldo Actual</th>
                                 <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gestionar saldo</th>-->
                             </thead>
                             <tbody>
                             @foreach( $users as $user )
                                 <tr>
-                                    <td class="align-middle text-center text-sm">{{ $user->name }}</td>
-                                    <td class="align-middle text-center text-sm">{{ $user->role }}</td>
-                                    <td class="align-middle text-center text-sm">{{ $user->balance }}</td>
+                                    <td class="align-middle text-sm ps-4">{{ $user->name }}</td>
+                                    <td class="align-middle text-sm ps-0">
+                                        @if ($user->role == 'Distributor')
+                                            Distribuidor
+                                        @endif
+                                        @if ($user->role == 'Administrator')
+                                            Administrador
+                                        @endif
+                                        @if ($user->role == 'Shopkeeper')
+                                             Tendero
+                                        @endif
+                                        @if ($user->role == 'Supplier')
+                                             Proveedor
+                                        @endif
+                                    </td>
+                                    <td class="align-middle text-sm ps-1">{{ $user->balance }}</td>
                                 <!-- <td class="align-middle text-center text-sm"> <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal"
                                     data-bs-target="#SaldoModal"><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Editar</a></button>
                                     </td>-->
@@ -34,6 +47,16 @@
                             @endforeach
                             </tbody>
                         </table>
+                            <script>
+                                $(document).ready( function () {
+                                    $('#my_table').DataTable({
+                                        "language": {
+                                            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                                        },
+                                        "stripeClasses": [ 'strip1', 'strip2', 'strip3' ]
+                                    });
+                                } );
+                            </script>
                             <!-- Modal-->
                             <div class="modal fade" id="SaldoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">

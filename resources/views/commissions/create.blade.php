@@ -29,6 +29,7 @@
                         <table class="table align-items-center mb-3">
                             <thead thead-light>
                                 <tr>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de producto</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
                                     @if (Auth::user()->role == 'Distributor')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión distribuidor</th>
@@ -43,6 +44,14 @@
                             <tbody>
                                 @foreach ($commissions as $commission)
                                     <tr>
+                                        <td class="align-middle text-center text-sm">
+                                            @if($commission->product->product_type == 'Deposit')
+                                                Deposito
+                                            @endif
+                                            @if($commission->product->product_type == 'Withdrawal')
+                                                Retiro
+                                            @endif
+                                        </td>
                                         <td class="align-middle text-center text-sm">{{$commission->product->product_name}}</td>
                                         @if (Auth::user()->role == 'Distributor')
                                         <td class="align-middle text-center text-sm">
