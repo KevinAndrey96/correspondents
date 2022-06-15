@@ -29,6 +29,9 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bloq/Desbl</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
+                                        @if ($role == 'allShopkeepers')
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Distribuidor</th>
+                                        @endif
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teléfono</th>
                                         <!--<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">T. Documento</th>
@@ -38,7 +41,8 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>-->
-                                        @if ($role == 'Distributor')
+
+                                        @if ($role == 'Distributor' || $role == 'allShopkeepers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancias</th>
                                         @endif
                                         @if ($role != 'Distributor' && $role != 'Administrator')
@@ -73,6 +77,9 @@
                                             </div>
                                         </td>
                                         <td class="align-middle text-center text-sm">{{$user->name}}</td>
+                                        @if ($role == 'allShopkeepers')
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{$user->distributor->name}}</th>
+                                        @endif
                                         <!--<td class="align-middle text-center text-sm">{{$user->email}}</td>-->
                                         <td class="align-middle text-center text-sm">{{$user->phone}}</td>
                                     <!-- <td class="align-middle text-center text-sm">{{$user->document_type}}</td>
@@ -82,11 +89,12 @@
                                         <!--<td class="align-middle text-center text-sm">{{$user->commission}}</td>
                                         <td class="align-middle text-center text-sm">{{$user->balance}}</td>-->
                                         <!--<td class="align-middle text-center text-sm">{{$user->commission}}</td>-->
-                                        @if ($role == 'Distributor')
-                                            <td class="align-middle text-center text-sm">{{$user->profit}}</td
+                                        @if ($role == 'Distributor' || $role == 'allShopkeepers')
+                                            <td class="align-middle text-center text-sm">${{$user->profit}}</td
                                         @endif
-                                        @if ($role != 'Distributor' and $role != 'Administrator')
-                                        <td class="align-middle text-center text-sm">{{$user->balance}}</td>
+                                        @if ( $role == 'allShopkeepers' || ($role != 'Distributor' && $role != 'Administrator'))
+                                            <td style="display: none;" class="">${{$user->balance}}</td>
+                                            <td class="align-middle text-center text-sm">${{$user->balance}}</td>
                                         @endif
                                         @if ($role == 'Supplier')
                                             <td class="align-middle text-center text-sm">{{$user->max_queue}}</td>
