@@ -19,7 +19,7 @@ class AddBalanceShopkeeperController extends Controller
             $fields = [
                 'amount'=>'required|numeric|min:20000',
                 'image'=>'required',
-                'transactionNumber'=>'required|unique:balances,code',
+                //'transactionNumber'=>'required|unique:balances,code',
             ];
             $message = [
                 'required'=>':attribute es requerido',
@@ -33,7 +33,7 @@ class AddBalanceShopkeeperController extends Controller
             date_default_timezone_set('America/Bogota');
             $balance->date = $date;
             $balance->type = 'Deposit';
-            $balance->code = $request->input('transactionNumber');
+            //$balance->code = $request->input('transactionNumber');
             $balance->save();
             if ($request->hasFile('image')) {
                 $pathName = Sprintf('balances/%s.png', $balance->id);

@@ -16,8 +16,9 @@
                                 @elseif ($role == 'Administrator')
                                     (Administradores)
                                 @endif
-                                <a href="/user/create?role={{$role}}" class="btn btn-block btn-Secondary"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">group_add</i></a></h6>
-
+                                @if ($role != 'allShopkeepers')
+                                    <a href="/user/create?role={{$role}}" class="btn btn-block btn-Secondary"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">group_add</i></a></h6>
+                                @endif
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">
@@ -36,6 +37,10 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dirección</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>-->
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
+                                        @if ($role != 'Distributor' and $role != 'Administrator')
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>
+                                        @endif
                                         @if ($role == 'Supplier')
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cola maxima</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Prioridad</th>
@@ -73,6 +78,10 @@
                                         <td class="align-middle text-center text-sm">{{$user->address}}</td>-->
                                         <!--<td class="align-middle text-center text-sm">{{$user->commission}}</td>
                                         <td class="align-middle text-center text-sm">{{$user->balance}}</td>-->
+                                        <!--<td class="align-middle text-center text-sm">{{$user->commission}}</td>-->
+                                        @if ($role != 'Distributor' and $role != 'Administrator')
+                                        <td class="align-middle text-center text-sm">{{$user->balance}}</td>
+                                        @endif
                                         @if ($role == 'Supplier')
                                             <td class="align-middle text-center text-sm">{{$user->max_queue}}</td>
                                             <td class="align-middle text-center text-sm">{{$user->priority}}</td>
@@ -87,9 +96,17 @@
                                                     data-city="{{$user->city}}"
                                                     data-address="{{$user->address}}"
                                             >Detalles</button>-->
-                                                <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Editar</a>
                                                 <!--<a style="color: red;" class="btn btn-link px-3 mb-0" href="/user/delete/{{$user->id}}" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>-->
+
+                                            @if ($role != 'allShopkeepers' && $role != 'Administrator')
+                                                <a style="color: blue;" href="/commissions/create/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: blue;" class="material-icons opacity-10">price_change</i>Comisiones</a>
+                                            @endif
                                         </td>
+                                               <td>
+                                            <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i>Editar</a>
+                                            <a style="color: red;" class="btn btn-link px-3 mb-0" href="/user/delete/{{$user->id}}" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>
+                                               </td>
+
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -213,8 +230,6 @@
                                     modal.find('#numberdoc').text('N°: ' + (numberdoc ))
                                     modal.find('#city').text('' + (city))
                                     modal.find('#address').text('' + (address))
-
-
                                 })
                             </script>
                             <script>

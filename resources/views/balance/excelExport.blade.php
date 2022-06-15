@@ -6,7 +6,6 @@
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Actual</th>
         @endhasrole
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Solicitud  </th>
-        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Transaccion  </th>
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de Solicitud</th>
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
@@ -21,7 +20,6 @@
             <td class="align-middle text-center text-sm">{{ $balance->user->balance}}</td>
             @endhasrole
             <td class="align-middle text-center text-sm">{{ $balance->id}}</td>
-            <td class="align-middle text-center text-sm">{{ $balance->code}}</td>
             @if($balance->type == 'Deposit')
             <td class="align-middle text-center text-sm">Deposito</td>
             @elseif($balance->type == 'Withdrawal')

@@ -25,6 +25,12 @@ class CreateCommissionsController extends Controller
                 return redirect('/home')->with('deniedAccess', 'Acceso denegado');
             }
         }
+        if ($userLogged->role == 'Shopkeeper') {
+            return redirect('/home')->with('deniedAccess', 'Acceso denegado');
+        }
+        if ($userLogged->role == 'Supplier') {
+            return redirect('/home')->with('deniedAccess', 'Acceso denegado');
+        }
         $products = Product::all();
         foreach ($products as $product) {
             $commission = Commission::where('user_id', '=', $id)

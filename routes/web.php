@@ -32,7 +32,8 @@ Route::group(['middleware' => ['auth', 'transactions']], function() {
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
     Route::get('/products/{id}/edit', [App\Http\Controllers\Products\EditProductController::class, 'edit']);
     Route::patch('/products/{id}', [App\Http\Controllers\Products\UpdateProductController::class, 'update']);
-    Route::delete('/products/{id}', [App\Http\Controllers\Products\DestroyProductController::class, 'destroy']);
+    Route::post('/changeStatusProduct', [App\Http\Controllers\Products\ChangeStatusProductsController::class, 'changeStatus']);
+    //Route::delete('/products/{id}', [App\Http\Controllers\Products\DestroyProductController::class, 'destroy']);
 
     Route::get('/balance', [App\Http\Controllers\Balances\IndexBalanceController::class, 'index']);
     Route::get('/balance/create', [App\Http\Controllers\Balances\CreateBalanceController::class, 'create']);

@@ -1,5 +1,15 @@
 @extends('layouts.dashboard')
 @section('content')
+    @if(Session::has('UpdaCommissionFailed'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('UpdaCommissionFailed') }}
+        </div>
+    @endif
+    @if(Session::has('UpdaCommissionSuccess'))
+        <div class="alert alert-success" role="alert">
+            {{ Session::get('UpdaCommissionSuccess') }}
+        </div>
+    @endif
     <div class="row mt-4"></div>
     <div class="container-fluid py-4">
         <div class="row">
