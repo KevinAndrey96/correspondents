@@ -92,6 +92,11 @@
                                 <input type="hidden" name="amounts" id="amounts">
                                 <input type="hidden" name="ids" id="ids">
                                 <input class="btn btn-primary" type="submit" value="Modificar">
+                                @hasrole('Distributor')
+                                    <a class="btn btn-info" href="{{ url('/commissions/users?id=shopkeeper') }}"> Regresar</a>
+                                @else
+                                    <a class="btn btn-info" href="{{ url('/commissions/users?id=supdis') }}"> Regresar</a>
+                                @endhasrole
                             </div>
                         </form>
                         <script type="text/javascript">

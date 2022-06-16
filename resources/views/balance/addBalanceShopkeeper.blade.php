@@ -28,15 +28,10 @@
                                 <div class="col-md-4">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="amount" class="form-label"></label>
-                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="10000" min="20000.0" placeholder="Monto">
+                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="1" min="0" placeholder="Monto">
                                     </div>
                                 </div>
-                                <!--<div class="col-md-6">
-                                    <div class=" input-group input-group-outline my-3">
-                                        <label for="transactionNumber" id="account_label" class="form-label"></label>
-                                        <input type="text" class="form-control" name="transactionNumber" value="" id="transactionNumber" placeholder="Numero de Transacción">
-                                    </div>
-                                </div>-->
+                                <div class="col-md-4"></div>
                                 <div class="col-md-4">
                                      <div class="input-group  my-3">
                                       <label for="image" id="image_label" class="mx-3 my-1">Recibo</label>

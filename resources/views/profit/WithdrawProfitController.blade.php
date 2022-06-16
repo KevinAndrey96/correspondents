@@ -28,7 +28,7 @@
                                 <div class="col-md-4">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="amount" class="form-label">Monto</label>
-                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="100" min="50.0" placeholder="">
+                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="1" min="0" placeholder="">
                                     </div>
                                 </div>
                                 @hasanyrole('Supplier|Distributor|Shopkeeper')

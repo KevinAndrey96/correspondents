@@ -16,30 +16,31 @@ class ValidateWithdrawProfitController extends Controller
     {
         if (Auth::user()->role == 'Administrator') {
             $profit = Profit::find($request->input('id'));
-            $profit->is_valid = $request->input('status');
-            $profit->save();
+            if(is_null($profit->is_valid)){
+                $profit->is_valid = $request->input('status');
+                $profit->comment = $request->input('comment');
+                $profit->save();
 
-            $user = User::find($profit->user_id);
-            $receiverEmail = $user->email;
-            $emailBody = new \stdClass();
-            $emailBody->sender = 'Asparecargas';
-            $emailBody->receiver = $user->name;
+                $user = User::find($profit->user_id);
+                $receiverEmail = $user->email;
+                $emailBody = new \stdClass();
+                $emailBody->sender = 'Asparecargas';
+                $emailBody->receiver = $user->name;
 
-            if($profit->is_valid == 1){
-                $user->profit = $user->profit - $profit->amount;
+                if($profit->is_valid == 1){
+                    $user->profit = $user->profit - $profit->amount;
 
-                $emailSubject = 'Retiro de ganacias aprobado';
-                $emailBody->body = 'Su solicitud de retiro de ganancias por valor de $'.$profit->amount.' fue aprobada.';
-            }else{
-                $user->profit = $user->profit + $profit->amount;
+                    $emailSubject = 'Retiro de ganacias aprobado';
+                    $emailBody->body = 'Su solicitud de retiro de ganancias por valor de $'.$profit->amount.' fue aprobada.';
+                }else{                    
+                    $emailSubject = 'Retiro de ganacias rechazado';
+                    $emailBody->body = 'La solicitud de retiro de ganancias #'.$profit->id.' por valor de $'.$profit->amount.' fue rechazada a consideración de un administrador.';
+                }
+                Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
+                $user->save();
                 
-                $emailSubject = 'Retiro de ganacias revertido';
-                $emailBody->body = 'La solicitud de retiro de ganancias #'.$profit->id.' por valor de $'.$profit->amount.' fue invalidada a consideración de un administrador.';
+                return back();
             }
-            Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
-            $user->save();
-            
-            return back();
         }
     }
 }
