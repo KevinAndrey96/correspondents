@@ -32,16 +32,6 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">tipo del producto</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descripción del producto</th>
-                                        <!--<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">activo?</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Documento</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">tipo de cuenta</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">numero de cuenta</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">correo</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">nombre cliente</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">telefono</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">codigo</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">extra</th>-->
-
                                     </tr>
                                     </thead>
 
@@ -68,11 +58,6 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a style="color: darkgreen;" href="{{ url('/products/'.$product->id.'/edit') }}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Editar</a>
-                                                <!--<form action="{{ url('/products/'.$product->id ) }}" class="d-inline" method="post">
-                                                    @csrf
-                                                    {{ method_field('DELETE') }}
-                                                    <button type="submit" class="btn btn-link text-danger text-gradient px-1 mb-0" onclick="return confirm('¿Seguro que deseas eliminar el producto?')"><i style="color: red;" class="material-icons opacity-10">delete</i> Borrar</button>
-                                                </form>-->
                                                 <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-dark" data-bs-toggle="modal"
                                                         data-bs-target="#exampleModalMessage"
                                                         data-whatever="{{ $product->product_name}}"
@@ -254,17 +239,7 @@
                                                        </div>
                                                        <div class="row pb-2">
                                                             <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
-                                                            <!--<div class="card">
-                                                                <div class="card-header p-0 ">
-                                                                        <div class="icon icon-x icon-shape bg-gradient-primary shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
-                                                                            <i class="material-icons opacity-10">phone_forwarded</i>
-                                                                        </div>
-                                                                        <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
-                                                                            <label for="recipient-phone_number" id="product-phone_number" class="col-form-label">N° Teléfono:</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="card-footer p-1"></div>
-                                                                </div>-->
+
                                                             </div>
                                                             <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
                                                                 <div class="card">
@@ -306,7 +281,6 @@
                                             var account_number = button.data('account_number')
                                             var account_type = button.data('account_type')
                                             var client_name = button.data('aclient_name')
-                                            //var phone_number = button.data('phone_number')
                                             var code = button.data('code')
                                             var extra = button.data('extra')
                                             var commission = button.data('commission')
@@ -318,7 +292,6 @@
                                             modal.find('#product-account_number').text('N° Cuenta: ' + (account_number ? 'Si' : 'No' ))
                                             modal.find('#product-account_type').text('T. Cuenta: ' + (account_type ? 'Si' : 'No' ))
                                             modal.find('#product-client_name').text('Cliente: ' + (client_name ? 'No' : 'Si' ))
-                                            //modal.find('#product-phone_number').text('Teléfono: ' + (phone_number ? 'Si' : 'No' ))
                                             modal.find('#product-code').text('Código: ' + (code ? 'Si' : 'No' ))
                                             modal.find('#product-extra').text('Extra: ' + (extra ? 'Si' : 'No' ))
                                             modal.find('#product-commission').text('Comisión: ' + (commission ))

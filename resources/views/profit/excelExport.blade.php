@@ -8,7 +8,7 @@
             <th>N° de Solicitud</th>
             <th>Monto a retirar</th>
             <th>Fecha</th>
-            <th>¿Validado?</th>
+            <th>¿Aceptada?</th>
         </tr>
     </thead>
     <tbody>

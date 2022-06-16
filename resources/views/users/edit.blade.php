@@ -34,22 +34,24 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="input-group input-group-static mb-4">
-                                            <label  for="document_type">&nbsp&nbsp&nbsp&nbspTipo de documento</label>
+                                            <label  for="document_type">&nbsp&nbsp&nbsp&nbspTipo de documento {{$user->document_type}}</label>
                                             <select id="" name="document_type" class="form-control" aria-label="Default select example">
                                                 @if ($user->document_type == 'CC')
-                                                    <option class="text-center" value="C.C" selected>C.C</option>
-                                                    <option class="text-center" value="T.I">T.I</option>
+                                                    <option class="text-center" value="CC" selected>C.C</option>
+                                                    <option class="text-center" value="TI">T.I</option>
                                                     <option class="text-center" value="NIT">NIT</option>
-                                                @endif
-                                                @if ($user->document_type == 'TI')
-                                                    <option class="text-center" value="T.I" selected>T.I</option>
+                                                @elseif ($user->document_type == 'TI')
+                                                    <option class="text-center" value="TI" selected>T.I</option>
                                                     <option class="text-center" value="CC">C.C</option>
                                                     <option class="text-center" value="NIT">NIT</option>
-                                                @endif
-                                                @if ($user->document_type == 'NIT')
+                                                @elseif ($user->document_type == 'NIT')
                                                     <option class="text-center" value="NIT" selected>NIT</option>
-                                                    <option class="text-center" value="C.C">C.C</option>
-                                                    <option class="text-center" value="T.I">T.I</option>
+                                                    <option class="text-center" value="CC">C.C</option>
+                                                    <option class="text-center" value="TI">T.I</option>
+                                                @else
+                                                    <option class="text-center" value="CC" selected>C.C</option>
+                                                    <option class="text-center" value="TI">T.I</option>
+                                                    <option class="text-center" value="NIT">NIT</option>
                                                 @endif
                                             </select>
                                         </div>

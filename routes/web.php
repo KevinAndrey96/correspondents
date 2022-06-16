@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth', 'transactions']], function() {
     Route::get('/products/{id}/edit', [App\Http\Controllers\Products\EditProductController::class, 'edit']);
     Route::patch('/products/{id}', [App\Http\Controllers\Products\UpdateProductController::class, 'update']);
     Route::post('/changeStatusProduct', [App\Http\Controllers\Products\ChangeStatusProductsController::class, 'changeStatus']);
-    //Route::delete('/products/{id}', [App\Http\Controllers\Products\DestroyProductController::class, 'destroy']);
+    //Route::delete('/products/delete/{id}', [App\Http\Controllers\Products\DestroyProductController::class, 'destroy']);
 
     Route::get('/balance', [App\Http\Controllers\Balances\IndexBalanceController::class, 'index']);
     Route::get('/balance/create', [App\Http\Controllers\Balances\CreateBalanceController::class, 'create']);
@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth', 'transactions']], function() {
     Route::post('/user/store', [App\Http\Controllers\Users\StoreUsersController::class, 'store']);
     Route::get('/user/edit/{id}', [App\Http\Controllers\Users\EditUsersController::class, 'edit']);
     Route::post('/user/update', [App\Http\Controllers\Users\UpdateUsersController::class, 'update']);
-    Route::get('/user/delete/{id}', [App\Http\Controllers\Users\DeleteUsersController::class, 'delete']);
+    //Route::get('/user/delete/{id}', [App\Http\Controllers\Users\DeleteUsersController::class, 'delete']);
     Route::post('/changeStatusUser', [App\Http\Controllers\Users\ChangeStatusUsersController::class, 'changeStatus']);
     Route::get('/changePassword', [App\Http\Controllers\Users\ChangePasswordUsersController::class, 'changePassword']);
     Route::post('/updatePassword', [App\Http\Controllers\Users\UpdatePasswordUsersController::class, 'updatePassword']);
