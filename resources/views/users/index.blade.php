@@ -90,6 +90,7 @@
                                                 @endif
                                                 <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" alt="Editar" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i></a>
                                                 <a style="color: red;" class="btn btn-link px-1 mb-0" href="/user/delete/{{$user->id}}" title="Borrar" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>
+
                                             </td>
 
                                     </tr>
