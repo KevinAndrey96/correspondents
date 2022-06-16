@@ -84,16 +84,16 @@
                                                             <a class="btn btn-success text-center text-xs" href="/transaction/detail-pdf/{{$transaction->id}}"><i class="material-icons me-2">print</i>Imprimir comprobante</a>
                                                             </div>
                                                             <div class="input-group input-group-static mb-2 mt-2">
-                                                                <img class="" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
+                                                                <a class="image-link" href="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
+                                                                <img class="image-link" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
+                                                                </a>
                                                             </div>
                                                         </div>
-                                                        <!--
-                                                        <div class="col-md-6">
+                                                        <div style="display: none;" class="col-md-6">
                                                             <div class="input-group input-group-dynamic">
                                                                 <textarea class="form-control" name="comment" rows="3" placeholder="Comentario:" spellcheck="false">{{$transaction->comment}}</textarea>
                                                             </div>
                                                         </div>
-                                                        -->
                                                 @endif
                                                 </div>
                                               </div>

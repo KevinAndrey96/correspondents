@@ -55,7 +55,7 @@
                                                     <span class="badge badge-sm bg-gradient-secondary">OffLine</span>
                                                 @endif
                                             </td>
-                                            <td class="align-middle text-center text-sm ps-0">                                                
+                                            <td class="align-middle text-center text-sm ps-0">
                                                 <div class="form-check form-switch align-middle text-center">
                                                     @if ($product->is_enabled == 1)
                                                         <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$product->id}}" checked onchange="getStatus({{$product->id}})">
@@ -92,7 +92,9 @@
                                             <td class="align-middle text-center">
                                                 @if(isset($product->product_logo))
                                                 <div>
+                                                    <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}">
                                                     <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">
+                                                    </a>
                                                 </div>
                                                 @endif
                                             </td>

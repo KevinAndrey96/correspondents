@@ -18,6 +18,8 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="/assets/Magnific-Popup-master/dist/magnific-popup.css">
     <!-- datatable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.css"/>
 
@@ -547,7 +549,15 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
-
+<!-- Github buttons -->
+<script src="/assets/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.image-link').magnificPopup({
+            type:'image'
+        });
+    });
+</script>
 
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

@@ -27,7 +27,20 @@
                             @foreach( $profits as $profit )
                                 <tr>
                                     <td class="align-middle text-center text-sm">{{ $profit->user->name }}</td>
-                                    <td class="align-middle text-center text-sm">{{ $profit->user->role }}</td>
+                                    <td class="align-middle text-center text-sm">
+                                        @if ($profit->user->role == 'Distributor')
+                                            Distribuidor
+                                        @endif
+                                        @if ($profit->user->role == 'Administrator')
+                                            Administrador
+                                        @endif
+                                        @if ($profit->user->role == 'Shopkeeper')
+                                            Tendero
+                                        @endif
+                                        @if ($profit->user->role == 'Supplier')
+                                            Proveedor
+                                        @endif
+                                    </td>
                                     <td class="align-middle text-center text-sm">{{$profit->user->profit}}</td>
                                     <td class="align-middle text-center text-sm">{{ $profit->amount }}</td>
                                     <td class="align-middle text-center text-sm">
@@ -108,7 +121,7 @@
                                                         @else
                                                             <input type="hidden" class="form-control" name="profitID" value="" id="profitID" readonly="readonly">
                                                         @endif
-                                                    </div>                                                  
+                                                    </div>
                                                     <div class="col-md-12">
                                                         <div class="p-3">
                                                             <label for="image" > Recibo </label>
