@@ -29,17 +29,15 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bloq/Desbl</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
+                                        @if ($role == 'allShopkeepers')
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Distribuidor</th>
+                                        @endif
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teléfono</th>
-                                        <!--<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">T. Documento</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° Documento</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ciudad</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dirección</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>-->
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
-                                        @if ($role != 'Distributor' and $role != 'Administrator')
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>
+                                        @if ($role == 'Distributor' || $role == 'allShopkeepers')
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancias</th>
+                                        @endif
+                                        @if ($role != 'Distributor' && $role != 'Administrator')
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>
                                         @endif
                                         @if ($role == 'Supplier')
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cola maxima</th>
@@ -70,42 +68,29 @@
                                             </div>
                                         </td>
                                         <td class="align-middle text-center text-sm">{{$user->name}}</td>
+                                        @if ($role == 'allShopkeepers')
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{$user->distributor->name}}</th>
+                                        @endif
                                         <!--<td class="align-middle text-center text-sm">{{$user->email}}</td>-->
                                         <td class="align-middle text-center text-sm">{{$user->phone}}</td>
-                                    <!-- <td class="align-middle text-center text-sm">{{$user->document_type}}</td>
-                                        <td class="align-middle text-center text-sm">{{$user->document}}</td>
-                                        <td class="align-middle text-center text-sm">{{$user->city}}</td>
-                                        <td class="align-middle text-center text-sm">{{$user->address}}</td>-->
-                                        <!--<td class="align-middle text-center text-sm">{{$user->commission}}</td>
-                                        <td class="align-middle text-center text-sm">{{$user->balance}}</td>-->
-                                        <!--<td class="align-middle text-center text-sm">{{$user->commission}}</td>-->
-                                        @if ($role != 'Distributor' and $role != 'Administrator')
-                                        <td class="align-middle text-center text-sm">{{$user->balance}}</td>
+                                        @if ($role == 'Distributor' || $role == 'allShopkeepers')
+                                            <td class="align-middle text-center text-sm">${{$user->profit}}</td>
+                                        @endif
+                                        @if ( $role == 'allShopkeepers' || ($role != 'Distributor' && $role != 'Administrator'))
+                                            <td style="display: none;" class="">${{$user->balance}}</td>
+                                            <td class="align-middle text-center text-sm">${{$user->balance}}</td>
                                         @endif
                                         @if ($role == 'Supplier')
                                             <td class="align-middle text-center text-sm">{{$user->max_queue}}</td>
                                             <td class="align-middle text-center text-sm">{{$user->priority}}</td>
                                         @endif
-                                        <td class="align-middle text-center text-sm">
-                                           <!-- <button style="padding: 6px; font-size: 9px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalMessage"
-                                                    data-whatever="{{$user->name}}"
-                                                    data-doc="{{$user->document_type}}"
-                                                    data-email="{{$user->email}}"
-                                                    data-numberdoc="{{$user->document}}"
-                                                    data-city="{{$user->city}}"
-                                                    data-address="{{$user->address}}"
-                                            >Detalles</button>-->
-                                                <!--<a style="color: red;" class="btn btn-link px-3 mb-0" href="/user/delete/{{$user->id}}" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>-->
-
-                                            @if ($role != 'allShopkeepers' && $role != 'Administrator')
-                                                <a style="color: blue;" href="/commissions/create/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: blue;" class="material-icons opacity-10">price_change</i>Comisiones</a>
-                                            @endif
-                                        </td>
-                                               <td>
-                                            <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i>Editar</a>
-                                            <a style="color: red;" class="btn btn-link px-3 mb-0" href="/user/delete/{{$user->id}}" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>
-                                               </td>
+                                            <td>
+                                                @if ($role != 'allShopkeepers' && $role != 'Administrator')
+                                                    <a style="color: dodgerblue;" href="/commissions/create/{{$user->id}}" title="Comisiones" class="btn btn-link px-1 mb-0"><i style="color: dodgerblue;" class="material-icons opacity-10">price_change</i></a>
+                                                @endif
+                                                <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" alt="Editar" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i></a>
+                                                <a style="color: red;" class="btn btn-link px-1 mb-0" href="/user/delete/{{$user->id}}" title="Borrar" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>
+                                            </td>
 
                                     </tr>
                                 @endforeach
