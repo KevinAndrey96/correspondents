@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class DeleteUsersController extends Controller
 {
-    public function delete($id)
+    /*public function delete($id)
     {
        User::destroy($id);
 
        return back();
-    }
+    }*/
 }

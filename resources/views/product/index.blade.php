@@ -24,22 +24,14 @@
                                 <table id= "my_table" class="table align-items-center mb-0">
                                     <thead class="thead-light">
                                     <tr>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BLOQ/DESBL</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Logo</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">nombre del producto</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">tipo del producto</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descripción del producto</th>
-                                        <!--<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">activo?</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Documento</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">tipo de cuenta</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">numero de cuenta</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">correo</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">nombre cliente</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">telefono</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">codigo</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">extra</th>-->
-
                                     </tr>
                                     </thead>
 
@@ -47,13 +39,25 @@
                                     @foreach( $products as $product )
                                         <tr>
                                             <td class="align-middle text-center text-sm">
+                                                @if ($product->is_enabled == 1)
+                                                    <span class="badge badge-sm bg-gradient-success">OnLine</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-secondary">OffLine</span>
+                                                @endif
+                                            </td>
+                                            <td class="align-middle text-center text-sm ps-0">
+                                                <div class="form-check form-switch align-middle text-center">
+                                                    @if ($product->is_enabled == 1)
+                                                        <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$product->id}}" checked onchange="getStatus({{$product->id}})">
+                                                        <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{$product->id}}"></label>
+                                                    @else
+                                                        <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$product->id}}" onchange="getStatus({{$product->id}})">
+                                                        <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$product->id}}"></label>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
                                                 <a style="color: darkgreen;" href="{{ url('/products/'.$product->id.'/edit') }}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Editar</a>
-
-                                                <form action="{{ url('/products/'.$product->id ) }}" class="d-inline" method="post">
-                                                    @csrf
-                                                    {{ method_field('DELETE') }}
-                                                    <button type="submit" class="btn btn-link text-danger text-gradient px-1 mb-0" onclick="return confirm('¿Seguro que deseas eliminar el producto?')"><i style="color: red;" class="material-icons opacity-10">delete</i> Borrar</button>
-                                                </form>
                                                 <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-dark" data-bs-toggle="modal"
                                                         data-bs-target="#exampleModalMessage"
                                                         data-whatever="{{ $product->product_name}}"
@@ -73,7 +77,9 @@
                                             <td class="align-middle text-center">
                                                 @if(isset($product->product_logo))
                                                 <div>
+                                                    <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}">
                                                     <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">
+                                                    </a>
                                                 </div>
                                                 @endif
                                             </td>
@@ -87,6 +93,28 @@
                                             <td class="align-middle text-center text-sm">{{ $product->product_description}}</td>
                                         </tr>
                                     @endforeach
+                                    <form id="form-status" name="form-status" method="POST" action="/changeStatusProduct">
+                                        @csrf
+                                        <input type="hidden" name="id" id="id">
+                                        <input type="hidden" name="status" id="status">
+                                    </form>
+                                    <script>
+                                        function getStatus(id)
+                                        {
+                                            var toggle = document.getElementById("togglestatus"+id);
+                                            var status = document.getElementById("status");
+                                            var form = document.getElementById("form-status");
+                                            var product_id = document.getElementById("id");
+
+                                            if (toggle.checked == true) {
+                                                status.value = 1;
+                                            } else {
+                                                status.value = 0;
+                                            }
+                                            product_id.value = id;
+                                            form.submit();
+                                        }
+                                    </script>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModalMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -188,10 +216,10 @@
                                                                 <div class="card">
                                                                     <div class="card-header p-0 ">
                                                                         <div class="icon icon-x icon-shape bg-gradient-primary shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
-                                                                            <i class="material-icons opacity-10">phone_forwarded</i>
+                                                                            <i class="material-icons opacity-10">add_circle_outline</i>
                                                                         </div>
                                                                         <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
-                                                                            <label for="recipient-phone_number" id="product-phone_number" class="col-form-label">N° Teléfono:</label>
+                                                                            <label for="recipient-extra" id="product-extra" class="col-form-label">Extra:</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="card-footer p-1"></div>
@@ -213,17 +241,7 @@
                                                        </div>
                                                        <div class="row pb-2">
                                                             <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
-                                                                <div class="card">
-                                                                    <div class="card-header p-0 ">
-                                                                        <div class="icon icon-x icon-shape bg-gradient-primary shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
-                                                                            <i class="material-icons opacity-10">add_circle_outline</i>
-                                                                        </div>
-                                                                        <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
-                                                                            <label for="recipient-extra" id="product-extra" class="col-form-label">Extra:</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="card-footer p-1"></div>
-                                                                </div>
+
                                                             </div>
                                                             <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
                                                                 <div class="card">
@@ -265,7 +283,6 @@
                                             var account_number = button.data('account_number')
                                             var account_type = button.data('account_type')
                                             var client_name = button.data('aclient_name')
-                                            var phone_number = button.data('phone_number')
                                             var code = button.data('code')
                                             var extra = button.data('extra')
                                             var commission = button.data('commission')
@@ -277,7 +294,6 @@
                                             modal.find('#product-account_number').text('N° Cuenta: ' + (account_number ? 'Si' : 'No' ))
                                             modal.find('#product-account_type').text('T. Cuenta: ' + (account_type ? 'Si' : 'No' ))
                                             modal.find('#product-client_name').text('Cliente: ' + (client_name ? 'No' : 'Si' ))
-                                            modal.find('#product-phone_number').text('Teléfono: ' + (phone_number ? 'Si' : 'No' ))
                                             modal.find('#product-code').text('Código: ' + (code ? 'Si' : 'No' ))
                                             modal.find('#product-extra').text('Extra: ' + (extra ? 'Si' : 'No' ))
                                             modal.find('#product-commission').text('Comisión: ' + (commission ))

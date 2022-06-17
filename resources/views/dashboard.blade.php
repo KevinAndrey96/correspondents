@@ -179,6 +179,7 @@
                                                 <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault" checked>
                                                 <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="flexSwitchCheckDefault"></label>
                                             </div>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>

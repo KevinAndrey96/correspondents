@@ -17,9 +17,8 @@ class AddBalanceShopkeeperController extends Controller
     {
         if (Auth::user()->role == 'Shopkeeper' or Auth::user()->role == 'Supplier') {
             $fields = [
-                'amount'=>'required|numeric|min:20000',
+                'amount'=>'required|numeric|min:0',
                 'image'=>'required',
-                'transactionNumber'=>'required|unique:balances,code',
             ];
             $message = [
                 'required'=>':attribute es requerido',
@@ -33,13 +32,10 @@ class AddBalanceShopkeeperController extends Controller
             date_default_timezone_set('America/Bogota');
             $balance->date = $date;
             $balance->type = 'Deposit';
-            $balance->code = $request->input('transactionNumber');
             $balance->save();
             if ($request->hasFile('image')) {
                 $pathName = Sprintf('balances/%s.png', $balance->id);
                 Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
-                //dd(Storage::path('balances\\' .$balance->id . '.png'));
-                //dd(Storage::disk('public')->path('balances/' .$balance->id . '.png'));
                 $client = new Client();
                 $url = "https://corresponsales.asparecargas.net/upload.php";
                 $client->request(RequestAlias::METHOD_POST, $url, [

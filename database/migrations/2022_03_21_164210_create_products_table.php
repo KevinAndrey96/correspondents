@@ -31,6 +31,7 @@ return new class extends Migration
             $table->boolean('code')->default(0);
             $table->boolean('extra')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

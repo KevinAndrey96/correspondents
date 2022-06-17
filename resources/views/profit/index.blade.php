@@ -55,7 +55,9 @@
                                         <td class="align-middle text-center text-sm">
                                             @if(isset($profit->boucher))
                                             <div>
+                                                <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net/'.$profit->boucher }}">
                                                 <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$profit->boucher }}" alt="No carga">
+                                                </a>
                                             </div>
                                             @endif
                                         </td>

@@ -19,10 +19,10 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->double('amount')->default(0);
             $table->date('date')->nullable();
-            $table->boolean('is_valid')->default(0);
+            $table->boolean('is_valid')->nullable();
             $table->string('type');
             $table->string('boucher')->nullable();
-            $table->string('code')->unique()->nullable();
+            $table->string('comment')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
         });

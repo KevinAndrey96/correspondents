@@ -20,10 +20,11 @@ return new class extends Migration
             $table->unsignedBigInteger('transaction_id')->nullable();
             $table->double('amount')->default(0);
             $table->date('date')->nullable();
-            $table->boolean('is_valid')->default(0);
+            $table->boolean('is_valid')->nullable();
             $table->string('type');
             $table->string('boucher')->nullable();
             $table->string('extra')->nullable();
+            $table->string('comment')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete("set null");
             $table->foreign('transaction_id')->references('id')->on('users')->onDelete('set null');

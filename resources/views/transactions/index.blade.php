@@ -63,27 +63,27 @@
                                         <td class="align-middle text-center text-sm">
                                             @if ($transaction->status == 'hold')
                                                 <center>
-                                                    <p class="text-center text-dark text-sm p-2" style="background-color:#f5df4d; width:60%; border-radius: 20px;">En espera</p>
+                                                    <p class="text-center text-dark text-xs p-2" style="background-color:#f5df4d; width:50%; border-radius: 20px;">En espera</p>
                                                 </center>
                                             @endif
                                                 @if ($transaction->status == 'accepted')
                                                     <center>
-                                                        <p class="text-center text-white text-sm p-2" style="background-color:dodgerblue; width:60%;  border-radius: 20px;">Aceptada</p>
+                                                        <p class="text-center text-white text-xs p-1" style="background-color:dodgerblue; width:60%;  border-radius: 20px;">Aceptada</p>
                                                     </center>
                                                 @endif
                                                 @if ($transaction->status == 'successful')
                                                     <center>
-                                                        <p class="text-center text-white text-sm p-2" style="background-color:green; width:60%; border-radius: 20px;">Exitosa</p>
+                                                        <p class="text-center text-white text-xs p-1" style="background-color:green; width:60%; border-radius: 20px;">Exitosa</p>
                                                     </center>
                                                 @endif
                                                 @if ($transaction->status == 'failed')
                                                     <center>
-                                                        <p class="text-center text-white text-sm p-2" style="background-color:red; width:60%; border-radius: 20px;">Fallida</p>
+                                                        <p class="text-center text-white text-xs p-1" style="background-color:red; width:60%; border-radius: 20px;">Fallida</p>
                                                     </center>
                                                 @endif
                                                 @if ($transaction->status == 'cancelled')
                                                     <center>
-                                                        <p class="text-center text-white text-sm p-2" style="background-color:#58696F; width:60%; border-radius: 20px;">Cancelada</p>
+                                                        <p class="text-center text-white text-xs p-1" style="background-color:#58696F; width:60%; border-radius: 20px;">Cancelada</p>
                                                     </center>
                                                 @endif
                                             </td>
@@ -113,6 +113,16 @@
                                 </tbody>
                             </table>
                         </div>
+                        <script>
+                            $(document).ready( function () {
+                                $('#my_table').DataTable({
+                                    "language": {
+                                        "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                                    },
+                                    "stripeClasses": [ 'strip1', 'strip2', 'strip3' ]
+                                });
+                            } );
+                        </script>
                     </div>
                 </div>
             </div>
