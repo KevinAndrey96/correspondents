@@ -65,6 +65,13 @@ class StoreUsersController extends Controller
         if (Auth::user()->role == 'Distributor') {
             $user->distributor_id = Auth::user()->id;
         }
+        /*
+        if (strlen($request->password) < 7 || !preg_match('`[0-9]`',$request->password)
+            || !preg_match('`[a-z]`', $request->password) ) {
+
+            return back()->with('unfulfilledRequirements', 'La contraseña debe tener mínimo 7 caracteres, al menos una letra y al menos un número.');
+        }
+        */
         $user->password = Hash::make($request->input('password'));
         $user->save();
         if ($request->input('role') == 'Administrator') {

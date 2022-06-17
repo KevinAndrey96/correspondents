@@ -1,5 +1,10 @@
 @extends('layouts.dashboard')
 @section('content')
+    @if(Session::has('unfulfilledRequirements'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('unfulfilledRequirements') }}
+        </div>
+    @endif
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
