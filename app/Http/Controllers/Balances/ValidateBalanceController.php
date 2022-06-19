@@ -16,7 +16,7 @@ class ValidateBalanceController extends Controller
     {
         if (Auth::user()->role == 'Administrator') {
             $balance = Balance::find($request->input('id'));
-            if(is_null($balance->is_valid)){
+            //if(is_null($balance->is_valid)){
                 $balance->is_valid = $request->input('status');
                 $balance->comment = $request->input('comment');
                 $balance->save();
@@ -44,7 +44,7 @@ class ValidateBalanceController extends Controller
                 $user->save();
                 
                 return back();
-            }
+            //}
         }
     }
 }

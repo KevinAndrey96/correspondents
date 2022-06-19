@@ -75,7 +75,9 @@
                                     @hasrole('Administrator')
                                         <td class="align-middle text-center text-sm">
                                             @if(is_null($balance->is_valid))
-                                                <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal"><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Gestionar</a></button>
+                                                <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal"
+                                                    data-id="{{$balance->id}}"
+                                                ><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Gestionar</a></button>
                                             @else
                                                 @if($balance->is_valid == 1)
                                                     Aceptada
@@ -83,70 +85,77 @@
                                                     Rechazada
                                                 @endif
                                             @endif
-                                            <form id="form-status" name="form-status" method="POST" action="{{ url('/balance/validate/' ) }}">
-                                                @csrf
-                                                <input type="hidden" name="id" id="id">
-                                                <input type="hidden" name="status" id="status">
-                                                <input type="hidden" name="comment" id="comment">
-                                            </form>
-                                            <script>
-                                                function validate(id, type)
-                                                {
-                                                    var status = document.getElementById("status");
-                                                    var form = document.getElementById("form-status");
-                                                    var balance_id = document.getElementById("id");
-
-                                                    if (type == 'accepted') {
-                                                        status.value = 1;
-                                                    } else {
-                                                        status.value = 0;
-                                                    }
-                                                    balance_id.value = id;
-                                                    form.submit();
-                                                }
-                                                function comment()
-                                                {
-                                                    var comment = document.getElementById("comment");
-                                                    comment.value = document.getElementById("commentModal").value;
-                                                }
-                                            </script>
-                                            <!-- Modal-->
-                                            <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h6 class="modal-title" id="exampleModalLabel">Gestionar solicitud</h6>
-                                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">×</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                            <div class="col-md-6">
-                                                                <label for="name" class="form-label"></label>
-                                                                <input type="text" class="form-control" name="commentModal" id="commentModal" placeholder="Comentario" onchange = "comment()">   
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                <a style="color: green;" class="btn btn-link px-3 mb-0" id="acceptstatus{{$balance->id}}" onclick="validate({{$balance->id}}, 'accepted')">Aceptar</a>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                <a style="color: red;" class="btn btn-link px-3 mb-0" id="acceptstatus{{$balance->id}}" onclick="validate({{$balance->id}}, 'rejected')">Rechazar</a>
-                                                                </div>   
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--end Modal-->
+                                            
                                         </td>
                                     @endhasrole
                                     </tr>
                                 @endforeach
-
                                 </tbody>
                             </table>
+                            <form id="form-status" name="form-status" method="POST" action="{{ url('/balance/validate/' ) }}">
+                                @csrf
+                                <input type="hidden" name="id" id="id">
+                                <input type="hidden" name="status" id="status">
+                                <input type="hidden" name="comment" id="comment">
+                            </form>
+                            <script>
+                                function validate(type)
+                                {
+                                    var status = document.getElementById("status");
+                                    var form = document.getElementById("form-status");
+
+                                    if (type == 'accepted') {
+                                        status.value = 1;
+                                    } else {
+                                        status.value = 0;
+                                    }
+                                    form.submit();
+                                }
+                                function comment()
+                                {
+                                    var comment = document.getElementById("comment");
+                                    comment.value = document.getElementById("commentModal").value;
+                                }
+                            </script>
+                            <!-- Modal-->
+                            <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLabel">Gestionar solicitud</h6>
+                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="name" class="form-label"></label>
+                                                <input type="text" class="form-control" name="commentModal" id="commentModal" placeholder="Comentario" onchange = "comment()">   
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                <a style="color: green;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('accepted')">Aceptar</a>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <a style="color: red;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('rejected')">Rechazar</a>
+                                                </div>   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end Modal-->
+                            <script>
+                                $('#acceptModal').on('show.bs.modal', function (event) {
+                                    var button = $(event.relatedTarget)
+                                    var uID = button.data('id')
+                                    var modal = $(this)
+                                    var balance_id = document.getElementById("id");
+                                    balance_id.value = uID;
+                                })
+                            </script>
                         </div>
                     </div>
                 </div>

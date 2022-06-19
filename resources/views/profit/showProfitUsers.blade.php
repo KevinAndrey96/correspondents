@@ -65,125 +65,141 @@
                                         @endif
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#SaldoModal"><a style="color: darkgreen;" >Recibo</a></button>
+                                        <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#boucherModal"
+                                            data-id="{{$profit->id}}"
+                                        ><a style="color: darkgreen;" >Recibo</a></button>
                                         @if(is_null($profit->is_valid))
-                                            <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal"><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Gestionar</a></button>
+                                            <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal" 
+                                                data-id="{{$profit->id}}"
+                                            ><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Gestionar</a></button>
                                         @endif
-                                        <form id="form-status" name="form-status" method="POST" action="{{ url('/profit/validate/' ) }}">
-                                            @csrf
-                                            <input type="hidden" name="id" id="id">
-                                            <input type="hidden" name="status" id="status">
-                                            <input type="hidden" name="comment" id="comment">
-                                        </form>
-                                        <script>
-                                            function validate(id, type)
-                                            {
-                                                var status = document.getElementById("status");
-                                                var form = document.getElementById("form-status");
-                                                var profit_id = document.getElementById("id");
-
-                                                if (type == 'accepted') {
-                                                    status.value = 1;
-                                                } else {
-                                                    status.value = 0;
-                                                }
-                                                profit_id.value = id;
-                                                form.submit();
-                                            }
-                                            function comment()
-                                            {
-                                                var comment = document.getElementById("comment");
-                                                comment.value = document.getElementById("commentModal").value;
-                                            }
-                                        </script>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                            <!-- Modal-->
-                            <div class="modal fade" id="SaldoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h6 class="modal-title" id="exampleModalLabel">Validar Ganancia</h6>
-                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="{{ url('/profit') }}" method="post" enctype="multipart/form-data">
-                                                <div class="row">
-                                                    @csrf
-                                                    @if(count($errors)>0)
-                                                        <div class="alert alert-danger" role="alert">
-                                                            <ul>
-                                                                @foreach( $errors->all() as $error )
-                                                                    <li> {{ $error }} </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    @endif
-                                                    <div class="form-group">
-                                                        @if(count($profits)>0)
-                                                            <input type="hidden" class="form-control" name="profitID" value="{{$profit->id}}" id="profitID" readonly="readonly">
-                                                        @else
-                                                            <input type="hidden" class="form-control" name="profitID" value="" id="profitID" readonly="readonly">
+                        <form id="form-status" name="form-status" method="POST" action="{{ url('/profit/validate/' ) }}">
+                            @csrf
+                            <input type="hidden" name="id" id="id">
+                            <input type="hidden" name="status" id="status">
+                            <input type="hidden" name="comment" id="comment">
+                        </form>
+                        <script>
+                            function validate(type)
+                            {
+                                var status = document.getElementById("status");
+                                var form = document.getElementById("form-status");
+
+                                if (type == 'accepted') {
+                                    status.value = 1;
+                                } else {
+                                    status.value = 0;
+                                }
+                                form.submit();
+                            }
+                            function comment()
+                            {
+                                var comment = document.getElementById("comment");
+                                comment.value = document.getElementById("commentModal").value;
+                            }
+                        </script>
+                        <!-- Modal-->
+                        <div class="modal fade" id="boucherModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title" id="exampleModalLabel">Validar Ganancia</h6>
+                                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ url('/profit') }}" method="post" enctype="multipart/form-data">
+                                            <div class="row">
+                                                @csrf
+                                                @if(count($errors)>0)
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <ul>
+                                                            @foreach( $errors->all() as $error )
+                                                                <li> {{ $error }} </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                                                <div class="form-group">
+                                                    <input type="hidden" class="form-control" name="profitID" value="" id="profitID" readonly="readonly">
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="p-3">
+                                                        <label for="image" > Recibo </label>
+                                                        @if(isset($profit->boucher))
+                                                        <img class="img-thumbnail img-fluid" src="{{ 'https://corresponsales.asparecargas.net/'.$profit->boucher }}" width="100" alt = "No carga">
                                                         @endif
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="p-3">
-                                                            <label for="image" > Recibo </label>
-                                                            @if(isset($profit->boucher))
-                                                            <img class="img-thumbnail img-fluid" src="{{ 'https://corresponsales.asparecargas.net/'.$profit->boucher }}" width="100" alt = "No carga">
-                                                            @endif
-                                                            <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="image" value="" id="image">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 text-center">
-                                                        <input class="btn btn-success" type="submit" value="Gestionar saldo" onclick="return confirm('¿Esta seguro de realizar esta acción?')">
-
-                                                        <a class="btn btn-primary" href="{{ url('/profit/users') }}"> Regresar</a>
+                                                        <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="image" value="" id="image">
                                                     </div>
                                                 </div>
-                                            </form>
-                                        </div>
+                                                <div class="col-md-12 text-center">
+                                                    <input class="btn btn-success" type="submit" value="Gestionar saldo" onclick="return confirm('¿Esta seguro de realizar esta acción?')">
 
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end Modal-->
-                            <!-- Modal-->
-                            <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h6 class="modal-title" id="exampleModalLabel">Gestionar solicitud</h6>
-                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="name" class="form-label"></label>
-                                                <input type="text" class="form-control" name="commentModal" id="commentModal" placeholder="Comentario" onchange = "comment()">   
+                                                    <a class="btn btn-primary" href="{{ url('/profit/users') }}"> Regresar</a>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                <a style="color: green;" class="btn btn-link px-3 mb-0" id="acceptstatus{{$profit->id}}" onclick="validate({{$profit->id}}, 'accepted')">Aceptar</a>
-                                                </div>
-                                                <div class="col-md-6">
-                                                <a style="color: red;" class="btn btn-link px-3 mb-0" id="acceptstatus{{$profit->id}}" onclick="validate({{$profit->id}}, 'rejected')">Rechazar</a>
-                                                </div>   
-                                            </div>
-                                        </div>
+                                        </form>
                                     </div>
+
                                 </div>
                             </div>
-                            <!--end Modal-->
                         </div>
+                        <!--end Modal-->
+                        <script>
+                            $('#boucherModal').on('show.bs.modal', function (event) {
+                                var button = $(event.relatedTarget)
+                                var pID = button.data('id')
+                                var modal = $(this)
+
+                                modal.find('.modal-body #profitID').val(pID)
+                            })
+                        </script>
+                        <!-- Modal-->
+                        <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title" id="exampleModalLabel">Gestionar solicitud</h6>
+                                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="name" class="form-label"></label>
+                                            <input type="text" class="form-control" name="commentModal" id="commentModal" placeholder="Comentario" onchange = "comment()">   
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                            <a style="color: green;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('accepted')">Aceptar</a>
+                                            </div>
+                                            <div class="col-md-6">
+                                            <a style="color: red;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('rejected')">Rechazar</a>
+                                            </div>   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end Modal-->
+                        <script>
+                            $('#acceptModal').on('show.bs.modal', function (event) {
+                                var button = $(event.relatedTarget)
+                                var pID = button.data('id')
+                                var modal = $(this)
+                                var profit_id = document.getElementById("id");
+                                profit_id.value = pID;
+                            })
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>

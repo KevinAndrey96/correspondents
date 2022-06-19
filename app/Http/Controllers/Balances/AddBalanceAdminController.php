@@ -19,11 +19,19 @@ class AddBalanceAdminController extends Controller
     public function store(Request $request)
     {
         if (Auth::user()->role == 'Administrator') {
-            $fields = [
-                'amount'=>'required|numeric|min:0',
-            ];
+            $user = User::find($request->input('userID'));
+            if($request->input('type') == 'Withdrawal' and $user->role == 'Shopkeeper'){
+                $fields = [
+                    'amount'=>'required|numeric|min:0|max:'.$user->balance,
+                ];
+            }else{
+                $fields = [
+                    'amount'=>'required|numeric|min:0',
+                ];
+            }
             $message = [
                 'required'=>':attribute es requerido',
+                'amount.max'=>'El monto no puede ser mayor a :max',
             ];
             $this->validate($request, $fields, $message);
     
@@ -60,7 +68,7 @@ class AddBalanceAdminController extends Controller
                 unlink(str_replace('\\', '/', storage_path('app/public/balances/'.$balance->id.'.png')));
             }
             
-            $user = User::find($balance->user_id);
+            
             $receiverEmail = $user->email;
             $emailBody = new \stdClass();
             $emailBody->sender = 'Asparecargas';
