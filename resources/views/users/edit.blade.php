@@ -54,7 +54,7 @@
                                                     <option class="text-center" value="CC">C.C</option>
                                                     <option class="text-center" value="TI">T.I</option>
                                                 @else
-                                                    <option class="text-center" value="CC" selected>C.C</option>
+                                                    <option class="text-center" value="CC" selected>p</option>
                                                     <option class="text-center" value="TI">T.I</option>
                                                     <option class="text-center" value="NIT">NIT</option>
                                                 @endif
