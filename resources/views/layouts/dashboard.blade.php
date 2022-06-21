@@ -443,9 +443,9 @@
                 @if(Auth::user()->role == 'Distributor')
                 <h6 class="text-white mb-1">Distribuidor</h6>
                 @endif
-                <p class="text-xs text-white mb-1">Ganancia: ${{ Auth::user()->profit }}
+                <p class="text-xs text-white mb-1">Ganancia: ${{ number_format(Auth::user()->profit, 2, ',', '.') }}
                     @hasanyrole('Supplier|Shopkeeper')
-                </br> Saldo: ${{ Auth::user()->balance }}
+                </br> Saldo: ${{ number_format(Auth::user()->balance, 2, ',', '.') }}
                     @endhasanyrole
                 </p>
             </div>

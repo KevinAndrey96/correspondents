@@ -72,7 +72,7 @@
                                                                     Tipo de transacción: Depósito
                                                                 @endif
                                                             </p>
-                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Monto: ${{$transaction->amount}}</p>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Monto: ${{number_format($transaction->amount, 2, ',', '.')}}</p>
                                                             @foreach ($extras as $extra)
                                                                 <p class="mb-2 text-xs font-weight-bold text-dark">{{$extra}}</p>
                                                         @endforeach
