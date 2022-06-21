@@ -84,6 +84,14 @@
                 </div>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-white " href="/products">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">credit_score</i>
+                    </div>
+                    <span class="nav-link-text ms-1">G. Productos</span>
+                </a>
+            </li>
+            <li style="display: none;" class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-4" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">card_travel</i>

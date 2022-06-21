@@ -36,7 +36,7 @@
                       <div class="table-responsive p-0">
                         <form method="POST" action="/commissions/update">
                             @csrf
-                        <table class="table align-items-center mb-3">
+                        <table  id="my_table" class="table align-items-center mb-3">
                             <thead thead-light>
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de producto</th>
@@ -123,6 +123,22 @@
                             }
                         </script>
                       </div>
+                        <style>
+                            .form-control {
+                                background-color: #f2f2f2 !important ;
+                            }
+                        </style>
+                        <script>
+                            $(document).ready( function () {
+                                $('#my_table').DataTable({
+                                    "language": {
+                                        "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                                    },
+                                    responsive: true,
+                                    "pageLength": 20
+                                });
+                            } );
+                        </script>
                 </div>
             </div>
         </div>

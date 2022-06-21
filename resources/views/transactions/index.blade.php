@@ -113,13 +113,19 @@
                                 </tbody>
                             </table>
                         </div>
+                        <style>
+                            .form-control {
+                                background-color: #f2f2f2 !important ;
+                            }
+                        </style>
                         <script>
                             $(document).ready( function () {
                                 $('#my_table').DataTable({
                                     "language": {
                                         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
                                     },
-                                    "stripeClasses": [ 'strip1', 'strip2', 'strip3' ]
+                                    responsive: true,
+                                    "pageLength": 20
                                 });
                             } );
                         </script>

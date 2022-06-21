@@ -57,7 +57,7 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a style="color: darkgreen;" href="{{ url('/products/'.$product->id.'/edit') }}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Editar</a>
+                                                <a style="color: darkgreen;" href="{{ url('/products/'.$product->id.'/edit') }}" title="Editar" class="btn btn-link px-0 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i></a>
                                                 <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-dark" data-bs-toggle="modal"
                                                         data-bs-target="#exampleModalMessage"
                                                         data-whatever="{{ $product->product_name}}"
@@ -303,6 +303,22 @@
                                     </script>
                                     </tbody>
                                 </table>
+                                <style>
+                                    .form-control {
+                                        background-color: #f2f2f2 !important ;
+                                    }
+                                </style>
+                                <script>
+                                    $(document).ready( function () {
+                                        $('#my_table').DataTable({
+                                            "language": {
+                                                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                                            },
+                                            responsive: true,
+                                            "pageLength": 20
+                                        });
+                                    } );
+                                </script>
                             </div>
                         </div>
                     </div>

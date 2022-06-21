@@ -88,11 +88,11 @@
                                             @if ($role != 'allShopkeepers' && $role != 'Administrator')
                                                 <a style="color: dodgerblue;" href="/commissions/create/{{$user->id}}" title="Comisiones" class="btn btn-link px-1 mb-0"><i style="color: dodgerblue;" class="material-icons opacity-10">price_change</i></a>
                                             @endif
-                                            <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i>Editar</a>
-                                            @if ($role == 'allShopkeepers' or $role == 'Supplier') 
-                                                <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#SaldoModal" 
+                                            <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i></a>
+                                            @if ($role == 'allShopkeepers' or $role == 'Supplier')
+                                                <button style=" margin-top: 15px; " type="button" class="btn btn-white px-0" title="Gestionar comisión" data-bs-toggle="modal" data-bs-target="#SaldoModal"
                                                     data-id="{{$user->id}}"
-                                                ><a style="color: blue;" class="btn btn-link px-3 mb-0"><i style="color: blue;" class="material-icons opacity-10">monetization_on</i>G. Saldos</a></button>
+                                                ><i class="material-icons opacity-10">monetization_on</i></button>
                                             @endif
                                         </td>
                                     </tr>
@@ -164,7 +164,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="name" class="form-label"></label>
-                                                        <input type="text" class="form-control" name="comment" id="comment" placeholder="Comentario">   
+                                                        <input type="text" class="form-control" name="comment" id="comment" placeholder="Comentario">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
@@ -177,7 +177,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 text-center">
-                                                        <input class="btn btn-success" type="submit" value="Gestionar saldo" onclick="return confirm('¿Esta seguro de realizar la transacción?')">
+                                                        <input class="btn btn-success" type="submit" value="Gestionar saldo" onclick="return confirm('¿Está seguro de realizar la transacción?')">
                                                         @if($role == 'allShopkeepers')
                                                         <a class="btn btn-primary" href="{{ url('users?role=allShopkeepers') }}"> Regresar</a>
                                                         @elseif($role == 'Supplier')

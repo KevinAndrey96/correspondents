@@ -19,7 +19,7 @@
                             </div>
                         @endif
                         <div class="table-responsive p-0">
-                            <table id= "my_table" class="table align-items-center mb-0">
+                            <table id="my_table" class="table align-items-center mb-0">
                                 <thead class="thead-light">
                                 <tr>
                                 @hasrole('Administrator')
@@ -85,7 +85,7 @@
                                                     Rechazada
                                                 @endif
                                             @endif
-                                            
+
                                         </td>
                                     @endhasrole
                                     </tr>
@@ -131,7 +131,7 @@
                                             <div class="row">
                                             <div class="col-md-6">
                                                 <label for="name" class="form-label"></label>
-                                                <input type="text" class="form-control" name="commentModal" id="commentModal" placeholder="Comentario" onchange = "comment()">   
+                                                <input type="text" class="form-control" name="commentModal" id="commentModal" placeholder="Comentario" onchange = "comment()">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -140,7 +140,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                 <a style="color: red;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('rejected')">Rechazar</a>
-                                                </div>   
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

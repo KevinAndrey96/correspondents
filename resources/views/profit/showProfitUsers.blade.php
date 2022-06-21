@@ -69,7 +69,7 @@
                                             data-id="{{$profit->id}}"
                                         ><a style="color: darkgreen;" >Recibo</a></button>
                                         @if(is_null($profit->is_valid))
-                                            <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal" 
+                                            <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal"
                                                 data-id="{{$profit->id}}"
                                             ><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Gestionar</a></button>
                                         @endif
@@ -78,6 +78,22 @@
                             @endforeach
                             </tbody>
                         </table>
+                            <style>
+                                .form-control {
+                                    background-color: #f2f2f2 !important ;
+                                }
+                            </style>
+                            <script>
+                                $(document).ready( function () {
+                                    $('#my_table').DataTable({
+                                        "language": {
+                                            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                                        },
+                                        responsive: true,
+                                        "pageLength": 20
+                                    });
+                                } );
+                            </script>
                         <form id="form-status" name="form-status" method="POST" action="{{ url('/profit/validate/' ) }}">
                             @csrf
                             <input type="hidden" name="id" id="id">
@@ -174,7 +190,7 @@
                                         <div class="row">
                                         <div class="col-md-6">
                                             <label for="name" class="form-label"></label>
-                                            <input type="text" class="form-control" name="commentModal" id="commentModal" placeholder="Comentario" onchange = "comment()">   
+                                            <input type="text" class="form-control" name="commentModal" id="commentModal" placeholder="Comentario" onchange = "comment()">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -183,7 +199,7 @@
                                             </div>
                                             <div class="col-md-6">
                                             <a style="color: red;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('rejected')">Rechazar</a>
-                                            </div>   
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
