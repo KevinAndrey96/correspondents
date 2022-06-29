@@ -25,6 +25,7 @@
                 <p style="font-size: xx-small; text-align: center; margin-top:-5px;"><span >{{$extra}}</span></p>
                 @endforeach
             <h6 style="font-size: xx-small; text-align: center; margin-top:-5px;">Tendero: {{$transaction->Shopkeeper->name}}</h6>
+            <h6 style="font-size: xx-small; text-align: center; margin-top:-5px;">www.asparecargas.net</h6>
         </div>
     </body>
 </html>
