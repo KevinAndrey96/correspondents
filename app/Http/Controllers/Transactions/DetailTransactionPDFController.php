@@ -24,7 +24,7 @@ class DetailTransactionPDFController extends Controller
             $extras = explode(',', $transaction->detail);
 
             $pdf = PDF::loadView('transactions.detailPDF', ['transaction'=>$transaction, 'extras'=>$extras]);
-            $pdf->setPaper(array(0, 0, 141.732, 200), 'portrait');//setPaper(tamaño 5cmx10cm,vertical)
+            $pdf->setPaper(array(0, 0, 141.732, 250), 'portrait');//setPaper(tamaño 5cmx10cm,vertical)
             return $pdf->stream();
         }
     }
