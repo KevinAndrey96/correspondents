@@ -36,7 +36,7 @@
                       <div class="table-responsive p-0">
                         <form method="POST" action="/commissions/update">
                             @csrf
-                        <table class="table align-items-center mb-3">
+                        <table  id="my_table" class="table align-items-center mb-3">
                             <thead thead-light>
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de producto</th>
@@ -92,6 +92,11 @@
                                 <input type="hidden" name="amounts" id="amounts">
                                 <input type="hidden" name="ids" id="ids">
                                 <input class="btn btn-primary" type="submit" value="Modificar">
+                                @hasrole('Distributor')
+                                    <a class="btn btn-info" href="{{ url('/commissions/users?id=shopkeeper') }}"> Regresar</a>
+                                @else
+                                    <a class="btn btn-info" href="{{ url('/commissions/users?id=supdis') }}"> Regresar</a>
+                                @endhasrole
                             </div>
                         </form>
                         <script type="text/javascript">
@@ -118,6 +123,22 @@
                             }
                         </script>
                       </div>
+                        <style>
+                            .form-control {
+                                background-color: #f2f2f2 !important ;
+                            }
+                        </style>
+                        <script>
+                            $(document).ready( function () {
+                                $('#my_table').DataTable({
+                                    "language": {
+                                        "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                                    },
+                                    responsive: true,
+                                    "pageLength": 20
+                                });
+                            } );
+                        </script>
                 </div>
             </div>
         </div>

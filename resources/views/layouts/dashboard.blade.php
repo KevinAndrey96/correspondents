@@ -16,6 +16,8 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="/assets/Magnific-Popup-master/dist/magnific-popup.css">
     <!-- datatable -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.css"/>
 
@@ -82,6 +84,14 @@
                 </div>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-white " href="/products">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">credit_score</i>
+                    </div>
+                    <span class="nav-link-text ms-1">G. Productos</span>
+                </a>
+            </li>
+            <li style="display: none;" class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-4" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">card_travel</i>
@@ -433,9 +443,9 @@
                 @if(Auth::user()->role == 'Distributor')
                 <h6 class="text-white mb-1">Distribuidor</h6>
                 @endif
-                <p class="text-xs text-white mb-1">Ganancia: ${{ Auth::user()->profit }}
+                <p class="text-xs text-white mb-1">Ganancia: ${{ number_format(Auth::user()->profit, 2, ',', '.') }}
                     @hasanyrole('Supplier|Shopkeeper')
-                </br> Saldo: ${{ Auth::user()->balance }}
+                </br> Saldo: ${{ number_format(Auth::user()->balance, 2, ',', '.') }}
                     @endhasanyrole
                 </p>
             </div>
@@ -544,6 +554,16 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Magnific-Popup -->
+<script src="/assets/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.image-link').magnificPopup({
+            type:'image'
+        });
+    });
+</script>
 
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

@@ -19,7 +19,7 @@
                             </div>
                         @endif
                         <div class="table-responsive p-0">
-                            <table id= "my_table" class="table align-items-center mb-0">
+                            <table id="my_table" class="table align-items-center mb-0">
                                 <thead class="thead-light">
                                 <tr>
                                 @hasrole('Administrator')
@@ -27,14 +27,13 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Actual</th>
                                 @endhasrole
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Solicitud  </th>
-                                    <!--<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Transaccion  </th>-->
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de Solicitud</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">¿Validado?</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comentarios</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recibo</th>
                                     @hasrole('Administrator')
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Invalidar/Validar</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gestionar solicitud</th>
                                     @endhasrole
 
                                 </tr>
@@ -48,7 +47,6 @@
                                         <td class="align-middle text-center text-sm">{{ $balance->user->balance}}</td>
                                     @endhasrole
                                         <td class="align-middle text-center text-sm">{{ $balance->id}}</td>
-                                        <!--<td class="align-middle text-center text-sm">{{ $balance->code}}</td>-->
                                         @if($balance->type == 'Deposit')
                                         <td class="align-middle text-center text-sm">Deposito</td>
                                         @elseif($balance->type == 'Withdrawal')
@@ -56,58 +54,108 @@
                                         @endif
                                         <td class="align-middle text-center text-sm">{{ $balance->amount}}</td>
                                         <td class="align-middle text-center text-sm">{{ $balance->date}}</td>
-                                        @if($balance->is_valid == 0)
-                                        <td class="align-middle text-center text-sm">No</td>
+                                        <td class="align-middle text-center text-sm">
+                                        @if(is_null($balance->comment))
+                                            Sin comentarios
                                         @else
-                                        <td class="align-middle text-center text-sm">Si</td>
+                                            {{$balance->comment}}
                                         @endif
+                                        </td>
                                         <td class="align-middle text-center text-sm">
                                             @if(isset($balance->boucher))
                                             <div>
-                                                <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" alt="No carga">
+                                                <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}">
+                                                    <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle image-link" src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" alt="No carga">
+                                                </a>
                                             </div>
+                                            @else
+                                                Sin recibo
                                             @endif
                                         </td>
                                     @hasrole('Administrator')
                                         <td class="align-middle text-center text-sm">
-                                            <div class="form-check form-switch ">
-                                                @if ($balance->is_valid == 1)
-                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" onclick="return confirm('¿Esta seguro de invalidar la transacción #{{$balance->id}} por un valor de ${{$balance->amount}} para el usuario {{$balance->user->name}}?')" checked onchange="validate({{$balance->id}})">
-                                                    <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{$balance->id}}"></label>
+                                            @if(is_null($balance->is_valid))
+                                                <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal"
+                                                    data-id="{{$balance->id}}"
+                                                ><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Gestionar</a></button>
+                                            @else
+                                                @if($balance->is_valid == 1)
+                                                    Aceptada
                                                 @else
-                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$balance->id}}" onclick="return confirm('¿Esta seguro de validar la transacción #{{$balance->id}} por un valor de ${{$balance->amount}} para el usuario {{$balance->user->name}}?')" onchange="validate({{$balance->id}})">
-                                                    <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$balance->id}}"></label>
+                                                    Rechazada
                                                 @endif
-                                            </div>
-                                            <form id="form-status" name="form-status" method="POST" action="{{ url('/balance/validate/' ) }}">
-                                                @csrf
-                                                <input type="hidden" name="id" id="id">
-                                                <input type="hidden" name="status" id="status">
-                                            </form>
-                                            <script>
-                                                function validate(id)
-                                                {
-                                                    var toggle = document.getElementById("togglestatus"+id);
-                                                    var status = document.getElementById("status");
-                                                    var form = document.getElementById("form-status");
-                                                    var balance_id = document.getElementById("id");
+                                            @endif
 
-                                                    if (toggle.checked == true) {
-                                                        status.value = 1;
-                                                    } else {
-                                                        status.value = 0;
-                                                    }
-                                                    balance_id.value = id;
-                                                    form.submit();
-                                                }
-                                            </script>
                                         </td>
                                     @endhasrole
                                     </tr>
                                 @endforeach
-
                                 </tbody>
                             </table>
+                            <form id="form-status" name="form-status" method="POST" action="{{ url('/balance/validate/' ) }}">
+                                @csrf
+                                <input type="hidden" name="id" id="id">
+                                <input type="hidden" name="status" id="status">
+                                <input type="hidden" name="comment" id="comment">
+                            </form>
+                            <script>
+                                function validate(type)
+                                {
+                                    var status = document.getElementById("status");
+                                    var form = document.getElementById("form-status");
+
+                                    if (type == 'accepted') {
+                                        status.value = 1;
+                                    } else {
+                                        status.value = 0;
+                                    }
+                                    form.submit();
+                                }
+                                function comment()
+                                {
+                                    var comment = document.getElementById("comment");
+                                    comment.value = document.getElementById("commentModal").value;
+                                }
+                            </script>
+                            <!-- Modal-->
+                            <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLabel">Gestionar solicitud</h6>
+                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="name" class="form-label"></label>
+                                                <input type="text" class="form-control" name="commentModal" id="commentModal" placeholder="Comentario" onchange = "comment()">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                <a style="color: green;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('accepted')">Aceptar</a>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <a style="color: red;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('rejected')">Rechazar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end Modal-->
+                            <script>
+                                $('#acceptModal').on('show.bs.modal', function (event) {
+                                    var button = $(event.relatedTarget)
+                                    var uID = button.data('id')
+                                    var modal = $(this)
+                                    var balance_id = document.getElementById("id");
+                                    balance_id.value = uID;
+                                })
+                            </script>
                         </div>
                     </div>
                 </div>

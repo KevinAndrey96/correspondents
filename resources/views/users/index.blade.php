@@ -33,15 +33,6 @@
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Distribuidor</th>
                                         @endif
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teléfono</th>
-                                        <!--<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">T. Documento</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° Documento</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ciudad</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dirección</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>-->
-
                                         @if ($role == 'Distributor' || $role == 'allShopkeepers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancias</th>
                                         @endif
@@ -82,15 +73,8 @@
                                         @endif
                                         <!--<td class="align-middle text-center text-sm">{{$user->email}}</td>-->
                                         <td class="align-middle text-center text-sm">{{$user->phone}}</td>
-                                    <!-- <td class="align-middle text-center text-sm">{{$user->document_type}}</td>
-                                        <td class="align-middle text-center text-sm">{{$user->document}}</td>
-                                        <td class="align-middle text-center text-sm">{{$user->city}}</td>
-                                        <td class="align-middle text-center text-sm">{{$user->address}}</td>-->
-                                        <!--<td class="align-middle text-center text-sm">{{$user->commission}}</td>
-                                        <td class="align-middle text-center text-sm">{{$user->balance}}</td>-->
-                                        <!--<td class="align-middle text-center text-sm">{{$user->commission}}</td>-->
                                         @if ($role == 'Distributor' || $role == 'allShopkeepers')
-                                            <td class="align-middle text-center text-sm">${{$user->profit}}</td
+                                            <td class="align-middle text-center text-sm">${{$user->profit}}</td>
                                         @endif
                                         @if ( $role == 'allShopkeepers' || ($role != 'Distributor' && $role != 'Administrator'))
                                             <td style="display: none;" class="">${{$user->balance}}</td>
@@ -100,28 +84,17 @@
                                             <td class="align-middle text-center text-sm">{{$user->max_queue}}</td>
                                             <td class="align-middle text-center text-sm">{{$user->priority}}</td>
                                         @endif
-
-                                            <td class="align-middle text-center text-sm">
-                                                <!-- <button style="padding: 6px; font-size: 9px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalMessage"
-                                                    data-whatever="{{$user->name}}"
-                                                    data-doc="{{$user->document_type}}"
-                                                    data-email="{{$user->email}}"
-                                                    data-numberdoc="{{$user->document}}"
-                                                    data-city="{{$user->city}}"
-                                                    data-address="{{$user->address}}"
-                                            >Detalles</button>-->
-                                                <!--<a style="color: red;" class="btn btn-link px-3 mb-0" href="/user/delete/{{$user->id}}" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>-->
-                                            </td>
-
-                                               <td>
-                                                   @if ($role != 'allShopkeepers' && $role != 'Administrator')
-                                                       <a style="color: blue;" href="/commissions/create/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: blue;" class="material-icons opacity-10">price_change</i>Comisiones</a>
-                                                   @endif
-                                                   <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i>Editar</a>
-                                            <a style="color: red;" class="btn btn-link px-3 mb-0" href="/user/delete/{{$user->id}}" onclick="return confirm('¿Está seguro que quiere eliminar el usuario?');"><i style="color: red;" class="material-icons opacity-10">delete</i></a>
-                                               </td>
-
+                                        <td>
+                                            @if ($role != 'allShopkeepers' && $role != 'Administrator')
+                                                <a style="color: dodgerblue;" href="/commissions/create/{{$user->id}}" title="Comisiones" class="btn btn-link px-1 mb-0"><i style="color: dodgerblue;" class="material-icons opacity-10">price_change</i></a>
+                                            @endif
+                                            <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i></a>
+                                            @if ($role == 'allShopkeepers' or $role == 'Supplier')
+                                                <button style=" margin-top: 15px; " type="button" class="btn btn-white px-0" title="Gestionar comisión" data-bs-toggle="modal" data-bs-target="#SaldoModal"
+                                                    data-id="{{$user->id}}"
+                                                ><i class="material-icons opacity-10">monetization_on</i></button>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -131,122 +104,6 @@
                                 <input type="hidden" name="id" id="id">
                                 <input type="hidden" name="status" id="status">
                             </form>
-                            <!-- modal -->
-                            <div class="modal fade" id="exampleModalMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h6 class="modal-title" id="exampleModalLabel">Detalles</h6>
-                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="row pb-2">
-                                                    <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
-                                                        <div class="card">
-                                                            <div class="card-header p-0 ">
-                                                                <div class="icon icon-x icon-shape bg-gradient-dark shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
-                                                                    <i class="material-icons opacity-10">article</i>
-                                                                </div>
-                                                                <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
-                                                                    <label for="recipient-doc" id="doc" class="col-form-label text-xs"></label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-footer p-1"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
-                                                        <div class="card">
-                                                            <div class="card-header p-0 ">
-                                                                <div class="icon icon-x icon-shape bg-gradient-primary shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
-                                                                    <i class="material-icons opacity-10">assignment_ind</i>
-                                                                </div>
-                                                                <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
-                                                                    <label for="recipient-number-doc" id="numberdoc" class="col-form-label text-xs"></label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-footer p-1"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row pb-2">
-                                                    <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
-                                                        <div class="card">
-                                                            <div class="card-header p-0 ">
-                                                                <div class="icon icon-x icon-shape bg-gradient-dark shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
-                                                                    <i class="material-icons opacity-10">location_city</i>
-                                                                </div>
-                                                                <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
-                                                                    <label for="recipient-city" id="city" class="col-form-label text-xs"></label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-footer p-1"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
-                                                        <div class="card">
-                                                            <div class="card-header p-0 ">
-                                                                <div class="icon icon-x icon-shape bg-gradient-primary shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
-                                                                    <i class="material-icons opacity-10">pin</i>
-                                                                </div>
-                                                                <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
-                                                                    <label for="recipient-address" id="address" class="col-form-label text-xs"></label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-footer p-1"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row pb-2">
-                                                    <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
-                                                        <div class="card">
-                                                            <div class="card-header p-0 ">
-                                                                <div class="icon icon-x icon-shape bg-gradient-primary shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
-                                                                    <i class="material-icons opacity-10">email</i>
-                                                                </div>
-                                                                <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
-                                                                    <label for="recipient-email" id="email" class="col-form-label text-xs"></label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-footer p-1"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-                                $('#exampleModalMessage').on('show.bs.modal', function (event) {
-                                    /*var button = $(event.relatedTarget)  // Button that triggered the modal
-                                    var recipient = button.data('whatever') // Extract info from data-* attributes
-                                    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                                    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-
-                                    modal.find('.modal-title').text('New message to ' + recipient)
-                                    modal.find('.modal-body input').val(recipient)*/
-                                    var button = $(event.relatedTarget)
-                                    var whatever = button.data('whatever')
-                                    var modal = $(this)
-
-                                    var email = button.data('email')
-                                    var doc = button.data('doc')
-                                    var numberdoc = button.data('numberdoc')
-                                    var city = button.data('city')
-                                    var address = button.data('address')
-
-                                    modal.find('.modal-title').text('Detalles ' + whatever)
-                                    modal.find('#email').text('' + (email))
-                                    modal.find('#doc').text('' + (doc ))
-                                    modal.find('#numberdoc').text('N°: ' + (numberdoc ))
-                                    modal.find('#city').text('' + (city))
-                                    modal.find('#address').text('' + (address))
-                                })
-                            </script>
                             <script>
                                 function getStatus(id)
                                 {
@@ -263,6 +120,86 @@
                                     user_id.value = id;
                                     form.submit();
                                 }
+                            </script>
+                            <!-- Modal-->
+                            <div class="modal fade" id="SaldoModal" tabindex="-1" role="dialog" aria-labelledby="SaldoModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLabel">Modificar saldo</h6>
+                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ url('/balance') }}" method="post" enctype="multipart/form-data">
+                                                <div class="row">
+                                                    @csrf
+                                                    @if(count($errors)>0)
+                                                        <div class="alert alert-danger" role="alert">
+                                                            <ul>
+                                                                @foreach( $errors->all() as $error )
+                                                                    <li> {{ $error }} </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    @endif
+                                                    <div class="input-group input-group-outline my-3">
+                                                        <input type="hidden" class="form-control" name="userID" value="" id="userID" readonly="readonly">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="input-group input-group-static mb-4">
+                                                            <label class="" for="">Tipo de transacción</label>
+                                                            <select id="type" name="type" class="form-control" aria-label="Default select example">
+                                                                <option class="text-center" value="Deposit">Depósito</option>
+                                                                <option class="text-center" value="Withdrawal">Retiro</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="input-group input-group-outline my-3">
+                                                            <label for="amount"></label>
+                                                            <input type="number" class="form-control" name="amount" value="" id="amount" step="1" min="0" placeholder="Monto">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="name" class="form-label"></label>
+                                                        <input type="text" class="form-control" name="comment" id="comment" placeholder="Comentario">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="p-3">
+                                                            <label for="image" > Recibo (Opcional) </label>
+                                                            @if(isset($balance->boucher))
+                                                            <img class="img-thumbnail img-fluid" src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" width="100" alt = "No carga">
+                                                            @endif
+                                                            <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="image" value="" id="image">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 text-center">
+                                                        <input class="btn btn-success" type="submit" value="Gestionar saldo" onclick="return confirm('¿Está seguro de realizar la transacción?')">
+                                                        @if($role == 'allShopkeepers')
+                                                        <a class="btn btn-primary" href="{{ url('users?role=allShopkeepers') }}"> Regresar</a>
+                                                        @elseif($role == 'Supplier')
+                                                        <a class="btn btn-primary" href="{{ url('users?role=Supplier') }}"> Regresar</a>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end Modal-->
+                            <script>
+                                $('#SaldoModal').on('show.bs.modal', function (event) {
+                                    var button = $(event.relatedTarget)
+                                    var uID = button.data('id')
+                                    var modal = $(this)
+
+                                    modal.find('.modal-body #userID').val(uID)
+                                })
                             </script>
                         </div>
                     </div>
