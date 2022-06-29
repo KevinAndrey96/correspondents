@@ -2,12 +2,14 @@
     <thead>
         <tr>
             <th>id</th>
-            <th>tendero</th>
+            <th>Distribuidor</th>
+            <th>Tendero</th>
             <th>Proveedor</th>
             <th>Producto</th>
             <th>Monto</th>
             <th>Estado</th>
-            <th>Fecha</th>
+            <th>Fecha y hora</th>
+            <th>Cuenta</th>
             <th>Detalle</th>
         </tr>
     </thead>
@@ -15,6 +17,7 @@
         @foreach ($transactions as $transaction)
         <tr>
             <td>{{$transaction->id}}</td>
+            <td>{{$transaction->distributor->name}}</td>
             <td>{{$transaction->shopkeeper->name}}</td>
             <td>
                 @if (!$transaction->supplier_id)
@@ -32,8 +35,22 @@
                 @endif
             </td>
             <td>${{$transaction->amount}}</td>
-            <td>{{$transaction->status}}</td>
+            <td>
+                @if($transaction->status == 'successful')
+                    Exitoso
+                @endif
+                @if($transaction->product->product_type == 'failed')
+                    Fallido
+                @endif
+                @if($transaction->product->product_type == 'cancelled')
+                    Cancelado
+                @endif
+                @if($transaction->product->product_type == 'hold')
+                    En Espera
+                @endif
+            </td>
             <td>{{$transaction->created_at}}</td>
+            <td>{{$transaction->account_number}}</td>
             <td>{{$transaction->detail}}</td>
 
         </tr>
