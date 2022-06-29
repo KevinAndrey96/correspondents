@@ -11,11 +11,15 @@ use Spatie\Permission\Traits\HasRoles;
 use App\Models\Commission;
 
 
+/**
+ * @method static where(string $string, string $string1, string $string2)
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
 
+    public const STATUS_ENABLED = 1;
     /**
      * The attributes that are mass assignable.
      *
