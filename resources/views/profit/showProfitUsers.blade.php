@@ -155,7 +155,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 text-center">
-                                                    <input class="btn btn-success" type="submit" value="Gestionar saldo" onclick="return confirm('¿Esta seguro de realizar esta acción?')">
+                                                    <input class="btn btn-success" type="submit" value="Gestionar saldo" onclick="return confirm('¿Está seguro de realizar esta acción?')">
 
                                                     <a class="btn btn-primary" href="{{ url('/profit/users') }}"> Regresar</a>
                                                 </div>

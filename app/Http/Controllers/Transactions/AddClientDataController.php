@@ -48,8 +48,7 @@ class AddClientDataController extends Controller
                     ['date', '=', substr($transaction->date, 0, -9)]
                 ])->first();
                 if (! is_null($dailyTransaction)) {
-
-                    return redirect('/transactions')->with('LimitExceeded', 'Esta cuenta supero él limite de transacciones por día');
+                    return redirect('/transactions')->with('LimitExceeded', 'Esta cuenta superó el límite de transacciones por día');
                 }
                 $transaction->shopkeeper_id = $shopkeeperID;
                 $transaction->distributor_id = $distributorID;
