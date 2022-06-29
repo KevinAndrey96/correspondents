@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled']], function()
     Route::post('/profit/store', [App\Http\Controllers\Profits\WithdrawProfitController::class, 'store']);
     Route::get('/profit/users', [App\Http\Controllers\Profits\ShowWithdrawProfitController::class, 'index']);
     Route::post('/profit', [App\Http\Controllers\Profits\adminWithdrawProfitController::class, 'store']);
-    Route::post('/profit/validate', [App\Http\Controllers\Profits\validateWithdrawProfitController::class, 'isValid']);
+    Route::post('/profit/validate', [App\Http\Controllers\Profits\ValidateWithdrawProfitController::class, 'isValid']);
     Route::post('/profit/excel', [App\Http\Controllers\Profits\ExcelExportProfitController::class, 'export']);
 
     Route::get('/transactions', [App\Http\Controllers\Transactions\IndexTransactionController::class, 'index']);
