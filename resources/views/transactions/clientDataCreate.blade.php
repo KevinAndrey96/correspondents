@@ -33,7 +33,7 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° de cuenta</h6>
+                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° de cuenta o teléfono</h6>
                                         <div class="input-group input-group-outline my-3">
                                             <label for="accountNumber" ></label>
                                             <input type="text" class="form-control" name="accountNumber" id="accountNumber" placeholder="Número de cuenta">
