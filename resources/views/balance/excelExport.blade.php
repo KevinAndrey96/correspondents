@@ -9,11 +9,11 @@
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de Solicitud</th>
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
-        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">¿Validado?</th>
+        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">¿Es valido?</th>
         </tr>
     </thead>
     <tbody>
-    @foreach( $balances as $balance )       
+    @foreach( $balances as $balance )
         <tr>
             @hasrole('Administrator')
             <td class="align-middle text-center text-sm">{{ $balance->user->name}}</td>
