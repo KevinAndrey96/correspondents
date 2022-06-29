@@ -32,9 +32,10 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comentarios</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recibo</th>
-                                    @hasrole('Administrator')
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gestionar solicitud</th>
-                                    @endhasrole
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
+                                @hasrole('Administrator')
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gestionar solicitud</th>
+                                @endhasrole
 
                                 </tr>
                                 </thead>
@@ -72,18 +73,21 @@
                                                 Sin recibo
                                             @endif
                                         </td>
+                                        <td class="align-middle text-center text-sm">
+                                            @if($balance->is_valid === 1)
+                                                <button class="btn btn-primary"disabled style="background-color: lightgreen">Aceptada</button>
+                                            @elseif($balance->is_valid === 0)
+                                                <button class="btn btn-primary"disabled style="background-color: lightcoral">Rechazada</button>
+                                            @else
+                                                <button class="btn btn-primary"disabled style="background-color: lightgoldenrodyellow">Pendiente</button>
+                                            @endif
+                                        </td>
                                     @hasrole('Administrator')
                                         <td class="align-middle text-center text-sm">
                                             @if(is_null($balance->is_valid))
                                                 <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal"
                                                     data-id="{{$balance->id}}"
                                                 ><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Gestionar</a></button>
-                                            @else
-                                                @if($balance->is_valid == 1)
-                                                    Aceptada
-                                                @else
-                                                    Rechazada
-                                                @endif
                                             @endif
 
                                         </td>
