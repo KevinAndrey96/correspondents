@@ -90,7 +90,7 @@
                                             @endif
                                             <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i></a>
                                             @if ($role == 'allShopkeepers' or $role == 'Supplier')
-                                                <button style=" margin-top: 15px; " type="button" class="btn btn-white px-0" title="Gestionar comisión" data-bs-toggle="modal" data-bs-target="#SaldoModal"
+                                                <button style=" margin-top: 15px; " type="button" class="btn btn-white px-0" title="Gestionar saldo" data-bs-toggle="modal" data-bs-target="#SaldoModal"
                                                     data-id="{{$user->id}}"
                                                 ><i class="material-icons opacity-10">monetization_on</i></button>
                                             @endif
@@ -107,18 +107,21 @@
                             <script>
                                 function getStatus(id)
                                 {
-                                    var toggle = document.getElementById("togglestatus"+id);
-                                    var status = document.getElementById("status");
-                                    var form = document.getElementById("form-status");
-                                    var user_id = document.getElementById("id");
+                                    let text = "Está seguro que desea continuar con esta acción";
+                                    if (confirm(text) === true) {
+                                        let toggle = document.getElementById("togglestatus" + id);
+                                        let status = document.getElementById("status");
+                                        let form = document.getElementById("form-status");
+                                        let user_id = document.getElementById("id");
 
-                                    if (toggle.checked == true) {
-                                        status.value = 1;
-                                    } else {
-                                        status.value = 0;
+                                        if (toggle.checked === true) {
+                                            status.value = 1;
+                                        } else {
+                                            status.value = 0;
+                                        }
+                                        user_id.value = id;
+                                        form.submit();
                                     }
-                                    user_id.value = id;
-                                    form.submit();
                                 }
                             </script>
                             <!-- Modal-->
