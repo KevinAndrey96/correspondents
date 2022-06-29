@@ -107,7 +107,7 @@
                             <script>
                                 function getStatus(id)
                                 {
-                                    let text = "Está seguro que desea continuar con esta acción";
+                                    let text = "¿Está seguro que desea continuar con esta acción?";
                                     if (confirm(text) === true) {
                                         let toggle = document.getElementById("togglestatus" + id);
                                         let status = document.getElementById("status");
