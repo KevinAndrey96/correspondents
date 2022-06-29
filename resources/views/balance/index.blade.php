@@ -74,9 +74,9 @@
                                             @endif
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            @if($balance->is_valid === 1)
+                                            @if($balance->is_valid == 1)
                                                 <button class="btn btn-primary"disabled style="background-color: lightgreen">Aceptada</button>
-                                            @elseif($balance->is_valid === 0)
+                                            @elseif($balance->is_valid == 0)
                                                 <button class="btn btn-primary"disabled style="background-color: lightcoral">Rechazada</button>
                                             @else
                                                 <button class="btn btn-primary"disabled style="background-color: lightgoldenrodyellow">Pendiente</button>
