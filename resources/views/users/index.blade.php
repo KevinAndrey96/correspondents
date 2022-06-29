@@ -33,8 +33,8 @@
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Distribuidor</th>
                                         @endif
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teléfono</th>
-                                        @if ($role == 'Distributor' || $role == 'allShopkeepers')
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancias</th>
+                                        @if ($role == 'Distributor' || $role == 'Supplier' || $role == 'allShopkeepers')
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancia</th>
                                         @endif
                                         @if ($role != 'Distributor' && $role != 'Administrator')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>
@@ -51,9 +51,9 @@
                                     <tr>
                                         <td class="align-middle text-center text-sm">
                                             @if ($user->is_enabled == 1)
-                                                <span class="badge badge-sm bg-gradient-success">OnLine</span>
+                                                <span class="badge badge-sm bg-gradient-success">En Línea</span>
                                             @else
-                                                <span class="badge badge-sm bg-gradient-secondary">OffLine</span>
+                                                <span class="badge badge-sm bg-gradient-secondary">Fuera de Línea</span>
                                             @endif
                                         </td>
                                         <td class="align-middle text-center text-sm ps-0">
@@ -73,7 +73,7 @@
                                         @endif
                                         <!--<td class="align-middle text-center text-sm">{{$user->email}}</td>-->
                                         <td class="align-middle text-center text-sm">{{$user->phone}}</td>
-                                        @if ($role == 'Distributor' || $role == 'allShopkeepers')
+                                        @if ($role == 'Distributor' || $role == 'Supplier' || $role == 'allShopkeepers')
                                             <td class="align-middle text-center text-sm">${{$user->profit}}</td>
                                         @endif
                                         @if ( $role == 'allShopkeepers' || ($role != 'Distributor' && $role != 'Administrator'))
