@@ -12,7 +12,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($transactions as $transaction)       
+        @foreach ($transactions as $transaction)
         <tr>
             <td>{{$transaction->id}}</td>
             <td>{{$transaction->shopkeeper->name}}</td>
@@ -33,9 +33,9 @@
             </td>
             <td>${{$transaction->amount}}</td>
             <td>{{$transaction->status}}</td>
-            <td>{{$transaction->date}}</td>
+            <td>{{$transaction->created_at}}</td>
             <td>{{$transaction->detail}}</td>
-            
+
         </tr>
         @endforeach
     </tbody>
