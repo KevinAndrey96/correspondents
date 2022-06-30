@@ -16,6 +16,7 @@ class AddClientDataController extends Controller
     public function store(Request $request)
     {
         try {
+            date_default_timezone_set('America/Bogota');
             if (Auth::user()->role == 'Shopkeeper') {
                 $detail = "";
                 $productID = $request->input('productID');
@@ -62,7 +63,8 @@ class AddClientDataController extends Controller
                 $transaction->save();
                 $suppliers = User::where([
                                             ['role', '=', 'Supplier'],
-                                            ['is_online', '=', 1]
+                                            ['is_online', '=', 1],
+                                            ['balance', '>=', $transaction->amount]
                                             ])->orderBy('priority', 'asc')->get();
                 foreach ($suppliers as $supplier) {
                     $transactions = Transaction::where([

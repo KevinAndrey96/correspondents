@@ -15,6 +15,7 @@ class StoreTransactionController extends Controller
 {
     public function store(Request $request)
     {
+        //return $request;
         $fields = [
                 'transactionAmount'=>'required|numeric|min:20000|max:200000',
             ];
@@ -23,7 +24,7 @@ class StoreTransactionController extends Controller
             ];
             $this->validate($request, $fields, $message);
             $productID = $request->input('productID');
-            if (doubleval(Auth::user()->balance) < doubleval($request->input('transactionAmount'))) {
+            if (doubleval(Auth::user()->balance) < doubleval($request->input('transactionAmount')) && $request->input('transactionType') == 'Deposit') {
 
                 return redirect('/transactions/create')->with('insufficientBalance', 'No tiene saldo suficiente para realizar la transacción');
             }

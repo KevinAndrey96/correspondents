@@ -38,7 +38,7 @@
                                              Proveedor
                                         @endif
                                     </td>
-                                    <td class="align-middle text-sm ps-1">{{ $user->balance }}</td>
+                                    <td class="align-middle text-sm ps-1">${{number_format($user->balance, 2, ',', '.')}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
