@@ -26,15 +26,21 @@ class ValidateWithdrawProfitController extends Controller
                 $emailBody = new \stdClass();
                 $emailBody->sender = 'Asparecargas';
                 $emailBody->receiver = $user->name;
-
-                if($profit->is_valid == 1){
-                    $user->profit = $user->profit - $profit->amount;
-
-                    $emailSubject = 'Retiro de ganacias aprobado';
-                    $emailBody->body = 'Su solicitud de retiro de ganancias por valor de $'.$profit->amount.' fue aprobada.';
-                }else{                    
-                    $emailSubject = 'Retiro de ganacias rechazado';
-                    $emailBody->body = 'La solicitud de retiro de ganancias #'.$profit->id.' por valor de $'.$profit->amount.' fue rechazada a consideración de un administrador.';
+                if($user->profit >= $profit->amount){
+                    if($profit->is_valid == 1){
+                        $user->profit = $user->profit - $profit->amount;
+    
+                        $emailSubject = 'Retiro de ganacias aprobado';
+                        $emailBody->body = 'Su solicitud de retiro de ganancias por valor de $'.$profit->amount.' fue aprobada.';
+                    }else{                    
+                        $emailSubject = 'Retiro de ganacias rechazado';
+                        $emailBody->body = 'La solicitud de retiro de ganancias #'.$profit->id.' por valor de $'.$profit->amount.' fue rechazada a consideración de un administrador.';
+                    }
+                }else{
+                    $profit->is_valid = 0;
+                    $profit->save();
+                    $emailSubject = 'Retiro de ganacias rechazado, sin ganancias suficientes';
+                    $emailBody->body = 'La solicitud de retiro de ganancias #'.$profit->id.' por valor de $'.$profit->amount.' fue rechazada a consideración de un administrador, no cuenta con ganancias acumuladas suficientes para retirar.';
                 }
                 Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
                 $user->save();

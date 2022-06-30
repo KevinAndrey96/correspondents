@@ -69,9 +69,9 @@ class UpdateTransactionController extends Controller
                 $shopkeeper = User::find($transaction->shopkeeper_id);
                 $com_adm = $transaction->product->product_commission -
                     ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup);
-                if ($com_adm >= 0) {
-                    $administrator->profit = $administrator->profit + $com_adm;
-                }
+                
+                $administrator->profit = $administrator->profit + $com_adm;
+                
                 if (isset($commissionSupp)) {
                     $supplier->profit = $supplier->profit + $commissionSupp->amount;
                 }
