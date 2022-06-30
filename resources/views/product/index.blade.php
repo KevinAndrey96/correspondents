@@ -89,7 +89,7 @@
                                             @else
                                                 <td class="align-middle text-center text-sm">Retiro</td>
                                             @endif
-                                            <td class="align-middle text-center text-sm">{{ $product->product_commission }}</td>
+                                            <td class="align-middle text-center text-sm">${{number_format($product->product_commission, 2, ',', '.')}}</td>
                                             <td class="align-middle text-center text-sm">{{ $product->product_description}}</td>
                                         </tr>
                                     @endforeach

@@ -18,23 +18,28 @@ trait ReasignTransaction
                     $supplier->is_online = 0;
                     $supplier->save();
                 }
-                $users = User::where('is_online', '=', 1)->orderBy('priority', 'asc')->get();
+                $users = User::where([
+                    ['role', '=', 'Supplier'],
+                    ['is_online', '=', 1],
+                    ['balance', '>=', $transaction->amount]
+                ])->orderBy('priority', 'asc')->get();
                 if (is_null($users)) {
                     $transaction->supplier_id = null;
-                    $transaction->status = 'failed';
+                    $transaction->status = 'cancelled';
                     $transaction->save();
-                    break;
                 }
-                foreach ($users as $user) {
-                    $transactions = Transaction::where([
-                        ['supplier_id', '=', $user->id],
-                        ['status', '=', 'hold']
-                    ])->get();
-                    $numTransactions = $transactions->count();
-                    if ($numTransactions < $user->max_queue) {
-                        $transaction->supplier_id = $user->id;
-                        $transaction->save();
-                        break;
+                if (! is_null($users)) {
+                    foreach ($users as $user) {
+                        $transactions = Transaction::where([
+                            ['supplier_id', '=', $user->id],
+                            ['status', '=', 'hold']
+                        ])->get();
+                        $numTransactions = $transactions->count();
+                        if ($numTransactions < $user->max_queue) {
+                            $transaction->supplier_id = $user->id;
+                            $transaction->save();
+                            break;
+                        }
                     }
                 }
             }

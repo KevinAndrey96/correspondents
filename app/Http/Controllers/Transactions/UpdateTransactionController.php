@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Commission;
 use App\Models\User;
+use App\Models\Balance;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Request as RequestAlias;
 
@@ -17,6 +19,7 @@ class UpdateTransactionController extends Controller
     public function update(Request $request)
     {
         try {
+            date_default_timezone_set('America/Bogota');
             $transaction = Transaction::find($request->input('transaction_id'));
             $transaction->status = $request->input('status');
             $transaction->comment = $request->input('comment');
@@ -77,10 +80,34 @@ class UpdateTransactionController extends Controller
                 }
                 $distributor->profit = $distributor->profit + $commissionDist->amount - $commissionShop->amount;
                 $shopkeeper->profit = $shopkeeper->profit + $commissionShop->amount;
+                $supplierBalance = new Balance();
+                $shopkeeperBalance = new Balance();
+                $shopkeeperBalance->user_id = $shopkeeper->id;
+                $shopkeeperBalance->amount = $transaction->amount;
+                $shopkeeperBalance->date = Carbon::now();
+                $shopkeeperBalance->is_valid = 1;
+                $supplierBalance->user_id = $supplier->id;
+                $supplierBalance->amount = $transaction->amount;
+                $supplierBalance->date = Carbon::now();
+                $supplierBalance->is_valid = 1;
+                if ($transaction->type == 'Withdrawal') {
+                    $shopkeeper->balance += $transaction->amount;
+                    $supplier->balance -= $transaction->amount;
+                    $shopkeeperBalance->type = 'Deposit';
+                    $supplierBalance->type = 'Withdrawal';
+                }
+                if ($transaction->type == 'Deposit') {
+                    $shopkeeper->balance -= $transaction->amount;
+                    $supplier->balance += $transaction->amount;
+                    $shopkeeperBalance->type = 'Withdrawal';
+                    $supplierBalance->type = 'Deposit';
+                }
                 $supplier->save();
                 $distributor->save();
                 $shopkeeper->save();
                 $transaction->save();
+                $supplierBalance->save();
+                $shopkeeperBalance->save();
             }
 
             return redirect('/transactions');

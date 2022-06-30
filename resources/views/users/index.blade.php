@@ -77,8 +77,8 @@
                                             <td class="align-middle text-center text-sm">${{$user->profit}}</td>
                                         @endif
                                         @if ( $role == 'allShopkeepers' || ($role != 'Distributor' && $role != 'Administrator'))
-                                            <td style="display: none;" class="">${{$user->balance}}</td>
-                                            <td class="align-middle text-center text-sm">${{$user->balance}}</td>
+                                            <td style="display: none;" class="">${{number_format($user->balance, 2, ',', '.')}}</td>
+                                            <td class="align-middle text-center text-sm">${{number_format($user->balance, 2, ',', '.')}}</td>
                                         @endif
                                         @if ($role == 'Supplier')
                                             <td class="align-middle text-center text-sm">{{$user->max_queue}}</td>

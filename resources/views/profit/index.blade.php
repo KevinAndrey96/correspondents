@@ -45,7 +45,7 @@
                                         <td class="align-middle text-center text-sm">{{ $profit->user->profit}}</td>
                                         @endhasrole
                                         <td class="align-middle text-center text-sm">{{ $profit->id}}</td>
-                                        <td class="align-middle text-center text-sm">{{ $profit->amount}}</td>
+                                        <td class="align-middle text-center text-sm">${{number_format($profit->amount, 2, ',', '.')}}</td>
                                         <td class="align-middle text-center text-sm">{{ $profit->date}}</td>
                                         @if($profit->is_valid == 0)
                                         <td class="align-middle text-center text-sm">No</td>

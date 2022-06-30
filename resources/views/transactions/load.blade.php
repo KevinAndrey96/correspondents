@@ -41,7 +41,7 @@
                             </div>
                             <div class="text-center">
                                 <p class="mb-1 text-xs font-weight-bold text-dark">Número de cuenta:<p class=" mb-2 text-xs font-weight-bold"> {{$transaction->account_number}}</p></p>
-                                <p class="mb-1 text-xs font-weight-bold text-dark">Monto: <p class=" mb-2 text-xs font-weight-bold">{{$transaction->amount}}</p></p>
+                                <p class="mb-1 text-xs font-weight-bold text-dark">Monto: <p class=" mb-2 text-xs font-weight-bold">${{number_format($transaction->amount, 2, ',', '.')}}</p></p>
                                <p class="mb-1 text-xs font-weight-bold text-dark">Tipo: <p class=" mb-2 text-xs font-weight-bold">
                                  @if ($transaction->type == 'Deposit')
                                   Deposito
@@ -162,7 +162,7 @@
                         pStatus.innerHTML = 'Aceptada';
                         pStatus.style.backgroundColor = 'dodgerblue';
                     }
-                    if (res.data.status == 'successful' || res.data.status == 'failed') {
+                    if (res.data.status == 'successful' || res.data.status == 'failed' || res.data.status == 'cancelled') {
                         window.location.replace("https://corresponsales.asparecargas.net/transaction/detail/{{$transaction->id}}");
                         //pStatus.innerHTML = 'Exitosa';
                         //pStatus.style.backgroundColor = 'green';

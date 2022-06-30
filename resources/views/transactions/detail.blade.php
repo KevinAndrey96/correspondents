@@ -31,7 +31,7 @@
                                                                 Tipo de transacción: Depósito
                                                             @endif
                                                     </p>
-                                                    <p class="mb-2 text-xs font-weight-bold text-dark">Monto: ${{$transaction->amount}}</p>
+                                                    <p class="mb-2 text-xs font-weight-bold text-dark">Monto: ${{number_format($transaction->amount, 2, ',', '.')}}</p>
                                                         @foreach ($extras as $extra)
                                                             <span class="mb-2 text-xs font-weight-bold text-dark">{{$extra}}</span>
                                                         @endforeach
@@ -62,6 +62,7 @@
                                                 @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role =='Administrator' || Auth::user()->role =='Supplier' && ! is_null($detailSupplier))
                                                         <div class="col-md-6 d-flex flex-column ">
                                                             <h6 class="mb-3 text-sm">Datos de transacción</h6>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Estado: <a class="mb-2 text-xl " style="color: darkred;">{{$transaction->status == 'successful' ? 'Exitosa' : 'Fallida' }}</a> </p>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Producto: <a class="mb-2 text-xl " style="color: darkred;">{{$transaction->product->product_name}}</a> </p>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Número de cuenta: <a class="mb-2 text-xl " style="color: darkred;">{{$transaction->account_number}}</a></p>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">
