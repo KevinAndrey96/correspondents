@@ -32,10 +32,10 @@
                     Tendero
                 @endif
             </td>
-            <td>{{ $profit->user->profit}}</td>
+            <td>${{number_format($profit->user->profit, 2, ',', '.')}}</td>
             @endhasrole
             <td>{{ $profit->id}}</td>
-            <td>{{ $profit->amount}}</td>
+            <td>${{number_format($profit->amount, 2, ',', '.')}}</td>
             <td>{{ $profit->created_at}}</td>
             <td>{{ $profit->extra}}</td>
             @if($profit->is_valid == 0)

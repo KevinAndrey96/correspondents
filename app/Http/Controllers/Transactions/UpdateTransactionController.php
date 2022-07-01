@@ -70,16 +70,16 @@ class UpdateTransactionController extends Controller
                 $supplier = User::find($transaction->supplier_id);
                 $distributor = User::find($transaction->distributor_id);
                 $shopkeeper = User::find($transaction->shopkeeper_id);
-                $com_adm = $transaction->product->product_commission -
-                    ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup);
-                
-                $administrator->profit = $administrator->profit + $com_adm;
-                
+                //$com_adm = $transaction->product->product_commission -
+                  //  ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup);
+
                 if (isset($commissionSupp)) {
                     $supplier->profit = $supplier->profit + $commissionSupp->amount;
                 }
+                $administrator->profit += $transaction->com_adm;
                 $distributor->profit = $distributor->profit + $commissionDist->amount - $commissionShop->amount;
                 $shopkeeper->profit = $shopkeeper->profit + $commissionShop->amount;
+
                 $supplierBalance = new Balance();
                 $shopkeeperBalance = new Balance();
                 $shopkeeperBalance->user_id = $shopkeeper->id;
@@ -105,9 +105,11 @@ class UpdateTransactionController extends Controller
                 $supplier->save();
                 $distributor->save();
                 $shopkeeper->save();
+                $administrator->save();
                 $transaction->save();
                 $supplierBalance->save();
                 $shopkeeperBalance->save();
+
             }
 
             return redirect('/transactions');

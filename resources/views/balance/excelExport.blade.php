@@ -18,15 +18,15 @@
         <tr>
             @hasrole('Administrator')
             <td class="align-middle text-center text-sm">{{ $balance->user->name}}</td>
-            <td class="align-middle text-center text-sm">{{ $balance->user->balance}}</td>
+            <td class="align-middle text-center text-sm">${{number_format($balance->user->balance, 2, ',', '.')}}</td>
             @endhasrole
-            <td class="align-middle text-center text-sm">{{ $balance->id}}</td>
+            <td class="align-middle text-center text-sm">{{$balance->id}}</td>
             @if($balance->type == 'Deposit')
             <td class="align-middle text-center text-sm">Deposito</td>
             @elseif($balance->type == 'Withdrawal')
             <td class="align-middle text-center text-sm">Retiro por Administrador</td>
             @endif
-            <td class="align-middle text-center text-sm">{{ $balance->amount}}</td>
+            <td class="align-middle text-center text-sm">${{number_format($balance->amount, 2, ',', '.')}}</td>
             <td class="align-middle text-center text-sm">{{ $balance->created_at}}</td>
             @if($balance->is_valid == 0)
                 <td class="align-middle text-center text-sm">No</td>

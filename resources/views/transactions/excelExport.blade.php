@@ -34,7 +34,7 @@
                     Retiro
                 @endif
             </td>
-            <td>${{$transaction->amount}}</td>
+            <td>${{number_format($transaction->amount, 2, ',', '.')}}</td>
             <td>
                 @if($transaction->status == 'successful')
                     Exitoso

@@ -42,7 +42,7 @@
                                     <tr>
                                         @hasrole('Administrator')
                                         <td class="align-middle text-center text-sm">{{ $profit->user->name}}</td>
-                                        <td class="align-middle text-center text-sm">{{ $profit->user->profit}}</td>
+                                        <td class="align-middle text-center text-sm">${{number_format($profit->user->profit, 2, ',', '.')}}</td>
                                         @endhasrole
                                         <td class="align-middle text-center text-sm">{{ $profit->id}}</td>
                                         <td class="align-middle text-center text-sm">${{number_format($profit->amount, 2, ',', '.')}}</td>

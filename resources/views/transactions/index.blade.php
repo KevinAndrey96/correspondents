@@ -128,6 +128,14 @@
                                     "pageLength": 20
                                 });
                             } );
+                            $(document).ready(function() {
+                                $('#my_table').DataTable(
+                                    {
+                                        //"bSort" : false,
+                                        "aaSorting": [],
+                                        "bDestroy": true
+                                    });
+                            });
                         </script>
                     </div>
                 </div>
