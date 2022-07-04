@@ -15,7 +15,6 @@ class StoreTransactionController extends Controller
 {
     public function store(Request $request)
     {
-        //return $request;
         $fields = [
                 'transactionAmount'=>'required|numeric|min:20000|max:200000',
             ];
@@ -33,7 +32,6 @@ class StoreTransactionController extends Controller
                 ['product_id', '=', $productID]
             ])->first();
             if (is_null($commission)) {
-
                 return redirect('/transactions/create')->with('thereIsNotCommission', 'No tiene comisión asignada para este producto');
             }
             $product = Product::find($productID);
@@ -45,6 +43,4 @@ class StoreTransactionController extends Controller
             $transaction->status = 'hold';
             return view('transactions.clientDataCreate', compact('transaction', 'product'));
         }
-
-
 }

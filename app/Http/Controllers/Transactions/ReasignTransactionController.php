@@ -11,14 +11,5 @@ class ReasignTransactionController extends Controller
 {
     public function transactionReasign()
     {
-
-
-
-
-        }
-
-
-
-
     }
 }

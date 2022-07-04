@@ -1,9 +1,12 @@
-Buen día <i>{{ $body->receiver }}</i>,
- 
+Buen día <b>{{ $body->receiver }}</b>,
+
 <div>
-<p>&nbsp;{{ $body->body }}</p>
+    <p>&nbsp;{{ $body->body }}</p>
 </div>
- 
+
 <br/>
-<p>&nbsp;Este es un correo generado automaticamente y no recibe respuestas.</p>
+<br/>
+<br/>
+<br/>
+    <small>&nbsp;Este correo ha sido envíado automáticamente, por lo tanto no se reciben respuestas.</small>
 <i>{{ $body->sender }}</i>
