@@ -47,7 +47,11 @@
                                         <td class="align-middle text-center text-sm">{{ $transaction->product->product_name }}</td>
                                         @hasrole('Administrator')
                                         <td class="align-middle text-center text-sm">{{ $transaction->shopkeeper->name }}</td>
-                                        <td class="align-middle text-center text-sm">{{ $transaction->supplier->name }}</td>
+                                        <td class="align-middle text-center text-sm">
+                                            @if (isset($transaction->supplier))
+                                                {{ $transaction->supplier->name }}
+                                            @endif
+                                        </td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->distributor->name }}</td>
                                         @endhasrole
                                         @if (Auth::user()->role == 'Shopkeeper')
