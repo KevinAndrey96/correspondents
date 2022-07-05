@@ -15,7 +15,7 @@ class WithdrawProfitController extends Controller
 {
     public function store(Request $request)
     {
-        if (Auth::user()->role != 'Administrator') {
+        if (Auth::user()->role !== 'Administrator') {
             $fields = [
                 'amount'=>'required|numeric|max:'.Auth::user()->profit,
                 'entity'=>'required',
@@ -37,7 +37,7 @@ class WithdrawProfitController extends Controller
             $profit->type = 'Withdrawal';
             $profit->extra = $extra;
             $profit->save();
-    
+
             return redirect('home');
         }
         if (Auth::user()->role == 'Administrator') {
@@ -59,7 +59,7 @@ class WithdrawProfitController extends Controller
             $profit->extra = $extra;
             $profit->is_valid = 1;
             $profit->save();
-    
+
             return redirect('home');
         }
     }
