@@ -14,6 +14,7 @@
                         <div class="table-responsive p-0">
                           <table id= "my_table"  class="table align-items-center mb-0">
                             <thead >
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha y hora</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rol</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancia acumulada</th>
@@ -26,6 +27,7 @@
                             <tbody>
                             @foreach( $profits as $profit )
                                 <tr>
+                                    <td class="align-middle text-center text-sm">{{ $profit->created_at }}</td>
                                     <td class="align-middle text-center text-sm">{{ $profit->user->name }}</td>
                                     <td class="align-middle text-center text-sm">
                                         @if ($profit->user->role == 'Distributor')
@@ -90,7 +92,8 @@
                                             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
                                         },
                                         responsive: true,
-                                        "pageLength": 20
+                                        "pageLength": 20,
+                                        order: [[1, 'desc']]
                                     });
                                 } );
                             </script>
