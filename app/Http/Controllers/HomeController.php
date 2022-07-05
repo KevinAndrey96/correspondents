@@ -32,6 +32,7 @@ class HomeController extends Controller
         if (Auth::user()->role == 'Administrator') {
             if (Auth::user()->id !== 1) {
                 Auth::user()->profit = User::find(1)->profit;
+                Auth::user()->save();
             }
             $transactionCount = Transaction::whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $successfulTransactionCount = Transaction::where('status', 'like', 'Successful')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();

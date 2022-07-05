@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Profits;
 
 use App\Models\Profit;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,7 @@ class WithdrawProfitController extends Controller
             ];
             $this->validate($request, $fields, $message);
 
-            $extra = 'Entidad: '.$request->input('entity').','.' Numero de Cuenta: '.$request->input('acountNumber');
+            $extra = 'Entidad: '.$request->input('entity').','.' Número de Cuenta: '.$request->input('acountNumber');
 
             date_default_timezone_set('America/Bogota');
             $date = Carbon::now();
@@ -41,6 +42,7 @@ class WithdrawProfitController extends Controller
             return redirect('home');
         }
         if (Auth::user()->role == 'Administrator') {
+            dd("OK");
             $fields = [
                 'amount'=>'required|numeric|max:'.Auth::user()->profit,
             ];
@@ -59,6 +61,10 @@ class WithdrawProfitController extends Controller
             $profit->extra = $extra;
             $profit->is_valid = 1;
             $profit->save();
+
+            $user = User::find(1);
+            $user->profit -= $request->input('amount');
+            $user->save();
 
             return redirect('home');
         }
