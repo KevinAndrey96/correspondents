@@ -92,15 +92,15 @@ class UpdateTransactionController extends Controller
                 $supplierBalance->is_valid = 1;
                 if ($transaction->type == 'Withdrawal') {
                     $shopkeeper->balance += $transaction->amount;
-                    $supplier->balance -= $transaction->amount;
+                    $supplier->balance += $transaction->amount;
                     $shopkeeperBalance->type = 'Deposit';
-                    $supplierBalance->type = 'Withdrawal';
+                    $supplierBalance->type = 'Deposit';
                 }
                 if ($transaction->type == 'Deposit') {
                     $shopkeeper->balance -= $transaction->amount;
-                    $supplier->balance += $transaction->amount;
+                    $supplier->balance -= $transaction->amount;
                     $shopkeeperBalance->type = 'Withdrawal';
-                    $supplierBalance->type = 'Deposit';
+                    $supplierBalance->type = 'Withdrawal';
                 }
                 $supplier->save();
                 $distributor->save();
@@ -109,7 +109,6 @@ class UpdateTransactionController extends Controller
                 $transaction->save();
                 $supplierBalance->save();
                 $shopkeeperBalance->save();
-
             }
 
             return redirect('/transactions');
