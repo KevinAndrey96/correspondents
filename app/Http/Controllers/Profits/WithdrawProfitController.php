@@ -42,7 +42,6 @@ class WithdrawProfitController extends Controller
             return redirect('home');
         }
         if (Auth::user()->role == 'Administrator') {
-            dd("OK");
             $fields = [
                 'amount'=>'required|numeric|max:'.Auth::user()->profit,
             ];
