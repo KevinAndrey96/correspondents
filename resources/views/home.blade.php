@@ -5,16 +5,36 @@
             {{ Session::get('deniedAccess') }}
         </div>
     @endif
+    @hasrole('Administrator')
     <div class="container-fluid py-4">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-            <div class="bg-gradient-primary shadow-primary border-radius-lg py-6 pe-1">
-                <p class="text-center text-white text-xl">Banner publicitario</p>
-            </div>
+            <img src="/assets/img/Banner/administrator.png" width="100%" height="auto" class="border-radius-lg">
         </div>
     </div>
+    @endhasrole
+    @hasrole('Distributor')
+    <div class="container-fluid py-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+            <img src="/assets/img/Banner/distributor.png" width="100%" height="auto" class="border-radius-lg">
+        </div>
+    </div>
+    @endhasrole
+    @hasrole('Shopkeeper')
+    <div class="container-fluid py-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+            <img src="/assets/img/Banner/shopkeeper.png" width="100%" height="auto" class="border-radius-lg">
+        </div>
+    </div>
+    @endhasrole
+    @hasrole('Supplier')
+    <div class="container-fluid py-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+            <img src="/assets/img/Banner/supplier.png" width="100%" height="auto" class="border-radius-lg">
+        </div>
+    </div>
+    @endhasrole
     <div class="container-fluid py-2">
         <div class="row">
-
         @hasrole('Administrator')
             <div class="col-xl-3 col-sm-2 mb-xl-2 mb-4">
                 <div class="card">
@@ -373,7 +393,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
@@ -480,7 +500,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">

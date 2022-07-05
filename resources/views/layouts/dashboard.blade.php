@@ -29,15 +29,23 @@
 
 <body class="g-sidenav-show  bg-gray-200">
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-dark" id="sidenav-main">
-    <div class="sidenav-header p-2">
+    <div class="sidenav-header text-center p-2">
         <a class="text-center p-3" href="/home">
-            <img style="margin-top: -3px;" src="/assets/img/LOGO-COMPLETO.png" height="70px" width="195px" class="" alt="main_logo" >
+            <img style="margin-top: -3px;" src="/assets/img/favicon1.png" height="auto" width="30%" class="text-center" alt="main_logo" >
             <span class="ms-1 font-weight-bold text-white "></span>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 mb-4 " id="sidenav-collapse-main">
         <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-white " href="/home">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">home</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Inicio</span>
+                </a>
+            </li>
         @hasrole('Administrator')
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
