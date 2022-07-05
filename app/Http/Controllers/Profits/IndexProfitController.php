@@ -15,7 +15,7 @@ class IndexProfitController extends Controller
         if (Auth::user()->role == 'Administrator') {
             $profitsData['profits'] = Profit::orderBy('created_at', 'desc')->get();
         }
-        if (Auth::user()->role != 'Administrator') {
+        if (Auth::user()->role !== 'Administrator') {
             $profitsData['profits'] = Profit::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         }
         return view('profit.index', $profitsData);

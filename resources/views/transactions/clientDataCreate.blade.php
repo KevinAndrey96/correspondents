@@ -13,7 +13,7 @@
                     <div class="card-body px-0 pb-2">
                         <div class="container">
 
-                            <form action="{{ url('/transaction/storeClientData') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ url('/transaction/storeClientData') }}" method="post" enctype="multipart/form-data" onsubmit="return confirm('¿Está seguro que desea realizar esta transacción?');">
                                 @csrf
                                 <div class="row">
                                     <div class="form-group">

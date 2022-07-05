@@ -30,6 +30,9 @@ class HomeController extends Controller
     {
         $date = Carbon::now();
         if (Auth::user()->role == 'Administrator') {
+            if (Auth::user()->id !== 1) {
+                Auth::user()->profit = User::find(1)->profit;
+            }
             $transactionCount = Transaction::whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $successfulTransactionCount = Transaction::where('status', 'like', 'Successful')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $failedTransactionCount = Transaction::where('status', 'like', 'Failed')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();

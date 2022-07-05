@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="container">
-                            <form action="{{ url('/profit/store') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ url('/profit/store') }}" method="post" enctype="multipart/form-data" onsubmit="return confirm('¿Está seguro que desea realizar esta solicitud?');">
                               <div class="row">
                                 @csrf
                                 @if(count($errors)>0)

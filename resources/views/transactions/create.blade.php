@@ -83,7 +83,7 @@
                                     <div class="form-check mb-3">
                                         @foreach( $productsDeposit as $product )
                                             <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
-                                            <label style="margin-right: 50px;" class="custom-control-label" for="customRadio1"><img style="margin-right: 10px;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">{{ $product->product_name}}</label>
+                                            <label style="margin-right: 50px;" class="custom-control-label" for="customRadio1"><img style="margin-right: 10px; height: 100px !important; width: 100px !important;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">{{ $product->product_name}}</label>
                                         @endforeach
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
                                     <div class="form-check mb-3">
                                         @foreach( $productsWithdrawal as $product )
                                             <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
-                                            <label class="custom-control-label" for="customRadio1"><img  class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">{{ $product->product_name}}</label>
+                                            <label class="custom-control-label" for="customRadio1"><img style="margin-right: 10px; height: 100px !important; width: 100px !important;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">{{ $product->product_name}}</label>
                                         @endforeach
                                     </div>
                                 </div>
