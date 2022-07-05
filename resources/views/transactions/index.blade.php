@@ -67,27 +67,27 @@
                                         <td class="align-middle text-center text-sm">
                                             @if ($transaction->status == 'hold')
                                                 <center>
-                                                    <p class="text-center text-dark text-xs p-2" style="background-color:#f5df4d; width:50%; border-radius: 20px;">En espera</p>
+                                                    <p class="text-center text-dark text-xxs p-1" style="background-color:#f5df4d; width:80%; border-radius: 20px;">En espera</p>
                                                 </center>
                                             @endif
                                                 @if ($transaction->status == 'accepted')
                                                     <center>
-                                                        <p class="text-center text-white text-xs p-1" style="background-color:dodgerblue; width:60%;  border-radius: 20px;">Aceptada</p>
+                                                        <p class="text-center text-white text-xxs p-1" style="background-color:dodgerblue; width:80%;  border-radius: 20px;">Aceptada</p>
                                                     </center>
                                                 @endif
                                                 @if ($transaction->status == 'successful')
                                                     <center>
-                                                        <p class="text-center text-white text-xs p-1" style="background-color:green; width:60%; border-radius: 20px;">Exitosa</p>
+                                                        <p class="text-center text-white text-xxs p-1" style="background-color:green; width:80%; border-radius: 20px;">Exitosa</p>
                                                     </center>
                                                 @endif
                                                 @if ($transaction->status == 'failed')
                                                     <center>
-                                                        <p class="text-center text-white text-xs p-1" style="background-color:red; width:60%; border-radius: 20px;">Fallida</p>
+                                                        <p class="text-center text-white text-xxs p-1" style="background-color:red; width:80%; border-radius: 20px;">Fallida</p>
                                                     </center>
                                                 @endif
                                                 @if ($transaction->status == 'cancelled')
                                                     <center>
-                                                        <p class="text-center text-white text-xs p-1" style="background-color:#58696F; width:60%; border-radius: 20px;">Cancelada</p>
+                                                        <p class="text-center text-white text-xxs p-1" style="background-color:#58696F; width:80%; border-radius: 20px;">Cancelada</p>
                                                     </center>
                                                 @endif
                                             </td>
@@ -99,13 +99,13 @@
                                         @endif
                                         @if (Auth::user()->role == 'Supplier' && isset($id))
                                         <td class="align-middle text-center text-sm">
-                                            <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}?detail=yes" class="btn btn-link px-3 mb-0" ><i style="color: darkgreen;" class="material-icons opacity-10">add</i>Detalle</a>
+                                            <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}?detail=yes" title="Detalle" class="btn btn-link px-3 mb-0" ><i style="color: darkgreen;" class="material-icons opacity-10">add</i></a>
                                         </td>
                                         @endif
                                         @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Administrator' )
                                             <td class="align-middle text-center text-sm">
                                                 @if ($transaction->status == 'successful' || $transaction->status == 'failed' || $transaction->status == 'cancelled')
-                                                    <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i> Detalle</a>
+                                                    <a style="color: darkgreen;" href="/transaction/detail/{{$transaction->id}}" title="Detalle" class="btn btn-link px-3 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">add</i></a>
                                                 @endif
                                                 @if ($transaction->status == 'hold')
                                                         <a style="color: red;" href="/transaction/cancel/{{$transaction->id}}" class="btn btn-link px-3 mb-0"><i style="color: red;" class="material-icons opacity-10">cancel</i> Cancelar</a>

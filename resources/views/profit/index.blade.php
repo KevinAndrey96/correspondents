@@ -21,7 +21,7 @@
                             </div>
                         @endif
                         <div class="table-responsive p-0">
-                            <table id= "my_table" class="table align-items-center mb-0">
+                            <table id="my_table" class="table align-items-center mb-0">
                                 <thead class="thead-light">
                                 <tr>
                                     @hasrole('Administrator')

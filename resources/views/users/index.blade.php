@@ -3,12 +3,12 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                <div class="card my-4">
+                <div class="card my-2">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
                             <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Gestion de usuarios
                                 @if ($role == 'Shopkeeper' || $role == 'allShopkeepers')
-                                    (Tenderos)
+                                    (Tenderos)<a class="btn btn-block btn-Secondary ps-0 p-4"></a>
                                 @elseif ($role == 'Distributor')
                                     (Distribuidores)
                                 @elseif ($role == 'Supplier')
@@ -24,7 +24,7 @@
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
                             <table id="tabla1" class="table align-items-center mb-0">
-                                <thead>
+                                <thead class="thead-light">
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bloq/Desbl</th>
@@ -71,13 +71,12 @@
                                         @if ($role == 'allShopkeepers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{$user->distributor->name}}</th>
                                         @endif
-                                        <!--<td class="align-middle text-center text-sm">{{$user->email}}</td>-->
                                         <td class="align-middle text-center text-sm">{{$user->phone}}</td>
                                         @if ($role == 'Distributor' || $role == 'Supplier' || $role == 'allShopkeepers')
                                             <td class="align-middle text-center text-sm">${{$user->profit}}</td>
                                         @endif
                                         @if ( $role == 'allShopkeepers' || ($role != 'Distributor' && $role != 'Administrator'))
-                                            <td style="display: none;" class="">${{number_format($user->balance, 2, ',', '.')}}</td>
+                                            <!--<td style="display: none;" class="">${{number_format($user->balance, 2, ',', '.')}}</td>-->
                                             <td class="align-middle text-center text-sm">${{number_format($user->balance, 2, ',', '.')}}</td>
                                         @endif
                                         @if ($role == 'Supplier')
@@ -90,7 +89,7 @@
                                             @endif
                                             <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i></a>
                                             @if ($role == 'allShopkeepers' or $role == 'Supplier')
-                                                <button style=" margin-top: 15px; " type="button" class="btn btn-white px-0" title="Gestionar saldo" data-bs-toggle="modal" data-bs-target="#SaldoModal"
+                                                <button type="button" class="btn btn-white px-1 mb-0" title="Gestionar saldo" data-bs-toggle="modal" data-bs-target="#SaldoModal"
                                                     data-id="{{$user->id}}"
                                                 ><i class="material-icons opacity-10">monetization_on</i></button>
                                             @endif
@@ -99,6 +98,22 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <style>
+                                .form-control {
+                                    background-color: #f2f2f2 !important ;
+                                }
+                            </style>
+                            <script>
+                                $(document).ready( function () {
+                                    $('#tabla1').DataTable({
+                                        "language": {
+                                            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                                        },
+                                        responsive: true,
+                                        "pageLength": 15
+                                    });
+                                } );
+                            </script>
                             <form id="form-status" name="form-status" method="POST" action="/changeStatusUser">
                                 @csrf
                                 <input type="hidden" name="id" id="id">
@@ -168,7 +183,6 @@
                                                     <div class="col-md-6">
                                                         <label for="name" class="form-label"></label>
                                                         <input type="text" class="form-control" name="comment" id="comment" placeholder="Comentario">
-                                                        </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="p-3">
@@ -190,7 +204,6 @@
                                                 </div>
                                             </form>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

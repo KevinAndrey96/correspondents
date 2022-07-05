@@ -44,18 +44,18 @@
                                 @foreach( $balances as $balance )
                                     <tr>
                                     @hasrole('Administrator')
-                                        <td class="align-middle text-center text-sm">{{ $balance->user->name}}</td>
-                                        <td class="align-middle text-center text-sm">${{number_format($balance->user->balance, 2, ',', '.')}}</td>
+                                        <td class="align-middle text-center text-xs">{{ $balance->user->name}}</td>
+                                        <td class="align-middle text-center text-xs">${{number_format($balance->user->balance, 2, ',', '.')}}</td>
                                     @endhasrole
-                                        <td class="align-middle text-center text-sm">{{ $balance->id}}</td>
+                                        <td class="align-middle text-center text-xs">{{ $balance->id}}</td>
                                         @if($balance->type == 'Deposit')
-                                        <td class="align-middle text-center text-sm">Deposito</td>
+                                        <td class="align-middle text-center text-xs">Deposito</td>
                                         @elseif($balance->type == 'Withdrawal')
-                                        <td class="align-middle text-center text-sm">Retiro por Administrador</td>
+                                        <td class="align-middle text-center text-xs">Retiro por Administrador</td>
                                         @endif
-                                        <td class="align-middle text-center text-sm">${{number_format($balance->amount, 2, ',', '.')}}</td>
-                                        <td class="align-middle text-center text-sm">{{$balance->date}}</td>
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="align-middle text-center text-xs">${{number_format($balance->amount, 2, ',', '.')}}</td>
+                                        <td class="align-middle text-center text-xs">{{$balance->date}}</td>
+                                        <td class="align-middle text-center text-xs">
                                         @if(is_null($balance->comment))
                                             Sin comentarios
                                         @else
@@ -75,11 +75,11 @@
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             @if($balance->is_valid == null)
-                                                <button class="btn btn-primary"disabled style="background-color: lightgoldenrodyellow">Pendiente</button>
+                                                <button class="btn btn-primary btn-sm"disabled style="background-color: lightgoldenrodyellow">Pendiente</button>
                                             @elseif($balance->is_valid == 1)
-                                                <button class="btn btn-primary"disabled style="background-color: lightgreen">Aceptada</button>
+                                                <button class="btn btn-primary btn-sm"disabled style="background-color: lightgreen">Aceptada</button>
                                             @elseif($balance->is_valid == 0)
-                                                <button class="btn btn-primary"disabled style="background-color: lightcoral">Rechazada</button>
+                                                <button class="btn btn-primary btn-sm"disabled style="background-color: lightcoral">Rechazada</button>
                                             @endif
                                         </td>
                                     @hasrole('Administrator')
@@ -151,6 +151,22 @@
                                 </div>
                             </div>
                             <!--end Modal-->
+                            <style>
+                                .form-control {
+                                    background-color: #f2f2f2 !important ;
+                                }
+                            </style>
+                            <script>
+                                $(document).ready( function () {
+                                    $('#my_table').DataTable({
+                                        "language": {
+                                            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                                        },
+                                        responsive: true,
+                                        "pageLength": 15
+                                    });
+                                } );
+                            </script>
                             <script>
                                 $('#acceptModal').on('show.bs.modal', function (event) {
                                     var button = $(event.relatedTarget)
