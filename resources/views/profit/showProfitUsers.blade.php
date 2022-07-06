@@ -93,7 +93,7 @@
                                         },
                                         responsive: true,
                                         "pageLength": 20,
-                                        order: [[1, 'desc']]
+                                        order: [[1, 'desc']],
                                     });
                                 } );
                             </script>
