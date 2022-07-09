@@ -20,7 +20,7 @@
                                     <div class="alert alert-danger" role="alert">
                                         <ul>
                                         @foreach( $errors->all() as $error )
-                                            <li class="text-white"> {{ $error }} </li>
+                                                <li class="text-white"> <p class="text-center text-sm text-white">{{ $error }} </p></li>
                                         @endforeach
                                         </ul>
                                     </div>
@@ -56,12 +56,17 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid py-0 mb-3">
+    <div class="container-fluid py-4">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-            <div class="bg-gradient-primary shadow-primary border-radius-lg py-6 pe-1">
-                <p class="text-center text-white text-xl">Banner con cuentas autorizadas</p>
+            <div class="row">
+            <div class="col-md-6 text-center">
+                <img src="/assets/img/tajeta.jpeg" width="80%" height="auto" class="border-radius-lg">
+            </div>
+            <div class="col-md-6 text-center ">
+                <a href="/assets/pdf/TARJETA.pdf" target="_blank" class="btn btn-primary
+                 btn-lg text-white active my-7 text-center" role="button" aria-pressed="true"><i class="material-icons mx-2">file_download</i>Descargar PDF</a>
+            </div>
             </div>
         </div>
     </div>
-
 @endsection

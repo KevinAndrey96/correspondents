@@ -9,7 +9,7 @@ Duvan esto es un modal
             <div class="alert alert-danger" role="alert">
                 <ul>
                 @foreach( $errors->all() as $error )
-                    <li> {{ $error }} </li>
+                    <li class="text-white text-sm text-center"> {{ $error }} </li>
                 @endforeach
                 </ul>
             </div>

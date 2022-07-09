@@ -85,13 +85,13 @@
                                         @endif
                                         <td>
                                             @if ($role != 'allShopkeepers' && $role != 'Administrator')
-                                                <a style="color: dodgerblue;" href="/commissions/create/{{$user->id}}" title="Comisiones" class="btn btn-link px-1 mb-0"><i style="color: dodgerblue;" class="material-icons opacity-10">price_change</i></a>
+
+                                                <a style="color: dodgerblue;" href="/commissions/create/{{$user->id}}" title="Comisiones" class="btn btn-link px-1 mb-0"><i style="color: dodgerblue; font-size: 25px !important;" class="material-icons opacity-15">price_change</i></a>
                                             @endif
-                                            <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i></a>
+                                            <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen; font-size: 25px !important;" class="material-icons opacity-10">edit</i></a>
                                             @if ($role == 'allShopkeepers' or $role == 'Supplier')
                                                 <button type="button" class="btn btn-white px-1 mb-0" title="Gestionar saldo" data-bs-toggle="modal" data-bs-target="#SaldoModal"
-                                                    data-id="{{$user->id}}"
-                                                ><i class="material-icons opacity-10">monetization_on</i></button>
+                                                    data-id="{{$user->id}}"><i style="font-size: 25px !important;" class="material-icons opacity-10">monetization_on</i></button>
                                             @endif
                                         </td>
                                     </tr>

@@ -532,7 +532,7 @@
                                     <div class="col-8">
                                         <div class="numbers">
                                             <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Tenderos</p>
-                                            <h5 class="font-weight-bolder text-xs">
+                                            <h5 class="font-weight-bolder">
                                                 {{ $shopkeeperCount }}
                                             </h5>
                                         </div>
@@ -553,7 +553,7 @@
                                     <div class="col-8">
                                         <div class="numbers">
                                             <p class="text-xs mb-0 text-uppercase font-weight-bold">Saldo Tenderos</p>
-                                            <h5 class="font-weight-bolder text-xs">
+                                            <h5 class="font-weight-bolder">
                                                 ${{ $shopkeepersBalance }}
                                             </h5>
 

@@ -1,18 +1,18 @@
 @extends('layouts.dashboard')
 @section('content')
     @if(Session::has('thereIsNotCommission'))
-        <div class="alert alert-danger" role="alert">
-            {{ Session::get('thereIsNotCommission') }}
+        <div class="alert alert-danger text-white" role="alert">
+            <p class="text-center text-sm text-white">{{ Session::get('thereIsNotCommission') }}</p>
         </div>
     @endif
     @if(Session::has('cancelTransactionSuccess'))
-        <div class="alert alert-success" role="alert">
-            {{ Session::get('cancelTransactionSuccess') }}
+        <div class="alert alert-success text-white" role="alert">
+            <p class="text-center text-sm text-white">{{ Session::get('cancelTransactionSuccess') }}</p>
         </div>
     @endif
     @if(Session::has('insufficientBalance'))
-        <div class="alert alert-danger" role="alert">
-            {{ Session::get('insufficientBalance') }}
+        <div class="alert alert-danger text-white" role="alert">
+            <p class="text-center text-sm text-white">{{ Session::get('insufficientBalance') }}</p>
         </div>
     @endif
     <div class="container-fluid py-4">
@@ -42,7 +42,7 @@
                                         <div class="input-group input-group-static mb-4 ">
                                             <label  for="">Tipo de transacción</label>
                                             <select id="transactionType" onchange="showProducts()" name="transactionType" class="form-control" aria-label="Default select example" required>
-                                                <option class="text-center" value="">seleccionar</option>
+                                                <option class="text-center" value="off">seleccionar</option>
                                                 <option class="text-center" value="Deposit">Deposito</option>
                                                 <option class="text-center" value="Withdrawal">Retiro</option>
                                             </select>
@@ -63,66 +63,57 @@
                                                 document.getElementById('withdrawal').style.display = 'block'
                                                 document.getElementById('deposit').style.display = 'none'
                                             }
+                                            if (transactionType == 'off') {
+                                                document.getElementById('withdrawal').style.display = 'none'
+                                                document.getElementById('deposit').style.display = 'none'
+                                            }
 
                                         }
 
                                     </script>
-                                <div class="col-md-6">
-                                    <div class=" input-group input-group-outline my-3">
-                                        <label for="transactionAmount" class="form-label">Monto</label>
-                                        <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="1" min="20000" max="200000" placeholder="" required>
+                                    <div class="col-md-6">
+                                        <div class=" input-group input-group-outline my-3">
+                                            <label for="transactionAmount" class="form-label">Monto</label>
+                                            <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="1" min="20000" max="200000" placeholder="" required>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="hidden" class="form-control" name="productID" value="" id="productID" readonly="readonly">
-                                </div>
-
-                                <div class="col-md-12" id="deposit" style="display: none;">
-                                    <label class="form-label">Depositos</label>
-                                    <div class="form-check mb-3">
-                                        @foreach( $productsDeposit as $product )
-                                            <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
-                                            <label style="margin-right: 50px;" class="custom-control-label" for="customRadio1"><img style="margin-right: 10px; height: 100px !important; width: 100px !important;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">{{ $product->product_name}}</label>
-                                        @endforeach
+                                    <div class="form-group col-md-6">
+                                        <input type="hidden" class="form-control" name="productID" value="" id="productID" readonly="readonly">
                                     </div>
-                                </div>
-
-                                <div class="col-md-12" id="withdrawal" style="display: none;">
-                                    <label class="form-label">Retiros</label>
-                                    <div class="form-check mb-3">
-                                        @foreach( $productsWithdrawal as $product )
-                                            <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
-                                            <label class="custom-control-label" for="customRadio1"><img style="margin-right: 10px; height: 100px !important; width: 100px !important;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">{{ $product->product_name}}</label>
-                                        @endforeach
+                                    <div class="col-md-12">
+                                            <div id="deposit" style=" display: none;">
+                                                <p class="form-label">Depositos</p>
+                                                <div class="row">
+                                                    @foreach( $productsDeposit as $product )
+                                                        <div class="col-md-3 col-xs-6">
+                                                        <div class=" form-check mb-3" >
+                                                            <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
+                                                            <label  class="custom-control-label text-center" for="customRadio1"><img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga"><p class="text-xs mt-1">{{ $product->product_name}}</p></label>
+                                                        </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <div id="withdrawal" style="display: none;">
+                                                <p class="form-label">Retiros</p>
+                                                <div class="row">
+                                                    @foreach( $productsWithdrawal as $product )
+                                                    <div class="col-md-3 col-xs-6">
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
+                                                        <label class="custom-control-label text-center " for="customRadio1"><img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga"><p class="text-xs mt-1">{{ $product->product_name}}</p></label>
+                                                    </div>
+                                                    </div>
+                                                    @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <!--<div class="col-md-3">
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
-                                        <label class="custom-control-label" for="customRadio1"><img src="https://artesla.com.co/wp-content/uploads/2021/01/nequi-logo.png" height="80px" width="80px" ></label>
-                                    </div>
-                               </div>
-                                <div class="col-md-3">
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
-                                        <label class="custom-control-label" for="customRadio1"><img src="https://www.bancolombia.com/wps/wcm/connect/16a1f742-cf9f-4b5d-ac06-d7845c05d88e/logo-grupo-bancolombia.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-16a1f742-cf9f-4b5d-ac06-d7845c05d88e-nAfNfta" height="80px" width="160px" ></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadio1">
-                                        <label class="custom-control-label" for="customRadio1"><img src="https://cdn.worldvectorlogo.com/logos/daviplata.svg" height="80px" width="80px" ></label>
-                                    </div>
-                                </div>-->
-
-                                    <div class="text-center">
+                                    <div class="col-md-12 text-center">
                                         <input class="btn btn-success" type="submit" value="continuar">
-
                                         <a class="btn btn-primary" href="{{ url('/transactions') }}"> Regresar</a>
-                                   </div>
-                               </div>
+                                    </div>
                             </form>
 
                             </div>

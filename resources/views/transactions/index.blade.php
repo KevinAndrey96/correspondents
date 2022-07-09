@@ -124,6 +124,7 @@
                         </style>
                         <script>
                             $(document).ready( function () {
+                                setTimeout("location.reload()", 30000);
                                 $('#my_table').DataTable({
                                     "language": {
                                         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
@@ -132,14 +133,6 @@
                                     "pageLength": 20
                                 });
                             } );
-                            $(document).ready(function() {
-                                $('#my_table').DataTable(
-                                    {
-                                        //"bSort" : false,
-                                        "aaSorting": [],
-                                        "bDestroy": true
-                                    });
-                            });
                         </script>
                     </div>
                 </div>

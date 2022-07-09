@@ -2,12 +2,12 @@
 @section('content')
     @if(Session::has('UpdaCommissionFailed'))
         <div class="alert alert-danger" role="alert">
-            {{ Session::get('UpdaCommissionFailed') }}
+            <p class="text-center text-sm text-white">{{ Session::get('UpdaCommissionFailed') }}</p>
         </div>
     @endif
     @if(Session::has('UpdaCommissionSuccess'))
         <div class="alert alert-success" role="alert">
-            {{ Session::get('UpdaCommissionSuccess') }}
+            <p class="text-center text-sm text-white">{{ Session::get('UpdaCommissionSuccess') }}</p>
         </div>
     @endif
     <div class="row mt-4"></div>
