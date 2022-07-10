@@ -1,5 +1,10 @@
 @extends('layouts.dashboard')
 @section('content')
+    @if(Session::has('existingProfit'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('existingProfit') }}
+        </div>
+    @endif
     <div class="row mt-4"></div>
     <div class="container-fluid py-4">
         <div class="row">
