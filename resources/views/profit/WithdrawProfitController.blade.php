@@ -5,6 +5,11 @@
             {{ Session::get('existingProfit') }}
         </div>
     @endif
+    @if(Session::has('limitExceeded'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('limitExceeded') }}
+        </div>
+    @endif
     <div class="row mt-4"></div>
     <div class="container-fluid py-4">
         <div class="row">
