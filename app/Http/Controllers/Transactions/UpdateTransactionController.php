@@ -124,8 +124,8 @@ class UpdateTransactionController extends Controller
                 $transaction->save();
                 $supplierBalance->save();
                 $shopkeeperBalance->save();
-                $supplierSummary->movement_id = $supplierBalance->id;
-                $shopkeeperSummary->movement_id = $shopkeeperBalance->id;
+                $supplierSummary->movement_id = $transaction->id;
+                $shopkeeperSummary->movement_id = $transaction->id;
                 $supplierSummary->save();
                 $shopkeeperSummary->save();
             }
