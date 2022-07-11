@@ -69,4 +69,17 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid py-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <img src="/assets/img/tarjeta2.jpeg" width="80%" height="auto" class="border-radius-lg">
+                </div>
+                <div class="col-md-6 text-center ">
+                    <a href="/assets/pdf/TARJETA2.pdf" target="_blank" class="btn btn-primary
+                 btn-lg text-white active my-7 text-center" role="button" aria-pressed="true"><i class="material-icons mx-2">file_download</i>Descargar PDF</a>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
