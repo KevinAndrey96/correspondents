@@ -32,6 +32,7 @@ return new class extends Migration
             $table->boolean('is_enabled');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->text('google2fa_secret')->default('eyJpdiI6InN3eWhrU3o4TnhFblcvOEpPUkJ5ZUE9PSIsInZhbHVlIjoidlRwVi9nZXFlSzRSRFRJekh6RTJYclJHOEE0OHc1N3AzRmRPb2dLUFdUUT0iLCJtYWMiOiJmYzY0NTQ2OTE5OWU1NjhiNGFiYWZkM2EwNzFkNTMyMTgzMTljMGI5ZDExOWEzMmRhOGE0MmVkZmE1ZGRmZmUzIiwidGFnIjoiIn0');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

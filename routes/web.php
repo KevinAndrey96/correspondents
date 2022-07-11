@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TwoFAController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,8 +80,28 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled']], function()
     Route::get('/commissions/create/{id}', [App\Http\Controllers\Commissions\CreateCommissionsController::class, 'create']);
     Route::post('/commissions/update', [App\Http\Controllers\Commissions\UpdateCommissionsController::class, 'update']);
 });
-    Route::get('/transactionLoad/{id}', [App\Http\Controllers\Transactions\LoadTransactionController::class, 'load'])->middleware('auth');
-    Route::get('/transactionReasign', [App\Http\Controllers\Transactions\ReasignTransactionController::class, 'transactionReasign'])->middleware('auth');
-    Route::get('/transaction/detail/{id}', [App\Http\Controllers\Transactions\DetailTransactionController::class, 'detail'])->middleware('auth');
-    Route::post('/transaction/update', [App\Http\Controllers\Transactions\UpdateTransactionController::class, 'update'])->middleware('auth');
-    Route::get('/transaction/cancel/{id}', [App\Http\Controllers\Transactions\CancelTransactionController::class, 'cancel']);
+Route::get('/transactionLoad/{id}', [App\Http\Controllers\Transactions\LoadTransactionController::class, 'load'])->middleware('auth');
+Route::get('/transactionReasign', [App\Http\Controllers\Transactions\ReasignTransactionController::class, 'transactionReasign'])->middleware('auth');
+Route::get('/transaction/detail/{id}', [App\Http\Controllers\Transactions\DetailTransactionController::class, 'detail'])->middleware('auth');
+Route::post('/transaction/update', [App\Http\Controllers\Transactions\UpdateTransactionController::class, 'update'])->middleware('auth');
+Route::get('/transaction/cancel/{id}', [App\Http\Controllers\Transactions\CancelTransactionController::class, 'cancel']);
+
+/**
+ * Middleware for 2FA
+ */
+Route::middleware(['2fa'])->group(function () {
+    /**
+     * Route for controller {@link HomeController}
+     */
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::post('/2fa', static function () {
+        return redirect(route('home'));
+    })->name('2fa');
+
+});
+
+/**
+ * Route for controller {@link TwoFAController} QR code view
+ */
+Route::get('/complete-registration', [TwoFAController::class, 'index'])->name('complete.registration');
+Route::get('/complete-registration2', [RegisterController::class, 'fullRegister'])->name('complete.registration2');

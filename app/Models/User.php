@@ -2,19 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use App\Models\Commission;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 
 /**
  * @method static where(string $string, string $string1, string $string2)
+ * @property mixed|string $name
+ * @property mixed|string $email
+ * @property mixed|string $password
+ * @property mixed|string $role
+ * @property mixed|string $phone
+ * @property mixed|string $document_type
+ * @property mixed|string $document
+ * @property mixed|string $city
+ * @property mixed|string $address
+ * @property int|mixed $is_enabled
+ * @property mixed|string $google2fa_secret
+ * @property int|mixed $balance
  */
 class User extends Authenticatable
 {
@@ -44,6 +53,7 @@ class User extends Authenticatable
         'is_online',
         'distributor_id',
         'balance',
+        'google2fa_secret'
     ];
 
     /**
@@ -54,6 +64,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'google2fa_secret'
     ];
 
     /**
@@ -90,4 +101,15 @@ class User extends Authenticatable
         return $this->hasOne(Commission::class);
     }
 
+    /**
+     * Interact with the user's first name.
+     * @see google2faSecret
+     */
+    protected function google2faSecret(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) =>  decrypt($value),
+            set: fn ($value) =>  encrypt($value),
+        );
+    }
 }
