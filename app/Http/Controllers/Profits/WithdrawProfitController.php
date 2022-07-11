@@ -73,13 +73,9 @@ class WithdrawProfitController extends Controller
             $profit->is_valid = 1;
             $profit->save();
 
-<<<<<<< HEAD
             $user = User::find(1);
             $user->profit -= $request->input('amount');
             $user->save();
-
-=======
->>>>>>> feature/unify-button
             return redirect('home');
         }
     }
