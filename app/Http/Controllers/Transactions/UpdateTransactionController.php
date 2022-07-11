@@ -10,6 +10,7 @@ use App\Models\Transaction;
 use App\Models\Commission;
 use App\Models\User;
 use App\Models\Balance;
+use App\Models\Summary;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Request as RequestAlias;
@@ -90,18 +91,32 @@ class UpdateTransactionController extends Controller
                 $supplierBalance->amount = $transaction->amount;
                 $supplierBalance->date = Carbon::now();
                 $supplierBalance->is_valid = 1;
+                $supplierSummary = new Summary();
+                $shopkeeperSummary = new Summary();
+                $shopkeeperSummary->user_id = $shopkeeper->id;
+                $shopkeeperSummary->amount = $transaction->amount;
+                $shopkeeperSummary->previous_balance = $shopkeeper->balance;
+                $supplierSummary->user_id = $supplier->id;
+                $supplierSummary->amount = $transaction->amount;
+                $supplierSummary->previous_balance = $supplier->balance;
                 if ($transaction->type == 'Withdrawal') {
                     $shopkeeper->balance += $transaction->amount;
                     $supplier->balance += $transaction->amount;
                     $shopkeeperBalance->type = 'Deposit';
                     $supplierBalance->type = 'Deposit';
+                    $supplierSummary->movement_type = 'Retiro Realizado';
+                    $shopkeeperSummary->movement_type = 'Retiro Realizado';
                 }
                 if ($transaction->type == 'Deposit') {
                     $shopkeeper->balance -= $transaction->amount;
                     $supplier->balance -= $transaction->amount;
                     $shopkeeperBalance->type = 'Withdrawal';
                     $supplierBalance->type = 'Withdrawal';
+                    $supplierSummary->movement_type = 'Deposito Realizado';
+                    $shopkeeperSummary->movement_type = 'Deposito Realizado';
                 }
+                $supplierSummary->next_balance = $supplier->balance;
+                $shopkeeperSummary->next_balance = $shopkeeper->balance;
                 $supplier->save();
                 $distributor->save();
                 $shopkeeper->save();
@@ -109,6 +124,10 @@ class UpdateTransactionController extends Controller
                 $transaction->save();
                 $supplierBalance->save();
                 $shopkeeperBalance->save();
+                $supplierSummary->movement_id = $transaction->id;
+                $shopkeeperSummary->movement_id = $transaction->id;
+                $supplierSummary->save();
+                $shopkeeperSummary->save();
             }
 
             return redirect('/transactions');

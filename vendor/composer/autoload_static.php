@@ -707,6 +707,7 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'App\\Models\\Commission' => __DIR__ . '/../..' . '/app/Models/Commission.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\Profit' => __DIR__ . '/../..' . '/app/Models/Profit.php',
+        'App\\Models\\Summary' => __DIR__ . '/../..' . '/app/Models/Summary.php',
         'App\\Models\\Transaction' => __DIR__ . '/../..' . '/app/Models/Transaction.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

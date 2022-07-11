@@ -570,7 +570,7 @@
                     </div>
                 </div>
                 @endhasrole
-                <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                <div class="col-lg-3 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2 ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
@@ -589,7 +589,7 @@
                     </div>
                 </div>
                 @unlessrole('Distributor')
-                <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                <div class="col-lg-3 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2  ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
@@ -609,7 +609,28 @@
                     </div>
                 </div>
                 @endunlessrole
-                <div class="col-lg-4 mt-4 mb-3">
+                @hasanyrole('Shopkeeper|Supplier')
+                <div class="col-lg-3 col-md-6 mt-4 mb-4">
+                    <div class="card z-index-2  ">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
+                                <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal"
+                                data-bs-target="#ExcelModal" onclick="excelURL('Extracto')"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="mb-0 "> Estadística 3° </h6>
+                            <p class="text-sm ">Extracto de saldos</p>
+                            <hr class="dark horizontal">
+                            <div class="d-flex ">
+                                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                                <p class="mb-0 text-sm"> Rango seleccionable </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endhasanyrole
+                <div class="col-lg-3 mt-4 mb-3">
                     <div class="card z-index-2 ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
@@ -618,7 +639,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6 class="mb-0 ">Estadística 3°</h6>
+                            <h6 class="mb-0 ">Estadística 4°</h6>
                             <p class="text-sm ">Historial de retiro de ganancias</p>
                             <hr class="dark horizontal">
                             <div class="d-flex ">
@@ -640,6 +661,10 @@
             }
             if(type == 'Saldos'){
                 actionURL.action = "{{ url('/balance/excel') }}";
+                document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
+            }
+            if(type == 'Extracto'){
+                actionURL.action = "{{ url('/balanceSummary/excel') }}";
                 document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
             }
             if(type == 'Ganancias'){

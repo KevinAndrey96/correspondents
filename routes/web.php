@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled']], function()
     Route::post('/balance', [App\Http\Controllers\Balances\AddBalanceAdminController::class, 'store']);
     Route::post('/balance/validate', [App\Http\Controllers\Balances\ValidateBalanceController::class, 'isValid']);
     Route::post('/balance/excel', [App\Http\Controllers\Balances\ExcelExportBalanceController::class, 'export']);
+    Route::post('/balanceSummary/excel', [App\Http\Controllers\Balances\ExcelExportSummaryController::class, 'export']);
 
     Route::get('/profit', [App\Http\Controllers\Profits\IndexProfitController::class, 'index']);
     Route::get('/profit/create', [App\Http\Controllers\Profits\CreateProfitController::class, 'create']);

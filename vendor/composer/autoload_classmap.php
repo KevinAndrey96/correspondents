@@ -81,6 +81,7 @@ return array(
     'App\\Models\\Commission' => $baseDir . '/app/Models/Commission.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
     'App\\Models\\Profit' => $baseDir . '/app/Models/Profit.php',
+    'App\\Models\\Summary' => $baseDir . '/app/Models/Summary.php',
     'App\\Models\\Transaction' => $baseDir . '/app/Models/Transaction.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
