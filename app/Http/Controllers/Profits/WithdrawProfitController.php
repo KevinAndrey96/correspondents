@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Profits;
 use App\Models\Profit;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -17,15 +16,20 @@ class WithdrawProfitController extends Controller
 {
     public function store(Request $request)
     {
-        $user = User::find(Auth::user()->id);
+        $currentUser = User::find(Auth::user()->id);
         $ongoingProfit = Profit::where([
-            ['user_id', '=', $user->id],
+            ['user_id', '=', $currentUser->id],
             ['is_valid', '=', null]
         ])->first();
         if (isset($ongoingProfit)) {
 
             return back()->with('existingProfit', 'Tiene un retiro de ganancia en proceso');
         }
+        if ($request->input('amount') > $currentUser->profit) {
+
+            return back()->with('limitExceeded', 'No tiene esa ganancia');
+        }
+
 
         if (Auth::user()->role != 'Administrator') {
 
@@ -72,10 +76,10 @@ class WithdrawProfitController extends Controller
             $profit->extra = $extra;
             $profit->is_valid = 1;
             $profit->save();
-
             $user = User::find(1);
             $user->profit -= $request->input('amount');
             $user->save();
+
             return redirect('home');
         }
     }

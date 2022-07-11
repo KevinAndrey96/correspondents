@@ -81,6 +81,14 @@
                                         "pageLength": 20,
                                         order: [[1, 'desc']]
                                     });
+                                    $(document).ready(function() {
+                                        $('#my_table').DataTable(
+                                            {
+                                                //"bSort" : false,
+                                                "aaSorting": [],
+                                                "bDestroy": true
+                                            });
+                                    });
                                 } );
                             </script>
                         </div>

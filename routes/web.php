@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled']], function()
     Route::post('/profit/validate', [App\Http\Controllers\Profits\ValidateWithdrawProfitController::class, 'isValid']);
     Route::post('/profit/excel', [App\Http\Controllers\Profits\ExcelExportProfitController::class, 'export']);
 
+
     Route::get('/transactions', [App\Http\Controllers\Transactions\IndexTransactionController::class, 'index']);
     Route::get('/transactions/create', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create']);
     Route::post('/transaction/store', [App\Http\Controllers\Transactions\StoreTransactionController::class, 'store']);
