@@ -63,8 +63,15 @@
                                                             <input id="one_time_password" type="number" style="background-color:lightblue;" class="form-control" name="one_time_password" required autofocus>
                                                         </div>
                                                         <div  class="col-md-6" style="text-align: center;"><button type="submit" class="btn btn-primary">Iniciar sesión</button></div>
-                                                    </div>
+                                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                                            <i class="fas fa-sign-out-alt  me-4"></i>Salir
+                                                        </a></div>
+
                                                     <center>Nota. Si no posee un código pongase en contacto con el administrador</center>
+                                                </form>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                    @csrf
                                                 </form>
                                             </div>
                                         </div>
