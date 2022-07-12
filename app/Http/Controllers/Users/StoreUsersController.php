@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ class StoreUsersController extends Controller
         $user->document = $request->input('document');
         $user->city = $request->input('city');
         $user->address = $request->input('address');
-        //$user->balance = $request->input('balance');
+        $user->google2fa_secret = RegisterController::GENERIC_2FA_SECRET;
         $user->is_enabled = 1;
         if ($request->input('role') == 'Supplier') {
             $user->priority = $request->input('priority');
