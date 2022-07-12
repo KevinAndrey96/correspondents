@@ -543,7 +543,7 @@
                                 document.write(new Date().getFullYear())
                             </script>
                             Desarrollado por
-                            <a href="https://cobol.com.co/" class="font-weight-bold" target="_blank">Cobol Ingeniería</a>
+                            <a href="https://asparecargas.net" class="font-weight-bold" target="_blank">Asparecargas</a>
                             Todos los derechos reservados.
                         </div>
                     </div>
