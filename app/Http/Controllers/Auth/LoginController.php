@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public const GENERIC_SECRET_KEY = "I5U2VVLGELG7EFIA";
+    public const GENERIC_SECRET_KEY = "6QTWIP5ZWKJP5BM7";
 
     /*
     |--------------------------------------------------------------------------

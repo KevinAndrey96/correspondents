@@ -35,10 +35,6 @@ class UpdateUsersController extends Controller
                 return back()->with('unfulfilledRequirements', 'La contraseña debe tener mínimo 7 caracteres, al menos una letra y al menos un número.');
             }
             $user->password = Hash::make($request->input('password'));
-            /**
-             * We reset the 2FA code to set a new in the login
-             */
-            $user->google2fa_secret = LoginController::GENERIC_SECRET_KEY;
         }
         $user->save();
 

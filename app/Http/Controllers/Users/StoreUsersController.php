@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\NoReplyMailable;
 use Illuminate\Support\Facades\Mail;
+use stdClass;
 
 class StoreUsersController extends Controller
 {
@@ -57,7 +58,6 @@ class StoreUsersController extends Controller
         $user->document = $request->input('document');
         $user->city = $request->input('city');
         $user->address = $request->input('address');
-        $user->google2fa_secret = RegisterController::GENERIC_2FA_SECRET;
         $user->is_enabled = 1;
         if ($request->input('role') == 'Supplier') {
             $user->priority = $request->input('priority');
@@ -88,7 +88,7 @@ class StoreUsersController extends Controller
             $user->assignRole('Supplier');
         }
         $receiverEmail = $user->email;
-        $emailBody = new \stdClass();
+        $emailBody = new stdClass();
         $emailBody->sender = 'Asparecargas';
         $emailBody->receiver = $user->name;
         $emailSubject = 'Su cuenta fue creada';
