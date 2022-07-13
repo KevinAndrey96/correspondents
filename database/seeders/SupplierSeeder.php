@@ -16,7 +16,7 @@ class SupplierSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User();
+        /*$user = new User();
         $user->name = "Supplier";
         $user->email = "supplier@gmail.com";
         $user->password = Hash::make('supplier');
@@ -123,6 +123,6 @@ class SupplierSeeder extends Seeder
         $user->is_online = 1;
         $user->balance = 0;
         $user->save();
-        $user->assignRole('Supplier');
+        $user->assignRole('Supplier');*/
     }
 }

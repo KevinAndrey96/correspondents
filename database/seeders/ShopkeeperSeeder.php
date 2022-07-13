@@ -16,7 +16,7 @@ class ShopkeeperSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User();
+        /*$user = new User();
         $user->name = "Shopkeeper";
         $user->email = "shopkeeper@gmail.com";
         $user->password = Hash::make('shopkeeper');
@@ -31,6 +31,6 @@ class ShopkeeperSeeder extends Seeder
         $user->balance = 400000;
         $user->distributor_id = 2;
         $user->save();
-        $user->assignRole('Shopkeeper');
+        $user->assignRole('Shopkeeper');*/
     }
 }

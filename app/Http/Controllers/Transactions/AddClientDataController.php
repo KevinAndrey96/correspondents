@@ -61,11 +61,20 @@ class AddClientDataController extends Controller
                 $transaction->status = $request->input('transactionState');
                 $transaction->detail = $detail;
                 $transaction->save();
-                $suppliers = User::where([
-                                            ['role', '=', 'Supplier'],
-                                            ['is_online', '=', 1],
-                                            ['balance', '>=', $transaction->amount]
-                                            ])->orderBy('priority', 'asc')->get();
+
+                if ($transaction->type === 'Withdrawal') {
+                    $suppliers = User::where([
+                        ['role', '=', 'Supplier'],
+                        ['is_online', '=', 1]
+                    ])->orderBy('priority', 'asc')->get();
+                } else {
+                    $suppliers = User::where([
+                        ['role', '=', 'Supplier'],
+                        ['is_online', '=', 1],
+                        ['balance', '>=', $transaction->amount]
+                    ])->orderBy('priority', 'asc')->get();
+                }
+
                 foreach ($suppliers as $supplier) {
                     $transactions = Transaction::where([
                                                        ['supplier_id', '=', $supplier->id],

@@ -16,7 +16,7 @@ class DistributorSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User();
+        /*$user = new User();
         $user->name = "Distribuidor";
         $user->email = "distributor@gmail.com";
         $user->password = Hash::make('distributor');
@@ -30,6 +30,6 @@ class DistributorSeeder extends Seeder
         $user->is_enabled = 1;
         //$user->balance = 400000;
         $user->save();
-        $user->assignRole('Distributor');
+        $user->assignRole('Distributor');*/
     }
 }

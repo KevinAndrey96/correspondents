@@ -9,7 +9,7 @@ class ProductSeeder extends Seeder
 {
     public function run()
     {
-        $product = new Product();
+        /*$product = new Product();
         $product->product_name = "Bancolombia";
         $product->product_type = "Deposit";
         $product->product_description = "lorem ipsum";
@@ -23,6 +23,6 @@ class ProductSeeder extends Seeder
         $product->account_number = 1;
         $product->code = 0;
         $product->extra = 0;
-        $product->save();
+        $product->save();*/
     }
 }

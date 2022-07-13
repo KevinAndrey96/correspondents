@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Traits;
+
 use App\Models\User;
 use App\Models\Transaction;
 use Carbon\Carbon;
