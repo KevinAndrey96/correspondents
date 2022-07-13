@@ -17,20 +17,25 @@ class SummaryExport implements FromView, ShouldAutoSize
     public function forDateFrom(Carbon $dateFrom)
     {
         $this->dateFrom = $dateFrom;
-        
+
         return $this;
     }
 
     public function forDateTo(Carbon $dateTo)
     {
         $this->dateTo = $dateTo;
-        
+
         return $this;
     }
 
     public function view(): View
     {
         if (Auth::user()->role == 'Shopkeeper' or Auth::user()->role == 'Supplier') {
+            if ($this->dateFrom == $this->dateTo) {
+                return view('balance.summaryExcelExport', [
+                    'summaries' => Summary::where('user_id','=',Auth::user()->id)->where('created_at', $this->dateTo)->get()
+                ]);
+            }
             return view('balance.summaryExcelExport', [
                 'summaries' => Summary::where('user_id','=',Auth::user()->id)->whereBetween('created_at',[$this->dateFrom, $this->dateTo])->get()
             ]);
