@@ -20,10 +20,9 @@ class TwoFAController extends Controller
     {
         $user = Auth::user();
 
-        $registration_data['email'] = $user->id;
+        $registration_data['email'] = $user->email;
         $google2fa = app('pragmarx.google2fa');
 
-        dd($user->google2fa_secret);
         if ($user->google2fa_secret === LoginController::GENERIC_SECRET_KEY) {
             /**
              * First login, we generate new QR code
@@ -37,8 +36,8 @@ class TwoFAController extends Controller
             $user->google2fa_secret = $registration_data['google2fa_secret'];
             $user->save();
             return view('google2fa.register', ['QR_Image' => $QR_Image, 'secret' => $registration_data['google2fa_secret']]);
-        }else {
-            return redirect('/home');
         }
+
+        return redirect('/home');
     }
 }

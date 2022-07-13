@@ -74,13 +74,9 @@ class LoginController extends Controller
 
     /**
      * Send the response after the user was authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     protected function sendLoginResponse(Request $request)
     {
-        //NOT WORKS
         /**
          * User first login
          */

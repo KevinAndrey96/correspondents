@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed|string $city
  * @property mixed|string $address
  * @property int|mixed $is_enabled
- * @property mixed|string $google2fa_secret
+ * @property string $google2fa_secret
  * @property int|mixed $balance
  */
 class User extends Authenticatable

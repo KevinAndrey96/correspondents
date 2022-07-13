@@ -28,7 +28,7 @@ class UpdatePasswordUsersController extends Controller
                 /**
                  * We reset the 2FA code to set a new in the login
                  */
-                $user->google2fa_secret = RegisterController::GENERIC_2FA_SECRET;
+                $user->google2fa_secret = null;
                 $user->save();
 
                 return back()->with('messageSuccess', 'Contraseña modificada con éxito');
