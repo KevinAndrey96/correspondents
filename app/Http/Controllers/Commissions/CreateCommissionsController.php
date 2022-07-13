@@ -44,7 +44,8 @@ class CreateCommissionsController extends Controller
                 $commission->save();
             }
         }
-        $commissions = Commission::where('user_id', '=', $id)->get();
+        $productsExcept = Product::where('is_enabled','=','0')->pluck('id')->toArray();
+        $commissions = Commission::where('user_id', '=', $id)->whereNotIn('product_id',$productsExcept)->get();
 
         return view('commissions.create', compact('commissions', 'user'));
     }

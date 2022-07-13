@@ -93,28 +93,6 @@
                                             <td class="align-middle text-center text-sm">{{ $product->product_description}}</td>
                                         </tr>
                                     @endforeach
-                                    <form id="form-status" name="form-status" method="POST" action="/changeStatusProduct">
-                                        @csrf
-                                        <input type="hidden" name="id" id="id">
-                                        <input type="hidden" name="status" id="status">
-                                    </form>
-                                    <script>
-                                        function getStatus(id)
-                                        {
-                                            var toggle = document.getElementById("togglestatus"+id);
-                                            var status = document.getElementById("status");
-                                            var form = document.getElementById("form-status");
-                                            var product_id = document.getElementById("id");
-
-                                            if (toggle.checked == true) {
-                                                status.value = 1;
-                                            } else {
-                                                status.value = 0;
-                                            }
-                                            product_id.value = id;
-                                            form.submit();
-                                        }
-                                    </script>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModalMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -266,13 +244,6 @@
                                     </div>
                                     <script>
                                         $('#exampleModalMessage').on('show.bs.modal', function (event) {
-                                            /*var button = $(event.relatedTarget)  // Button that triggered the modal
-                                            var recipient = button.data('whatever') // Extract info from data-* attributes
-                                            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                                            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-
-                                            modal.find('.modal-title').text('New message to ' + recipient)
-                                            modal.find('.modal-body input').val(recipient)*/
                                             var button = $(event.relatedTarget)
                                             var whatever = button.data('whatever')
                                             var modal = $(this)
@@ -303,6 +274,28 @@
                                     </script>
                                     </tbody>
                                 </table>
+                                <form id="form-status" name="form-status" method="POST" action="/changeStatusProduct">
+                                        @csrf
+                                        <input type="hidden" name="id" id="id">
+                                        <input type="hidden" name="status" id="status">
+                                </form>
+                                <script>
+                                    function getStatus(id)
+                                    {
+                                        var toggle = document.getElementById("togglestatus"+id);
+                                        var status = document.getElementById("status");
+                                        var form = document.getElementById("form-status");
+                                        var product_id = document.getElementById("id");
+
+                                        if (toggle.checked == true) {
+                                            status.value = 1;
+                                        } else {
+                                            status.value = 0;
+                                        }
+                                        product_id.value = id;
+                                        form.submit();
+                                    }
+                                </script>
                                 <style>
                                     .form-control {
                                         background-color: #f2f2f2 !important ;
