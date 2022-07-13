@@ -32,7 +32,7 @@ class SummaryExport implements FromView, ShouldAutoSize
     {
         if (Auth::user()->role == 'Shopkeeper' or Auth::user()->role == 'Supplier') {
             if ($this->dateFrom == $this->dateTo) {
-                dd($this->dateTo);
+                dd(Summary::where('user_id','=',Auth::user()->id)->whereDate('created_at', '>',$this->dateTo)->get());
                 return view('balance.summaryExcelExport', [
                     'summaries' => Summary::where('user_id','=',Auth::user()->id)->whereDate('created_at', '>',$this->dateTo)->get()
                 ]);
