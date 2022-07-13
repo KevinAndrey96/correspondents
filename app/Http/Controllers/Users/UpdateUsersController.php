@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,6 @@ class UpdateUsersController extends Controller
         $user->document = $request->input('document');
         $user->city = $request->input('city');
         $user->address = $request->input('address');
-        //$user->balance = $request->input('balance');
         if (isset($request->max_queue)) {
             $user->max_queue = $request->input('max_queue');
         }
@@ -34,6 +34,10 @@ class UpdateUsersController extends Controller
                 return back()->with('unfulfilledRequirements', 'La contraseña debe tener mínimo 7 caracteres, al menos una letra y al menos un número.');
             }
             $user->password = Hash::make($request->input('password'));
+            /**
+             * We reset the 2FA code to set a new in the login
+             */
+            $user->google2fa_secret = RegisterController::GENERIC_2FA_SECRET;
         }
         $user->save();
         if (Auth::user()->role == 'Administrator' && $user->role == 'Shopkeeper') {
