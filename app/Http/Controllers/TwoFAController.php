@@ -23,6 +23,7 @@ class TwoFAController extends Controller
         $registration_data['email'] = $user->id;
         $google2fa = app('pragmarx.google2fa');
 
+        dd($user->google2fa_secret);
         if ($user->google2fa_secret === LoginController::GENERIC_SECRET_KEY) {
             /**
              * First login, we generate new QR code
