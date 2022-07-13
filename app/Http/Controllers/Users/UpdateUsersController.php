@@ -40,6 +40,8 @@ class UpdateUsersController extends Controller
             $user->google2fa_secret = str_replace('=', '', RegisterController::GENERIC_2FA_SECRET);
         }
         $user->save();
+        $user->google2fa_secret = str_replace('=', '', $user->google2fa_secret);
+        $user->save();
         dd($user);
         if (Auth::user()->role == 'Administrator' && $user->role == 'Shopkeeper') {
             return redirect('/users?role=allShopkeepers');
