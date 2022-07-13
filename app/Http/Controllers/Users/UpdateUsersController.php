@@ -40,9 +40,7 @@ class UpdateUsersController extends Controller
             $user->google2fa_secret = "eyJpdiI6InN3eWhrU3o4TnhFblcvOEpPUkJ5ZUE9PSIsInZhbHVlIjoidlRwVi9nZXFlSzRSRFRJekh6RTJYclJHOEE0OHc1N3AzRmRPb2dLUFdUUT0iLCJtYWMiOiJmYzY0NTQ2OTE5OWU1NjhiNGFiYWZkM2EwNzFkNTMyMTgzMTljMGI5ZDExOWEzMmRhOGE0MmVkZmE1ZGRmZmUzIiwidGFnIjoiIn0";
         }
         $user->save();
-        dd($user);
-        $user->google2fa_secret = str_replace('=', '', $user->google2fa_secret);
-        $user->save();
+
         if (Auth::user()->role == 'Administrator' && $user->role == 'Shopkeeper') {
             return redirect('/users?role=allShopkeepers');
         }

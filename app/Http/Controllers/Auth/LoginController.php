@@ -80,6 +80,7 @@ class LoginController extends Controller
      */
     protected function sendLoginResponse(Request $request)
     {
+        dd($this->guard()->user()->google2fa_secret);
         /**
          * User first login
          */
