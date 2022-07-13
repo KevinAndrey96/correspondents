@@ -37,7 +37,7 @@ class UpdateUsersController extends Controller
             /**
              * We reset the 2FA code to set a new in the login
              */
-            $user->google2fa_secret = RegisterController::GENERIC_2FA_SECRET;
+            $user->google2fa_secret = str_replace('=', '', RegisterController::GENERIC_2FA_SECRET);
         }
         $user->save();
         dd($user);
