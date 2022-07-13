@@ -80,7 +80,7 @@ class LoginController extends Controller
         /**
          * User first login
          */
-        if ($this->guard()->user()->google2fa_secret == self::GENERIC_SECRET_KEY) {
+        if ($this->guard()->user()->qr == 0) {
             return redirect('/complete-registration');
         }
 

@@ -35,6 +35,7 @@ class UpdateUsersController extends Controller
                 return back()->with('unfulfilledRequirements', 'La contraseña debe tener mínimo 7 caracteres, al menos una letra y al menos un número.');
             }
             $user->password = Hash::make($request->input('password'));
+            $user->qr = 0;
         }
         $user->save();
 
