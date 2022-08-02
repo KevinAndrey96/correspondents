@@ -55,7 +55,7 @@
                                                         </div>
                                                         <div class="pt-4 pb-1 text-center">
                                                             <input type="hidden" name="transaction_id" value="{{$transaction->id}}">
-                                                            <input class="btn btn-success" onclick="return confirm('¿está seguro de realizar la transacción?')"  type="submit" value="Enviar">
+                                                            <input class="btn btn-success" onclick="all(this)"  type="submit" value="Enviar">
                                                         </div>
                                                     </form>
                                                 @endif
@@ -97,6 +97,18 @@
                                                         </div>
                                                 @endif
                                                 </div>
+                                                <script>
+                                                    function all(button) {
+                                                        function blockButton(button);
+                                                        function conf();    
+                                                    }
+                                                    function blockButton(button) {
+                                                        button.disabled = true; 
+                                                    }
+                                                    function conf() {
+                                                        return confirm('¿está seguro de realizar la transacción?');
+                                                    }
+                                                </script>
                                               </div>
                                             </li>
                                         </ul>

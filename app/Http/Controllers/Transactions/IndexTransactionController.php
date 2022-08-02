@@ -33,7 +33,7 @@ class IndexTransactionController extends Controller
             }
         }
         if (Auth::user()->role == 'Administrator') {
-            $transactions = Transaction::orderBy('created_at', 'desc')->get();
+            $transactions = Transaction::all()->sortByDesc('created_at');//->orderBy('created_at', 'desc')->get();
 
             return view('transactions.index', compact('transactions'));
         }
