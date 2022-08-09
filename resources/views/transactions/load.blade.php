@@ -51,7 +51,8 @@
                                  @endif
                                </p></p>
                                 <p class="mb-1 text-xs font-weight-bold text-dark">Producto: <p class=" mb-2 text-xs font-weight-bold">{{$transaction->product->product_name}}</p></p>
-                                </div>
+                                <p class="mb-1 text-xs font-weight-bold text-dark">ID de proveedor: <p class=" mb-2 text-xs font-weight-bold" id="supplierID">{{$transaction->supplier_id}}</p></p>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-6 text-center aling-content-middel" id="divStatus" style="margin-right:auto; margin-left:auto">
                                     <p class="text-center text-white text-sm p-2" id="pStatus" style="background-color:#E7B615; width:100%; border-radius: 10px;">En espera</p>
@@ -152,6 +153,8 @@
     {
         var pStatus = document.getElementById('pStatus');
         var divStatus = document.getElementById('divStatus');
+        var pSupplierID = document.getElementById('supplierID');
+
         axios.get('https://corresponsales.asparecargas.net/api/getStatus/'+id)
             .then((res)=> {
                     if (res.data.status == 'hold') {
@@ -167,6 +170,10 @@
                         //pStatus.innerHTML = 'Exitosa';
                         //pStatus.style.backgroundColor = 'green';
                     }
+                    pSupplierID.innerHTML = res.data.supplier_id;
+
+
+
             });
     }
 

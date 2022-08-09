@@ -14,7 +14,7 @@ trait ReasignTransaction
         $transactions = Transaction::where('status', '=', 'hold')->get();
             foreach ($transactions as $transaction) {
                 $diffMinutes = $transaction->created_at->diffInMinutes(Carbon::now());
-                if ($diffMinutes >= 4) {
+                if ($diffMinutes >= 1) {
                     $supplier = User::find($transaction->supplier_id);
                     if (! is_null($supplier)) {
                         $supplier->is_online = 0;
@@ -46,5 +46,6 @@ trait ReasignTransaction
                     }
                 }
             }
+            print("Cron ejecutado correctamente");
         }
 }
