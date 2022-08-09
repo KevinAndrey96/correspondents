@@ -43,7 +43,7 @@ class AddClientDataController extends Controller
                 $distributorID = Auth::user()->distributor_id;
                 $transaction = new Transaction();
                 //$transaction->date = substr(Carbon::now(), 9, 17);
-                $transaction->date = Carbon::now();
+                $transaction->date = Carbon::now()->toDateTimeString();
                 $dailyTransaction = Transaction::where([
                     ['account_number', '=', $request->input('accountNumber')],
                     ['date', '=', substr($transaction->date, 0, -9)]
@@ -61,6 +61,8 @@ class AddClientDataController extends Controller
                 $transaction->status = $request->input('transactionState');
                 $transaction->detail = $detail;
                 $transaction->save();
+                //$transaction->date = $transaction->created_at;
+                //$transaction->save();
 
                 if ($transaction->type === 'Withdrawal') {
                     $suppliers = User::where([

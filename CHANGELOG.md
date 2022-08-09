@@ -12,5 +12,8 @@ fix: implement security in users edit
 ## [Hotfix 1.0.4]
 fix: balance dynamic was fixed
 
+## [Hotfix 1.0.5]
+fix: supplier time
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
