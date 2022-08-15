@@ -5,6 +5,11 @@
             {{ Session::get('deniedAccess') }}
         </div>
     @endif
+    @if(Session::has('transactionAccepted'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('transactionAccepted') }}
+        </div>
+    @endif
     @hasrole('Administrator')
     <div class="container-fluid py-4">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
