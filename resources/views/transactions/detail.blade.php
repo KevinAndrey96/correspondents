@@ -37,7 +37,7 @@
                                                         @endforeach
                                                 </div>
                                                 <div class="col-md-8 ms-auto text-end ps-6">
-                                                    <form method="POST" action="/transaction/update" enctype="multipart/form-data">
+                                                    <form method="POST" action="/transaction/update" id="updateForm" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="pb-3 text-end d-flex flex-column">
                                                             <label>Subir la imagen del recibo generado:</label>
@@ -55,7 +55,7 @@
                                                         </div>
                                                         <div class="pt-4 pb-1 text-center">
                                                             <input type="hidden" name="transaction_id" value="{{$transaction->id}}">
-                                                            <input class="btn btn-success" onclick="all(this)"  type="submit" value="Enviar">
+                                                            <input class="btn btn-success" id="submitButton" onclick="hideButton()"  type="submit" value="Enviar">
                                                         </div>
                                                     </form>
                                                 @endif
@@ -98,16 +98,19 @@
                                                 @endif
                                                 </div>
                                                 <script>
-                                                    function all(button) {
-                                                        function blockButton(button);
-                                                        function conf();    
+                                                    function hideButton()
+                                                    {
+                                                        var subButton = document.getElementById('submitButton');
+                                                        var form = document.getElementById('updateForm');
+                                                        form.submit();
+                                                        subButton.disabled = true;
                                                     }
-                                                    function blockButton(button) {
-                                                        button.disabled = true; 
-                                                    }
+                                                    /*
                                                     function conf() {
                                                         return confirm('¿está seguro de realizar la transacción?');
                                                     }
+
+                                                    */
                                                 </script>
                                               </div>
                                             </li>
