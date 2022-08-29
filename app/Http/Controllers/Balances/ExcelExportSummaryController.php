@@ -14,8 +14,9 @@ class ExcelExportSummaryController extends Controller
     {
         $dateFrom = $request->input('dateFrom');
         $dateTo = $request->input('dateTo');
-        $dateFrom = Carbon::parse($dateFrom);
-        $dateTo = Carbon::parse($dateTo);
-        return (new SummaryExport)->forDateFrom($dateFrom)->forDateTo($dateTo)->download('Extracto-desde-'.$dateFrom->format('d-m-Y').'-hasta-'.$dateTo->format('d-m-Y').'.xlsx');
+        //$dateFrom = Carbon::parse($dateFrom);
+        //$dateTo = Carbon::parse($dateTo);
+        //return (new SummaryExport)->forDateFrom($dateFrom)->forDateTo($dateTo)->download('Extracto-desde-'.$dateFrom->format('d-m-Y').'-hasta-'.$dateTo->format('d-m-Y').'.xlsx');
+        return (new SummaryExport)->forDateFrom($dateFrom)->forDateTo($dateTo)->download('Extracto-desde-'.$dateFrom.'-hasta-'.$dateTo.'.xlsx');
     }
 }
