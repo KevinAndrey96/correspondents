@@ -28,13 +28,13 @@ class ValidateBalanceController extends Controller
                 $emailBody->sender = 'Asparecargas';
                 $emailBody->receiver = $user->name;
 
-                $summary = new Summary();
-                $summary->movement_id = $balance->id;
-                $summary->user_id = $balance->user_id;
-                $summary->amount = $balance->amount;
-                $summary->previous_balance = $user->balance;
-
                 if($balance->is_valid == 1){
+                    $summary = new Summary();
+                    $summary->movement_id = $balance->id;
+                    $summary->user_id = $balance->user_id;
+                    $summary->amount = $balance->amount;
+                    $summary->previous_balance = $user->balance;
+
                     if($balance->type == 'Deposit'){
                         $user->balance = $user->balance+$balance->amount;
                         $emailBody->body = 'Su solicitud de recarga de saldo por valor de $'.$balance->amount.' fue aprobada.';
@@ -46,14 +46,14 @@ class ValidateBalanceController extends Controller
                     }
                     $summary->next_balance = $user->balance;
                     $emailSubject = 'Solicitud de saldo aprobada';
+                    $summary->save();
                 }else{
                     $emailSubject = 'Solicitud de saldo rechazada';
                     $emailBody->body = 'La solicitud de recarga de saldo #'.$balance->id.' por valor de $'.$balance->amount.' fue rechazada a consideración de un administrador.';
                 }
-                Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
                 $user->save();
-                $summary->save();
-                
+                Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
+
                 return back();
             }
         }

@@ -15,6 +15,7 @@ class AddBalanceShopkeeperController extends Controller
 {
     public function store(Request $request)
     {
+        date_default_timezone_set('America/Bogota');
         if (Auth::user()->role == 'Shopkeeper' or Auth::user()->role == 'Supplier') {
             $fields = [
                 'amount'=>'required|numeric|min:0',
@@ -29,7 +30,6 @@ class AddBalanceShopkeeperController extends Controller
             $balance = new Balance();
             $balance->user_id = Auth::user()->id;
             $balance->amount = $request->input('amount');
-            date_default_timezone_set('America/Bogota');
             $balance->date = $date;
             $balance->type = 'Deposit';
             $balance->save();
@@ -55,7 +55,7 @@ class AddBalanceShopkeeperController extends Controller
                 $balance->save();
                 unlink(str_replace('\\', '/', storage_path('app/public/balances/'.$balance->id.'.png')));
             }
-    
+
             return redirect('home');
         }
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Balances;
 
 use App\Models\Balance;
 use App\Models\User;
+use App\Models\Summary;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,7 @@ class AddBalanceAdminController extends Controller
                 'amount.max'=>'El monto no puede ser mayor a :max',
             ];
             $this->validate($request, $fields, $message);
-    
+
             $date = Carbon::now();
             $balance = new Balance();
             $balance->user_id = $request->input('userID');
@@ -45,6 +46,16 @@ class AddBalanceAdminController extends Controller
             $balance->comment = $request->input('comment');
             $balance->is_valid = 1;
             $balance->save();
+
+            /*
+            $summary = new Summary();
+            $summary->user_id = $request->input('userID');
+            $summary->amount = $balance->amount;
+            $summary->previous_balance = $user->balance;
+            $summary->movement_type = 'Deposito Realizado';
+            $summary->next_balance = $user->balance + $balance->amount;
+            $summary->save();
+            */
             if ($request->hasFile('image')) {
                 $pathName = Sprintf('balances/%s.png', $balance->id);
                 Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
@@ -67,8 +78,8 @@ class AddBalanceAdminController extends Controller
                 $balance->save();
                 unlink(str_replace('\\', '/', storage_path('app/public/balances/'.$balance->id.'.png')));
             }
-            
-            
+
+
             $receiverEmail = $user->email;
             $emailBody = new \stdClass();
             $emailBody->sender = 'Asparecargas';
@@ -85,7 +96,7 @@ class AddBalanceAdminController extends Controller
             }
             $user->save();
             Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
-    
+
             return back();
         }
     }
