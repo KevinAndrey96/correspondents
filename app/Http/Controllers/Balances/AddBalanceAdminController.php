@@ -47,15 +47,23 @@ class AddBalanceAdminController extends Controller
             $balance->is_valid = 1;
             $balance->save();
 
-            /*
             $summary = new Summary();
             $summary->user_id = $request->input('userID');
             $summary->amount = $balance->amount;
             $summary->previous_balance = $user->balance;
-            $summary->movement_type = 'Deposito Realizado';
-            $summary->next_balance = $user->balance + $balance->amount;
+
+            if ($request->input('type') == 'Deposit') {
+                $summary->movement_type = 'Recarga de Saldo ';
+                $summary->next_balance = $user->balance + $balance->amount;
+            }
+
+            if ($request->input('type') == 'Withdrawal') {
+                $summary->movement_type = 'Retiro por Administrador ';
+                $summary->next_balance = $user->balance - $balance->amount;
+            }
+
             $summary->save();
-            */
+
             if ($request->hasFile('image')) {
                 $pathName = Sprintf('balances/%s.png', $balance->id);
                 Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
