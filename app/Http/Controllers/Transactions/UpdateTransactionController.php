@@ -17,37 +17,40 @@ use Symfony\Component\HttpFoundation\Request as RequestAlias;
 
 class UpdateTransactionController extends Controller
 {
+    private const SUCCESSFUL_STATUS = 'successful';
+
     public function update(Request $request)
     {
         try {
             date_default_timezone_set('America/Bogota');
             $transaction = Transaction::find($request->input('transaction_id'));
-            if (Summary::where('movement_id', $transaction->id)->first() === null) {
-                $transaction->status = $request->input('status');
+            if ($transaction->status !== self::SUCCESSFUL_STATUS
+                && Summary::where('movement_id', $transaction->id)->first() === null) {
+                $transaction->status = self::SUCCESSFUL_STATUS;
                 $transaction->comment = $request->input('comment');
                 $transaction->save();
-                if ($request->hasFile('voucher')) {
-                    $pathName = Sprintf('voucher_images/%s.png', $transaction->id);
-                    Storage::disk('public')->put($pathName, file_get_contents($request->file('voucher')));
-                    $client = new Client();
-                    $url = "https://corresponsales.asparecargas.net/upload.php";
-                    $client->request(RequestAlias::METHOD_POST, $url, [
-                        'multipart' => [
-                            [
-                                'name' => 'image',
-                                'contents' => fopen(
-                                    str_replace('\\', '/', Storage::path('public\voucher_images\\' . $transaction->id . '.png')), 'r')
-                            ],
-                            [
-                                'name' => 'path',
-                                'contents' => 'voucher_images'
+                if ($transaction->status === self::SUCCESSFUL_STATUS) {
+                    if ($request->hasFile('voucher')) {
+                        $pathName = Sprintf('voucher_images/%s.png', $transaction->id);
+                        Storage::disk('public')->put($pathName, file_get_contents($request->file('voucher')));
+                        $client = new Client();
+                        $url = "https://corresponsales.asparecargas.net/upload.php";
+                        $client->request(RequestAlias::METHOD_POST, $url, [
+                            'multipart' => [
+                                [
+                                    'name' => 'image',
+                                    'contents' => fopen(
+                                        str_replace('\\', '/', Storage::path('public\voucher_images\\' . $transaction->id . '.png')), 'r')
+                                ],
+                                [
+                                    'name' => 'path',
+                                    'contents' => 'voucher_images'
+                                ]
                             ]
-                        ]
-                    ]);
-                    $transaction->voucher = '/storage/voucher_images/' . $transaction->id . '.png';
-                    $transaction->save();
-                }
-                if ($transaction->status == 'successful') {
+                        ]);
+                        $transaction->voucher = '/storage/voucher_images/' . $transaction->id . '.png';
+                        $transaction->save();
+                    }
                     $commissionShop = Commission::where([
                         ['user_id', '=', $transaction->shopkeeper_id],
                         ['product_id', '=', $transaction->product_id]
@@ -134,6 +137,7 @@ class UpdateTransactionController extends Controller
             return redirect('/transactions');
         }catch (Exception $e) {
             echo $e->getMessage();
+            return redirect('/transactions');
         }
     }
 }
