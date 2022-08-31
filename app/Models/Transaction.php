@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Product;
 
+/**
+ * @method static find($id)
+ */
 class Transaction extends Model
 {
     use HasFactory;

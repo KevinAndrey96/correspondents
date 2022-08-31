@@ -39,20 +39,19 @@
                 @if($transaction->status == 'successful')
                     Exitoso
                 @endif
-                @if($transaction->product->product_type == 'failed')
+                @if($transaction->status == 'failed')
                     Fallido
                 @endif
-                @if($transaction->product->product_type == 'cancelled')
+                @if($transaction->status == 'cancelled')
                     Cancelado
                 @endif
-                @if($transaction->product->product_type == 'hold')
+                @if($transaction->status == 'hold')
                     En Espera
                 @endif
             </td>
             <td>{{$transaction->created_at}}</td>
             <td>{{$transaction->account_number}}</td>
             <td>{{$transaction->detail}}</td>
-
         </tr>
         @endforeach
     </tbody>
