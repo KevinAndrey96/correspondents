@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Commission;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @method static find(mixed $productID)
+ */
 class Product extends Model
 {
     use HasFactory;
