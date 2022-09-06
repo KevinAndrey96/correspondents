@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TwoFAController;
+use App\Http\Middleware\IsenabledMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -94,7 +95,9 @@ Route::middleware(['2fa'])->group(function () {
     /**
      * Route for controller {@link HomeController}
      */
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])
+        ->name('home')
+        ->middleware(IsenabledMiddleware::class);
     Route::post('/2fa', static function () {
         return redirect(route('home'));
     })->name('2fa');
