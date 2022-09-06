@@ -19,38 +19,44 @@ class UpdateTransactionController extends Controller
 {
     private const SUCCESSFUL_STATUS = 'successful';
 
+    private const FAILURE_STATUS = 'failure';
+
     public function update(Request $request)
     {
         try {
             date_default_timezone_set('America/Bogota');
             $transaction = Transaction::find($request->input('transaction_id'));
-            if ($transaction->status !== self::SUCCESSFUL_STATUS
-                && Summary::where('movement_id', $transaction->id)->first() === null) {
-                $transaction->status = self::SUCCESSFUL_STATUS;
+            if (
+                $transaction->status !== self::SUCCESSFUL_STATUS
+                && $transaction->status !== self::FAILURE_STATUS
+                && Summary::where('movement_id', $transaction->id)->first() === null
+            ) {
+                $transaction->status = $request->input('status');
                 $transaction->comment = $request->input('comment');
                 $transaction->save();
-                if ($transaction->status === self::SUCCESSFUL_STATUS) {
-                    if ($request->hasFile('voucher')) {
-                        $pathName = Sprintf('voucher_images/%s.png', $transaction->id);
-                        Storage::disk('public')->put($pathName, file_get_contents($request->file('voucher')));
-                        $client = new Client();
-                        $url = "https://corresponsales.asparecargas.net/upload.php";
-                        $client->request(RequestAlias::METHOD_POST, $url, [
-                            'multipart' => [
-                                [
-                                    'name' => 'image',
-                                    'contents' => fopen(
-                                        str_replace('\\', '/', Storage::path('public\voucher_images\\' . $transaction->id . '.png')), 'r')
-                                ],
-                                [
-                                    'name' => 'path',
-                                    'contents' => 'voucher_images'
-                                ]
+
+                if ($request->hasFile('voucher')) {
+                    $pathName = Sprintf('voucher_images/%s.png', $transaction->id);
+                    Storage::disk('public')->put($pathName, file_get_contents($request->file('voucher')));
+                    $client = new Client();
+                    $url = "https://corresponsales.asparecargas.net/upload.php";
+                    $client->request(RequestAlias::METHOD_POST, $url, [
+                        'multipart' => [
+                            [
+                                'name' => 'image',
+                                'contents' => fopen(
+                                    str_replace('\\', '/', Storage::path('public\voucher_images\\' . $transaction->id . '.png')), 'r')
+                            ],
+                            [
+                                'name' => 'path',
+                                'contents' => 'voucher_images'
                             ]
-                        ]);
-                        $transaction->voucher = '/storage/voucher_images/' . $transaction->id . '.png';
-                        $transaction->save();
-                    }
+                        ]
+                    ]);
+                    $transaction->voucher = '/storage/voucher_images/' . $transaction->id . '.png';
+                    $transaction->save();
+                }
+                if ($transaction->status == self::SUCCESSFUL_STATUS) {
                     $commissionShop = Commission::where([
                         ['user_id', '=', $transaction->shopkeeper_id],
                         ['product_id', '=', $transaction->product_id]
@@ -75,8 +81,6 @@ class UpdateTransactionController extends Controller
                     $supplier = User::find($transaction->supplier_id);
                     $distributor = User::find($transaction->distributor_id);
                     $shopkeeper = User::find($transaction->shopkeeper_id);
-                    //$com_adm = $transaction->product->product_commission -
-                    //  ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup);
 
                     if (isset($commissionSupp)) {
                         $supplier->profit = $supplier->profit + $commissionSupp->amount;
@@ -133,8 +137,8 @@ class UpdateTransactionController extends Controller
                     $supplierSummary->save();
                     $shopkeeperSummary->save();
                 }
+                return redirect('/transactions');
             }
-            return redirect('/transactions');
         }catch (Exception $e) {
             echo $e->getMessage();
             return redirect('/transactions');
