@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Transactions;
 
 use App\Http\Controllers\Controller;
-use App\Mail\NoReplyMailable;
 use Exception;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Commission;
@@ -14,7 +12,6 @@ use App\Models\User;
 use App\Models\Balance;
 use App\Models\Summary;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Request as RequestAlias;
 
@@ -43,8 +40,8 @@ class UpdateTransactionController extends Controller
                     Storage::disk('public')->put($pathName, file_get_contents($request->file('voucher')));
                     $client = new Client();
                     $url = "https://corresponsales.asparecargas.net/upload.php";
-                    try {
-                        $response1 = $client->request(RequestAlias::METHOD_POST, $url, [
+
+                        $client->request(RequestAlias::METHOD_POST, $url, [
                             'multipart' => [
                                 [
                                     'name' => 'image',
@@ -63,27 +60,7 @@ class UpdateTransactionController extends Controller
                                 ]
                             ]
                         ]);
-                        $response2 = $client->request(RequestAlias::METHOD_POST, $url, [
-                            'multipart' => [
-                                [
-                                    'name' => 'image',
-                                    'contents' => fopen($request->file('voucher')?->getRealPath(), 'r')
-                                ],
-                                [
-                                    'name' => 'path',
-                                    'contents' => 'voucher_images'
-                                ]
-                            ]
-                        ]);
 
-                        $res_json = $response1->getBody()->getContents();
-                        $res_json .= " ---------- " . $response2->getBody()->getContents();
-
-                        Mail::to("kaherreras@unal.edu.co")->send(new NoReplyMailable($res_json, "Depuración imágen subida a servidor"));
-
-                    } catch (GuzzleException $e) {
-                        Mail::to("kaherreras@unal.edu.co")->send(new NoReplyMailable($e->getMessage(), "ERROR ENVIANDO IMAGEN EXCEPCION"));
-                    }
                     $transaction->voucher = '/storage/voucher_images/' . $transaction->id . '.png';
                     $transaction->save();
                 }
@@ -115,11 +92,11 @@ class UpdateTransactionController extends Controller
                     $shopkeeper = User::find($transaction->shopkeeper_id);
 
                     if (isset($commissionSupp)) {
-                        $supplier->profit = $supplier->profit + $commissionSupp->amount;
+                        $supplier->profit += $commissionSupp->amount;
                     }
                     $administrator->profit += $transaction->com_adm;
                     $distributor->profit = $distributor->profit + $commissionDist->amount - $commissionShop->amount;
-                    $shopkeeper->profit = $shopkeeper->profit + $commissionShop->amount;
+                    $shopkeeper->profit += $commissionShop->amount;
 
                     $supplierBalance = new Balance();
                     $shopkeeperBalance = new Balance();
@@ -139,7 +116,7 @@ class UpdateTransactionController extends Controller
                     $supplierSummary->user_id = $supplier->id;
                     $supplierSummary->amount = $transaction->amount;
                     $supplierSummary->previous_balance = $supplier->balance;
-                    if ($transaction->type == 'Withdrawal') {
+                    if ($transaction->type === 'Withdrawal') {
                         $shopkeeper->balance += $transaction->amount;
                         $supplier->balance += $transaction->amount;
                         $shopkeeperBalance->type = 'Deposit';
@@ -147,7 +124,7 @@ class UpdateTransactionController extends Controller
                         $supplierSummary->movement_type = 'Retiro Realizado';
                         $shopkeeperSummary->movement_type = 'Retiro Realizado';
                     }
-                    if ($transaction->type == 'Deposit') {
+                    if ($transaction->type === 'Deposit') {
                         $shopkeeper->balance -= $transaction->amount;
                         $supplier->balance -= $transaction->amount;
                         $shopkeeperBalance->type = 'Withdrawal';

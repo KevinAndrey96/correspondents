@@ -55,7 +55,7 @@
                                                         </div>
                                                         <div class="pt-4 pb-1 text-center">
                                                             <input type="hidden" name="transaction_id" value="{{$transaction->id}}">
-                                                            <input class="btn btn-success" id="submitButton" onclick="hideButton()"  type="submit" value="Enviar">
+                                                            <input class="btn btn-success" id="submitButton" onclick="hideButton()" type="submit" value="Enviar">
                                                         </div>
                                                     </form>
                                                 @endif
