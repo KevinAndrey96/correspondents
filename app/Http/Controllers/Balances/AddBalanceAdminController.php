@@ -87,7 +87,6 @@ class AddBalanceAdminController extends Controller
                 unlink(str_replace('\\', '/', storage_path('app/public/balances/'.$balance->id.'.png')));
             }
 
-
             $receiverEmail = $user->email;
             $emailBody = new \stdClass();
             $emailBody->sender = 'Asparecargas';
