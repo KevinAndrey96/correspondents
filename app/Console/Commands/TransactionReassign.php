@@ -5,6 +5,10 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Traits\ReassignTransaction;
 
+/**
+ * To Execute in Cpanel is necessary write this command
+ * /usr/local/bin/ea-php80 -d "disable_functions=" /home/corresponsal/repositories/correspondents/artisan schedule:run
+ */
 class TransactionReassign extends Command
 {
     use ReassignTransaction;

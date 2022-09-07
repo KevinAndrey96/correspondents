@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('transaction:reassign')
             ->everyMinute()
             ->timezone('America/Bogota')
-            ->emailOutputTo('kaherreras@unal.edu.co', true);
+            ->emailOutputTo('aspasoluciones@gmail.com', true);
     }
 
     /**
