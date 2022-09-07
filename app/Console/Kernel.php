@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('transaction:reassign')
-            ->everyMinute()
+            ->everyFiveMinutes()
             ->timezone('America/Bogota')
             ->emailOutputTo('aspasoluciones@gmail.com', true);
     }
