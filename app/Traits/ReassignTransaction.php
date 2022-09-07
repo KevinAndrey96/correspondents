@@ -14,6 +14,7 @@ trait ReassignTransaction
         $output = '';
         date_default_timezone_set('America/Bogota');
         $transactions = Transaction::where('status', '=', 'hold')->get();
+        $existsTransactions = $transactions->count() !== 0;
 
         $output .= 'Transacciones en este momento:
         ';
@@ -41,7 +42,7 @@ trait ReassignTransaction
                 if (! is_null($supplier)) {
                     $supplier->is_online = 0;
                     $supplier->save();
-                    $output .= 'Actual proveedor: ' . $supplier->id . ' - ' . $supplier->name . ' ...APAGANDO PROVEEDOR...
+                    $output .= 'Actual proveedor: #' . $supplier->id . ' - ' . $supplier->name . ' ...APAGANDO PROVEEDOR...
                     ';
                 }
 
@@ -64,7 +65,7 @@ trait ReassignTransaction
                 $output .= 'PROVEEDORES ENCONTRADOS' . ' ...EVALUANDO PARA REASIGNARLE ESTA TRANSACCIÓN...
                 ';
                 foreach ($users as $user) {
-                    $output .= 'Evaluando proveedor #' . $user->id . ' ' . $user->name . '
+                    $output .= 'Evaluando proveedor #' . $user->id . ' - ' . $user->name . '
                     ';
                     $transactions = Transaction::where([
                         ['supplier_id', '=', $user->id],
@@ -85,7 +86,7 @@ trait ReassignTransaction
                     }
                 }
 
-                if (!$wasReassigned) {
+                if (! $wasReassigned) {
                     $transaction->supplier_id = null;
                     $transaction->status = 'cancelled';
                     $transaction->save();
@@ -109,7 +110,7 @@ trait ReassignTransaction
 
         ';
 
-        if ($transactions->count() !== 0) {
+        if ($existsTransactions) {
             print($output);
         }
     }
