@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('transaction:reasign')->everyFiveMinutes()->timezone('America/Bogota');
+        $schedule->command('transaction:reassign')->everyThreeMinutes()->timezone('America/Bogota');
     }
 
     /**

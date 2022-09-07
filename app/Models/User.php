@@ -11,7 +11,6 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @method static where(string $string, string $string1, string $string2)
  * @property mixed|string $name
  * @property mixed|string $email
  * @property mixed|string $password
