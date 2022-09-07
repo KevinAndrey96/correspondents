@@ -16,12 +16,12 @@ class CancelTransactionController extends Controller
         if ($transaction->status === 'hold') {
             $transaction->status = 'cancelled';
             $transaction->save();
-            return redirect('/transactions/create')->with(
+            return redirect('/transactions?id=record')->with(
                 'cancelTransactionSuccess',
                 'Se ha cancelado la transacción'
             );
         }
-        return redirect('/transactions/create')->with(
+        return redirect('/transactions?id=record')->with(
             'cancelTransactionSuccess',
             'No se ha podido cancelar la transacción ya que esta fue tomada por un proveedor'
         );

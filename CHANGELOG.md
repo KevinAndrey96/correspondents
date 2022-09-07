@@ -15,5 +15,8 @@ fix: balance dynamic was fixed
 ## [Hotfix 1.0.5]
 fix: supplier time
 
+## [Hotfix 1.0.6]
+fix: redirect to transaction's index since admin was fixed
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
