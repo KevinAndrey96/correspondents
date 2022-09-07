@@ -1,14 +1,14 @@
 <?php
-    $targetDir = Sprintf('storage/%s/', $_POST['path']);
-    if (!mkdir($targetDir, 0755) && !is_dir($targetDir)) {
+    $targetDir = sprintf('storage/%s/', $_POST['path']);
+    if (!is_dir($targetDir) && !mkdir($targetDir, 0755) && !is_dir($targetDir)) {
         throw new RuntimeException(sprintf('Directory "%s" was not created', $targetDir));
     }
-    $targetFile = Sprintf('%s%s', $targetDir, basename($_FILES["image"]["name"]));
+    $targetFile = sprintf('%s%s', $targetDir, basename($_FILES["image"]["name"]));
     $uploadOk = true;
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    //$imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
     // Check if image file is an actual image or fake image
-    if(isset($_FILE["image"])) {
+    /*if(isset($_FILE["image"])) {
         $check = getimagesize($_FILES["image"]["tmp_name"]);
         if($check !== false) {
             echo "File is an image - " . $check["mime"] . ".";
@@ -17,7 +17,7 @@
             echo "File is not an image.";
             $uploadOk = 0;
         }
-    }
+    }*/
 
     // Check if file already exists
     /*if (file_exists($targetFile)) {
@@ -26,10 +26,10 @@
     }*/
 
     // Check file size
-    if ($_FILES["image"]["size"] > 500000) {
+    /*if ($_FILES["image"]["size"] > 500000) {
       echo "Sorry, your file is too large.";
       $uploadOk = 0;
-    }
+    }*/
 
     // Allow certain file formats
     /*if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"

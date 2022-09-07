@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Transactions;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NoReplyMailable;
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Commission;
@@ -12,6 +14,7 @@ use App\Models\User;
 use App\Models\Balance;
 use App\Models\Summary;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Request as RequestAlias;
 
@@ -36,27 +39,56 @@ class UpdateTransactionController extends Controller
                 $transaction->save();
 
                 if ($request->hasFile('voucher')) {
-                    $pathName = Sprintf('voucher_images/%s.png', $transaction->id);
+                    $pathName = sprintf('voucher_images/%s.png', $transaction->id);
                     Storage::disk('public')->put($pathName, file_get_contents($request->file('voucher')));
                     $client = new Client();
                     $url = "https://corresponsales.asparecargas.net/upload.php";
-                    $client->request(RequestAlias::METHOD_POST, $url, [
-                        'multipart' => [
-                            [
-                                'name' => 'image',
-                                'contents' => fopen(
-                                    str_replace('\\', '/', Storage::path('public\voucher_images\\' . $transaction->id . '.png')), 'r')
-                            ],
-                            [
-                                'name' => 'path',
-                                'contents' => 'voucher_images'
+                    try {
+                        $response1 = $client->request(RequestAlias::METHOD_POST, $url, [
+                            'multipart' => [
+                                [
+                                    'name' => 'image',
+                                    'contents' => fopen(
+                                        str_replace(
+                                            '\\',
+                                            '/',
+                                            Storage::path('public\voucher_images\\' . $transaction->id . '.png')
+                                        ),
+                                        'r'
+                                    )
+                                ],
+                                [
+                                    'name' => 'path',
+                                    'contents' => 'voucher_images'
+                                ]
                             ]
-                        ]
-                    ]);
+                        ]);
+                        $response2 = $client->request(RequestAlias::METHOD_POST, $url, [
+                            'multipart' => [
+                                [
+                                    'name' => 'image',
+                                    'contents' => fopen($request->file('voucher')?->getRealPath(), 'r')
+                                ],
+                                [
+                                    'name' => 'path',
+                                    'contents' => 'voucher_images'
+                                ]
+                            ]
+                        ]);
+
+                        $res_json = $response1->getBody()->getContents();
+                        $res_json .= " ---------- " . $response2->getBody()->getContents();
+
+                        Mail::to("kaherreras@unal.edu.co")->send(new NoReplyMailable($res_json, "Depuración imágen subida a servidor"));
+
+                    } catch (GuzzleException $e) {
+                        Mail::to("kaherreras@unal.edu.co")->send(new NoReplyMailable($e->getMessage(), "ERROR ENVIANDO IMAGEN EXCEPCION"));
+                    }
                     $transaction->voucher = '/storage/voucher_images/' . $transaction->id . '.png';
                     $transaction->save();
                 }
-                if ($transaction->status == self::SUCCESSFUL_STATUS) {
+
+                if ($transaction->status === self::SUCCESSFUL_STATUS) {
                     $commissionShop = Commission::where([
                         ['user_id', '=', $transaction->shopkeeper_id],
                         ['product_id', '=', $transaction->product_id]
