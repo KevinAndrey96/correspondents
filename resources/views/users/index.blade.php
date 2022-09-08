@@ -50,7 +50,7 @@
                                 @foreach ($users as $user)
                                     <tr>
                                         <td class="align-middle text-center text-sm">
-                                            @if (isset($user->is_online) && $user->is_online === 1)
+                                            @if ($user->is_online == 1)
                                                 <span class="badge badge-sm bg-gradient-success">En Línea</span>
                                             @else
                                                 <span class="badge badge-sm bg-gradient-secondary">Fuera de Línea</span>
