@@ -26,8 +26,11 @@ trait ReassignTransaction
         foreach ($transactions as $transaction) {
             $wasReassigned = false;
             ++$transactionCounter;
-            // Encontramos hace cuantos mínutos se creo esta transacción ya que si se creo hace menos de 1 minuto
-            // No es pertinente reasignarla.
+
+            /**
+             * Encontramos hace cuantos mínutos se creo esta transacción ya que si se creo hace menos de 1 minuto
+             * No es pertinente reasignarla.
+             */
             $diffMinutes = $transaction->created_at->diffInMinutes(Carbon::now());
 
             $output .= 'Transacción #' . $transactionCounter . '
@@ -46,6 +49,7 @@ trait ReassignTransaction
                     ';
                 }
 
+                //TODO Aquí valida el saldo pero no el tipo de transacción
                 $users = User::where([
                     ['role', 'Supplier'],
                     ['is_online', 1],

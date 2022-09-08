@@ -27,7 +27,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bloq/Desbl</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Eliminar</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
                                         @if ($role == 'allShopkeepers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Distribuidor</th>
