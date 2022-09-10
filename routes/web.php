@@ -76,13 +76,14 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled']], function()
     Route::post('/changeStatusUser', [App\Http\Controllers\Users\ChangeStatusUsersController::class, 'changeStatus']);
     Route::get('/changePassword', [App\Http\Controllers\Users\ChangePasswordUsersController::class, 'changePassword']);
     Route::post('/updatePassword', [App\Http\Controllers\Users\UpdatePasswordUsersController::class, 'updatePassword']);
-    Route::post('/changeOnlineStatusUser', [App\Http\Controllers\Users\ChangeOnlineStatusUsersController::class, 'changeOnlineStatus']);
 
     Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index']);
     Route::get('/commissions/users', [App\Http\Controllers\Commissions\UsersCommissionsController::class, 'usersCommissions']);
     Route::get('/commissions/create/{id}', [App\Http\Controllers\Commissions\CreateCommissionsController::class, 'create']);
     Route::post('/commissions/update', [App\Http\Controllers\Commissions\UpdateCommissionsController::class, 'update']);
 });
+Route::post('/changeOnlineStatusUser', [App\Http\Controllers\Users\ChangeOnlineStatusUsersController::class, 'changeOnlineStatus'])->middleware('auth');
+
 Route::get('/transactionLoad/{id}', [App\Http\Controllers\Transactions\LoadTransactionController::class, 'load'])->middleware('auth');
 Route::get('/transactionReasign', [App\Http\Controllers\Transactions\ReasignTransactionController::class, 'transactionReasign'])->middleware('auth');
 Route::get('/transaction/detail/{id}', [App\Http\Controllers\Transactions\DetailTransactionController::class, 'detail'])->middleware('auth');
