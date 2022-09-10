@@ -29,7 +29,7 @@ class UpdateTransactionController extends Controller
             if (
                 $transaction->status !== self::SUCCESSFUL_STATUS
                 && $transaction->status !== self::FAILURE_STATUS
-                && Summary::where('movement_id', $transaction->id)->first() === null
+                && Summary::where([['movement_id', $transaction->id],['movement_type','!=','Recarga de Saldo']])->first() === null
             ) {
                 $transaction->status = $request->input('status');
                 $transaction->comment = $request->input('comment');
@@ -64,7 +64,6 @@ class UpdateTransactionController extends Controller
                     $transaction->voucher = '/storage/voucher_images/' . $transaction->id . '.png';
                     $transaction->save();
                 }
-
                 if ($transaction->status === self::SUCCESSFUL_STATUS) {
                     $commissionShop = Commission::where([
                         ['user_id', '=', $transaction->shopkeeper_id],
