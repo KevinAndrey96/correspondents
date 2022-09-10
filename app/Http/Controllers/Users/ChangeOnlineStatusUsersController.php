@@ -14,8 +14,14 @@ class ChangeOnlineStatusUsersController extends Controller
         if (Auth::user()->role == 'Supplier') {
             $user = User::find($request->input('id'));
             $user->is_online = $request->input('status');
+            if ($user->is_online == 1) {
+                $user->is_online = 0;
+                $user->save();
+                return redirect()->back();
+            }
+            $user->is_online = 1;
             $user->save();
-            return back();
+            return redirect()->back();
         }
     }
 }

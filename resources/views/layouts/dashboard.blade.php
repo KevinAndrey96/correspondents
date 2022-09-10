@@ -413,10 +413,10 @@
                 <script>
                     function changeOnlineStatus(id)
                     {
-                        var toggle = document.getElementById("togglestatus"+id);
-                        var status = document.getElementById("status");
-                        var form = document.getElementById("form-status");
-                        var supplier_id = document.getElementById("id");
+                        let toggle = document.getElementById("togglestatus" + id);
+                        let status = document.getElementById("status");
+                        let form = document.getElementById("form-status");
+                        let supplier_id = document.getElementById("id");
 
                         if (toggle.checked == true) {
                             status.value = 1;
