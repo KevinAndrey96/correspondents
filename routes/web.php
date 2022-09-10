@@ -24,14 +24,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-/*
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});*/
-
-Route::group(['middleware' => ['auth', 'transactions', 'isenabled']], function() {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth', 'transactions', 'isenabled']], static function() {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+        ->name('home')
+        ->middleware('2fa');
     Route::get('/products', [App\Http\Controllers\Products\IndexProductController::class, 'index']);
     Route::get('/products/create', [App\Http\Controllers\Products\CreateProductController::class, 'create']);
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
@@ -94,16 +90,9 @@ Route::get('/transaction/cancel/{id}', [App\Http\Controllers\Transactions\Cancel
  * Middleware for 2FA
  */
 Route::middleware(['2fa'])->group(function () {
-    /**
-     * Route for controller {@link HomeController}
-     */
-    Route::get('/home', [HomeController::class, 'index'])
-        ->name('home')
-        ->middleware(TransactionsMiddleware::class);
     Route::post('/2fa', static function () {
         return redirect(route('home'));
     })->name('2fa');
-
 });
 
 /**
