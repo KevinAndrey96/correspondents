@@ -6,7 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Console\\Commands\\TransactionReasign' => $baseDir . '/app/Console/Commands/TransactionReasign.php',
+    'App\\Console\\Commands\\MoneyTablesTruncate' => $baseDir . '/app/Console/Commands/MoneyTablesTruncate.php',
+    'App\\Console\\Commands\\TransactionReassign' => $baseDir . '/app/Console/Commands/TransactionReassign.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Exports\\BalancesExport' => $baseDir . '/app/Exports/BalancesExport.php',
@@ -56,6 +57,7 @@ return array(
     'App\\Http\\Controllers\\Transactions\\ExcelExportTransactionController' => $baseDir . '/app/Http/Controllers/Transactions/ExcelExportTransactionController.php',
     'App\\Http\\Controllers\\Transactions\\LoadTransactionController' => $baseDir . '/app/Http/Controllers/Transactions/LoadTransactionController.php',
     'App\\Http\\Controllers\\Transactions\\ReasignTransactionController' => $baseDir . '/app/Http/Controllers/Transactions/ReasignTransactionController.php',
+    'App\\Http\\Controllers\\Transactions\\StoreTransactionController' => $baseDir . '/app/Http/Controllers/Transactions/StoreTransactionController.php',
     'App\\Http\\Controllers\\Transactions\\UpdateTransactionController' => $baseDir . '/app/Http/Controllers/Transactions/UpdateTransactionController.php',
     'App\\Http\\Controllers\\TwoFAController' => $baseDir . '/app/Http/Controllers/TwoFAController.php',
     'App\\Http\\Controllers\\Users\\ChangeOnlineStatusUsersController' => $baseDir . '/app/Http/Controllers/Users/ChangeOnlineStatusUsersController.php',
@@ -92,7 +94,7 @@ return array(
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
-    'App\\Traits\\ReasignTransaction' => $baseDir . '/app/Traits/ReasignTransaction.php',
+    'App\\Traits\\ReassignTransaction' => $baseDir . '/app/Traits/ReassignTransaction.php',
     'Asm89\\Stack\\Cors' => $vendorDir . '/asm89/stack-cors/src/Cors.php',
     'Asm89\\Stack\\CorsService' => $vendorDir . '/asm89/stack-cors/src/CorsService.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

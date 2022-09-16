@@ -61,21 +61,27 @@ class AddClientDataController extends Controller
                 $transaction->status = $request->input('transactionState');
                 $transaction->detail = $detail;
                 $transaction->save();
-                //$transaction->date = $transaction->created_at;
-                //$transaction->save();
 
                 if ($transaction->type === 'Withdrawal') {
                     $suppliers = User::where([
                         ['role', '=', 'Supplier'],
-                        ['is_online', '=', 1]
+                        ['is_online', '=', 1],
+                        ['is_enabled', '=', 1]
                     ])->orderBy('priority', 'asc')->get();
                 } else {
                     $suppliers = User::where([
                         ['role', '=', 'Supplier'],
                         ['is_online', '=', 1],
+                        ['is_enabled', '=', 1],
                         ['balance', '>=', $transaction->amount]
                     ])->orderBy('priority', 'asc')->get();
                 }
+
+                 if ($suppliers->count() === 0) {
+                     Transaction::destroy($transaction->id);
+
+                     return redirect('/transactions/create')->with('noSuppliers', 'No hay proveedores disponibles');
+                 }
 
                 foreach ($suppliers as $supplier) {
                     $transactions = Transaction::where([

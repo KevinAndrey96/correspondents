@@ -50,12 +50,23 @@ trait ReassignTransaction
                 }
 
                 //TODO Aquí valida el saldo pero no el tipo de transacción
-                $users = User::where([
-                    ['role', 'Supplier'],
-                    ['is_online', 1],
-                    ['is_enabled', 1],
-                    ['balance', '>=', $transaction->amount]
-                ])->orderBy('priority', 'asc')->get();
+
+                if ($transaction->type == 'Deposit') {
+                    $users = User::where([
+                        ['role', 'Supplier'],
+                        ['is_online', 1],
+                        ['is_enabled', 1],
+                        ['balance', '>=', $transaction->amount]
+                    ])->orderBy('priority', 'asc')->get();
+                }
+
+                if ($transaction->type == 'Withdrawal') {
+                    $users = User::where([
+                        ['role', 'Supplier'],
+                        ['is_online', 1],
+                        ['is_enabled', 1],
+                    ])->orderBy('priority', 'asc')->get();
+                }
 
                 if ($users->count() === 0) {
                     $transaction->supplier_id = null;

@@ -17,7 +17,7 @@ class IsenabledMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->is_enabled == 0) {
+        if (Auth::user()->is_enabled === 0) {
             Auth::logout();
             return redirect('/');
         }

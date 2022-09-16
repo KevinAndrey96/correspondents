@@ -15,6 +15,12 @@
             <p class="text-center text-sm text-white">{{ Session::get('insufficientBalance') }}</p>
         </div>
     @endif
+    @if(Session::has('noSuppliers'))
+        <div class="alert alert-danger text-white" role="alert">
+            <p class="text-center text-sm text-white">{{ Session::get('noSuppliers') }}</p>
+        </div>
+    @endif
+
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
