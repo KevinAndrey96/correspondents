@@ -18,5 +18,8 @@ fix: supplier time
 ## [Hotfix 1.0.6]
 fix: redirect to transaction's index since admin was fixed
 
+## [Hotfix 1.0.7]
+fix: place image for canceled and failed transactions
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

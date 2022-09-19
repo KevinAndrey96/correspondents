@@ -51,6 +51,7 @@ class MoneyTablesTruncate extends Command
 
         foreach($users as $user) {
             $user->balance = 0;
+            $user->profit = 0;
             $user->save();
         }
     }

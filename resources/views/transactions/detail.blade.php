@@ -86,7 +86,11 @@
                                                             </div>
                                                             <div class="input-group input-group-static mb-2 mt-2">
                                                                 <a class="image-link" href="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
-                                                                <img class="image-link" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
+                                                                    @if (! is_null($transaction->voucher))
+                                                                        <img class="image-link" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
+                                                                    @else
+                                                                        <img class="image-link" width="200px" height="" style="border-radius: 10px;" src="https://corresponsales.asparecargas.net/assets/img/failed_transaction.PNG">
+                                                                    @endif
                                                                 </a>
                                                             </div>
                                                         </div>

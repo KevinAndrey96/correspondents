@@ -22,7 +22,6 @@ class DetailTransactionController extends Controller
             return redirect('/home')->with('transactionAccepted', 'La transacción ya ha sido aceptada por otro proveedor');
         }
 
-
         $extras = explode(',', $transaction->detail);
         if (Auth::user()->role == 'Supplier' && is_null($detailSupplier) && ($transaction->status == 'hold' || $transaction->status == 'accepted')) {
             $transaction->status = 'accepted';
