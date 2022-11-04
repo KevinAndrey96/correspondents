@@ -60,7 +60,6 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled']], static fun
     Route::post('/transaction/store', [App\Http\Controllers\Transactions\StoreTransactionController::class, 'store']);
     Route::post('/transaction/storeClientData', [App\Http\Controllers\Transactions\AddClientDataController::class, 'store']);
     Route::get('/transaction/cancel/{id}', [App\Http\Controllers\Transactions\CancelTransactionController::class, 'cancel']);
-    Route::get('/transaction/detail-pdf/{id}', [App\Http\Controllers\Transactions\DetailTransactionPDFController::class, 'detailPDF']);
     Route::post('/transaction/excel', [App\Http\Controllers\Transactions\ExcelExportTransactionController::class, 'export']);
 
     Route::get('/users', [App\Http\Controllers\Users\IndexUsersController::class, 'index']);
@@ -85,6 +84,7 @@ Route::get('/transactionReasign', [App\Http\Controllers\Transactions\ReasignTran
 Route::get('/transaction/detail/{id}', [App\Http\Controllers\Transactions\DetailTransactionController::class, 'detail'])->middleware('auth');
 Route::post('/transaction/update', [App\Http\Controllers\Transactions\UpdateTransactionController::class, 'update'])->middleware('auth');
 Route::get('/transaction/cancel/{id}', [App\Http\Controllers\Transactions\CancelTransactionController::class, 'cancel']);
+Route::get('/transaction/detail-pdf/{id}', [App\Http\Controllers\Transactions\DetailTransactionPDFController::class, 'detailPDF']);
 
 /**
  * Middleware for 2FA
@@ -100,3 +100,11 @@ Route::middleware(['2fa'])->group(function () {
  */
 Route::get('/complete-registration', [TwoFAController::class, 'index'])->name('complete.registration');
 Route::get('/complete-registration2', [RegisterController::class, 'fullRegister'])->name('complete.registration2');
+
+
+/**
+ *  Routes for whatsapp
+ */
+Route::get('/whatsapp-number-transaction',
+    App\Http\Controllers\Transactions\NumberWhatsappTransactionController::class)
+          ->name('number.whatsapp');

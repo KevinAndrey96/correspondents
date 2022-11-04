@@ -118,7 +118,7 @@
                                                 <div class="col-md-3 col-xs-6">
                                                     <div class=" form-check mb-3" >
                                                         <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
-                                                        <label  class="custom-control-label text-center" for="customRadio1"><img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga"><p class="text-xs mt-1">{{ $product->product_name}}</p></label>
+                                                        <label  class="custom-control-label text-center" for="customRadio1"><img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://testing.asparecargas.net/'.$product->product_logo }}" alt="No carga"><p class="text-xs mt-1">{{ $product->product_name}}</p></label>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -131,7 +131,7 @@
                                                 <div class="col-md-3 col-xs-6">
                                                     <div class="form-check mb-3">
                                                         <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
-                                                        <label class="custom-control-label text-center " for="customRadio1"><img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga"><p class="text-xs mt-1">{{ $product->product_name}}</p></label>
+                                                        <label class="custom-control-label text-center " for="customRadio1"><img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://testing.asparecargas.net/'.$product->product_logo }}" alt="No carga"><p class="text-xs mt-1">{{ $product->product_name}}</p></label>
                                                     </div>
                                                 </div>
                                             @endforeach

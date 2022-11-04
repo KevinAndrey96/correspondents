@@ -85,11 +85,11 @@
                                                             <a class="btn btn-success text-center text-xs" href="/transaction/detail-pdf/{{$transaction->id}}"><i class="material-icons me-2">print</i>Imprimir comprobante</a>
                                                             </div>
                                                             <div class="input-group input-group-static mb-2 mt-2">
-                                                                <a class="image-link" href="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
+                                                                <a class="image-link" href="https://testing.asparecargas.net{{$transaction->voucher}}">
                                                                     @if (! is_null($transaction->voucher))
-                                                                        <img class="image-link" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
+                                                                        <img class="image-link" width="200px" height="200px" src="https://testing.asparecargas.net{{$transaction->voucher}}">
                                                                     @else
-                                                                        <img class="image-link" width="200px" height="" style="border-radius: 10px;" src="https://corresponsales.asparecargas.net/assets/img/failed_transaction.PNG">
+                                                                        <img class="image-link" width="200px" height="" style="border-radius: 10px;" src="https://testing.asparecargas.net/assets/img/failed_transaction.PNG">
                                                                     @endif
                                                                 </a>
                                                             </div>
@@ -99,6 +99,11 @@
                                                                 <textarea class="form-control" name="comment" rows="3" placeholder="Comentario:" spellcheck="false">{{$transaction->comment}}</textarea>
                                                             </div>
                                                         </div>
+                                                        <div class="col-md-8">
+                                                            <a href="{{route('number.whatsapp')}}?transactionID={{$transaction->id}}&voucher={{$transaction->voucher}}" class="link-primary">Enviar comprobante a Whatsapp</a>
+                                                        </div>
+
+                                                        <!--['transactionID'=> $transaction->id, 'voucher' => $transaction->voucher]-->
                                                 @endif
                                                 </div>
                                                 <script>
@@ -116,7 +121,9 @@
 
                                                     */
                                                 </script>
+
                                               </div>
+
                                             </li>
                                         </ul>
                                     </div>

@@ -7,7 +7,7 @@
         @page { margin: 10; }
     </style>
     <body >
-    <img style="align-content: center;" src="https://corresponsales.asparecargas.net/assets/img/LOGO-COMPLETO.png" width="140px" height="50px">
+    <img style="align-content: center;" src="https://testing.asparecargas.net/assets/img/LOGO-COMPLETO.png" width="140px" height="50px">
         <h6 style="font-size: xx-small; text-align: center;">Comprobante Transacción #{{$transaction->id}}</h6>
         <h6 style="font-size: xx-small; text-align: center;">{{($transaction->status == 'successful') ? 'EXITOSA' : 'FALLIDA'}}</h6>
         <div style="margin-top:-20px;">

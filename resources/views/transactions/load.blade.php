@@ -98,11 +98,11 @@
 <script>
     // Aquí se ejecuta el método onload, que dice que esto se ejecutará apenas cargue la página
     window.onload = function() {
-        axios.get('https://corresponsales.asparecargas.net/api/getStatus/'+{{$transaction->id}})
+        axios.get('https://testing.asparecargas.net/api/getStatus/'+{{$transaction->id}})
             .then((res) => {
                 //http://127.0.0.1:8000
                 if (res.data.status == 'successful' || res.data.status == 'failed') {
-                    window.location.replace("https://corresponsales.asparecargas.net/transaction/detail/{{$transaction->id}}");
+                    window.location.replace("https://testing.asparecargas.net/transaction/detail/{{$transaction->id}}");
                 }
             });
         window.alert('Su transacción se está realizando en este momento, por favor espere unos minutos mientras esta se completa.')
@@ -115,7 +115,7 @@
     // Aquí se ejecuta el código, entonces arriba recibe los segundos, abajo se le mandan
         setTimeout(function(){
             // Cuando pasen los segundos que le dijimos hará estas acciones a continuación
-            axios.get('https://corresponsales.asparecargas.net/api/getStatus/'+{{$transaction->id}})
+            axios.get('https://testing.asparecargas.net/api/getStatus/'+{{$transaction->id}})
                     .then((res)=>{
                         if (res.data.status == 'hold') {
                             document.getElementById('out').style.display = 'block';
@@ -155,7 +155,7 @@
         var divStatus = document.getElementById('divStatus');
         var pSupplierID = document.getElementById('supplierID');
 
-        axios.get('https://corresponsales.asparecargas.net/api/getStatus/'+id)
+        axios.get('https://testing.asparecargas.net/api/getStatus/'+id)
             .then((res)=> {
                     if (res.data.status == 'hold') {
                         pStatus.innerHTML = 'En espera';
@@ -166,7 +166,7 @@
                         pStatus.style.backgroundColor = 'dodgerblue';
                     }
                     if (res.data.status == 'successful' || res.data.status == 'failed' || res.data.status == 'cancelled') {
-                        window.location.replace("https://corresponsales.asparecargas.net/transaction/detail/{{$transaction->id}}");
+                        window.location.replace("https://testing.asparecargas.net/transaction/detail/{{$transaction->id}}");
                         //pStatus.innerHTML = 'Exitosa';
                         //pStatus.style.backgroundColor = 'green';
                     }

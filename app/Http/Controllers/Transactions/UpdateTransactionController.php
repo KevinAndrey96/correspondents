@@ -39,7 +39,7 @@ class UpdateTransactionController extends Controller
                     $pathName = sprintf('voucher_images/%s.png', $transaction->id);
                     Storage::disk('public')->put($pathName, file_get_contents($request->file('voucher')));
                     $client = new Client();
-                    $url = "https://corresponsales.asparecargas.net/upload.php";
+                    $url = "https://testing.asparecargas.net/upload.php";
 
                         $client->request(RequestAlias::METHOD_POST, $url, [
                             'multipart' => [
