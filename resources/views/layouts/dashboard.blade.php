@@ -49,6 +49,14 @@
             </li>
         @hasrole('Administrator')
             <li class="nav-item">
+                <a class="nav-link text-white " href="{{route('shopkeeper.top.date')}}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">military_tech</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Top tenderos</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-24" aria-expanded="false" aria-controls="submenu-24">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="width:30px; margin-left: -5px;" class="fas fa-cogs"></i>

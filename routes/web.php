@@ -128,4 +128,10 @@ Route::post('/banners-update', App\Http\Controllers\Banners\UpdateBannersControl
 Route::get('/banners-delete/{id}', App\Http\Controllers\Banners\DeleteBannersController::class)
     ->name('banners.delete');
 
-
+/**
+ * Routes for top shopkeepers
+ */
+Route::get('/shopkeepers-top-date', App\Http\Controllers\Users\ShopkeepersTopDateUsersController::class)
+    ->name('shopkeeper.top.date');
+Route::post('/shopkeepers-top', App\Http\Controllers\Users\ShopkeepersTopUsersController::class)
+    ->name('shopkeeper.top');
