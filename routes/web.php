@@ -26,8 +26,8 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-        ->name('home')
-        ->middleware('2fa');
+        ->name('home');
+        //->middleware('2fa');
     Route::get('/products', [App\Http\Controllers\Products\IndexProductController::class, 'index']);
     Route::get('/products/create', [App\Http\Controllers\Products\CreateProductController::class, 'create']);
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
@@ -89,18 +89,20 @@ Route::get('/transaction/detail-pdf/{id}', [App\Http\Controllers\Transactions\De
 /**
  * Middleware for 2FA
  */
+/*
 Route::middleware(['2fa'])->group(function () {
     Route::post('/2fa', static function () {
         return redirect(route('home'));
     })->name('2fa');
 });
-
+*/
 /**
  * Route for controller {@link TwoFAController} QR code view
  */
+/*
 Route::get('/complete-registration', [TwoFAController::class, 'index'])->name('complete.registration');
 Route::get('/complete-registration2', [RegisterController::class, 'fullRegister'])->name('complete.registration2');
-
+*/
 
 /**
  *  Routes for whatsapp
@@ -108,3 +110,22 @@ Route::get('/complete-registration2', [RegisterController::class, 'fullRegister'
 Route::get('/whatsapp-number-transaction',
     App\Http\Controllers\Transactions\NumberWhatsappTransactionController::class)
           ->name('number.whatsapp');
+
+
+/**
+ *  Routes for banners
+ */
+Route::get('/banners', App\Http\Controllers\Banners\indexBannersController::class)
+    ->name('banners.index');
+Route::get('/banners-create', App\Http\Controllers\Banners\CreateBannersController::class)
+    ->name('banners.create');
+Route::post('/banners-store', App\Http\Controllers\Banners\StoreBannersController::class)
+    ->name('banners.store');
+Route::get('/banners-edit/{id}', App\Http\Controllers\Banners\EditBannersController::class)
+    ->name('banners.edit');
+Route::post('/banners-update', App\Http\Controllers\Banners\UpdateBannersController::class)
+    ->name('banners.update');
+Route::get('/banners-delete/{id}', App\Http\Controllers\Banners\DeleteBannersController::class)
+    ->name('banners.delete');
+
+

@@ -25,6 +25,11 @@ class UpdateProductController extends Controller
             'accountType'=>'required|boolean',
             'code'=>'required|boolean',
             'extra'=>'required|boolean',
+            'min_amount'=>'required',
+            'max_amount'=>'required',
+            'priority'=>'required',
+            'num_jineteo'=>'required',
+            'hours'=>'required'
         ];
         $message= [
             'required'=>':attribute es requerido',
@@ -42,6 +47,11 @@ class UpdateProductController extends Controller
             'account_type'=> $request->input('accountType'),
             'code'=> $request->input('code'),
             'extra'=> $request->input('extra'),
+            'min_amount' => $request->input('min_amount'),
+            'max_amount' => $request->input('max_amount'),
+            'priority' => $request->input('priority'),
+            'num_jineteo' => $request->input('num_jineteo'),
+            'hours' => $request->input('hours')
         ];
         $product = Product::findOrFail($productId);
         if ($request->hasFile('image')) {
@@ -61,7 +71,7 @@ class UpdateProductController extends Controller
                             Storage::disk('public')
                                 ->getDriver()
                                 ->getAdapter()
-                                ->getPathPrefix() . 'blogs/' . $blog->id . '.png', 'r'),*/ 
+                                ->getPathPrefix() . 'blogs/' . $blog->id . '.png', 'r'),*/
                     ],
                     [
                         'name' => 'path',

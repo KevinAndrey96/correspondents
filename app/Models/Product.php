@@ -30,7 +30,13 @@ class Product extends Model
         'account_number',
         'code',
         'extra',
+        'min_amount',
+        'max_amount',
+        'priority',
+        'num_jineteo',
+        'hours',
     ];
+
 
     public function shopkeepers()
     {

@@ -49,6 +49,26 @@
             </li>
         @hasrole('Administrator')
             <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-24" aria-expanded="false" aria-controls="submenu-24">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="width:30px; margin-left: -5px;" class="fas fa-cogs"></i>
+                    </div>
+                    <span class="nav-link-text">Configuración</span>
+                </a>
+                <div id="submenu-24" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{route('banners.index')}}">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">width_full</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Banners</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 						        <i style="width:30px; margin-left: -5px;" class="fas fa-user-tie"></i>
@@ -581,7 +601,11 @@
 
 <!--Import axios-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+<!--CKEDITOR CDN-->
+<script src="//cdn.ckeditor.com/4.17.1/full/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'richText' );
+</script>
 </body>
 
 </html>

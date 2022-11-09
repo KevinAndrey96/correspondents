@@ -20,6 +20,11 @@
             <p class="text-center text-sm text-white">{{ Session::get('noSuppliers') }}</p>
         </div>
     @endif
+    @if(Session::has('limitExceeded'))
+        <div class="alert alert-danger text-white" role="alert">
+            <p class="text-center text-sm text-white">{{ Session::get('limitExceeded') }}</p>
+        </div>
+    @endif
 
     <div class="container-fluid py-4">
         <div class="row">
@@ -104,7 +109,7 @@
                                 <div class="col-md-6">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="transactionAmount" class="form-label">Monto</label>
-                                        <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="1" min="20000" max="200000" placeholder="" required>
+                                        <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="1" placeholder="" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -118,7 +123,47 @@
                                                 <div class="col-md-3 col-xs-6">
                                                     <div class=" form-check mb-3" >
                                                         <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
-                                                        <label  class="custom-control-label text-center" for="customRadio1"><img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://testing.asparecargas.net/'.$product->product_logo }}" alt="No carga"><p class="text-xs mt-1">{{ $product->product_name}}</p></label>
+                                                        <label  class="custom-control-label text-center" for="customRadio1">
+                                                            <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$product->id}}"
+                                                                    data-id="{{$product->id}}">
+                                                                <a>
+                                                                    <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://testing.asparecargas.net/'.$product->product_logo }}" alt="No carga">
+                                                                    <p class="text-xs mt-1">{{ $product->product_name}}</p>
+                                                                </a>
+                                                            </button>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="DescriptionModal{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h6 class="modal-title" id="exampleModalLabel">Detalle del producto</h6>
+                                                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="container-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-md-2"></div>
+                                                                    <div class="col-md-8">
+                                                                        <div class="card">
+                                                                            <div class="card-header pb-0 px-3 text-center">
+                                                                                <h6 class="mb-0">{{$product->product_name}}</h6>
+                                                                            </div>
+                                                                            <div class="card-body pt-4 p-3">
+                                                                                <div class="d-flex flex-column">
+                                                                                        {!! $product->product_description !!}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -131,7 +176,13 @@
                                                 <div class="col-md-3 col-xs-6">
                                                     <div class="form-check mb-3">
                                                         <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
-                                                        <label class="custom-control-label text-center " for="customRadio1"><img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://testing.asparecargas.net/'.$product->product_logo }}" alt="No carga"><p class="text-xs mt-1">{{ $product->product_name}}</p></label>
+                                                        <label class="custom-control-label text-center " for="customRadio1">
+                                                            <a href="#">
+                                                            <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://testing.asparecargas.net/'.$product->product_logo }}" alt="No carga">
+                                                            </a>
+                                                            <p class="text-xs mt-1">{{ $product->product_name}}
+                                                            </p>
+                                                        </label>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -150,4 +201,6 @@
                     </div>
                 </div>
             </div>
+    <!--MODAL-->
+
 @endsection

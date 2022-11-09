@@ -13,19 +13,11 @@ class DetailTransactionPDFController extends Controller
     public function detailPDF($id)
     {
         $transaction = Transaction::find($id);
-        if (Auth::user()->role == 'Supplier' and Auth::user()->id == $transaction->supplier_id) {
             $extras = explode(',', $transaction->detail);
 
             $pdf = PDF::loadView('transactions.detailPDF', ['transaction'=>$transaction, 'extras'=>$extras]);
             $pdf->setPaper(array(0, 0, 141.732, 300), 'portrait');//setPaper(tamaño 5cmx10cm,vertical)
             return $pdf->stream();
-        }
-        if (Auth::user()->role == 'Shopkeeper' and Auth::user()->id == $transaction->shopkeeper_id) {
-            $extras = explode(',', $transaction->detail);
 
-            $pdf = PDF::loadView('transactions.detailPDF', ['transaction'=>$transaction, 'extras'=>$extras]);
-            $pdf->setPaper(array(0, 0, 141.732, 300), 'portrait');//setPaper(tamaño 5cmx10cm,vertical)
-            return $pdf->stream();
-        }
     }
 }

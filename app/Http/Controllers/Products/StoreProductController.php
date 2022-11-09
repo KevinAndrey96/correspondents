@@ -14,7 +14,7 @@ class StoreProductController extends Controller
 {
     public function store(Request $request)
     {
-        
+
         $fields = [
             'productName'=>'required|string',
             'productType'=>'required|string',
@@ -26,13 +26,19 @@ class StoreProductController extends Controller
             'accountType'=>'required|boolean',
             'code'=>'required|boolean',
             'extra'=>'required|boolean',
-            'image'=>'required',//
+            'image'=>'required',
+            'min_amount'=>'required',
+            'max_amount'=>'required',
+            'priority'=>'required',
+            'num_jineteo'=>'required',
+            'hours'=>'required',
+
         ];
         $message = [
             'required'=>':attribute es requerido',
         ];
         $this->validate($request, $fields, $message);
-        
+
         $product = new Product();
         $product->product_name = $request->input('productName');
         $product->product_type = $request->input('productType');
@@ -44,7 +50,13 @@ class StoreProductController extends Controller
         $product->product_commission = $request->input('productCommission');
         $product->code = $request->input('code');
         $product->extra = $request->input('extra');
+        $product->min_amount = $request->input('min_amount');
+        $product->max_amount = $request->input('max_amount');
+        $product->priority = $request->input('priority');
+        $product->num_jineteo = $request->input('num_jineteo');
+        $product->hours = $request->input('hours');
         $product->save();
+
         if ($request->hasFile('image')) {
             $pathName = Sprintf('products/%s.png', $product->id);
             Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
@@ -67,7 +79,7 @@ class StoreProductController extends Controller
             $product->save();
             unlink(str_replace('\\', '/', storage_path('app/public/products/'.$product->id.'.png')));
         }
-        
+
         return redirect('products');
         //return response()->json(request()->all());
     }

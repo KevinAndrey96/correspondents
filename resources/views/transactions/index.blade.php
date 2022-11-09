@@ -135,6 +135,15 @@
                                 $(document).ready(function() {
                                     $('#my_table').DataTable(
                                         {
+                                            "language": {
+                                                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+                                                "paginate": {
+                                                    "first": "Primero",
+                                                    "last": "Último",
+                                                    "next": "=>",
+                                                    "previous": "<="
+                                                }
+                                            },
                                             //"bSort" : false,
                                             "aaSorting": [],
                                             "bDestroy": true

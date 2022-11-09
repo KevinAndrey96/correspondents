@@ -10,7 +10,6 @@
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
                                 <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Gestión de productos<a href="{{ url('products/create') }}" class="btn btn-block btn-Secondary"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">add_card</i></a></h6>
-
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
@@ -31,7 +30,6 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">nombre del producto</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">tipo del producto</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descripción del producto</th>
                                     </tr>
                                     </thead>
 
@@ -90,7 +88,6 @@
                                                 <td class="align-middle text-center text-sm">Retiro</td>
                                             @endif
                                             <td class="align-middle text-center text-sm">${{number_format($product->product_commission, 2, ',', '.')}}</td>
-                                            <td class="align-middle text-center text-sm">{{ $product->product_description}}</td>
                                         </tr>
                                     @endforeach
                                     <!-- Modal -->
@@ -305,7 +302,13 @@
                                     $(document).ready( function () {
                                         $('#my_table').DataTable({
                                             "language": {
-                                                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                                                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+                                                "paginate": {
+                                                    "first": "Primero",
+                                                    "last": "Último",
+                                                    "next": "=>",
+                                                    "previous": "<="
+                                                }
                                             },
                                             responsive: true,
                                             "pageLength": 20

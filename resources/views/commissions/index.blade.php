@@ -47,7 +47,13 @@
                                 $(document).ready( function () {
                                     $('#my_table').DataTable({
                                         "language": {
-                                            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                                            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+                                            "paginate": {
+                                                "first": "Primero",
+                                                "last": "Último",
+                                                "next": "=>",
+                                                "previous": "<="
+                                            }
                                         },
                                         responsive: true,
                                         "pageLength": 20

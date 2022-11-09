@@ -55,15 +55,39 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class=" input-group input-group-outline my-3">
+                                    <div class="input-group input-group-outline my-3">
                                         <label for="productCommission" class="form-label">Comisión del producto</label>
                                         <input type="text" class="form-control" name="productCommission" value="{{ isset($product->product_commission)?$product->product_commission:old('product_commission') }}" id="productCommission" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="input-group input-group-outline  my-3">
-                                        <label for="productDescription" class="form-label">Descripción del producto</label>
-                                        <input type="text" class="form-control" name="productDescription" value="{{ isset($product->product_description)?$product->product_description:old('product_description') }}" id="productDescription" placeholder="">
+                                    <div class="input-group input-group-outline my-3">
+                                        <label for="productCommission" class="form-label">Monto mínimo</label>
+                                        <input type="number" class="form-control" name="min_amount" value="{{ isset($product->min_amount)?$product->min_amount:old('min_amount') }}" id="productMinAmount" placeholder="" min="0">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group input-group-outline my-3">
+                                        <label for="productCommission" class="form-label">Monto máximo</label>
+                                        <input type="number" class="form-control" name="max_amount" value="{{ isset($product->max_amount)?$product->max_amount:old('max_amount') }}" id="productMaxAmount" placeholder="" min="0">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group input-group-outline my-3">
+                                        <label for="productCommission" class="form-label">Prioridad</label>
+                                        <input type="number" class="form-control" name="priority" value="{{ isset($product->priority)?$product->priority:old('priority') }}" id="priority" placeholder="" min="0">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group input-group-outline my-3">
+                                            <label for="productCommission" class="form-label">Transacciones por periodo</label>
+                                        <input type="number" class="form-control" name="num_jineteo" value="{{ isset($product->num_jineteo)?$product->num_jineteo:old('num_jineteo') }}" id="numJineteo" placeholder="" min="1">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group input-group-outline my-3">
+                                        <label for="productCommission" class="form-label">Período de tiempo (en horas)</label>
+                                        <input type="number" class="form-control" name="hours" value="{{ isset($product->hours)?$product->hours:old('hours') }}" id="hours" placeholder="" min="1">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -161,7 +185,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
                                         <label for="clientName" class="ms-0"> ¿Incluye nombre del cliente?</label>
                                         <select id="clientName" name="clientName" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
@@ -181,9 +205,17 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="input-group input-group-static mb-4">
-                                        <label for="image">Logo</label>
+                                    <div class="form-group mb-4">
+                                        <label for="image">Logo:</label>
                                         <input type="file" class="form-control-file" name="image" value="" id="image">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="productDescription">Descripción:</label>
+                                        <textarea class="form-control" name="productDescription" id="richText" required>
+                                            {{ isset($product->product_description)?$product->product_description:old('product_description') }}
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="text-center">

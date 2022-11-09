@@ -23,6 +23,7 @@ class StoreTransactionController extends Controller
      */
     public function store(Request $request): Factory|View|Redirector|RedirectResponse|Application
     {
+        /*
         $fields = [
             'transactionAmount'=>'required|numeric|min:20000|max:200000',
         ];
@@ -31,9 +32,20 @@ class StoreTransactionController extends Controller
         ];
 
         $this->validate($request, $fields, $message);
-
+        */
         $productID = $request->input('productID');
         $product = Product::find($productID);
+        $amount = $request->input('transactionAmount');
+
+        if ($amount < $product->min_amount || $amount > $product->max_amount) {
+
+            return redirect('/transactions/create')
+                ->with('limitExceeded', 'Supero el límite del monto permitido por transacción para el producto seleccionado,
+                        el monto mínimo debe ser de $'.number_format($product->min_amount, 2, ',', '.').' y el monto máximo de $'.number_format($product->max_amount, 2, ',', '.'));
+
+        }
+
+
 
         /**
          * We validate that the type present in the request is congruent with the product type

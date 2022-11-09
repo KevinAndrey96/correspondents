@@ -21,5 +21,8 @@ fix: redirect to transaction's index since admin was fixed
 ## [Hotfix 1.0.7]
 fix: place image for canceled and failed transactions
 
+## [Hotfix 1.0.8]
+fix: transaction detail pdf was fixed
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
