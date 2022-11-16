@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Commission;
+use App\Models\SupplierProduct;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -51,5 +52,10 @@ class Product extends Model
     public function commissions()
     {
         return $this->hasMany(Commission::class);
+    }
+
+    public function supplierProducts()
+    {
+        return $this->hasMany(SupplierProduct::class);
     }
 }

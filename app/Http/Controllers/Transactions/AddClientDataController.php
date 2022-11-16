@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\SupplierProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -84,15 +85,21 @@ class AddClientDataController extends Controller
                  }
 
                 foreach ($suppliers as $supplier) {
-                    $transactions = Transaction::where([
-                                                       ['supplier_id', '=', $supplier->id],
-                                                       ['status', '=', 'hold']
-                                                       ])->get();
-                    $numTransactions = $transactions->count();
-                    if ($supplier->max_queue > $numTransactions) {
-                        $transaction->supplier_id = $supplier->id;
-                        $transaction->save();
-                        break;
+                    $supplierProduct = SupplierProduct::where([
+                        ['user_id', $supplier->id],
+                        ['product_id', $productID]
+                    ])->get();
+                    if ($supplierProduct->count() > 0) {
+                        $transactions = Transaction::where([
+                                                           ['supplier_id', '=', $supplier->id],
+                                                           ['status', '=', 'hold']
+                                                           ])->get();
+                        $numTransactions = $transactions->count();
+                        if ($supplier->max_queue > $numTransactions) {
+                            $transaction->supplier_id = $supplier->id;
+                            $transaction->save();
+                            break;
+                        }
                     }
                 }
 

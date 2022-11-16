@@ -65,6 +65,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'transactions' => \App\Http\Middleware\TransactionsMiddleware::class,
         'isenabled' => \App\Http\Middleware\IsenabledMiddleware::class,
-        '2fa' => \PragmaRX\Google2FALaravel\Middleware::class
+        '2fa' => \PragmaRX\Google2FALaravel\Middleware::class,
+        'isAuthorized' => \App\Http\Middleware\IsAuthorizedMiddleware::class,
+        'lockPlatform' => \App\Http\Middleware\LockPlatformMiddleware::class,
     ];
 }

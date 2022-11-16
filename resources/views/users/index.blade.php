@@ -1,5 +1,11 @@
 @extends('layouts.dashboard')
 @section('content')
+    @if(Session::has('successfulAssignment'))
+        <div class="alert alert-success" role="alert">
+            {{ Session::get('successfulAssignment') }}
+        </div>
+    @endif
+
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -26,7 +32,15 @@
                             <table id="tabla1" class="table align-items-center mb-0">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
+                                        @if ($role !== 'Administrator')
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
+                                        @endif
+                                        @if ($role == 'Supplier')
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Conexión</th>
+                                        @endif
+                                        @if($role !== 'Administrator')
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Habilitar</th>
+                                        @endif
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Eliminar</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
                                         @if ($role == 'allShopkeepers')
@@ -49,13 +63,38 @@
                                 <tbody>
                                 @foreach ($users as $user)
                                     <tr>
-                                        <td class="align-middle text-center text-sm">
-                                            @if ($user->is_online == 1)
-                                                <span class="badge badge-sm bg-gradient-success">En Línea</span>
-                                            @else
-                                                <span class="badge badge-sm bg-gradient-secondary">Fuera de Línea</span>
+                                        @if ($role !== 'Administrator')
+                                            <td class="align-middle text-center text-sm">
+                                                @if ($user->is_authorized == 1)
+                                                    <span class="badge badge-sm bg-gradient-success">Habilitado</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-secondary">Deshabilitado</span>
+                                                @endif
+                                            </td>
+                                        @endif
+                                            @if ($role == 'Supplier')
+                                                <td class="align-middle text-center text-sm">
+                                                    @if ($user->is_online == 1)
+                                                        <span class="badge badge-sm bg-gradient-success">En Línea</span>
+                                                    @else
+                                                        <span class="badge badge-sm bg-gradient-secondary">Fuera de Línea</span>
+                                                    @endif
+                                                </td>
                                             @endif
+
+                                        @if ($role !== 'Administrator')
+                                        <td class="align-middle text-center text-sm">
+                                            <div class="form-check form-switch align-middle text-center">
+                                                @if ($user->is_authorized == 1)
+                                                    <input class="form-check-input ms-auto" type="checkbox" id="toggleauthorized{{$user->id}}" checked onchange="getAuthorized({{$user->id}})">
+                                                    <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{$user->id}}"></label>
+                                                @else
+                                                    <input class="form-check-input ms-auto" type="checkbox" id="toggleauthorized{{$user->id}}" onchange="getAuthorized({{$user->id}})">
+                                                    <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$user->id}}"></label>
+                                                @endif
+                                            </div>
                                         </td>
+                                        @endif
                                         <td class="align-middle text-center text-sm ps-0">
                                             <div class="form-check form-switch align-middle text-center">
                                                 @if ($user->is_enabled == 1)
@@ -93,6 +132,9 @@
                                                 <button type="button" class="btn btn-white px-1 mb-0" title="Gestionar saldo" data-bs-toggle="modal" data-bs-target="#SaldoModal"
                                                     data-id="{{$user->id}}"><i style="font-size: 25px !important;" class="material-icons opacity-10">monetization_on</i></button>
                                             @endif
+                                                @if ($role == 'Supplier')
+                                                    <a style="color:#505050 ;" href="{{route('product.assign', ['id' => $user->id])}}" title="Asignar productos" class="btn btn-link px-1 mb-0"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10">assignment_turned_in</i></a>
+                                                @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -125,6 +167,11 @@
                                 <input type="hidden" name="id" id="id">
                                 <input type="hidden" name="status" id="status">
                             </form>
+                            <form id="form-authorized" name="form-authorized" method="POST" action="{{route('users.shopkeeper.authorized')}}">
+                                @csrf
+                                <input type="hidden" name="id" id="user_id">
+                                <input type="hidden" name="authorized" id="authorized">
+                            </form>
                             <script>
                                 function getStatus(id)
                                 {
@@ -143,6 +190,20 @@
                                         user_id.value = id;
                                         form.submit();
                                     }
+                                }
+                                function getAuthorized(id) {
+                                        let toggle = document.getElementById("toggleauthorized" + id);
+                                        let status = document.getElementById("authorized");
+                                        let form = document.getElementById("form-authorized");
+                                        let user_id = document.getElementById("user_id");
+
+                                        if (toggle.checked === true) {
+                                            status.value = 1;
+                                        } else {
+                                            status.value = 0;
+                                        }
+                                        user_id.value = id;
+                                        form.submit();
                                 }
                             </script>
                             <!-- Modal-->

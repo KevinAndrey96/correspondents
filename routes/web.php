@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth', 'transactions', 'isenabled']], static function() {
+Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized', 'lockPlatform']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home');
         //->middleware('2fa');
@@ -135,3 +135,27 @@ Route::get('/shopkeepers-top-date', App\Http\Controllers\Users\ShopkeepersTopDat
     ->name('shopkeeper.top.date');
 Route::post('/shopkeepers-top', App\Http\Controllers\Users\ShopkeepersTopUsersController::class)
     ->name('shopkeeper.top');
+
+/**
+ * Routes to assign products to suppliers
+ */
+Route::get('/assign-products/{id}', App\Http\Controllers\Products\AssignProductsController::class)
+    ->name('product.assign');
+Route::post('/store-assignments-products', App\Http\Controllers\Products\StoreAssignmentsProductsController::class)
+    ->name('product.store.assignments');
+
+/**
+ * Route to authorize shopkeepers on the platform
+ */
+Route::post('/change-authorized-user', App\Http\Controllers\Users\AuthorizeShopkeeperUserController::class)
+    ->name('users.shopkeeper.authorized');
+
+/**
+ * Routes to lock platform
+ */
+
+Route::get('/platform-lock-index', App\Http\Controllers\Platforms\LockIndexPlatformController::class)
+    ->name('platform.lock.index');
+
+Route::post('/platform-lock', App\Http\Controllers\Platforms\LockPlatformController::class)
+    ->name('platform.lock');

@@ -75,13 +75,68 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <!--Modal-->
+                            <div class="modal fade" id="AlertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <!--<h6 class="modal-title" id="exampleModalLabel">Gestionar ganancias</h6>-->
+                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-4 col-sm-4">
+                                                    <div class="row jusfify-content-center align-items-center">
+                                                        <img width="60%" class="img-responsive" src="https://testing.asparecargas.net/assets/img/bell.png">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 col-sm-8">
+                                                    <div class="row jusfify-content-center align-items-center">
+                                                        <div class="col-md-12">
+                                                            <h2>¡Tienes una nueva solicitud de retiro de ganancias!</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end Modal-->
+                            <audio id="alert" style="display: none;" src="/assets/alerts/SD_ALERT_3.mp3"
+                                   controls>
+                                Your browser does not support the <code>audio</code> element.
+                            </audio>
+                            <input type="button" style="display:none" id="btn" value="reproducir">
+                            <input type="button" style="display:none" id="btn-modal" value="reproducir">
                             <style>
                                 .form-control {
                                     background-color: #f2f2f2 !important ;
                                 }
                             </style>
                             <script>
+                                window.addEventListener("load", function(event) {
+                                    @if (isset($countProfits))
+                                    @if ($countProfits > 0)
+                                    const alert = document.getElementById('alert');
+                                    const btn = document.getElementById('btn');
+                                    const btnModal = document.getElementById('btn-modal');
+                                    $("#btn").on('click', function(){
+                                        alert.play();
+                                    })
+                                    $("#btn-modal").on('click', function(){
+                                        $('#AlertModal').modal('show');
+                                    })
+                                    btn.click()
+                                    btnModal.click()
+                                    @endif
+                                    @endif
+                                });
                                 $(document).ready( function () {
+                                    setTimeout("location.reload()", 30000);
                                     $('#my_table').DataTable({
                                             "language": {
                                                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",

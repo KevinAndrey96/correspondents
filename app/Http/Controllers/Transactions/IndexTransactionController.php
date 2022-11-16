@@ -51,8 +51,9 @@ class IndexTransactionController extends Controller
             ])
                 ->orderBy('created_at', 'desc')
                 ->get();
+            $countTransactions = $transactions->count();
 
-            return view('transactions.index', compact('transactions'));
+            return view('transactions.index', compact('transactions', 'countTransactions'));
         }
     }
 }

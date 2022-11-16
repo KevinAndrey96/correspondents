@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\SupplierProduct;
 
 /**
  * @property mixed|string $name
@@ -49,6 +50,7 @@ class User extends Authenticatable
         'address',
         'priority',
         'is_enabled',
+        'is_authorized',
         'is_online',
         'distributor_id',
         'balance',
@@ -98,6 +100,11 @@ class User extends Authenticatable
     public function commission()
     {
         return $this->hasOne(Commission::class);
+    }
+
+    public function supplierProducts()
+    {
+        return $this->hasMany(SupplierProduct::class);
     }
 
     /**

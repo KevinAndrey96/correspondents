@@ -13,7 +13,10 @@ class IndexBalanceController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'Administrator') {
-            $balancesData['balances'] = Balance::whereNull('is_valid')->orderBy('created_at', 'desc')->get();//all()->sortByDesc('created_at');
+            $balances = Balance::whereNull('is_valid')->orderBy('created_at', 'desc')->get();
+            $countBalances = $balances->count();
+
+            return view('balance.index', compact('balances', 'countBalances'));
         }
         if (Auth::user()->role == 'Shopkeeper') {
             $balancesData['balances'] = Balance::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();

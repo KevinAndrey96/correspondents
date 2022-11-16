@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->double('min_amount');
-            $table->double('max_amount');
-            $table->integer('priority');
-            $table->integer('num_jineteo');
-            $table->integer('hours');
-            $table->longText('product_description')->change();
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_authorized')->nullable();
         });
     }
 
@@ -30,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }
