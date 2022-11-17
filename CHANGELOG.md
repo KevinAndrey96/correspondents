@@ -24,5 +24,8 @@ fix: place image for canceled and failed transactions
 ## [Hotfix 1.0.8]
 fix: transaction detail pdf was fixed
 
+## [Hotfix 1.0.9]
+fix: mail section in the env file
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
