@@ -19,6 +19,11 @@ class Kernel extends ConsoleKernel
             ->everyFiveMinutes()
             ->timezone('America/Bogota')
             ->emailOutputTo('asparecargas@gmail.com', true);
+
+        $schedule->command('mail:supplier-inactivity')
+            ->everyFiveMinutes()
+            ->timezone('America/Bogota')
+            ->emailOutputTo('asparecargas@gmail.com', true);
     }
 
     /**
