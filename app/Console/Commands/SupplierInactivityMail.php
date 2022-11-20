@@ -54,34 +54,28 @@ class SupplierInactivityMail extends Command
             $last_login = Carbon::parse($supplier->last_login);
             $inactivityDays = $last_login->diffInHours($currentDate);
 
-            if ($inactivityDays >= 7)
-            {
+            if ($inactivityDays >= 7) {
                 $inactiveSuppliers->push($supplier);
             }
+        }
+        
+        if ($inactiveSuppliers->count() > 0) {
+            $admins = User::where('role', 'Administrator')->get();
 
-            if ($inactiveSuppliers->count() > 0) {
-                $admins = User::where('role', 'Administrator')->get();
-
-                foreach ($admins as $admin) {
-                    $receiverEmail = $admin->email;
-                    $emailBody = new stdClass();
-                    $emailBody->sender = 'Asparecargas';
-                    $emailBody->receiver = $admin->name;
-                    $emailSubject = 'Proveedores inactivos';
-                    $emailBody->body = 'Los siguientes proveedores llevan más de una semana sin realizar transacciones: ';
-                    Mail::to($receiverEmail)->send(new SupplierInactivity($emailBody, $emailSubject, $inactiveSuppliers));
-                }
-
-
-
-
+            foreach ($admins as $admin) {
+                $receiverEmail = $admin->email;
+                $emailBody = new stdClass();
+                $emailBody->sender = 'Asparecargas';
+                $emailBody->receiver = $admin->name;
+                $emailSubject = 'Proveedores inactivos';
+                $emailBody->body = 'Los siguientes proveedores llevan más de una semana sin realizar transacciones: ';
+                Mail::to($receiverEmail)->send(new SupplierInactivity($emailBody, $emailSubject, $inactiveSuppliers));
             }
 
 
 
 
         }
-
         //return print_r($last_login);
 
 
