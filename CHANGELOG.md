@@ -30,5 +30,8 @@ fix: mail section in the env file
 ## [Hotfix 1.1.0]
 fix: style and images of inactive providers mail
 
+## [Hotfix 1.1.1]
+fix: font-size of inactive suppliers mail
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

@@ -1,10 +1,10 @@
 <img src="https://testing.asparecargas.net/assets/img/footer.png" width="100%" height="auto" style="padding-bottom: 20px;">
 <h2 style="color:darkblue; text-align: center;">¡Hola, {{ $emailBody->receiver }}!</h2>
 <div>
-    <p style="text-align: justify;">{{$emailBody->body}}</p>
-    <ol>
+    <p style="text-align: justify; font-size:14px;">{{$emailBody->body}}</p>
+    <ol style="font-size:14px">
     @foreach ($inactiveSuppliers as $supplier)
-        <li><p style="font-size:20px">{{$supplier->name}}</p></li>
+        <li><p style="font-size:14px">{{$supplier->name}}</p></li>
     @endforeach
     </ol>
 </div>
