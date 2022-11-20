@@ -14,7 +14,6 @@ class StoreBannersController extends Controller
     public function __invoke(Request $request)
     {
         $fields = [
-            'role'=>'required|string',
             'image'=>'required|mimes:jpg,jpeg,png',
         ];
         $message = [
@@ -23,7 +22,6 @@ class StoreBannersController extends Controller
         $this->validate($request, $fields, $message);
 
         $banner = new Banner();
-        $banner->role = $request->input('role');
         $banner->banner_url = '';
         $banner->save();
 

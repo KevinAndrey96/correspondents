@@ -116,6 +116,7 @@
                                     <input type="hidden" class="form-control" name="productID" value="" id="productID" readonly="readonly">
                                 </div>
                                 <div class="col-md-12">
+                                    @if ($platform->is_enabled == 1)
                                     <div id="deposit" style=" display: none;">
                                         <p class="form-label">Depositos</p>
                                         <div class="row">
@@ -188,6 +189,7 @@
                                             @endforeach
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-12 text-center">

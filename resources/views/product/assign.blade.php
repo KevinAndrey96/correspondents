@@ -19,9 +19,8 @@
                             <form method="POST" action="{{route('product.store.assignments')}}" enctype="multipart/form-data">
                                 <div class="row">
                                     @csrf
-                                    <div class="col-md-12">
                                         @foreach($products as $product)
-                                            <div class="form-check mt-4">
+                                            <div class="col-md-4 form-check mt-4">
                                                 <input style=""type="checkbox" class="form-check-input" name="products[]" value="{{$product->id}}">
                                                 <label>{{$product->product_name}} -
                                                     @if($product->product_type == 'Deposit')
@@ -32,7 +31,6 @@
                                                 </label>
                                             </div>
                                         @endforeach
-                                    </div>
                                     </div>
                                 <input type="hidden" name="user_id" value="{{$id}}">
                                 <input type="submit" class="btn btn-success bg-gradient m-4 float-end" value="Asignar">

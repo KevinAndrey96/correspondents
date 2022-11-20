@@ -5,6 +5,7 @@ namespace App\Http\Controllers\transactions;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\Models\Product;
+use App\Models\Platform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +23,9 @@ class CreateTransactionController extends Controller
                 ->where('is_enabled','=','1')
                 ->orderBy('priority', 'asc')
                 ->get();
-            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal'));
+            $platform = Platform::find(1);
+
+            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform'));
         }
     }
 

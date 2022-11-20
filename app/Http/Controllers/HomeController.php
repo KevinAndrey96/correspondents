@@ -40,6 +40,7 @@ class HomeController extends Controller
             $failedTransactionCount = Transaction::where('status', 'like', 'Failed')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $holdTransactionCount = Transaction::where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $acceptedTransactionCount = Transaction::where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $cancelledTransactionCount = Transaction::where('status', 'like', 'cancelled')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
 
             $administratorCount = User::where('role', 'like', 'Administrator')->count();
             $shopkeeperCount = User::where('role', 'like', 'Shopkeeper')->count();
@@ -56,13 +57,6 @@ class HomeController extends Controller
             foreach($suppliers as $supplier){
                 $suppliersBalance = $suppliersBalance + $supplier->balance;
             }
-            $banners = Banner::where('role', '=','administrator')->get();
-            $firstBanner = null;
-            if ($banners->count() > 0) {
-                $firstBanner = $banners[0];
-            }
-
-
             return view('home', compact(
                 'transactionCount',
                 'successfulTransactionCount',
@@ -75,8 +69,8 @@ class HomeController extends Controller
                 'distributorCount',
                 'shopkeepersBalance',
                 'suppliersBalance',
-                'banners',
-                'firstBanner'));
+                'cancelledTransactionCount'
+                ));
         }
 
         if (Auth::user()->role == 'Distributor') {
@@ -89,7 +83,7 @@ class HomeController extends Controller
             foreach($shopkeepers as $shopkeeper){
                 $shopkeepersBalance = $shopkeepersBalance + $shopkeeper->balance;
             }
-            $banners = Banner::where('role', '=','distributor')->get();
+            $banners = Banner::all();
             $firstBanner = null;
             if ($banners->count() > 0) {
                 $firstBanner = $banners[0];
@@ -108,19 +102,14 @@ class HomeController extends Controller
             $failedTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Failed')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $holdTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $acceptedTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
-            $banners = Banner::where('role', '=','supplier')->get();
-            $firstBanner = null;
-            if ($banners->count() > 0) {
-                $firstBanner = $banners[0];
-            }
+
             return view('home', compact(
                 'transactionCount',
                 'successfulTransactionCount',
                 'failedTransactionCount',
                 'holdTransactionCount',
-                'acceptedTransactionCount',
-                'banners',
-                'firstBanner'));
+                'acceptedTransactionCount'
+            ));
         }
 
         if (Auth::user()->role == 'Shopkeeper') {
@@ -129,7 +118,7 @@ class HomeController extends Controller
             $failedTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Failed')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $holdTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $acceptedTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
-            $banners = Banner::where('role', '=','shopkeeper')->get();
+            $banners = Banner::all();
             $firstBanner = null;
             if ($banners->count() > 0) {
                 $firstBanner = $banners[0];

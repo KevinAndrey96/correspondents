@@ -18,6 +18,7 @@ class LockPlatformMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        /*
         $platform = Platform::find(1);
 
         if (Auth::user()->role !== 'Administrator' && $platform->is_enabled == 0) {
@@ -25,7 +26,7 @@ class LockPlatformMiddleware
 
             return redirect('/');
         }
-
+        */
         return $next($request);
     }
 }

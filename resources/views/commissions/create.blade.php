@@ -5,6 +5,11 @@
             <p class="text-center text-sm text-white">{{ Session::get('UpdaCommissionFailed') }}</p>
         </div>
     @endif
+    @if(Session::has('noCommissions'))
+        <div class="alert alert-danger" role="alert">
+            <p class="text-center text-sm text-white">{{ Session::get('noCommissions') }}</p>
+        </div>
+    @endif
     @if(Session::has('UpdaCommissionSuccess'))
         <div class="alert alert-success" role="alert">
             <p class="text-center text-sm text-white">{{ Session::get('UpdaCommissionSuccess') }}</p>

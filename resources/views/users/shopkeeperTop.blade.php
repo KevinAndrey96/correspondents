@@ -50,8 +50,7 @@
                     }
                 },
                 responsive: true,
-                "pageLength": 20,
-                "paging": false,
+                "pageLength": 10,
                 "aaSorting": [],
                 "bDestroy": true,
             });

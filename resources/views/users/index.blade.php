@@ -41,7 +41,6 @@
                                         @if($role !== 'Administrator')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Habilitar</th>
                                         @endif
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Eliminar</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
                                         @if ($role == 'allShopkeepers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Distribuidor</th>
@@ -95,17 +94,6 @@
                                             </div>
                                         </td>
                                         @endif
-                                        <td class="align-middle text-center text-sm ps-0">
-                                            <div class="form-check form-switch align-middle text-center">
-                                                @if ($user->is_enabled == 1)
-                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$user->id}}" checked onchange="getStatus({{$user->id}})">
-                                                    <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{$user->id}}"></label>
-                                                @else
-                                                    <input class="form-check-input ms-auto" type="checkbox" id="togglestatus{{$user->id}}" onchange="getStatus({{$user->id}})">
-                                                    <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$user->id}}"></label>
-                                                @endif
-                                            </div>
-                                        </td>
                                         <td class="align-middle text-center text-sm">{{$user->name}}</td>
                                         @if ($role == 'allShopkeepers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{$user->distributor->name}}</th>
@@ -115,7 +103,6 @@
                                             <td class="align-middle text-center text-sm">${{$user->profit}}</td>
                                         @endif
                                         @if ( $role == 'allShopkeepers' || ($role != 'Distributor' && $role != 'Administrator'))
-                                            <!--<td style="display: none;" class="">${{number_format($user->balance, 2, ',', '.')}}</td>-->
                                             <td class="align-middle text-center text-sm">${{number_format($user->balance, 2, ',', '.')}}</td>
                                         @endif
                                         @if ($role == 'Supplier')
@@ -135,6 +122,7 @@
                                                 @if ($role == 'Supplier')
                                                     <a style="color:#505050 ;" href="{{route('product.assign', ['id' => $user->id])}}" title="Asignar productos" class="btn btn-link px-1 mb-0"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10">assignment_turned_in</i></a>
                                                 @endif
+                                                <a style="color: darkred;" href="#" title="Eliminar" class="btn btn-link px-1 mb-0"><i style="color: darkred; font-size: 25px !important;" class="material-icons opacity-10" onclick="getStatus({{$user->id}})">delete</i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -181,12 +169,7 @@
                                         let status = document.getElementById("status");
                                         let form = document.getElementById("form-status");
                                         let user_id = document.getElementById("id");
-
-                                        if (toggle.checked === true) {
-                                            status.value = 1;
-                                        } else {
-                                            status.value = 0;
-                                        }
+                                        status.value = 0;
                                         user_id.value = id;
                                         form.submit();
                                     }

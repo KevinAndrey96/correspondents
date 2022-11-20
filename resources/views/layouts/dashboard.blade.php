@@ -73,14 +73,15 @@
                                 <span class="nav-link-text ms-1">Banners</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+
+                        <!--<li class="nav-item">
                             <a class="nav-link text-white " href="{{route('platform.lock.index')}}">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <i class="material-icons opacity-10">block</i>
                                 </div>
                                 <span class="nav-link-text ms-1">Bloquear plataforma</span>
                             </a>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
             </li>
@@ -473,6 +474,57 @@
         </div>
     </div>
     @endhasrole
+    @hasrole('Administrator')
+    <div class="sidenav-footer mx-3 ">
+        <div class="card card-plain shadow-none" id="sidenavCard">
+            <div class="card-body text-center p-3 w-100 pt-0">
+                <div class="form-check form-switch ">
+                    <label></label>
+                    <label id="onlineLabel">
+                        @if (($platform = App\Models\Platform::find(1))->is_enabled == 1)
+                            Online</label>
+                    <input class="form-check-input ms-auto" type="checkbox" id="togglePlatformStatus{{$platform->id}}" checked onchange="getPlatformStatus({{$platform->id}})">
+                    <label class="form-check-label text-body ms-0 text-truncate w-80" for="togglePlatformStatus{{$platform->id}}"></label>
+                    @else
+                        Offline </label>
+                        <input class="form-check-input ms-auto" type="checkbox" id="togglePlatformStatus{{$platform->id}}" onchange="getPlatformStatus({{$platform->id}})">
+                        <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglePlatformStatus{{$platform->id}}"></label>
+                    @endif
+                </div>
+                <form id="form-platform-status" name="form-platform-status" method="POST" action="{{route('platform.lock')}}">
+                    @csrf
+                    <input type="hidden" name="id" id="platform_id">
+                    <input type="hidden" name="status" id="platform_status">
+                </form>
+                <script>
+                    function getPlatformStatus(id)
+                    {
+                        console.log('ok');
+                        let toggle = document.getElementById("togglePlatformStatus" + id);
+                        let status = document.getElementById("platform_status");
+                        let form = document.getElementById("form-platform-status");
+                        let platform_id = document.getElementById("platform_id");
+
+                        if (toggle.checked == true) {
+                            status.value = 1;
+                            document.getElementById("onlineLabel").innerHTML = 'Online';
+                        } else {
+                            status.value = 0;
+                            document.getElementById("onlineLabel").innerHTML = 'Offline';
+                        }
+                        platform_id.value = id;
+                        form.submit();
+                    }
+                </script>
+                <div class="docs-info">
+                    <h6 class="mb-0 text-white">! Recuerda ¡</h6>
+                    <p class="text-xs text-white mb-0">Enciende el switch para activar la plataforma y apágalo para bloquearla</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endhasrole
+
     <div class="sidenav-footer mx-3 ">
         <div class="card card-plain shadow-none" id="sidenavCard">
             <div class="card-body text-center p-3 w-100 pt-0">

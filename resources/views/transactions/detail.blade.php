@@ -86,10 +86,8 @@
                                                             </div>
                                                             <div class="input-group input-group-static mb-2 mt-2">
                                                                 <a class="image-link" href="https://testing.asparecargas.net{{$transaction->voucher}}">
-                                                                    @if (! is_null($transaction->voucher))
+                                                                    @if (! is_null($transaction->voucher) && ($transaction->status == 'successful' || $transaction->status == 'failed' ))
                                                                         <img class="image-link" width="200px" height="200px" src="https://testing.asparecargas.net{{$transaction->voucher}}">
-                                                                    @else
-                                                                        <img class="image-link" width="200px" height="" style="border-radius: 10px;" src="https://testing.asparecargas.net/assets/img/failed_transaction.PNG">
                                                                     @endif
                                                                 </a>
                                                             </div>

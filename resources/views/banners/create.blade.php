@@ -28,18 +28,7 @@
                             <form method="POST" action="{{route('banners.store')}}" enctype="multipart/form-data">
                                 <div class="row">
                                     @csrf
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-static mb-4">
-                                            <label>Seleccione un Rol:</label>
-                                            <select class="form-control text-center" name="role">
-                                                <option value="administrator">Administrador</option>
-                                                <option value="distributor">Distribuidor</option>
-                                                <option value="supplier">Proveedor</option>
-                                                <option value="shopkeeper">Tendero</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label for="image" >Seleccione un Banner:</label>
                                         <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="image" value="" id="image">
                                     </div>

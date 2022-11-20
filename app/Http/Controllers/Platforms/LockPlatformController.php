@@ -13,7 +13,7 @@ class LockPlatformController extends Controller
         $platform = Platform::find($request->input('id'));
         $platform->is_enabled = $request->input('status');
         $platform->save();
-        return back();
+        return redirect('/home');
 
     }
 }

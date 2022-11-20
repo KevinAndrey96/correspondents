@@ -38,7 +38,9 @@
             <div class="row justify-content-center">
                 <div class="col-auto">
                     <a class="image-link" href="https://testing.asparecargas.net{{$voucher}}">
-                        <img class="image-link" width="200px" height="200px" src="https://testing.asparecargas.net{{$voucher}}">
+                        @if (! is_null($voucher))
+                            <img class="image-link" width="200px" height="200px" src="https://testing.asparecargas.net{{$voucher}}">
+                        @endif
                     </a>
                 </div>
             </div>

@@ -17,7 +17,6 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Imagen</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rol</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
                                     </tr>
                                 </thead>
@@ -30,24 +29,6 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                @if ($banner->role == 'administrator')
-                                                    <strong>ADMINISTRADOR</strong>
-                                                @endif
-                                                    @if ($banner->role == 'supplier')
-                                                        <strong>PROVEEDOR</strong>
-                                                    @endif
-                                                    @if ($banner->role == 'distributor')
-                                                        <strong>DISTRIBUIDOR</strong>
-                                                    @endif
-                                                    @if ($banner->role == 'shopkeeper')
-                                                        <strong>TENDERO</strong>
-                                                    @endif
-                                            </td>
-                                            <td>
-                                                <a style="color: darkgreen;" href="{{route('banners.edit', ['id'=>$banner->id])}}"
-                                                   title="Detalle" class="btn btn-link px-3 mb-0">
-                                                    <i style="color: darkgreen;" class="material-icons opacity-10">edit</i>
-                                                </a>
                                                 <a style="color: darkgreen;" href="{{route('banners.delete', ['id'=>$banner->id])}}"
                                                    title="Detalle" class="btn btn-link px-3 mb-0">
                                                     <i style="color: darkred;" class="material-icons opacity-10">delete</i>

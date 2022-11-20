@@ -12,7 +12,6 @@ class indexBannersController extends Controller
     {
         $banners = Banner::all();
 
-
         return view('banners.index', compact('banners'));
 
 

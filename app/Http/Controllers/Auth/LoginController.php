@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class LoginController extends Controller
 {
@@ -95,5 +96,12 @@ class LoginController extends Controller
         return $request->wantsJson()
             ? new JsonResponse([], 204)
             : redirect()->intended($this->redirectPath());
+    }
+
+    public function authenticated(Request $request, $user)
+    {
+        date_default_timezone_set('America/Bogota');
+        $user->last_login = Carbon::now();
+        $user->save();
     }
 }

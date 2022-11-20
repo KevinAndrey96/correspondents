@@ -23,6 +23,7 @@ class ShopkeepersTopUsersController extends Controller
                         ->select(DB::raw('sum(amount) as acum, count(*) as num_transactions, transactions.shopkeeper_id'))
                         ->groupBy('shopkeeper_id')
                         ->orderBy('acum', 'desc')
+                        ->limit(10)
                         ->get();
 
         foreach ($transactions as $transaction) {

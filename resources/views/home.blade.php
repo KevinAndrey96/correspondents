@@ -15,7 +15,8 @@
             <!--<img src="/assets/img/Banner/administrator.png" width="100%" height="auto" class="border-radius-lg">-->
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                    @if ($banners->count() > 0)
+                    @if (isset($banners))
+                        @if ($banners->count() > 0 && (Auth::user()->role == 'Distributor' || Auth::user()->role == 'Shopkeeper'))
                         @foreach($banners as $banner)
                         @if ($banner->id == $firstBanner->id)
                             <div class="carousel-item active">
@@ -27,6 +28,11 @@
                             </div>
                         @endif
                     @endforeach
+                    @endif
+                    @else
+                        <div class="carousel-item active">
+                            <img class="d-block w-100 rounded img-fluid" src="https://testing.asparecargas.net/assets/img/Banner/banner_original.png">
+                        </div>
                     @endif
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
@@ -73,6 +79,27 @@
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. exitosas</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $successfulTransactionCount }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-2 mb-xl-2 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. canceladas</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{ $cancelledTransactionCount }}
                                     </h5>
                                 </div>
                             </div>
@@ -237,7 +264,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">Saldo Tenderos</p>
-                                    <h5 class="font-weight-bolder">${{ $shopkeepersBalance }}</h5>
+                                    <h5 class="font-weight-bolder">${{number_format($shopkeepersBalance, 2, ',', '.')}}</h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -256,7 +283,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">Saldo Proveedores</p>
-                                    <h5 class="font-weight-bolder">${{ $suppliersBalance }}</h5>
+                                    <h5 class="font-weight-bolder">${{number_format($suppliersBalance , 2, ',', '.')}}</h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -561,7 +588,7 @@
                                         <div class="numbers">
                                             <p class="text-xs mb-0 text-uppercase font-weight-bold">Saldo Tenderos</p>
                                             <h5 class="font-weight-bolder">
-                                                ${{ $shopkeepersBalance }}
+                                                ${{number_format($shopkeepersBalance, 2, ',', '.')}}
                                             </h5>
 
                                         </div>

@@ -54,7 +54,8 @@ class User extends Authenticatable
         'is_online',
         'distributor_id',
         'balance',
-        'google2fa_secret'
+        'google2fa_secret',
+        'last_login'
     ];
 
     /**

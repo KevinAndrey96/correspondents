@@ -53,7 +53,8 @@ class UpdateCommissionsController extends Controller
                 return back()->with('UpdaCommissionSuccess', 'Comisiones asignadas');
             }
         } catch (Exception $e){
-            echo '<h4>El distribuidor asociado no tiene comisiones asignadas</h4><br/><h4>Ha habido una excepción:</h4>'.$e->getMessage();
+            
+            return back()->with('noCommissions', 'El distribuidor asociado aún no tiene comisiones asignadas');
         }
     }
 }
