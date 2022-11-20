@@ -1,10 +1,10 @@
-<img src="/assets/img/footer.png" width="100%" height="auto" style="padding-bottom: 20px;">
-<h6 style="color:darkblue; text-align: center;">¡Hola, {{ $emailBody->receiver }}!</h6>
+<img src="https://testing.asparecargas.net/assets/img/footer.png" width="100%" height="auto" style="padding-bottom: 20px;">
+<h2 style="color:darkblue; text-align: center;">¡Hola, {{ $emailBody->receiver }}!</h2>
 <div>
     <p style="text-align: justify;">{{$emailBody->body}}</p>
     <ol>
     @foreach ($inactiveSuppliers as $supplier)
-        <li>{{$supplier->name}}</li>
+        <li><p style="font-size:20px">{{$supplier->name}}</p></li>
     @endforeach
     </ol>
 </div>
@@ -14,4 +14,4 @@
 <small>Este correo fue enviado automáticamente, agradecemos no responder este mensaje.</small>
 <br/>
 <i>{{ $emailBody->sender }}</i>
-<img src="/assets/img/footer1.png" width="100%" height="auto" style="padding-top: 20px;">
+<img src="https://testing.asparecargas.net/assets/img/footer1.png" width="100%" height="auto" style="padding-top: 20px;">
