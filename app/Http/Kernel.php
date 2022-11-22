@@ -68,5 +68,9 @@ class Kernel extends HttpKernel
         '2fa' => \PragmaRX\Google2FALaravel\Middleware::class,
         'isAuthorized' => \App\Http\Middleware\IsAuthorizedMiddleware::class,
         'lockPlatform' => \App\Http\Middleware\LockPlatformMiddleware::class,
+        'dailyPassword' => \App\Http\Middleware\DailyPasswordMiddleware::class,
+        'requestDailyPassword' => \App\Http\Middleware\RequestDailyPasswordMiddleware::class,
+        'firstPassword' => \App\Http\Middleware\FirstPasswordMiddleware::class,
+
     ];
 }

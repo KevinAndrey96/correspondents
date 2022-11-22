@@ -26,6 +26,9 @@ class UpdateTransactionController extends Controller
         try {
             date_default_timezone_set('America/Bogota');
             $transaction = Transaction::find($request->input('transaction_id'));
+            $shopkeeper = User::find($transaction->shopkeeper_id);
+            $shopkeeper->daily_verified = 0;
+            $shopkeeper->save();
             if (
                 $transaction->status !== self::SUCCESSFUL_STATUS
                 && $transaction->status !== self::FAILURE_STATUS
@@ -88,7 +91,7 @@ class UpdateTransactionController extends Controller
                     $administrator = User::find($transaction->admin_id);
                     $supplier = User::find($transaction->supplier_id);
                     $distributor = User::find($transaction->distributor_id);
-                    $shopkeeper = User::find($transaction->shopkeeper_id);
+
 
                     if (isset($commissionSupp)) {
                         $supplier->profit += $commissionSupp->amount;
@@ -145,6 +148,7 @@ class UpdateTransactionController extends Controller
                     $supplierSummary->save();
                     $shopkeeperSummary->save();
                 }
+
                 return redirect('/transactions');
             }
         }catch (Exception $e) {

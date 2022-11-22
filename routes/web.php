@@ -26,8 +26,8 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-        ->name('home');
-        //->middleware('2fa');
+        ->name('home')
+        ->middleware('firstPassword', 'dailyPassword');
     Route::get('/products', [App\Http\Controllers\Products\IndexProductController::class, 'index']);
     Route::get('/products/create', [App\Http\Controllers\Products\CreateProductController::class, 'create']);
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
 
 
     Route::get('/transactions', [App\Http\Controllers\Transactions\IndexTransactionController::class, 'index']);
-    Route::get('/transactions/create', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create']);
+        Route::get('/transactions/create', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create'])->middleware('requestDailyPassword');
     Route::post('/transaction/store', [App\Http\Controllers\Transactions\StoreTransactionController::class, 'store']);
     Route::post('/transaction/storeClientData', [App\Http\Controllers\Transactions\AddClientDataController::class, 'store']);
     Route::get('/transaction/cancel/{id}', [App\Http\Controllers\Transactions\CancelTransactionController::class, 'cancel']);
@@ -89,20 +89,20 @@ Route::get('/transaction/detail-pdf/{id}', [App\Http\Controllers\Transactions\De
 /**
  * Middleware for 2FA
  */
-/*
+
 Route::middleware(['2fa'])->group(function () {
     Route::post('/2fa', static function () {
         return redirect(route('home'));
     })->name('2fa');
 });
-*/
+
 /**
  * Route for controller {@link TwoFAController} QR code view
  */
-/*
+
 Route::get('/complete-registration', [TwoFAController::class, 'index'])->name('complete.registration');
 Route::get('/complete-registration2', [RegisterController::class, 'fullRegister'])->name('complete.registration2');
-*/
+
 
 /**
  *  Routes for whatsapp
@@ -159,3 +159,29 @@ Route::get('/platform-lock-index', App\Http\Controllers\Platforms\LockIndexPlatf
 
 Route::post('/platform-lock', App\Http\Controllers\Platforms\LockPlatformController::class)
     ->name('platform.lock');
+
+/**
+ * Route for daily password view
+ */
+
+Route::get('/daily-password', App\Http\Controllers\Users\DailyPasswordIndexUsersController::class)
+    ->name('users.daily.password.index');
+
+Route::post('/daily-password', App\Http\Controllers\Users\DailyPasswordUsersController::class)
+    ->name('users.daily.password');
+
+Route::get('/require-daily-password', App\Http\Controllers\Users\RequireDailyPasswordUsersController::class)
+    ->name('users.require.daily.password');
+
+Route::post('/store-required-daily-password', App\Http\Controllers\Users\StoreDailyPasswordUsersController::class)
+    ->name('users.store.required.daily.password');
+
+/**
+ * Routes for first password
+ */
+
+Route::get('/first-password', App\Http\Controllers\Users\FirstPasswordUsersController::class)
+    ->name('users.first.password');
+
+Route::post('/store-first-password', App\Http\Controllers\Users\StoreFirstPasswordUsersController::class)
+    ->name('users.store.first.password');

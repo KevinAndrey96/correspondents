@@ -36,5 +36,8 @@ fix: font-size of inactive suppliers mail
 ## [Hotfix 1.1.2]
 fix: for loop
 
+## [Hotfix 1.1.3]
+fix: cron hour
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

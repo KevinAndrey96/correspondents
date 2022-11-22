@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dateTime('last_login')->nullable();
-            //$table->dropColumn('last_login');
+            $table->string('daily_password')->nullable();
+            $table->date('daily_password_date')->nullable();
+            //$table->dropColumn('daily_password');
+            //$table->dropColumn('daily_password_date');
         });
     }
 

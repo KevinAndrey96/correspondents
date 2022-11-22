@@ -55,7 +55,11 @@ class User extends Authenticatable
         'distributor_id',
         'balance',
         'google2fa_secret',
-        'last_login'
+        'last_login',
+        'daily_password',
+        'daily_password_date',
+        'daily_verified',
+        'first_login'
     ];
 
     /**
