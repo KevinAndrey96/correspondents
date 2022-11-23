@@ -61,6 +61,7 @@ class AddClientDataController extends Controller
                 $transaction->type = $request->input('transactionType');
                 $transaction->status = $request->input('transactionState');
                 $transaction->detail = $detail;
+                $transaction->userIP = \Request::ip();;
                 $transaction->save();
 
                 if ($transaction->type === 'Withdrawal') {

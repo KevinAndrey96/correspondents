@@ -56,6 +56,12 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cola maxima</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Prioridad</th>
                                         @endif
+                                            @if ($role == 'Distributor')
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID Multiproductos</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plataforma Multiproductos</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PDF Cedula</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PDF RUT</th>
+                                            @endif
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">Acción</th>
                                     </tr>
                                 </thead>
@@ -109,6 +115,32 @@
                                             <td class="align-middle text-center text-sm">{{$user->max_queue}}</td>
                                             <td class="align-middle text-center text-sm">{{$user->priority}}</td>
                                         @endif
+                                            @if ($role == 'Distributor')
+                                                <td class="align-middle text-center text-sm">
+                                                    @if (isset($user->multiproductosID))
+                                                        {{$user->multiproductosID}}
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    @if (isset($user->platform_mul))
+                                                        {{$user->platform_mul}}
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    @if (isset($user->cedulaPDF))
+                                                        <a target="_blank" href="https://testing.asparecargas.net{{$user->cedulaPDF}}">
+                                                            <img width="50%" src="https://testing.asparecargas.net/assets/img/icono-pdf.png">
+                                                        </a>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    @if (isset($user->rutPDF))
+                                                        <a target="_blank" href="https://testing.asparecargas.net{{$user->rutPDF}}">
+                                                            <img width="64%" src="https://testing.asparecargas.net/assets/img/icono-pdf.png">
+                                                        </a>
+                                                    @endif
+                                                </td>
+                                            @endif
                                         <td>
                                             @if ($role != 'allShopkeepers' && $role != 'Administrator')
 

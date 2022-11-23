@@ -22,7 +22,7 @@
                             @endif
                             <form method="POST" action="{{route('users.store.required.daily.password')}}">
                                 @csrf
-                                <div >
+                                <div>
                                     <div class="input-group input-group-dynamic mb-4">
                                         <label class="form-label" for="newPass1">Contraseña</label>
                                         <input type="password" class="form-control" name="password" placeholder="" required>

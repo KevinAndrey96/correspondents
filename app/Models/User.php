@@ -54,12 +54,17 @@ class User extends Authenticatable
         'is_online',
         'distributor_id',
         'balance',
+        'profit',
         'google2fa_secret',
         'last_login',
         'daily_password',
         'daily_password_date',
         'daily_verified',
-        'first_login'
+        'first_login',
+        'multiproductosID',
+        'platform_mul',
+        'cedulaPDF',
+        'rutPDF'
     ];
 
     /**

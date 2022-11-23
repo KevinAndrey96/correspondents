@@ -295,6 +295,25 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xl-3 col-sm-2 mb-xl-2 mb-4 ">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">Ganancia en red</p>
+                                    <h5 class="font-weight-bolder">${{number_format($totalProfit , 2, ',', '.')}}</h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                                    <i class="material-icons opacity-10">payments</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endhasrole
         @hasrole('Distributor')
            <!-- <div  class="col-lg-3 col-sm-6 mb-xl-0 mb-4"></div>

@@ -57,6 +57,9 @@ class HomeController extends Controller
             foreach($suppliers as $supplier){
                 $suppliersBalance = $suppliersBalance + $supplier->balance;
             }
+
+            $totalProfit = User::sum('profit');
+
             return view('home', compact(
                 'transactionCount',
                 'successfulTransactionCount',
@@ -69,7 +72,8 @@ class HomeController extends Controller
                 'distributorCount',
                 'shopkeepersBalance',
                 'suppliersBalance',
-                'cancelledTransactionCount'
+                'cancelledTransactionCount',
+                'totalProfit'
                 ));
         }
 

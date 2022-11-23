@@ -40,7 +40,8 @@ class Transaction extends Model
         'com_adm',
         'com_dis',
         'com_sup',
-        'com_shp'
+        'com_shp',
+        'userIP'
     ];
 
     public function shopkeeper(): BelongsTo

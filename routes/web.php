@@ -27,7 +27,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home')
-        ->middleware('firstPassword', 'dailyPassword');
+        ->middleware('2fa','firstPassword', 'dailyPassword', 'distributorExtrainfo');
     Route::get('/products', [App\Http\Controllers\Products\IndexProductController::class, 'index']);
     Route::get('/products/create', [App\Http\Controllers\Products\CreateProductController::class, 'create']);
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
@@ -76,6 +76,22 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     Route::get('/commissions/users', [App\Http\Controllers\Commissions\UsersCommissionsController::class, 'usersCommissions']);
     Route::get('/commissions/create/{id}', [App\Http\Controllers\Commissions\CreateCommissionsController::class, 'create']);
     Route::post('/commissions/update', [App\Http\Controllers\Commissions\UpdateCommissionsController::class, 'update']);
+
+    /**
+     * Routes for cards
+     */
+
+    Route::get('/cards-create', App\Http\Controllers\Cards\ConfigCardsController::class)
+        ->name('cards.create');
+    Route::post('/cards-store', App\Http\Controllers\Cards\StoreCardsController::class)
+        ->name('cards.store');
+    Route::get('/cards', App\Http\Controllers\Cards\IndexCardsController::class)
+        ->name('cards');
+    Route::get('/cards-delete/{id}', App\Http\Controllers\Cards\DeleteCardsController::class)
+        ->name('cards.delete');
+
+
+
 });
 Route::post('/changeOnlineStatusUser', [App\Http\Controllers\Users\ChangeOnlineStatusUsersController::class, 'changeOnlineStatus'])->middleware('auth');
 
@@ -185,3 +201,13 @@ Route::get('/first-password', App\Http\Controllers\Users\FirstPasswordUsersContr
 
 Route::post('/store-first-password', App\Http\Controllers\Users\StoreFirstPasswordUsersController::class)
     ->name('users.store.first.password');
+
+/**
+ * Routes for distributor extra info
+ */
+Route::get('/distributor-extrainfo', App\Http\Controllers\Users\DistributorExtrainfoUsersController::class)
+    ->name('distributor.extrainfo');
+
+Route::post('/store-distributor-extrainfo', App\Http\Controllers\Users\StoreDistributorExtrainfoUsersController::class)
+    ->name('store.distributor.extrainfo');
+

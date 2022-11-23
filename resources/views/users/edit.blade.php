@@ -16,7 +16,7 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="container">
-                            <form method="POST" action="/user/update">
+                            <form method="POST" action="/user/update" enctype="multipart/form-data">
                                 <div class="row">
                                     @csrf
                                     <div class="col-md-4">
@@ -79,6 +79,45 @@
                                             <input type="text" class="form-control" name="address" value="{{$user->address}}" id="" placeholder="Dirección">
                                         </div>
                                     </div>
+                                    @if ($user->role == 'Distributor')
+                                    <div class="col-md-4">
+                                        <div class="input-group input-group-dynamic my-3">
+                                            <label for="address" class="form-label"></label>
+                                            <input type="text" class="form-control" name="multiproductosID"
+                                                   @if (! is_null($user->multiproductosID))
+                                                        value="{{$user->multiproductosID}}"
+                                                   @endif
+                                                   id="multiproductosID"
+                                                   placeholder="ID Multiproductos">
+                                        </div>
+                                    </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group input-group-dynamic my-3">
+                                                <label for="address" class="form-label"></label>
+                                                <input type="text" class="form-control" name="platform_mul"
+                                                       @if (! is_null($user->platform_mul))
+                                                       value="{{$user->platform_mul}}"
+                                                       @endif
+                                                       id="platform_mul"
+                                                       placeholder="Plataforma Multiproductos">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="cedulaPDF" class="">PDF Cedula:</label>
+                                                <input id="cedulaPDF" type="file" class="form-control-file" name="cedulaPDF">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="cedulaPDF" class="">PDF RUT:</label>
+                                                <input id="rutPDF" type="file" class="form-control-file" name="rutPDF">
+                                            </div>
+                                        </div>
+
+
+
+                                    @endif
                                     <!--
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">

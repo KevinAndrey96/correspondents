@@ -71,6 +71,6 @@ class Kernel extends HttpKernel
         'dailyPassword' => \App\Http\Middleware\DailyPasswordMiddleware::class,
         'requestDailyPassword' => \App\Http\Middleware\RequestDailyPasswordMiddleware::class,
         'firstPassword' => \App\Http\Middleware\FirstPasswordMiddleware::class,
-
+        'distributorExtrainfo' => \App\Http\Middleware\ExtraInfoDistributorMiddleware::class
     ];
 }

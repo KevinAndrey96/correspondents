@@ -5,6 +5,7 @@
             <th>Distribuidor</th>
             <th>Tendero</th>
             <th>Proveedor</th>
+            <th>IP Tendero</th>
             <th>Producto</th>
             <th>Monto</th>
             <th>Estado</th>
@@ -26,6 +27,7 @@
                     {{$transaction->supplier->name}}
                 @endif
             </td>
+            <td>{{$transaction->userIP}}</td>
             <td>{{$transaction->product->product_name}} -
                 @if($transaction->product->product_type == 'Deposit')
                     Deposito
