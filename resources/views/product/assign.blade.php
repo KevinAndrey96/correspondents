@@ -21,7 +21,15 @@
                                     @csrf
                                         @foreach($products as $product)
                                             <div class="col-md-4 form-check mt-4">
-                                                <input style=""type="checkbox" class="form-check-input" name="products[]" value="{{$product->id}}">
+                                                <input style=""type="checkbox" class="form-check-input" name="products[]"
+                                                       value="{{$product->id}}"
+                                                       @foreach($supplierProducts as $sProduct)
+                                                           @if($sProduct->product_id == $product->id)
+                                                                checked
+                                                           @break
+                                                           @endif
+                                                       @endforeach
+                                                >
                                                 <label>{{$product->product_name}} -
                                                     @if($product->product_type == 'Deposit')
                                                         DEPOSITO

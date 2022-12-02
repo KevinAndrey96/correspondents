@@ -21,18 +21,17 @@ class DailyPasswordMiddleware
     {
         date_default_timezone_set('America/Bogota');
         $user = User::find(Auth::user()->id);
+        if ($user->role == 'Shopkeeper' && $user->enabled_daily == 1) {
             if (! is_null($user->daily_password_date)) {
                 $currentDate = strtotime(Carbon::now()->format('Y-m-d'));
                 $dailyDate = strtotime(Carbon::parse($user->daily_password_date)->format('Y-m-d'));
-                //$userp = User::find(33);
-                //$userp->daily_password = $dailyDate.' '.$currentDate;
-                //$userp->save();
                 if ($currentDate !== $dailyDate) {
                     return redirect()->route('users.daily.password.index');
                 }
             } else {
                 return redirect()->route('users.daily.password.index');
             }
+        }
         return $next($request);
     }
 }

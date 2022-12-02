@@ -25,7 +25,7 @@
                                 @for($i = 0; $i < count($transactions); $i++)
                                     <tr class="align-middle text-center text-sm">
                                         <td>{{$shopkeepers[$i]->name}}</td>
-                                        <td>${{number_format($transactions[$i]->acum, 2, ',', '.')}}</td>
+                                        <td>${{$transactions[$i]->acum}}</td>
                                         <td>{{$transactions[$i]->num_transactions}}</td>
                                     </tr>
                                 @endfor

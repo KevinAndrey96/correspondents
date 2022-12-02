@@ -20,7 +20,7 @@ class ExtraInfoDistributorMiddleware
     {
         $user = User::find(Auth::user()->id);
 
-        if ($user->role == 'Distributor' && $user->extrainfo == 0) {
+        if ($user->role == 'Shopkeeper' && $user->extrainfo == 0) {
 
             return redirect()->route('distributor.extrainfo');
         }

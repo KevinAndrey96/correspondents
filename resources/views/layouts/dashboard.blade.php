@@ -466,7 +466,7 @@
                     }
                 </script>
                 <div class="docs-info">
-                    <h6 class="mb-0 text-white">! Recuerda ¡</h6>
+                    <h6 class="mb-0 text-white">¡ Recuerda !</h6>
                     <p class="text-xs text-white mb-0">Enciende el switch al iniciar y apágalo cuando culmines tu jornada</p>
                 </div>
             </div>
@@ -516,8 +516,8 @@
                     }
                 </script>
                 <div class="docs-info">
-                    <h6 class="mb-0 text-white">! Recuerda ¡</h6>
-                    <p class="text-xs text-white mb-0">Enciende el switch para activar la plataforma y apágalo para bloquearla</p>
+                    <h6 class="mb-0 text-white">¡ Recuerda !</h6>
+                    <p class="text-xs text-white mb-0">Habilita o deshabilita la plataforma transaccional</p>
                 </div>
             </div>
         </div>

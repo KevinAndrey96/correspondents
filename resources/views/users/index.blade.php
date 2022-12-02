@@ -40,7 +40,10 @@
                                         @endif
                                         @if($role !== 'Administrator')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Habilitar</th>
-                                        @endif
+                                            @endif
+                                            @if ($role == 'allShopkeepers')
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Contraseña diaria</th>
+                                            @endif
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
                                         @if ($role == 'allShopkeepers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Distribuidor</th>
@@ -56,11 +59,14 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cola maxima</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Prioridad</th>
                                         @endif
-                                            @if ($role == 'Distributor')
+                                            @if ($role == 'Shopkeeper' || $role == 'allShopkeepers')
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID Multiproductos</th>
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plataforma Multiproductos</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PDF Cedula</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PDF RUT</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Documento Cedula</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Documento RUT</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cámara y comercio</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto local</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto de recibo público:</th>
                                             @endif
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">Acción</th>
                                     </tr>
@@ -100,6 +106,19 @@
                                             </div>
                                         </td>
                                         @endif
+                                            @if ($role == 'allShopkeepers')
+                                                <td class="align-middle text-center text-sm">
+                                                    <div class="form-check form-switch align-middle text-center">
+                                                        @if ($user->enabled_daily == 1)
+                                                            <input class="form-check-input ms-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" checked onchange="getEnabledDaily({{$user->id}})">
+                                                            <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{$user->id}}"></label>
+                                                        @else
+                                                            <input class="form-check-input ms-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" onchange="getEnabledDaily({{$user->id}})">
+                                                            <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$user->id}}"></label>
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                            @endif
                                         <td class="align-middle text-center text-sm">{{$user->name}}</td>
                                         @if ($role == 'allShopkeepers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{$user->distributor->name}}</th>
@@ -115,7 +134,7 @@
                                             <td class="align-middle text-center text-sm">{{$user->max_queue}}</td>
                                             <td class="align-middle text-center text-sm">{{$user->priority}}</td>
                                         @endif
-                                            @if ($role == 'Distributor')
+                                            @if ($role == 'Shopkeeper' || $role == 'allShopkeepers')
                                                 <td class="align-middle text-center text-sm">
                                                     @if (isset($user->multiproductosID))
                                                         {{$user->multiproductosID}}
@@ -129,14 +148,35 @@
                                                 <td class="align-middle text-center text-sm">
                                                     @if (isset($user->cedulaPDF))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->cedulaPDF}}">
-                                                            <img width="50%" src="https://testing.asparecargas.net/assets/img/icono-pdf.png">
+                                                            <img width="27%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
                                                     @if (isset($user->rutPDF))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->rutPDF}}">
-                                                            <img width="64%" src="https://testing.asparecargas.net/assets/img/icono-pdf.png">
+                                                            <img width="31%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                        </a>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    @if (isset($user->camara_comercio))
+                                                        <a target="_blank" href="https://testing.asparecargas.net{{$user->camara_comercio}}">
+                                                            <img width="28%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                        </a>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    @if (isset($user->local_photo))
+                                                        <a target="_blank" href="https://testing.asparecargas.net{{$user->local_photo}}">
+                                                            <img width="39%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                        </a>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    @if (isset($user->public_receipt))
+                                                        <a target="_blank" href="https://testing.asparecargas.net{{$user->public_receipt}}">
+                                                            <img width="22%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
                                                 </td>
@@ -192,6 +232,11 @@
                                 <input type="hidden" name="id" id="user_id">
                                 <input type="hidden" name="authorized" id="authorized">
                             </form>
+                            <form id="form-enabled-daily" name="form-enabled-daily" method="POST" action="{{route('users.shopkeeper.enabled.daily')}}">
+                                @csrf
+                                <input type="hidden" name="id" id="shopkeeper_id">
+                                <input type="hidden" name="enabled_daily" id="enabled_daily">
+                            </form>
                             <script>
                                 function getStatus(id)
                                 {
@@ -219,6 +264,21 @@
                                         }
                                         user_id.value = id;
                                         form.submit();
+                                }
+                                function getEnabledDaily(id)
+                                {
+                                    let toggle = document.getElementById("toggleEnabledDaily" + id);
+                                    let status = document.getElementById("enabled_daily");
+                                    let form = document.getElementById("form-enabled-daily");
+                                    let user_id = document.getElementById("shopkeeper_id");
+
+                                    if (toggle.checked === true) {
+                                        status.value = 1;
+                                    } else {
+                                        status.value = 0;
+                                    }
+                                    user_id.value = id;
+                                    form.submit();
                                 }
                             </script>
                             <!-- Modal-->

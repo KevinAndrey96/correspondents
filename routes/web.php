@@ -27,7 +27,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home')
-        ->middleware('2fa','firstPassword', 'dailyPassword', 'distributorExtrainfo');
+        ->middleware('distributorExtrainfo', 'firstPassword', 'dailyPassword');
     Route::get('/products', [App\Http\Controllers\Products\IndexProductController::class, 'index']);
     Route::get('/products/create', [App\Http\Controllers\Products\CreateProductController::class, 'create']);
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
@@ -71,6 +71,9 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     Route::post('/changeStatusUser', [App\Http\Controllers\Users\ChangeStatusUsersController::class, 'changeStatus']);
     Route::get('/changePassword', [App\Http\Controllers\Users\ChangePasswordUsersController::class, 'changePassword']);
     Route::post('/updatePassword', [App\Http\Controllers\Users\UpdatePasswordUsersController::class, 'updatePassword']);
+    Route::post('/enabled-daily', App\Http\Controllers\Users\EnabledDailyUsersController::class)
+        ->name('users.shopkeeper.enabled.daily');
+
 
     Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index']);
     Route::get('/commissions/users', [App\Http\Controllers\Commissions\UsersCommissionsController::class, 'usersCommissions']);
@@ -116,7 +119,7 @@ Route::middleware(['2fa'])->group(function () {
  * Route for controller {@link TwoFAController} QR code view
  */
 
-Route::get('/complete-registration', [TwoFAController::class, 'index'])->name('complete.registration');
+Route::get('/complete-registration', [TwoFAController::class, 'index'])->name('complete.registration')->middleware('distributorExtrainfo');
 Route::get('/complete-registration2', [RegisterController::class, 'fullRegister'])->name('complete.registration2');
 
 

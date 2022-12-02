@@ -706,25 +706,31 @@
 
         </div>
         <script>
-        function excelURL(type) {
-            var actionURL = document.getElementById("action");
-            if(type == 'Transacciones'){
-                actionURL.action = "{{ url('/transaction/excel') }}";
-                document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
+            $('.carousel').carousel({
+                interval: 3000,
+                pause:true,
+                wrap:false
+            });
+
+            function excelURL(type) {
+                var actionURL = document.getElementById("action");
+                if(type == 'Transacciones'){
+                    actionURL.action = "{{ url('/transaction/excel') }}";
+                    document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
+                }
+                if(type == 'Saldos'){
+                    actionURL.action = "{{ url('/balance/excel') }}";
+                    document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
+                }
+                if(type == 'Extracto'){
+                    actionURL.action = "{{ url('/balanceSummary/excel') }}";
+                    document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
+                }
+                if(type == 'Ganancias'){
+                    actionURL.action = "{{ url('/profit/excel') }}";
+                    document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
+                }
             }
-            if(type == 'Saldos'){
-                actionURL.action = "{{ url('/balance/excel') }}";
-                document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
-            }
-            if(type == 'Extracto'){
-                actionURL.action = "{{ url('/balanceSummary/excel') }}";
-                document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
-            }
-            if(type == 'Ganancias'){
-                actionURL.action = "{{ url('/profit/excel') }}";
-                document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
-            }
-        }
         </script>
     <!-- Modal-->
     <div class="modal fade" id="ExcelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">

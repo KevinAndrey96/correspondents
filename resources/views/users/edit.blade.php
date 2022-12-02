@@ -79,10 +79,10 @@
                                             <input type="text" class="form-control" name="address" value="{{$user->address}}" id="" placeholder="Dirección">
                                         </div>
                                     </div>
-                                    @if ($user->role == 'Distributor')
+                                    @if ($user->role == 'Shopkeeper')
                                     <div class="col-md-4">
-                                        <div class="input-group input-group-dynamic my-3">
-                                            <label for="address" class="form-label"></label>
+                                        <div class="input-group input-group-outline my-3">
+                                            <label class="form-label"></label>
                                             <input type="text" class="form-control" name="multiproductosID"
                                                    @if (! is_null($user->multiproductosID))
                                                         value="{{$user->multiproductosID}}"
@@ -92,7 +92,7 @@
                                         </div>
                                     </div>
                                         <div class="col-md-4">
-                                            <div class="input-group input-group-dynamic my-3">
+                                            <div class="input-group input-group-outline my-3">
                                                 <label for="address" class="form-label"></label>
                                                 <input type="text" class="form-control" name="platform_mul"
                                                        @if (! is_null($user->platform_mul))
@@ -104,17 +104,34 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="cedulaPDF" class="">PDF Cedula:</label>
+                                                <label for="cedulaPDF" class="">PDF o Imagen de Cedula:</label>
                                                 <input id="cedulaPDF" type="file" class="form-control-file" name="cedulaPDF">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="cedulaPDF" class="">PDF RUT:</label>
+                                                <label for="cedulaPDF" class="">PDF o Imagen de RUT:</label>
                                                 <input id="rutPDF" type="file" class="form-control-file" name="rutPDF">
                                             </div>
                                         </div>
-
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="camara_comercio" class="">Cámara y comercio (opcional):</label>
+                                                <input id="camara_comercio" type="file" class="form-control-file" name="camara_comercio">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="local_photo" class="">Foto local:</label>
+                                                <input id="local_photo" type="file" class="form-control-file" name="local_photo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="public_receipt" class="">Foto de recibo público:</label>
+                                                <input id="public_receipt" type="file" class="form-control-file" name="public_receipt">
+                                            </div>
+                                        </div>
 
 
                                     @endif

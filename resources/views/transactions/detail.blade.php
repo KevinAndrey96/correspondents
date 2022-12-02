@@ -19,7 +19,7 @@
                                             <li class="list-group-item border-0 d-flex p-4 mb-0 bg-gray-100 border-radius-lg">
                                               <div class="row">
                                                 @if (Auth::user()->role == 'Supplier' && is_null($detailSupplier))
-                                                <div class="col-md-4 d-flex flex-column ">
+                                                <div style="border:1px solid black" class="col-md-4 d-flex flex-column ">
                                                     <h6 class="mb-3 text-sm">Información</h6>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Producto: {{$transaction->product->product_name}}</p>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Número de cuenta: {{$transaction->account_number}}</p>
@@ -87,7 +87,7 @@
                                                             <div class="input-group input-group-static mb-2 mt-2">
                                                                 <a class="image-link" href="https://testing.asparecargas.net{{$transaction->voucher}}">
                                                                     @if (! is_null($transaction->voucher) && ($transaction->status == 'successful' || $transaction->status == 'failed' ))
-                                                                        <img class="image-link" width="200px" height="200px" src="https://testing.asparecargas.net{{$transaction->voucher}}">
+                                                                        <img class="image-link rounded" width="200px" height="200px" src="https://testing.asparecargas.net{{$transaction->voucher}}">
                                                                     @endif
                                                                 </a>
                                                             </div>
@@ -97,13 +97,26 @@
                                                                 <textarea class="form-control" name="comment" rows="3" placeholder="Comentario:" spellcheck="false">{{$transaction->comment}}</textarea>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-8">
-                                                            <a href="{{route('number.whatsapp')}}?transactionID={{$transaction->id}}&voucher={{$transaction->voucher}}" class="link-primary">Enviar comprobante a Whatsapp</a>
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-8 ms-auto mt-4">
+                                                                    <form id="form-wp" method="get" action="https://api.whatsapp.com/send">
+                                                                    <!--<a  href="{{route('number.whatsapp')}}?transactionID={{$transaction->id}}&voucher={{$transaction->voucher}}" class="link-primary">Enviar comprobante a Whatsapp</a>-->
+                                                                    <img width="10%" src="https://testing.asparecargas.net/assets/img/whatsapp.png" alt="">
+                                                                    <span class="text-xs font-weight-bold text-dark">Enviar comprobante: </span>
+                                                                        <div class="input-group d-inline mx-2">
+                                                                            <input style="background:white; width:30%;" type="text" name="phone" id="phone" class="form-control text-center d-inline border-top border-start border-bottom p-2">
+                                                                            <input type="hidden" name="text" value="{{ 'Hola, este es el comprobante de la transacción: https://testing.asparecargas.net/transaction/detail-pdf/'.$transaction->id }}">
+                                                                        </div>
+                                                                        <div style="width:10%" class="d-inline">
+                                                                            <input type="submit" class="btn btn-success bg-gradient d-inline mt-3" value="Enviar" onclick="sendWP({{getenv('COUNTRY_CODE')}})">
+                                                                            <!--<a class="btn btn-success bg-gradient d-inline">Enviar</a>-->
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        @endif
                                                         </div>
-
-                                                        <!--['transactionID'=> $transaction->id, 'voucher' => $transaction->voucher]-->
-                                                @endif
-                                                </div>
                                                 <script>
                                                     function hideButton()
                                                     {
@@ -112,14 +125,14 @@
                                                         form.submit();
                                                         subButton.disabled = true;
                                                     }
-                                                    /*
-                                                    function conf() {
-                                                        return confirm('¿está seguro de realizar la transacción?');
+                                                    function sendWP(id)
+                                                    {
+                                                        var numPhone = document.getElementById('phone');
+                                                        var form = document.getElementById('form-wp');
+                                                        numPhone.value = id+numPhone.value;
+                                                        form.send();
                                                     }
-
-                                                    */
                                                 </script>
-
                                               </div>
 
                                             </li>

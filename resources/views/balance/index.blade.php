@@ -225,15 +225,9 @@
                                             }
                                         },
                                         responsive: true,
-                                        "pageLength": 15
-                                    });
-                                    $(document).ready(function() {
-                                        $('#my_table').DataTable(
-                                            {
-                                                //"bSort" : false,
-                                                "aaSorting": [],
-                                                "bDestroy": true
-                                            });
+                                        "pageLength": 15,
+                                        "aaSorting": [],
+                                        "bDestroy": true
                                     });
                                 } );
                             </script>

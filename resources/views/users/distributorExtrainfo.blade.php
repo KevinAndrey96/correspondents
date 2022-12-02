@@ -36,7 +36,6 @@
                             </div>
                         </div>
                         <div class="card-body">
-
                             @if(count($errors)>0)
                                 <div class="alert alert-danger" role="alert">
                                     <ul>
@@ -47,12 +46,21 @@
                                             @if ($error == 'platform_mul es requerido')
                                                 <li>Plataforma Multiproductos es requerida</li>
                                             @endif
-                                            @if ($error == 'El campo cedula p d f debe ser un archivo de tipo: pdf.')
-                                                <li>El campo PDF cedula debe ser un archivo de tipo: pdf.</li>
+                                            @if ($error == 'El campo cedula p d f debe ser un archivo de tipo: jpg, jpeg, png, pdf.')
+                                                <li>El campo PDF cedula debe ser un archivo de tipo: jpg, jpeg, png, pdf.</li>
                                             @endif
-                                            @if ($error == 'El campo rut p d f debe ser un archivo de tipo: pdf.')
-                                                <li>El campo PDF RUT debe ser un archivo de tipo: pdf.</li>
+                                            @if ($error == 'El campo rut p d f debe ser un archivo de tipo: jpg, jpeg, png, pdf.')
+                                                <li>El campo PDF RUT debe ser un archivo de tipo: jpg, jpeg, png, pdf.</li>
                                             @endif
+                                                @if ($error == 'El campo camara comercio debe ser un archivo de tipo: pdf.')
+                                                    <li>El campo cámara y comercio debe ser un archivo de tipo: pdf.</li>
+                                                @endif
+                                                @if ($error == 'El campo local photo debe ser un archivo de tipo: jpg, jpeg, png.')
+                                                    <li>El campo foto local debe ser un archivo de tipo: jpg, jpeg, png.</li>
+                                                @endif
+                                                @if ($error == 'El campo public receipt debe ser un archivo de tipo: jpg, jpeg, png.')
+                                                    <li>El campo foto de recibo público debe ser un archivo de tipo: jpg, jpeg, png.</li>
+                                                @endif
                                         @endforeach
                                     </ul>
                                 </div>
@@ -79,14 +87,32 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group mb-3">
-                                            <label for="cedulaPDF" class="">PDF Cedula:</label>
+                                            <label for="cedulaPDF" class="">PDF o Imagen de Cedula:</label>
                                             <input id="cedulaPDF" type="file" class="form-control-file" name="cedulaPDF" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group mb-3">
-                                            <label for="cedulaPDF" class="">PDF RUT:</label>
-                                            <input id="rutPDF" type="file" class="form-control-file" name="rutPDF" required>
+                                            <label for="rutPDF" class="">PDF o Imagen de RUT (opcional):</label>
+                                            <input id="rutPDF" type="file" class="form-control-file" name="rutPDF">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3">
+                                            <label for="camara_comercio" class="">Cámara y comercio (opcional):</label>
+                                            <input id="camara_comercio" type="file" class="form-control-file" name="camara_comercio">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3">
+                                            <label for="local_photo" class="">Foto local:</label>
+                                            <input id="local_photo" type="file" class="form-control-file" name="local_photo" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3">
+                                            <label for="public_receipt" class="">Foto de recibo público:</label>
+                                            <input id="public_receipt" type="file" class="form-control-file" name="public_receipt" required>
                                         </div>
                                     </div>
                                     <div class="text-center">

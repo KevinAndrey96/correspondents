@@ -64,7 +64,11 @@ class User extends Authenticatable
         'multiproductosID',
         'platform_mul',
         'cedulaPDF',
-        'rutPDF'
+        'rutPDF',
+        'camara_comercio',
+        'local_photo',
+        'public_receipt',
+        'enabled_daily'
     ];
 
     /**
