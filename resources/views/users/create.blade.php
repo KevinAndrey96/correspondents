@@ -20,6 +20,8 @@
                                     (Proveedores)
                                 @elseif ($role == 'Administrator')
                                     (Administradores)
+                                @elseif ($role == 'Saldos')
+                                    (S & G)
                                 @endif
                             </h6>
                         </div>

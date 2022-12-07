@@ -27,7 +27,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home')
-        ->middleware('distributorExtrainfo', '2fa', 'firstPassword', 'dailyPassword');
+        ->middleware('distributorExtrainfo', 'firstPassword', 'dailyPassword');
     Route::get('/products', [App\Http\Controllers\Products\IndexProductController::class, 'index']);
     Route::get('/products/create', [App\Http\Controllers\Products\CreateProductController::class, 'create']);
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
@@ -208,7 +208,7 @@ Route::post('/store-first-password', App\Http\Controllers\Users\StoreFirstPasswo
 /**
  * Routes for distributor extra info
  */
-Route::get('/distributor-extrainfo', App\Http\Controllers\Users\DistributorExtrainfoUsersController::class)
+Route::get('/extrainfo', App\Http\Controllers\Users\DistributorExtrainfoUsersController::class)
     ->name('distributor.extrainfo');
 
 Route::post('/store-distributor-extrainfo', App\Http\Controllers\Users\StoreDistributorExtrainfoUsersController::class)

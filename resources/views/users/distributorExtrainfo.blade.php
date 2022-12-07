@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group mb-3">
-                                            <label for="camara_comercio" class="">Cámara y comercio (opcional):</label>
+                                            <label for="camara_comercio" class="">PDF o Imagen de Cámara y comercio (opcional):</label>
                                             <input id="camara_comercio" type="file" class="form-control-file" name="camara_comercio">
                                         </div>
                                     </div>

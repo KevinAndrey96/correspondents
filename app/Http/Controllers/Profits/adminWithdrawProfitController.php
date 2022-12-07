@@ -17,7 +17,7 @@ class adminWithdrawProfitController extends Controller
 {
     public function store(Request $request)
     {
-        if (Auth::user()->role == 'Administrator') {
+        if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos') {
             $profit = Profit::find($request->input('profitID'));
             $emailBody = new \stdClass();
             $emailBody->sender = 'Asparecargas';

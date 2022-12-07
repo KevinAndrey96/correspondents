@@ -125,6 +125,14 @@
                                 <span class="nav-link-text ms-1">G. Tenderos</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/users?role=Saldos">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">groups</i>
+                                </div>
+                                <span class="nav-link-text ms-1">G. Usuarios S & G</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -383,6 +391,39 @@
                 </a>
             </li>
         @endhasrole
+            @if (Auth::user()->role == 'Saldos')
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-3" aria-expanded="false" aria-controls="submenu-2">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">monetization_on</i>
+
+                        </div>
+                        <span class="nav-link-text">Saldos</span>
+                    </a>
+                    <div id="submenu-3" class="collapse " data-bs-parent="#menu-accordion">
+                        <ul class="submenu-list list-unstyled">
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/balance">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">payments</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Solicitudes</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/balance/users">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">price_check</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Saldo por usuario</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-9" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -392,7 +433,7 @@
                 </a>
                 <div id="submenu-9" class="collapse " data-bs-parent="#menu-accordion">
                     <ul class="submenu-list list-unstyled">
-                        @hasrole('Administrator')
+                        @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos')
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/profit/users">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -401,7 +442,8 @@
                                 <span class="nav-link-text ms-1">Solicitudes</span>
                             </a>
                         </li>
-                        @endhasrole
+                        @endif
+                        @if (Auth::user()->role !== 'Saldos')
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/profit/create">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -418,6 +460,7 @@
                                 <span class="nav-link-text ms-1">Historial de Retiros</span>
                             </a>
                         </li>
+                            @endif
                     </ul>
                 </div>
             </li>

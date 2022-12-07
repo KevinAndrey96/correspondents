@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -103,5 +105,14 @@ class LoginController extends Controller
         date_default_timezone_set('America/Bogota');
         $user->last_login = Carbon::now();
         $user->save();
+    }
+
+    public function logout(Request $request): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
+    {
+        $user = User::find(Auth::user()->id);
+        $user->daily_verified = 0;
+        $user->save();
+        Auth::logout();
+        return redirect('/login');
     }
 }

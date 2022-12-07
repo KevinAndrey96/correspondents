@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('enabled_daily')->nullable()->default(1);
+        Schema::table('products', function (Blueprint $table) {
+            $table->integer('reassignment_minutes')->default(1)->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             //
         });
     }

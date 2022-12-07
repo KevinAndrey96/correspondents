@@ -60,7 +60,7 @@
                                                     </form>
                                                 @endif
                                                 @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role =='Administrator' || Auth::user()->role =='Supplier' && ! is_null($detailSupplier))
-                                                        <div class="col-md-6 d-flex flex-column ">
+                                                        <div class="col-md-4 d-flex flex-column ">
                                                             <h6 class="mb-3 text-sm">Datos de transacción</h6>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Estado: <a class="mb-2 text-xl " style="color: darkred;">{{$transaction->status == 'successful' ? 'Exitosa' : 'Fallida' }}</a> </p>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Producto: <a class="mb-2 text-xl " style="color: darkred;">{{$transaction->product->product_name}}</a> </p>
@@ -80,13 +80,24 @@
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Comentario: {{$transaction->comment}}</p>
 
                                                         </div>
-                                                        <div class="col-md-6 d-flex flex-column">
-                                                            <div>
+                                                        <div class="col-md-8 d-flex flex-column ms-auto me-auto pe-2">
+                                                            <div class="me-auto">
                                                             <a class="btn btn-success text-center text-xs" href="/transaction/detail-pdf/{{$transaction->id}}"><i class="material-icons me-2">print</i>Imprimir comprobante</a>
                                                             </div>
                                                             <div class="input-group input-group-static mb-2 mt-2">
+                                                                @if (Auth::user()->role == 'Shopkeeper')
+                                                                    @if ($transaction->status == 'successful')
+                                                                        <p style="font-size:200%" class="text-success text-opacity-75 text-center font-weight-bold">
+                                                                            Transacción Exitosa
+                                                                        </p>
+                                                                    @else
+                                                                        <p style="font-size:200%" class="text-danger text-opacity-75 text-center font-weight-bold">
+                                                                            Transacción Fallida
+                                                                        </p>
+                                                                    @endif
+                                                                @endif
                                                                 <a class="image-link" href="https://testing.asparecargas.net{{$transaction->voucher}}">
-                                                                    @if (! is_null($transaction->voucher) && ($transaction->status == 'successful' || $transaction->status == 'failed' ))
+                                                                    @if (! is_null($transaction->voucher) && ($transaction->status == 'successful' || $transaction->status == 'failed' ) && Auth::user()->role !== 'Shopkeeper')
                                                                         <img class="image-link rounded" width="200px" height="200px" src="https://testing.asparecargas.net{{$transaction->voucher}}">
                                                                     @endif
                                                                 </a>
@@ -98,9 +109,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <div class="row">
-                                                                <div class="col-md-8 ms-auto mt-4">
-                                                                    <form id="form-wp" method="get" action="https://api.whatsapp.com/send">
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-md-8 ms-auto me-auto mt-4">
+                                                                    <form id="form-wp" target="_blank" method="get" action="https://api.whatsapp.com/send">
                                                                     <!--<a  href="{{route('number.whatsapp')}}?transactionID={{$transaction->id}}&voucher={{$transaction->voucher}}" class="link-primary">Enviar comprobante a Whatsapp</a>-->
                                                                     <img width="10%" src="https://testing.asparecargas.net/assets/img/whatsapp.png" alt="">
                                                                     <span class="text-xs font-weight-bold text-dark">Enviar comprobante: </span>
@@ -109,8 +120,7 @@
                                                                             <input type="hidden" name="text" value="{{ 'Hola, este es el comprobante de la transacción: https://testing.asparecargas.net/transaction/detail-pdf/'.$transaction->id }}">
                                                                         </div>
                                                                         <div style="width:10%" class="d-inline">
-                                                                            <input type="submit" class="btn btn-success bg-gradient d-inline mt-3" value="Enviar" onclick="sendWP({{getenv('COUNTRY_CODE')}})">
-                                                                            <!--<a class="btn btn-success bg-gradient d-inline">Enviar</a>-->
+                                                                            <input type="submit" class="btn btn-success bg-gradient d-inline mt-3" value="Enviar" onclick="sendWP({{$callSign}})">
                                                                         </div>
                                                                     </form>
                                                                 </div>

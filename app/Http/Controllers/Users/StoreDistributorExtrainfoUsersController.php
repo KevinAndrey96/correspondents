@@ -19,7 +19,7 @@ class StoreDistributorExtrainfoUsersController extends Controller
             'platform_mul' => 'required|string',
             'cedulaPDF' => 'required|mimes:jpg,jpeg,png,pdf',
             'rutPDF' => 'mimes:jpg,jpeg,png,pdf',
-            'camara_comercio' => 'mimes:pdf',
+            'camara_comercio' => 'mimes:jpg,jpeg,png,pdf',
             'local_photo' => 'required|mimes:jpg,jpeg,png',
             'public_receipt' => 'required|mimes:jpg,jpeg,png'
         ];
@@ -166,33 +166,69 @@ class StoreDistributorExtrainfoUsersController extends Controller
         }
 
         if ($request->hasFile('camara_comercio')) {
-            $pathName = sprintf('camara_comercio_pdf/%s.pdf', $user->id);
+            $path = $_FILES['camara_comercio']['name'];
+            $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+            if ($extension == 'pdf') {
+                $pathName = sprintf('camara_comercio_pdf/%s.pdf', $user->id);
+            }
+
+            if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'PNG') {
+                $pathName = sprintf('camara_comercio_pdf/%s.png', $user->id);
+            }
+
             Storage::disk('public')->put($pathName, file_get_contents($request->file('camara_comercio')));
             $client = new Client();
             $url = "https://testing.asparecargas.net/upload.php";
-
-            $client->request(RequestAlias::METHOD_POST, $url, [
-                'multipart' => [
-                    [
-                        'name' => 'image',
-                        'contents' => fopen(
-                            str_replace(
-                                '\\',
-                                '/',
-                                Storage::path('public\camara_comercio_pdf\\' . $user->id . '.pdf')
-                            ),
-                            'r'
-                        )
-                    ],
-                    [
-                        'name' => 'path',
-                        'contents' => 'camara_comercio_pdf'
+            if ($extension == 'pdf') {
+                $client->request(RequestAlias::METHOD_POST, $url, [
+                    'multipart' => [
+                        [
+                            'name' => 'image',
+                            'contents' => fopen(
+                                str_replace(
+                                    '\\',
+                                    '/',
+                                    Storage::path('public\camara_comercio_pdf\\' . $user->id . '.pdf')
+                                ),
+                                'r'
+                            )
+                        ],
+                        [
+                            'name' => 'path',
+                            'contents' => 'rut_pdf'
+                        ]
                     ]
-                ]
-            ]);
-            $user->camara_comercio = '/storage/camara_comercio_pdf/' . $user->id . '.pdf';
+                ]);
+                $user->camara_comercio = '/storage/camara_comercio_pdf/' . $user->id . '.pdf';
+                unlink(str_replace('\\', '/', storage_path('app/public/camara_comercio_pdf/'.$user->id.'.pdf')));
+            }
+
+            if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'PNG') {
+                $client->request(RequestAlias::METHOD_POST, $url, [
+                    'multipart' => [
+                        [
+                            'name' => 'image',
+                            'contents' => fopen(
+                                str_replace(
+                                    '\\',
+                                    '/',
+                                    Storage::path('public\camara_comercio_pdf\\' . $user->id . '.png')
+                                ),
+                                'r'
+                            )
+                        ],
+                        [
+                            'name' => 'path',
+                            'contents' => 'camara_comercio_pdf'
+                        ]
+                    ]
+                ]);
+                $user->camara_comercio = '/storage/camara_comercio_pdf/' . $user->id . '.png';
+                unlink(str_replace('\\', '/', storage_path('app/public/camara_comercio_pdf/'.$user->id.'.png')));
+            }
+
             $user->save();
-            unlink(str_replace('\\', '/', storage_path('app/public/camara_comercio_pdf/'.$user->id.'.pdf')));
         }
 
         if ($request->hasFile('local_photo')) {

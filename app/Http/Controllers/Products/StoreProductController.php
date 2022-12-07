@@ -32,6 +32,7 @@ class StoreProductController extends Controller
             'priority'=>'required',
             'num_jineteo'=>'required',
             'hours'=>'required',
+            'reassignment_minutes' => 'required'
 
         ];
         $message = [
@@ -55,6 +56,7 @@ class StoreProductController extends Controller
         $product->priority = $request->input('priority');
         $product->num_jineteo = $request->input('num_jineteo');
         $product->hours = $request->input('hours');
+        $product->reassignment_minutes = $request->input('reassignment_minutes');
         $product->save();
 
         if ($request->hasFile('image')) {

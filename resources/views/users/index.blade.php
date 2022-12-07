@@ -12,7 +12,7 @@
                 <div class="card my-2">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Gestion de usuarios
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Gestión de usuarios
                                 @if ($role == 'Shopkeeper' || $role == 'allShopkeepers')
                                     (Tenderos)<a class="btn btn-block btn-Secondary ps-0 p-4"></a>
                                 @elseif ($role == 'Distributor')
@@ -21,7 +21,10 @@
                                     (Proveedores)
                                 @elseif ($role == 'Administrator')
                                     (Administradores)
+                                @elseif ($role == 'Saldos')
+                                    (S & G)
                                 @endif
+
                                 @if ($role != 'allShopkeepers')
                                     <a href="/user/create?role={{$role}}" class="btn btn-block btn-Secondary"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">group_add</i></a></h6>
                                 @endif
@@ -148,35 +151,35 @@
                                                 <td class="align-middle text-center text-sm">
                                                     @if (isset($user->cedulaPDF))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->cedulaPDF}}">
-                                                            <img width="27%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                            <img width="20%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
                                                     @if (isset($user->rutPDF))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->rutPDF}}">
-                                                            <img width="31%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                            <img width="23%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
                                                     @if (isset($user->camara_comercio))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->camara_comercio}}">
-                                                            <img width="28%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                            <img width="20%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
                                                     @if (isset($user->local_photo))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->local_photo}}">
-                                                            <img width="39%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                            <img width="29%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
                                                     @if (isset($user->public_receipt))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->public_receipt}}">
-                                                            <img width="22%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                            <img width="16.5%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
                                                 </td>

@@ -15,7 +15,7 @@ class ValidateBalanceController extends Controller
 {
     public function isValid(Request $request)
     {
-        if (Auth::user()->role == 'Administrator') {
+        if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos') {
             $balance = Balance::find($request->input('id'));
             if(is_null($balance->is_valid)){
                 $balance->is_valid = $request->input('status');

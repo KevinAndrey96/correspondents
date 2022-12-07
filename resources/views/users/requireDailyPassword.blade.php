@@ -25,7 +25,7 @@
                                 <div>
                                     <div class="input-group input-group-dynamic mb-4">
                                         <label class="form-label" for="newPass1">Contraseña</label>
-                                        <input type="password" class="form-control" name="password" placeholder="" required>
+                                        <input type="password" autocomplete="new-password" spellcheck="false" class="form-control" name="password" placeholder="" required>
                                     </div>
                                 </div>
                                 <div class="text-center"><input type="submit" class="btn btn-primary text-center" value="Enviar"></div>

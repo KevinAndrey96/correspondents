@@ -120,19 +120,19 @@
                             <script>
                                 window.addEventListener("load", function(event) {
                                     @if (isset($countProfits))
-                                    @if ($countProfits > 0)
-                                    const alert = document.getElementById('alert');
-                                    const btn = document.getElementById('btn');
-                                    const btnModal = document.getElementById('btn-modal');
-                                    $("#btn").on('click', function(){
-                                        alert.play();
-                                    })
-                                    $("#btn-modal").on('click', function(){
-                                        $('#AlertModal').modal('show');
-                                    })
-                                    btn.click()
-                                    btnModal.click()
-                                    @endif
+                                        @if ($countProfits > 0)
+                                            const alert = document.getElementById('alert');
+                                            const btn = document.getElementById('btn');
+                                            const btnModal = document.getElementById('btn-modal');
+                                            $("#btn").on('click', function(){
+                                                alert.play();
+                                            })
+                                            $("#btn-modal").on('click', function(){
+                                                $('#AlertModal').modal('show');
+                                            })
+                                            btn.click()
+                                            btnModal.click()
+                                        @endif
                                     @endif
                                 });
                                 $(document).ready( function () {

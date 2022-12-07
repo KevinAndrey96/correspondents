@@ -27,17 +27,13 @@ trait ReassignTransaction
             $wasReassigned = false;
             ++$transactionCounter;
 
-            /**
-             * Encontramos hace cuantos mínutos se creo esta transacción ya que si se creo hace menos de 1 minuto
-             * No es pertinente reasignarla.
-             */
             $diffMinutes = $transaction->created_at->diffInMinutes(Carbon::now());
 
             $output .= 'Transacción #' . $transactionCounter . '
             ';
             $output .= 'Creada hace: ' . $diffMinutes . ' mínutos
             ';
-            if ($diffMinutes > 1) {
+            if ($diffMinutes > $transaction->product->reassignment_minutes) {
                 $output .= '---APTA PARA REASIGNACIÓN---
                 ';
                 $supplier = User::find($transaction->supplier_id);

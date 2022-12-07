@@ -11,10 +11,8 @@ class DetailTransactionController extends Controller
 {
     public function detail($id, Request $request)
     {
-        //return $id;
-
-
         $detailSupplier = $request->input('detail');
+        $callSign = getenv('COUNTRY_CODE');
         $transaction = Transaction::find($id);
 
         if ($transaction->status == 'accepted' && Auth::user()->role == 'Supplier' && $transaction->supplier_id != Auth::user()->id) {
@@ -27,15 +25,15 @@ class DetailTransactionController extends Controller
             $transaction->status = 'accepted';
             $transaction->save();
 
-            return view('transactions.detail', compact('transaction', 'extras', 'detailSupplier'));
+            return view('transactions.detail', compact('transaction', 'extras', 'detailSupplier','callSign'));
         }
         if (Auth::user()->role == 'Supplier' && ! is_null($detailSupplier)) {
 
-            return view('transactions.detail', compact('transaction', 'extras', 'detailSupplier'));
+            return view('transactions.detail', compact('transaction', 'extras', 'detailSupplier', 'callSign'));
         }
         if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Administrator') {
 
-            return view('transactions.detail', compact('transaction', 'extras'));
+            return view('transactions.detail', compact('transaction', 'extras', 'callSign'));
         }
     }
 }

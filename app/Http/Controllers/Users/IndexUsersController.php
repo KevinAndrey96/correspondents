@@ -42,5 +42,12 @@ class IndexUsersController extends Controller
                 ->get();
             return view('users.index', compact('role', 'users'));
         }
+
+        if ($role === 'Saldos') {
+            $users = User::where('role', 'like', 'Saldos')
+                ->where('is_enabled', '=', User::STATUS_ENABLED)
+                ->get();
+            return view('users.index', compact('role', 'users'));
+        }
     }
 }

@@ -39,6 +39,7 @@ class UpdateUsersController extends Controller
             }
             $user->password = Hash::make($request->input('password'));
             $user->qr = 0;
+            $user->first_login = 0;
             $user->daily_password_date = null;
         }
         $user->save();

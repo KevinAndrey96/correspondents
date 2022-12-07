@@ -11,9 +11,9 @@ class ShowWithdrawProfitController extends Controller
 {
     public function index(Request $request)
     {
-        if (Auth::user()->role == 'Administrator') {
+        if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos') {
             $profits = Profit::all()->sortByDesc('created_at');
-            $countProfits = $profits->count();
+            $countProfits = Profit::where('is_valid',null)->get()->count();
             return view('profit.showProfitUsers', compact('profits', 'countProfits'));
         }
     }

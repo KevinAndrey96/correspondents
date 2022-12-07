@@ -18,7 +18,7 @@ class RequestDailyPasswordMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        if (Auth::user()->daily_verified == 0) {
+        if (Auth::user()->daily_verified == 0 && Auth::user()->enabled_daily == 1   ) {
             return redirect()->route('users.require.daily.password');
         }
 

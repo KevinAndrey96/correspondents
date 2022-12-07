@@ -26,6 +26,9 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Cantidad</th>
+                                    @hasrole('Administrator')
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo</th>
+                                    @endhasrole
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Producto</th>
                                     @hasrole('Administrator')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tendero</th>
@@ -44,6 +47,15 @@
                                 @foreach( $transactions as $transaction )
                                     <tr>
                                         <td class="align-middle text-center text-sm">${{ number_format($transaction->amount, 2, ',', '.') }}</td>
+                                        @hasrole('Administrator')
+                                        <td class="align-middle text-center text-sm">
+                                            @if ($transaction->type == 'Deposit')
+                                                Depósito
+                                            @else
+                                                Retiro
+                                            @endif
+                                        </td>
+                                        @endhasrole
                                         <td class="align-middle text-center text-sm">{{ $transaction->product->product_name }}</td>
                                         @hasrole('Administrator')
                                         <td class="align-middle text-center text-sm">{{ $transaction->shopkeeper->name }}</td>

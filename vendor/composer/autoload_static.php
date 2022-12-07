@@ -737,6 +737,7 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'App\\Http\\Controllers\\Users\\DeleteUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/DeleteUsersController.php',
         'App\\Http\\Controllers\\Users\\DistributorExtrainfoUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/DistributorExtrainfoUsersController.php',
         'App\\Http\\Controllers\\Users\\EditUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/EditUsersController.php',
+        'App\\Http\\Controllers\\Users\\EnabledDailyUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/EnabledDailyUsersController.php',
         'App\\Http\\Controllers\\Users\\FirstPasswordUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/FirstPasswordUsersController.php',
         'App\\Http\\Controllers\\Users\\IndexUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/IndexUsersController.php',
         'App\\Http\\Controllers\\Users\\RequireDailyPasswordUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/RequireDailyPasswordUsersController.php',

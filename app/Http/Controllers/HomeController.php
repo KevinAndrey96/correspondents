@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Banner;
+use App\Models\Profit;
+use App\Models\Balance;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -137,6 +139,20 @@ class HomeController extends Controller
                 'banners',
                 'firstBanner'));
         }
+
+        if (Auth::user()->role == 'Saldos') {
+            $profitsCount = Profit::where('is_valid', null)->get()->count();
+            $balancesCount = Balance::where('is_valid', null)->get()->count();
+            $banners = Banner::all();
+            $firstBanner = null;
+            if ($banners->count() > 0) {
+                $firstBanner = $banners[0];
+            }
+
+            return view('home', compact('profitsCount', 'balancesCount', 'banners', 'firstBanner'));
+
+        }
+
 
         return view('home');
     }

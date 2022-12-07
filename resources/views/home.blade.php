@@ -13,10 +13,10 @@
     <div class="container-fluid py-4">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
             <!--<img src="/assets/img/Banner/administrator.png" width="100%" height="auto" class="border-radius-lg">-->
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="500">
                 <div class="carousel-inner">
                     @if (isset($banners))
-                        @if ($banners->count() > 0 && (Auth::user()->role == 'Distributor' || Auth::user()->role == 'Shopkeeper'))
+                        @if ($banners->count() > 0 && (Auth::user()->role == 'Distributor' || Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Saldos'))
                         @foreach($banners as $banner)
                         @if ($banner->id == $firstBanner->id)
                             <div class="carousel-item active">
@@ -623,6 +623,7 @@
                     </div>
                 </div>
                 @endhasrole
+                @if (Auth::user()->role !== 'Saldos')
                 <div class="col-lg-3 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2 ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -641,7 +642,8 @@
                         </div>
                     </div>
                 </div>
-                @unlessrole('Distributor')
+                @endif
+                @if (Auth::user()->role !== 'Distributor' && Auth::user()->role !== 'Saldos')
                 <div class="col-lg-3 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2  ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -661,7 +663,7 @@
                         </div>
                     </div>
                 </div>
-                @endunlessrole
+                @endif
                 @hasanyrole('Shopkeeper|Supplier')
                 <div class="col-lg-3 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2  ">
@@ -683,6 +685,7 @@
                     </div>
                 </div>
                 @endhasanyrole
+                @if (Auth::user()->role !== 'Saldos')
                 <div class="col-lg-3 mt-4 mb-3">
                     <div class="card z-index-2 ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -702,14 +705,27 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
 
         </div>
         <script>
+            $(document).ready(function () {
+                //carousel_next = document.querySelector('.carousel-control-next');
+                //carousel_next.click();
+                $('.carousel-control-next').on('click', function(){
+                    console.log('Acción ejecutada!');
+                })
+
+                $('.carousel-control-next').get(0).click();
+                $(document).click();
+                //$('.carousel-control-next').trigger('click');
+            });
+
             $('.carousel').carousel({
-                interval: 3000,
-                pause:true,
-                wrap:false
+                interval: 500,
+                pause: false,
+                wrap: false
             });
 
             function excelURL(type) {
@@ -778,4 +794,88 @@
         </div>
     </div>
     <!--end Modal-->
+        <!--Modal-->
+        @if (isset($balancesCount) || isset($profitsCount))
+            @if ($balancesCount > 0 || $profitsCount > 0)
+            <div class="modal fade" id="BalanceProfitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!--<h6 class="modal-title" id="exampleModalLabel">Gestionar ganancias</h6>-->
+                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="row jusfify-content-center align-items-center">
+                                        <img width="60%" class="img-responsive" src="https://testing.asparecargas.net/assets/img/bell.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="row jusfify-content-center align-items-center">
+                                        <div class="col-md-12">
+                                            <h2 class="text-center pe-2">¡Tienes una nueva solicitud de saldo y/o retiro de ganancia!</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ms-auto me-auto">
+                                    <div class="col-md-6 col-sm-6 mt-3 ms-auto me-auto">
+                                        <a id="btn-balance" class="btn btn-success bg-gradient ms-auto me-auto w-100" href="/balance">Ir a saldos</a>
+                                    </div>
+                                </div>
+                                <div class="row ms-auto me-auto clearfix">
+                                    <div class="col-md-6 col-sm-6 ms-auto me-auto mt-2">
+                                        <a id="btn-profit" class="btn btn-success bg-gradient ms-auto w-100" href="/profit/users">Ir a ganancias</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+        @endif
+        <!--end Modal-->
+
+        <audio id="alert" style="display: none;" src="/assets/alerts/SD_ALERT_3.mp3"
+               controls>
+            Your browser does not support the <code>audio</code> element.
+        </audio>
+        <input type="button" style="display:none" id="btn" value="reproducir">
+        <input type="button" style="display:none" id="btn2" value="reproducir">
+        <input type="button" style="display:none" id="btn-modal" value="reproducir">
+        <input type="button" style="display:none" id="btn-modal2" value="reproducir">
+        <script>
+        window.addEventListener("load", function(event) {
+            @if (isset($balancesCount) || isset($profitsCount))
+            let alert = document.getElementById('alert');
+            let btn = document.getElementById('btn');
+            let btnModal = document.getElementById('btn-modal');
+            let btnBalance = document.getElementById('btn-balance');
+            let btnProfit = document.getElementById('btn-profit');
+            console.log('ok');
+            setTimeout("location.reload()", 30000);
+                @if ($balancesCount > 0)
+                    btnBalance.style.display = "block";
+                @else
+                    btnBalance.style.display = "none";
+                @endif
+                    @if ($profitsCount > 0)
+                            btnProfit.style.display = "block";
+                        @else
+                            btnProfit.style.display = "none";
+                    @endif
+                $("#btn").on('click', function(){
+                alert.play();
+                })
+                $("#btn-modal").on('click', function(){
+                    $('#BalanceProfitModal').modal('show');
+                })
+                btn.click()
+                btnModal.click()
+            @endif
+        });
+        </script>
 @endsection

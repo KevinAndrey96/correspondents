@@ -22,10 +22,10 @@
                             <table id="my_table" class="table align-items-center mb-0">
                                 <thead class="thead-light">
                                 <tr>
-                                @hasrole('Administrator')
+                                @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Actual</th>
-                                @endhasrole
+                                @endif
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Solicitud  </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de Solicitud</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
@@ -33,9 +33,9 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comentarios</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recibo</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
-                                @hasrole('Administrator')
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gestionar solicitud</th>
-                                @endhasrole
+                                    @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos')
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gestionar solicitud</th>
+                                    @endif
 
                                 </tr>
                                 </thead>
@@ -43,10 +43,10 @@
                                 <tbody>
                                 @foreach( $balances as $balance )
                                     <tr>
-                                    @hasrole('Administrator')
-                                        <td class="align-middle text-center text-xs">{{ $balance->user->name}}</td>
-                                        <td class="align-middle text-center text-xs">${{number_format($balance->user->balance, 2, ',', '.')}}</td>
-                                    @endhasrole
+                                        @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos')
+                                            <td class="align-middle text-center text-xs">{{ $balance->user->name}}</td>
+                                            <td class="align-middle text-center text-xs">${{number_format($balance->user->balance, 2, ',', '.')}}</td>
+                                        @endif
                                         <td class="align-middle text-center text-xs">{{ $balance->id}}</td>
                                         @if($balance->type == 'Deposit')
                                         <td class="align-middle text-center text-xs">Deposito</td>
@@ -82,7 +82,7 @@
                                                 <button class="btn btn-primary btn-sm"disabled style="background-color: lightcoral">Rechazada</button>
                                             @endif
                                         </td>
-                                    @hasrole('Administrator')
+                                            @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos')
                                         <td class="align-middle text-center text-sm">
                                             @if(is_null($balance->is_valid))
                                                 <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal"
@@ -91,9 +91,9 @@
                                             @endif
 
                                         </td>
-                                    @endhasrole
+                                    @endif
                                     </tr>
-                                @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                             <form id="form-status" name="form-status" method="POST" action="{{ url('/balance/validate/' ) }}">
@@ -171,7 +171,7 @@
                                                 <div class="col-md-8 col-sm-8">
                                                     <div class="row jusfify-content-center align-items-center">
                                                         <div class="col-md-12">
-                                                            <h2>¡Tienes una nueva solicitud de saldo!</h2>
+                                                            <h2 class="text-center pe-2">¡Tienes una nueva solicitud de saldo!</h2>
                                                         </div>
                                                     </div>
                                                 </div>

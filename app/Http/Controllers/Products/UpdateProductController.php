@@ -29,7 +29,8 @@ class UpdateProductController extends Controller
             'max_amount'=>'required',
             'priority'=>'required',
             'num_jineteo'=>'required',
-            'hours'=>'required'
+            'hours'=>'required',
+            'reassignment_minutes' => 'required'
         ];
         $message= [
             'required'=>':attribute es requerido',
@@ -51,7 +52,8 @@ class UpdateProductController extends Controller
             'max_amount' => $request->input('max_amount'),
             'priority' => $request->input('priority'),
             'num_jineteo' => $request->input('num_jineteo'),
-            'hours' => $request->input('hours')
+            'hours' => $request->input('hours'),
+            'reassignment_minutes' => $request->input('reassignment_minutes')
         ];
         $product = Product::findOrFail($productId);
         if ($request->hasFile('image')) {

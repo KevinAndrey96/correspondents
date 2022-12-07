@@ -86,6 +86,7 @@ return array(
     'App\\Http\\Controllers\\Users\\DeleteUsersController' => $baseDir . '/app/Http/Controllers/Users/DeleteUsersController.php',
     'App\\Http\\Controllers\\Users\\DistributorExtrainfoUsersController' => $baseDir . '/app/Http/Controllers/Users/DistributorExtrainfoUsersController.php',
     'App\\Http\\Controllers\\Users\\EditUsersController' => $baseDir . '/app/Http/Controllers/Users/EditUsersController.php',
+    'App\\Http\\Controllers\\Users\\EnabledDailyUsersController' => $baseDir . '/app/Http/Controllers/Users/EnabledDailyUsersController.php',
     'App\\Http\\Controllers\\Users\\FirstPasswordUsersController' => $baseDir . '/app/Http/Controllers/Users/FirstPasswordUsersController.php',
     'App\\Http\\Controllers\\Users\\IndexUsersController' => $baseDir . '/app/Http/Controllers/Users/IndexUsersController.php',
     'App\\Http\\Controllers\\Users\\RequireDailyPasswordUsersController' => $baseDir . '/app/Http/Controllers/Users/RequireDailyPasswordUsersController.php',

@@ -12,7 +12,7 @@ class IndexBalanceController extends Controller
 {
     public function index()
     {
-        if (Auth::user()->role == 'Administrator') {
+        if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos') {
             $balances = Balance::whereNull('is_valid')->orderBy('created_at', 'desc')->get();
             $countBalances = $balances->count();
 
