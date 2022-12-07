@@ -42,5 +42,8 @@ fix: cron hour
 ## [Hotfix 1.1.4]
 fix: periodicity of reassign transaction's scheduling 
 
+## [Hotfix 1.1.5]
+fix: put 2fa middleware
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
