@@ -111,6 +111,7 @@ class LoginController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $user->daily_verified = 0;
+        $user->is_online = 0;
         $user->save();
         Auth::logout();
         return redirect('/login');

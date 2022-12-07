@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'a14d8ff82eb44481d8aabd82b1937d37a8c5e0d4',
+        'reference' => 'ebccc060631d436f8f8ed1303957a86b7cdfe854',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -457,6 +457,15 @@
                 0 => 'v9.2.0',
             ),
         ),
+        'juliomotol/laravel-auth-timeout' => array(
+            'pretty_version' => 'v3.1.1',
+            'version' => '3.1.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../juliomotol/laravel-auth-timeout',
+            'aliases' => array(),
+            'reference' => '3f53a129188b107d2f0b6eeb244146bf989ea1c8',
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -478,7 +487,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'a14d8ff82eb44481d8aabd82b1937d37a8c5e0d4',
+            'reference' => 'ebccc060631d436f8f8ed1303957a86b7cdfe854',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(

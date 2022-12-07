@@ -697,11 +697,29 @@
 <!-- Magnific-Popup -->
 <script src="/assets/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
 <script>
+    var contadorAfk = 0;
     $(document).ready(function() {
-        $('.image-link').magnificPopup({
-            type:'image'
+        @if (Auth::user()->role == 'Supplier')
+        setInterval(ctrlTiempo, 60000);
+        $(this).mousemove(function (e) {
+            contadorAfk = 0;
+        });
+        $(this).keypress(function (e) {
+            contadorAfk = 0;
         });
     });
+
+    function ctrlTiempo() {
+        let formLogout = document.getElementById('logout-form');
+        contadorAfk++;
+        if (contadorAfk > 59) {
+            formLogout.submit();
+        }
+    }
+    @endif
+        $('.image-link').magnificPopup({
+            type: 'image'
+        });
 </script>
 
 <!-- Github buttons -->

@@ -142,6 +142,10 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
             'Laravel\\Sanctum\\' => 16,
             'Laravel\\Sail\\' => 13,
         ),
+        'J' => 
+        array (
+            'JulioMotol\\AuthTimeout\\' => 23,
+        ),
         'I' => 
         array (
             'Illuminate\\Support\\' => 19,
@@ -498,6 +502,10 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         array (
             0 => __DIR__ . '/..' . '/laravel/sail/src',
         ),
+        'JulioMotol\\AuthTimeout\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/juliomotol/laravel-auth-timeout/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
@@ -659,6 +667,7 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
     public static $classMap = array (
         'App\\Console\\Commands\\MoneyTablesTruncate' => __DIR__ . '/../..' . '/app/Console/Commands/MoneyTablesTruncate.php',
         'App\\Console\\Commands\\SupplierInactivityMail' => __DIR__ . '/../..' . '/app/Console/Commands/SupplierInactivityMail.php',
+        'App\\Console\\Commands\\SupplierTurnOffPlatform' => __DIR__ . '/../..' . '/app/Console/Commands/SupplierTurnOffPlatform.php',
         'App\\Console\\Commands\\TransactionReassign' => __DIR__ . '/../..' . '/app/Console/Commands/TransactionReassign.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -3558,6 +3567,12 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'JulioMotol\\AuthTimeout\\AuthTimeout' => __DIR__ . '/..' . '/juliomotol/laravel-auth-timeout/src/AuthTimeout.php',
+        'JulioMotol\\AuthTimeout\\Contracts\\AuthTimeout' => __DIR__ . '/..' . '/juliomotol/laravel-auth-timeout/src/Contracts/AuthTimeout.php',
+        'JulioMotol\\AuthTimeout\\Events\\AuthTimeoutEvent' => __DIR__ . '/..' . '/juliomotol/laravel-auth-timeout/src/Events/AuthTimeoutEvent.php',
+        'JulioMotol\\AuthTimeout\\Facades\\AuthTimeout' => __DIR__ . '/..' . '/juliomotol/laravel-auth-timeout/src/Facades/AuthTimeout.php',
+        'JulioMotol\\AuthTimeout\\Middleware\\AuthTimeoutMiddleware' => __DIR__ . '/..' . '/juliomotol/laravel-auth-timeout/src/Middleware/AuthTimeoutMiddleware.php',
+        'JulioMotol\\AuthTimeout\\ServiceProvider' => __DIR__ . '/..' . '/juliomotol/laravel-auth-timeout/src/ServiceProvider.php',
         'Laravel\\Sail\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/InstallCommand.php',
         'Laravel\\Sail\\Console\\PublishCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/PublishCommand.php',
         'Laravel\\Sail\\SailServiceProvider' => __DIR__ . '/..' . '/laravel/sail/src/SailServiceProvider.php',
