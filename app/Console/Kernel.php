@@ -15,9 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        date_default_timezone_set('America/Bogota');
+        //date_default_timezone_set('America/Bogota');
         $schedule->command('transaction:reassign')
-            ->everyFiveMinutes()
+            ->everyMinute()
             ->timezone('America/Bogota')
             ->emailOutputTo('asparecargas@gmail.com', true);
         $schedule->command('mail:supplier-inactivity')
