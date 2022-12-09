@@ -13,7 +13,7 @@
     <div class="container-fluid py-4">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
             <!--<img src="/assets/img/Banner/administrator.png" width="100%" height="auto" class="border-radius-lg">-->
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="500">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="300">
                 <div class="carousel-inner">
                     @if (isset($banners))
                         @if ($banners->count() > 0 && (Auth::user()->role == 'Distributor' || Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Saldos'))
@@ -643,6 +643,7 @@
                     </div>
                 </div>
                 @endif
+
                 @if (Auth::user()->role !== 'Distributor' && Auth::user()->role !== 'Saldos')
                 <div class="col-lg-3 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2  ">
@@ -706,11 +707,30 @@
                     </div>
                 </div>
                 @endif
+                @if (Auth::user()->role == 'Shopkeeper')
+                    <div class="col-lg-3 mt-4 mb-3">
+                        <div class="card z-index-2 ">
+                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                                <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
+                                    <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal"
+                                            data-bs-target="#ExcelProductTransactionsModal"  onclick="excelURL('ProductTransactions')"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="mb-0 ">Estadística 5°</h6>
+                                <p class="text-sm ">Transacciones por producto</p>
+                                <hr class="dark horizontal">
+                            </div>
+                        </div>
+                    </div>
+
+                @endif
             </div>
 
         </div>
         <script>
             $(document).ready(function () {
+
                 //carousel_next = document.querySelector('.carousel-control-next');
                 //carousel_next.click();
                 $('.carousel-control-next').on('click', function(){
@@ -720,16 +740,20 @@
                 $('.carousel-control-next').get(0).click();
                 $(document).click();
                 //$('.carousel-control-next').trigger('click');
-            });
 
+            });
+            //let carousel = document.getElementById('carouselExampleControls');
             $('.carousel').carousel({
-                interval: 500,
+                interval: 300,
                 pause: false,
                 wrap: false
             });
 
+
             function excelURL(type) {
                 var actionURL = document.getElementById("action");
+                var actionURL2 = document.getElementById("actionProductTransactions");
+
                 if(type == 'Transacciones'){
                     actionURL.action = "{{ url('/transaction/excel') }}";
                     document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
@@ -745,6 +769,10 @@
                 if(type == 'Ganancias'){
                     actionURL.action = "{{ url('/profit/excel') }}";
                     document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
+                }
+                if(type == 'ProductTransactions'){
+                    actionURL2.action = "{{ url('/transaction/excel') }}";
+                    document.getElementById("LabelProductTransactions").innerHTML = "Transacciones por producto";
                 }
             }
         </script>
@@ -794,6 +822,58 @@
         </div>
     </div>
     <!--end Modal-->
+        <!-- Modal-->
+        @if (Auth::user()->role == 'Shopkeeper')
+        <div class="modal fade" id="ExcelProductTransactionsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="LabelProductTransactions"></h6>
+                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="actionProductTransactions" action="{{ url('/transaction/excelff') }}" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                @csrf
+                                @if(count($errors)>0)
+                                    <div class="alert alert-danger" role="alert">
+                                        <ul>
+                                            @foreach( $errors->all() as $error )
+                                                <li> {{ $error }} </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="product">Seleccione un producto</label>
+                                        <select class="form-select mb-4" name="product_id" >
+                                        @foreach ($products as $product)
+                                            <option value="{{$product->id}}">{{$product->product_name}} -
+                                                @if ($product->product_type == 'Deposit')
+                                                    DEPOSITO
+                                                @else
+                                                    RETIRO
+                                                @endif
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <input class="btn btn-success" type="submit" value="Descargar excel">
+                                    <a class="btn btn-primary" href="{{ url('/home') }}"> Regresar</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        <!--end Modal-->
         <!--Modal-->
         @if (isset($balancesCount) || isset($profitsCount))
             @if ($balancesCount > 0 || $profitsCount > 0)
@@ -855,7 +935,7 @@
             let btnModal = document.getElementById('btn-modal');
             let btnBalance = document.getElementById('btn-balance');
             let btnProfit = document.getElementById('btn-profit');
-            console.log('ok');
+
             setTimeout("location.reload()", 30000);
                 @if ($balancesCount > 0)
                     btnBalance.style.display = "block";
@@ -875,6 +955,7 @@
                 })
                 btn.click()
                 btnModal.click()
+                $('[data-slide-to=0]').trigger('click')
             @endif
         });
         </script>

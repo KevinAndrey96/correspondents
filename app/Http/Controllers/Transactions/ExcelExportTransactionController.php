@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Transactions;
 
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Exports\TransactionsExport;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
@@ -12,6 +14,12 @@ class ExcelExportTransactionController extends Controller
 {
     public function export(Request $request)
     {
+        if (isset($request->product_id)) {
+            $product = Product::find($request->input('product_id'));
+
+            return (new TransactionsExport)->forProductID($product->id)->download('Transacciones de '.$product->name.'.xlsx');
+        }
+        
         $dateFrom = $request->input('dateFrom');
         $dateTo = $request->input('dateTo');
         $dateFrom = Carbon::parse($dateFrom);

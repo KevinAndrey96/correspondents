@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Banner;
 use App\Models\Profit;
 use App\Models\Balance;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -125,6 +126,7 @@ class HomeController extends Controller
             $holdTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $acceptedTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $banners = Banner::all();
+            $products = Product::all();
             $firstBanner = null;
             if ($banners->count() > 0) {
                 $firstBanner = $banners[0];
@@ -137,7 +139,8 @@ class HomeController extends Controller
                 'holdTransactionCount',
                 'acceptedTransactionCount',
                 'banners',
-                'firstBanner'));
+                'firstBanner',
+                'products'));
         }
 
         if (Auth::user()->role == 'Saldos') {

@@ -197,6 +197,9 @@
                                                 @if ($role == 'Supplier')
                                                     <a style="color:#505050 ;" href="{{route('product.assign', ['id' => $user->id])}}" title="Asignar productos" class="btn btn-link px-1 mb-0"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10">assignment_turned_in</i></a>
                                                 @endif
+                                                @if ($role == 'Shopkeeper' || $role == 'allShopkeepers')
+                                                        <a id="" style="color:#505050;" title="Descargar extracto de saldos" class="btn btn-link px-1 mb-0" onclick="summaryExtract({{$user->id}})"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10">download</i></a>
+                                                @endif
                                                 <a style="color: darkred;" href="#" title="Eliminar" class="btn btn-link px-1 mb-0"><i style="color: darkred; font-size: 25px !important;" class="material-icons opacity-10" onclick="getStatus({{$user->id}})">delete</i></a>
                                         </td>
                                     </tr>
@@ -240,6 +243,10 @@
                                 <input type="hidden" name="id" id="shopkeeper_id">
                                 <input type="hidden" name="enabled_daily" id="enabled_daily">
                             </form>
+                            <form id="form-excel" method="POST" action="/balanceSummary/excel">
+                                @csrf
+                                <input type="hidden" name="shopkeeper_id" id="usershop_id">
+                            </form>
                             <script>
                                 function getStatus(id)
                                 {
@@ -254,6 +261,7 @@
                                         form.submit();
                                     }
                                 }
+
                                 function getAuthorized(id) {
                                         let toggle = document.getElementById("toggleauthorized" + id);
                                         let status = document.getElementById("authorized");
@@ -268,6 +276,7 @@
                                         user_id.value = id;
                                         form.submit();
                                 }
+
                                 function getEnabledDaily(id)
                                 {
                                     let toggle = document.getElementById("toggleEnabledDaily" + id);
@@ -282,6 +291,14 @@
                                     }
                                     user_id.value = id;
                                     form.submit();
+                                }
+
+                                function summaryExtract(id)
+                                {
+                                    let formExcel = document.getElementById('form-excel');
+                                    let shopkeeper_id = document.getElementById('usershop_id');
+                                    shopkeeper_id.value = id;
+                                    formExcel.submit();
                                 }
                             </script>
                             <!-- Modal-->

@@ -14,22 +14,44 @@ class TransactionsExport implements FromView, ShouldAutoSize
 {
     use Exportable;
 
+    public function forProductID($product_id)
+    {
+        $this->product_id = $product_id;
+
+        return $this;
+    }
+
     public function forDateFrom(Carbon $dateFrom)
     {
         $this->dateFrom = $dateFrom;
-        
+
         return $this;
     }
 
     public function forDateTo(Carbon $dateTo)
     {
         $this->dateTo = $dateTo;
-        
+
         return $this;
     }
 
     public function view(): View
     {
+        if ((Auth::user()->role == 'Administrator' ||  Auth::user()->role == 'Shopkeeper') && isset($this->product_id)) {
+            if (Auth::user()->role == 'Administrator') {
+                return view('transactions.excelExport', [
+                    'transactions' => Transaction::where('product_id', $this->product_id)->get()
+                ]);
+            }
+
+            if (Auth::user()->role == 'Shopkeeper') {
+
+                return view('transactions.excelExport', [
+                    'transactions' => Transaction::where('product_id', $this->product_id)->where('shopkeeper_id', Auth::user()->id)->get()
+                ]);
+            }
+        }
+
         if (Auth::user()->role == 'Administrator') {
             return view('transactions.excelExport', [
                 'transactions' => Transaction::whereBetween('date',[$this->dateFrom, $this->dateTo])->get()

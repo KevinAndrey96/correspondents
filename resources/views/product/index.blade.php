@@ -25,11 +25,11 @@
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BLOQ/DESBL</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Logo</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">nombre del producto</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">tipo del producto</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
                                     </tr>
                                     </thead>
 
@@ -54,8 +54,25 @@
                                                     @endif
                                                 </div>
                                             </td>
+                                            <td class="align-middle text-center">
+                                                @if(isset($product->product_logo))
+                                                <div>
+                                                    <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}">
+                                                        <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">
+                                                    </a>
+                                                </div>
+                                                @endif
+                                            </td>
+                                            <td class="align-middle text-center text-sm">{{ $product->product_name}}</td>
+                                            @if($product->product_type=='Deposit')
+                                                <td class="align-middle text-center text-sm">Deposito</td>
+                                            @else
+                                                <td class="align-middle text-center text-sm">Retiro</td>
+                                            @endif
+                                            <td class="align-middle text-center text-sm">${{number_format($product->product_commission, 2, ',', '.')}}</td>
                                             <td class="align-middle text-center text-sm">
-                                                <a style="color: darkgreen;" href="{{ url('/products/'.$product->id.'/edit') }}" title="Editar" class="btn btn-link px-0 mb-0"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i></a>
+                                                <a style="color: darkgreen;" href="{{ url('/products/'.$product->id.'/edit') }}" title="Editar" class="btn btn-link px-0 mb-0"><i style="color: darkgreen;  font-size: 25px !important;" class="material-icons opacity-10">edit</i></a>
+                                                <a style="color: darkblue;" href="#" title="Reporte de transacciones hechas con este producto" class="btn btn-link px-0 mb-0" onclick="productTransactions({{$product->id}})"><i style="color: darkblue;  font-size: 25px !important;" class="material-icons opacity-10">paid</i></a>
                                                 <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-dark" data-bs-toggle="modal"
                                                         data-bs-target="#exampleModalMessage"
                                                         data-whatever="{{ $product->product_name}}"
@@ -72,22 +89,6 @@
 
                                                 >Ver</button>
                                             </td>
-                                            <td class="align-middle text-center">
-                                                @if(isset($product->product_logo))
-                                                <div>
-                                                    <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}">
-                                                    <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">
-                                                    </a>
-                                                </div>
-                                                @endif
-                                            </td>
-                                            <td class="align-middle text-center text-sm">{{ $product->product_name}}</td>
-                                            @if($product->product_type=='Deposit')
-                                                <td class="align-middle text-center text-sm">Deposito</td>
-                                            @else
-                                                <td class="align-middle text-center text-sm">Retiro</td>
-                                            @endif
-                                            <td class="align-middle text-center text-sm">${{number_format($product->product_commission, 2, ',', '.')}}</td>
                                         </tr>
                                     @endforeach
                                     <!-- Modal -->
@@ -276,6 +277,10 @@
                                         <input type="hidden" name="id" id="id">
                                         <input type="hidden" name="status" id="status">
                                 </form>
+                                <form id="product-transactions" method="POST" action="/transaction/excel">
+                                    @csrf
+                                    <input type="hidden" id="product_id" name="product_id">
+                                </form>
                                 <script>
                                     function getStatus(id)
                                     {
@@ -292,7 +297,18 @@
                                         product_id.value = id;
                                         form.submit();
                                     }
+
+                                    function productTransactions(id)
+                                    {
+                                        let productID = document.getElementById('product_id');
+                                        let form = document.getElementById('product-transactions');
+                                        productID.value = id;
+                                        form.submit();
+
+                                    }
+
                                 </script>
+
                                 <style>
                                     .form-control {
                                         background-color: #f2f2f2 !important ;
