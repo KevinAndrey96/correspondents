@@ -13,7 +13,7 @@
     <div class="container-fluid py-4">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
             <!--<img src="/assets/img/Banner/administrator.png" width="100%" height="auto" class="border-radius-lg">-->
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="300">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     @if (isset($banners))
                         @if ($banners->count() > 0 && (Auth::user()->role == 'Distributor' || Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Saldos'))
@@ -723,33 +723,114 @@
                             </div>
                         </div>
                     </div>
-
                 @endif
             </div>
+            @if (Auth::user()->role == 'Administrator')
+                <div class="row">
+                    <select id="productChart" class="form-select col-md-8 mt-6 mb-5 bg-white text-center" aria-label="Default select example" onchange="showProductChart()">
+                        <option value="">Seleccione un producto</option>
+                        @foreach ($auxProducts as $product)
+                            <option value="{{$product->id}}">{{$product->product_name}} -
+                                @if ($product->product_type == 'Deposit')
+                                    DEPOSITO
+                                @else
+                                    RETIRO
+                                @endif
+                            </option>
+                        @endforeach
+                    </select>
+                    {!! $htmlContainers !!}
+                </div>
+            @endif
 
         </div>
         <script>
             $(document).ready(function () {
+                carousel_next = document.querySelector('.carousel-control-next');
 
-                //carousel_next = document.querySelector('.carousel-control-next');
-                //carousel_next.click();
-                $('.carousel-control-next').on('click', function(){
-                    console.log('Acción ejecutada!');
-                })
-
-                $('.carousel-control-next').get(0).click();
-                $(document).click();
-                //$('.carousel-control-next').trigger('click');
+                setInterval(()=>{
+                    carousel_next.click();
+                }, 3000);
 
             });
-            //let carousel = document.getElementById('carouselExampleControls');
-            $('.carousel').carousel({
-                interval: 300,
-                pause: false,
-                wrap: false
-            });
+            @if (Auth::user()->role == 'Administrator')
+            @for ($i = 0; $i < count($superProduct); $i++)
+                var dates = {{json_encode($superProduct[$i][0])}};
+                dates = dates.map(function(num){
+                    if (num == 1) {
+                        num = 'Ene'
+                    }
+                    if (num == 2) {
+                        num = 'Feb'
+                    }
+                    if (num == 3) {
+                        num = 'Mar'
+                    }
+                    if (num == 4) {
+                        num = 'Abr'
+                    }
+                    if (num == 5) {
+                        num = 'May'
+                    }
+                    if (num == 6) {
+                        num = 'Jun'
+                    }
+                    if (num == 7) {
+                        num = 'Jul'
+                    }
+                    if (num == 8) {
+                        num = 'Ago'
+                    }
+                    if (num == 9) {
+                        num = 'Sep'
+                    }
+                    if (num == 10) {
+                        num = 'Oct'
+                    }
+                    if (num == 11) {
+                        num = 'Nov'
+                    }
+                    if (num == 12) {
+                        num = 'Dic'
+                    }
 
+                    return num
+                });
 
+                var amounts = {{json_encode($superProduct[$i][1])}};
+                Highcharts.chart('container{{$products[$i]}}', {
+                    chart: {
+                        type: 'area'
+                    },
+                    title: {
+                        text: 'Dinero movido'
+                    },
+                    xAxis: {
+                            categories: dates
+                    },
+                    yAxis: {
+                            title: {
+                                text: 'Cantidad de dinero'
+                            }
+                    },
+                    legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle',
+                    },
+                    plotOptions: {
+                        series: {
+                            allowPointSelect: true
+                        }
+                    },
+                    series: [{
+                        name: 'Monto',
+                        data: amounts
+                    }]
+
+                });
+            @endfor
+            @endif
             function excelURL(type) {
                 var actionURL = document.getElementById("action");
                 var actionURL2 = document.getElementById("actionProductTransactions");
@@ -774,6 +855,21 @@
                     actionURL2.action = "{{ url('/transaction/excel') }}";
                     document.getElementById("LabelProductTransactions").innerHTML = "Transacciones por producto";
                 }
+            }
+
+            function showProductChart()
+            {
+                let selectProductChart = document.getElementById('productChart');
+                let containerChart = document.getElementById('container'+selectProductChart.value)
+                let charts = document.querySelectorAll('.product-chart');
+
+                charts.forEach(function(chart){
+                    chart.style.display = 'none';
+                });
+
+
+                containerChart.style.display = 'block';
+                console.log(containerChart);
             }
         </script>
     <!-- Modal-->

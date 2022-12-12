@@ -16,6 +16,13 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+    <!--Highcharts-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
     <!-- magnific popup -->
     <link rel="stylesheet" href="/assets/Magnific-Popup-master/dist/magnific-popup.css">
     <!-- datatable -->
@@ -696,6 +703,11 @@
 
 <!-- Magnific-Popup -->
 <script src="/assets/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
+<script type="text/javascript">
+    $('.image-link').magnificPopup({
+        type: 'image'
+    });
+</script>
 <script>
     var contadorAfk = 0;
     $(document).ready(function() {
@@ -717,9 +729,7 @@
         }
     }
     @endif
-        $('.image-link').magnificPopup({
-            type: 'image'
-        });
+
 </script>
 
 <!-- Github buttons -->
@@ -734,6 +744,10 @@
 <script>
     CKEDITOR.replace( 'richText' );
 </script>
+
+
+
+
 </body>
 
 </html>

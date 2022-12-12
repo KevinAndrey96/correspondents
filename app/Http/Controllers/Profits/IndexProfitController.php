@@ -12,6 +12,16 @@ class IndexProfitController extends Controller
 {
     public function index(Request $request)
     {
+        $shopkeeper_id = $request->input('shopkeeper_id');
+
+        if (isset($shopkeeper_id)) {
+            if (Auth::user()->role == 'Administrator') {
+                $profits =  Profit::where('user_id', '=', $shopkeeper_id)->orderBy('created_at', 'desc')->get();
+
+                return view('profit.index', compact('profits'));
+            }
+        }
+
         if (Auth::user()->role == 'Administrator') {
             $profitsData['profits'] = Profit::orderBy('created_at', 'desc')->get();
         }

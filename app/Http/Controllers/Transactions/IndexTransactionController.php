@@ -12,6 +12,7 @@ class IndexTransactionController extends Controller
     public function index(Request $request)
     {
         $id = $request->input('id');
+        $shopkeeper_id = $request->input('shopkeeper_id');
         if (isset($id)) {
             if (Auth::user()->role == 'Supplier') {
                 $transactions = Transaction::where([
@@ -32,6 +33,15 @@ class IndexTransactionController extends Controller
                 return view('transactions.index', compact('transactions', 'id'));
             }
         }
+
+        if (isset($shopkeeper_id)) {
+            if (Auth::user()->role == 'Administrator') {
+                $transactions = Transaction::where('shopkeeper_id', $shopkeeper_id)->orderBy('created_at', 'desc')->get();
+
+                return view('transactions.index', compact('transactions'));
+            }
+        }
+
         if (Auth::user()->role == 'Administrator') {
             $transactions = Transaction::orderBy('created_at', 'desc')->paginate(50);
 

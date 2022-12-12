@@ -11,6 +11,7 @@ use App\Models\Balance;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class HomeController extends Controller
@@ -33,6 +34,7 @@ class HomeController extends Controller
     public function index()
     {
         $date = Carbon::now();
+
         if (Auth::user()->role == 'Administrator') {
             if (Auth::user()->id !== 1) {
                 Auth::user()->profit = User::find(1)->profit;
@@ -52,17 +54,55 @@ class HomeController extends Controller
 
             $shopkeepers = User::where('role', 'like', 'Shopkeeper')->get();
             $shopkeepersBalance = 0;
+
             foreach($shopkeepers as $shopkeeper){
                 $shopkeepersBalance = $shopkeepersBalance + $shopkeeper->balance;
             }
             $suppliers = User::where('role', 'like', 'Supplier')->get();
             $suppliersBalance = 0;
+
             foreach($suppliers as $supplier){
                 $suppliersBalance = $suppliersBalance + $supplier->balance;
             }
 
             $totalProfit = User::sum('profit');
 
+            $transactions = DB::table('transactions')
+                            ->where('status', 'successful')
+                            ->select(DB::raw('sum(amount) as acum, count(*) as num_transactions, YEAR(created_at) as year, MONTH(created_at) as month, product_id'))
+                            ->groupBy(['year', 'month', 'product_id',])
+                            ->orderBy('year', 'asc')
+                            ->orderBy('month', 'asc')
+                            ->get();
+
+            $superProduct = array();
+            $auxProducts = Product::all();
+            $products = array();
+            $htmlContainers = '';
+
+            foreach ($auxProducts as $product) {
+                $monthsProduct = array();
+                $amountsProduct = array();
+                $subProduct = array();
+                $i = 0;
+                foreach ($transactions as $transaction) {
+                    if ($transaction->product_id == $product->id) {
+                        $i++;
+                        array_push($amountsProduct, $transaction->acum);
+                        array_push($monthsProduct, $transaction->month);
+                    }
+                }
+
+                if ($i > 0) {
+
+
+                    array_push($subProduct, $monthsProduct, $amountsProduct);
+                    array_push($superProduct, $subProduct);
+                    array_push($products, $product->id);
+                    $htmlContainers .= '<div class="col-sm-10 col-md-10 col-lg-10 ms-auto me-auto rounded product-chart" style="display: none"
+                                        id="container' . $product->id . '"></div>';
+                }
+            }
             return view('home', compact(
                 'transactionCount',
                 'successfulTransactionCount',
@@ -76,7 +116,11 @@ class HomeController extends Controller
                 'shopkeepersBalance',
                 'suppliersBalance',
                 'cancelledTransactionCount',
-                'totalProfit'
+                'totalProfit',
+                'superProduct',
+                'products',
+                'htmlContainers',
+                'auxProducts'
                 ));
         }
 

@@ -197,9 +197,14 @@
                                                 @if ($role == 'Supplier')
                                                     <a style="color:#505050 ;" href="{{route('product.assign', ['id' => $user->id])}}" title="Asignar productos" class="btn btn-link px-1 mb-0"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10">assignment_turned_in</i></a>
                                                 @endif
+                                                @if ($role == 'allShopkeepers')
+                                                    <button type="button" class="btn btn-white px-1 mb-0" title="Ver información del tendero"  data-bs-toggle="modal" data-bs-target="#ShopkeeperInfoModal"
+                                                            data-id="{{$user->id}}"><i style="font-size: 25px !important;" class="material-icons opacity-10 text-primary" data-userID={{$user->id}}>visibility</i></button>
+                                                @endif
                                                 @if ($role == 'Shopkeeper' || $role == 'allShopkeepers')
                                                         <a id="" style="color:#505050;" title="Descargar extracto de saldos" class="btn btn-link px-1 mb-0" onclick="summaryExtract({{$user->id}})"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10">download</i></a>
                                                 @endif
+
                                                 <a style="color: darkred;" href="#" title="Eliminar" class="btn btn-link px-1 mb-0"><i style="color: darkred; font-size: 25px !important;" class="material-icons opacity-10" onclick="getStatus({{$user->id}})">delete</i></a>
                                         </td>
                                     </tr>
@@ -300,6 +305,8 @@
                                     shopkeeper_id.value = id;
                                     formExcel.submit();
                                 }
+
+
                             </script>
                             <!-- Modal-->
                             <div class="modal fade" id="SaldoModal" tabindex="-1" role="dialog" aria-labelledby="SaldoModal" aria-hidden="true">
@@ -370,6 +377,29 @@
                                 </div>
                             </div>
                             <!--end Modal-->
+                            <!-- Modal-->
+                            <div class="modal fade" id="ShopkeeperInfoModal" tabindex="-1" role="dialog" aria-labelledby="SaldoModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLabel">Información tendero</h6>
+                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul class="list-group">
+                                                <li class="list-group-item text-center"><a id="transactionLink" href="">Transacciones</a></li>
+                                                <li class="list-group-item text-center"><a id="commissionLink" href="">Comisiones</a></li>
+                                                <li class="list-group-item text-center"><a id="balanceLink" href="">Saldos</a></li>
+                                                <li class="list-group-item text-center"><a id="profitLink" href="">Historial de retiro de ganancias</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end Modal-->
                             <script>
                                 $('#SaldoModal').on('show.bs.modal', function (event) {
                                     var button = $(event.relatedTarget)
@@ -378,6 +408,16 @@
 
                                     modal.find('.modal-body #userID').val(uID)
                                 })
+                                $('#ShopkeeperInfoModal').on('show.bs.modal', function (event) {
+                                    var button = $(event.relatedTarget)
+                                    var uID = button.data('id')
+                                    var modal = $(this)
+                                    var transactionLi =
+                                    modal.find('.modal-body #transactionLink ').attr('href', '/transactions?shopkeeper_id=' + uID);
+                                    modal.find('.modal-body #commissionLink ').attr('href', '/commissions?shopkeeper_id=' + uID);
+                                    modal.find('.modal-body #balanceLink ').attr('href', '/balance?shopkeeper_id=' + uID);
+                                    modal.find('.modal-body #profitLink ').attr('href', '/profit?shopkeeper_id=' + uID);
+                                });
                             </script>
                         </div>
                     </div>
