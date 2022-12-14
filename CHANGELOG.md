@@ -54,6 +54,8 @@ fix: solve cron delay
 ## [Hotfix 1.1.8]
 fix: show chart
 
+## [Hotfix 1.1.9]
+fix: put 2fa
 
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
