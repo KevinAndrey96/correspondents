@@ -93,7 +93,7 @@
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label for="productCommission" class="form-label">Minutos para reasignar</label>
-                                        <input type="number" class="form-control" name="reassignment_minutes" value="{{ isset($product->reassignment_minutes)?$product->reassignment_minutes:old('reassignment_minutes') }}" id="reassignment_minutes" placeholder="" min="1">
+                                        <input type="number" class="form-control" name="reassignment_minutes" value="{{ isset($product->reassignment_minutes)?$product->reassignment_minutes:old('reassignment_minutes') }}" id="reassignment_minutes" placeholder="" min="2">
                                     </div>
                                 </div>
                                 <div class="col-md-3">

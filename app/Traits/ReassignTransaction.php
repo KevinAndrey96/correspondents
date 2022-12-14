@@ -33,7 +33,7 @@ trait ReassignTransaction
             ';
             $output .= 'Creada hace: ' . $diffMinutes . ' mínutos
             ';
-            if ($diffMinutes > $transaction->product->reassignment_minutes) {
+            if ($diffMinutes > $transaction->product->reassignment_minutes-1) {
                 $output .= '---APTA PARA REASIGNACIÓN---
                 ';
                 $supplier = User::find($transaction->supplier_id);

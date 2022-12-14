@@ -48,5 +48,9 @@ fix: put 2fa middleware
 ## [Hotfix 1.1.6]
 fix: solve error of logout middleware 
 
+## [Hotfix 1.1.7]
+fix: solve cron delay
+
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

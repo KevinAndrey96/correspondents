@@ -726,7 +726,7 @@
             </div>
             @if (Auth::user()->role == 'Administrator')
                 <div class="row">
-                    <select id="productChart" class="form-select col-md-8 mt-6 mb-5 bg-white text-center" aria-label="Default select example" onChange="showCharts()">
+                    <select id="productChart" class="form-select col-md-8 mt-6 mb-5 bg-white text-center" aria-label="Default select example" onchange="showCharts()">
                         <option value="">Seleccione un producto</option>
                         @foreach ($auxProducts as $product)
                             <option value="{{$product->id}}">{{$product->product_name}} -
@@ -743,8 +743,21 @@
             @endif
 
         </div>
-        <script>
+        <script type="text/javascript">
             @if (Auth::user()->role == 'Administrator')
+            function showCharts()
+            {
+                let selectProductChart = document.getElementById('productChart');
+                let containerChart = document.getElementById('container'+selectProductChart.value)
+                let charts = document.querySelectorAll('.product-chart');
+
+                charts.forEach(function(chart){
+                    chart.style.display = 'none';
+                });
+
+                containerChart.style.display = 'block';
+            }
+
                 @for ($i = 0; $i < count($superProduct); $i++)
                     var dates = {{json_encode($superProduct[$i][0])}};
                     dates = dates.map(function(num){
@@ -818,21 +831,8 @@
                             name: 'Monto',
                             data: amounts
                         }]
-
                     });
                 @endfor
-                function showCharts()
-                {
-                    let selectProductChart = document.getElementById('productChart');
-                    let containerChart = document.getElementById('container'+selectProductChart.value)
-                    let charts = document.querySelectorAll('.product-chart');
-
-                    charts.forEach(function(chart){
-                        chart.style.display = 'none';
-                    });
-
-                    containerChart.style.display = 'block';
-                }
             @endif
         </script>
         <script>
@@ -868,8 +868,6 @@
                     document.getElementById("LabelProductTransactions").innerHTML = "Transacciones por producto";
                 }
             }
-
-
         </script>
     <!-- Modal-->
     <div class="modal fade" id="ExcelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
