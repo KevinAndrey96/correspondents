@@ -21,14 +21,14 @@ class TransactionsExport implements FromView, ShouldAutoSize
         return $this;
     }
 
-    public function forDateFrom(Carbon $dateFrom)
+    public function forDateFrom($dateFrom)
     {
         $this->dateFrom = $dateFrom;
 
         return $this;
     }
 
-    public function forDateTo(Carbon $dateTo)
+    public function forDateTo($dateTo)
     {
         $this->dateTo = $dateTo;
 
@@ -47,29 +47,32 @@ class TransactionsExport implements FromView, ShouldAutoSize
             if (Auth::user()->role == 'Shopkeeper') {
 
                 return view('transactions.excelExport', [
-                    'transactions' => Transaction::where('product_id', $this->product_id)->where('shopkeeper_id', Auth::user()->id)->get()
+                    'transactions' => Transaction::where('product_id', $this->product_id)
+                                                    ->where('shopkeeper_id', Auth::user()->id)
+                                                    ->whereBetween('created_at', [Carbon::parse($this->dateFrom), Carbon::parse($this->dateTo)])
+                                                    ->get()
                 ]);
             }
         }
 
         if (Auth::user()->role == 'Administrator') {
             return view('transactions.excelExport', [
-                'transactions' => Transaction::whereBetween('date',[$this->dateFrom, $this->dateTo])->get()
+                'transactions' => Transaction::whereBetween('date',[Carbon::parse($this->dateFrom), Carbon::parse($this->dateTo)])->get()
             ]);
         }
         if (Auth::user()->role == 'Shopkeeper') {
             return view('transactions.excelExport', [
-                'transactions' => Transaction::where('shopkeeper_id','=',Auth::user()->id)->whereBetween('date',[$this->dateFrom, $this->dateTo])->get()
+                'transactions' => Transaction::where('shopkeeper_id','=',Auth::user()->id)->whereBetween('date',[Carbon::parse($this->dateFrom), Carbon::parse($this->dateTo)])->get()
             ]);
         }
         if (Auth::user()->role == 'Distributor') {
             return view('transactions.excelExport', [
-                'transactions' => Transaction::where('distributor_id','=',Auth::user()->id)->whereBetween('date',[$this->dateFrom, $this->dateTo])->get()
+                'transactions' => Transaction::where('distributor_id','=',Auth::user()->id)->whereBetween('date',[Carbon::parse($this->dateFrom), Carbon::parse($this->dateTo)])->get()
             ]);
         }
         if (Auth::user()->role == 'Supplier') {
             return view('transactions.excelExport', [
-                'transactions' => Transaction::where('supplier_id','=',Auth::user()->id)->whereBetween('date',[$this->dateFrom, $this->dateTo])->get()
+                'transactions' => Transaction::where('supplier_id','=',Auth::user()->id)->whereBetween('date',[Carbon::parse($this->dateFrom), Carbon::parse($this->dateTo)])->get()
             ]);
         }
     }

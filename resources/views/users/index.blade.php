@@ -65,11 +65,7 @@
                                             @if ($role == 'Shopkeeper' || $role == 'allShopkeepers')
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID Multiproductos</th>
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plataforma Multiproductos</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Documento Cedula</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Documento RUT</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cámara y comercio</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto local</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto de recibo público:</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 p-6">Documentos</th>
                                             @endif
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-1">Acción</th>
                                     </tr>
@@ -148,44 +144,36 @@
                                                         {{$user->platform_mul}}
                                                     @endif
                                                 </td>
-                                                <td class="align-middle text-center text-sm">
+                                                <td>
                                                     @if (isset($user->cedulaPDF))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->cedulaPDF}}">
-                                                            <img width="20%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                            <img width="15%" title="Documento cedula" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
-                                                </td>
-                                                <td class="align-middle text-center text-sm">
                                                     @if (isset($user->rutPDF))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->rutPDF}}">
-                                                            <img width="23%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                            <img width="15%" title="Documento RUT" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
-                                                </td>
-                                                <td class="align-middle text-center text-sm">
                                                     @if (isset($user->camara_comercio))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->camara_comercio}}">
-                                                            <img width="20%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                            <img width="15%" title="Cámara y comercio" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
-                                                </td>
-                                                <td class="align-middle text-center text-sm">
                                                     @if (isset($user->local_photo))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->local_photo}}">
-                                                            <img width="29%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                            <img width="15%" title="Foto local" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
-                                                </td>
-                                                <td class="align-middle text-center text-sm">
                                                     @if (isset($user->public_receipt))
                                                         <a target="_blank" href="https://testing.asparecargas.net{{$user->public_receipt}}">
-                                                            <img width="16.5%" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
+                                                            <img width="15%" title="Foto de recibo público" src="https://testing.asparecargas.net/assets/img/documento-icono.png">
                                                         </a>
                                                     @endif
                                                 </td>
                                             @endif
                                         <td>
-                                            @if ($role != 'allShopkeepers' && $role != 'Administrator')
+                                            @if ($role != 'allShopkeepers' && $role != 'Administrator' && $role != 'Saldos')
 
                                                 <a style="color: dodgerblue;" href="/commissions/create/{{$user->id}}" title="Comisiones" class="btn btn-link px-1 mb-0"><i style="color: dodgerblue; font-size: 25px !important;" class="material-icons opacity-15">price_change</i></a>
                                             @endif
@@ -201,10 +189,6 @@
                                                     <button type="button" class="btn btn-white px-1 mb-0" title="Ver información del tendero"  data-bs-toggle="modal" data-bs-target="#ShopkeeperInfoModal"
                                                             data-id="{{$user->id}}"><i style="font-size: 25px !important;" class="material-icons opacity-10 text-primary" data-userID={{$user->id}}>visibility</i></button>
                                                 @endif
-                                                @if ($role == 'Shopkeeper' || $role == 'allShopkeepers')
-                                                        <a id="" style="color:#505050;" title="Descargar extracto de saldos" class="btn btn-link px-1 mb-0" onclick="summaryExtract({{$user->id}})"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10">download</i></a>
-                                                @endif
-
                                                 <a style="color: darkred;" href="#" title="Eliminar" class="btn btn-link px-1 mb-0"><i style="color: darkred; font-size: 25px !important;" class="material-icons opacity-10" onclick="getStatus({{$user->id}})">delete</i></a>
                                         </td>
                                     </tr>
@@ -247,10 +231,6 @@
                                 @csrf
                                 <input type="hidden" name="id" id="shopkeeper_id">
                                 <input type="hidden" name="enabled_daily" id="enabled_daily">
-                            </form>
-                            <form id="form-excel" method="POST" action="/balanceSummary/excel">
-                                @csrf
-                                <input type="hidden" name="shopkeeper_id" id="usershop_id">
                             </form>
                             <script>
                                 function getStatus(id)
@@ -297,16 +277,6 @@
                                     user_id.value = id;
                                     form.submit();
                                 }
-
-                                function summaryExtract(id)
-                                {
-                                    let formExcel = document.getElementById('form-excel');
-                                    let shopkeeper_id = document.getElementById('usershop_id');
-                                    shopkeeper_id.value = id;
-                                    formExcel.submit();
-                                }
-
-
                             </script>
                             <!-- Modal-->
                             <div class="modal fade" id="SaldoModal" tabindex="-1" role="dialog" aria-labelledby="SaldoModal" aria-hidden="true">
@@ -393,7 +363,28 @@
                                                 <li class="list-group-item text-center"><a id="commissionLink" href="">Comisiones</a></li>
                                                 <li class="list-group-item text-center"><a id="balanceLink" href="">Saldos</a></li>
                                                 <li class="list-group-item text-center"><a id="profitLink" href="">Historial de retiro de ganancias</a></li>
-
+                                                <li class="list-group-item text-center">
+                                                    <div class="row">
+                                                        <form id="form-excel" method="POST" action="/balanceSummary/excel">
+                                                            @csrf
+                                                            <input type="hidden" name="shopkeeper_id" id="usershop_id">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                <div class="input-group date mb-4">
+                                                                    <label>Desde: </label>
+                                                                    <input type="date" class="form-control ms-2" id="dateFrom" name="dateFrom" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                <div class="input-group date mb-4">
+                                                                    <label>Hasta: </label>
+                                                                    <input type="date" class="form-control ms-2" id="dateTo" name="dateTo" required>
+                                                                </div>
+                                                            </div>
+                                                            <input type="submit" class="btn btn-success" value="Descargar extracto">
+                                                        </form>
+                                                        <!--<a href="" onclick="summaryExtract()">Descargar extracto de saldos</a>-->
+                                                    </div>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -412,11 +403,12 @@
                                     var button = $(event.relatedTarget)
                                     var uID = button.data('id')
                                     var modal = $(this)
-                                    var transactionLi =
-                                    modal.find('.modal-body #transactionLink ').attr('href', '/transactions?shopkeeper_id=' + uID);
-                                    modal.find('.modal-body #commissionLink ').attr('href', '/commissions?shopkeeper_id=' + uID);
-                                    modal.find('.modal-body #balanceLink ').attr('href', '/balance?shopkeeper_id=' + uID);
-                                    modal.find('.modal-body #profitLink ').attr('href', '/profit?shopkeeper_id=' + uID);
+                                    modal.find('.modal-body #transactionLink').attr('href', '/transactions?shopkeeper_id=' + uID);
+                                    modal.find('.modal-body #commissionLink').attr('href', '/commissions?shopkeeper_id=' + uID);
+                                    modal.find('.modal-body #balanceLink').attr('href', '/balance?shopkeeper_id=' + uID);
+                                    modal.find('.modal-body #profitLink').attr('href', '/profit?shopkeeper_id=' + uID);
+                                    modal.find('.modal-body #profitLink').attr('href', '/profit?shopkeeper_id=' + uID);
+                                    modal.find('.modal-body #usershop_id').val(uID);
                                 });
                             </script>
                         </div>

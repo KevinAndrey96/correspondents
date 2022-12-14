@@ -38,11 +38,11 @@ class SummaryExport implements FromView, ShouldAutoSize
     public function view(): View
     {
         if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Distributor' && isset($this->shopkeeperID)) {
-            $summaries = Summary::where('user_id', $this->shopkeeperID)->get();
+            $summaries = Summary::where('user_id', $this->shopkeeperID)
+                                ->whereBetween('created_at', [Carbon::parse($this->dateFrom), Carbon::parse($this->dateTo)])
+                                ->get();
             return view('balance.summaryExcelExport', compact('summaries'));
         }
-
-
 
         if (Auth::user()->role == 'Shopkeeper' or Auth::user()->role == 'Supplier') {
             if ($this->dateFrom == $this->dateTo) {

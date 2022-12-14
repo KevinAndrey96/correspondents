@@ -17,7 +17,7 @@ class IndexTransactionController extends Controller
             if (Auth::user()->role == 'Administrator' && $id == 'record2') {
                 $transactions = Transaction::orderBy('created_at', 'desc')->get();
 
-                return view('transactions.index', compact('transactions'));
+                return view('transactions.index', compact('transactions', 'id'));
             }
 
             if (Auth::user()->role == 'Administrator') {

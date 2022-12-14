@@ -601,11 +601,13 @@
                 @if(Auth::user()->role == 'Distributor')
                 <h6 class="text-white mb-1">Distribuidor</h6>
                 @endif
-                <p class="text text-white mb-1">Ganancia: ${{ number_format(Auth::user()->profit, 2, ',', '.') }}
-                    @hasanyrole('Supplier|Shopkeeper')
-                </br> Saldo: ${{ number_format(Auth::user()->balance, 2, ',', '.') }}
-                    @endhasanyrole
-                </p>
+                    @if (Auth::user()->role !== 'Saldos')
+                        <p class="text text-white mb-1">Ganancia: ${{ number_format(Auth::user()->profit, 2, ',', '.') }}
+                            @hasanyrole('Supplier|Shopkeeper')
+                        </br> Saldo: ${{ number_format(Auth::user()->balance, 2, ',', '.') }}
+                            @endhasanyrole
+                        </p>
+                    @endif
             </div>
             <div style="display: none;" class="card-body text-center p-2 pt-1">
                 <a class="btn btn-white text-dark "  href="{{ route('logout') }}" onclick="event.preventDefault();
