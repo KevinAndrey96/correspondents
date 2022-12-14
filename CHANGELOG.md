@@ -51,6 +51,9 @@ fix: solve error of logout middleware
 ## [Hotfix 1.1.7]
 fix: solve cron delay
 
+## [Hotfix 1.1.8]
+fix: show chart
+
 
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

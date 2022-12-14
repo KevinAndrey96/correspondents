@@ -726,22 +726,27 @@
             </div>
             @if (Auth::user()->role == 'Administrator')
                 <div class="row">
-                    <select id="productChart" class="form-select col-md-8 mt-6 mb-5 bg-white text-center" aria-label="Default select example" onchange="showCharts()">
-                        <option value="">Seleccione un producto</option>
-                        @foreach ($auxProducts as $product)
-                            <option value="{{$product->id}}">{{$product->product_name}} -
-                                @if ($product->product_type == 'Deposit')
-                                    DEPOSITO
-                                @else
-                                    RETIRO
-                                @endif
-                            </option>
-                        @endforeach
-                    </select>
+                    <div class="col-md-12">
+                        <select id="productChart" class="form-select mt-6 mb-5 bg-white text-center" aria-label="Default select example" onchange="showCharts()">
+                            <option value="">Seleccione un producto</option>
+                            @foreach ($auxProducts as $product)
+                                <option value="{{$product->id}}">{{$product->product_name}} -
+                                    @if ($product->product_type == 'Deposit')
+                                        DEPOSITO
+                                    @else
+                                        RETIRO
+                                    @endif
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="border col-md-2 ms-auto me-auto">
+                        <button type="button" class="btn btn-success">Ver grafica</button>
+                    </div>
                     {!! $htmlContainers !!}
                 </div>
-            @endif
 
+            @endif
         </div>
         <script type="text/javascript">
             @if (Auth::user()->role == 'Administrator')
@@ -759,8 +764,8 @@
             }
 
                 @for ($i = 0; $i < count($superProduct); $i++)
-                    var dates = {{json_encode($superProduct[$i][0])}};
-                    dates = dates.map(function(num){
+                    var dates2 = {{json_encode($superProduct[$i][0])}};
+                    dates2 = dates2.map(function(num){
                         if (num == 1) {
                             num = 'Ene'
                         }
@@ -810,7 +815,7 @@
                             text: 'Dinero movido'
                         },
                         xAxis: {
-                            categories: dates
+                            categories: dates2
                         },
                         yAxis: {
                             title: {
