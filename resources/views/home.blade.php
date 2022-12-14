@@ -12,7 +12,6 @@
     @endif
     <div class="container-fluid py-4">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-            <!--<img src="/assets/img/Banner/administrator.png" width="100%" height="auto" class="border-radius-lg">-->
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     @if (isset($banners))
@@ -727,7 +726,7 @@
             </div>
             @if (Auth::user()->role == 'Administrator')
                 <div class="row">
-                    <select id="productChart" class="form-select col-md-8 mt-6 mb-5 bg-white text-center" aria-label="Default select example" onchange="showProductChart()">
+                    <select id="productChart" class="form-select col-md-8 mt-6 mb-5 bg-white text-center" aria-label="Default select example" onChange="showProductChart()">
                         <option value="">Seleccione un producto</option>
                         @foreach ($auxProducts as $product)
                             <option value="{{$product->id}}">{{$product->product_name}} -
@@ -752,9 +751,8 @@
                     carousel_next.click();
                 }, 3000);
 
-            });
-            @if (Auth::user()->role == 'Administrator')
-            @for ($i = 0; $i < count($superProduct); $i++)
+                @if (Auth::user()->role == 'Administrator')
+                @for ($i = 0; $i < count($superProduct); $i++)
                 var dates = {{json_encode($superProduct[$i][0])}};
                 dates = dates.map(function(num){
                     if (num == 1) {
@@ -806,17 +804,17 @@
                         text: 'Dinero movido'
                     },
                     xAxis: {
-                            categories: dates
+                        categories: dates
                     },
                     yAxis: {
-                            title: {
-                                text: 'Cantidad de dinero'
-                            }
+                        title: {
+                            text: 'Cantidad de dinero'
+                        }
                     },
                     legend: {
-                            layout: 'vertical',
-                            align: 'right',
-                            verticalAlign: 'middle',
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
                     },
                     plotOptions: {
                         series: {
@@ -829,8 +827,11 @@
                     }]
 
                 });
-            @endfor
-            @endif
+                @endfor
+                @endif
+
+            });
+
             function excelURL(type) {
                 var actionURL = document.getElementById("action");
                 var actionURL2 = document.getElementById("actionProductTransactions");

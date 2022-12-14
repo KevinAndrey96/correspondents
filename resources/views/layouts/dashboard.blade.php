@@ -200,6 +200,18 @@
                         </li>
                     </ul>
                 </div>
+                <div id="submenu-6" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/transactions?id=record2">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">post_add</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Ver todas las transacciones</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-3" aria-expanded="false" aria-controls="submenu-2">
@@ -709,25 +721,25 @@
     });
 </script>
 <script>
-    var contadorAfk = 0;
-    $(document).ready(function() {
-        @if (Auth::user()->role == 'Supplier')
-        setInterval(ctrlTiempo, 60000);
-        $(this).mousemove(function (e) {
-            contadorAfk = 0;
-        });
-        $(this).keypress(function (e) {
-            contadorAfk = 0;
-        });
-    });
+    @if (Auth::user()->role == 'Supplier')
+        var contadorAfk = 0;
+        $(document).ready(function() {
+                setInterval(ctrlTiempo, 60000);
+                $(this).mousemove(function (e) {
+                    contadorAfk = 0;
+                });
+                $(this).keypress(function (e) {
+                    contadorAfk = 0;
+                });
 
-    function ctrlTiempo() {
-        let formLogout = document.getElementById('logout-form');
-        contadorAfk++;
-        if (contadorAfk > 59) {
-            formLogout.submit();
-        }
-    }
+                function ctrlTiempo() {
+                    let formLogout = document.getElementById('logout-form');
+                    contadorAfk++;
+                    if (contadorAfk > 59) {
+                        formLogout.submit();
+                    }
+                }
+        });
     @endif
 
 </script>

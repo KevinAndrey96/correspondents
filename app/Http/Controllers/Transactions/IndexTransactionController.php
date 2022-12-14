@@ -14,6 +14,17 @@ class IndexTransactionController extends Controller
         $id = $request->input('id');
         $shopkeeper_id = $request->input('shopkeeper_id');
         if (isset($id)) {
+            if (Auth::user()->role == 'Administrator' && $id == 'record2') {
+                $transactions = Transaction::orderBy('created_at', 'desc')->get();
+
+                return view('transactions.index', compact('transactions'));
+            }
+
+            if (Auth::user()->role == 'Administrator') {
+                $transactions = Transaction::orderBy('created_at', 'desc')->paginate(50);
+
+                return view('transactions.index', compact('transactions'));
+            }
             if (Auth::user()->role == 'Supplier') {
                 $transactions = Transaction::where([
                     ['supplier_id', Auth::user()->id],
@@ -42,11 +53,6 @@ class IndexTransactionController extends Controller
             }
         }
 
-        if (Auth::user()->role == 'Administrator') {
-            $transactions = Transaction::orderBy('created_at', 'desc')->paginate(50);
-
-            return view('transactions.index', compact('transactions'));
-        }
         if (Auth::user()->role == 'Shopkeeper') {
             $transactions = Transaction::where('shopkeeper_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
 
