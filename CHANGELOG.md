@@ -1,4 +1,4 @@
-# Changelog
+p# Changelog
 
 ## [Hotfix 1.0.1]
 fix: balance and profit fields on database (users table) are fixed to accept null values
@@ -56,6 +56,9 @@ fix: show chart
 
 ## [Hotfix 1.1.9]
 fix: put 2fa
+
+## [Hotfix 1.2.0]
+fix: home error
 
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
