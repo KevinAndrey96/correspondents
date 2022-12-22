@@ -60,5 +60,8 @@ fix: put 2fa
 ## [Hotfix 1.2.0]
 fix: home error
 
+## [Hotfix 1.2.1]
+fix: put 2fa in ecuador platform
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

@@ -34,7 +34,7 @@ class AdministratorSeeder extends Seeder
         $user->address = 'calle 58a #90-43';
         $user->is_enabled = 1;
         $user->google2fa_secret = (new Google2FA)->generateSecretKey();
-        $user->balance = 400_000;
+        $user->balance = 0;
         $user->save();
         $user->assignRole('Administrator');
     }
