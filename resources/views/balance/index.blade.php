@@ -165,7 +165,12 @@
                                             <div class="row">
                                                 <div class="col-md-4 col-sm-4">
                                                     <div class="row jusfify-content-center align-items-center">
-                                                        <img width="60%" class="img-responsive" src="https://testing.asparecargas.net/assets/img/bell.png">
+                                                        @if ($countryName == 'COLOMBIA')
+                                                            <img width="60%" class="img-responsive" src="https://corresponsales.asparecargas.net/assets/img/bell.png">
+                                                        @endif
+                                                            @if ($countryName == 'ECUADOR')
+                                                                <img width="60%" class="img-responsive" src="https://transacciones.asparecargas.net/assets/img/bell.png">
+                                                            @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-sm-8">

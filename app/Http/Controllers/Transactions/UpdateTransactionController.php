@@ -42,7 +42,7 @@ class UpdateTransactionController extends Controller
                     $pathName = sprintf('voucher_images/%s.png', $transaction->id);
                     Storage::disk('public')->put($pathName, file_get_contents($request->file('voucher')));
                     $client = new Client();
-                    $url = "https://testing.asparecargas.net/upload.php";
+                    $url = "https://corresponsales.asparecargas.net/upload.php";
 
                         $client->request(RequestAlias::METHOD_POST, $url, [
                             'multipart' => [
@@ -66,6 +66,7 @@ class UpdateTransactionController extends Controller
 
                     $transaction->voucher = '/storage/voucher_images/' . $transaction->id . '.png';
                     $transaction->save();
+                    unlink(str_replace('\\', '/', storage_path('app/public/voucher_images/'.$transaction->id.'.png')));
                 }
                 if ($transaction->status === self::SUCCESSFUL_STATUS) {
                     $commissionShop = Commission::where([

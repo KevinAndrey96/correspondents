@@ -13,16 +13,18 @@ class SupplierInactivity extends Mailable
     public $emailBody;
     public $emailSubject;
     public $inactiveSuppliers;
+    public $url;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($emailBody, $emailSubject, $inactiveSuppliers)
+    public function __construct($emailBody, $emailSubject, $inactiveSuppliers, $url)
     {
         $this->emailBody = $emailBody;
         $this->emailSubject = $emailSubject;
         $this->inactiveSuppliers = $inactiveSuppliers;
+        $this->url = $url;
     }
 
     /**
@@ -35,6 +37,7 @@ class SupplierInactivity extends Mailable
         return $this->subject($this->emailSubject )
                     ->view('emails.inactiveSuppliers')
                     ->with('emailBody', $this->emailBody)
-                    ->with('inactiveSuppliers', $this->inactiveSuppliers);
+                    ->with('inactiveSuppliers', $this->inactiveSuppliers)
+                    ->with('url', $this->url);
     }
 }

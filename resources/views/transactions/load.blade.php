@@ -67,10 +67,7 @@
             </div>
         </div>
         <div>
-
         </div>
-
-
         <footer class="footer position-absolute bottom-2 py-2 w-100">
             <div class="container">
                 <div class="row justify-content-center">
@@ -80,7 +77,7 @@
                                 document.write(new Date().getFullYear())
                             </script>
                             Desarrollado por
-                            <a href="https://asparecargas.net/" class="font-weight-bold text-white" target="_blank">Asparecargas</a>
+                            <a href="{{$url}}" class="font-weight-bold text-white" target="_blank">Asparecargas</a>
                             Todos los derechos reservados.
                         </div>
                     </div>
@@ -98,24 +95,26 @@
 <script>
     // Aquí se ejecuta el método onload, que dice que esto se ejecutará apenas cargue la página
     window.onload = function() {
-        axios.get('https://testing.asparecargas.net/api/getStatus/'+{{$transaction->id}})
+        axios.get('{{$url}}/api/getStatus/'+{{$transaction->id}})
             .then((res) => {
                 //http://127.0.0.1:8000
                 if (res.data.status == 'successful' || res.data.status == 'failed') {
-                    window.location.replace("https://testing.asparecargas.net/transaction/detail/{{$transaction->id}}");
+                    window.location.replace("{{$url}}/transaction/detail/{{$transaction->id}}");
                 }
             });
         window.alert('Su transacción se está realizando en este momento, por favor espere unos minutos mientras esta se completa.')
         // Aquí llama la función que está definida abajo, lo que hace es llamarla solamente y se le envia en los parentesis cuantos segundos queremos que pasen
 
         timerToCancel(180)
+
+
     };
     // Este método lo que hace es cancelar pasados X segundos según se le diga al momento de llamarlo
     function timerToCancel(segundos){
     // Aquí se ejecuta el código, entonces arriba recibe los segundos, abajo se le mandan
         setTimeout(function(){
             // Cuando pasen los segundos que le dijimos hará estas acciones a continuación
-            axios.get('https://testing.asparecargas.net/api/getStatus/'+{{$transaction->id}})
+            axios.get('{{$url}}/api/getStatus/'+{{$transaction->id}})
                     .then((res)=>{
                         if (res.data.status == 'hold') {
                             document.getElementById('out').style.display = 'block';
@@ -155,7 +154,7 @@
         var divStatus = document.getElementById('divStatus');
         var pSupplierID = document.getElementById('supplierID');
 
-        axios.get('https://testing.asparecargas.net/api/getStatus/'+id)
+        axios.get('{{$url}}/api/getStatus/'+id)
             .then((res)=> {
                     if (res.data.status == 'hold') {
                         pStatus.innerHTML = 'En espera';
@@ -166,7 +165,7 @@
                         pStatus.style.backgroundColor = 'dodgerblue';
                     }
                     if (res.data.status == 'successful' || res.data.status == 'failed' || res.data.status == 'cancelled') {
-                        window.location.replace("https://testing.asparecargas.net/transaction/detail/{{$transaction->id}}");
+                        window.location.replace("{{$url}}/transaction/detail/{{$transaction->id}}");
                         //pStatus.innerHTML = 'Exitosa';
                         //pStatus.style.backgroundColor = 'green';
                     }

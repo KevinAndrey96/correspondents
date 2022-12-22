@@ -37,9 +37,9 @@
     <div class="card-body px-0 pb-4">
             <div class="row justify-content-center">
                 <div class="col-auto">
-                    <a class="image-link" href="https://testing.asparecargas.net{{$voucher}}">
+                    <a class="image-link" href="https://corresponsales.asparecargas.net{{$voucher}}">
                         @if (! is_null($voucher))
-                            <img class="image-link" width="200px" height="200px" src="https://testing.asparecargas.net{{$voucher}}">
+                            <img class="image-link" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$voucher}}">
                         @endif
                     </a>
                 </div>
@@ -49,7 +49,7 @@
                     <form method="get" action="https://api.whatsapp.com/send">
                             <div class="input-group input-group-outline">
                                 <label class="form-label" for="number">Número</label>
-                                <input type="hidden" value="{{ $message. 'https://testing.asparecargas.net/transaction/detail-pdf/'.$transactionID }}" name="text">
+                                <input type="hidden" value="{{ $message. 'https://corresponsales.asparecargas.net/transaction/detail-pdf/'.$transactionID }}" name="text">
                                 <input class="form-control" type="number" min="0" name="phone">
                             </div>
                 </div>

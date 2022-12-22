@@ -96,11 +96,20 @@
                                                                         </p>
                                                                     @endif
                                                                 @endif
-                                                                <a class="image-link" href="https://testing.asparecargas.net{{$transaction->voucher}}">
-                                                                    @if (! is_null($transaction->voucher) && ($transaction->status == 'successful' || $transaction->status == 'failed' ) && Auth::user()->role !== 'Shopkeeper')
-                                                                        <img class="image-link rounded" width="200px" height="200px" src="https://testing.asparecargas.net{{$transaction->voucher}}">
+                                                                @if ($countryName == 'COLOMBIA')
+                                                                    <a class="image-link" href="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
+                                                                        @if (! is_null($transaction->voucher) && ($transaction->status == 'successful' || $transaction->status == 'failed' ) && Auth::user()->role !== 'Shopkeeper')
+                                                                            <img class="image-link rounded" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
+                                                                        @endif
+                                                                    </a>
                                                                     @endif
-                                                                </a>
+                                                                    @if ($countryName == 'ECUADOR')
+                                                                        <a class="image-link" href="https://transacciones.asparecargas.net{{$transaction->voucher}}">
+                                                                            @if (! is_null($transaction->voucher) && ($transaction->status == 'successful' || $transaction->status == 'failed' ) && Auth::user()->role !== 'Shopkeeper')
+                                                                                <img class="image-link rounded" width="200px" height="200px" src="https://transacciones.asparecargas.net{{$transaction->voucher}}">
+                                                                            @endif
+                                                                        </a>
+                                                                    @endif
                                                             </div>
                                                         </div>
                                                         <div style="display: none;" class="col-md-6">
@@ -116,12 +125,22 @@
 
                                                                         <div class="row">
                                                                             <div class="col-xs-12 col-sm-12 col-md-9 mb-3">
-                                                                                <img width="10%" src="https://testing.asparecargas.net/assets/img/whatsapp.png" alt="">
+                                                                                @if ($countryName == 'COLOMBIA')
+                                                                                    <img width="10%" src="https://corresponsales.asparecargas.net/assets/img/whatsapp.png" alt="">
+                                                                                @endif
+                                                                                    @if ($countryName == 'ECUADOR')
+                                                                                        <img width="10%" src="https://transacciones.asparecargas.net/assets/img/whatsapp.png" alt="">
+                                                                                    @endif
                                                                                 <span class="text-xs font-weight-bold text-dark">Enviar comprobante: </span>
-                                                                        <div class="input-group mx-2 d-inline">
+                                                                                    <div class="input-group mx-2 d-inline">
                                                                             <input style="background:white; width:100%;" type="text" name="phone" id="phone" class="form-control text-center d-inline border-top border-start border-bottom p-2">
-                                                                            <input type="hidden" name="text" value="{{ 'Hola, este es el comprobante de la transacción: https://testing.asparecargas.net/transaction/detail-pdf/'.$transaction->id }}">
-                                                                        </div>
+                                                                                        @if ($countryName == 'COLOMBIA')
+                                                                                            <input type="hidden" name="text" value="{{ 'Hola, este es el comprobante de la transacción: https://corresponsales.asparecargas.net/transaction/detail-pdf/'.$transaction->id }}">
+                                                                                        @endif
+                                                                                        @if ($countryName == 'ECUADOR')
+                                                                                            <input type="hidden" name="text" value="{{ 'Hola, este es el comprobante de la transacción: https://transacciones.asparecargas.net/transaction/detail-pdf/'.$transaction->id }}">
+                                                                                        @endif
+                                                                                    </div>
                                                                             </div>
                                                                         <div style="width:20%" class="col-xs-12 col-sm-12 col-md-3 p-0 ms-3 mt-4">
                                                                             <input type="submit" class="btn btn-success bg-gradient " value="Enviar" onclick="sendWP({{$callSign}})">

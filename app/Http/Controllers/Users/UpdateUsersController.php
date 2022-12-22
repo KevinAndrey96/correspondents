@@ -69,7 +69,11 @@ class UpdateUsersController extends Controller
 
             Storage::disk('public')->put($pathName, file_get_contents($request->file('cedulaPDF')));
             $client = new Client();
-            $url = "https://testing.asparecargas.net/upload.php";
+            $countryName = getenv('COUNTRY_NAME');
+            $url = "https://corresponsales.asparecargas.net/upload.php";
+            if ($countryName == 'ECUADOR') {
+                $url = "https://transacciones.asparecargas.net/upload.php";
+            }
 
             if ($extension == 'pdf') {
                 $client->request(RequestAlias::METHOD_POST, $url, [
@@ -135,7 +139,11 @@ class UpdateUsersController extends Controller
 
             Storage::disk('public')->put($pathName, file_get_contents($request->file('rutPDF')));
             $client = new Client();
-            $url = "https://testing.asparecargas.net/upload.php";
+            $countryName = getenv('COUNTRY_NAME');
+            $url = "https://corresponsales.asparecargas.net/upload.php";
+            if ($countryName == 'ECUADOR') {
+                $url = "https://transacciones.asparecargas.net/upload.php";
+            }
             if ($extension == 'pdf') {
                 $client->request(RequestAlias::METHOD_POST, $url, [
                     'multipart' => [
@@ -191,7 +199,11 @@ class UpdateUsersController extends Controller
             $pathName = sprintf('camara_comercio_pdf/%s.pdf', $user->id);
             Storage::disk('public')->put($pathName, file_get_contents($request->file('camara_comercio')));
             $client = new Client();
-            $url = "https://testing.asparecargas.net/upload.php";
+            $countryName = getenv('COUNTRY_NAME');
+            $url = "https://corresponsales.asparecargas.net/upload.php";
+            if ($countryName == 'ECUADOR') {
+                $url = "https://transacciones.asparecargas.net/upload.php";
+            }
 
             $client->request(RequestAlias::METHOD_POST, $url, [
                 'multipart' => [
@@ -221,7 +233,11 @@ class UpdateUsersController extends Controller
             $pathName = sprintf('local_photo_pdf/%s.png', $user->id);
             Storage::disk('public')->put($pathName, file_get_contents($request->file('local_photo')));
             $client = new Client();
-            $url = "https://testing.asparecargas.net/upload.php";
+            $countryName = getenv('COUNTRY_NAME');
+            $url = "https://corresponsales.asparecargas.net/upload.php";
+            if ($countryName == 'ECUADOR') {
+                $url = "https://transacciones.asparecargas.net/upload.php";
+            }
 
             $client->request(RequestAlias::METHOD_POST, $url, [
                 'multipart' => [
@@ -251,7 +267,11 @@ class UpdateUsersController extends Controller
             $pathName = sprintf('public_receipts/%s.png', $user->id);
             Storage::disk('public')->put($pathName, file_get_contents($request->file('public_receipt')));
             $client = new Client();
-            $url = "https://testing.asparecargas.net/upload.php";
+            $countryName = getenv('COUNTRY_NAME');
+            $url = "https://corresponsales.asparecargas.net/upload.php";
+            if ($countryName == 'ECUADOR') {
+                $url = "https://transacciones.asparecargas.net/upload.php";
+            }
 
             $client->request(RequestAlias::METHOD_POST, $url, [
                 'multipart' => [

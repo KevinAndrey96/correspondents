@@ -19,18 +19,33 @@
                             @foreach($banners as $banner)
                                 @if ($banner->id == $firstBanner->id)
                                     <div class="carousel-item active">
-                                        <img class="d-block w-100 rounded img-fluid" src="https://testing.asparecargas.net{{$banner->banner_url}}">
+                                        @if ($countryName == 'COLOMBIA')
+                                            <img class="d-block w-100 rounded img-fluid" src="https://corresponsales.asparecargas.net{{$banner->banner_url}}">
+                                        @endif
+                                            @if ($countryName == 'ECUADOR')
+                                                <img class="d-block w-100 rounded img-fluid" src="https://transacciones.asparecargas.net{{$banner->banner_url}}">
+                                            @endif
                                     </div>
                                 @else
                                     <div class="carousel-item">
-                                        <img class="d-block w-100 rounded img-fluid" src="https://testing.asparecargas.net{{$banner->banner_url}}">
+                                        @if ($countryName == 'COLOMBIA')
+                                            <img class="d-block w-100 rounded img-fluid" src="https://corresponsales.asparecargas.net{{$banner->banner_url}}">
+                                        @endif
+                                            @if ($countryName == 'ECUADOR')
+                                                <img class="d-block w-100 rounded img-fluid" src="https://transacciones.asparecargas.net{{$banner->banner_url}}">
+                                            @endif
                                     </div>
                                 @endif
                             @endforeach
                         @endif
                     @else
                         <div class="carousel-item active">
-                            <img class="d-block w-100 rounded img-fluid" src="https://testing.asparecargas.net/assets/img/Banner/banner_original.png">
+                            @if ($countryName == 'COLOMBIA')
+                                <img class="d-block w-100 rounded img-fluid" src="https://corresponsales.asparecargas.net/assets/img/Banner/banner_original.png">
+                            @endif
+                                @if ($countryName == 'ECUADOR')
+                                    <img class="d-block w-100 rounded img-fluid" src="https://transacciones.asparecargas.net/assets/img/Banner/banner_original.png">
+                                @endif
                         </div>
                     @endif
                 </div>
@@ -999,7 +1014,12 @@
                                 <div class="row">
                                     <div class="col-md-4 col-sm-4">
                                         <div class="row jusfify-content-center align-items-center">
-                                            <img width="60%" class="img-responsive" src="https://testing.asparecargas.net/assets/img/bell.png">
+                                            @if ($countryName == 'COLOMBIA')
+                                                <img width="60%" class="img-responsive" src="https://corresponsales.asparecargas.net/assets/img/bell.png">
+                                            @endif
+                                                @if ($countryName == 'ECUADOR')
+                                                    <img width="60%" class="img-responsive" src="https://transacciones.asparecargas.net/assets/img/bell.png">
+                                                @endif
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-sm-8">

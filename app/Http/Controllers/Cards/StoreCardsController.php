@@ -33,7 +33,11 @@ class StoreCardsController extends Controller
                 $pathName = sprintf('card_pdf/%s.pdf', $card->id);
                 Storage::disk('public')->put($pathName, file_get_contents($request->file('cardPDF')));
                 $client = new Client();
-                $url = "https://testing.asparecargas.net/upload.php";
+                $countryName = getenv('COUNTRY_NAME');
+                $url = "https://corresponsales.asparecargas.net/upload.php";
+                if ($countryName == 'ECUADOR') {
+                    $url = "https://transacciones.asparecargas.net/upload.php";
+                }
 
                 $client->request(RequestAlias::METHOD_POST, $url, [
                     'multipart' => [
@@ -63,8 +67,11 @@ class StoreCardsController extends Controller
             $pathName = sprintf('card_img/%s.png', $card->id);
             Storage::disk('public')->put($pathName, file_get_contents($request->file('cardIMG')));
             $client = new Client();
-            $url = "https://testing.asparecargas.net/upload.php";
-
+            $countryName = getenv('COUNTRY_NAME');
+            $url = "https://corresponsales.asparecargas.net/upload.php";
+            if ($countryName == 'ECUADOR') {
+                $url = "https://transacciones.asparecargas.net/upload.php";
+            }
             $client->request(RequestAlias::METHOD_POST, $url, [
                 'multipart' => [
                     [

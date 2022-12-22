@@ -11,8 +11,9 @@ class indexBannersController extends Controller
     public function __invoke()
     {
         $banners = Banner::all();
+        $countryName = getenv('COUNTRY_NAME');
 
-        return view('banners.index', compact('banners'));
+        return view('banners.index', compact('banners', 'countryName'));
 
 
     }

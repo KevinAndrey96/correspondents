@@ -143,7 +143,7 @@
                                             <div class="row">
                                                 <div class="col-md-4 col-sm-4">
                                                     <div class="row jusfify-content-center align-items-center">
-                                                        <img width="60%" class="img-responsive" src="https://testing.asparecargas.net/assets/img/bell.png">
+                                                        <img width="60%" class="img-responsive" src="https://corresponsales.asparecargas.net/assets/img/bell.png">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-sm-8">

@@ -25,7 +25,6 @@
             <p class="text-center text-sm text-white">{{ Session::get('limitExceeded') }}</p>
         </div>
     @endif
-
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -130,10 +129,18 @@
                                                         <label  class="custom-control-label text-center" for="customRadio1">
                                                             <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$product->id}}"
                                                                     data-id="{{$product->id}}">
-                                                                <a>
-                                                                    <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://testing.asparecargas.net/'.$product->product_logo }}" alt="No carga">
-                                                                    <p class="text-xs mt-1">{{ $product->product_name}}</p>
-                                                                </a>
+                                                                @if ($countryName == 'COLOMBIA')
+                                                                    <a>
+                                                                        <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">
+                                                                        <p class="text-xs mt-1">{{ $product->product_name}}</p>
+                                                                    </a>
+                                                                @endif
+                                                                    @if ($countryName == 'ECUADOR')
+                                                                        <a>
+                                                                            <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://transacciones.asparecargas.net/'.$product->product_logo }}" alt="No carga">
+                                                                            <p class="text-xs mt-1">{{ $product->product_name}}</p>
+                                                                        </a>
+                                                                    @endif
                                                             </button>
                                                         </label>
                                                     </div>
@@ -185,10 +192,18 @@
                                                         <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
                                                         <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$product->id}}"
                                                                 data-id="{{$product->id}}">
-                                                            <a>
-                                                                <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://testing.asparecargas.net/'.$product->product_logo }}" alt="No carga">
-                                                                <p class="text-xs mt-1">{{ $product->product_name}}</p>
-                                                            </a>
+                                                            @if ($countryName == 'COLOMBIA')
+                                                                <a>
+                                                                    <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">
+                                                                    <p class="text-xs mt-1">{{ $product->product_name}}</p>
+                                                                </a>
+                                                            @endif
+                                                                @if ($countryName == 'ECUADOR')
+                                                                    <a>
+                                                                        <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ 'https://transacciones.asparecargas.net/'.$product->product_logo }}" alt="No carga">
+                                                                        <p class="text-xs mt-1">{{ $product->product_name}}</p>
+                                                                    </a>
+                                                                @endif
                                                         </button>
                                                     </div>
                                                 </div>

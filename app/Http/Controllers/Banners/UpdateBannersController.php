@@ -21,7 +21,12 @@ class UpdateBannersController extends Controller
             $pathName = Sprintf('banners/%s.png', $banner->id);
             Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
             $client = new Client();
-            $url = "https://testing.asparecargas.net/upload.php";
+            $countryName = getenv('COUNTRY_NAME');
+            $url = "https://corresponsales.asparecargas.net/upload.php";
+            if ($countryName == 'ECUADOR') {
+                $url = "https://transacciones.asparecargas.net/upload.php";
+            }
+
             $client->request(RequestAlias::METHOD_POST, $url, [
                 'multipart' => [
                     [

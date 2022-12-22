@@ -72,11 +72,22 @@
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
             <div class="row">
                     <div class="col-md-6 text-center">
-                        <img src="https://testing.asparecargas.net{{$card->cardIMG}}" width="80%" height="auto" class="border-radius-lg">
+                        @if ($countryName == 'COLOMBIA')
+                            <img src="https://corresponsales.asparecargas.net{{$card->cardIMG}}" width="80%" height="auto" class="border-radius-lg">
+                        @endif
+                        @if ($countryName == 'ECUADOR')
+                                <img src="https://transacciones.asparecargas.net{{$card->cardIMG}}" width="80%" height="auto" class="border-radius-lg">
+                            @endif
                     </div>
                     <div class="col-md-6 text-center">
-                        <a href="https://testing.asparecargas.net{{$card->cardPDF}}" target="_blank" class="btn btn-primary
+                        @if ($countryName == 'COLOMBIA')
+                            <a href="https://corresponsales.asparecargas.net{{$card->cardPDF}}" target="_blank" class="btn btn-primary
                         btn-lg text-white active my-7 text-center" role="button" aria-pressed="true"><i class="material-icons mx-2">file_download</i>Descargar PDF</a>
+                        @endif
+                        @if ($countryName == 'ECUADOR')
+                                <a href="https://transacciones.asparecargas.net{{$card->cardPDF}}" target="_blank" class="btn btn-primary
+                        btn-lg text-white active my-7 text-center" role="button" aria-pressed="true"><i class="material-icons mx-2">file_download</i>Descargar PDF</a>
+                        @endif
                     </div>
 
                 <!--

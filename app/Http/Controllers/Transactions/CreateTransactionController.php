@@ -14,6 +14,7 @@ class CreateTransactionController extends Controller
     public function create()
     {
         if (Auth::user()->role == 'Shopkeeper') {
+            $countryName = getenv('COUNTRY_NAME');
             $productsDeposit = Product::where('product_type','=','Deposit')
                 ->where('is_enabled','=','1')
                 ->orderBy('priority', 'asc')
@@ -25,7 +26,7 @@ class CreateTransactionController extends Controller
                 ->get();
             $platform = Platform::find(1);
 
-            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform'));
+            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform', 'countryName'));
         }
     }
 

@@ -34,6 +34,7 @@ class HomeController extends Controller
     public function index()
     {
         $date = Carbon::now();
+        $countryName = getenv('COUNTRY_NAME');
 
         if (Auth::user()->role == 'Administrator') {
             if (Auth::user()->id !== 1) {
@@ -120,7 +121,8 @@ class HomeController extends Controller
                 'superProduct',
                 'products',
                 'htmlContainers',
-                'auxProducts'
+                'auxProducts',
+                'countryName'
                 ));
         }
 
@@ -144,7 +146,9 @@ class HomeController extends Controller
                 'shopkeeperCount',
                 'shopkeepersBalance',
                 'banners',
-                'firstBanner'));
+                'firstBanner',
+                'countryName'
+                ));
         }
 
         if (Auth::user()->role == 'Supplier') {
@@ -159,7 +163,8 @@ class HomeController extends Controller
                 'successfulTransactionCount',
                 'failedTransactionCount',
                 'holdTransactionCount',
-                'acceptedTransactionCount'
+                'acceptedTransactionCount',
+                'countryName'
             ));
         }
 
@@ -184,7 +189,9 @@ class HomeController extends Controller
                 'acceptedTransactionCount',
                 'banners',
                 'firstBanner',
-                'products'));
+                'products',
+                'countryName'
+            ));
         }
 
         if (Auth::user()->role == 'Saldos') {
@@ -196,7 +203,7 @@ class HomeController extends Controller
                 $firstBanner = $banners[0];
             }
 
-            return view('home', compact('profitsCount', 'balancesCount', 'banners', 'firstBanner'));
+            return view('home', compact('profitsCount', 'balancesCount', 'banners', 'firstBanner', 'countryName'));
 
         }
 

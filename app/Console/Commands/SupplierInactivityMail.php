@@ -43,6 +43,15 @@ class SupplierInactivityMail extends Command
     public function handle()
     {
         date_default_timezone_set('America/Bogota');
+        $countryName = getenv('COUNTRY_NAME');
+
+        if ($countryName == 'COLOMBIA') {
+            $url = 'https://corresponsales.asparecargas.net';
+        }
+        if ($countryName == 'ECUADOR') {
+            $url = 'https://transacciones.asparecargas.net';
+        }
+
         $currentDate = Carbon::now();
         $inactiveSuppliers = collect([]);
         $suppliers = User::where('role', 'Supplier')
@@ -69,7 +78,7 @@ class SupplierInactivityMail extends Command
                 $emailBody->receiver = $admin->name;
                 $emailSubject = 'Proveedores inactivos';
                 $emailBody->body = 'Los siguientes proveedores llevan más de una semana sin realizar transacciones: ';
-                Mail::to($receiverEmail)->send(new SupplierInactivity($emailBody, $emailSubject, $inactiveSuppliers));
+                Mail::to($receiverEmail)->send(new SupplierInactivity($emailBody, $emailSubject, $inactiveSuppliers, $url));
             }
         }
     }

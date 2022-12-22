@@ -11,6 +11,15 @@ class LoadTransactionController extends Controller
     public function load($id) {
 
         $transaction = Transaction::find($id);
-        return view('transactions.load', compact('transaction'));
+        $countryName = getenv('COUNTRY_NAME');
+
+        if ($countryName == 'COLOMBIA') {
+            $url = 'https://corresponsales.asparecargas.net';
+        }
+        if ($countryName == 'ECUADOR') {
+            $url = 'https://transacciones.asparecargas.net';
+        }
+
+        return view('transactions.load', compact('transaction', 'url'));
     }
 }

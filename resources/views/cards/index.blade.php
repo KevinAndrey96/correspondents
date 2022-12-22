@@ -34,9 +34,16 @@
                                 @foreach($cards as $card)
                                     <tr class="align-middle text-center text-sm">
                                         <td>
-                                            <a class="image-link" href="{{ 'https://testing.asparecargas.net'.$card->cardIMG }}">
-                                                <img width="200px" class="rounded img-fluid m-4" src="{{ 'https://testing.asparecargas.net'.$card->cardIMG  }}">
-                                            </a>
+                                            @if ($countryName == 'COLOMBIA')
+                                                <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net'.$card->cardIMG }}">
+                                                    <img width="200px" class="rounded img-fluid m-4" src="{{ 'https://corresponsales.asparecargas.net'.$card->cardIMG  }}">
+                                                </a>
+                                            @endif
+                                                @if ($countryName == 'ECUADOR')
+                                                    <a class="image-link" href="{{ 'https://transacciones.asparecargas.net'.$card->cardIMG }}">
+                                                        <img width="200px" class="rounded img-fluid m-4" src="{{ 'https://transacciones.asparecargas.net'.$card->cardIMG  }}">
+                                                    </a>
+                                                @endif
                                         </td>
                                         <td>
                                             <a style="color: darkgreen;" href="{{route('cards.delete',['id'=>$card->id])}}"
