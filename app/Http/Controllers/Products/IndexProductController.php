@@ -10,7 +10,17 @@ class IndexProductController extends Controller
 {
     public function index()
     {
-        $productsData['products'] = Product::all();
-        return view('product.index',$productsData);
+        $products = Product::all();
+        $countryName = getenv('COUNTRY_NAME');
+
+        if ($countryName == 'COLOMBIA') {
+            $url = 'https://corresponsales.asparecargas.net';
+        }
+
+        if ($countryName == 'ECUADOR') {
+            $url = 'https://transacciones.asparecargas.net';
+        }
+
+        return view('product.index', compact('products', 'url'));
     }
 }

@@ -57,8 +57,8 @@
                                             <td class="align-middle text-center">
                                                 @if(isset($product->product_logo))
                                                 <div>
-                                                    <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}">
-                                                        <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$product->product_logo }}" alt="No carga">
+                                                    <a class="image-link" href="{{ $url.$product->product_logo }}">
+                                                        <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ $url.$product->product_logo }}" alt="No carga">
                                                     </a>
                                                 </div>
                                                 @endif

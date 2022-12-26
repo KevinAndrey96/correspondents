@@ -62,7 +62,11 @@ class UpdateProductController extends Controller
             //dd(Storage::path('products\\' .$product->id . '.png'));
             //dd(Storage::disk('public')->path('products/' .$product->id . '.png'));
             $client = new Client();
+            $countryName = getenv('COUNTRY_NAME');
             $url = "https://corresponsales.asparecargas.net/upload.php";
+            if ($countryName == 'ECUADOR') {
+                $url = "https://transacciones.asparecargas.net/upload.php";
+            }
             $client->request(RequestAlias::METHOD_POST, $url, [
                 'multipart' => [
                     [
