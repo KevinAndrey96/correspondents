@@ -66,5 +66,11 @@ fix: put 2fa in ecuador platform
 ## [Hotfix 1.2.2]
 fix: icons of products
 
+## [Hotfix 1.2.2]
+fix: icons of products
+
+## [Hotfix 1.2.3]
+fix: put 2fa and env variables correctly
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
