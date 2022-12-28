@@ -22,7 +22,9 @@ class ExtraInfoDistributorMiddleware
 
         if ($user->role == 'Shopkeeper' && $user->extrainfo == 0) {
 
-            return redirect()->route('distributor.extrainfo');
+            $rutName = getenv('RUT_NAME');
+
+            return redirect()->route('distributor.extrainfo')->with('rutName', $rutName);
         }
 
         return $next($request);

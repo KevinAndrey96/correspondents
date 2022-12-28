@@ -20,7 +20,7 @@ class IndexProductController extends Controller
         if ($countryName == 'ECUADOR') {
             $url = 'https://transacciones.asparecargas.net';
         }
-
+        
         return view('product.index', compact('products', 'url'));
     }
 }

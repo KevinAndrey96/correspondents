@@ -164,7 +164,7 @@
                                                             @endif
                                                                 @if ($countryName == 'ECUADOR')
                                                                     <a target="_blank" href="https://transacciones.asparecargas.net{{$user->rutPDF}}">
-                                                                        <img width="15%" title="Documento RUT" src="https://transacciones.asparecargas.net/assets/img/documento-icono.png">
+                                                                        <img width="15%" title="Documento RUC" src="https://transacciones.asparecargas.net/assets/img/documento-icono.png">
                                                                     </a>
                                                                 @endif
                                                     @endif
@@ -176,7 +176,7 @@
                                                             @endif
                                                                 @if ($countryName == 'ECUADOR')
                                                                     <a target="_blank" href="https://transacciones.asparecargas.net{{$user->camara_comercio}}">
-                                                                        <img width="15%" title="Cámara y comercio" src="https://transacciones.asparecargas.net/assets/img/documento-icono.png">
+                                                                        <img width="15%" title="SRI" src="https://transacciones.asparecargas.net/assets/img/documento-icono.png">
                                                                     </a>
                                                                 @endif
                                                     @endif
@@ -200,7 +200,7 @@
                                                             @endif
                                                                 @if ($countryName == 'ECUADOR')
                                                                     <a target="_blank" href="https://transacciones.asparecargas.net{{$user->public_receipt}}">
-                                                                        <img width="15%" title="Foto de recibo público" src="https://transacciones.asparecargas.net/assets/img/documento-icono.png">
+                                                                        <img width="15%" title="Planilla" src="https://transacciones.asparecargas.net/assets/img/documento-icono.png">
                                                                     </a>
                                                                 @endif
                                                     @endif

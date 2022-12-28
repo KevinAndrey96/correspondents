@@ -93,13 +93,27 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group mb-3">
-                                            <label for="rutPDF" class="">PDF o Imagen de RUT (opcional):</label>
+                                            <label for="rutPDF" class="">
+                                                @if (Session::get('rutName') == 'RUT')
+                                                    PDF o Imagen de RUT (opcional):
+                                                @endif
+                                                    @if (Session::get('rutName') == 'RUC')
+                                                        PDF o Imagen de RUC (opcional):
+                                                    @endif
+                                            </label>
                                             <input id="rutPDF" type="file" class="form-control-file" name="rutPDF">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group mb-3">
-                                            <label for="camara_comercio" class="">PDF o Imagen de Cámara y comercio (opcional):</label>
+                                            <label for="camara_comercio" class="">
+                                                @if (Session::get('rutName') == 'RUT')
+                                                    PDF o Imagen de Cámara y comercio (opcional):
+                                                @endif
+                                                    @if (Session::get('rutName') == 'RUC')
+                                                        PDF o Imagen de SRI:
+                                                    @endif
+                                            </label>
                                             <input id="camara_comercio" type="file" class="form-control-file" name="camara_comercio">
                                         </div>
                                     </div>
@@ -111,7 +125,15 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group mb-3">
-                                            <label for="public_receipt" class="">Foto de recibo público:</label>
+                                            <label for="public_receipt" class="">
+                                                @if (Session::get('rutName') == 'RUT')
+                                                    Foto de recibo público:
+                                                @endif
+                                                @if (Session::get('rutName') == 'RUC')
+                                                    PDF o Imagen de planilla:
+                                                @endif
+
+                                            </label>
                                             <input id="public_receipt" type="file" class="form-control-file" name="public_receipt" required>
                                         </div>
                                     </div>
