@@ -75,5 +75,8 @@ fix: put 2fa and env variables correctly
 ## [Hotfix 1.2.4]
 fix: put 2fa and env variables correctly in Colombia platform
 
+## [Hotfix 1.2.5]
+fix: test cpanel modification
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
