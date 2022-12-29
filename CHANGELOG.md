@@ -78,5 +78,8 @@ fix: put 2fa and env variables correctly in Colombia platform
 ## [Hotfix 1.2.5]
 fix: test cpanel modification
 
+## [Hotfix 1.2.6]
+fix: increase time in setTimeout on balance index
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

@@ -218,7 +218,7 @@
                                     @endif
                                 });
                                 $(document).ready( function () {
-                                    setTimeout("location.reload()", 30000);
+                                    setTimeout("location.reload()", 60000);
                                     $('#my_table').DataTable({
                                         "language": {
                                             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
