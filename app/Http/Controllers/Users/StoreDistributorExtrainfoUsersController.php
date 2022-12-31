@@ -41,7 +41,7 @@ class StoreDistributorExtrainfoUsersController extends Controller
                 $pathName = sprintf('cedula_pdf/%s.pdf', $user->id);
             }
 
-            if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'PNG') {
+            if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'PNG' ) {
                 $pathName = sprintf('cedula_pdf/%s.png', $user->id);
             }
 

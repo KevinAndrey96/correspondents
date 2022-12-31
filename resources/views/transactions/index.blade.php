@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
     @if(Session::has('LimitExceeded'))
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger text-white text-center" role="alert">
             {{ Session::get('LimitExceeded') }}
         </div>
     @endif

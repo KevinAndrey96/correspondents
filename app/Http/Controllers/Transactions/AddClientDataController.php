@@ -45,7 +45,7 @@ class AddClientDataController extends Controller
                 $transaction = new Transaction();
                 //$transaction->date = substr(Carbon::now(), 9, 17);
                 $transaction->date = Carbon::now()->toDateTimeString();
-                /*
+
                 $allowedTransaction = 0;
                 $i = 0;
                 $firstTransactions =  Transaction::where([
@@ -72,8 +72,8 @@ class AddClientDataController extends Controller
                     }
 
                     if ($i < $product->num_jineteo) {
-                        $diffHours = $transaction->updated_at->diffInHours(Carbon::now());
-                        if ($diffHours > $product->hours) {
+                        $diffHours = $firstTransaction->updated_at->diffInHours(Carbon::now());
+                        if ($diffHours >= $product->hours) {
                             $allowedTransaction = 1;
                             $transaction->first_transaction = 1;
                         } else {
@@ -82,19 +82,19 @@ class AddClientDataController extends Controller
                         }
                     } else {
                         $diffHours = $firstTransaction->updated_at->diffInHours(Carbon::now());
-                        if ($diffHours > $product->hours) {
+                        if ($diffHours >= $product->hours) {
                             $allowedTransaction = 1;
                             $transaction->first_transaction = 1;
                         } else {
                             $allowedTransaction = 0;
+                            $allowedHour = Carbon::parse($firstTransaction->updated_at)->addHours($product->hours)->format('h:i A');
                         }
                     }
                 }
                 if ($allowedTransaction == 0) {
-                    return redirect('/transactions')->with('LimitExceeded', 'Esta cuenta superó el límite de transacciones');
+                    return redirect('/transactions')->with('LimitExceeded', 'Esta cuenta superó el límite de transacciones por periodo, podra realizar transacciones con la misma a partir de las '.$allowedHour);
                 }
-                */
-
+                /*
                 $dailyTransaction = Transaction::where([
                     ['account_number', '=', $request->input('accountNumber')],
                     ['date', '=', substr($transaction->date, 0, -9)]
@@ -102,7 +102,7 @@ class AddClientDataController extends Controller
                 if (! is_null($dailyTransaction)) {
                     return redirect('/transactions')->with('LimitExceeded', 'Esta cuenta superó el límite de transacciones por día');
                 }
-
+                */
                 $transaction->shopkeeper_id = $shopkeeperID;
                 $transaction->distributor_id = $distributorID;
                 $transaction->admin_id = 1;
