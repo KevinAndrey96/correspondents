@@ -41,6 +41,7 @@ class HomeController extends Controller
                 Auth::user()->profit = User::find(1)->profit;
                 Auth::user()->save();
             }
+
             $transactionCount = Transaction::whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $successfulTransactionCount = Transaction::where('status', 'like', 'Successful')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $failedTransactionCount = Transaction::where('status', 'like', 'Failed')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
@@ -84,6 +85,7 @@ class HomeController extends Controller
             foreach ($auxProducts as $product) {
                 $monthsProduct = array();
                 $amountsProduct = array();
+                $countProduct = array();
                 $subProduct = array();
                 $i = 0;
                 foreach ($transactions as $transaction) {
@@ -91,13 +93,18 @@ class HomeController extends Controller
                         $i++;
                         array_push($amountsProduct, $transaction->acum);
                         array_push($monthsProduct, $transaction->month);
+                        array_push($countProduct, $transaction->num_transactions);
                     }
                 }
 
                 if ($i > 0) {
+                    if (count($amountsProduct) > 12 ) {
+                        $amountsProduct = array_slice($amountsProduct, -12);
+                        $monthsProduct = array_slice($monthsProduct, -12);
+                        $countProduct = array_slice($countProduct, -12);
+                    }
 
-
-                    array_push($subProduct, $monthsProduct, $amountsProduct);
+                    array_push($subProduct, $monthsProduct, $amountsProduct, $countProduct);
                     array_push($superProduct, $subProduct);
                     array_push($products, $product->id);
                     $htmlContainers .= '<div class="col-sm-10 col-md-10 col-lg-10 ms-auto me-auto rounded product-chart" style="display: none"

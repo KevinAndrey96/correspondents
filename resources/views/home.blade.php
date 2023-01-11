@@ -777,6 +777,7 @@
         <script type="text/javascript">
             @if (Auth::user()->role == 'Administrator')
             @for ($i = 0; $i < count($superProduct); $i++)
+
             var dates2 = {{ str_replace('"', "", json_encode($superProduct[$i][0])) }}
 
                 dates2 = dates2.map(function(num){
@@ -820,13 +821,15 @@
                 return num
             });
 
-            var amounts = {{ str_replace('"', "", json_encode($superProduct[$i][1])); }}
+            var productCounts = {{ str_replace('"', "", json_encode($superProduct[$i][2])) }}
+            var amounts = {{ str_replace('"', "", json_encode($superProduct[$i][1])) }}
+
             Highcharts.chart('container{{$products[$i]}}', {
                 chart: {
                     type: 'area'
                 },
                 title: {
-                    text: 'Dinero movido'
+                    text: 'Dinero movido y cantidad de transacciones'
                 },
                 xAxis: {
                     categories: dates2
@@ -849,7 +852,12 @@
                 series: [{
                     name: 'Monto',
                     data: amounts
-                }]
+                },
+                    {
+                        name: 'Cantidad transacciones',
+                        data: productCounts
+                    }
+                ]
             });
             @endfor
             @endif
