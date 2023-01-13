@@ -29,11 +29,11 @@ class IndexBalanceController extends Controller
             return view('balance.index', compact('balances', 'countBalances', 'countryName'));
         }
         if (Auth::user()->role == 'Shopkeeper') {
-            $balancesData['balances'] = Balance::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+            $balances = Balance::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         }
         if (Auth::user()->role == 'Supplier') {
-            $balancesData['balances'] = Balance::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+            $balances = Balance::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         }
-        return view('balance.index',$balancesData,);
+        return view('balance.index', compact('balances', 'countryName'));
     }
 }

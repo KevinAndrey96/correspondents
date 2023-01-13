@@ -37,7 +37,11 @@ class AddBalanceShopkeeperController extends Controller
                 $pathName = Sprintf('balances/%s.png', $balance->id);
                 Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
                 $client = new Client();
+                $countryName = getenv('COUNTRY_NAME');
                 $url = "https://corresponsales.asparecargas.net/upload.php";
+                if ($countryName == 'ECUADOR') {
+                    $url = "https://transacciones.asparecargas.net/upload.php";
+                }
                 $client->request(RequestAlias::METHOD_POST, $url, [
                     'multipart' => [
                         [

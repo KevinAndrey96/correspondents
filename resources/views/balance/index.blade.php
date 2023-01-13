@@ -65,9 +65,17 @@
                                         <td class="align-middle text-center text-sm">
                                             @if(isset($balance->boucher))
                                             <div>
-                                                <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}">
-                                                    <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle image-link" src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" alt="No carga">
-                                                </a>
+                                                @if ($countryName == 'COLOMBIA')
+                                                    <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}">
+                                                        <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle image-link" src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" alt="No carga">
+                                                    </a>
+                                                @endif
+                                                    @if ($countryName == 'ECUADOR')
+                                                        <a class="image-link" href="{{ 'https://transacciones.asparecargas.net/'.$balance->boucher }}">
+                                                            <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle image-link" src="{{ 'https://transacciones.asparecargas.net/'.$balance->boucher }}" alt="No carga">
+                                                        </a>
+                                                    @endif
+
                                             </div>
                                             @else
                                                 Sin recibo

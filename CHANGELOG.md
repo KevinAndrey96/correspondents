@@ -81,6 +81,8 @@ fix: test cpanel modification
 ## [Hotfix 1.2.6]
 fix: increase time in setTimeout on balance index
 
+## [Hotfix 1.2.7]
+fix: balance history in shopkeeper rol
 
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
