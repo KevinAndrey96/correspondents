@@ -84,5 +84,8 @@ fix: increase time in setTimeout on balance index
 ## [Hotfix 1.2.7]
 fix: balance history in shopkeeper rol
 
+## [Hotfix 1.2.8]
+fix: allow decimals in transaction input
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

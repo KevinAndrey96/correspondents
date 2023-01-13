@@ -108,7 +108,7 @@
                                 <div class="col-md-6">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="transactionAmount" class="form-label">Monto</label>
-                                        <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="1" placeholder="" required>
+                                        <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="any" placeholder="" min="0" required >
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
