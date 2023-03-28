@@ -14,14 +14,9 @@ class GetCountryNameController extends Controller
 
         public function index()
         {
-            $countryName = getenv('COUNTRY_NAME');
+            $urlServer = getenv('URL_SERVER');
+            $url = $urlServer.'/transaction/detail/';
 
-            if ($countryName == 'COLOMBIA') {
-                $url = 'https://corresponsales.asparecargas.net/transaction/detail/';
-            }
-            if ($countryName == 'ECUADOR') {
-                $url = 'https://transacciones.asparecargas.net/transaction/detail/';
-            }
             $responseBody = [
                 'data' => $url
             ];

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Card;
+use App\Models\Product;
+
 
 class CreateBalanceController extends Controller
 {
@@ -14,9 +16,10 @@ class CreateBalanceController extends Controller
     {
         if (Auth::user()->role == 'Shopkeeper' or Auth::user()->role == 'Supplier') {
             $cards = Card::all();
-            $countryName = getenv('COUNTRY_NAME');
+            $products = Product::where('product_type', 'like', 'Deposit')->get();
+            $urlServer = getenv('URL_SERVER');
 
-            return view('balance.addBalanceShopkeeper', compact('cards', 'countryName'));
+            return view('balance.addBalanceShopkeeper', compact('cards', 'urlServer', 'products'));
         }
     }
 }

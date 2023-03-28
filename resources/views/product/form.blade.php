@@ -32,13 +32,13 @@
                                 <div class="col-md-3">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="productName" class="form-label">Nombre del producto</label>
-                                        <input type="text" class="form-control" name="productName" value="{{ isset($product->product_name)?$product->product_name:old('product_name') }}" id="productName" placeholder="">
+                                        <input type="text" class="form-control" name="productName" value="{{ isset($product->product_name)?$product->product_name:old('product_name') }}" id="productName" placeholder="" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
                                         <label for="productType" class="ms-0"> Seleccionar tipo de producto</label>
-                                        <select id="productType" name="productType" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
+                                        <select id="productType" name="productType" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()" required>
                                         @if($mode=="Editar")
                                             @if($product->product_type == 'Deposit')
                                             <option value="Deposit">Depósito</option>
@@ -57,43 +57,63 @@
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label for="productCommission" class="form-label">Comisión del producto</label>
-                                        <input type="text" class="form-control" name="productCommission" value="{{ isset($product->product_commission)?$product->product_commission:old('product_commission') }}" id="productCommission" placeholder="">
+                                        <input type="number" class="form-control" step="any" name="productCommission" value="{{ isset($product->product_commission)?$product->product_commission:old('product_commission') }}" id="productCommission" placeholder="" required>
+                                    </div>
+                                </div>
+                                @if ($mode == 'Crear')
+                                <div class="col-md-3">
+                                    <div class="input-group input-group-outline my-3">
+                                        <label for="com_dis" class="form-label">Comisión del distribuidor</label>
+                                        <input type="number" class="form-control" step="any" min="0" name="com_dis" value="{{ isset($product->com_shop)?$product->com_shop:old('com_shop') }}" id="com_dis" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
+                                        <label for="com_shp" class="form-label">Comisión del tendero</label>
+                                        <input type="number" class="form-control" step="any" min="0" name="com_shp" value="{{ isset($product->com_shop)?$product->com_shop:old('com_shop') }}" id="com_shp" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group input-group-outline my-3">
+                                        <label for="com_sup" class="form-label">Comisión del proveedor</label>
+                                        <input type="number" class="form-control" step="any" min="0" name="com_sup" value="{{ isset($product->com_shop)?$product->com_shop:old('com_shop') }}" id="com_sup" placeholder="">
+                                    </div>
+                                </div>
+                                @endif
+                                <div class="col-md-3">
+                                    <div class="input-group input-group-outline my-3">
                                         <label for="productCommission" class="form-label">Monto mínimo</label>
-                                        <input type="number" class="form-control" name="min_amount" value="{{ isset($product->min_amount)?$product->min_amount:old('min_amount') }}" id="productMinAmount" placeholder="" min="0">
+                                        <input type="number" class="form-control" name="min_amount" step="any" value="{{ isset($product->min_amount)?$product->min_amount:old('min_amount') }}" id="productMinAmount" placeholder="" min="0" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label for="productCommission" class="form-label">Monto máximo</label>
-                                        <input type="number" class="form-control" name="max_amount" value="{{ isset($product->max_amount)?$product->max_amount:old('max_amount') }}" id="productMaxAmount" placeholder="" min="0">
+                                        <input type="number" class="form-control" name="max_amount" step="any" value="{{ isset($product->max_amount)?$product->max_amount:old('max_amount') }}" id="productMaxAmount" placeholder="" min="0" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
-                                        <label for="productCommission" class="form-label">Prioridad</label>
-                                        <input type="number" class="form-control" name="priority" value="{{ isset($product->priority)?$product->priority:old('priority') }}" id="priority" placeholder="" min="0">
+                                        <label for="priority" class="form-label">Prioridad</label>
+                                        <input type="number" class="form-control" name="priority" value="{{ isset($product->priority)?$product->priority:old('priority') }}" id="priority" placeholder="" min="0" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
-                                            <label for="productCommission" class="form-label">Transacciones por periodo</label>
-                                        <input type="number" class="form-control" name="num_jineteo" value="{{ isset($product->num_jineteo)?$product->num_jineteo:old('num_jineteo') }}" id="numJineteo" placeholder="" min="1">
+                                            <label for="num_jineteo" class="form-label">Transacciones por periodo</label>
+                                        <input type="number" class="form-control" name="num_jineteo" value="{{ isset($product->num_jineteo)?$product->num_jineteo:old('num_jineteo') }}" id="numJineteo" placeholder="" min="1" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label for="productCommission" class="form-label">Período de tiempo (en horas)</label>
-                                        <input type="number" class="form-control" name="hours" value="{{ isset($product->hours)?$product->hours:old('hours') }}" id="hours" placeholder="" min="1">
+                                        <input type="number" class="form-control" name="hours" value="{{ isset($product->hours)?$product->hours:old('hours') }}" id="hours" placeholder="" min="1" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label for="productCommission" class="form-label">Minutos para reasignar</label>
-                                        <input type="number" class="form-control" name="reassignment_minutes" value="{{ isset($product->reassignment_minutes)?$product->reassignment_minutes:old('reassignment_minutes') }}" id="reassignment_minutes" placeholder="" min="2">
+                                        <input type="number" class="form-control" name="reassignment_minutes" value="{{ isset($product->reassignment_minutes)?$product->reassignment_minutes:old('reassignment_minutes') }}" id="reassignment_minutes" placeholder="" min="2" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -239,5 +259,33 @@
         </div>
     </div>
 </div>
+    <script type="text/javascript">
+        var comShpInput = document.getElementById('com_shp');
+        var comDisInput = document.getElementById('com_dis');
+        var comSupInput = document.getElementById('com_sup');
+        var comProdInput = document.getElementById('productCommission');
+
+                comProdInput.addEventListener('input', function(){
+                    comDisInput.max = comProdInput.value;
+                    console.log(comDisInput.max);
+                });
+        /*
+                comDisInput.addEventListener('input', function(){
+                    comShpInput.max = comDisInput.value;
+
+                });
+
+
+                comShpInput.addEventListener('input', function(){
+                    comShpInput.value
+
+
+                });
+
+                comSupInput.addEventListener('input', function(){
+
+                });
+                */
+    </script>
 @endsection
 

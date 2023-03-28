@@ -34,7 +34,7 @@ class HomeController extends Controller
     public function index()
     {
         $date = Carbon::now();
-        $countryName = getenv('COUNTRY_NAME');
+        $urlServer = getenv('URL_SERVER');
 
         if (Auth::user()->role == 'Administrator') {
             if (Auth::user()->id !== 1) {
@@ -129,7 +129,7 @@ class HomeController extends Controller
                 'products',
                 'htmlContainers',
                 'auxProducts',
-                'countryName'
+                'urlServer'
                 ));
         }
 
@@ -154,7 +154,7 @@ class HomeController extends Controller
                 'shopkeepersBalance',
                 'banners',
                 'firstBanner',
-                'countryName'
+                'urlServer'
                 ));
         }
 
@@ -171,7 +171,7 @@ class HomeController extends Controller
                 'failedTransactionCount',
                 'holdTransactionCount',
                 'acceptedTransactionCount',
-                'countryName'
+                'urlServer'
             ));
         }
 
@@ -197,23 +197,31 @@ class HomeController extends Controller
                 'banners',
                 'firstBanner',
                 'products',
-                'countryName'
+                'urlServer'
             ));
         }
 
         if (Auth::user()->role == 'Saldos') {
-            $profitsCount = Profit::where('is_valid', null)->get()->count();
-            $balancesCount = Balance::where('is_valid', null)->get()->count();
+
+            $profitsCount = Profit::where([
+                ['is_valid', null],
+                ['product_id', Auth::user()->product_id]
+            ])->get()->count();
+
+            $balancesCount = Balance::where([
+                ['is_valid', null],
+                ['product_id', Auth::user()->product_id]
+            ])->get()->count();
+
             $banners = Banner::all();
             $firstBanner = null;
+
             if ($banners->count() > 0) {
                 $firstBanner = $banners[0];
             }
 
-            return view('home', compact('profitsCount', 'balancesCount', 'banners', 'firstBanner', 'countryName'));
-
+            return view('home', compact('profitsCount', 'balancesCount', 'banners', 'firstBanner', 'urlServer'));
         }
-
 
         return view('home');
     }

@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\SupplierProduct;
+use App\Models\Product;
 
 /**
  * @property mixed|string $name
@@ -68,7 +69,8 @@ class User extends Authenticatable
         'camara_comercio',
         'local_photo',
         'public_receipt',
-        'enabled_daily'
+        'enabled_daily',
+        'product_id'
     ];
 
     /**
@@ -119,6 +121,11 @@ class User extends Authenticatable
     public function supplierProducts()
     {
         return $this->hasMany(SupplierProduct::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 
     /**

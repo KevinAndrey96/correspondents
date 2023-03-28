@@ -42,12 +42,8 @@ class UpdateTransactionController extends Controller
                     $pathName = sprintf('voucher_images/%s.png', $transaction->id);
                     Storage::disk('public')->put($pathName, file_get_contents($request->file('voucher')));
                     $client = new Client();
-                    $countryName = getenv('COUNTRY_NAME');
-                    $url = "https://corresponsales.asparecargas.net/upload.php";
-                    if ($countryName == 'ECUADOR') {
-                        $url = "https://transacciones.asparecargas.net/upload.php";
-                    }
-
+                    $urlServer = getenv('URL_SERVER');
+                    $url = $urlServer."/upload.php";
                         $client->request(RequestAlias::METHOD_POST, $url, [
                             'multipart' => [
                                 [

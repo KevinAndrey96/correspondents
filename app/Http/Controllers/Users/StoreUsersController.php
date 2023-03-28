@@ -16,6 +16,7 @@ class StoreUsersController extends Controller
 {
     public function store(Request $request)
     {
+
         $fields = [
             'name'=>'required',
             'email'=>'required|unique:users,email',
@@ -58,7 +59,9 @@ class StoreUsersController extends Controller
         $user->document = $request->input('document');
         $user->city = $request->input('city');
         $user->address = $request->input('address');
+        $user->product_id = $request->input('product_id');
         $user->is_enabled = 1;
+
         if ($request->input('role') == 'Supplier') {
             $user->priority = $request->input('priority');
             $user->max_queue = $request->input('max_queue');

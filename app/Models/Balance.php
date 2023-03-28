@@ -13,4 +13,10 @@ class Balance extends Model
         //return $this->hasOne('App/Models/User','id','user_id');
         return $this->belongsTo(User::class);
     }
+
+
+    public function administrator()
+    {
+        return $this->belongsTo(User::class, 'administrator_id');
+    }
 }

@@ -11,8 +11,8 @@ class IndexCardsController extends Controller
     public function __invoke()
     {
         $cards = Card::all();
-        $countryName = getenv('COUNTRY_NAME');
+        $urlServer = getenv('URL_SERVER');
 
-        return view('cards.index', compact('cards','countryName'));
+        return view('cards.index', compact('cards','urlServer'));
     }
 }

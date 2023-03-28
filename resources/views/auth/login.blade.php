@@ -48,6 +48,21 @@
                                     </span>
                                     @enderror
                                 </div>
+                                <div style="display:flex; align-items: center;">
+                                    <span style="width:10%; text-align: center;" id="showPass"><a href="#"><i style="" class="material-icons opacity-10 text-primary" onclick="showPass()">visibility</i></a></span>
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="form-label">Contraseña</label>
+                                        <input style="width:90%;" id="password" type="password" class="form-control @error('password') is-invalid @enderror border" name="password" required autocomplete="current-password">
+                                    </div>
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong class="text-white">{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+
+                                </div>
+
+                                <!--
                                 <div class="input-group input-group-outline mb-3">
                                     <label class="form-label">Contraseña</label>
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -58,6 +73,7 @@
                                     </span>
                                     @enderror
                                 </div>
+                                -->
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary w-100 my-4 mb-2">
                                         {{ __('Iniciar sesión') }}
@@ -103,6 +119,22 @@
             damping: '0.5'
         }
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
+
+<script type="text/javascript">
+
+    function showPass()
+    {
+        var passInput = document.getElementById('password');
+
+        if (passInput.type == 'password') {
+            passInput.type = 'text'
+        } else {
+            passInput.type = 'password'
+        }
+
+        console.log(passInput);
     }
 </script>
 <!-- Github buttons -->

@@ -132,17 +132,22 @@
                                                 <input id="public_receipt" type="file" class="form-control-file" name="public_receipt">
                                             </div>
                                         </div>
-
-
                                     @endif
-                                    <!--
-                                    <div class="col-md-4">
-                                        <div class=" input-group input-group-outline my-3">
-                                            <label for="balance" class="form-label"></label>
-                                            <input type="number" class="form-control" name="balance" min="1" value="{{$user->balance}}" id="" placeholder="Saldo">
+                                    @if ($user->role == 'Saldos')
+                                        <div class="col-md-4">
+                                            <label for="product_id">Seleccione un producto:</label>
+                                            <select class="form-select" name="product_id" id="product_id">
+                                                @foreach ($products as $product)
+                                                    @if ($user->product_id == $product->id)
+                                                        <option value="{{$product->id}}" selected>{{strtoupper($product->product_name)}}</option>
+                                                    @else
+                                                        <option value="{{$product->id}}">{{strtoupper($product->product_name)}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
                                         </div>
-                                    </div>
-                                    -->
+                                    @endif
+
                                     @if (isset($user->max_queue))
                                         <div class="col-md-4">
                                             <div class=" input-group input-group-outline my-3">

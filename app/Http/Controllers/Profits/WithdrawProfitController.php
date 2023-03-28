@@ -16,6 +16,10 @@ class WithdrawProfitController extends Controller
 {
     public function store(Request $request)
     {
+        //return $request->input('entity');
+        $entity = explode(',', $request->input('entity'))[1];
+        $entityID = explode(',', $request->input('entity'))[0];
+
         $currentUser = User::find(Auth::user()->id);
         $ongoingProfit = Profit::where([
             ['user_id', '=', $currentUser->id],
@@ -43,7 +47,7 @@ class WithdrawProfitController extends Controller
             ];
             $this->validate($request, $fields, $message);
 
-            $extra = 'Entidad: '.$request->input('entity').','.' Número de Cuenta: '.$request->input('acountNumber');
+            $extra = 'Entidad: '.$entity.','.' Número de Cuenta: '.$request->input('acountNumber');
 
             date_default_timezone_set('America/Bogota');
             $date = Carbon::now();
@@ -53,6 +57,7 @@ class WithdrawProfitController extends Controller
             $profit->date = $date;
             $profit->type = 'Withdrawal';
             $profit->extra = $extra;
+            $profit->product_id = $entityID;
             $profit->save();
 
             return redirect('home');

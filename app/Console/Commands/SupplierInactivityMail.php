@@ -43,14 +43,8 @@ class SupplierInactivityMail extends Command
     public function handle()
     {
         date_default_timezone_set('America/Bogota');
-        $countryName = getenv('COUNTRY_NAME');
-
-        if ($countryName == 'COLOMBIA') {
-            $url = 'https://corresponsales.asparecargas.net';
-        }
-        if ($countryName == 'ECUADOR') {
-            $url = 'https://transacciones.asparecargas.net';
-        }
+        $urlServer = getenv('URL_SERVER');
+        $url = $urlServer;
 
         $currentDate = Carbon::now();
         $inactiveSuppliers = collect([]);

@@ -77,6 +77,7 @@ class StoreTransactionController extends Controller
         $transaction->type = $product->product_type;
         $transaction->status = 'hold';
 
+
         return view('transactions.clientDataCreate', compact('transaction', 'product'));
     }
 }

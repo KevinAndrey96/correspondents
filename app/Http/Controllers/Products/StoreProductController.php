@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Products;
 
 use App\Models\Product;
+use App\Models\Commission;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,17 +59,53 @@ class StoreProductController extends Controller
         $product->num_jineteo = $request->input('num_jineteo');
         $product->hours = $request->input('hours');
         $product->reassignment_minutes = $request->input('reassignment_minutes');
+        $product->com_shp = $request->input('com_shp');
+        $product->com_dis = $request->input('com_dis');
+        $product->com_sup = $request->input('com_sup');
         $product->save();
+
+        if (! is_null($product->com_shp) && ! is_null($product->com_dis ) && ! is_null($product->com_sup)) {
+
+            $users = User::where('role', 'Distributor')
+                ->orWhere('role', 'Shopkeeper')
+                ->orWhere('role', 'Supplier')
+                ->get();
+
+            foreach ($users as $user) {
+
+                if ($user->role == 'Distributor') {
+                    $commission = new Commission();
+                    $commission->user_id = $user->id;
+                    $commission->product_id = $product->id;
+                    $commission->amount = $product->com_dis;
+                    $commission->save();
+                }
+
+                if ($user->role == 'Shopkeeper') {
+                    $commission = new Commission();
+                    $commission->user_id = $user->id;
+                    $commission->product_id = $product->id;
+                    $commission->amount = $product->com_shp;
+                    $commission->save();
+                }
+
+                if ($user->role == 'Supplier') {
+                    $commission = new Commission();
+                    $commission->user_id = $user->id;
+                    $commission->product_id = $product->id;
+                    $commission->amount = $product->com_sup;
+                    $commission->save();
+                }
+            }
+        }
 
         if ($request->hasFile('image')) {
             $pathName = Sprintf('products/%s.png', $product->id);
             Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
             $client = new Client();
-            $countryName = getenv('COUNTRY_NAME');
-            $url = "https://corresponsales.asparecargas.net/upload.php";
-            if ($countryName == 'ECUADOR') {
-                $url = "https://transacciones.asparecargas.net/upload.php";
-            }
+            $urlServer = getenv('URL_SERVER');
+            $url = $urlServer."/upload.php";
+
             $client->request(RequestAlias::METHOD_POST, $url, [
                 'multipart' => [
                     [

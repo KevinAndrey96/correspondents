@@ -17,14 +17,14 @@ class BalancesExport implements FromView, ShouldAutoSize
     public function forDateFrom(Carbon $dateFrom)
     {
         $this->dateFrom = $dateFrom;
-        
+
         return $this;
     }
 
     public function forDateTo(Carbon $dateTo)
     {
         $this->dateTo = $dateTo;
-        
+
         return $this;
     }
 

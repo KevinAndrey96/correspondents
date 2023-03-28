@@ -95,13 +95,13 @@
                                         <div class="form-group mb-3">
                                             <label for="rutPDF" class="">
                                                 @if (Session::get('rutName') == 'RUT')
-                                                    PDF o Imagen de RUT (opcional):
+                                                    PDF o Imagen de RUT:
                                                 @endif
                                                     @if (Session::get('rutName') == 'RUC')
-                                                        PDF o Imagen de RUC (opcional):
+                                                        PDF o Imagen de RUC:
                                                     @endif
                                             </label>
-                                            <input id="rutPDF" type="file" class="form-control-file" name="rutPDF">
+                                            <input id="rutPDF" type="file" class="form-control-file" name="rutPDF" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -114,7 +114,7 @@
                                                         PDF o Imagen de SRI:
                                                     @endif
                                             </label>
-                                            <input id="camara_comercio" type="file" class="form-control-file" name="camara_comercio">
+                                            <input id="camara_comercio" type="file" class="form-control-file" name="camara_comercio" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">

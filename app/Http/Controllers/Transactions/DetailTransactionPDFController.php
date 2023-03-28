@@ -14,14 +14,9 @@ class DetailTransactionPDFController extends Controller
     {
             $transaction = Transaction::find($id);
             $extras = explode(',', $transaction->detail);
-            $countryName = getenv('COUNTRY_NAME');
+            $url = getenv('URL_SERVER');
 
-            if ($countryName == 'COLOMBIA') {
-                $url = 'https://corresponsales.asparecargas.net';
-            }
-            if ($countryName == 'ECUADOR') {
-                $url = 'https://transacciones.asparecargas.net';
-            }
+
             $pdf = PDF::loadView('transactions.detailPDF', ['transaction'=>$transaction, 'extras'=>$extras, 'url'=>$url]);
             $pdf->setPaper(array(0, 0, 141.732, 300), 'portrait');//setPaper(tamaño 5cmx10cm,vertical)
             return $pdf->stream();

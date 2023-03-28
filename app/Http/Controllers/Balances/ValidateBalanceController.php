@@ -20,6 +20,7 @@ class ValidateBalanceController extends Controller
             if(is_null($balance->is_valid)){
                 $balance->is_valid = $request->input('status');
                 $balance->comment = $request->input('comment');
+                $balance->administrator_id = Auth::user()->id;
                 $balance->save();
 
                 $user = User::find($balance->user_id);

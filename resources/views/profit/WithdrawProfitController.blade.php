@@ -38,7 +38,7 @@
                                 <div class="col-md-4">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="amount" class="form-label">Monto</label>
-                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="1" min="0" placeholder="">
+                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="any" min="0" placeholder="">
                                     </div>
                                 </div>
                                 @hasanyrole('Supplier|Distributor|Shopkeeper')
@@ -50,8 +50,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class=" input-group input-group-outline my-3">
-                                        <label for="transactionNumber" id="account_label" class="form-label">Entidad</label>
-                                        <input type="text" class="form-control" name="entity" value="" id="entity" placeholder="">
+                                        <select class="form-select" name="entity" id="entity">
+                                            <option selected disabled>Seleccione una entidad</option>
+                                            @foreach ($products as $product)
+                                                <option value="{{$product->id}},{{$product->product_name}}">{{strtoupper($product->product_name)}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 @endhasanyrole

@@ -30,8 +30,10 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo</th>
                                     @endhasrole
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Producto</th>
-                                    @hasrole('Administrator')
+                                    @hasanyrole('Administrator|Supplier')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tendero</th>
+                                    @endhasanyrole
+                                    @hasrole('Administrator')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Proveedor</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Distribuidor</th>
                                     @endhasrole
@@ -57,8 +59,10 @@
                                         </td>
                                         @endhasrole
                                         <td class="align-middle text-center text-sm">{{ $transaction->product->product_name }}</td>
-                                        @hasrole('Administrator')
+                                        @hasanyrole('Administrator|Supplier')
                                         <td class="align-middle text-center text-sm">{{ $transaction->shopkeeper->name }}</td>
+                                        @endhasanyrole
+                                        @hasrole('Administrator')
                                         <td class="align-middle text-center text-sm">
                                             @if (isset($transaction->supplier))
                                                 {{ $transaction->supplier->name }}

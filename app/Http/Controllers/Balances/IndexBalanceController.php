@@ -13,12 +13,12 @@ class IndexBalanceController extends Controller
     public function index(Request $request)
     {
         $shopkeeper_id = $request->input('shopkeeper_id');
-        $countryName = getenv('COUNTRY_NAME');
+        $urlServer = getenv('URL_SERVER');
 
         if (isset($shopkeeper_id)) {
             if (Auth::user()->role == 'Administrator') {
                 $balances =  Balance::where('user_id', '=', $shopkeeper_id)->orderBy('created_at', 'desc')->get();
-                return view('balance.index', compact('balances', 'countryName'));
+                return view('balance.index', compact('balances', 'urlServer'));
             }
         }
 
@@ -26,7 +26,7 @@ class IndexBalanceController extends Controller
             $balances = Balance::whereNull('is_valid')->orderBy('created_at', 'desc')->get();
             $countBalances = $balances->count();
 
-            return view('balance.index', compact('balances', 'countBalances', 'countryName'));
+            return view('balance.index', compact('balances', 'countBalances', 'urlServer'));
         }
         if (Auth::user()->role == 'Shopkeeper') {
             $balances = Balance::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
@@ -34,6 +34,6 @@ class IndexBalanceController extends Controller
         if (Auth::user()->role == 'Supplier') {
             $balances = Balance::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         }
-        return view('balance.index', compact('balances', 'countryName'));
+        return view('balance.index', compact('balances', 'urlServer'));
     }
 }

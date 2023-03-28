@@ -65,17 +65,9 @@
                                         <td class="align-middle text-center text-sm">
                                             @if(isset($balance->boucher))
                                             <div>
-                                                @if ($countryName == 'COLOMBIA')
-                                                    <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}">
-                                                        <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle image-link" src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" alt="No carga">
-                                                    </a>
-                                                @endif
-                                                    @if ($countryName == 'ECUADOR')
-                                                        <a class="image-link" href="{{ 'https://transacciones.asparecargas.net/'.$balance->boucher }}">
-                                                            <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle image-link" src="{{ 'https://transacciones.asparecargas.net/'.$balance->boucher }}" alt="No carga">
-                                                        </a>
-                                                    @endif
-
+                                                <a class="image-link" href="{{$urlServer.'/'.$balance->boucher}}">
+                                                    <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle image-link" src="{{$urlServer.'/'.$balance->boucher}}" alt="No carga">
+                                                </a>
                                             </div>
                                             @else
                                                 Sin recibo
@@ -164,7 +156,6 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <!--<h6 class="modal-title" id="exampleModalLabel">Gestionar ganancias</h6>-->
                                             <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
                                             </button>
@@ -173,12 +164,7 @@
                                             <div class="row">
                                                 <div class="col-md-4 col-sm-4">
                                                     <div class="row jusfify-content-center align-items-center">
-                                                        @if ($countryName == 'COLOMBIA')
-                                                            <img width="60%" class="img-responsive" src="https://corresponsales.asparecargas.net/assets/img/bell.png">
-                                                        @endif
-                                                            @if ($countryName == 'ECUADOR')
-                                                                <img width="60%" class="img-responsive" src="https://transacciones.asparecargas.net/assets/img/bell.png">
-                                                            @endif
+                                                        <img width="60%" class="img-responsive" src="{{$urlServer}}/assets/img/bell.png">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-sm-8">
@@ -242,17 +228,16 @@
                                         "aaSorting": [],
                                         "bDestroy": true
                                     });
-                                } );
+                                        $('#acceptModal').on('show.bs.modal', function (event) {
+                                        var button = $(event.relatedTarget)
+                                        var uID = button.data('id')
+                                        var modal = $(this)
+                                        var balance_id = document.getElementById("id");
+                                        balance_id.value = uID;
+                                    })
+                                });
                             </script>
-                            <script>
-                                $('#acceptModal').on('show.bs.modal', function (event) {
-                                    var button = $(event.relatedTarget)
-                                    var uID = button.data('id')
-                                    var modal = $(this)
-                                    var balance_id = document.getElementById("id");
-                                    balance_id.value = uID;
-                                })
-                            </script>
+
                         </div>
                     </div>
                 </div>

@@ -96,6 +96,13 @@
                                              </div>
                                         </div>
                                     @endif
+                                    <div class="col-md-3">
+                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">Comisión</h6>
+                                        <div class="input-group input-group-outline my-3">
+                                            <label for="own_commission" ></label>
+                                            <input type="number" class="form-control" name="own_commission" id="own_commission" placeholder="Comisión" min="0" step="any" required>
+                                        </div>
+                                    </div>
                                     <div class="text-center">
                                         <input class="btn btn-success" type="submit" value="Solicitar Transacción">
                                     </div>

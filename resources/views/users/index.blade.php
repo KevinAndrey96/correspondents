@@ -145,64 +145,29 @@
                                                 </td>
                                                 <td>
                                                     @if (isset($user->cedulaPDF))
-                                                        @if ($countryName == 'COLOMBIA')
-                                                            <a target="_blank" href="https://corresponsales.asparecargas.net{{$user->cedulaPDF}}">
-                                                                <img width="15%" title="Documento cedula" src="https://corresponsales.asparecargas.net/assets/img/documento-icono.png">
-                                                            </a>
-                                                        @endif
-                                                            @if ($countryName == 'ECUADOR')
-                                                                <a target="_blank" href="https://transacciones.asparecargas.net{{$user->cedulaPDF}}">
-                                                                    <img width="15%" title="Documento cedula" src="https://transacciones.asparecargas.net/assets/img/documento-icono.png">
-                                                                </a>
-                                                            @endif
+                                                        <a target="_blank" href="{{$urlServer.$user->cedulaPDF}}">
+                                                            <img width="15%" title="Documento cedula" src="{{$urlServer}}/assets/img/documento-icono.png">
+                                                        </a>
                                                     @endif
                                                     @if (isset($user->rutPDF))
-                                                            @if ($countryName == 'COLOMBIA')
-                                                                <a target="_blank" href="https://corresponsales.asparecargas.net{{$user->rutPDF}}">
-                                                                    <img width="15%" title="Documento RUT" src="https://corresponsales.asparecargas.net/assets/img/documento-icono.png">
-                                                                </a>
-                                                            @endif
-                                                                @if ($countryName == 'ECUADOR')
-                                                                    <a target="_blank" href="https://transacciones.asparecargas.net{{$user->rutPDF}}">
-                                                                        <img width="15%" title="Documento RUC" src="https://transacciones.asparecargas.net/assets/img/documento-icono.png">
-                                                                    </a>
-                                                                @endif
+                                                            <a target="_blank" href="{{$urlServer.$user->rutPDF}}">
+                                                                <img width="15%" title="Documento RUT" src="{{$urlServer}}/assets/img/documento-icono.png">
+                                                            </a>
                                                     @endif
                                                     @if (isset($user->camara_comercio))
-                                                            @if ($countryName == 'COLOMBIA')
-                                                                <a target="_blank" href="https://corresponsales.asparecargas.net{{$user->camara_comercio}}">
-                                                                    <img width="15%" title="Cámara y comercio" src="https://corresponsales.asparecargas.net/assets/img/documento-icono.png">
-                                                                </a>
-                                                            @endif
-                                                                @if ($countryName == 'ECUADOR')
-                                                                    <a target="_blank" href="https://transacciones.asparecargas.net{{$user->camara_comercio}}">
-                                                                        <img width="15%" title="SRI" src="https://transacciones.asparecargas.net/assets/img/documento-icono.png">
-                                                                    </a>
-                                                                @endif
+                                                            <a target="_blank" href="{{$urlServer.$user->camara_comercio}}">
+                                                                <img width="15%" title="Cámara y comercio" src="{{$urlServer}}/assets/img/documento-icono.png">
+                                                            </a>
                                                     @endif
                                                     @if (isset($user->local_photo))
-                                                            @if ($countryName == 'COLOMBIA')
-                                                                <a target="_blank" href="https://corresponsales.asparecargas.net{{$user->local_photo}}">
-                                                                    <img width="15%" title="Foto local" src="https://corresponsales.asparecargas.net/assets/img/documento-icono.png">
-                                                                </a>
-                                                            @endif
-                                                                @if ($countryName == 'ECUADOR')
-                                                                    <a target="_blank" href="https://transacciones.asparecargas.net{{$user->local_photo}}">
-                                                                        <img width="15%" title="Foto local" src="https://transacciones.asparecargas.net/assets/img/documento-icono.png">
-                                                                    </a>
-                                                                @endif
+                                                            <a target="_blank" href="{{$urlServer.$user->local_photo}}">
+                                                                <img width="15%" title="Foto local" src="{{$urlServer}}/assets/img/documento-icono.png">
+                                                            </a>
                                                     @endif
                                                     @if (isset($user->public_receipt))
-                                                            @if ($countryName == 'COLOMBIA')
-                                                                <a target="_blank" href="https://corresponsales.asparecargas.net{{$user->public_receipt}}">
-                                                                    <img width="15%" title="Foto de recibo público" src="https://corresponsales.asparecargas.net/assets/img/documento-icono.png">
-                                                                </a>
-                                                            @endif
-                                                                @if ($countryName == 'ECUADOR')
-                                                                    <a target="_blank" href="https://transacciones.asparecargas.net{{$user->public_receipt}}">
-                                                                        <img width="15%" title="Planilla" src="https://transacciones.asparecargas.net/assets/img/documento-icono.png">
-                                                                    </a>
-                                                                @endif
+                                                            <a target="_blank" href="{{$urlServer.$user->public_receipt}}">
+                                                                <img width="15%" title="Foto de recibo público" src="{{$urlServer}}/assets/img/documento-icono.png">
+                                                            </a>
                                                     @endif
                                                 </td>
                                             @endif
@@ -361,7 +326,7 @@
                                                         <div class="p-3">
                                                             <label for="image" > Recibo (Opcional) </label>
                                                             @if(isset($balance->boucher))
-                                                            <img class="img-thumbnail img-fluid" src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" width="100" alt = "No carga">
+                                                            <img class="img-thumbnail img-fluid" src="{{ $urlServer.'/'.$balance->boucher }}" width="100" alt = "No carga">
                                                             @endif
                                                             <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="image" value="" id="image">
                                                         </div>

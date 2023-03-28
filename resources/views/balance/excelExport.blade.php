@@ -10,6 +10,8 @@
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha y hora</th>
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">¿Es valido?</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre administrador</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rol administrador</th>
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comentario</th>
         </tr>
     </thead>
@@ -33,6 +35,20 @@
             @else
                 <td class="align-middle text-center text-sm">Si</td>
             @endif
+            <td class="align-middle text-center text-sm">
+                @if(isset($balance->administrator->name))
+                    {{$balance->administrator->name}}
+                @endif
+            </td>
+            <td class="align-middle text-center text-sm">
+                @if(isset($balance->administrator->role))
+                    @if ($balance->administrator->role == 'Administrator')
+                        Administrador
+                    @else
+                        Saldos
+                    @endif
+                @endif
+            </td>
             <td class="align-middle text-center text-sm">{{ $balance->comment}}</td>
         </tr>
         @endforeach

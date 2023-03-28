@@ -43,13 +43,13 @@
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="name" class="form-label">Nombre</label>
-                                            <input type="text" class="form-control" name="name" value="" id="" placeholder="">
+                                            <input type="text" class="form-control" name="name" value="" id="" placeholder="" required>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="input-group input-group-static mb-4">
                                             <label  for="document_type">Tipo de documento</label>
-                                            <select id="" name="document_type" class="form-control" aria-label="Default select example">
+                                            <select id="" name="document_type" class="form-control" aria-label="Default select example" required>
                                                 <option class="text-center" value="CC">C.C</option>
                                                 <option class="text-center" value="TI">T.I</option>
                                                 <option class="text-center" value="NIT">NIT</option>
@@ -59,51 +59,61 @@
                                     <div class="col-md-2">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="document" class="form-label">N° documento</label>
-                                            <input type="text" class="form-control" name="document" value="" id="" placeholder="">
+                                            <input type="text" class="form-control" name="document" value="" id="" placeholder="" required>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="phone" class="form-label">Teléfono</label>
-                                            <input type="text" class="form-control" name="phone" value="" id="" placeholder="">
+                                            <input type="text" class="form-control" name="phone" value="" id="" placeholder="" required>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="city" class="form-label">Ciudad</label>
-                                            <input type="text" class="form-control" name="city" value="" id="" placeholder="">
+                                            <input type="text" class="form-control" name="city" value="" id="" placeholder="" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="email" class="form-label">Correo electrónico</label>
-                                            <input type="email" class="form-control" name="email" value="" id="" placeholder="">
+                                            <input type="email" class="form-control" name="email" value="" id="" placeholder="" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="address" class="form-label">Dirección</label>
-                                            <input type="text" class="form-control" name="address" value="" id="" placeholder="">
+                                            <input type="text" class="form-control" name="address" value="" id="" placeholder="" required>
                                         </div>
                                     </div>
                                     @if ($role == 'Supplier')
                                         <div class="col-md-4">
                                             <div class=" input-group input-group-outline my-3">
                                                 <label for="priority" class="form-label">Prioridad</label>
-                                                <input type="number" class="form-control" name="priority" min="1" value="" id="" placeholder="">
+                                                <input type="number" class="form-control" name="priority" min="1" value="" id="" placeholder="" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class=" input-group input-group-outline my-3">
                                                 <label for="max_queue" class="form-label">Maxima cola de transacciones</label>
-                                                <input type="number" class="form-control" name="max_queue" min="1" value="" id="" placeholder="">
+                                                <input type="number" class="form-control" name="max_queue" min="1" value="" id="" placeholder="" required>
                                             </div>
                                         </div>
+                                    @endif
+                                    @if ($role == 'Saldos')
+                                    <div class="col-md-4">
+                                        <select class="form-select form-select-lg mb-3" name="product_id" aria-label=".form-select-lg example" required>
+                                            <option selected disabled><p style="font-weight:bold">Seleccione un banco</p></option>
+                                            @foreach($products as $product)
+                                                <option value="{{$product->id}}">{{strtoupper($product->product_name)}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     @endif
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="max_queue" class="form-label">Contraseña</label>
-                                            <input type="password" class="form-control" name="password" value="" id="" placeholder="">
+                                            <input type="password" class="form-control" name="password" value="" id="" placeholder="" required>
                                         </div>
                                     </div>
                                     <div class="text-center">

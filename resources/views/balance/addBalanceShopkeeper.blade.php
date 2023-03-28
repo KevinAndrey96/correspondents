@@ -1,5 +1,15 @@
 @extends('layouts.dashboard')
 @section('content')
+    @if(Session::has('requestAlreadyExists'))
+        <div class="alert alert-danger text-white text-center" role="alert">
+            {{ Session::get('requestAlreadyExists') }}
+        </div>
+    @endif
+    @if(Session::has('failedBalanceSaved'))
+        <div class="alert alert-danger text-white text-center" role="alert">
+            {{ Session::get('failedBalanceSaved') }}
+        </div>
+    @endif
     <div class="row "></div>
     <div class="container-fluid py-4">
         <div class="row">
@@ -28,7 +38,7 @@
                                 <div class="col-md-6">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="amount" class="form-label"></label>
-                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="1" min="0" placeholder="Monto">
+                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="any" min="0" placeholder="Monto" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -37,18 +47,34 @@
                                       @if(isset($balance->boucher))
                                           <img class="img-thumbnail img-fluid" src="{{ 'https://corresponsales.asparecargas.net/'.$balance->boucher }}" width="100" alt = "No carga">
                                       @endif
-                                      <input style="border: gray 0.5px solid; border-radius: 20px" class="form-control form-control-sm" type="file" id="image" name="image">
+                                      <input style="border: gray 0.5px solid; border-radius: 20px" class="form-control form-control-sm" type="file" id="image" name="image" required>
                                      </div>
                                 </div>
+                                  <div class="col-md-6">
+                                      <div class=" input-group input-group-outline my-3">
+                                          <label for="payment_code" class="form-label"></label>
+                                          <input type="text" class="form-control" name="payment_code" value="" id="payment_code" placeholder="Código de pago (Este código debe ser exactamente igual al del recibo subido)" required>
+                                      </div>
+                                  </div>
                                   <div class="col-md-6 mb-4">
                                       <div class="form-group">
-                                          <label for="bank" class="form-label">Banco:</label>
-                                          <select class="form-select" name="bank" id="bank" onchange="showCard()">
-                                              <option>Seleccione un banco</option>
-                                              @foreach($cards as $card)
-                                                <option value="{{$card->id}}">{{$card->bank}}</option>
+                                          <label for="product_id" class="form-label">Banco:</label>
+                                          <select class="form-select" name="product_id" id="product_id" required>
+                                              <option selected disabled>Seleccione un banco</option>
+                                              @foreach($products as $product)
+                                                  <option value="{{$product->id}}">{{strtoupper($product->product_name)}}</option>
                                               @endforeach
-
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6 mb-4">
+                                      <div class="form-group">
+                                          <label for="bank" class="form-label">Tarjeta:</label>
+                                          <select class="form-select" name="bank" id="bank" onchange="showCard()">
+                                              <option>Seleccione un tarjeta</option>
+                                              @foreach($cards as $card)
+                                                <option value="{{$card->id}}">Tarjeta de {{$card->bank}}</option>
+                                              @endforeach
                                           </select>
                                       </div>
                                   </div>
@@ -72,34 +98,13 @@
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
             <div class="row">
                     <div class="col-md-6 text-center">
-                        @if ($countryName == 'COLOMBIA')
-                            <img src="https://corresponsales.asparecargas.net{{$card->cardIMG}}" width="80%" height="auto" class="border-radius-lg">
-                        @endif
-                        @if ($countryName == 'ECUADOR')
-                                <img src="https://transacciones.asparecargas.net{{$card->cardIMG}}" width="80%" height="auto" class="border-radius-lg">
-                            @endif
+                        <img src="{{$urlServer.$card->cardIMG}}" width="80%" height="auto" class="border-radius-lg">
                     </div>
                     <div class="col-md-6 text-center">
-                        @if ($countryName == 'COLOMBIA')
-                            <a href="https://corresponsales.asparecargas.net{{$card->cardPDF}}" target="_blank" class="btn btn-primary
+                        <a href="{{$urlServer.$card->cardPDF}}" target="_blank" class="btn btn-primary
                         btn-lg text-white active my-7 text-center" role="button" aria-pressed="true"><i class="material-icons mx-2">file_download</i>Descargar PDF</a>
-                        @endif
-                        @if ($countryName == 'ECUADOR')
-                                <a href="https://transacciones.asparecargas.net{{$card->cardPDF}}" target="_blank" class="btn btn-primary
-                        btn-lg text-white active my-7 text-center" role="button" aria-pressed="true"><i class="material-icons mx-2">file_download</i>Descargar PDF</a>
-                        @endif
+
                     </div>
-
-                <!--
-            <div class="col-md-6 text-center">
-                <img src="/assets/img/tajeta.jpeg" width="80%" height="auto" class="border-radius-lg">
-            </div>
-            <div class="col-md-6 text-center ">
-                <a href="/assets/pdf/TARJETA.pdf" target="_blank" class="btn btn-primary
-                 btn-lg text-white active my-7 text-center" role="button" aria-pressed="true"><i class="material-icons mx-2">file_download</i>Descargar PDF</a>
-            </div>
-            -->
-
             </div>
         </div>
     </div>

@@ -706,6 +706,7 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'App\\Http\\Controllers\\Commissions\\UpdateCommissionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Commissions/UpdateCommissionsController.php',
         'App\\Http\\Controllers\\Commissions\\UsersCommissionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Commissions/UsersCommissionsController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\GetCountryNameController' => __DIR__ . '/../..' . '/app/Http/Controllers/GetCountryNameController.php',
         'App\\Http\\Controllers\\GetstatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/GetstatusController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\Platforms\\LockIndexPlatformController' => __DIR__ . '/../..' . '/app/Http/Controllers/Platforms/LockIndexPlatformController.php',

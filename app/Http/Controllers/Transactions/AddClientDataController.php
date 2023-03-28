@@ -112,6 +112,7 @@ class AddClientDataController extends Controller
                 $transaction->type = $request->input('transactionType');
                 $transaction->status = $request->input('transactionState');
                 $transaction->detail = $detail;
+                $transaction->own_commission = $request->input('own_commission');
                 $transaction->userIP = \Request::ip();;
                 $transaction->save();
 

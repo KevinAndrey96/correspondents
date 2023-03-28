@@ -89,18 +89,13 @@
                                             <div class="row">
                                                 <div class="col-md-4 col-sm-4">
                                                     <div class="row jusfify-content-center align-items-center">
-                                                        @if ($countryName == 'COLOMBIA')
-                                                            <img width="60%" class="img-responsive" src="https://corresponsales.asparecargas.net/assets/img/bell.png">
-                                                        @endif
-                                                            @if ($countryName == 'ECUADOR')
-                                                                <img width="60%" class="img-responsive" src="https://transacciones.asparecargas.net/assets/img/bell.png">
-                                                            @endif
+                                                        <img width="60%" class="img-responsive" src="{{$urlServer}}/assets/img/bell.png">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-sm-8">
                                                     <div class="row jusfify-content-center align-items-center">
                                                         <div class="col-md-12">
-                                                            <h2>¡Tienes una nueva solicitud de retiro de ganancias!</h2>
+                                                            <h2 class="text-center">¡Tienes una nueva solicitud de retiro de ganancias!</h2>
                                                         </div>
                                                     </div>
                                                 </div>

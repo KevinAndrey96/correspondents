@@ -21,7 +21,8 @@
                 @endif
             </p>
             <p style="font-size: xx-small; text-align: center; margin-top:-5px;">Número de cuenta: {{$transaction->account_number}}</p>
-            <p style="font-size: xx-small; text-align: center; margin-top:-5px;">Monto solicitado: ${{$transaction->amount}}</p>
+            <p style="font-size: xx-small; text-align: center; margin-top:-5px;">Monto solicitado: ${{number_format($transaction->amount, 2, ',', '.')}}</p>
+            <p style="font-size: xx-small; text-align: center; margin-top:-5px;">Comisión de tendero: ${{number_format($transaction->own_commission, 2, ',', '.')}}</p>
                 @foreach ($extras as $extra)
                 <p style="font-size: xx-small; text-align: center; margin-top:-5px;"><span >{{$extra}}</span></p>
                 @endforeach

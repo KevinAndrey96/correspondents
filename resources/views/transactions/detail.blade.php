@@ -19,7 +19,7 @@
                                             <li class="list-group-item border-0 d-flex p-4 mb-0 bg-gray-100 border-radius-lg">
                                               <div class="row">
                                                 @if (Auth::user()->role == 'Supplier' && is_null($detailSupplier))
-                                                <div style="border:1px solid black" class="col-md-4 d-flex flex-column ">
+                                                <div class="col-md-4 d-flex flex-column ">
                                                     <h6 class="mb-3 text-sm">Información</h6>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Producto: {{$transaction->product->product_name}}</p>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Número de cuenta: {{$transaction->account_number}}</p>
@@ -45,9 +45,10 @@
                                                         </div>
                                                         <div class="input-group input-group-static mb-4">
                                                             <label for="status"> La transacción fue:</label>
-                                                              <select id="" name="status" class="form-control" aria-label="Default select example" required>
-                                                                 <option value="successful">Exitosa</option>
-                                                                 <option value="failed">Fallida</option>
+                                                              <select id="status-select" name="status" class="form-control" aria-label="Default select example" onchange="confirmSelection(this)" required>
+                                                                  <option selected disabled>Seleccione una opción</option>
+                                                                  <option value="successful">Exitosa</option>
+                                                                  <option value="failed">Fallida</option>
                                                               </select>
                                                         </div>
                                                         <div class="input-group input-group-dynamic">
@@ -74,9 +75,10 @@
                                                                 @endif
                                                             </p>
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Monto: ${{number_format($transaction->amount, 2, ',', '.')}}</p>
-                                                            @foreach ($extras as $extra)
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Comisión de tendero: ${{number_format($transaction->own_commission, 2, ',', '.')}}</p>
+                                                        @foreach ($extras as $extra)
                                                                 <p class="mb-2 text-xs font-weight-bold text-dark">{{$extra}}</p>
-                                                        @endforeach
+                                                            @endforeach
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Comentario: {{$transaction->comment}}</p>
 
                                                         </div>
@@ -96,20 +98,12 @@
                                                                         </p>
                                                                     @endif
                                                                 @endif
-                                                                @if ($countryName == 'COLOMBIA')
-                                                                    <a class="image-link" href="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
-                                                                        @if (! is_null($transaction->voucher) && ($transaction->status == 'successful' || $transaction->status == 'failed' ) && Auth::user()->role !== 'Shopkeeper')
-                                                                            <img class="image-link rounded" width="200px" height="200px" src="https://corresponsales.asparecargas.net{{$transaction->voucher}}">
-                                                                        @endif
-                                                                    </a>
+                                                                <a class="image-link" href="{{$urlServer}}{{$transaction->voucher}}">
+                                                                    @if (! is_null($transaction->voucher) && ($transaction->status == 'successful' || $transaction->status == 'failed' ) && Auth::user()->role !== 'Shopkeeper')
+                                                                        <img class="image-link rounded" width="200px" height="200px" src="{{$urlServer}}{{$transaction->voucher}}">
                                                                     @endif
-                                                                    @if ($countryName == 'ECUADOR')
-                                                                        <a class="image-link" href="https://transacciones.asparecargas.net{{$transaction->voucher}}">
-                                                                            @if (! is_null($transaction->voucher) && ($transaction->status == 'successful' || $transaction->status == 'failed' ) && Auth::user()->role !== 'Shopkeeper')
-                                                                                <img class="image-link rounded" width="200px" height="200px" src="https://transacciones.asparecargas.net{{$transaction->voucher}}">
-                                                                            @endif
-                                                                        </a>
-                                                                    @endif
+                                                                </a>
+
                                                             </div>
                                                         </div>
                                                         <div style="display: none;" class="col-md-6">
@@ -125,21 +119,11 @@
 
                                                                         <div class="row">
                                                                             <div class="col-xs-12 col-sm-12 col-md-9 mb-3">
-                                                                                @if ($countryName == 'COLOMBIA')
-                                                                                    <img width="10%" src="https://corresponsales.asparecargas.net/assets/img/whatsapp.png" alt="">
-                                                                                @endif
-                                                                                    @if ($countryName == 'ECUADOR')
-                                                                                        <img width="10%" src="https://transacciones.asparecargas.net/assets/img/whatsapp.png" alt="">
-                                                                                    @endif
+                                                                                <img width="10%" src="{{$urlServer}}/assets/img/whatsapp.png" alt="">
                                                                                 <span class="text-xs font-weight-bold text-dark">Enviar comprobante: </span>
                                                                                     <div class="input-group mx-2 d-inline">
                                                                             <input style="background:white; width:100%;" type="text" name="phone" id="phone" class="form-control text-center d-inline border-top border-start border-bottom p-2">
-                                                                                        @if ($countryName == 'COLOMBIA')
-                                                                                            <input type="hidden" name="text" value="{{ 'Hola, este es el comprobante de la transacción: https://corresponsales.asparecargas.net/transaction/detail-pdf/'.$transaction->id }}">
-                                                                                        @endif
-                                                                                        @if ($countryName == 'ECUADOR')
-                                                                                            <input type="hidden" name="text" value="{{ 'Hola, este es el comprobante de la transacción: https://transacciones.asparecargas.net/transaction/detail-pdf/'.$transaction->id }}">
-                                                                                        @endif
+                                                                                        <input type="hidden" name="text" value="'Hola, este es el comprobante de la transacción: {{$urlServer}}/transaction/detail-pdf/{{$transaction->id}}">
                                                                                     </div>
                                                                             </div>
                                                                         <div style="width:20%" class="col-xs-12 col-sm-12 col-md-3 p-0 ms-3 mt-4">
@@ -180,5 +164,16 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function confirmSelection(select)
+        {
+            var isConfirmed = confirm('¿Está seguro de esta elección?')
+
+            if (! isConfirmed) {
+                select.value = null;
+            }
+        }
+    </script>
+
 @endsection
 
