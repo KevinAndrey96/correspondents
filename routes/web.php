@@ -27,7 +27,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home')
-        ->middleware('distributorExtrainfo', 'firstPassword', 'dailyPassword');
+        ->middleware('distributorExtrainfo', '2fa', 'firstPassword', 'dailyPassword');
     Route::get('/products', [App\Http\Controllers\Products\IndexProductController::class, 'index']);
     Route::get('/products/create', [App\Http\Controllers\Products\CreateProductController::class, 'create']);
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
@@ -48,6 +48,10 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     Route::post('/balance/validate', [App\Http\Controllers\Balances\ValidateBalanceController::class, 'isValid']);
     Route::post('/balance/excel', [App\Http\Controllers\Balances\ExcelExportBalanceController::class, 'export']);
     Route::post('/balanceSummary/excel', [App\Http\Controllers\Balances\ExcelExportSummaryController::class, 'export']);
+    Route::get('/balance-all', App\Http\Controllers\Balances\AllBalancesController::class);
+    Route::get('/balance-assign-supplier/{id}', App\Http\Controllers\Balances\AssignSupplierBalancesController::class);
+    Route::post('/balance-store-assignment', App\Http\Controllers\Balances\StoreAssignmentBalanceController::class)->name('balance.store-assignment');
+
 
     Route::get('/profit', [App\Http\Controllers\Profits\IndexProfitController::class, 'index']);
     Route::get('/profit/create', [App\Http\Controllers\Profits\CreateProfitController::class, 'create']);

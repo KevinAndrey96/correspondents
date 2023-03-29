@@ -223,13 +223,20 @@
                 </a>
                 <div id="submenu-3" class="collapse " data-bs-parent="#menu-accordion">
                     <ul class="submenu-list list-unstyled">
-
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/balance">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <i class="material-icons opacity-10">payments</i>
                                 </div>
                                 <span class="nav-link-text ms-1">Solicitudes</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/balance-all">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">payments</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Historial de solicitudes</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -240,7 +247,6 @@
                                 <span class="nav-link-text ms-1">Saldo por usuario</span>
                             </a>
                         </li>
-
                     </ul>
                 </div>
             </li>
@@ -421,13 +427,20 @@
                     </a>
                     <div id="submenu-3" class="collapse " data-bs-parent="#menu-accordion">
                         <ul class="submenu-list list-unstyled">
-
                             <li class="nav-item">
                                 <a class="nav-link text-white " href="/balance">
                                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                         <i class="material-icons opacity-10">payments</i>
                                     </div>
                                     <span class="nav-link-text ms-1">Solicitudes</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/balance-all">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">payments</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Historial de solicitudes</span>
                                 </a>
                             </li>
                             <li class="nav-item">
