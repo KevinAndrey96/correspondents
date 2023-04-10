@@ -102,20 +102,32 @@
                                     @endif
                                     @if ($role == 'Saldos')
                                     <div class="col-md-4">
-                                        <select class="form-select form-select-lg mb-3" name="product_id" aria-label=".form-select-lg example" required>
+                                        <select class="form-select form-select-lg mb-3" name="card_ids[]    " aria-label=".form-select-lg example" multiple required>
                                             <option selected disabled><p style="font-weight:bold">Seleccione un banco</p></option>
-                                            @foreach($products as $product)
-                                                <option value="{{$product->id}}">{{strtoupper($product->product_name)}}</option>
+                                            @foreach($cards as $card)
+                                                <option value="{{$card->id}}">{{strtoupper($card->bank)}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     @endif
+                                    @if ($role == 'Shopkeeper')
+                                        <div class="col-md-4">
+                                            <label class="form-label">Seleccione un asesor:</label>
+                                            <select class="form-select" name="adviserID" id="adviserID" required>
+                                                @foreach ($advisers as $adviser)
+                                                    <option value="{{$adviser->id}}">{{strtoupper($adviser->name)}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @endif
+                                    @if ($role !== 'Advisers')
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="max_queue" class="form-label">Contraseña</label>
                                             <input type="password" class="form-control" name="password" value="" id="" placeholder="" required>
                                         </div>
                                     </div>
+                                    @endif
                                     <div class="text-center">
                                         <input type="hidden" value="{{$role}}" name="role">
                                         <input class="btn btn-primary" type="submit" value="Guardar">

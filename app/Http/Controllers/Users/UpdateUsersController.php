@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserBank;
+use App\Models\ShopkeeperAdviser;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +28,22 @@ class UpdateUsersController extends Controller
         $user->city = $request->input('city');
         $user->address = $request->input('address');
         $user->product_id = $request->input('product_id');
+
+        if (isset($request->card_ids)) {
+            $userBanks = UserBank::where('user_id', $user->id)->get();
+
+            foreach ($userBanks as $userBank) {
+                UserBank::destroy($userBank->id);
+            }
+
+            foreach ($request->card_ids as $cardID) {
+                $userBank = new UserBank();
+                $userBank->user_id = $user->id;
+                $userBank->card_id = $cardID;
+                $userBank->save();
+            }
+        }
+
         if (isset($request->max_queue)) {
             $user->max_queue = $request->input('max_queue');
         }
@@ -44,6 +62,20 @@ class UpdateUsersController extends Controller
             $user->daily_password_date = null;
         }
         $user->save();
+
+        if ($user->role == 'Shopkeeper') {
+            $shopkeeperAdviser = ShopkeeperAdviser::where('shopkeeper_id', $user->id)->first();
+            if (isset($shopkeeperAdviser)) {
+                $shopkeeperAdviser->adviser_id = $request->input('adviserID');
+                $shopkeeperAdviser->save();
+            } else {
+                $shopkeeperAdviser = new ShopkeeperAdviser();
+                $shopkeeperAdviser->shopkeeper_id = $user->id;
+                $shopkeeperAdviser->adviser_id = $request->input('adviserID');
+                $shopkeeperAdviser->save();
+            }
+
+        }
 
         if (! is_null($request->input('multiproductosID'))) {
             $user->multiproductosID = $request->input('multiproductosID');

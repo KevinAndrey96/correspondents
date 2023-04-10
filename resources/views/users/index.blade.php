@@ -22,6 +22,8 @@
                                     (Administradores)
                                 @elseif ($role == 'Saldos')
                                     (S & G)
+                                @elseif ($role == 'Advisers')
+                                    (Asesores)
                                 @endif
 
                                 @if ($role != 'allShopkeepers')
@@ -34,13 +36,13 @@
                             <table id="tabla1" class="table align-items-center mb-0">
                                 <thead class="thead-light">
                                     <tr>
-                                        @if ($role !== 'Administrator')
+                                        @if ($role !== 'Administrator' && $role !== 'Advisers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
                                         @endif
                                         @if ($role == 'Supplier')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Conexión</th>
                                         @endif
-                                        @if($role !== 'Administrator')
+                                        @if($role !== 'Administrator' && $role !== 'Advisers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Habilitar</th>
                                             @endif
                                             @if ($role == 'allShopkeepers')
@@ -54,7 +56,7 @@
                                         @if ($role == 'Distributor' || $role == 'Supplier' || $role == 'allShopkeepers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancia</th>
                                         @endif
-                                        @if ($role != 'Distributor' && $role != 'Administrator')
+                                        @if ($role != 'Distributor' && $role != 'Administrator' && $role !== 'Advisers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo</th>
                                         @endif
                                         @if ($role == 'Supplier')
@@ -72,7 +74,7 @@
                                 <tbody>
                                 @foreach ($users as $user)
                                     <tr>
-                                        @if ($role !== 'Administrator')
+                                        @if ($role !== 'Administrator' && $role !== 'Advisers')
                                             <td class="align-middle text-center text-sm">
                                                 @if ($user->is_authorized == 1)
                                                     <span class="badge badge-sm bg-gradient-success">Habilitado</span>
@@ -91,7 +93,7 @@
                                                 </td>
                                             @endif
 
-                                        @if ($role !== 'Administrator')
+                                        @if ($role !== 'Administrator' &&  $role !== 'Advisers')
                                         <td class="align-middle text-center text-sm">
                                             <div class="form-check form-switch align-middle text-center">
                                                 @if ($user->is_authorized == 1)
@@ -125,7 +127,7 @@
                                         @if ($role == 'Distributor' || $role == 'Supplier' || $role == 'allShopkeepers')
                                             <td class="align-middle text-center text-sm">${{$user->profit}}</td>
                                         @endif
-                                        @if ( $role == 'allShopkeepers' || ($role != 'Distributor' && $role != 'Administrator'))
+                                        @if ( $role == 'allShopkeepers' || ($role != 'Distributor' && $role != 'Administrator' && $role != 'Advisers'))
                                             <td class="align-middle text-center text-sm">${{number_format($user->balance, 2, ',', '.')}}</td>
                                         @endif
                                         @if ($role == 'Supplier')
@@ -172,8 +174,8 @@
                                                 </td>
                                             @endif
                                         <td>
-                                            @if ($role != 'allShopkeepers' && $role != 'Administrator' && $role != 'Saldos')
-
+                                            <div class="d-flex justify-content-center">
+                                            @if ($role != 'allShopkeepers' && $role != 'Administrator' && $role != 'Saldos' && $role != 'Advisers')
                                                 <a style="color: dodgerblue;" href="/commissions/create/{{$user->id}}" title="Comisiones" class="btn btn-link px-1 mb-0"><i style="color: dodgerblue; font-size: 25px !important;" class="material-icons opacity-15">price_change</i></a>
                                             @endif
                                             <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen; font-size: 25px !important;" class="material-icons opacity-10">edit</i></a>
@@ -189,6 +191,7 @@
                                                             data-id="{{$user->id}}"><i style="font-size: 25px !important;" class="material-icons opacity-10 text-primary" data-userID={{$user->id}}>visibility</i></button>
                                                 @endif
                                                 <a style="color: darkred;" href="#" title="Eliminar" class="btn btn-link px-1 mb-0"><i style="color: darkred; font-size: 25px !important;" class="material-icons opacity-10" onclick="getStatus({{$user->id}})">delete</i></a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -315,7 +318,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group input-group-outline my-3">
                                                             <label for="amount"></label>
-                                                            <input type="number" class="form-control" name="amount" value="" id="amount" step="1" min="0" placeholder="Monto">
+                                                            <input type="number" class="form-control" name="amount" value="" id="amount" step="any" min="0" placeholder="Monto">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">

@@ -80,69 +80,81 @@
                                         </div>
                                     </div>
                                     @if ($user->role == 'Shopkeeper')
-                                    <div class="col-md-4">
-                                        <div class="input-group input-group-outline my-3">
-                                            <label class="form-label"></label>
-                                            <input type="text" class="form-control" name="multiproductosID"
-                                                   @if (! is_null($user->multiproductosID))
-                                                        value="{{$user->multiproductosID}}"
-                                                   @endif
-                                                   id="multiproductosID"
-                                                   placeholder="ID Multiproductos">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Seleccione un asesor:</label>
+                                            <select class="form-select" name="adviserID" id="adviserID" required>
+                                                @foreach ($advisers as $adviser)
+                                                    @if (isset($shopkeeperAdviser))
+                                                        @if ($shopkeeperAdviser->adviser_id == $adviser->id)
+                                                            <option value="{{$adviser->id}}" selected>{{strtoupper($adviser->name)}}</option>
+                                                        @else
+                                                            <option value="{{$adviser->id}}">{{strtoupper($adviser->name)}}</option>
+                                                        @endif
+                                                    @else
+                                                        <option value="{{$adviser->id}}">{{strtoupper($adviser->name)}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
                                         </div>
-                                    </div>
                                         <div class="col-md-4">
                                             <div class="input-group input-group-outline my-3">
-                                                <label for="address" class="form-label"></label>
-                                                <input type="text" class="form-control" name="platform_mul"
-                                                       @if (! is_null($user->platform_mul))
-                                                       value="{{$user->platform_mul}}"
+                                                <label class="form-label"></label>
+                                                <input type="text" class="form-control" name="multiproductosID"
+                                                       @if (! is_null($user->multiproductosID))
+                                                            value="{{$user->multiproductosID}}"
                                                        @endif
-                                                       id="platform_mul"
-                                                       placeholder="Plataforma Multiproductos">
+                                                       id="multiproductosID"
+                                                       placeholder="ID Multiproductos">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="cedulaPDF" class="">PDF o Imagen de Cedula:</label>
-                                                <input id="cedulaPDF" type="file" class="form-control-file" name="cedulaPDF">
+                                            <div class="col-md-4">
+                                                <div class="input-group input-group-outline my-3">
+                                                    <label for="address" class="form-label"></label>
+                                                    <input type="text" class="form-control" name="platform_mul"
+                                                           @if (! is_null($user->platform_mul))
+                                                           value="{{$user->platform_mul}}"
+                                                           @endif
+                                                           id="platform_mul"
+                                                           placeholder="Plataforma Multiproductos">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="cedulaPDF" class="">PDF o Imagen de RUT:</label>
-                                                <input id="rutPDF" type="file" class="form-control-file" name="rutPDF">
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label for="cedulaPDF" class="">PDF o Imagen de Cedula:</label>
+                                                    <input id="cedulaPDF" type="file" class="form-control-file" name="cedulaPDF">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="camara_comercio" class="">Cámara y comercio (opcional):</label>
-                                                <input id="camara_comercio" type="file" class="form-control-file" name="camara_comercio">
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label for="cedulaPDF" class="">PDF o Imagen de RUT:</label>
+                                                    <input id="rutPDF" type="file" class="form-control-file" name="rutPDF">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="local_photo" class="">Foto local:</label>
-                                                <input id="local_photo" type="file" class="form-control-file" name="local_photo">
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label for="camara_comercio" class="">Cámara y comercio (opcional):</label>
+                                                    <input id="camara_comercio" type="file" class="form-control-file" name="camara_comercio">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group mb-3">
-                                                <label for="public_receipt" class="">Foto de recibo público:</label>
-                                                <input id="public_receipt" type="file" class="form-control-file" name="public_receipt">
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label for="local_photo" class="">Foto local:</label>
+                                                    <input id="local_photo" type="file" class="form-control-file" name="local_photo">
+                                                </div>
                                             </div>
-                                        </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label for="public_receipt" class="">Foto de recibo público:</label>
+                                                    <input id="public_receipt" type="file" class="form-control-file" name="public_receipt">
+                                                </div>
+                                            </div>
                                     @endif
                                     @if ($user->role == 'Saldos')
                                         <div class="col-md-4">
-                                            <label for="product_id">Seleccione un producto:</label>
-                                            <select class="form-select" name="product_id" id="product_id">
-                                                @foreach ($products as $product)
-                                                    @if ($user->product_id == $product->id)
-                                                        <option value="{{$product->id}}" selected>{{strtoupper($product->product_name)}}</option>
-                                                    @else
-                                                        <option value="{{$product->id}}">{{strtoupper($product->product_name)}}</option>
-                                                    @endif
+                                            <select class="form-select" name="card_ids[]" id="card_ids[]" multiple>
+                                                <option selected disabled>Seleccione bancos:</option>
+                                                @foreach ($cards as $card)
+                                                    <option value="{{$card->id}}">{{strtoupper($card->bank)}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -164,13 +176,16 @@
                                             </div>
                                         </div>
                                     @endif
+
+                                    @if ($user->role !== 'Advisers')
                                     <div class="col-md-4">
                                         <div class=" input-group input-group-outline my-3">
                                             <label for="max_queue" class="form-label"></label>
                                             <input type="password" class="form-control" name="password" value="" id="" placeholder="Contraseña">
                                         </div>
                                     </div>
-                                    <div class="text-center">
+                                    @endif
+                                    <div class="text-center mt-4">
                                         <input type="hidden" value="{{$user->id}}" name="user_id">
                                         <input class="btn btn-primary" type="submit" value="Guardar Cambios">
                                     </div>

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
+use App\Models\Card;
+use App\Models\User;
 
 class CreateUsersController extends Controller
 {
@@ -20,8 +22,19 @@ class CreateUsersController extends Controller
         }
 
         if ($role == 'Saldos') {
-            $products = Product::where('product_type', 'like', 'Deposit')->get();
-            return view('users.create', compact('role', 'products'));
+            $cards = Card::all();
+            return view('users.create', compact('role', 'cards'));
+        }
+
+        if ($role == 'Advisers') {
+            return view('users.create', compact('role'));
+        }
+
+        if ($role == 'Shopkeeper') {
+            $advisers = User::where('role', 'Advisers')->get();
+
+            return view('users.create', compact('role', 'advisers'));
+
         }
 
         return view('users.create', compact('role'));

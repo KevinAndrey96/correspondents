@@ -706,23 +706,6 @@
                         </div>
                     </div>
                 @endif
-                @if (Auth::user()->role == 'Shopkeeper')
-                    <div class="col-lg-3 mt-4 mb-3">
-                        <div class="card z-index-2 ">
-                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                                <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
-                                    <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal"
-                                            data-bs-target="#ExcelProductTransactionsModal"  onclick="excelURL('ProductTransactions')"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="mb-0 ">Estadística 5°</h6>
-                                <p class="text-sm ">Transacciones por producto</p>
-                                <hr class="dark horizontal">
-                            </div>
-                        </div>
-                    </div>
-                @endif
             </div>
             <script type="text/javascript">
                 function showCharts()
@@ -858,22 +841,34 @@
             function excelURL(type) {
                 var actionURL = document.getElementById("action");
                 var actionURL2 = document.getElementById("actionProductTransactions");
+                var divSelectProducts = document.getElementById("div-select-transaction-products");
+                var divSelectStatus = document.getElementById("div-select-transaction-status");
+
 
                 if(type == 'Transacciones'){
                     actionURL.action = "{{ url('/transaction/excel') }}";
                     document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
+                    divSelectProducts.style.display = "block";
+                    divSelectStatus.style.display = "block";
+
                 }
                 if(type == 'Saldos'){
                     actionURL.action = "{{ url('/balance/excel') }}";
                     document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
+                    divSelectProducts.style.display = "none";
+                    divSelectStatus.style.display = "none";
                 }
                 if(type == 'Extracto'){
                     actionURL.action = "{{ url('/balanceSummary/excel') }}";
                     document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
+                    divSelectProducts.style.display = "none";
+                    divSelectStatus.style.display = "none";
                 }
                 if(type == 'Ganancias'){
                     actionURL.action = "{{ url('/profit/excel') }}";
                     document.getElementById("exampleModalLabel").innerHTML = "("+type+") Seleccionar Fecha";
+                    divSelectProducts.style.display = "none";
+                    divSelectStatus.style.display = "none";
                 }
                 if(type == 'ProductTransactions'){
                     actionURL2.action = "{{ url('/transaction/excel') }}";
@@ -904,6 +899,34 @@
                                         </ul>
                                     </div>
                                 @endif
+                                <div class="col-md-12" id="div-select-transaction-products">
+                                    <div class="form-group">
+                                        <label for="product">Seleccione un producto:</label>
+                                        <select class="form-select mb-4" name="product_id">
+                                            <option value="all">TODOS</option>
+                                            @foreach ($products as $product)
+                                                <option value="{{$product->id}}">{{strtoupper($product->product_name)}} -
+                                                    @if ($product->product_type == 'Deposit')
+                                                        DEPOSITO
+                                                    @else
+                                                        RETIRO
+                                                    @endif
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" id="div-select-transaction-status">
+                                    <div class="form-group">
+                                        <label for="product">Seleccione un estado:</label>
+                                        <select class="form-select mb-4" name="status" >
+                                            <option value="all">TODOS</option>
+                                            <option value="successful">EXITOSAS</option>
+                                            <option value="failed">FALLIDAS</option>
+                                            <option value="cancelled">CANCELADAS</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static mb-4">
                                         <label>Desde</label>
@@ -928,68 +951,8 @@
         </div>
         <!--end Modal-->
         <!-- Modal-->
-        @if (Auth::user()->role == 'Shopkeeper')
-            <div class="modal fade" id="ExcelProductTransactionsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6 class="modal-title" id="LabelProductTransactions"></h6>
-                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="actionProductTransactions" action="{{ url('/transaction/excelff') }}" method="post" enctype="multipart/form-data">
-                                <div class="row">
-                                    @csrf
-                                    @if(count($errors)>0)
-                                        <div class="alert alert-danger" role="alert">
-                                            <ul>
-                                                @foreach( $errors->all() as $error )
-                                                    <li> {{ $error }} </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="product">Seleccione un producto</label>
-                                            <select class="form-select mb-4" name="product_id" >
-                                                @foreach ($products as $product)
-                                                    <option value="{{$product->id}}">{{$product->product_name}} -
-                                                        @if ($product->product_type == 'Deposit')
-                                                            DEPOSITO
-                                                        @else
-                                                            RETIRO
-                                                        @endif
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <div class="input-group date mb-4">
-                                            <label>Desde: </label>
-                                            <input type="date" class="form-control ms-2" id="dateFrom" name="dateFrom" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <div class="input-group date mb-4">
-                                            <label>Hasta: </label>
-                                            <input type="date" class="form-control ms-2" id="dateTo" name="dateTo" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 text-center">
-                                        <input class="btn btn-success" type="submit" value="Descargar excel">
-                                        <a class="btn btn-primary" href="{{ url('/home') }}"> Regresar</a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
+
+
     <!--end Modal-->
         <!--Modal-->
         @if (isset($balancesCount) || isset($profitsCount))

@@ -14,6 +14,12 @@ class IndexUsersController extends Controller
         $role = $request->input('role');
         $urlServer = getenv('URL_SERVER');
 
+        if ($role === 'Advisers') {
+            $users = User::where('role', 'Advisers')->get();
+            return view('users.index', compact('role', 'users', 'urlServer'));
+        }
+
+
         if ($role === 'Administrator') {
             $users = User::where('role', 'like', 'Administrator')
                 ->where('is_enabled', '=', User::STATUS_ENABLED)

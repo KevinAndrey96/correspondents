@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserBank;
+use App\Models\ShopkeeperAdviser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +18,6 @@ class StoreUsersController extends Controller
 {
     public function store(Request $request)
     {
-
         $fields = [
             'name'=>'required',
             'email'=>'required|unique:users,email',
@@ -26,6 +27,18 @@ class StoreUsersController extends Controller
             'address'=>'required',
             'password'=>'required',
         ];
+
+        if ($request->role == 'Advisers') {
+            $fields = [
+                'name'=>'required',
+                'email'=>'required|unique:users,email',
+                'phone'=>'required',
+                'document'=>'required',
+                'city'=>'required',
+                'address'=>'required',
+                ];
+        }
+
         $message = [
             'name.required'=>'El nombre es requerido',
             'email.required'=>'El email es requerido',
@@ -36,6 +49,7 @@ class StoreUsersController extends Controller
             'password.required'=>'La contraseña es requerida',
             'unique'=>'El :attribute debe ser unico',
         ];
+
         if ($request->input('role') == 'Supplier') {
             $fields2 = [
                 'priority'=>'required',
@@ -59,7 +73,6 @@ class StoreUsersController extends Controller
         $user->document = $request->input('document');
         $user->city = $request->input('city');
         $user->address = $request->input('address');
-        $user->product_id = $request->input('product_id');
         $user->is_enabled = 1;
 
         if ($request->input('role') == 'Supplier') {
@@ -70,23 +83,47 @@ class StoreUsersController extends Controller
             $user->distributor_id = Auth::user()->id;
         }
 
-        if (strlen($request->password) < 7 || !preg_match('`[0-9]`',$request->password)
-            || !preg_match('`[a-z]`', $request->password) ) {
+        if (isset($request->password)) {
+            if (strlen($request->password) < 7 || !preg_match('`[0-9]`', $request->password)
+                || !preg_match('`[a-z]`', $request->password)) {
 
-            return back()->with('unfulfilledRequirements', 'La contraseña debe tener mínimo 7 caracteres, al menos una letra y al menos un número.');
+                return back()->with('unfulfilledRequirements', 'La contraseña debe tener mínimo 7 caracteres, al menos una letra y al menos un número.');
+            }
+
+            $user->password = Hash::make($request->input('password'));
+        } else {
+            $user->password =  Hash::make($request->input('adviser'));
+        }
+        $user->save();
+
+        if (isset($request->card_ids)) {
+            foreach ($request->card_ids as $id) {
+                $userBank = new UserBank();
+                $userBank->user_id = $user->id;
+                $userBank->card_id = intval($id);
+                $userBank->save();
+            }
         }
 
-        $user->password = Hash::make($request->input('password'));
-        $user->save();
+        if ($user->role == 'Shopkeeper') {
+            $shopkeeperAdviser = new ShopkeeperAdviser();
+            $shopkeeperAdviser->shopkeeper_id = $user->id;
+            $shopkeeperAdviser->adviser_id = intval($request->input('adviserID'));
+            $shopkeeperAdviser->save();
+        }
+
         if ($request->input('role') == 'Administrator') {
             $user->assignRole('Administrator');
         }
+
         if ($request->input('role') == 'Shopkeeper') {
             $user->assignRole('Shopkeeper');
         }
+
         if ($request->input('role') == 'Distributor') {
             $user->assignRole('Distributor');
         }
+
         if ($request->input('role') == 'Supplier') {
             $user->assignRole('Supplier');
         }

@@ -58,11 +58,11 @@
                                   </div>
                                   <div class="col-md-6 mb-4">
                                       <div class="form-group">
-                                          <label for="product_id" class="form-label">Banco:</label>
-                                          <select class="form-select" name="product_id" id="product_id" required>
+                                          <label for="card_id" class="form-label">Banco:</label>
+                                          <select class="form-select" name="card_id" id="card_id" required>
                                               <option selected disabled>Seleccione un banco</option>
-                                              @foreach($products as $product)
-                                                  <option value="{{$product->id}}">{{strtoupper($product->product_name)}}</option>
+                                              @foreach($cards as $card)
+                                                  <option value="{{$card->id}}">{{strtoupper($card->bank)}}</option>
                                               @endforeach
                                           </select>
                                       </div>

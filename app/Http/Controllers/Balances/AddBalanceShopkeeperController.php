@@ -20,7 +20,7 @@ class AddBalanceShopkeeperController extends Controller
             $fields = [
                 'amount'=>'required|numeric|min:0',
                 'image'=>'required',
-                'product_id' => 'required',
+                'card_id' => 'required',
                 'payment_code' => 'required'
             ];
             $message = [
@@ -55,7 +55,7 @@ class AddBalanceShopkeeperController extends Controller
             $balance->amount = $request->input('amount');
             $balance->date = $date;
             $balance->type = 'Deposit';
-            $balance->product_id = $request->input('product_id');
+            $balance->card_id = $request->input('card_id');
             $balance->payment_code =  $request->input('payment_code');
             $balance->save();
             if ($request->hasFile('image')) {

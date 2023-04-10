@@ -44,6 +44,7 @@ class AddBalanceAdminController extends Controller
             $balance->date = $date;
             $balance->type = $request->input('type');
             $balance->comment = $request->input('comment');
+            $balance->administrator_id = Auth::user()->id;
             $balance->is_valid = 1;
             $balance->save();
 

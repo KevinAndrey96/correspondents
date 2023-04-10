@@ -16,10 +16,9 @@ class CreateBalanceController extends Controller
     {
         if (Auth::user()->role == 'Shopkeeper' or Auth::user()->role == 'Supplier') {
             $cards = Card::all();
-            $products = Product::where('product_type', 'like', 'Deposit')->get();
             $urlServer = getenv('URL_SERVER');
 
-            return view('balance.addBalanceShopkeeper', compact('cards', 'urlServer', 'products'));
+            return view('balance.addBalanceShopkeeper', compact('cards', 'urlServer'));
         }
     }
 }

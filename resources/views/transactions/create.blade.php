@@ -124,14 +124,14 @@
                                             </div>
                                             @foreach($productsDeposit as $product)
                                                 <div class="col-md-3 col-xs-6">
-                                                    <div class=" form-check mb-3" >
+                                                    <div class="form-check mb-3">
                                                         <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
-                                                        <label  class="custom-control-label text-center" for="customRadio1">
+                                                        <label  style="width:50%;" class="custom-control-label text-center" for="customRadio1">
                                                             <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$product->id}}"
                                                                     data-id="{{$product->id}}">
                                                                     <a>
                                                                         <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{$urlServer.'/'.$product->product_logo}}" alt="No carga">
-                                                                        <p class="text-xs mt-1">{{ $product->product_name}}</p>
+                                                                        <p style="overflow-wrap: break-word;" class="text-xs mt-1" >{{ $product->product_name}}</p>
                                                                     </a>
                                                             </button>
                                                         </label>

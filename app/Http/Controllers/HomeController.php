@@ -9,6 +9,7 @@ use App\Models\Banner;
 use App\Models\Profit;
 use App\Models\Balance;
 use App\Models\Product;
+use App\Models\UserBank;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +49,7 @@ class HomeController extends Controller
             $holdTransactionCount = Transaction::where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $acceptedTransactionCount = Transaction::where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $cancelledTransactionCount = Transaction::where('status', 'like', 'cancelled')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+
 
             $administratorCount = User::where('role', 'like', 'Administrator')->count();
             $shopkeeperCount = User::where('role', 'like', 'Shopkeeper')->count();
@@ -111,6 +113,8 @@ class HomeController extends Controller
                                         id="container' . $product->id . '"></div>';
                 }
             }
+            $products = Product::all();
+
             return view('home', compact(
                 'transactionCount',
                 'successfulTransactionCount',
@@ -129,15 +133,15 @@ class HomeController extends Controller
                 'products',
                 'htmlContainers',
                 'auxProducts',
-                'urlServer'
+                'urlServer',
+                'products'
                 ));
         }
 
         if (Auth::user()->role == 'Distributor') {
+            $products = Product::all();
             $transactionCount = Transaction::where('distributor_id', '=', Auth::user()->id)->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
-
             $shopkeeperCount = User::where('role', 'like', 'Shopkeeper')->where('distributor_id', '=', Auth::user()->id)->count();
-
             $shopkeepers = User::where('role', 'like', 'Shopkeeper')->where('distributor_id', '=', Auth::user()->id)->get();
             $shopkeepersBalance = 0;
             foreach($shopkeepers as $shopkeeper){
@@ -154,7 +158,8 @@ class HomeController extends Controller
                 'shopkeepersBalance',
                 'banners',
                 'firstBanner',
-                'urlServer'
+                'urlServer',
+                'products'
                 ));
         }
 
@@ -164,6 +169,7 @@ class HomeController extends Controller
             $failedTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Failed')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $holdTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $acceptedTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $products = Product::all();
 
             return view('home', compact(
                 'transactionCount',
@@ -171,7 +177,8 @@ class HomeController extends Controller
                 'failedTransactionCount',
                 'holdTransactionCount',
                 'acceptedTransactionCount',
-                'urlServer'
+                'urlServer',
+                'products'
             ));
         }
 
@@ -202,16 +209,17 @@ class HomeController extends Controller
         }
 
         if (Auth::user()->role == 'Saldos') {
+            $balancesCount = 0;
+            $userBanks = UserBank::where('user_id', Auth::user()->id)->get();
 
-            $profitsCount = Profit::where([
-                ['is_valid', null],
-                ['product_id', Auth::user()->product_id]
-            ])->get()->count();
+            foreach ($userBanks as $userBank) {
+                $balancesCount += Balance::where([
+                    ['is_valid', null],
+                    ['card_id', $userBank->card_id]
+                ])->get()->count();
+            }
 
-            $balancesCount = Balance::where([
-                ['is_valid', null],
-                ['product_id', Auth::user()->product_id]
-            ])->get()->count();
+            $profitsCount = 0;
 
             $banners = Banner::all();
             $firstBanner = null;
