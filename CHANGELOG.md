@@ -87,5 +87,8 @@ fix: balance history in shopkeeper rol
 ## [Hotfix 1.2.8]
 fix: allow decimals in transaction input
 
+## [Hotfix 1.2.9]
+fix: add user name to balance extract
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

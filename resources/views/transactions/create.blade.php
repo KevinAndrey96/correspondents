@@ -25,6 +25,7 @@
             <p class="text-center text-sm text-white">{{ Session::get('limitExceeded') }}</p>
         </div>
     @endif
+
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">

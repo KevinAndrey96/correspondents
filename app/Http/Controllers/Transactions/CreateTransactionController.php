@@ -15,6 +15,7 @@ class CreateTransactionController extends Controller
     {
         if (Auth::user()->role == 'Shopkeeper') {
             $urlServer = getenv('URL_SERVER');
+
             $productsDeposit = Product::where('product_type','=','Deposit')
                 ->where('is_enabled','=','1')
                 ->orderBy('priority', 'asc')

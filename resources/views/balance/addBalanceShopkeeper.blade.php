@@ -38,7 +38,12 @@
                                 <div class="col-md-6">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="amount" class="form-label"></label>
-                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="any" min="0" placeholder="Monto" required>
+                                        <input type="number" class="form-control" name="amount" value="" id="amount"
+                                               step="any" min="0" placeholder="Monto"
+                                               @if ($countryName == 'ECUADOR')
+                                                   max="5000"
+                                               @endif
+                                               required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
