@@ -34,7 +34,8 @@ class StoreProductController extends Controller
             'priority'=>'required',
             'num_jineteo'=>'required',
             'hours'=>'required',
-            'reassignment_minutes' => 'required'
+            'reassignment_minutes' => 'required',
+            'fixed_commission' => 'required'
 
         ];
         $message = [
@@ -62,6 +63,7 @@ class StoreProductController extends Controller
         $product->com_shp = $request->input('com_shp');
         $product->com_dis = $request->input('com_dis');
         $product->com_sup = $request->input('com_sup');
+        $product->fixed_commission = $request->input('fixed_commission');
         $product->save();
 
         if (! is_null($product->com_shp) && ! is_null($product->com_dis ) && ! is_null($product->com_sup)) {

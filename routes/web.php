@@ -111,6 +111,9 @@ Route::get('/transaction/detail/{id}', [App\Http\Controllers\Transactions\Detail
 Route::post('/transaction/update', [App\Http\Controllers\Transactions\UpdateTransactionController::class, 'update'])->middleware('auth');
 Route::get('/transaction/cancel/{id}', [App\Http\Controllers\Transactions\CancelTransactionController::class, 'cancel']);
 Route::get('/transaction/detail-pdf/{id}', [App\Http\Controllers\Transactions\DetailTransactionPDFController::class, 'detailPDF']);
+Route::get('/transactions-transfer/{id}',
+    App\Http\Controllers\Transactions\TransferTransactionController::class)
+    ->name('transactions.transfer');
 
 /**
  * Middleware for 2FA
@@ -221,3 +224,14 @@ Route::get('/extrainfo', App\Http\Controllers\Users\DistributorExtrainfoUsersCon
 Route::post('/store-distributor-extrainfo', App\Http\Controllers\Users\StoreDistributorExtrainfoUsersController::class)
     ->name('store.distributor.extrainfo');
 
+/**
+ * Routes for preloaded answers
+ */
+Route::get('/answers', App\Http\Controllers\Answers\IndexAnswersController::class)
+    ->name('answers.index');
+Route::get('/answers-create', App\Http\Controllers\Answers\CreateAnswersController::class)
+    ->name('answers.create');
+Route::post('/answers-store', App\Http\Controllers\Answers\StoreAnswersController::class)
+    ->name('answers.store');
+Route::get('/answers-delete/{id}', App\Http\Controllers\Answers\DeleteAnswersController::class)
+    ->name('answers.delete');

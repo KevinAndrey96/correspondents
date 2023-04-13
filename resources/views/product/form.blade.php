@@ -82,6 +82,12 @@
                                 @endif
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
+                                        <label for="fixed_commission" class="form-label">Comisión fija</label>
+                                        <input type="number" class="form-control" step="any" min="0" name="fixed_commission" value="{{ isset($product->fixed_commission)?$product->fixed_commission:old('fixed_commission') }}" id="fixed_commission" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group input-group-outline my-3">
                                         <label for="productCommission" class="form-label">Monto mínimo</label>
                                         <input type="number" class="form-control" name="min_amount" step="any" value="{{ isset($product->min_amount)?$product->min_amount:old('min_amount') }}" id="productMinAmount" placeholder="" min="0" required>
                                     </div>

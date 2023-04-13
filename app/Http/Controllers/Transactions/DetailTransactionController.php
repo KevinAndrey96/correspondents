@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Transactions;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Models\Answer;
 use Illuminate\Support\Facades\Auth;
 
 class DetailTransactionController extends Controller
@@ -24,9 +25,10 @@ class DetailTransactionController extends Controller
         $extras = explode(',', $transaction->detail);
         if (Auth::user()->role == 'Supplier' && is_null($detailSupplier) && ($transaction->status == 'hold' || $transaction->status == 'accepted')) {
             $transaction->status = 'accepted';
+            $answers = Answer::where('is_deleted', 0)->get();
             $transaction->save();
 
-            return view('transactions.detail', compact('transaction', 'extras', 'detailSupplier','callSign', 'urlServer'));
+            return view('transactions.detail', compact('transaction', 'extras', 'detailSupplier','callSign', 'urlServer', 'answers'));
         }
         if (Auth::user()->role == 'Supplier' && ! is_null($detailSupplier)) {
 

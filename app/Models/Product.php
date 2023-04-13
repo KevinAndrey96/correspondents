@@ -36,7 +36,8 @@ class Product extends Model
         'priority',
         'num_jineteo',
         'hours',
-        'reassignment_minutes'
+        'reassignment_minutes',
+        'fixed_commission'
     ];
 
 

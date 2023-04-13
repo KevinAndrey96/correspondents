@@ -86,7 +86,7 @@
                                             <div class="input-group input-group-lg input-group-outline">
                                             <input class="form-control form-control-lg" type="number" id="amount{{$commission->id}}"
                                                    onclick="amountChange({{ $commission->id }})"
-                                                   step="0.01" min="0">
+                                                   step="any" min="0">
                                             </div>
                                         </td>
                                     </tr>

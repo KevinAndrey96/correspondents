@@ -51,11 +51,22 @@
                                                                   <option value="failed">Fallida</option>
                                                               </select>
                                                         </div>
+                                                        <div style="display:none;"  class="input-group input-group-static mb-4" id="observation-select-div" >
+                                                            <label for="observation">Seleccione una observación:</label>
+                                                            <select  id="observation-select" name="observation" class="form-control" aria-label="Default select example" required>
+                                                                <option value="Ninguna" selected>Ninguna</option>
+                                                                @foreach($answers as $answer)
+                                                                    <option value="{{$answer->answer}}">{{$answer->answer}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
                                                         <div class="input-group input-group-dynamic">
                                                             <textarea class="form-control" name="comment" rows="3" placeholder="Comentario:" spellcheck="false"></textarea>
                                                         </div>
-                                                        <div class="pt-4 pb-1 text-center">
+                                                        <div class="pt-4 pb-1 text-center d-flex justify-content-center">
                                                             <input type="hidden" name="transaction_id" value="{{$transaction->id}}">
+                                                            <a href="{{route('transactions.transfer', ['id' => $transaction->id])}}" class="btn btn-primary me-2" onclick="confirm('¿Está seguro que quiere trasladar la transacción a otro proveedor?')">Trasladar</a>
                                                             <input class="btn btn-success" id="submitButton" onclick="hideButton()" type="submit" value="Enviar">
                                                         </div>
                                                     </form>
@@ -167,11 +178,21 @@
     <script type="text/javascript">
         function confirmSelection(select)
         {
-            var isConfirmed = confirm('¿Está seguro de esta elección?')
-
+            var isConfirmed = confirm('¿Está seguro de esta elección?');
+            var observationSelectDiv = document.getElementById('observation-select-div')
+            var observationSelect = document.getElementById('observation-select')
             if (! isConfirmed) {
                 select.value = null;
             }
+
+            if (select.value == 'failed') {
+                observationSelectDiv.style.display = 'block';
+                observationSelect.disabled = false;
+            } else {
+                observationSelectDiv.style.display = 'none';
+                observationSelect.disabled = true;
+            }
+
         }
     </script>
 

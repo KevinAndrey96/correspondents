@@ -35,6 +35,7 @@ class UpdateTransactionController extends Controller
                 && Summary::where([['movement_id', $transaction->id],['movement_type','!=','Recarga de Saldo']])->first() === null
             ) {
                 $transaction->status = $request->input('status');
+                $transaction->observation = $request->input('observation');
                 $transaction->comment = $request->input('comment');
                 $transaction->save();
 
@@ -97,7 +98,7 @@ class UpdateTransactionController extends Controller
                     if (isset($commissionSupp)) {
                         $supplier->profit += $commissionSupp->amount;
                     }
-                    $administrator->profit += $transaction->com_adm;
+                    $administrator->profit += ($transaction->com_adm + $transaction->product->fixed_commission);
                     $distributor->profit = $distributor->profit + $commissionDist->amount - $commissionShop->amount;
                     $shopkeeper->profit += $commissionShop->amount;
 
@@ -120,7 +121,7 @@ class UpdateTransactionController extends Controller
                     $supplierSummary->amount = $transaction->amount;
                     $supplierSummary->previous_balance = $supplier->balance;
                     if ($transaction->type === 'Withdrawal') {
-                        $shopkeeper->balance += $transaction->amount;
+                        $shopkeeper->balance += ($transaction->amount - $transaction->product->fixed_commission);
                         $supplier->balance += $transaction->amount;
                         $shopkeeperBalance->type = 'Deposit';
                         $supplierBalance->type = 'Deposit';
@@ -128,7 +129,7 @@ class UpdateTransactionController extends Controller
                         $shopkeeperSummary->movement_type = 'Retiro Realizado';
                     }
                     if ($transaction->type === 'Deposit') {
-                        $shopkeeper->balance -= $transaction->amount;
+                        $shopkeeper->balance -= ($transaction->amount + $transaction->product->fixed_commission);
                         $supplier->balance -= $transaction->amount;
                         $shopkeeperBalance->type = 'Withdrawal';
                         $supplierBalance->type = 'Withdrawal';
