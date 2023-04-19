@@ -20,7 +20,14 @@ class DailyPasswordMiddleware
     public function handle(Request $request, Closure $next)
     {
         date_default_timezone_set('America/Bogota');
+
+        if (session('impersonated_by')) {
+
+            return $next($request);
+        }
+
         $user = User::find(Auth::user()->id);
+
         if ($user->role == 'Shopkeeper' && $user->enabled_daily == 1) {
             if (! is_null($user->daily_password_date)) {
                 $currentDate = strtotime(Carbon::now()->format('Y-m-d'));

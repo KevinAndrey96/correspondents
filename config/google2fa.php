@@ -5,6 +5,7 @@ return [
     /*
      * Enable / disable Google2FA.
      */
+
     'enabled' => env('OTP_ENABLED', true),
 
     /*

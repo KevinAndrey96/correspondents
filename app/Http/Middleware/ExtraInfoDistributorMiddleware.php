@@ -18,7 +18,13 @@ class ExtraInfoDistributorMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        if (session('impersonated_by')) {
+
+            return $next($request);
+        }
+
         $user = User::find(Auth::user()->id);
+
 
         if ($user->role == 'Shopkeeper' && $user->extrainfo == 0) {
 

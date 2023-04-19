@@ -187,8 +187,11 @@
                                                     <a style="color:#505050 ;" href="{{route('product.assign', ['id' => $user->id])}}" title="Asignar productos" class="btn btn-link px-1 mb-0"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10">assignment_turned_in</i></a>
                                                 @endif
                                                 @if ($role == 'allShopkeepers')
+                                                    <a style="color:#505050 ;" href="{{route('mode.spectator', ['id' => $user->id, 'isInspector' => 1])}}" title="Modo inspector" class="btn btn-link px-1 mb-0" onclick="confirm('¿Está seguro que desea entrar en modo inspector y entrar en la cuenta del tendero?')"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10 text-primary">visibility</i></a>
+                                                <!--
                                                     <button type="button" class="btn btn-white px-1 mb-0" title="Ver información del tendero"  data-bs-toggle="modal" data-bs-target="#ShopkeeperInfoModal"
                                                             data-id="{{$user->id}}"><i style="font-size: 25px !important;" class="material-icons opacity-10 text-primary" data-userID={{$user->id}}>visibility</i></button>
+                                                            -->
                                                 @endif
                                                 <a style="color: darkred;" href="#" title="Eliminar" class="btn btn-link px-1 mb-0"><i style="color: darkred; font-size: 25px !important;" class="material-icons opacity-10" onclick="getStatus({{$user->id}})">delete</i></a>
                                             </div>

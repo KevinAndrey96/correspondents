@@ -11,6 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\SupplierProduct;
 use App\Models\Product;
+use Lab404\Impersonate\Models\Impersonate;
 
 /**
  * @property mixed|string $name
@@ -31,6 +32,8 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
     use SoftDeletes;
+    use Impersonate;
+
 
     public const STATUS_ENABLED = 1;
     /**

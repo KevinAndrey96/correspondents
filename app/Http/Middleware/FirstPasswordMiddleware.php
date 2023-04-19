@@ -17,6 +17,11 @@ class FirstPasswordMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        if (session('impersonated_by')) {
+
+            return $next($request);
+        }
+
         if (Auth::user()->first_login == 0) {
             return redirect()->route('users.first.password');
         }

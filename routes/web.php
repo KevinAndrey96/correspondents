@@ -18,11 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('auth.login');
 });
 
 Auth::routes();
+Route::impersonate();
 
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
@@ -80,6 +82,9 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     Route::post('/updatePassword', [App\Http\Controllers\Users\UpdatePasswordUsersController::class, 'updatePassword']);
     Route::post('/enabled-daily', App\Http\Controllers\Users\EnabledDailyUsersController::class)
         ->name('users.shopkeeper.enabled.daily');
+    Route::get('/mode-spectator/{id}/{isInspector}', App\Http\Controllers\Users\ModeSpectatorUsersController::class)
+        ->name('mode.spectator');
+
 
 
     Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index']);
@@ -235,3 +240,4 @@ Route::post('/answers-store', App\Http\Controllers\Answers\StoreAnswersControlle
     ->name('answers.store');
 Route::get('/answers-delete/{id}', App\Http\Controllers\Answers\DeleteAnswersController::class)
     ->name('answers.delete');
+

@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class CreateTransactionController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
+        return $request->session()->get('spector');
         if (Auth::user()->role == 'Shopkeeper') {
             $urlServer = getenv('URL_SERVER');
 

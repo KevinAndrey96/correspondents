@@ -705,6 +705,11 @@
                                     <i class="fas fa-sign-out-alt  me-4"></i>Cerrar sesión
                                 </a>
                             </li>
+                            @if (session('impersonated_by'))
+                                <li>
+                                    <a class="dropdown-item" href="{{route('mode.spectator', ['id'=> 1, 'isInspector' => 0]) }}"><i class="fas fa-exchange-alt me-4"></i>Volver a mi sesión</a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                 </ul>
