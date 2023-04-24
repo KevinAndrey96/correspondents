@@ -93,5 +93,8 @@ fix: add user name to balance extract
 ## [Hotfix 1.3.0]
 fix: add livewire.php to config folder
 
+## [Hotfix 1.3.1]
+fix: delete livewire.php
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
