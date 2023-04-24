@@ -90,5 +90,8 @@ fix: allow decimals in transaction input
 ## [Hotfix 1.2.9]
 fix: add user name to balance extract
 
+## [Hotfix 1.3.0]
+fix: add livewire.php to config folder
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
