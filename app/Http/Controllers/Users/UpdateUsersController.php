@@ -65,16 +65,19 @@ class UpdateUsersController extends Controller
 
         if ($user->role == 'Shopkeeper') {
             $shopkeeperAdviser = ShopkeeperAdviser::where('shopkeeper_id', $user->id)->first();
-            if (isset($shopkeeperAdviser)) {
-                $shopkeeperAdviser->adviser_id = $request->input('adviserID');
-                $shopkeeperAdviser->save();
+            if ($request->adviserID != 'none') {
+                if (isset($shopkeeperAdviser)) {
+                    $shopkeeperAdviser->adviser_id = $request->input('adviserID');
+                    $shopkeeperAdviser->save();
+                } else {
+                    $shopkeeperAdviser = new ShopkeeperAdviser();
+                    $shopkeeperAdviser->shopkeeper_id = $user->id;
+                    $shopkeeperAdviser->adviser_id = $request->input('adviserID');
+                    $shopkeeperAdviser->save();
+                }
             } else {
-                $shopkeeperAdviser = new ShopkeeperAdviser();
-                $shopkeeperAdviser->shopkeeper_id = $user->id;
-                $shopkeeperAdviser->adviser_id = $request->input('adviserID');
-                $shopkeeperAdviser->save();
+                ShopkeeperAdviser::destroy($shopkeeperAdviser->id);
             }
-
         }
 
         if (! is_null($request->input('multiproductosID'))) {

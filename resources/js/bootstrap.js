@@ -1,12 +1,13 @@
 window._ = require('lodash');
+import Pusher from "pusher-js"
+window.Pusher = require('pusher-js');
 
-<<<<<<< HEAD
-=======
+/*
 try {
     require('bootstrap');
 } catch (e) {}
+*/
 
->>>>>>> 81dadc7b96419ec4fe310a96ea9f3dc806681a74
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -25,7 +26,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 // import Echo from 'laravel-echo';
 
-// window.Pusher = require('pusher-js');
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',

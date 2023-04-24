@@ -36,15 +36,20 @@ class ValidateBalanceController extends Controller
                     $summary->amount = $balance->amount;
                     $summary->previous_balance = $user->balance;
 
-                    if($balance->type == 'Deposit'){
+                    if (isset($balance->card->bank)) {
+                        $summary->bank = $balance->card->bank;
+                    }
+
+                    if ($balance->type == 'Deposit') {
                         $user->balance = $user->balance+$balance->amount;
                         $emailBody->body = 'Su solicitud de recarga de saldo por valor de $'.$balance->amount.' fue aprobada.';
                         $summary->movement_type = 'Recarga de Saldo';
-                    }elseif($balance->type == 'Withdrawal'){
+                    } elseif ($balance->type == 'Withdrawal'){
                         $user->balance = $user->balance-$balance->amount;
                         $emailBody->body = 'Se retiro saldo por valor de $'.$balance->amount.' a consideración de un administrador.';
                         $summary->movement_type = 'Retiro por Administrador';
                     }
+
                     $summary->next_balance = $user->balance;
                     $emailSubject = 'Solicitud de saldo aprobada';
                     $summary->save();

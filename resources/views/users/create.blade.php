@@ -114,6 +114,7 @@
                                         <div class="col-md-4">
                                             <label class="form-label">Seleccione un asesor:</label>
                                             <select class="form-select" name="adviserID" id="adviserID" required>
+                                                <option value="none">Ninguno</option>
                                                 @foreach ($advisers as $adviser)
                                                     <option value="{{$adviser->id}}">{{strtoupper($adviser->name)}}</option>
                                                 @endforeach

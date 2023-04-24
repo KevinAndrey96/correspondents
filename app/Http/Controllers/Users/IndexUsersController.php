@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\ShopkeeperAdviser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,16 +28,18 @@ class IndexUsersController extends Controller
             return view('users.index', compact('role', 'users', 'urlServer'));
         }
         if ($role === 'Shopkeeper') {
+            $shopkeeperAdvisers = ShopkeeperAdviser::all();
             $users = User::where('role', 'like', 'Shopkeeper')
                 ->where('is_enabled', '=', User::STATUS_ENABLED)
                 ->where('distributor_id', '=', Auth::user()->id)->get();
-            return view('users.index', compact('role', 'users', 'urlServer'));
+            return view('users.index', compact('role', 'users', 'urlServer', 'shopkeeperAdvisers'));
         }
         if ($role === 'allShopkeepers') {
+            $shopkeeperAdvisers = ShopkeeperAdviser::all();
             $users = User::where('role', 'like', 'Shopkeeper')
                 ->where('is_enabled', '=', User::STATUS_ENABLED)
                 ->get();
-            return view('users.index', compact('role', 'users', 'urlServer'));
+            return view('users.index', compact('role', 'users', 'urlServer', 'shopkeeperAdvisers'));
         }
         if ($role === 'Supplier') {
             $users = User::where('role', 'like', 'Supplier')

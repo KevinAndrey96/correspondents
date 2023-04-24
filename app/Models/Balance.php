@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Card;
 
 class Balance extends Model
 {
@@ -18,5 +19,10 @@ class Balance extends Model
     public function administrator()
     {
         return $this->belongsTo(User::class, 'administrator_id');
+    }
+
+    public function card()
+    {
+        return $this->belongsTo(Card::class);
     }
 }

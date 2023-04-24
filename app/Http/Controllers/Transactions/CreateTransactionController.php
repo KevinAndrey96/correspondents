@@ -13,7 +13,7 @@ class CreateTransactionController extends Controller
 {
     public function create(Request $request)
     {
-        return $request->session()->get('spector');
+        //return $request->session()->get('spector');
         if (Auth::user()->role == 'Shopkeeper') {
             $urlServer = getenv('URL_SERVER');
 

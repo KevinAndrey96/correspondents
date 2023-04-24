@@ -153,7 +153,7 @@
                                                 <div class="col-md-8 col-sm-8">
                                                     <div class="row jusfify-content-center align-items-center">
                                                         <div class="col-md-12">
-                                                            <h2>¡Tienes una nueva transacción!</h2>
+                                                            <h2 class="text-center">¡Tienes una nueva transacción!</h2>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -83,6 +83,12 @@
                                         <div class="col-md-4">
                                             <label class="form-label">Seleccione un asesor:</label>
                                             <select class="form-select" name="adviserID" id="adviserID" required>
+                                                @if (isset($shopkeeperAdviser))
+                                                    <option value="none">Ninguno</option>
+                                                @else
+                                                    <option value="none" selected>Ninguno</option>
+                                                @endif
+
                                                 @foreach ($advisers as $adviser)
                                                     @if (isset($shopkeeperAdviser))
                                                         @if ($shopkeeperAdviser->adviser_id == $adviser->id)

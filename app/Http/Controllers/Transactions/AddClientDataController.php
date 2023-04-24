@@ -50,6 +50,7 @@ class AddClientDataController extends Controller
                 $i = 0;
                 $firstTransactions =  Transaction::where([
                     ['account_number', '=', $request->input('accountNumber')],
+                    ['product_id', '=', $request->input('productID')],
                     ['first_transaction', '=', 1]
                 ])->get();
 
@@ -58,7 +59,8 @@ class AddClientDataController extends Controller
                     $allowedTransaction = 1;
                 } else {
                     $accountTransactions = Transaction::where([
-                            ['account_number', '=', $request->input('accountNumber')]
+                            ['account_number', '=', $request->input('accountNumber')],
+                            ['product_id', '=', $request->input('productID')]
                         ])
                         ->orderBy('updated_at', 'desc')
                         ->get();

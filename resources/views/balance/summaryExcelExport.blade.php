@@ -4,6 +4,7 @@
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID Movimiento</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID Usuario</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre Usuario</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Banco</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de movimiento</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Previo</th>
@@ -17,6 +18,7 @@
             <td class="align-middle text-center text-sm">{{ $summary->movement_id }}</td>
             <td class="align-middle text-center text-sm">{{ $summary->user_id }}</td>
             <td class="align-middle text-center text-sm">{{ $summary->user->name }}</td>
+            <td class="align-middle text-center text-sm">{{ $summary->bank }}</td>
             <td class="align-middle text-center text-sm">{{ $summary->movement_type }}</td>
             <td class="align-middle text-center text-sm">${{ number_format($summary->amount, 2, ',', '.') }}</td>
             <td class="align-middle text-center text-sm">${{ number_format($summary->previous_balance, 2, ',', '.') }}</td>

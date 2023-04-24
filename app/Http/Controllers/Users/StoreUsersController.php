@@ -105,7 +105,7 @@ class StoreUsersController extends Controller
             }
         }
 
-        if ($user->role == 'Shopkeeper') {
+        if ($user->role == 'Shopkeeper' && $request->adviserID != 'none') {
             $shopkeeperAdviser = new ShopkeeperAdviser();
             $shopkeeperAdviser->shopkeeper_id = $user->id;
             $shopkeeperAdviser->adviser_id = intval($request->input('adviserID'));

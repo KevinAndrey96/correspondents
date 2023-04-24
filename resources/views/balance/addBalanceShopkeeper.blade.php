@@ -56,15 +56,14 @@
                                      </div>
                                 </div>
                                   <div class="col-md-6">
-                                      <div class=" input-group input-group-outline my-3">
+                                      <div class="input-group input-group-outline my-3">
                                           <label for="payment_code" class="form-label"></label>
-                                          <input type="text" class="form-control" name="payment_code" value="" id="payment_code" placeholder="Código de pago (Este código debe ser exactamente igual al del recibo subido)" required>
+                                          <input type="text" class="form-control" name="payment_code" value="" id="payment_code" placeholder="Código de pago o número de transacción" required>
                                       </div>
                                   </div>
                                   <div class="col-md-6 mb-4">
-                                      <div class="form-group">
-                                          <label for="card_id" class="form-label">Banco:</label>
-                                          <select class="form-select" name="card_id" id="card_id" required>
+                                      <div class="form-group my-3">
+                                          <select class="form-select" name="card_id" id="card_id" onchange="showCard()" required>
                                               <option selected disabled>Seleccione un banco</option>
                                               @foreach($cards as $card)
                                                   <option value="{{$card->id}}">{{strtoupper($card->bank)}}</option>
@@ -72,20 +71,8 @@
                                           </select>
                                       </div>
                                   </div>
-                                  <div class="col-md-6 mb-4">
-                                      <div class="form-group">
-                                          <label for="bank" class="form-label">Tarjeta:</label>
-                                          <select class="form-select" name="bank" id="bank" onchange="showCard()">
-                                              <option>Seleccione un tarjeta</option>
-                                              @foreach($cards as $card)
-                                                <option value="{{$card->id}}">Tarjeta de {{$card->bank}}</option>
-                                              @endforeach
-                                          </select>
-                                      </div>
-                                  </div>
                                   <div class="text-center">
                                       <input class="btn btn-primary" type="submit" value="Enviar solicitud">
-
                                       <a style="background-color: gray" class="btn text-white" href="{{ url('/home') }}"> Regresar</a>
                                   </div>
 
@@ -132,7 +119,7 @@
 
         function showCard()
         {
-            bank = document.getElementById('bank');
+            bank = document.getElementById('card_id');
             card = document.getElementById('card'+bank.value);
             cards = document.querySelectorAll(".bank-card");
 

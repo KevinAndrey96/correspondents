@@ -29,7 +29,7 @@ Route::impersonate();
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home')
-        ->middleware('distributorExtrainfo', '2fa', 'firstPassword', 'dailyPassword');
+        ->middleware('distributorExtrainfo', 'firstPassword', 'dailyPassword');
     Route::get('/products', [App\Http\Controllers\Products\IndexProductController::class, 'index']);
     Route::get('/products/create', [App\Http\Controllers\Products\CreateProductController::class, 'create']);
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
@@ -240,4 +240,12 @@ Route::post('/answers-store', App\Http\Controllers\Answers\StoreAnswersControlle
     ->name('answers.store');
 Route::get('/answers-delete/{id}', App\Http\Controllers\Answers\DeleteAnswersController::class)
     ->name('answers.delete');
+
+/**
+ * Routes for chats
+ */
+
+Route::get('/chat/{id}', App\Http\Controllers\Chats\indexChatsController::class)
+    ->name('chat');
+
 

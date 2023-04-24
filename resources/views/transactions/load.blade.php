@@ -27,6 +27,7 @@
     <div class="page-header align-items-start min-vh-100" style="background-image: url('{{$pathBackground}}'); background-position: center;">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container my-auto">
+
             <div class="row">
                 <div class="col-lg-4 col-md-8 col-12 mx-auto">
                     <div class="card z-index-0 fadeIn3 fadeInBottom">
@@ -35,7 +36,8 @@
                                 <h5 class="text-white font-weight-bolder text-center mt-2 mb-2">Un momento por favor ...</h5>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div style="position: relative;"  class="card-body">
+                            <a href="{{route('chat', ['id' => $transaction->id])}}"  target="_blank" id="chatIcon" style="position: absolute; left:80%; bottom:85%; display:none;" title="Comunicarse con proveedor"><i style="color: #505050; font-size: 30px !important;" class="material-icons opacity-10">forum</i></a>
                             <div class="text-center mb-2">
                                 <img  src="/assets/img/RelojArena2.gif" alt="gif" height="140px" width="200px">
                             </div>
@@ -153,6 +155,7 @@
         var pStatus = document.getElementById('pStatus');
         var divStatus = document.getElementById('divStatus');
         var pSupplierID = document.getElementById('supplierID');
+        var chatIcon = document.getElementById('chatIcon');
 
         axios.get('{{$url}}/api/getStatus/'+id)
             .then((res)=> {
@@ -163,6 +166,7 @@
                     if (res.data.status == 'accepted') {
                         pStatus.innerHTML = 'Aceptada';
                         pStatus.style.backgroundColor = 'dodgerblue';
+                        chatIcon.style.display = 'block';
                     }
                     if (res.data.status == 'successful' || res.data.status == 'failed' || res.data.status == 'cancelled') {
                         window.location.replace("{{$url}}/transaction/detail/{{$transaction->id}}");

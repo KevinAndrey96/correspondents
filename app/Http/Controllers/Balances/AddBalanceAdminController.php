@@ -49,9 +49,14 @@ class AddBalanceAdminController extends Controller
             $balance->save();
 
             $summary = new Summary();
+            $summary->movement_id = $balance->id;
             $summary->user_id = $request->input('userID');
             $summary->amount = $balance->amount;
             $summary->previous_balance = $user->balance;
+
+            if (isset($balance->card->bank)) {
+                $summary->bank = $balance->card->bank;
+            }
 
             if ($request->input('type') == 'Deposit') {
                 $summary->movement_type = 'Recarga de Saldo ';

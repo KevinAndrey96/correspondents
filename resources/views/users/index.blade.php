@@ -64,6 +64,7 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Prioridad</th>
                                         @endif
                                             @if ($role == 'Shopkeeper' || $role == 'allShopkeepers')
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Asesor</th>
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID Multiproductos</th>
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plataforma Multiproductos</th>
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 p-6">Documentos</th>
@@ -135,6 +136,13 @@
                                             <td class="align-middle text-center text-sm">{{$user->priority}}</td>
                                         @endif
                                             @if ($role == 'Shopkeeper' || $role == 'allShopkeepers')
+                                                <td class="align-middle text-center text-sm">
+                                                    @foreach ($shopkeeperAdvisers as $shopkeeperAdviser)
+                                                        @if ($shopkeeperAdviser->shopkeeper_id == $user->id)
+                                                            {{$shopkeeperAdviser->adviser->name}}
+                                                        @endif
+                                                    @endforeach
+                                                </td>
                                                 <td class="align-middle text-center text-sm">
                                                     @if (isset($user->multiproductosID))
                                                         {{$user->multiproductosID}}

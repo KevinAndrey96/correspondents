@@ -14,11 +14,12 @@
                             <div class="col-md-2 mt-1"></div>
                             <div class="col-md-7 mt-1">
                                 <div class="card bg-primary">
-                                    <div class="card-body pt-2 p-2">
+                                    <div style="position:relative;" class="card-body pt-2 p-2">
                                         <ul class="list-group">
                                             <li class="list-group-item border-0 d-flex p-4 mb-0 bg-gray-100 border-radius-lg">
                                               <div class="row">
-                                                @if (Auth::user()->role == 'Supplier' && is_null($detailSupplier))
+                                                  <a href="{{route('chat', ['id' => $transaction->id])}}" target="_blank" id="chatIcon" style="position: absolute; left:85%; bottom:85%;" title="Comunicarse con tendero"><i style="color: #505050; font-size: 30px !important;" class="material-icons opacity-10">forum</i></a>
+                                              @if (Auth::user()->role == 'Supplier' && is_null($detailSupplier))
                                                 <div class="col-md-4 d-flex flex-column ">
                                                     <h6 class="mb-3 text-sm">Información</h6>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Producto: {{$transaction->product->product_name}}</p>
@@ -91,6 +92,7 @@
                                                                 <p class="mb-2 text-xs font-weight-bold text-dark">{{$extra}}</p>
                                                             @endforeach
                                                             <p class="mb-2 text-xs font-weight-bold text-dark">Comentario: {{$transaction->comment}}</p>
+                                                            <p class="mb-2 text-xs font-weight-bold text-dark">Observación: {{$transaction->observation}}</p>
 
                                                         </div>
                                                         <div class="col-md-8 d-flex flex-column ms-auto me-auto pe-2">
@@ -114,7 +116,6 @@
                                                                         <img class="image-link rounded" width="200px" height="200px" src="{{$urlServer}}{{$transaction->voucher}}">
                                                                     @endif
                                                                 </a>
-
                                                             </div>
                                                         </div>
                                                         <div style="display: none;" class="col-md-6">
