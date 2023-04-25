@@ -1,4 +1,4 @@
-<div style="height:400px; overflow-y: scroll;">
+<div style="height:350px; overflow-y: scroll;">
     @if (! is_null($messages))
         @foreach ($messages as $message)
             @if ($message->message != '')
@@ -13,7 +13,6 @@
 
         <script>
             // Enable pusher logging - don't include this in production
-
             Pusher.logToConsole = true;
 
             var pusher = new Pusher('0fbdb644e77038da8545', {

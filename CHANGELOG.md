@@ -96,5 +96,8 @@ fix: add livewire.php to config folder
 ## [Hotfix 1.3.1]
 fix: delete livewire.php
 
+## [Hotfix 1.3.2]
+fix: delete dd() in chat-list component
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
