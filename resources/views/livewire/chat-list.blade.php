@@ -1,7 +1,13 @@
 <div style="height:400px; overflow-y: scroll;">
     @if (! is_null($messages))
         @foreach ($messages as $message)
-            <div style="display:block">{{$message->message}}</div>
+            @if ($message->message != '')
+                @if ($message->user_role == Auth::user()->role)
+                    <div class="alert alert-primary w-70 text-white float-end" style="display:block">{{$message->message}}</div>
+                @else
+                    <div class="alert alert-success w-70 text-white float-start" style="display:block">{{$message->message}}</div>
+                @endif
+            @endif
         @endforeach
     @endif
 

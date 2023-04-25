@@ -13,7 +13,8 @@ class Chat extends Model
     protected $fillable = [
         'transaction_id',
         'message',
-        'user_id'
+        'user_id',
+        'user_role'
     ];
 
     public function user()

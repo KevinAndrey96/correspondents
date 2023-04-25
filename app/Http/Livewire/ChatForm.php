@@ -28,6 +28,7 @@ class ChatForm extends Component
         $data = [
             'message'=> $this->message,
             'transactionID' => $this->transactionID,
+            'userID' => Auth::user()->id,
             'userRole' => Auth::user()->role
         ];
 

@@ -27,9 +27,11 @@ class ChatList extends Component
             $chat->transaction_id = $data['message']['transactionID'];
             $chat->message = $data['message']['message'];
             $chat->user_role = $data['message']['userRole'];
-            $chat->user_id = Auth::user()->id;
+            $chat->user_id = $data['message']['userID'];
             $chat->save();
+            dd($data['message']['userID']);
         }
+
         $this->messages = Chat::where('transaction_id', $data['message']['transactionID'])->orderBy('id', 'asc')->get();
     }
 
