@@ -99,5 +99,8 @@ fix: delete livewire.php
 ## [Hotfix 1.3.2]
 fix: delete dd() in chat-list component
 
+## [Hotfix 1.3.3]
+fix: balance assignment
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

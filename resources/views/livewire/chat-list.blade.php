@@ -3,7 +3,7 @@
         @foreach ($messages as $message)
             @if ($message->message != '')
                 @if ($message->user_role == Auth::user()->role)
-                    <div class="alert alert-primary w-70 text-white float-end" style="display:block">{{$message->message}}</div>
+                    <div class="alert alert-info w-70 text-white float-end" style="display:block">{{$message->message}}</div>
                 @else
                     <div class="alert alert-success w-70 text-white float-start" style="display:block">{{$message->message}}</div>
                 @endif

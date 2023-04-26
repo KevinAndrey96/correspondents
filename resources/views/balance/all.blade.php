@@ -40,8 +40,6 @@
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comentarios</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recibo</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
-
                                     <tbody>
                                         @foreach( $balances as $balance )
                                             @if ($balance->user->role == 'Shopkeeper')
@@ -85,13 +83,6 @@
                                                             <button class="btn btn-primary btn-sm"disabled style="background-color: lightcoral">Rechazada</button>
                                                         @endif
                                                     </td>
-                                                <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        @if ($balance->is_assigned !== 1)
-                                                            <a href="/balance-assign-supplier/{{$balance->id}}" title="Asignar a proveedor" class="btn btn-link px-1 mb-0"><i style="color: darkslategray; font-size: 25px !important;" class="material-icons opacity-10">currency_exchange</i></a>
-                                                        @endif
-                                                    </div>
-                                                </td>
                                             </tr>
                                             @endif
                                         @endforeach

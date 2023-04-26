@@ -39,7 +39,6 @@
 
                                 </tr>
                                 </thead>
-
                                 <tbody>
                                 @foreach( $balances as $balance )
                                     <tr>
@@ -87,7 +86,7 @@
                                             @if(is_null($balance->is_valid))
                                                 <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal"
                                                     data-id="{{$balance->id}}"
-                                                ><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i> Gestionar</a></button>
+                                                ><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i>Gestionar</a></button>
                                             @endif
 
                                         </td>
@@ -133,17 +132,19 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="name" class="form-label"></label>
-                                                <input type="text" class="form-control" name="commentModal" id="commentModal" placeholder="Comentario" onchange = "comment()">
+                                                <div class="col-md-6 ms-auto me-auto mb-3">
+                                                    <input type="text" class="form-control" name="commentModal" id="commentModal" placeholder="Comentario" onchange = "comment()">
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                <a style="color: green;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('accepted')">Aceptar</a>
+                                                <div class="col-md-4 text-center">
+                                                    <a style="color: green;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('accepted')">Aceptar</a>
                                                 </div>
-                                                <div class="col-md-6">
-                                                <a style="color: red;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('rejected')">Rechazar</a>
+                                                <div class="col-md-4 text-center">
+                                                    <a style="color: red;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('rejected')">Rechazar</a>
+                                                </div>
+                                                <div class="col-md-4 text-center">
+                                                    <a id="assign-link" style="color: darkblue;" class="btn btn-link px-3 mb-0">Asignar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -234,6 +235,7 @@
                                         var modal = $(this)
                                         var balance_id = document.getElementById("id");
                                         balance_id.value = uID;
+                                        document.getElementById('assign-link').href = '/balance-assign-supplier/'+uID;
                                     })
                                 });
                             </script>

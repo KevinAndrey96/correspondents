@@ -13,7 +13,11 @@ class AllBalancesController extends Controller
         $balances = Balance::where([
             ['type', 'Deposit'],
             ['is_valid', 1]
-        ])->orderBy('created_at', 'desc')->paginate(50);
+        ])->orWhere([
+            ['type', 'Deposit'],
+            ['is_valid', 0]
+        ])->orderBy('created_at', 'desc')
+            ->paginate(50);
 
         $urlServer = getenv('URL_SERVER');
 
