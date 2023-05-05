@@ -102,5 +102,7 @@ fix: delete dd() in chat-list component
 ## [Hotfix 1.3.3]
 fix: balance assignment
 
+## [Hotfix 1.3.4]
+fix: add urlServe variable to iframe in transaction detail
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

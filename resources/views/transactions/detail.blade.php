@@ -203,7 +203,7 @@
             var iframe;
 
             secondaryWindow = window.open('', 'secondaryWindow', 'width=400,height=500');
-            iframe = '<iframe src="{{$url.'/chat/'.$transaction->id}}" width="100%" height="100%">';
+            iframe = '<iframe src="{{$urlServer.'/chat/'.$transaction->id}}" width="100%" height="100%">';
             secondaryWindow.document.write(iframe)
         }
     </script>
