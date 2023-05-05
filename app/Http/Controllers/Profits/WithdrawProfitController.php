@@ -16,10 +16,7 @@ class WithdrawProfitController extends Controller
 {
     public function store(Request $request)
     {
-        //return $request->input('entity');
-        $entity = explode(',', $request->input('entity'))[1];
-        $entityID = explode(',', $request->input('entity'))[0];
-
+        $entity = strtoupper($request->input('entity'));
         $currentUser = User::find(Auth::user()->id);
         $ongoingProfit = Profit::where([
             ['user_id', '=', $currentUser->id],
@@ -57,7 +54,6 @@ class WithdrawProfitController extends Controller
             $profit->date = $date;
             $profit->type = 'Withdrawal';
             $profit->extra = $extra;
-            $profit->product_id = $entityID;
             $profit->save();
 
             return redirect('home');

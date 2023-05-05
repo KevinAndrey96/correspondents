@@ -643,7 +643,7 @@
                     </div>
                 @endif
 
-                @if (Auth::user()->role !== 'Distributor' && Auth::user()->role !== 'Saldos')
+                @if (Auth::user()->role !== 'Distributor')
                     <div class="col-lg-3 col-md-6 mt-4 mb-4">
                         <div class="card z-index-2  ">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -685,7 +685,6 @@
                     </div>
                 </div>
                 @endhasanyrole
-                @if (Auth::user()->role !== 'Saldos')
                     <div class="col-lg-3 mt-4 mb-3">
                         <div class="card z-index-2 ">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -705,7 +704,6 @@
                             </div>
                         </div>
                     </div>
-                @endif
             </div>
             <script type="text/javascript">
                 function showCharts()

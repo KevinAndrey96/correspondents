@@ -96,6 +96,14 @@
                                 <span class="nav-link-text ms-1">Respuestas pre-cargadas</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{route('product.fields')}}">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">text_fields</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Campos de producto</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -313,6 +321,7 @@
                 </a>
                 <div id="submenu-6" class="collapse " data-bs-parent="#menu-accordion">
                     <ul class="submenu-list list-unstyled">
+                        @if (is_null(session('impersonated_by')))
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/transactions/create">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -321,6 +330,7 @@
                                 <span class="nav-link-text ms-1">Nueva Transacción</span>
                             </a>
                         </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/transactions">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -500,15 +510,15 @@
                                 <span class="nav-link-text ms-1">Retirar Ganancia</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/profit">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                   <i class="material-icons opacity-10">history</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Historial de Retiros</span>
-                            </a>
-                        </li>
                             @endif
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/profit">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">history</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Historial de Retiros</span>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </li>
@@ -716,6 +726,11 @@
             </div>
         </div>
     </nav>
+    @if(session('impersonated_by'))
+        <div class="d-flex justify-content-center p-3">
+            <img style="margin-top: -3px;" src="{{getenv('URL_SERVER')}}/assets/img/phantom_mode.png" height="auto" width="30%" class="text-center" alt="main_logo" >
+        </div>
+    @endif
     <!-- End Navbar -->
     @yield('content')
     <!-- footer -->

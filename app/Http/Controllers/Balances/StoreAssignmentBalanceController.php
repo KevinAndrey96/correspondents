@@ -15,7 +15,10 @@ class StoreAssignmentBalanceController extends Controller
     {
         $supplier = User::find($request->input('supplier_id'));
         $balance = Balance::find($request->input('balance_id'));
+        $balanceOwner = User::find($balance->user->id);
+        $balanceOwner->balance += $balance->amount;
         $balance->is_assigned = 1;
+        $balance->is_valid = 1;
         $balance->administrator_id = Auth::user()->id;
         $balance->save();
         $summary = new Summary();

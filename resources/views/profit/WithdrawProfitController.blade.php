@@ -50,12 +50,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class=" input-group input-group-outline my-3">
-                                        <select class="form-select" name="entity" id="entity">
-                                            <option selected disabled>Seleccione una entidad</option>
-                                            @foreach ($products as $product)
-                                                <option value="{{$product->id}},{{$product->product_name}}">{{strtoupper($product->product_name)}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="entity" class="form-label">Entidad bancaria</label>
+                                        <input type="text" class="form-control" name="entity" value="" id="entity" placeholder="">
                                     </div>
                                 </div>
                                 @endhasanyrole

@@ -156,14 +156,40 @@
                                             </div>
                                     @endif
                                     @if ($user->role == 'Saldos')
+                                        <div class="container mt-3 mb-3 border">
+                                            <p><strong>Seleccione Bancos:</strong></p>
+                                            <div class="row">
+                                                @foreach ($cards as $card)
+                                                    <div class="col-md-4 form-check mt-2 mb-2 justify-content-center">
+                                                        <input style="" type="checkbox" class="form-check-input" name="card_ids[]"
+                                                               value="{{$card->id}}"
+                                                                    @foreach ($userBanks as $uBank)
+                                                                        @if ($uBank->card_id == $card->id)
+                                                                            checked
+                                                                            @break
+                                                                            @endif
+                                                                    @endforeach>
+                                                        <label>{{strtoupper($card->bank)}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+
+                                        <!--
                                         <div class="col-md-4">
+
                                             <select class="form-select" name="card_ids[]" id="card_ids[]" multiple>
                                                 <option selected disabled>Seleccione bancos:</option>
                                                 @foreach ($cards as $card)
                                                     <option value="{{$card->id}}">{{strtoupper($card->bank)}}</option>
                                                 @endforeach
                                             </select>
+
                                         </div>
+                                         -->
+
+
+
                                     @endif
 
                                     @if (isset($user->max_queue))

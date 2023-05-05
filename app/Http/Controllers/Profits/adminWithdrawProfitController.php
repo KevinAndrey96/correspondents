@@ -19,6 +19,12 @@ class adminWithdrawProfitController extends Controller
     {
         if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos') {
             $profit = Profit::find($request->input('profitID'));
+
+            if (! is_null($profit->administrator_id)) {
+                return redirect('/profit/users')->with('RequestWasAcceptedByAnotherAdmin', 'La solicitud de retiro de ganancias ha sido aceptada por otro administrador');
+            }
+
+            $profit->administrator_id = Auth::user()->id;
             $emailBody = new \stdClass();
             $emailBody->sender = 'Asparecargas';
             $user = User::find($profit->user_id);
@@ -42,14 +48,14 @@ class adminWithdrawProfitController extends Controller
             }
             $profit->save();
             $user->save();
-            Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
+
             if ($request->hasFile('image')) {
                 $pathName = Sprintf('profits/%s.png', $profit->id);
                 Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
-                //dd(Storage::path('profits\\' .$profit->id . '.png'));
-                //dd(Storage::disk('public')->path('profits/' .$profit->id . '.png'));
+
                 $client = new Client();
-                $url = "https://corresponsales.asparecargas.net/upload.php";
+                $url = getenv('URL_SERVER')."/upload.php";
+
                 $client->request(RequestAlias::METHOD_POST, $url, [
                     'multipart' => [
                         [
@@ -67,6 +73,8 @@ class adminWithdrawProfitController extends Controller
                 $profit->save();
                 unlink(str_replace('\\', '/', storage_path('app/public/profits/'.$profit->id.'.png')));
             }
+
+            Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
 
             return back();
         }

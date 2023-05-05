@@ -12,8 +12,15 @@ class Profit extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
     public function transaction()
     {
         return $this->belongsTo(Transaction::class);
     }
+
+    public function administrator()
+    {
+        return $this->belongsTo(User::class, 'administrator_id');
+    }
+
 }

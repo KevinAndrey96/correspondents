@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div style="position: relative;"  class="card-body">
-                            <a href="{{route('chat', ['id' => $transaction->id])}}"  target="_blank" id="chatIcon" style="position: absolute; left:80%; bottom:85%; display:none;" title="Comunicarse con proveedor"><i style="color: #505050; font-size: 30px !important;" class="material-icons opacity-10">forum</i></a>
+                            <a href="#" id="chatIcon" style="position: absolute; left:70%; bottom:85%; display:none;" class="btn btn-info" title="Comunicarse con proveedor" onclick="openSecondaryWindow()">Chat<i style="color: white; font-size: 30px !important;" class="material-icons opacity-10">forum</i></a>
                             <div class="text-center mb-2">
                                 <img  src="/assets/img/RelojArena2.gif" alt="gif" height="140px" width="200px">
                             </div>
@@ -167,6 +167,7 @@
                         pStatus.innerHTML = 'Aceptada';
                         pStatus.style.backgroundColor = 'dodgerblue';
                         chatIcon.style.display = 'block';
+                        openSecondaryWindow();
                     }
                     if (res.data.status == 'successful' || res.data.status == 'failed' || res.data.status == 'cancelled') {
                         window.location.replace("{{$url}}/transaction/detail/{{$transaction->id}}");
@@ -180,6 +181,17 @@
             });
     }
 
+</script>
+<script type="text/javascript">
+    function openSecondaryWindow()
+    {
+        var secondaryWindow;
+        var iframe;
+
+        secondaryWindow = window.open('', 'secondaryWindow', 'width=400,height=500');
+        iframe = '<iframe src="{{$url.'/chat/'.$transaction->id}}" width="100%" height="100%">';
+        secondaryWindow.document.write(iframe)
+    }
 </script>
 </body>
 </html>

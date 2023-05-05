@@ -101,14 +101,18 @@
                                         </div>
                                     @endif
                                     @if ($role == 'Saldos')
-                                    <div class="col-md-4">
-                                        <select class="form-select form-select-lg mb-3" name="card_ids[]    " aria-label=".form-select-lg example" multiple required>
-                                            <option selected disabled><p style="font-weight:bold">Seleccione un banco</p></option>
-                                            @foreach($cards as $card)
-                                                <option value="{{$card->id}}">{{strtoupper($card->bank)}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                        <div class="container mt-3 mb-3 border ">
+                                            <p><strong>Seleccione Bancos:</strong></p>
+                                            <div class="row">
+                                                @foreach($cards as $card)
+                                                    <div class="col-md-4 form-check mt-2 mb-2 justify-content-center">
+                                                        <input style="" type="checkbox" class="form-check-input" name="card_ids[]"
+                                                               value="{{$card->id}}">
+                                                        <label>{{strtoupper($card->bank)}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
                                     @endif
                                     @if ($role == 'Shopkeeper')
                                         <div class="col-md-4">

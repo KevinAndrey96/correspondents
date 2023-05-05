@@ -11,24 +11,23 @@ use PragmaRX\Google2FA\Google2FA;
 
 class ModeSpectatorUsersController extends Controller
 {
-    public function __invoke($id, $isInsSpector)
+    public function __invoke($id, $isInspector)
     {
-        //session(['enabled2fa', false]);
+        $user = User::find($id);
 
-        if ($isInsSpector == 1) {
+        if ($isInspector == 1) {
             $user = User::find($id);
-            //$google2fa = app(Google2FA::class);
-            //$google2fa->temporaryDisableTwoFactorAuth($user);
+            $user->qr = 0;
+            $user->backup_google2fa_secret = $user->google2fa_secret;
+            $user->save();
 
             Auth::user()->impersonate($user);
 
-            return redirect()->route('home');
+            return redirect()->route('complete.registration');
         }
 
         Auth::user()->leaveImpersonation();
-        return redirect()->route('home');
 
-
-
+        return redirect('/users?role=allShopkeepers');
     }
 }

@@ -16,6 +16,7 @@ class ExcelExportBalanceController extends Controller
         $dateTo = $request->input('dateTo');
         $dateFrom = Carbon::parse($dateFrom);
         $dateTo = Carbon::parse($dateTo);
+
         return (new BalancesExport)->forDateFrom($dateFrom)->forDateTo($dateTo)->download('Saldos-desde-'.$dateFrom->format('d-m-Y').'-hasta-'.$dateTo->format('d-m-Y').'.xlsx');
     }
 }

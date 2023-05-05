@@ -46,6 +46,7 @@ class AddBalanceAdminController extends Controller
             $balance->comment = $request->input('comment');
             $balance->administrator_id = Auth::user()->id;
             $balance->is_valid = 1;
+            $balance->indirect = 1;
             $balance->save();
 
             $summary = new Summary();

@@ -132,6 +132,11 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                                @if (isset($id) && $id == 'record2')
+                                    <div style="text-align: center;">
+                                        {{ $transactions->setPath('/transactions?id=record2')->links() }}
+                                    </div>
+                                @endif
                         </div>
                         <!--Modal-->
                         <div class="modal fade" id="ManageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
@@ -209,6 +214,24 @@
                                     "pageLength": 20
                                 });
                                 $(document).ready(function() {
+                                    @if (isset($id) && $id == 'record2')
+                                    $('#my_table').DataTable(
+                                        {
+                                            "language": {
+                                                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
+                                                "paginate": {
+                                                    "first": "Primero",
+                                                    "last": "Último",
+                                                    "next": "=>",
+                                                    "previous": "<="
+                                                }
+                                            },
+                                            paging: false,
+                                            //"bSort" : false,
+                                            "aaSorting": [],
+                                            "bDestroy": true
+                                        });
+                                    @else
                                     $('#my_table').DataTable(
                                         {
                                             "language": {
@@ -224,10 +247,9 @@
                                             "aaSorting": [],
                                             "bDestroy": true
                                         });
+                                    @endif
                                 });
                             } );
-
-
                         </script>
                     </div>
                 </div>

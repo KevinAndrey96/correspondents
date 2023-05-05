@@ -26,6 +26,7 @@
                                 <tr>
                                     @hasrole('Administrator')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Administrador</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Acumulado</th>
                                     @endhasrole
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Solicitud  </th>
@@ -42,6 +43,11 @@
                                     <tr>
                                         @hasrole('Administrator')
                                         <td class="align-middle text-center text-sm">{{ $profit->user->name}}</td>
+                                        <td class="align-middle text-center text-sm">
+                                            @if (isset($profit->administrator))
+                                                {{$profit->administrator->name}}
+                                            @endif
+                                        </td>
                                         <td class="align-middle text-center text-sm">${{number_format($profit->user->profit, 2, ',', '.')}}</td>
                                         @endhasrole
                                         <td class="align-middle text-center text-sm">{{ $profit->id}}</td>
@@ -55,8 +61,8 @@
                                         <td class="align-middle text-center text-sm">
                                             @if(isset($profit->boucher))
                                             <div>
-                                                <a class="image-link" href="{{ 'https://corresponsales.asparecargas.net/'.$profit->boucher }}">
-                                                <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{ 'https://corresponsales.asparecargas.net/'.$profit->boucher }}" alt="No carga">
+                                                <a class="image-link" href="{{getenv('URL_SERVER') }}{{$profit->boucher }}">
+                                                    <img style="border: 1px solid #010101;" class="avatar avatar-sm rounded-circle " src="{{getenv('URL_SERVER')}}{{$profit->boucher }}" alt="No carga">
                                                 </a>
                                             </div>
                                             @endif
@@ -85,9 +91,10 @@
                                         },
                                         responsive: true,
                                         "pageLength": 20,
-                                        order: [[1, 'desc']]
+                                        "aaSorting": [],
+                                        "bDestroy": true
                                     });
-                                } );
+                                });
                             </script>
                         </div>
                     </div>

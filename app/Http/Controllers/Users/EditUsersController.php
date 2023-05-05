@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserBank;
 use Illuminate\Http\Request;
 use App\Models\Card;
 use App\Models\ShopkeeperAdviser;
@@ -15,6 +16,7 @@ class EditUsersController extends Controller
         $user = User::find($id);
         $cards = Card::all();
 
+
         if ($user->role == 'Shopkeeper') {
             $shopkeeperAdviser = ShopkeeperAdviser::where('shopkeeper_id', $user->id)->first();
             $advisers = User::where('role', 'Advisers')->get();
@@ -22,6 +24,12 @@ class EditUsersController extends Controller
             return view('users.edit', compact('user', 'cards', 'shopkeeperAdviser', 'advisers'));
         }
 
+        if ($user->role == 'Saldos') {
+            $userBanks = UserBank::where('user_id', $id)->get();
+
+            return view('users.edit', compact('user', 'cards', 'userBanks'));
+
+        }
         return view('users.edit', compact('user', 'cards'));
     }
 }

@@ -39,6 +39,10 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     //Route::delete('/products/delete/{id}', [App\Http\Controllers\Products\DestroyProductController::class, 'destroy']);
     Route::get('/products/{id}/edit', [App\Http\Controllers\Products\EditProductController::class, 'edit']);
     Route::get('/products-transactions-excel/{id}', [App\Http\Controllers\Products\TransactionsProductController::class, 'transactions']);
+    Route::get('/product-fields', App\Http\Controllers\Products\FieldsProductsController::class)->name('product.fields');
+    Route::get('/product-fields-edit', App\Http\Controllers\Products\EditFieldsProductsController::class)->name('product.fields-edit');
+    Route::post('/product-fields-store', App\Http\Controllers\Products\StoreFieldsProductsController::class)->name('product.fields-store');
+
 
 
     Route::get('/balance', [App\Http\Controllers\Balances\IndexBalanceController::class, 'index']);
@@ -247,5 +251,9 @@ Route::get('/answers-delete/{id}', App\Http\Controllers\Answers\DeleteAnswersCon
 
 Route::get('/chat/{id}', App\Http\Controllers\Chats\indexChatsController::class)
     ->name('chat');
+
+/**
+ * Routes for product fields
+ */
 
 

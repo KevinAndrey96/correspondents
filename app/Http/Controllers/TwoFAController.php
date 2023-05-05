@@ -19,7 +19,6 @@ class TwoFAController extends Controller
     public function index(): Factory|View|Application
     {
         $user = Auth::user();
-
         $registration_data['email'] = $user->email;
         $google2fa = app('pragmarx.google2fa');
 
@@ -35,7 +34,11 @@ class TwoFAController extends Controller
             );
             $user->google2fa_secret = $registration_data['google2fa_secret'];
             $user->qr = 1;
+            if (session('impersonated_by')) {
+                $user->qr = 0;
+            }
             $user->save();
+
             return view('google2fa.register', ['QR_Image' => $QR_Image, 'secret' => $registration_data['google2fa_secret']]);
         }
 

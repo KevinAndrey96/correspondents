@@ -35,9 +35,16 @@ class BalancesExport implements FromView, ShouldAutoSize
                 'balances' => Balance::whereBetween('date',[$this->dateFrom, $this->dateTo])->get()
             ]);
         }
+
         if (Auth::user()->role == 'Shopkeeper' or Auth::user()->role == 'Supplier') {
             return view('balance.excelExport', [
                 'balances' => Balance::where('user_id','=',Auth::user()->id)->whereBetween('date',[$this->dateFrom, $this->dateTo])->get()
+            ]);
+        }
+
+        if (Auth::user()->role == 'Saldos') {
+            return view('balance.excelExport', [
+                'balances' => Balance::where('administrator_id','=',Auth::user()->id)->whereBetween('date',[$this->dateFrom, $this->dateTo])->get()
             ]);
         }
     }

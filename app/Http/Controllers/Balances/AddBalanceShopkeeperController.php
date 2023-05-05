@@ -30,7 +30,9 @@ class AddBalanceShopkeeperController extends Controller
 
             $date = Carbon::now();
 
-            $lastBalance = Balance::where('user_id', Auth::user()->id)
+            $lastBalance = Balance::where([
+                ['user_id', Auth::user()->id],
+                ['indirect', null]])
                 ->latest()
                 ->first();
 

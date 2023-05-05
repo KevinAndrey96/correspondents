@@ -1,5 +1,11 @@
 @extends('layouts.dashboard')
 @section('content')
+    @if(Session::has('RequestWasAcceptedByAnotherAdmin'))
+        <div class="alert alert-danger w-90 m-auto" role="alert">
+            <p style="color:white;" class="text-center">{{Session::get('RequestWasAcceptedByAnotherAdmin')}}</p>
+        </div>
+    @endif
+
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -17,7 +23,7 @@
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rol</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ganancia acumulada</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">monto a retirar</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto a retirar</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Extra</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">¿Aceptado?</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comentarios</th>

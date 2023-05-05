@@ -108,10 +108,12 @@ class UpdateTransactionController extends Controller
                     $shopkeeperBalance->amount = $transaction->amount;
                     $shopkeeperBalance->date = Carbon::now();
                     $shopkeeperBalance->is_valid = 1;
+                    $shopkeeperBalance->indirect = 1;
                     $supplierBalance->user_id = $supplier->id;
                     $supplierBalance->amount = $transaction->amount;
                     $supplierBalance->date = Carbon::now();
                     $supplierBalance->is_valid = 1;
+                    $supplierBalance->indirect = 1;
                     $supplierSummary = new Summary();
                     $shopkeeperSummary = new Summary();
                     $shopkeeperSummary->user_id = $shopkeeper->id;

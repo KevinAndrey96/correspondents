@@ -16,7 +16,6 @@ class ValidateWithdrawProfitController extends Controller
     {
         if (Auth::user()->role == 'Administrator') {
             $profit = Profit::find($request->input('id'));
-            //return $profit;
             if(is_null($profit->is_valid)){
                 $profit->is_valid = $request->input('status');
                 $profit->comment = $request->input('comment');

@@ -34,6 +34,7 @@ class User extends Authenticatable
     use SoftDeletes;
     use Impersonate;
 
+    protected $table = 'users';
 
     public const STATUS_ENABLED = 1;
     /**
@@ -41,6 +42,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
     protected $fillable = [
         'name',
         'email',
@@ -73,7 +76,8 @@ class User extends Authenticatable
         'local_photo',
         'public_receipt',
         'enabled_daily',
-        'product_id'
+        'product_id',
+        'was_impersonated'
     ];
 
     /**
@@ -81,10 +85,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $hidden = [
         'password',
         'remember_token',
-        'google2fa_secret'
     ];
 
     /**

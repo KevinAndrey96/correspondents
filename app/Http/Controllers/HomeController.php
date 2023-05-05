@@ -210,6 +210,7 @@ class HomeController extends Controller
 
         if (Auth::user()->role == 'Saldos') {
             $balancesCount = 0;
+            $profitsCount = 0;
             $userBanks = UserBank::where('user_id', Auth::user()->id)->get();
 
             foreach ($userBanks as $userBank) {
@@ -219,7 +220,10 @@ class HomeController extends Controller
                 ])->get()->count();
             }
 
-            $profitsCount = 0;
+            $profitsCount = Profit::where([
+                ['is_valid', null],
+                ['administrator_id', null]
+            ])->get()->count();
 
             $banners = Banner::all();
             $firstBanner = null;
@@ -228,7 +232,9 @@ class HomeController extends Controller
                 $firstBanner = $banners[0];
             }
 
-            return view('home', compact('profitsCount', 'balancesCount', 'banners', 'firstBanner', 'urlServer'));
+            $products = Product::all();
+
+            return view('home', compact('profitsCount', 'balancesCount', 'banners', 'firstBanner', 'urlServer', 'products'));
         }
 
         return view('home');

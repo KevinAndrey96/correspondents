@@ -18,7 +18,7 @@
                                         <ul class="list-group">
                                             <li class="list-group-item border-0 d-flex p-4 mb-0 bg-gray-100 border-radius-lg">
                                               <div class="row">
-                                                  <a href="{{route('chat', ['id' => $transaction->id])}}" target="_blank" id="chatIcon" style="position: absolute; left:85%; bottom:85%;" title="Comunicarse con tendero"><i style="color: #505050; font-size: 30px !important;" class="material-icons opacity-10">forum</i></a>
+                                                  <a href="#" class="btn btn-info p-0" id="chatIcon" style="position:absolute; left:88%; top:3%; width:12%;" title="Comunicarse con tendero" onclick="openSecondaryWindow()">Chat<i style="color: white; font-size: 30px !important;" class="material-icons opacity-10">forum</i></a>
                                               @if (Auth::user()->role == 'Supplier' && is_null($detailSupplier))
                                                 <div class="col-md-4 d-flex flex-column ">
                                                     <h6 class="mb-3 text-sm">Información</h6>
@@ -67,7 +67,7 @@
                                                         </div>
                                                         <div class="pt-4 pb-1 text-center d-flex justify-content-center">
                                                             <input type="hidden" name="transaction_id" value="{{$transaction->id}}">
-                                                            <a href="{{route('transactions.transfer', ['id' => $transaction->id])}}" class="btn btn-primary me-2" onclick="confirm('¿Está seguro que quiere trasladar la transacción a otro proveedor?')">Trasladar</a>
+                                                            <a href="{{route('transactions.transfer', ['id' => $transaction->id])}}" class="btn btn-primary me-2" onclick="return confirm('¿Está seguro que quiere trasladar la transacción a otro proveedor?')">Trasladar</a>
                                                             <input class="btn btn-success" id="submitButton" onclick="hideButton()" type="submit" value="Enviar">
                                                         </div>
                                                     </form>
@@ -194,6 +194,17 @@
                 observationSelect.disabled = true;
             }
 
+        }
+    </script>
+    <script type="text/javascript">
+        function openSecondaryWindow()
+        {
+            var secondaryWindow;
+            var iframe;
+
+            secondaryWindow = window.open('', 'secondaryWindow', 'width=400,height=500');
+            iframe = '<iframe src="{{$url.'/chat/'.$transaction->id}}" width="100%" height="100%">';
+            secondaryWindow.document.write(iframe)
         }
     </script>
 

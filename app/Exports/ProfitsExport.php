@@ -17,14 +17,14 @@ class ProfitsExport implements FromView, ShouldAutoSize
     public function forDateFrom(Carbon $dateFrom)
     {
         $this->dateFrom = $dateFrom;
-        
+
         return $this;
     }
 
     public function forDateTo(Carbon $dateTo)
     {
         $this->dateTo = $dateTo;
-        
+
         return $this;
     }
 
@@ -35,7 +35,15 @@ class ProfitsExport implements FromView, ShouldAutoSize
                 'profits' => Profit::whereBetween('date',[$this->dateFrom, $this->dateTo])->get()
             ]);
         }
+
         if (Auth::user()->role != 'Administrator') {
+            if (Auth::user()->role == 'Saldos') {
+
+                return view('profit.excelExport', [
+                    'profits' => Profit::where('administrator_id', '=', Auth::user()->id)->whereBetween('date',[$this->dateFrom, $this->dateTo])->get()
+                ]);
+            }
+
             return view('profit.excelExport', [
                 'profits' => Profit::where('user_id','=',Auth::user()->id)->whereBetween('date',[$this->dateFrom, $this->dateTo])->get()
             ]);

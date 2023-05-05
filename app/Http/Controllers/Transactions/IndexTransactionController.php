@@ -15,7 +15,7 @@ class IndexTransactionController extends Controller
         $shopkeeper_id = $request->input('shopkeeper_id');
         if (isset($id)) {
             if (Auth::user()->role == 'Administrator' && $id == 'record2') {
-                $transactions = Transaction::orderBy('created_at', 'desc')->get();
+                $transactions = Transaction::orderBy('created_at', 'desc')->paginate(20);
 
                 return view('transactions.index', compact('transactions', 'id'));
             }

@@ -42,7 +42,6 @@
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
                                     <tbody>
                                         @foreach( $balances as $balance )
-                                            @if ($balance->user->role == 'Shopkeeper')
                                             <tr>
                                                 @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos')
                                                     <td class="align-middle text-center text-xs">{{$balance->user->name}}</td>
@@ -84,7 +83,6 @@
                                                         @endif
                                                     </td>
                                             </tr>
-                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>

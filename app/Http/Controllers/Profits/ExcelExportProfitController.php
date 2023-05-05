@@ -16,6 +16,7 @@ class ExcelExportProfitController extends Controller
         $dateTo = $request->input('dateTo');
         $dateFrom = Carbon::parse($dateFrom);
         $dateTo = Carbon::parse($dateTo);
+
         return (new ProfitsExport)->forDateFrom($dateFrom)->forDateTo($dateTo)->download('Ganancias-desde-'.$dateFrom->format('d-m-Y').'-hasta-'.$dateTo->format('d-m-Y').'.xlsx');
     }
 }

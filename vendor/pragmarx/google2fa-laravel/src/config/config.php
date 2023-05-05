@@ -58,7 +58,6 @@ return [
      * One Time Password View.
      */
     'view' => 'google2fa.index',
-
     /*
      * One Time Password error message.
      */
