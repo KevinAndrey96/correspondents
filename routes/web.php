@@ -253,7 +253,13 @@ Route::get('/chat/{id}', App\Http\Controllers\Chats\indexChatsController::class)
     ->name('chat');
 
 /**
- * Routes for product fields
+ * Routes for publicity
  */
 
+Route::get('/publicity', App\Http\Controllers\Publicity\IndexPublicityController::class)
+    ->name('publicity.index');
+Route::get('/publicity-create', App\Http\Controllers\Publicity\CreatePublicityController::class)
+    ->name('publicity.create');
+Route::post('/publicity-store', App\Http\Controllers\Publicity\StorePublicityController::class)
+    ->name('publicity.store');
 

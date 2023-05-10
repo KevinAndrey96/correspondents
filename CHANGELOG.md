@@ -104,5 +104,9 @@ fix: balance assignment
 
 ## [Hotfix 1.3.4]
 fix: add urlServe variable to iframe in transaction detail
+
+## [Hotfix 1.3.5]
+fix: max in input and alert text 
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

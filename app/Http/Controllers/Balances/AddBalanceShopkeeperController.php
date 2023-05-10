@@ -45,7 +45,7 @@ class AddBalanceShopkeeperController extends Controller
             $sameBalance = Balance::where('payment_code',  $request->input('payment_code'))->get()->count();
 
             if ($sameBalance > 0) {
-                return back()->with('requestAlreadyExists', 'Ya tienes una solicitud de retiro de saldo con este recibo');
+                return back()->with('requestAlreadyExists', 'Ya tienes una solicitud de recarga de saldo con este recibo');
             }
 
             if ($diffHours < 1) {
