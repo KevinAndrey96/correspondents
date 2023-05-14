@@ -1,5 +1,10 @@
 @extends('layouts.dashboard')
 @section('content')
+    @if(Session::has('publicityLimitExceeded'))
+        <div class="alert alert-danger text-center text-light" role="alert">
+            {{ Session::get('publicityLimitExceeded') }}
+        </div>
+    @endif
     @if(count($errors) > 0)
         <div class="alert alert-danger text-light text-center">
             <ul>

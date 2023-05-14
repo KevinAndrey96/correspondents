@@ -23,6 +23,12 @@ class StorePublicityController extends Controller
 
         $this->validate($request, $fields, $message);
 
+        $publicityCount = Publicity::where('is_deleted', 0)->get()->count();
+
+        if ($publicityCount >= 5) {
+            return back()->with('publicityLimitExceeded', 'Supero el límite máximo de publicidad');
+        }
+
         $publicity = new Publicity();
         $publicity->publicity_url = '';
         $publicity->save();
@@ -49,7 +55,7 @@ class StorePublicityController extends Controller
             ]);
             $publicity->publicity_url = '/storage/publicity/'.$publicity->id.'.png';
             $publicity->save();
-            unlink(str_replace('\\', '/', storage_path('app/public/publicity/'.$publicity->id.'.png')));
+            //unlink(str_replace('\\', '/', storage_path('app/public/publicity/'.$publicity->id.'.png')));
         }
 
         return redirect()->route('publicity.index');

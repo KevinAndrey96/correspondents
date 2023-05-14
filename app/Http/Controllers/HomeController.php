@@ -10,6 +10,7 @@ use App\Models\Profit;
 use App\Models\Balance;
 use App\Models\Product;
 use App\Models\UserBank;
+use App\Models\Publicity;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -191,9 +192,12 @@ class HomeController extends Controller
             $banners = Banner::all();
             $products = Product::all();
             $firstBanner = null;
+
             if ($banners->count() > 0) {
                 $firstBanner = $banners[0];
             }
+
+            $publicity = Publicity::where('is_deleted', 0)->get();
 
             return view('home', compact(
                 'transactionCount',
@@ -204,7 +208,8 @@ class HomeController extends Controller
                 'banners',
                 'firstBanner',
                 'products',
-                'urlServer'
+                'urlServer',
+                'publicity'
             ));
         }
 

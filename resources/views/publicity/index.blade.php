@@ -25,7 +25,7 @@
                                         <div class="card-body text-center border-0 p-0">
                                             <div class="d-flex justify-content-center">
                                                 <div class="d-inline">
-                                                    <a style="color: darkred;" href="" title="Eliminar" class="btn btn-link px-1 mb-0" onclick="return confirm('¿Está seguro que quiere eliminar este usuario?');"><i style="color: darkred; font-size: 25px !important;" class="material-icons opacity-10">delete</i></a>
+                                                    <a style="color: darkred;" href="{{route('publicity.delete', ['id' => $value->id])}}" title="Eliminar" class="btn btn-link px-1 mb-0" onclick="return confirm('¿Está seguro que quiere eliminar esta publicidad?');"><i style="color: darkred; font-size: 25px !important;" class="material-icons opacity-10">delete</i></a>
                                                 </div>
                                             </div>
                                         </div>

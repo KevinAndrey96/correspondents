@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('publicities', function (Blueprint $table) {
             $table->id();
             $table->string('publicity_url')->nullable();
+            $table->boolean('is_deleted')->default(0);
             $table->timestamps();
         });
     }

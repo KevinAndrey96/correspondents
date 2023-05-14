@@ -29,7 +29,7 @@ Route::impersonate();
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home')
-        ->middleware('distributorExtrainfo', '2fa', 'firstPassword', 'dailyPassword');
+        ->middleware('distributorExtrainfo', 'firstPassword', 'dailyPassword');
     Route::get('/products', [App\Http\Controllers\Products\IndexProductController::class, 'index']);
     Route::get('/products/create', [App\Http\Controllers\Products\CreateProductController::class, 'create']);
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
@@ -262,4 +262,8 @@ Route::get('/publicity-create', App\Http\Controllers\Publicity\CreatePublicityCo
     ->name('publicity.create');
 Route::post('/publicity-store', App\Http\Controllers\Publicity\StorePublicityController::class)
     ->name('publicity.store');
+Route::get('/publicity-delete/{id}', App\Http\Controllers\Publicity\DeletePublicityController::class)
+    ->name('publicity.delete');
+Route::get('/publicity-download/{id}', App\Http\Controllers\Publicity\DownloadPublicityController::class)
+    ->name('publicity.download');
 

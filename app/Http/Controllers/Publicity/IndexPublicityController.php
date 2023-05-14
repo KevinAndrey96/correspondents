@@ -10,8 +10,7 @@ class IndexPublicityController extends Controller
 {
     public function __invoke()
     {
-        $publicity = Publicity::all();
-
+        $publicity = Publicity::where('is_deleted', 0)->get();
 
         return view('publicity.index', compact('publicity'));
     }
