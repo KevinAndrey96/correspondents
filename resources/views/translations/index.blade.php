@@ -12,14 +12,12 @@
                     <div class="card-body px-0 pb-2">
                         <div class="container">
                             <div class="row mb-4">
-                                <div class="col-md-4 d-flex justify-content-center">
+                                <div class="col-md-6 d-flex justify-content-center">
                                     <a class="btn btn-success mt-auto mb-auto" href="{{route('product.fields')}}">Productos</a>
                                 </div>
-                                <div class="col-md-4 d-flex justify-content-center">
+                                <div class="col-md-6 d-flex justify-content-center">
                                     <a class="btn btn-success mt-auto mb-auto" href="{{route('transactions.fields')}}">Transacciones</a>
                                 </div>
-                                <div class="col-md-4 d-flex justify-content-center">
-                                    <a class="btn btn-success mt-auto mb-auto" href="{{route('keywords.index')}}">Palabras clave</a>
                                 </div>
                             </div>
                         </div>

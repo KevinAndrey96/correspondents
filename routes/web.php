@@ -172,8 +172,6 @@ Route::post('/banners-update', App\Http\Controllers\Banners\UpdateBannersControl
 Route::get('/banners-delete/{id}', App\Http\Controllers\Banners\DeleteBannersController::class)
     ->name('banners.delete');
 
-
-
 /**
  * Routes for top shopkeepers
  */

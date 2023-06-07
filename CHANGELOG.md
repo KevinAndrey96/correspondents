@@ -108,5 +108,8 @@ fix: add urlServe variable to iframe in transaction detail
 ## [Hotfix 1.3.5]
 fix: max in input and alert text 
 
+## [Hotfix 1.3.6]
+fix: remove palabras clave button
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
