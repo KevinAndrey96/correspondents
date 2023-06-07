@@ -41,7 +41,8 @@ class Transaction extends Model
         'com_dis',
         'com_sup',
         'com_shp',
-        'userIP'
+        'userIP',
+        'giros'
     ];
 
     public function shopkeeper(): BelongsTo

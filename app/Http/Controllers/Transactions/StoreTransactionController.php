@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\Models\Product;
 use App\Models\Commission;
+use App\Models\TransactionField;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -21,7 +22,8 @@ class StoreTransactionController extends Controller
     /**
      * @throws ValidationException
      */
-    public function store(Request $request): Factory|View|Redirector|RedirectResponse|Application
+    //: Factory|View|Redirector|RedirectResponse|Application
+    public function store(Request $request)
     {
         /*
         $fields = [
@@ -36,40 +38,55 @@ class StoreTransactionController extends Controller
         $productID = $request->input('productID');
         $product = Product::find($productID);
         $amount = $request->input('transactionAmount');
+        $giros = $request->input('giros');
 
         if ($amount < $product->min_amount || $amount > $product->max_amount) {
-
-            return redirect('/transactions/create')
-                ->with('limitExceeded', 'Supero el límite del monto permitido por transacción para el producto seleccionado,
-                        el monto mínimo debe ser de $'.number_format($product->min_amount, 2, ',', '.').' y el monto máximo de $'.number_format($product->max_amount, 2, ',', '.'));
-
+            if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1) {
+                return redirect('/transactions/create?giros=1')
+                    ->with('limitExceeded', 'Supero el límite del monto permitido por transacción para el producto seleccionado,
+                        el monto mínimo debe ser de $' . number_format($product->min_amount, 2, ',', '.') . ' y el monto máximo de $' . number_format($product->max_amount, 2, ',', '.'));
+            } else {
+                return redirect('/transactions/create')
+                    ->with('limitExceeded', 'Supero el límite del monto permitido por transacción para el producto seleccionado,
+                        el monto mínimo debe ser de $' . number_format($product->min_amount, 2, ',', '.') . ' y el monto máximo de $' . number_format($product->max_amount, 2, ',', '.'));
+            }
         }
-
-
 
         /**
          * We validate that the type present in the request is congruent with the product type
          */
         if ($product->product_type !== $request->input('transactionType')) {
-            return redirect('/transactions/create')->with('insufficientBalance', 'Se ha presentado un error inesperado en la plataforma, por favor intentelo de nuevo');
+            if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1) {
+                return redirect('/transactions/create?giros=1')->with('insufficientBalance', 'Se ha presentado un error inesperado en la plataforma, por favor intentelo de nuevo');
+            } else {
+                return redirect('/transactions/create')->with('insufficientBalance', 'Se ha presentado un error inesperado en la plataforma, por favor intentelo de nuevo');
+            }
         }
 
         if (
             $request->input('transactionType') === Transaction::TYPE_DEPOSIT
-            && (double) Auth::user()->balance < (double) $request->input('transactionAmount')
+            && (double)Auth::user()->balance < (double)$request->input('transactionAmount')
         ) {
-            return redirect('/transactions/create')->with('insufficientBalance', 'No tiene saldo suficiente para realizar la transacción');
+            if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1) {
+                return redirect('/transactions/create?giros=1')->with('insufficientBalance', 'No tiene saldo suficiente para realizar el giro');
+            } else {
+                return redirect('/transactions/create')->with('insufficientBalance', 'No tiene saldo suficiente para realizar la transacción');
+            }
         }
 
-        $commission = Commission::where([
-            ['user_id', '=', Auth::user()->id],
-            ['product_id', '=', $product->id]
-        ])->first();
+        if ($giros != 1) {
+            $commission = Commission::where([
+                ['user_id', '=', Auth::user()->id],
+                ['product_id', '=', $product->id]
+            ])->first();
 
-        if (is_null($commission)) {
-            return redirect('/transactions/create')->with('thereIsNotCommission', 'No tiene comisión asignada para este producto');
+            if (is_null($commission)) {
+                return redirect('/transactions/create')->with('thereIsNotCommission', 'No tiene comisión asignada para este producto');
+            }
         }
 
+
+        $transactionFields = TransactionField::first();
         $transaction = new Transaction();
         $transaction->product_id = $product->id;
         $transaction->amount = $request->input('transactionAmount');
@@ -77,7 +94,6 @@ class StoreTransactionController extends Controller
         $transaction->type = $product->product_type;
         $transaction->status = 'hold';
 
-
-        return view('transactions.clientDataCreate', compact('transaction', 'product'));
+        return view('transactions.clientDataCreate', compact('transaction', 'product', 'giros', 'transactionFields'));
     }
 }

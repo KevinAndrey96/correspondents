@@ -86,7 +86,7 @@
                                                         data-code="{{ $product->code }}"
                                                         data-extra="{{ $product->extra }}"
                                                         data-commission="{{ $product->product_commission }}"
-
+                                                        data-giros = "{{ $product->giros }}"
                                                 >Ver</button>
                                             </td>
                                         </tr>
@@ -216,9 +216,21 @@
                                                             </div>
                                                        </div>
                                                        <div class="row pb-2">
-                                                            <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
-
-                                                            </div>
+                                                           @if (getenv('COUNTRY_NAME') == 'ECUADOR')
+                                                           <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
+                                                               <div class="card">
+                                                                   <div class="card-header p-0 ">
+                                                                       <div class="icon icon-x icon-shape bg-gradient-dark shadow-dark text-center border-radius-xxl mt-n0 position-absolute">
+                                                                           <i class="material-icons opacity-10">currency_exchange</i>
+                                                                       </div>
+                                                                       <div style="margin-bottom: -15px; margin-left: 32px;" class="text-center p-1 mt-2">
+                                                                           <label for="giros" id="giros" class="col-form-label">Giros:</label>
+                                                                       </div>
+                                                                   </div>
+                                                                   <div class="card-footer p-1"></div>
+                                                               </div>
+                                                           </div>
+                                                           @endif
                                                             <div class="col-xl-6 col-sm-4 mb-xl-0 pb-3">
                                                                 <div class="card">
                                                                     <div class="card-header p-0 ">
@@ -255,6 +267,7 @@
                                             var code = button.data('code')
                                             var extra = button.data('extra')
                                             var commission = button.data('commission')
+                                            var giros = parseInt(button.data('giros'));
 
                                             modal.find('.modal-title').text('Producto ' + whatever)
                                             modal.find('#product-email').text('Correo: ' + (email == 1 ? 'Si' : 'No'))
@@ -266,6 +279,7 @@
                                             modal.find('#product-code').text('Código: ' + (code ? 'Si' : 'No' ))
                                             modal.find('#product-extra').text('Extra: ' + (extra ? 'Si' : 'No' ))
                                             modal.find('#product-commission').text('Comisión: ' + (commission ))
+                                            modal.find('#giros').text('Giros: ' + (giros == 1 ? 'Si' : 'No' ))
 
 
                                         })

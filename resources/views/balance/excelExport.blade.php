@@ -12,6 +12,7 @@
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">¿Es valido?</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre administrador</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rol administrador</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Banco</th>
         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comentario</th>
         </tr>
     </thead>
@@ -49,7 +50,12 @@
                     @endif
                 @endif
             </td>
-            <td class="align-middle text-center text-sm">{{ $balance->comment}}</td>
+            <td class="align-middle text-center text-sm">
+                @if (isset($balance->card->bank))
+                    {{$balance->card->bank}}
+                @endif
+            </td>
+            <td class="align-middle text-center text-sm">{{$balance->comment}}</td>
         </tr>
         @endforeach
     </tbody>

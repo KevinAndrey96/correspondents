@@ -196,7 +196,7 @@
                                         <div class="col-md-4">
                                             <div class=" input-group input-group-outline my-3">
                                                 <label for="max_queue" class="form-label"></label>
-                                                <input type="number" class="form-control" name="max_queue" min="1" value="{{$user->max_queue}}" id="" placeholder="Maxima cola de transacciones">
+                                                <input type="number" class="form-control" name="max_queue" min="1" value="{{$user->max_queue}}" id="" placeholder="Máxima cola de transacciones">
                                             </div>
                                         </div>
                                     @endif

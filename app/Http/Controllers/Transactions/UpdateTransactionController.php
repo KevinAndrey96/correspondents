@@ -69,6 +69,7 @@ class UpdateTransactionController extends Controller
                     $transaction->save();
                     unlink(str_replace('\\', '/', storage_path('app/public/voucher_images/'.$transaction->id.'.png')));
                 }
+
                 if ($transaction->status === self::SUCCESSFUL_STATUS) {
                     $commissionShop = Commission::where([
                         ['user_id', '=', $transaction->shopkeeper_id],
@@ -94,10 +95,10 @@ class UpdateTransactionController extends Controller
                     $supplier = User::find($transaction->supplier_id);
                     $distributor = User::find($transaction->distributor_id);
 
-
                     if (isset($commissionSupp)) {
                         $supplier->profit += $commissionSupp->amount;
                     }
+
                     $administrator->profit += ($transaction->com_adm + $transaction->product->fixed_commission);
                     $distributor->profit = $distributor->profit + $commissionDist->amount - $commissionShop->amount;
                     $shopkeeper->profit += $commissionShop->amount;
@@ -122,6 +123,7 @@ class UpdateTransactionController extends Controller
                     $supplierSummary->user_id = $supplier->id;
                     $supplierSummary->amount = $transaction->amount;
                     $supplierSummary->previous_balance = $supplier->balance;
+
                     if ($transaction->type === 'Withdrawal') {
                         $shopkeeper->balance += ($transaction->amount - $transaction->product->fixed_commission);
                         $supplier->balance += $transaction->amount;
@@ -130,6 +132,7 @@ class UpdateTransactionController extends Controller
                         $supplierSummary->movement_type = 'Retiro Realizado';
                         $shopkeeperSummary->movement_type = 'Retiro Realizado';
                     }
+
                     if ($transaction->type === 'Deposit') {
                         $shopkeeper->balance -= ($transaction->amount + $transaction->product->fixed_commission);
                         $supplier->balance -= $transaction->amount;
@@ -138,6 +141,7 @@ class UpdateTransactionController extends Controller
                         $supplierSummary->movement_type = 'Deposito Realizado';
                         $shopkeeperSummary->movement_type = 'Deposito Realizado';
                     }
+
                     $supplierSummary->next_balance = $supplier->balance;
                     $shopkeeperSummary->next_balance = $shopkeeper->balance;
                     $supplier->save();

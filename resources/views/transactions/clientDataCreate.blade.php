@@ -1,6 +1,5 @@
 @extends('layouts.dashboard')
 @section('content')
-
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -33,10 +32,10 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° de cuenta o teléfono</h6>
+                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° de {{$transactionFields->account}} o {{$transactionFields->phone}}</h6>
                                         <div class="input-group input-group-outline my-3">
                                             <label for="accountNumber" ></label>
-                                            <input type="text" class="form-control" name="accountNumber" id="accountNumber" placeholder="Número de cuenta">
+                                            <input type="text" class="form-control" name="accountNumber" id="accountNumber" placeholder="Número de {{$transactionFields->account}}">
                                         </div>
                                     </div>
                                     @if($product->account_type == 1)
@@ -62,10 +61,10 @@
                                     @endif
                                     @if($product->client_document == 1)
                                       <div class="col-md-3">
-                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° Documento</h6>
+                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° {{$transactionFields->document}}</h6>
                                         <div class="input-group input-group-outline my-3">
                                             <label for="clientDocument" ></label>
-                                            <input type="text" class="form-control" name="clientDocument" id="clientDocument" placeholder="Documento del cliente">
+                                            <input type="text" class="form-control" name="clientDocument" id="clientDocument" placeholder="{{$transactionFields->document}} del cliente">
                                         </div>
                                       </div>
                                     @endif
@@ -80,10 +79,10 @@
                                     @endif
                                     @if($product->code == 1)
                                         <div class="col-md-3">
-                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">Código</h6>
+                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->code}}</h6>
                                             <div class="input-group input-group-outline my-3">
                                                 <label for="code" ></label>
-                                                <input type="text" class="form-control" name="code" id="code" placeholder="Código">
+                                                <input type="text" class="form-control" name="code" id="code" placeholder="{{$transactionFields->code}}">
                                             </div>
                                         </div>
                                     @endif
@@ -103,12 +102,12 @@
                                             <input type="number" class="form-control" name="own_commission" id="own_commission" placeholder="Comisión" min="0" step="any" required>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="giros" value="{{$giros}}">
                                     <div class="text-center">
                                         <input class="btn btn-success" type="submit" value="Solicitar Transacción">
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

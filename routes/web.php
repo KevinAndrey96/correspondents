@@ -39,9 +39,19 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     //Route::delete('/products/delete/{id}', [App\Http\Controllers\Products\DestroyProductController::class, 'destroy']);
     Route::get('/products/{id}/edit', [App\Http\Controllers\Products\EditProductController::class, 'edit']);
     Route::get('/products-transactions-excel/{id}', [App\Http\Controllers\Products\TransactionsProductController::class, 'transactions']);
+
+    //Routes for translations
+    Route::get('/translations', App\Http\Controllers\Translations\IndexTranslationsController::class)->name('translations.index');
     Route::get('/product-fields', App\Http\Controllers\Products\FieldsProductsController::class)->name('product.fields');
     Route::get('/product-fields-edit', App\Http\Controllers\Products\EditFieldsProductsController::class)->name('product.fields-edit');
     Route::post('/product-fields-store', App\Http\Controllers\Products\StoreFieldsProductsController::class)->name('product.fields-store');
+    Route::get('/transactions-fields', App\Http\Controllers\Transactions\FieldsTransactionsController::class)->name('transactions.fields');
+    Route::get('/transactions-fields-edit', App\Http\Controllers\Transactions\EditFieldsTransactionsController::class)->name('transactions.fields-edit');
+    Route::post('/transactions-fields-store', App\Http\Controllers\Transactions\StoreFieldsTransactionsController::class)->name('transactions.fields-store');
+
+
+
+    Route::get('/keywords', App\Http\Controllers\Translations\IndexKeywordsController::class)->name('keywords.index');
 
 
 
@@ -166,6 +176,8 @@ Route::post('/banners-update', App\Http\Controllers\Banners\UpdateBannersControl
 Route::get('/banners-delete/{id}', App\Http\Controllers\Banners\DeleteBannersController::class)
     ->name('banners.delete');
 
+
+
 /**
  * Routes for top shopkeepers
  */
@@ -267,3 +279,13 @@ Route::get('/publicity-delete/{id}', App\Http\Controllers\Publicity\DeletePublic
 Route::get('/publicity-download/{id}', App\Http\Controllers\Publicity\DownloadPublicityController::class)
     ->name('publicity.download');
 
+/**
+ * Routes for Exchange
+ */
+
+Route::get('/exchanges', App\Http\Controllers\Exchanges\IndexExchangesController::class)
+    ->name('exchanges.index');
+Route::get('/exchanges-edit/{id}', App\Http\Controllers\Exchanges\EditExchangesController::class)
+    ->name('exchanges.edit');
+Route::post('/exchanges-update', App\Http\Controllers\Exchanges\UpdateExchangesController::class)
+    ->name('exchanges.update');

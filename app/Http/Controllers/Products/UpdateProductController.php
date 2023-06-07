@@ -38,6 +38,11 @@ class UpdateProductController extends Controller
         ];
         $this->validate($request, $fields, $message);
 
+        if (isset($request->giros))
+        {
+
+        }
+
         $productData = [
             'product_name'=> $request->input('productName'),
             'product_type'=> $request->input('productType'),
@@ -55,7 +60,8 @@ class UpdateProductController extends Controller
             'num_jineteo' => $request->input('num_jineteo'),
             'hours' => $request->input('hours'),
             'reassignment_minutes' => $request->input('reassignment_minutes'),
-            'fixed_commission' => $request->input('fixed_commission')
+            'fixed_commission' => $request->input('fixed_commission'),
+            'giros' => isset($request->giros) ? $request->input('giros') : 0
         ];
         $product = Product::findOrFail($productId);
         if ($request->hasFile('image')) {
