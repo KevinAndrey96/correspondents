@@ -96,12 +96,22 @@
                                 <span class="nav-link-text ms-1">Respuestas pre-cargadas</span>
                             </a>
                         </li>
+                        <!--
                         <li class="nav-item">
                             <a class="nav-link text-white " href="{{route('product.fields')}}">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <i class="material-icons opacity-10">text_fields</i>
                                 </div>
                                 <span class="nav-link-text ms-1">Campos de producto</span>
+                            </a>
+                        </li>
+                        -->
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{route('translations.index')}}">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">text_fields</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Traducciones</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -112,6 +122,16 @@
                                 <span class="nav-link-text ms-1">Publicidad</span>
                             </a>
                         </li>
+                        @if (getenv('COUNTRY_NAME') == 'ECUADOR')
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{route('exchanges.index')}}">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Tasas de cambio</span>
+                            </a>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </li>
@@ -351,6 +371,36 @@
                 </div>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-7" aria-expanded="false" aria-controls="submenu-2">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">price_check</i>
+                    </div>
+                    <span class="nav-link-text">Giros</span>
+                </a>
+                <div id="submenu-7" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+                        @if (is_null(session('impersonated_by')))
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/transactions/create?giros=1">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">post_add</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Nuevo Giro</span>
+                                </a>
+                            </li>
+                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/transactions">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Mis Giros</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-5" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">monetization_on</i>
@@ -359,7 +409,7 @@
                 </a>
                 <div id="submenu-5" class="collapse " data-bs-parent="#menu-accordion">
                     <ul class="submenu-list list-unstyled">
-
+                        @if (is_null(session('impersonated_by')))
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/balance/create">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -368,6 +418,7 @@
                                 <span class="nav-link-text ms-1">Recargar Saldo</span>
                             </a>
                         </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/balance">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -411,6 +462,36 @@
                     </ul>
                 </div>
             </li>
+            @if (getenv('COUNTRY_NAME') == 'ECUADOR' && Auth::user()->giros == 1)
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-7" aria-expanded="false" aria-controls="submenu-2">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">price_check</i>
+                    </div>
+                    <span class="nav-link-text">Giros</span>
+                </a>
+                <div id="submenu-7" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/transactions">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Giros en espera</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="/transactions?id=record">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">post_add</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Historial de giros</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-5" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -509,7 +590,7 @@
                             </a>
                         </li>
                         @endif
-                        @if (Auth::user()->role !== 'Saldos')
+                        @if (Auth::user()->role !== 'Saldos' && is_null(session('impersonated_by')))
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/profit/create">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -744,6 +825,38 @@
     <!-- footer -->
     <footer class="footer">
             <div class="container-fluid">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        @if (! isset($banners))
+                            @if (App\Models\Banner::all()->count() > 0 && (Auth::user()->role == 'Distributor' || Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Saldos'))
+                                @foreach(App\Models\Banner::all() as $banner)
+                                    @if ($banner->id == App\Models\Banner::first()->id)
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100 rounded img-fluid" src="{{getenv('URL_SERVER').$banner->banner_url}}">
+                                        </div>
+                                    @else
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 rounded img-fluid" src="{{getenv('URL_SERVER').$banner->banner_url}}">
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @else
+                            <div class="carousel-item active">
+                                <img class="d-block w-100 rounded img-fluid" src="{{getenv('URL_SERVER')}}/assets/img/Banner/banner_original.png">
+                            </div>
+                            @endif
+                        @endif
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
                 <div class="row align-items-center justify-content-lg-between">
                     <div  class="col-lg-12 mb-lg-0 mb-4">
                         <div class="copyright text-center text-sm text-muted text-lg-start">
@@ -801,6 +914,14 @@
         });
     @endif
 
+</script>
+<script>
+    $(document).ready(function () {
+        carousel_next = document.querySelector('.carousel-control-next');
+        setInterval(()=>{
+            carousel_next.click();
+        }, 3000);
+    });
 </script>
 
 <!-- Github buttons -->

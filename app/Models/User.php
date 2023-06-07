@@ -77,7 +77,7 @@ class User extends Authenticatable
         'public_receipt',
         'enabled_daily',
         'product_id',
-        'was_impersonated'
+        'giros'
     ];
 
     /**

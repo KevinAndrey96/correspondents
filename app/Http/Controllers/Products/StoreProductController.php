@@ -16,7 +16,7 @@ class StoreProductController extends Controller
 {
     public function store(Request $request)
     {
-
+        //return var_dump($request->input('giros'));
         $fields = [
             'productName'=>'required|string',
             'productType'=>'required|string',
@@ -64,6 +64,11 @@ class StoreProductController extends Controller
         $product->com_dis = $request->input('com_dis');
         $product->com_sup = $request->input('com_sup');
         $product->fixed_commission = $request->input('fixed_commission');
+
+        if (isset($request->giros)) {
+            $product->giros = $request->input('giros');
+        }
+
         $product->save();
 
         if (! is_null($product->com_shp) && ! is_null($product->com_dis ) && ! is_null($product->com_sup)) {
@@ -127,6 +132,5 @@ class StoreProductController extends Controller
         }
 
         return redirect('products');
-        //return response()->json(request()->all());
     }
 }

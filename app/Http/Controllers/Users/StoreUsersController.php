@@ -78,7 +78,11 @@ class StoreUsersController extends Controller
         if ($request->input('role') == 'Supplier') {
             $user->priority = $request->input('priority');
             $user->max_queue = $request->input('max_queue');
+            if (isset($request->giros)) {
+                $user->giros = $request->input('giros');
+            }
         }
+
         if (Auth::user()->role == 'Distributor') {
             $user->distributor_id = Auth::user()->id;
         }

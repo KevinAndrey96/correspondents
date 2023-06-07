@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\SupplierProduct;
+use App\Models\Exchange;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,10 +19,13 @@ class AddClientDataController extends Controller
     {
         try {
             date_default_timezone_set('America/Bogota');
+
             if (Auth::user()->role == 'Shopkeeper') {
                 $detail = "";
                 $productID = $request->input('productID');
                 $product = Product::find($productID);
+                $giros = intval($request->input('giros'));
+
                 if($product->account_type == 1){
                     $detail = $detail.'Tipo de cuenta: '.$request->input('accountType').',';
                 }
@@ -40,11 +44,15 @@ class AddClientDataController extends Controller
                 if($product->extra == 1){
                     $detail = $detail.'Extra: '.$request->input('extra').',';
                 }
+
                 $shopkeeperID = Auth::user()->id;
                 $distributorID = Auth::user()->distributor_id;
                 $transaction = new Transaction();
-                //$transaction->date = substr(Carbon::now(), 9, 17);
                 $transaction->date = Carbon::now()->toDateTimeString();
+
+                if ($giros == 1) {
+                    $transaction->giros = 1;
+                }
 
                 $allowedTransaction = 0;
                 $i = 0;
@@ -93,50 +101,68 @@ class AddClientDataController extends Controller
                         }
                     }
                 }
+
                 if ($allowedTransaction == 0) {
-                    return redirect('/transactions')->with('LimitExceeded', 'Esta cuenta superó el límite de transacciones por periodo, podra realizar transacciones con la misma a partir de las '.$allowedHour);
+                    if (isset($giros)) {
+                        return redirect('/transactions?giros=1')->with('LimitExceeded', 'Esta cuenta superó el límite de giros por periodo, podra realizar giros con la misma a partir de las '.$allowedHour);
+                    } else {
+                        return redirect('/transactions')->with('LimitExceeded', 'Esta cuenta superó el límite de transacciones por periodo, podra realizar transacciones con la misma a partir de las '.$allowedHour);
+                    }
                 }
-                /*
-                $dailyTransaction = Transaction::where([
-                    ['account_number', '=', $request->input('accountNumber')],
-                    ['date', '=', substr($transaction->date, 0, -9)]
-                ])->first();
-                if (! is_null($dailyTransaction)) {
-                    return redirect('/transactions')->with('LimitExceeded', 'Esta cuenta superó el límite de transacciones por día');
-                }
-                */
+
                 $transaction->shopkeeper_id = $shopkeeperID;
                 $transaction->distributor_id = $distributorID;
                 $transaction->admin_id = 1;
                 $transaction->product_id = $productID;
                 $transaction->account_number = $request->input('accountNumber');
                 $transaction->amount = $request->input('transactionAmount');
+
+                if (getenv('COUNTRY_NAME') == 'ECUADOR' && $transaction->giros == 1) {
+                    $exchange = Exchange::find(1);
+                    $transaction->amount = floatval($request->input('transactionAmount')) * floatval($exchange->value);
+                }
+
                 $transaction->type = $request->input('transactionType');
                 $transaction->status = $request->input('transactionState');
                 $transaction->detail = $detail;
                 $transaction->own_commission = $request->input('own_commission');
-                $transaction->userIP = \Request::ip();;
+                $transaction->userIP = \Request::ip();
                 $transaction->save();
 
-                if ($transaction->type === 'Withdrawal') {
-                    $suppliers = User::where([
-                        ['role', '=', 'Supplier'],
-                        ['is_online', '=', 1],
-                        ['is_enabled', '=', 1]
-                    ])->orderBy('priority', 'asc')->get();
-                } else {
+                if ($giros == 1) {
                     $suppliers = User::where([
                         ['role', '=', 'Supplier'],
                         ['is_online', '=', 1],
                         ['is_enabled', '=', 1],
+                        ['giros', '=', 1],
                         ['balance', '>=', $transaction->amount]
                     ])->orderBy('priority', 'asc')->get();
+                } else {
+                    if ($transaction->type === 'Withdrawal') {
+                        $suppliers = User::where([
+                            ['role', '=', 'Supplier'],
+                            ['giros', '=', 0],
+                            ['is_online', '=', 1],
+                            ['is_enabled', '=', 1]
+                        ])->orderBy('priority', 'asc')->get();
+                    } else {
+                        $suppliers = User::where([
+                            ['role', '=', 'Supplier'],
+                            ['giros', '=', 0],
+                            ['is_online', '=', 1],
+                            ['is_enabled', '=', 1],
+                            ['balance', '>=', $transaction->amount]
+                        ])->orderBy('priority', 'asc')->get();
+                    }
                 }
 
                  if ($suppliers->count() === 0) {
                      Transaction::destroy($transaction->id);
-
-                     return redirect('/transactions/create')->with('noSuppliers', 'No hay proveedores disponibles');
+                     if (isset($giros)) {
+                         return redirect('/transactions/create?giros=1')->with('noSuppliers', 'No hay proveedores disponibles');
+                     } else {
+                         return redirect('/transactions/create')->with('noSuppliers', 'No hay proveedores disponibles');
+                     }
                  }
 
                 foreach ($suppliers as $supplier) {
@@ -144,6 +170,7 @@ class AddClientDataController extends Controller
                         ['user_id', $supplier->id],
                         ['product_id', $productID]
                     ])->get();
+
                     if ($supplierProduct->count() > 0) {
                         $transactions = Transaction::where([
                                                            ['supplier_id', '=', $supplier->id],
@@ -157,8 +184,11 @@ class AddClientDataController extends Controller
                         }
                     }
                 }
-
-                return redirect('/transactions');
+                if (isset($giros)) {
+                    return redirect('/transactions?giros=1');
+                } else {
+                    return redirect('/transactions');
+                }
             }
         } catch (Exception $e) {
                 echo '<h4>No ha asignado todas las comisiones</h4><br/><h4>Ha habido una excepción:</h4>'.$e->getMessage();

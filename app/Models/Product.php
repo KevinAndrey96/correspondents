@@ -37,7 +37,8 @@ class Product extends Model
         'num_jineteo',
         'hours',
         'reassignment_minutes',
-        'fixed_commission'
+        'fixed_commission',
+        'giros'
     ];
 
 

@@ -13,12 +13,13 @@ class CreateTransactionController extends Controller
 {
     public function create(Request $request)
     {
-        //return $request->session()->get('spector');
         if (Auth::user()->role == 'Shopkeeper') {
             $urlServer = getenv('URL_SERVER');
+            $giros = $request->input('giros');
 
             $productsDeposit = Product::where('product_type','=','Deposit')
                 ->where('is_enabled','=','1')
+                ->where('giros', '=', '0')
                 ->orderBy('priority', 'asc')
                 ->get();
 
@@ -26,9 +27,20 @@ class CreateTransactionController extends Controller
                 ->where('is_enabled','=','1')
                 ->orderBy('priority', 'asc')
                 ->get();
+
             $platform = Platform::find(1);
 
-            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform', 'urlServer'));
+            if (isset($giros)) {
+                $productsDeposit = Product::where('product_type','=','Deposit')
+                    ->where('is_enabled','=','1')
+                    ->where('giros', '=', 1)
+                    ->orderBy('priority', 'asc')
+                    ->get();
+
+                $productsWithdrawal = collect([]);
+            }
+
+            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform', 'urlServer', 'giros'));
         }
     }
 

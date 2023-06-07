@@ -38,18 +38,22 @@
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
                                         <label for="productType" class="ms-0">{{$productFields->product_type}}</label>
-                                        <select id="productType" name="productType" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()" required>
-                                        @if($mode=="Editar")
+                                        @if (getenv('COUNTRY_NAME') == 'ECUADOR')
+                                            <select id="productType" name="productType" class="form-control ms-0" aria-label="Default select example" onchange="showGirosInput()" required>
+                                        @else
+                                                <select id="productType" name="productType" class="form-control ms-0" aria-label="Default select example" required>
+                                                @endif
+                                            @if($mode=="Editar")
                                             @if($product->product_type == 'Deposit')
-                                            <option value="Deposit">Depósito</option>
-                                            <option value="Withdrawal">Retiro</option>
+                                                <option value="Deposit">Depósito</option>
+                                                <option value="Withdrawal">Retiro</option>
                                             @else
-                                            <option value="Withdrawal">Retiro</option>
-                                            <option value="Deposit">Depósito</option>
+                                                <option value="Withdrawal">Retiro</option>
+                                                <option value="Deposit">Depósito</option>
                                             @endif
                                         @else
-                                            <option value="Deposit">Depósito</option>
                                             <option value="Withdrawal">Retiro</option>
+                                            <option value="Deposit">Depósito</option>
                                         @endif
                                         </select>
                                     </div>
@@ -122,22 +126,59 @@
                                         <input type="number" class="form-control" name="reassignment_minutes" value="{{ isset($product->reassignment_minutes)?$product->reassignment_minutes:old('reassignment_minutes') }}" id="reassignment_minutes" placeholder="" min="2" required>
                                     </div>
                                 </div>
+                                @if (getenv('COUNTRY_NAME') == 'ECUADOR')
+                                    @if ($mode=="Editar")
+                                        @if ($product->product_type == 'Deposit' )
+                                            <div class="col-md-3" id="girosDiv">
+                                                @else
+                                                    <div style="display:none;" class="col-md-3" id="girosDiv">
+                                            @endif
+                                                        @else
+                                                            <div style="display:none;" class="col-md-3" id="girosDiv">
+                                                            @endif
+                                        <div class="input-group input-group-static mb-3">
+                                            <label for="giros" class="ms-0">Giros</label>
+                                                @if ($mode=="Editar")
+                                                    @if ($product->product_type == 'Deposit')
+                                                    <select id="giros" name="giros" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
+                                                        @else
+                                                            <select id="giros" name="giros" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()" disabled>
+                                                            @endif
+                                                        @else
+                                                            <select id="giros" name="giros" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()" disabled>
+                                                                @endif
+                                                @if($mode=="Editar")
+                                                    @if($product->giros == 1)
+                                                        <option Value=1>Si</option>
+                                                        <option Value=0>No</option>
+                                                    @else
+                                                        <option Value=0>No</option>
+                                                        <option Value=1>Si</option>
+                                                    @endif
+                                                @else
+                                                    <option Value=0>No</option>
+                                                    <option Value=1>Si</option>
+                                                @endif
+                                            </select>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-3">
                                         <label for="clientDocument" class="ms-0">{{$productFields->client_document}}</label>
                                         <select id="clientDocument" name="clientDocument" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
-                                        @if($mode=="Editar")
-                                            @if($product->client_document == 1)
-                                            <option Value=1>Si</option>
-                                            <option Value=0>No</option>
+                                            @if($mode=="Editar")
+                                                @if($product->client_document == 1)
+                                                    <option Value=1>Si</option>
+                                                    <option Value=0>No</option>
+                                                @else
+                                                    <option Value=0>No</option>
+                                                    <option Value=1>Si</option>
+                                                @endif
                                             @else
-                                            <option Value=0>No</option>
-                                            <option Value=1>Si</option>
+                                                <option Value=1>Si</option>
+                                                <option Value=0>No</option>
                                             @endif
-                                        @else
-                                            <option Value=1>Si</option>
-                                            <option Value=0>No</option>
-                                        @endif
                                         </select>
                                     </div>
                                 </div>
@@ -275,23 +316,26 @@
                     comDisInput.max = comProdInput.value;
                     console.log(comDisInput.max);
                 });
-        /*
-                comDisInput.addEventListener('input', function(){
-                    comShpInput.max = comDisInput.value;
+    </script>
+    <script type="text/javascript">
+        function showGirosInput()
+        {
+            var productTypeInput = document.getElementById('productType');
+            var girosInput = document.getElementById('giros');
+            var girosDiv = document.getElementById('girosDiv');
 
-                });
+            if (productTypeInput.value == 'Deposit') {
+                girosDiv.style.display = 'block';
+                girosInput.disabled = false;
+            } else {
+                girosDiv.style.display = 'none';
+                girosInput.disabled = true;
+            }
+
+            console.log(girosInput.value)
+        }
 
 
-                comShpInput.addEventListener('input', function(){
-                    comShpInput.value
-
-
-                });
-
-                comSupInput.addEventListener('input', function(){
-
-                });
-                */
     </script>
 @endsection
 
