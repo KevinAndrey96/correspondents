@@ -18,26 +18,38 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class=" input-group input-group-outline my-3">
-                                            <label for="productName" class="form-label">Cuenta</label>
-                                            <input type="text" class="form-control" name="account" value="{{$transactionFields->account}}" id="account" placeholder="" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class=" input-group input-group-outline my-3">
-                                            <label for="productName"  class="form-label">Télefono</label>
-                                            <input type="text" class="form-control" name="phone" value="{{$transactionFields->phone}}" id="phone" placeholder="" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="input-group input-group-outline my-3">
-                                            <label for="productCommission" class="form-label">Documento</label>
+                                            <label for="document" class="form-label">Documento</label>
                                             <input type="text" class="form-control" name="document" value="{{$transactionFields->document}}" id="document" placeholder="" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
+                                        <div class=" input-group input-group-outline my-3">
+                                            <label for="document_type" class="form-label">Tipo de documento</label>
+                                            <input type="text" class="form-control" name="document_type" value="{{$transactionFields->document_type}}" id="phone" placeholder="" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="input-group input-group-outline my-3">
-                                            <label for="com_dis" class="form-label">Código</label>
-                                            <input type="text" class="form-control" name="code" value="{{$transactionFields->code}}" id="code" placeholder="" required>
+                                            <label for="email" class="form-label">Correo</label>
+                                            <input type="text" class="form-control" name="email" value="{{$transactionFields->email}}" id="document" placeholder="" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-group input-group-outline my-3">
+                                            <label for="first_code" class="form-label">Código</label>
+                                            <input type="text" class="form-control" name="first_code" value="{{$transactionFields->first_code}}" id="code" placeholder="" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-group input-group-outline my-3">
+                                            <label for="second_code" class="form-label">Segundo código</label>
+                                            <input type="text" class="form-control" name="second_code" value="{{$transactionFields->second_code}}" id="code" placeholder="" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-group input-group-outline my-3">
+                                            <label for="client_name " class="form-label">Nombre del cliente</label>
+                                            <input type="text" class="form-control" name="client_name" value="{{$transactionFields->client_name}}" id="code" placeholder="" required>
                                         </div>
                                     </div>
                                 </div>

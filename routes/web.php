@@ -147,18 +147,18 @@ Route::middleware(['2fa'])->group(function () {
 Route::get('/complete-registration', [TwoFAController::class, 'index'])->name('complete.registration')->middleware('distributorExtrainfo');
 Route::get('/complete-registration2', [RegisterController::class, 'fullRegister'])->name('complete.registration2');
 
-
 /**
  *  Routes for whatsapp
  */
+
 Route::get('/whatsapp-number-transaction',
     App\Http\Controllers\Transactions\NumberWhatsappTransactionController::class)
           ->name('number.whatsapp');
 
-
 /**
  *  Routes for banners
  */
+
 Route::get('/banners', App\Http\Controllers\Banners\indexBannersController::class)
     ->name('banners.index');
 Route::get('/banners-create', App\Http\Controllers\Banners\CreateBannersController::class)
@@ -175,6 +175,7 @@ Route::get('/banners-delete/{id}', App\Http\Controllers\Banners\DeleteBannersCon
 /**
  * Routes for top shopkeepers
  */
+
 Route::get('/shopkeepers-top-date', App\Http\Controllers\Users\ShopkeepersTopDateUsersController::class)
     ->name('shopkeeper.top.date');
 Route::post('/shopkeepers-top', App\Http\Controllers\Users\ShopkeepersTopUsersController::class)
@@ -183,6 +184,7 @@ Route::post('/shopkeepers-top', App\Http\Controllers\Users\ShopkeepersTopUsersCo
 /**
  * Routes to assign products to suppliers
  */
+
 Route::get('/assign-products/{id}', App\Http\Controllers\Products\AssignProductsController::class)
     ->name('product.assign');
 Route::post('/store-assignments-products', App\Http\Controllers\Products\StoreAssignmentsProductsController::class)
@@ -191,6 +193,7 @@ Route::post('/store-assignments-products', App\Http\Controllers\Products\StoreAs
 /**
  * Route to authorize shopkeepers on the platform
  */
+
 Route::post('/change-authorized-user', App\Http\Controllers\Users\AuthorizeShopkeeperUserController::class)
     ->name('users.shopkeeper.authorized');
 
@@ -233,6 +236,7 @@ Route::post('/store-first-password', App\Http\Controllers\Users\StoreFirstPasswo
 /**
  * Routes for distributor extra info
  */
+
 Route::get('/extrainfo', App\Http\Controllers\Users\DistributorExtrainfoUsersController::class)
     ->name('distributor.extrainfo');
 
@@ -242,6 +246,7 @@ Route::post('/store-distributor-extrainfo', App\Http\Controllers\Users\StoreDist
 /**
  * Routes for preloaded answers
  */
+
 Route::get('/answers', App\Http\Controllers\Answers\IndexAnswersController::class)
     ->name('answers.index');
 Route::get('/answers-create', App\Http\Controllers\Answers\CreateAnswersController::class)

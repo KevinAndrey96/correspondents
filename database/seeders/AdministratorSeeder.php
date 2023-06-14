@@ -22,6 +22,7 @@ class AdministratorSeeder extends Seeder
      */
     public function run(): void
     {
+        /*
         $user = new User();
         $user->name = 'Administrador';
         $user->email = 'administrator@gmail.com';
@@ -37,5 +38,7 @@ class AdministratorSeeder extends Seeder
         $user->balance = 0;
         $user->save();
         $user->assignRole('Administrator');
+    */
     }
+
 }

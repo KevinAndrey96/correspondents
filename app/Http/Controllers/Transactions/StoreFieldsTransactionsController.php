@@ -12,10 +12,12 @@ class StoreFieldsTransactionsController extends Controller
     {
         $transactionField = TransactionField::first();
 
-        $transactionField->account = $request->input('account');
-        $transactionField->phone = $request->input('phone');
         $transactionField->document = $request->input('document');
-        $transactionField->code = $request->input('code');
+        $transactionField->document_type = $request->input('document_type');
+        $transactionField->email = $request->input('email');
+        $transactionField->first_code = $request->input('first_code');
+        $transactionField->second_code = $request->input('second_code');
+        $transactionField->client_name = $request->input('client_name');
         $transactionField->save();
 
         return redirect()->route('transactions.fields');

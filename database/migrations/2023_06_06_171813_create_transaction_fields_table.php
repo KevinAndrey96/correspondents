@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('transaction_fields', function (Blueprint $table) {
             $table->id();
-            $table->string('account');
-            $table->string('phone');
             $table->string('document');
-            $table->string('code');
+            $table->string('document_type');
+            $table->string('email');
+            $table->string('first_code');
+            $table->string('second_code');
+            $table->string('client_name');
             $table->timestamps();
         });
     }

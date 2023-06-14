@@ -32,10 +32,10 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° de {{$transactionFields->account}} o {{$transactionFields->phone}}</h6>
+                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° de cuenta o teléfono</h6>
                                         <div class="input-group input-group-outline my-3">
                                             <label for="accountNumber" ></label>
-                                            <input type="text" class="form-control" name="accountNumber" id="accountNumber" placeholder="Número de {{$transactionFields->account}}">
+                                            <input type="text" class="form-control" name="accountNumber" id="accountNumber" placeholder="Número de cuenta o teléfono">
                                         </div>
                                     </div>
                                     @if($product->account_type == 1)
@@ -52,37 +52,37 @@
                                     @endif
                                     @if($product->client_name == 1)
                                       <div class="col-md-5">
-                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">Nombre del cliente</h6>
+                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->client_name}}</h6>
                                         <div class="input-group input-group-outline my-3">
                                             <label for="clientName" ></label>
-                                            <input type="text" class="form-control" name="clientName" id="clientName" placeholder="Nombre del cliente">
+                                            <input type="text" class="form-control" name="clientName" id="clientName" placeholder="{{$transactionFields->client_name}}">
                                         </div>
                                       </div>
                                     @endif
                                     @if($product->client_document == 1)
                                       <div class="col-md-3">
-                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° {{$transactionFields->document}}</h6>
+                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->document}}</h6>
                                         <div class="input-group input-group-outline my-3">
-                                            <label for="clientDocument" ></label>
-                                            <input type="text" class="form-control" name="clientDocument" id="clientDocument" placeholder="{{$transactionFields->document}} del cliente">
+                                            <label for="clientDocument"></label>
+                                            <input type="text" class="form-control" name="clientDocument" id="clientDocument" placeholder="{{$transactionFields->document}}">
                                         </div>
                                       </div>
                                     @endif
                                     @if($product->email == 1)
                                         <div class="col-md-6">
-                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">Correo electrónico</h6>
+                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->email}}</h6>
                                             <div class="input-group input-group-outline my-3">
                                                <label for="email" ></label>
-                                               <input type="email" class="form-control" name="email" value="" id="" placeholder="Correo electrónico">
+                                               <input type="email" class="form-control" name="email" value="" id="" placeholder="{{$transactionFields->email}}">
                                             </div>
                                         </div>
                                     @endif
                                     @if($product->code == 1)
                                         <div class="col-md-3">
-                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->code}}</h6>
+                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->first_code}}</h6>
                                             <div class="input-group input-group-outline my-3">
                                                 <label for="code" ></label>
-                                                <input type="text" class="form-control" name="code" id="code" placeholder="{{$transactionFields->code}}">
+                                                <input type="text" class="form-control" name="code" id="code" placeholder="{{$transactionFields->first_code}}">
                                             </div>
                                         </div>
                                     @endif

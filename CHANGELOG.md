@@ -111,5 +111,8 @@ fix: max in input and alert text
 ## [Hotfix 1.3.6]
 fix: remove palabras clave button
 
+## [Hotfix 1.3.7]
+fix: transaction fields
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
