@@ -330,7 +330,9 @@
                                                         <div class="input-group input-group-outline my-3">
                                                             <label for="amount"></label>
                                                             @if (getenv('COUNTRY_NAME') == 'ECUADOR')
-                                                                <input type="number" class="form-control" name="amount" value="" id="amount" step="any" min="0" placeholder="Monto" max="5000">
+                                                                <input type="number" class="form-control" name="amount" value="" id="amount" step="any" min="0" placeholder="Monto" max="10000">
+                                                            @else
+                                                                <input type="number" class="form-control" name="amount" value="" id="amount" step="any" min="0" placeholder="Monto">
                                                             @endif
                                                         </div>
                                                     </div>

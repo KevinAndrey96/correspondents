@@ -49,7 +49,7 @@ class AddBalanceShopkeeperController extends Controller
             }
 
             if ($diffHours < 1) {
-                return back()->with('failedBalanceSaved', 'Aun no tiene permitido solicitar saldo, lo podra hacer a partir de las '.$validDate);
+                return back()->with('failedBalanceSaved', 'Aún no tiene permitido solicitar saldo, lo podrá hacer a partir de las '.$validDate);
             }
 
             $balance = new Balance();

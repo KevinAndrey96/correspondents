@@ -120,9 +120,11 @@ class UpdateTransactionController extends Controller
                     $shopkeeperSummary->user_id = $shopkeeper->id;
                     $shopkeeperSummary->amount = $transaction->amount;
                     $shopkeeperSummary->previous_balance = $shopkeeper->balance;
+                    $shopkeeperSummary->fixed_commission = $transaction->product->fixed_commission;
                     $supplierSummary->user_id = $supplier->id;
                     $supplierSummary->amount = $transaction->amount;
                     $supplierSummary->previous_balance = $supplier->balance;
+                    $supplierSummary->fixed_commission = $transaction->product->fixed_commission;
 
                     if ($transaction->type === 'Withdrawal') {
                         $shopkeeper->balance += ($transaction->amount - $transaction->product->fixed_commission);
