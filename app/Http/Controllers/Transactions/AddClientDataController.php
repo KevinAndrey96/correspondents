@@ -115,11 +115,11 @@ class AddClientDataController extends Controller
                 $transaction->admin_id = 1;
                 $transaction->product_id = $productID;
                 $transaction->account_number = $request->input('accountNumber');
-                $transaction->amount = $request->input('transactionAmount');
+                $transaction->amount = (double)$request->input('transactionAmount');
 
                 if (getenv('COUNTRY_NAME') == 'ECUADOR' && $transaction->giros == 1) {
                     $exchange = Exchange::find(1);
-                    $transaction->amount = floatval($request->input('transactionAmount')) * floatval($exchange->value);
+                    $transaction->amount = (double)($request->input('transactionAmount')) * (double)($exchange->value);
                 }
 
                 $transaction->type = $request->input('transactionType');
@@ -129,31 +129,19 @@ class AddClientDataController extends Controller
                 $transaction->userIP = \Request::ip();
                 $transaction->save();
 
-                if ($giros == 1) {
+                if ($transaction->type === 'Withdrawal') {
+                    $suppliers = User::where([
+                        ['role', '=', 'Supplier'],
+                        ['is_online', '=', 1],
+                        ['is_enabled', '=', 1]
+                    ])->orderBy('priority', 'asc')->get();
+                } else {
                     $suppliers = User::where([
                         ['role', '=', 'Supplier'],
                         ['is_online', '=', 1],
                         ['is_enabled', '=', 1],
-                        ['giros', '=', 1],
                         ['balance', '>=', $transaction->amount]
                     ])->orderBy('priority', 'asc')->get();
-                } else {
-                    if ($transaction->type === 'Withdrawal') {
-                        $suppliers = User::where([
-                            ['role', '=', 'Supplier'],
-                            ['giros', '=', 0],
-                            ['is_online', '=', 1],
-                            ['is_enabled', '=', 1]
-                        ])->orderBy('priority', 'asc')->get();
-                    } else {
-                        $suppliers = User::where([
-                            ['role', '=', 'Supplier'],
-                            ['giros', '=', 0],
-                            ['is_online', '=', 1],
-                            ['is_enabled', '=', 1],
-                            ['balance', '>=', $transaction->amount]
-                        ])->orderBy('priority', 'asc')->get();
-                    }
                 }
 
                  if ($suppliers->count() === 0) {

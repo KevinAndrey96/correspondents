@@ -78,8 +78,6 @@ class IndexTransactionController extends Controller
             return view('transactions.index', compact('transactions'));
         }
 
-
-
         if (Auth::user()->role == 'Supplier') {
             $transactions = Transaction::where([
                 ['supplier_id', Auth::user()->id],

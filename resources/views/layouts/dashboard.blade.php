@@ -358,6 +358,16 @@
                                 <span class="nav-link-text ms-1">Nueva Transacción</span>
                             </a>
                         </li>
+                        @if (getenv('COUNTRY_NAME') == 'ECUADOR')
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/transactions/create?giros=1">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">post_add</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Nuevo Giro</span>
+                                </a>
+                            </li>
+                        @endif
                         @endif
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/transactions">
@@ -370,6 +380,7 @@
                     </ul>
                 </div>
             </li>
+            <!--
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-7" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -400,6 +411,7 @@
                     </ul>
                 </div>
             </li>
+            -->
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-5" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

@@ -117,5 +117,8 @@ fix: transaction fields
 ## [Hotfix 1.3.8]
 fix: max balance assignment
 
+## [Hotfix 1.3.9]
+fix: add SupplierProduct validation to ReassignTransaction Trait
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

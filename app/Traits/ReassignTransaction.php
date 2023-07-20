@@ -4,6 +4,8 @@ namespace App\Traits;
 
 use App\Models\User;
 use App\Models\Transaction;
+use App\Models\SupplierProduct;
+
 use Carbon\Carbon;
 
 trait ReassignTransaction
@@ -78,25 +80,30 @@ trait ReassignTransaction
                 foreach ($users as $user) {
                     $output .= 'Evaluando proveedor #' . $user->id . ' - ' . $user->name . '
                     ';
-                    $transactions = Transaction::where([
-                        ['supplier_id', '=', $user->id],
-                        ['status', '=', 'hold']
+                    $supplierProduct = SupplierProduct::where([
+                        ['user_id', $user->id],
+                        ['product_id', $transaction->product->id]
                     ])->get();
-                    $numTransactions = $transactions->count();
-                    $output .= 'Este proveedor tiene asignadas ' . $numTransactions . ' transacciones,  puede recibir un máximo de ' . $user->max_queue .' transacciones
-                    ';
 
-                    if ($numTransactions < $user->max_queue) {
-                        $transaction->supplier_id = $user->id;
-                        $transaction->save();
-                        $wasReassigned = true;
-                        $output .= 'REASIGNANDO TRANSACCIÓN A PROVEEDOR ' . $user->id . ' ' . $user->name . '...TRANSACCIÓN REASIGNADA...
+                    if ($supplierProduct->count() > 0) {
+                        $transactions = Transaction::where([
+                            ['supplier_id', '=', $user->id],
+                            ['status', '=', 'hold']
+                        ])->get();
+                        $numTransactions = $transactions->count();
+                        $output .= 'Este proveedor tiene asignadas ' . $numTransactions . ' transacciones,  puede recibir un máximo de ' . $user->max_queue . ' transacciones
+                            ';
 
-                        ';
-                        break;
+                        if ($numTransactions < $user->max_queue) {
+                            $transaction->supplier_id = $user->id;
+                            $transaction->save();
+                            $wasReassigned = true;
+                            $output .= 'REASIGNANDO TRANSACCIÓN A PROVEEDOR ' . $user->id . ' ' . $user->name . '...TRANSACCIÓN REASIGNADA...
+                            ';
+                            break;
+                        }
                     }
                 }
-
                 if (! $wasReassigned) {
                     $transaction->supplier_id = null;
                     $transaction->status = 'cancelled';

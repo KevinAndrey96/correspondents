@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\Models\Product;
 use App\Models\Platform;
+use App\Models\Exchange;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +41,9 @@ class CreateTransactionController extends Controller
                 $productsWithdrawal = collect([]);
             }
 
-            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform', 'urlServer', 'giros'));
+            $exchange = Exchange::first();
+
+            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform', 'urlServer', 'giros', 'exchange'));
         }
     }
 

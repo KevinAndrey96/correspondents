@@ -59,6 +59,25 @@
                                 </script>
                             @endif
                         @endif
+                            @if ($giros == 1)
+                            <div class="row d-flex">
+                                <div class="col-md-8 ms-auto me-auto mt-4 mb-4">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class=" input-group input-group-outline my-3">
+                                                    <label for="exchange" class="form-label">Valor en USD</label>
+                                                    <input type="number" class="form-control" id="exchange" min="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 d-flex">
+                                                <p class="mt-auto mb-auto" ><strong>Valor en COP:<span id="pesos_value"></span></strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                         <form action="{{ url('/transaction/store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
@@ -246,6 +265,18 @@
                         </div>
                     </div>
                 </div>
+
+        <script type="text/javascript">
+            var exchangeInput = document.getElementById('exchange');
+            var pesosValueSpan = document.getElementById('pesos_value');
+
+            exchangeInput.addEventListener('input', function(){
+                pesosValueSpan.innerHTML = ' $'+JSON.parse(parseFloat(exchangeInput.value) * parseFloat({{$exchange->value}}));
+            });
+
+
+
+        </script>
             </div>
     <!--MODAL-->
 
