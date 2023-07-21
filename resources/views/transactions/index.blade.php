@@ -40,6 +40,9 @@
                                     @if (Auth::user()->role == 'Shopkeeper')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo</th>
                                     @endif
+                                    @if (getenv('COUNTRY_NAME') == 'ECUADOR')
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Giros</th>
+                                    @endif
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Estado</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Fecha</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Acción</th>
@@ -79,6 +82,15 @@
                                                     Retiro
                                                 @endif
                                         </td>
+                                        @endif
+                                        @if (getenv('COUNTRY_NAME') == 'ECUADOR')
+                                            <td class="align-middle text-center text-sm">
+                                                @if ($transaction->giros == 0)
+                                                    NO
+                                                @else
+                                                    SI
+                                                @endif
+                                            </td>
                                         @endif
                                         <td class="align-middle text-center text-sm">
                                             @if ($transaction->status == 'hold')

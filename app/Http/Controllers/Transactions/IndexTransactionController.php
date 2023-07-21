@@ -56,6 +56,7 @@ class IndexTransactionController extends Controller
             }
         }
 
+        /*
         if (Auth::user()->role == 'Supplier' && isset($giros)) {
             $transactions = Transaction::where([
                 ['supplier_id', Auth::user()->id],
@@ -70,7 +71,7 @@ class IndexTransactionController extends Controller
 
             return view('transactions.index', compact('transactions', 'countTransactions'));
         }
-
+        */
 
         if (Auth::user()->role == 'Shopkeeper') {
             $transactions = Transaction::where('shopkeeper_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
@@ -81,7 +82,6 @@ class IndexTransactionController extends Controller
         if (Auth::user()->role == 'Supplier') {
             $transactions = Transaction::where([
                 ['supplier_id', Auth::user()->id],
-                ['giros', 0],
                 ['status',  '<>', 'successful'],
                 ['status',  '<>', 'failed'],
                 ['status',  '<>', 'cancelled']

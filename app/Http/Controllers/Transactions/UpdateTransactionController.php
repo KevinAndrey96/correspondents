@@ -23,10 +23,13 @@ class UpdateTransactionController extends Controller
 
     public function update(Request $request)
     {
-        try {
+
             date_default_timezone_set('America/Bogota');
             $transaction = Transaction::find($request->input('transaction_id'));
             $shopkeeper = User::find($transaction->shopkeeper_id);
+            $administrator = User::find($transaction->admin_id);
+            $supplier = User::find($transaction->supplier_id);
+            $distributor = User::find($transaction->distributor_id);
             $shopkeeper->daily_verified = 0;
             $shopkeeper->save();
             if (
@@ -71,38 +74,39 @@ class UpdateTransactionController extends Controller
                 }
 
                 if ($transaction->status === self::SUCCESSFUL_STATUS) {
-                    $commissionShop = Commission::where([
-                        ['user_id', '=', $transaction->shopkeeper_id],
-                        ['product_id', '=', $transaction->product_id]
-                    ])->first();
-                    $commissionDist = Commission::where([
-                        ['user_id', '=', $transaction->distributor_id],
-                        ['product_id', '=', $transaction->product_id]
-                    ])->first();
-                    $commissionSupp = Commission::where([
-                        ['user_id', '=', $transaction->supplier_id],
-                        ['product_id', '=', $transaction->product_id]
-                    ])->first();
-                    $transaction->com_shp = $commissionShop->amount;
-                    $transaction->com_dis = $commissionDist->amount - $commissionShop->amount;
-                    if (isset($commissionSupp)) {
-                        $transaction->com_sup = $commissionSupp->amount;
+                    if ($transaction->giros == 0) {
+                        $commissionShop = Commission::where([
+                            ['user_id', '=', $transaction->shopkeeper_id],
+                            ['product_id', '=', $transaction->product_id]
+                        ])->first();
+                        $commissionDist = Commission::where([
+                            ['user_id', '=', $transaction->distributor_id],
+                            ['product_id', '=', $transaction->product_id]
+                        ])->first();
+                        $commissionSupp = Commission::where([
+                            ['user_id', '=', $transaction->supplier_id],
+                            ['product_id', '=', $transaction->product_id]
+                        ])->first();
+                        $transaction->com_shp = $commissionShop->amount;
+                        $transaction->com_dis = $commissionDist->amount - $commissionShop->amount;
+                        if (isset($commissionSupp)) {
+                            $transaction->com_sup = $commissionSupp->amount;
+                        }
+                        $transaction->com_adm = $transaction->product->product_commission -
+                            ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup);
+
+
+
+                        if (isset($commissionSupp)) {
+                            $supplier->profit += $commissionSupp->amount;
+                        }
+
+                        $administrator->profit += ($transaction->com_adm + $transaction->product->fixed_commission);
+                        $distributor->profit = $distributor->profit + $commissionDist->amount - $commissionShop->amount;
+                        $shopkeeper->profit += $commissionShop->amount;
+
                     }
-                    $transaction->com_adm = $transaction->product->product_commission -
-                        ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup);
-
-                    $administrator = User::find($transaction->admin_id);
-                    $supplier = User::find($transaction->supplier_id);
-                    $distributor = User::find($transaction->distributor_id);
-
-                    if (isset($commissionSupp)) {
-                        $supplier->profit += $commissionSupp->amount;
-                    }
-
-                    $administrator->profit += ($transaction->com_adm + $transaction->product->fixed_commission);
-                    $distributor->profit = $distributor->profit + $commissionDist->amount - $commissionShop->amount;
-                    $shopkeeper->profit += $commissionShop->amount;
-
+                    //punto de control
                     $supplierBalance = new Balance();
                     $shopkeeperBalance = new Balance();
                     $shopkeeperBalance->user_id = $shopkeeper->id;
@@ -135,7 +139,7 @@ class UpdateTransactionController extends Controller
                         $shopkeeperSummary->movement_type = 'Retiro Realizado';
                     }
 
-                    if ($transaction->type === 'Deposit') {
+                    if ($transaction->type == 'Deposit') {
                         $shopkeeper->balance -= ($transaction->amount + $transaction->product->fixed_commission);
                         $supplier->balance -= $transaction->amount;
                         $shopkeeperBalance->type = 'Withdrawal';
@@ -161,9 +165,6 @@ class UpdateTransactionController extends Controller
 
                 return redirect('/transactions');
             }
-        }catch (Exception $e) {
-            echo $e->getMessage();
-            return redirect('/transactions');
-        }
+
     }
 }
