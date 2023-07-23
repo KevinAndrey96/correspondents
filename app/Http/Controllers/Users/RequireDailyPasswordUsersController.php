@@ -9,6 +9,5 @@ class RequireDailyPasswordUsersController extends Controller
 {
     public function __invoke() {
         return view('users.requireDailyPassword');
-
     }
 }

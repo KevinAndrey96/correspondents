@@ -29,7 +29,7 @@ Route::impersonate();
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home')
-        ->middleware('distributorExtrainfo', '2fa', 'firstPassword', 'dailyPassword');
+        ->middleware('distributorExtrainfo', 'firstPassword', 'dailyPassword');
     Route::get('/products', [App\Http\Controllers\Products\IndexProductController::class, 'index']);
     Route::get('/products/create', [App\Http\Controllers\Products\CreateProductController::class, 'create']);
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
@@ -76,10 +76,12 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
 
     Route::get('/transactions', [App\Http\Controllers\Transactions\IndexTransactionController::class, 'index']);
     Route::get('/transactions/create', [App\Http\Controllers\Transactions\CreateTransactionController::class, 'create'])->middleware('requestDailyPassword');
+    Route::get('/giros/create', [App\Http\Controllers\Transactions\CreateGirosTransactionController::class, 'create']);
     Route::post('/transaction/store', [App\Http\Controllers\Transactions\StoreTransactionController::class, 'store']);
     Route::post('/transaction/storeClientData', [App\Http\Controllers\Transactions\AddClientDataController::class, 'store']);
     Route::get('/transaction/cancel/{id}', [App\Http\Controllers\Transactions\CancelTransactionController::class, 'cancel']);
     Route::post('/transaction/excel', [App\Http\Controllers\Transactions\ExcelExportTransactionController::class, 'export']);
+
 
     Route::get('/users', [App\Http\Controllers\Users\IndexUsersController::class, 'index']);
     Route::get('/user/create', [App\Http\Controllers\Users\CreateUsersController::class, 'create']);

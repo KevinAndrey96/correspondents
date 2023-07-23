@@ -4,6 +4,7 @@
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID Movimiento</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID Usuario</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre Usuario</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Banco</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de movimiento</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comisión fija</th>
@@ -19,6 +20,14 @@
             <td class="align-middle text-center text-sm">{{ $summary->movement_id }}</td>
             <td class="align-middle text-center text-sm">{{ $summary->user_id }}</td>
             <td class="align-middle text-center text-sm">{{ $summary->user->name }}</td>
+            <td class="align-middle text-center text-sm">
+                @if (isset($summary->product_name))
+                    {{ $summary->product_name }}
+                @else
+                    NO APLICA
+                @endif
+
+            </td>
             <td class="align-middle text-center text-sm">
                 @if (isset($summary->bank))
                     {{$summary->bank}}

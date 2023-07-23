@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
     <div class="row mt-6">
-
     </div>
 
     <div class="container my-auto">
