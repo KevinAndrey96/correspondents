@@ -120,8 +120,8 @@ fix: max balance assignment
 ## [Hotfix 1.3.9]
 fix: add SupplierProduct validation to ReassignTransaction Trait
 
-## [Hotfix 1.3.9]
-fix: add 2fa middleware
+## [Hotfix 1.4.0]
+fix: change csrf middleware to accept all routes
 
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
