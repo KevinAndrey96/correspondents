@@ -36,27 +36,30 @@ class AddBalanceShopkeeperController extends Controller
                 ->latest()
                 ->first();
 
-            $creationDate = Carbon::parse($lastBalance->created_at);
+            if (! is_null($lastBalance)) {
 
-            $diffHours = $creationDate->diffInHours($date);
+                $creationDate = Carbon::parse($lastBalance->created_at);
 
-            $validDate = $creationDate->addHour()->format('h:i:s A');
+                $diffHours = $creationDate->diffInHours($date);
 
-            $sameBalance = Balance::where('payment_code',  $request->input('payment_code'))->get()->count();
+                $validDate = $creationDate->addHour()->format('h:i:s A');
 
-            if ($sameBalance > 0) {
-                return back()->with('requestAlreadyExists', 'Ya tienes una solicitud de recarga de saldo con este recibo');
+                $sameBalance = Balance::where('payment_code', $request->input('payment_code'))->get()->count();
+
+                if ($sameBalance > 0) {
+                    return back()->with('requestAlreadyExists', 'Ya tienes una solicitud de recarga de saldo con este recibo');
+                }
+
+                if ($diffHours < 1) {
+                    return back()->with('failedBalanceSaved', 'Aún no tiene permitido solicitar saldo, lo podrá hacer a partir de las ' . $validDate);
+                }
+
             }
-
-            if ($diffHours < 1) {
-                return back()->with('failedBalanceSaved', 'Aún no tiene permitido solicitar saldo, lo podrá hacer a partir de las '.$validDate);
-            }
-
             $balance = new Balance();
             $balance->user_id = Auth::user()->id;
             $balance->amount = $request->input('amount');
             $balance->date = $date;
-            $balance->type = 'Deposit';
+            $balance->type = 'Recharge';
             $balance->card_id = $request->input('card_id');
             $balance->payment_code =  $request->input('payment_code');
             $balance->save();

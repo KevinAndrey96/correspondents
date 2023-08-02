@@ -129,6 +129,8 @@ class AddClientDataController extends Controller
                 $transaction->userIP = \Request::ip();
                 $transaction->save();
 
+
+
                 if ($transaction->type === 'Withdrawal') {
                     $suppliers = User::where([
                         ['role', '=', 'Supplier'],
@@ -142,6 +144,16 @@ class AddClientDataController extends Controller
                         ['is_enabled', '=', 1],
                         ['balance', '>=', $transaction->amount]
                     ])->orderBy('priority', 'asc')->get();
+
+                    if ($transaction->giros == 1) {
+                        $suppliers = User::where([
+                            ['role', '=', 'Supplier'],
+                            ['is_online', '=', 1],
+                            ['is_enabled', '=', 1],
+                            ['balance', '>=', ($transaction->amount)/($exchange->value)]
+                        ])->orderBy('priority', 'asc')->get();
+                    }
+
                 }
 
                  if ($suppliers->count() === 0) {

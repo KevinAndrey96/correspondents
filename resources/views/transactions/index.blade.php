@@ -41,7 +41,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo</th>
                                     @endif
                                     @if (getenv('COUNTRY_NAME') == 'ECUADOR')
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Giros</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Giros Internacionales</th>
                                     @endif
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Estado</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Fecha</th>

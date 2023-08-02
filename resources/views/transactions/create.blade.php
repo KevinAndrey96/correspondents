@@ -80,8 +80,8 @@
                             @endif
                         <form action="{{ url('/transaction/store') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <div class="row">
-                                <div class="col-md-6">
+                            <div class="row justify-content-center">
+                                <div class="col-md-5">
                                     <div class="input-group input-group-static mb-4 ">
                                         <label  for="">Tipo de transacción</label>
                                         <select id="transactionType" onchange="showProducts()" name="transactionType" class="form-control" aria-label="Default select example" required>
@@ -131,7 +131,7 @@
                                         }
                                     }
                                 </script>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="transactionAmount" class="form-label">Monto</label>
                                         <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="any" placeholder="" min="0" required >
@@ -140,7 +140,7 @@
                                 <div class="form-group col-md-6">
                                     <input type="hidden" class="form-control" name="productID" value="" id="productID" readonly="readonly">
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-10">
                                     @if ($platform->is_enabled == 1)
                                     <div id="deposit" style=" display: none;">
                                         <p class="form-label">Depositos</p>

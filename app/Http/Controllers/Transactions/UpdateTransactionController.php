@@ -11,6 +11,7 @@ use App\Models\Commission;
 use App\Models\User;
 use App\Models\Balance;
 use App\Models\Summary;
+use App\Models\Exchange;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Request as RequestAlias;
@@ -106,17 +107,20 @@ class UpdateTransactionController extends Controller
                         $shopkeeper->profit += $commissionShop->amount;
 
                     }
-                    //punto de control
+
+
                     $supplierBalance = new Balance();
                     $shopkeeperBalance = new Balance();
                     $shopkeeperBalance->user_id = $shopkeeper->id;
                     $shopkeeperBalance->amount = $transaction->amount;
                     $shopkeeperBalance->date = Carbon::now();
+                    $shopkeeperBalance->product_name = $transaction->product->product_name;
                     $shopkeeperBalance->is_valid = 1;
                     $shopkeeperBalance->indirect = 1;
                     $supplierBalance->user_id = $supplier->id;
                     $supplierBalance->amount = $transaction->amount;
                     $supplierBalance->date = Carbon::now();
+                    $supplierBalance->product_name = $transaction->product->product_name;
                     $supplierBalance->is_valid = 1;
                     $supplierBalance->indirect = 1;
                     $supplierSummary = new Summary();
@@ -131,10 +135,11 @@ class UpdateTransactionController extends Controller
                     $supplierSummary->previous_balance = $supplier->balance;
                     $supplierSummary->product_name = $transaction->product->product_name;
                     $supplierSummary->fixed_commission = $transaction->product->fixed_commission;
+                    $exchange = Exchange::find(1);
 
                     if ($transaction->type === 'Withdrawal') {
-                        $shopkeeper->balance += ($transaction->amount - $transaction->product->fixed_commission);
-                        $supplier->balance += $transaction->amount;
+                        $shopkeeper->balance += $transaction->amount - $transaction->product->fixed_commission;
+                        $supplier->balance += ($transaction->amount)/$exchange->value;
                         $shopkeeperBalance->type = 'Deposit';
                         $supplierBalance->type = 'Deposit';
                         $supplierSummary->movement_type = 'Retiro Realizado';
@@ -142,8 +147,16 @@ class UpdateTransactionController extends Controller
                     }
 
                     if ($transaction->type == 'Deposit') {
-                        $shopkeeper->balance -= ($transaction->amount + $transaction->product->fixed_commission);
-                        $supplier->balance -= $transaction->amount;
+                        if ($transaction->giros == 0) {
+                            $shopkeeper->balance -= ($transaction->amount + $transaction->product->fixed_commission);
+                            $supplier->balance -= $transaction->amount;
+                        } else {
+                            $shopkeeper->balance -= ($transaction->amount + $transaction->product->fixed_commission)/($exchange->value);
+                            $supplier->balance -= ($transaction->amount)/($exchange->value);
+                        }
+
+
+
                         $shopkeeperBalance->type = 'Withdrawal';
                         $supplierBalance->type = 'Withdrawal';
                         $supplierSummary->movement_type = 'Deposito Realizado';

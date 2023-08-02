@@ -5,6 +5,7 @@ namespace App\Traits;
 use App\Models\User;
 use App\Models\Transaction;
 use App\Models\SupplierProduct;
+use App\Models\Exchange;
 
 use Carbon\Carbon;
 
@@ -12,11 +13,13 @@ trait ReassignTransaction
 {
     public function reassignTransaction(): void
     {
+
         $transactionCounter = 0;
         $output = '';
         date_default_timezone_set('America/Bogota');
         $transactions = Transaction::where('status', '=', 'hold')->get();
         $existsTransactions = $transactions->count() !== 0;
+        $exchange = Exchange::find(1);
 
         $output .= 'Transacciones en este momento:
         ';
@@ -56,6 +59,15 @@ trait ReassignTransaction
                         ['is_enabled', 1],
                         ['balance', '>=', $transaction->amount]
                     ])->orderBy('priority', 'asc')->get();
+
+                    if ($transaction->giros == 1) {
+                        $users = User::where([
+                            ['role', 'Supplier'],
+                            ['is_online', 1],
+                            ['is_enabled', 1],
+                            ['balance', '>=', ($transaction->amount)/$exchange->value]
+                        ])->orderBy('priority', 'asc')->get();
+                    }
                 }
 
                 if ($transaction->type == 'Withdrawal') {

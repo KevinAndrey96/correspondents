@@ -99,6 +99,7 @@
                                                 <input type="number" class="form-control" name="max_queue" min="1" value="" id="" placeholder="" required>
                                             </div>
                                         </div>
+                                    <!--
                                         @if (getenv('COUNTRY_NAME') == 'ECUADOR')
                                         <div class="col-md-4">
                                             <div class="input-group input-group-static mb-3">
@@ -110,6 +111,7 @@
                                             </div>
                                         </div>
                                         @endif
+                                        -->
                                     @endif
                                     @if ($role == 'Saldos')
                                         <div class="container mt-3 mb-3 border ">

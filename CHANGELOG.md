@@ -123,5 +123,8 @@ fix: add SupplierProduct validation to ReassignTransaction Trait
 ## [Hotfix 1.4.0]
 fix: change csrf middleware to accept all routes
 
+## [Hotfix 1.4.1]
+fix: add product_name to balances table
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

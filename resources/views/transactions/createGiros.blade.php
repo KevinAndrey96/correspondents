@@ -34,7 +34,7 @@
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
                             <h6 class="text-white text-center text-capitalize ps-2 mx-6 "> <a href="/home" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a>Crear
                                 @if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1)
-                                    Giro
+                                    Giro Internacional
                                 @else
                                     Transacción
                                 @endif
@@ -60,28 +60,16 @@
                             @endif
                         @endif
                         @if ($giros == 1)
-                            <div class="row d-flex">
-                                <div class="col-md-8 ms-auto me-auto mt-4 mb-4">
-                                    <div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class=" input-group input-group-outline my-3">
-                                                    <label for="exchange" class="form-label">Valor en USD</label>
-                                                    <input type="number" class="form-control" id="exchange" min="0">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 d-flex">
-                                                <p class="mt-auto mb-auto" ><strong>Valor en COP:<span id="pesos_value"></span></strong></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="row justify-content-center">
+                                <div class="col-auto mb-3">
+                                    <p class="mt-auto mb-auto" ><strong>Valor en COP:<span id="pesos_value"></span></strong></p>
                                 </div>
                             </div>
                         @endif
                         <form action="{{ url('/transaction/store') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <div class="row">
-                                <div class="col-md-6">
+                            <div class="row justify-content-center">
+                                <div class="col-md-5">
                                     <div class="input-group input-group-static mb-4 ">
                                         <label  for="">Tipo de transacción</label>
                                         <select id="transactionType" onchange="showProducts()" name="transactionType" class="form-control" aria-label="Default select example" required>
@@ -131,7 +119,7 @@
                                         }
                                     }
                                 </script>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="transactionAmount" class="form-label">Monto</label>
                                         <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="any" placeholder="" min="0" required >
@@ -140,7 +128,7 @@
                                 <div class="form-group col-md-6">
                                     <input type="hidden" class="form-control" name="productID" value="" id="productID" readonly="readonly">
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-10">
                                     @if ($platform->is_enabled == 1)
                                         <div id="deposit" style=" display: none;">
                                             <p class="form-label">Depositos</p>
@@ -267,7 +255,7 @@
         </div>
 
         <script type="text/javascript">
-            var exchangeInput = document.getElementById('exchange');
+            var exchangeInput = document.getElementById('transactionAmount');
             var pesosValueSpan = document.getElementById('pesos_value');
 
             exchangeInput.addEventListener('input', function(){

@@ -9,8 +9,8 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
@@ -210,7 +210,6 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         ),
         'A' => 
         array (
-            'Asm89\\Stack\\' => 12,
             'App\\' => 4,
         ),
     );
@@ -668,10 +667,6 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         array (
             0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
         ),
-        'Asm89\\Stack\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/asm89/stack-cors/src',
-        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -781,6 +776,7 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'App\\Http\\Controllers\\Publicity\\StorePublicityController' => __DIR__ . '/../..' . '/app/Http/Controllers/Publicity/StorePublicityController.php',
         'App\\Http\\Controllers\\Transactions\\AddClientDataController' => __DIR__ . '/../..' . '/app/Http/Controllers/Transactions/AddClientDataController.php',
         'App\\Http\\Controllers\\Transactions\\CancelTransactionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Transactions/CancelTransactionController.php',
+        'App\\Http\\Controllers\\Transactions\\CreateGirosTransactionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Transactions/CreateGirosTransactionController.php',
         'App\\Http\\Controllers\\Transactions\\DetailTransactionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Transactions/DetailTransactionController.php',
         'App\\Http\\Controllers\\Transactions\\DetailTransactionPDFController' => __DIR__ . '/../..' . '/app/Http/Controllers/Transactions/DetailTransactionPDFController.php',
         'App\\Http\\Controllers\\Transactions\\EditFieldsTransactionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Transactions/EditFieldsTransactionsController.php',
@@ -868,8 +864,6 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Traits\\ReassignTransaction' => __DIR__ . '/../..' . '/app/Traits/ReassignTransaction.php',
-        'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
-        'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'BaconQrCode\\Common\\BitArray' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Common/BitArray.php',
         'BaconQrCode\\Common\\BitMatrix' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/Common/BitMatrix.php',

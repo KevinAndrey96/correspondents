@@ -31,6 +31,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comentarios</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Código de pago</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recibo</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
                                     @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos')
@@ -48,9 +49,11 @@
                                         @endif
                                         <td class="align-middle text-center text-xs">{{ $balance->id}}</td>
                                         @if($balance->type == 'Deposit')
-                                        <td class="align-middle text-center text-xs">Deposito</td>
+                                            <td class="align-middle text-center text-xs">Deposito</td>
                                         @elseif($balance->type == 'Withdrawal')
-                                        <td class="align-middle text-center text-xs">Retiro por Administrador</td>
+                                            <td class="align-middle text-center text-xs">Retiro por Administrador</td>
+                                            @elseif($balance->type == 'Recharge')
+                                                <td class="align-middle text-center text-xs">Recarga de Saldo</td>
                                         @endif
                                         <td class="align-middle text-center text-xs">${{number_format($balance->amount, 2, ',', '.')}}</td>
                                         <td class="align-middle text-center text-xs">{{$balance->date}}</td>
@@ -61,6 +64,9 @@
                                             {{$balance->comment}}
                                         @endif
                                         </td>
+                                            <td class="align-middle text-center text-sm">
+                                                {{$balance->payment_code}}
+                                            </td>
                                         <td class="align-middle text-center text-sm">
                                             @if(isset($balance->boucher))
                                             <div>
