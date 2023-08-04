@@ -126,5 +126,8 @@ fix: change csrf middleware to accept all routes
 ## [Hotfix 1.4.1]
 fix: add product_name to balances table
 
+## [Hotfix 1.4.2]
+fix: change same_site and secure in session file in config folder
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
