@@ -129,5 +129,8 @@ fix: add product_name to balances table
 ## [Hotfix 1.4.2]
 fix: change same_site and secure in session file in config folder
 
+## [Hotfix 1.4.3]
+fix: add new status to validator of ValidateBalanceController
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

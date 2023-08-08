@@ -40,7 +40,7 @@ class ValidateBalanceController extends Controller
                         $summary->bank = $balance->card->bank;
                     }
 
-                    if ($balance->type == 'Deposit') {
+                    if ($balance->type == 'Deposit' || $balance->type == 'Recharge') {
                         $user->balance = $user->balance+$balance->amount;
                         $emailBody->body = 'Su solicitud de recarga de saldo por valor de $'.$balance->amount.' fue aprobada.';
                         $summary->movement_type = 'Recarga de Saldo';
@@ -64,4 +64,5 @@ class ValidateBalanceController extends Controller
             }
         }
     }
+
 }
