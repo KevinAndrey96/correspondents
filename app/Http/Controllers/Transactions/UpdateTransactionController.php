@@ -139,7 +139,7 @@ class UpdateTransactionController extends Controller
 
                     if ($transaction->type === 'Withdrawal') {
                         $shopkeeper->balance += $transaction->amount - $transaction->product->fixed_commission;
-                        $supplier->balance += ($transaction->amount)/$exchange->value;
+                        $supplier->balance += $transaction->amount;
                         $shopkeeperBalance->type = 'Deposit';
                         $supplierBalance->type = 'Deposit';
                         $supplierSummary->movement_type = 'Retiro Realizado';

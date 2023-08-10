@@ -141,5 +141,8 @@ fix: add $shopkeeperSummary on StoreAssignmentBalanceController
 ## [Hotfix 1.4.6]
 fix: add bank to summeries on StoreAssignmentBalanceController
 
+## [Hotfix 1.4.7]
+fix: balance increment to suppliers when transaction is withdrawal 
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
