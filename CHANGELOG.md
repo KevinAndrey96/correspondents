@@ -138,5 +138,8 @@ fix: save balanceOwner on StoreAssignmentBalanceController
 ## [Hotfix 1.4.5]
 fix: add $shopkeeperSummary on StoreAssignmentBalanceController
 
+## [Hotfix 1.4.6]
+fix: add bank to summeries on StoreAssignmentBalanceController
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

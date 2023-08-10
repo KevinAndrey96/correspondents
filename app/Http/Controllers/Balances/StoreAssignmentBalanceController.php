@@ -24,21 +24,23 @@ class StoreAssignmentBalanceController extends Controller
         $balance->administrator_id = Auth::user()->id;
         $balance->save();
         $summary = new Summary();
-        
+
         $summary->user_id = $supplier->id;
         $summary->amount = $balance->amount;
         $summary->previous_balance = $supplier->balance;
-        $summary->movement_type = 'Deposito Realizado';
+        $summary->movement_type = 'Recarga de saldo';
+        $summary->bank = $balance->card->bank;
 
         $shopkeeperSummary->user_id = $balanceOwner->id;
         $shopkeeperSummary->amount = $balance->amount;
-        
-        $shopkeeperSummary->movement_type = 'Deposito Realizado';
+
+        $shopkeeperSummary->movement_type = 'Recarga de saldo';
         $shopkeeperSummary->next_balance = $balanceOwner->balance;
+        $shopkeeperSummary->bank = $balance->card->bank;
 
         $supplier->balance += $balance->amount;
         $summary->next_balance = $supplier->balance;
-        
+
         $supplier->save();
         $balanceOwner->save();
         $summary->save();
