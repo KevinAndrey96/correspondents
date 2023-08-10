@@ -80,6 +80,29 @@ class UpdateUsersController extends Controller
             }
         }
 
+        if ($user->role == 'Distributor') {
+            $user->brand_id = intval($request->input('brand'));
+
+            if (intval($request->input('brand')) == 0) {
+                $user->brand_id = null;
+            }
+
+            $user->save();
+
+            $shopkeepers = User::where('distributor_id', $user->id)->get();
+
+            foreach ($shopkeepers as $shopkeeper) {
+                $shopkeeper->brand_id = intval($request->input('brand'));
+
+                if (intval($request->input('brand')) == 0) {
+                    $shopkeeper->brand_id = null;
+                }
+
+                $shopkeeper->save();
+            }
+        }
+
+
         if (! is_null($request->input('multiproductosID'))) {
             $user->multiproductosID = $request->input('multiproductosID');
             $user->save();

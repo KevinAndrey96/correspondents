@@ -11,6 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\SupplierProduct;
 use App\Models\Product;
+use App\Models\Brand;
 use Lab404\Impersonate\Models\Impersonate;
 
 /**
@@ -133,6 +134,11 @@ class User extends Authenticatable
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
     }
 
     /**

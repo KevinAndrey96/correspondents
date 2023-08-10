@@ -155,6 +155,25 @@
                                                 </div>
                                             </div>
                                     @endif
+
+                                    @if ($user->role == 'Distributor')
+                                        <div class="col-md-4">
+                                            <div class="input-group input-group-static mb-4">
+                                                <label  for="">Marca blanca</label>
+                                                <select id="type" name="brand" class="form-control" aria-label="Default select example">
+                                                    <option class="text-center" value="">Seleccionar</option>
+                                                    @foreach($brands as $brand)
+                                                        @if ($brand->id == $user->brand_id)
+                                                            <option class="text-center" value="{{$brand->id}}" selected>{{$brand->domain}}</option>
+                                                        @else
+                                                            <option class="text-center" value="{{$brand->id}}">{{$brand->domain}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     @if ($user->role == 'Saldos')
                                         <div class="container mt-3 mb-3 border">
                                             <p><strong>Seleccione Bancos:</strong></p>

@@ -34,12 +34,21 @@
     <link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
 
 </head>
-
+<!--background-image: linear-gradient(195deg, #42924a 0%, #191919 100%);-->
 <body class="g-sidenav-show  bg-gray-200">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  bg-gradient-dark" id="sidenav-main">
+
+    @if (isset(Auth::user()->brand_id))
+        <aside style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%)" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
+            @else
+                <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
+                    @endif
     <div class="sidenav-header text-center p-2">
         <a class="text-center p-3" href="/home">
-            <img style="margin-top: -3px;" src="/assets/img/favicon1.png" height="auto" width="30%" class="text-center" alt="main_logo" >
+            @if (isset(Auth::user()->brand_id))
+                <img style="margin-top: -3px;" src="{{getenv('URL_SERVER').Auth::user()->brand->square_logo_url}}" height="auto" width="30%" class="text-center" alt="main_logo" >
+                    @else
+                <img style="margin-top: -3px;" src="/assets/img/favicon1.png" height="auto" width="30%" class="text-center" alt="main_logo" >
+                            @endif
             <span class="ms-1 font-weight-bold text-white "></span>
         </a>
     </div>
@@ -132,6 +141,14 @@
                             </a>
                         </li>
                         @endif
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{route('brands.index')}}">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">branding_watermark</i>
+                                </div>
+                                <span class="nav-link-text ms-1">Marcas blancas</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

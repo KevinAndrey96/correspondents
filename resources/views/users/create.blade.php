@@ -86,6 +86,19 @@
                                             <input type="text" class="form-control" name="address" value="" id="" placeholder="" required>
                                         </div>
                                     </div>
+                                    @if ($role == 'Distributor')
+                                    <div class="col-md-4">
+                                        <div class="input-group input-group-static mb-4">
+                                            <label  for="">Marca blanca</label>
+                                            <select id="type" name="brand" class="form-control" aria-label="Default select example">
+                                                <option class="text-center" value="" selected>Seleccionar</option>
+                                                @foreach($brands as $brand)
+                                                    <option class="text-center" value="{{$brand->id}}">{{$brand->domain}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    @endif
                                     @if ($role == 'Supplier')
                                         <div class="col-md-4">
                                             <div class=" input-group input-group-outline my-3">

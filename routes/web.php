@@ -290,3 +290,18 @@ Route::get('/exchanges-edit/{id}', App\Http\Controllers\Exchanges\EditExchangesC
     ->name('exchanges.edit');
 Route::post('/exchanges-update', App\Http\Controllers\Exchanges\UpdateExchangesController::class)
     ->name('exchanges.update');
+
+/**
+ * Routes for brands
+ */
+
+Route::get('/brands', App\Http\Controllers\Brands\IndexBrandsController::class)
+    ->name('brands.index');
+Route::get('/brands-create', App\Http\Controllers\Brands\CreateBrandsController::class)
+    ->name('brands.create');
+Route::post('/brands-store', App\Http\Controllers\Brands\StoreBrandsController::class)
+    ->name('brands.store');
+Route::get('/brands-edit/{id}', App\Http\Controllers\Brands\EditBrandsController::class)
+    ->name('brands.edit');
+Route::post('/brands-update', App\Http\Controllers\Brands\UpdateBrandsController::class)
+    ->name('brands.update');

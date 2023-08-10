@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Card;
 use App\Models\User;
+use App\Models\Brand;
 
 class CreateUsersController extends Controller
 {
@@ -34,6 +35,14 @@ class CreateUsersController extends Controller
             $advisers = User::where('role', 'Advisers')->get();
 
             return view('users.create', compact('role', 'advisers'));
+
+        }
+
+
+        if ($role == 'Distributor') {
+            $brands = Brand::all();
+
+            return view('users.create', compact('role', 'brands'));
 
         }
 

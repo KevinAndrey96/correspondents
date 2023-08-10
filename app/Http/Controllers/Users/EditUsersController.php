@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserBank;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Models\Card;
 use App\Models\ShopkeeperAdviser;
@@ -30,6 +31,14 @@ class EditUsersController extends Controller
             return view('users.edit', compact('user', 'cards', 'userBanks'));
 
         }
+
+        if ($user->role == 'Distributor') {
+            $brands = Brand::all();
+            
+            return view('users.edit', compact('user', 'cards', 'brands'));
+
+        }
+
         return view('users.edit', compact('user', 'cards'));
     }
 }

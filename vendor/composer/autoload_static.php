@@ -39,6 +39,7 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
+        'b4e3f29b106af37a2bb239f73cdf68c7' => __DIR__ . '/../..' . '/app/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -731,6 +732,9 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'App\\Http\\Controllers\\Banners\\StoreBannersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Banners/StoreBannersController.php',
         'App\\Http\\Controllers\\Banners\\UpdateBannersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Banners/UpdateBannersController.php',
         'App\\Http\\Controllers\\Banners\\indexBannersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Banners/indexBannersController.php',
+        'App\\Http\\Controllers\\Brands\\CreateBrandsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Brands/CreateBrandsController.php',
+        'App\\Http\\Controllers\\Brands\\IndexBrandsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Brands/IndexBrandsController.php',
+        'App\\Http\\Controllers\\Brands\\StoreBrandsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Brands/StoreBrandsController.php',
         'App\\Http\\Controllers\\Cards\\ConfigCardsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Cards/ConfigCardsController.php',
         'App\\Http\\Controllers\\Cards\\DeleteCardsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Cards/DeleteCardsController.php',
         'App\\Http\\Controllers\\Cards\\IndexCardsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Cards/IndexCardsController.php',
@@ -842,6 +846,7 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'App\\Models\\Answer' => __DIR__ . '/../..' . '/app/Models/Answer.php',
         'App\\Models\\Balance' => __DIR__ . '/../..' . '/app/Models/Balance.php',
         'App\\Models\\Banner' => __DIR__ . '/../..' . '/app/Models/Banner.php',
+        'App\\Models\\Brand' => __DIR__ . '/../..' . '/app/Models/Brand.php',
         'App\\Models\\Card' => __DIR__ . '/../..' . '/app/Models/Card.php',
         'App\\Models\\Chat' => __DIR__ . '/../..' . '/app/Models/Chat.php',
         'App\\Models\\Commission' => __DIR__ . '/../..' . '/app/Models/Commission.php',

@@ -75,6 +75,8 @@ class StoreUsersController extends Controller
         $user->address = $request->input('address');
         $user->is_enabled = 1;
 
+
+
         if ($request->input('role') == 'Supplier') {
             $user->priority = $request->input('priority');
             $user->max_queue = $request->input('max_queue');
@@ -99,6 +101,22 @@ class StoreUsersController extends Controller
             $user->password =  Hash::make($request->input('adviser'));
         }
         $user->save();
+
+        if ($user->role == 'Distributor') {
+            if (isset($request->brand)) {
+                $user->brand_id = intval($request->input('brand'));
+                $user->save();
+                /*
+                $shopkeepers = User::where('distributor_id', $user->id)->get();
+
+                foreach ($shopkeepers as $shopkeeper) {
+                    $shopkeeper->brand_id = intval($request->input('brand'));
+                    $shopkeeper->save();
+                }
+                */
+            }
+        }
+
 
         if (isset($request->card_ids)) {
             foreach ($request->card_ids as $id) {
