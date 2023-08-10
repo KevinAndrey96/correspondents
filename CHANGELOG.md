@@ -135,5 +135,8 @@ fix: add new status to validator of ValidateBalanceController
 ## [Hotfix 1.4.4]
 fix: save balanceOwner on StoreAssignmentBalanceController
 
+## [Hotfix 1.4.5]
+fix: add $shopkeeperSummary on StoreAssignmentBalanceController
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
