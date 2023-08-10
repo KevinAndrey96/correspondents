@@ -29,7 +29,9 @@ class StoreAssignmentBalanceController extends Controller
         $supplier->balance += $balance->amount;
         $summary->next_balance = $supplier->balance;
         $supplier->save();
+        $balanceOwner->save();
         $summary->save();
+
 
         return redirect('/balance-all')->with('balanceAssigned', 'El saldo fue asignado al proveedor satisfactoriamente');
     }

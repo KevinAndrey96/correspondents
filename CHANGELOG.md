@@ -132,5 +132,8 @@ fix: change same_site and secure in session file in config folder
 ## [Hotfix 1.4.3]
 fix: add new status to validator of ValidateBalanceController
 
+## [Hotfix 1.4.4]
+fix: save balanceOwner on StoreAssignmentBalanceController
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
