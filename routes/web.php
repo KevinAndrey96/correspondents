@@ -19,9 +19,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
+/*
 Route::get('/', function () {
     return view('auth.login');
 });
+*/
+
+Route::get('/', App\Http\Controllers\Users\PersonalizeLoginUserController::class);
 
 Auth::routes();
 Route::impersonate();
@@ -29,7 +34,7 @@ Route::impersonate();
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home')
-        ->middleware('distributorExtrainfo', '2fa', 'firstPassword', 'dailyPassword');
+        ->middleware('distributorExtrainfo', 'firstPassword', 'dailyPassword');
     Route::get('/products', [App\Http\Controllers\Products\IndexProductController::class, 'index']);
     Route::get('/products/create', [App\Http\Controllers\Products\CreateProductController::class, 'create']);
     Route::post('/products', [App\Http\Controllers\Products\StoreProductController::class, 'store']);
