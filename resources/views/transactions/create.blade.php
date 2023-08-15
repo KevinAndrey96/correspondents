@@ -31,15 +31,27 @@
             <div class="col-12">
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 "> <a href="/home" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a>Crear
-                                @if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1)
-                                    Giro
-                                @else
-                                    Transacción
-                                @endif
-                            </h6>
-                        </div>
+                        @if (isset(Auth::user()->brand_id))
+                            <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                                <h6 class="text-white text-center text-capitalize ps-2 mx-6 "> <a href="/home" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a>Crear
+                                    @if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1)
+                                        Giro
+                                    @else
+                                        Transacción
+                                    @endif
+                                </h6>
+                            </div>
+                        @else
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                                <h6 class="text-white text-center text-capitalize ps-2 mx-6 "> <a href="/home" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a>Crear
+                                    @if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1)
+                                        Giro
+                                    @else
+                                        Transacción
+                                    @endif
+                                </h6>
+                            </div>
+                        @endif
                     </div>
                     <div class="card-body px-0 pb-2">
                         @if(count($errors)>0)
@@ -258,7 +270,12 @@
                             <div class="col-md-12 text-center">
                                 <input type="hidden" name="giros" value="{{$giros}}">
                                 <input class="btn btn-success" type="submit" id="submitButton" disabled value="continuar">
-                                <a class="btn btn-primary" href="{{ url('/transactions') }}"> Regresar</a>
+
+                                @if (isset(Auth::user()->brand_id))
+                                    <a style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="btn btn-primary" href="{{ url('/transactions') }}"> Regresar</a>
+                                @else
+                                    <a class="btn btn-primary" href="{{ url('/transactions') }}"> Regresar</a>
+                                @endif
                             </div>
                             </form>
                             </div>

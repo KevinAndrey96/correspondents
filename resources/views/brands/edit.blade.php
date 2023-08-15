@@ -24,11 +24,11 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="square_logo" class="form-label">Logo cuadrado:</label>
-                                        <input class="form-control form-control-sm" type="file" name="square_logo" id="formFile" required>
+                                        <input class="form-control form-control-sm" type="file" name="square_logo" id="formFile">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="rectangular_logo" class="form-label">Logo rectangular:</label>
-                                        <input class="form-control form-control-sm" type="file" name="rectangular_logo"  id="formFile" required>
+                                        <input class="form-control form-control-sm" type="file" name="rectangular_logo"  id="formFile">
                                     </div>
                                     <!--
                                     <div class="col-md-3 mb-3">
@@ -42,12 +42,14 @@
                                             <input type="color" class="form-control form-control-color" name="primary_color" value="{{$brand->primary_color}}"  title="Elige un color">
                                         </div>
                                     </div>
+                                    <!--
                                     <div class="col-md-3 mb-3">
                                         <label for="secondary_color" class="form-label">Color secundario</label>
                                         <div class="d-flex justify-content-center">
                                             <input type="color" class="form-control form-control-color" name="secondary_color" value="{{$brand->secondary_color}}" title="Elige un color">
                                         </div>
                                     </div>
+                                    -->
                                 </div>
                                 <input type="hidden" value="{{$brand->id}}" name="brand_id">
                                 <div class="d-flex justify-content-center mt-4">

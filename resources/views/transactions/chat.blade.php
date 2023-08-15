@@ -32,6 +32,7 @@
 </head>
 
 <body class="bg-gray-200">
+ok
 <main class="main-content  mt-0" >
     <div class="page-header align-items-start min-vh-100" style="background-position: center;">
         <span class="mask bg-gradient-dark opacity-6"></span>
@@ -40,9 +41,15 @@
                 <div class="col-lg-4 col-md-8 col-12 mx-auto">
                     <div class="card z-index-0 fadeIn3 fadeInBottom">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="bg-gradient-primary shadow-primary border-radius-lg py-2 pe-1">
-                                <h6 class="text-white font-weight-bolder text-center mt-1 mb-1">Chat de transacción</h6>
-                            </div>
+                            @if (Auth::user()->role == 'Shopkeeper' && isset(Auth::user()->brand_id))
+                                <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg py-2 pe-1">
+                                    <h6 class="text-white font-weight-bolder text-center mt-1 mb-1">Chat de transacción</h6>
+                                </div>
+                            @else
+                                <div class="bg-gradient-primary shadow-primary border-radius-lg py-2 pe-1">
+                                    <h6 class="text-white font-weight-bolder text-center mt-1 mb-1">Chat de transacción</h6>
+                                </div>
+                            @endif
                         </div>
                         <div class="card-body">
                                 @livewire("chat-list", ['transactionID' => $id])

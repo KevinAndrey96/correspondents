@@ -5,21 +5,35 @@
             <div class="col-12">
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                        <div class="bg-gradient-primary shadow-primary border-radius-lg  pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3"></a>Detalles de transacción</h6>
-                        </div>
+                        @if (isset(Auth::user()->brand_id))
+                            <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg  pt-1 pb-0">
+                                <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3"></a>Detalles de transacción</h6>
+                            </div>
+                        @else
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg  pt-1 pb-0">
+                                <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3"></a>Detalles de transacción</h6>
+                            </div>
+                        @endif
                     </div>
                     <div class="card-body px-0 pb-4">
                         <div class="row">
                             <div class="col-md-2 mt-1"></div>
                             <div class="col-md-7 mt-1">
-                                <div class="card bg-primary">
+                                @if (isset(Auth::user()->brand_id))
+                                    <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="card bg-primary">
+                                    @else
+                                            <div class="card bg-primary">
+                                    @endif
                                     <div style="position:relative;" class="card-body pt-2 p-2">
                                         <ul class="list-group">
                                             <li class="list-group-item border-0 d-flex p-4 mb-0 bg-gray-100 border-radius-lg">
                                               <div class="row">
-                                                  <a href="#" class="btn btn-info p-0" id="chatIcon" style="position:absolute; left:88%; top:3%; width:12%;" title="Comunicarse con tendero" onclick="openSecondaryWindow()">Chat<i style="color: white; font-size: 30px !important;" class="material-icons opacity-10">forum</i></a>
-                                              @if (Auth::user()->role == 'Supplier' && is_null($detailSupplier))
+                                                  @if (Auth::user()->brand_id)
+                                                    <a href="#" class="btn btn-info p-0" id="chatIcon" style="position:absolute; left:88%; top:3%; width:12%; background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" title="Comunicarse con tendero" onclick="openSecondaryWindow()">Chat<i style="color: white; font-size: 30px !important;" class="material-icons opacity-10">forum</i></a>
+                                                  @else
+                                                      <a href="#" class="btn btn-info p-0" id="chatIcon" style="position:absolute; left:88%; top:3%; width:12%;" title="Comunicarse con tendero" onclick="openSecondaryWindow()">Chat<i style="color: white; font-size: 30px !important;" class="material-icons opacity-10">forum</i></a>
+                                                  @endif
+                                                  @if (Auth::user()->role == 'Supplier' && is_null($detailSupplier))
                                                 <div class="col-md-4 d-flex flex-column ">
                                                     <h6 class="mb-3 text-sm">Información</h6>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Producto: {{$transaction->product->product_name}}</p>

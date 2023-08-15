@@ -42,7 +42,7 @@ class StoreTransactionController extends Controller
 
         if ($amount < $product->min_amount || $amount > $product->max_amount) {
             if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1) {
-                return redirect('/transactions/create?giros=1')
+                return redirect('/giros/create?giros=1')
                     ->with('limitExceeded', 'Supero el límite del monto permitido por transacción para el producto seleccionado,
                         el monto mínimo debe ser de $' . number_format($product->min_amount, 2, ',', '.') . ' y el monto máximo de $' . number_format($product->max_amount, 2, ',', '.'));
             } else {
@@ -57,7 +57,7 @@ class StoreTransactionController extends Controller
          */
         if ($product->product_type !== $request->input('transactionType')) {
             if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1) {
-                return redirect('/transactions/create?giros=1')->with('insufficientBalance', 'Se ha presentado un error inesperado en la plataforma, por favor intentelo de nuevo');
+                return redirect('/giros/create?giros=1')->with('insufficientBalance', 'Se ha presentado un error inesperado en la plataforma, por favor intentelo de nuevo');
             } else {
                 return redirect('/transactions/create')->with('insufficientBalance', 'Se ha presentado un error inesperado en la plataforma, por favor intentelo de nuevo');
             }
@@ -68,7 +68,7 @@ class StoreTransactionController extends Controller
             && (double)Auth::user()->balance < (double)$request->input('transactionAmount')
         ) {
             if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1) {
-                return redirect('/transactions/create?giros=1')->with('insufficientBalance', 'No tiene saldo suficiente para realizar el giro');
+                return redirect('/giros/create?giros=1')->with('insufficientBalance', 'No tiene saldo suficiente para realizar el giro');
             } else {
                 return redirect('/transactions/create')->with('insufficientBalance', 'No tiene saldo suficiente para realizar la transacción');
             }

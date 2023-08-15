@@ -21,7 +21,11 @@
             <div class="col-12">
                 <div class="card my-3">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                        @if (Auth::user()->role == 'Distributor' && isset(Auth::user()->brand_id))
+                        <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                            @else
+                                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                                @endif
                             <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Comisiones para el
                                 @if ($user->role == 'Shopkeeper')
                                     tendero
@@ -96,7 +100,11 @@
                             <div class="text-center p-1">
                                 <input type="hidden" name="amounts" id="amounts">
                                 <input type="hidden" name="ids" id="ids">
-                                <input class="btn btn-primary" type="submit" value="Modificar">
+                                @if (Auth::user()->role == 'Distributor' && isset(Auth::user()->brand_id))
+                                    <input style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="btn btn-primary" type="submit" value="Modificar">
+                                @else
+                                    <input class="btn btn-primary" type="submit" value="Modificar">
+                                @endif
                             </div>
                         </form>
                         <script type="text/javascript">

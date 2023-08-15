@@ -28,12 +28,12 @@
                                         <td>{{$brand->domain}}</td>
                                         <td>
                                             <a class="image-link" href="{{getenv('URL_SERVER').$brand->square_logo_url}}">
-                                                <img width="20%" class="img-fluid" src="{{getenv('URL_SERVER').$brand->square_logo_url}}">
+                                                <img width="40px" class="img-fluid" src="{{getenv('URL_SERVER').$brand->square_logo_url}}">
                                             </a>
                                         </td>
                                         <td>
                                             <a class="image-link" href="{{getenv('URL_SERVER').$brand->rectangular_logo_url}}">
-                                                <img width="20%" class="img-fluid" src="{{getenv('URL_SERVER').$brand->rectangular_logo_url}}">
+                                                <img width="40px" class="img-fluid" src="{{getenv('URL_SERVER').$brand->rectangular_logo_url}}">
                                             </a>
                                         </td>
                                         <td>

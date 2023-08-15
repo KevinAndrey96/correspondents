@@ -93,10 +93,11 @@
                                         </button>
                                     </div>
                                 @endif
+                                <!--
                                 <p class="mt-4 text-sm text-center">
                                     <a href="/password/reset" class="text-primary text-gradient font-weight-bold">Recuperar</a> usuario o contraseña
-
                                 </p>
+                                -->
                             </form>
                         </div>
                     </div>

@@ -104,7 +104,7 @@ class AddClientDataController extends Controller
 
                 if ($allowedTransaction == 0) {
                     if (isset($giros)) {
-                        return redirect('/transactions?giros=1')->with('LimitExceeded', 'Esta cuenta superó el límite de giros por periodo, podra realizar giros con la misma a partir de las '.$allowedHour);
+                        return redirect('/giros/create?giros=1')->with('LimitExceeded', 'Esta cuenta superó el límite de giros por periodo, podra realizar giros con la misma a partir de las '.$allowedHour);
                     } else {
                         return redirect('/transactions')->with('LimitExceeded', 'Esta cuenta superó el límite de transacciones por periodo, podra realizar transacciones con la misma a partir de las '.$allowedHour);
                     }
@@ -159,7 +159,7 @@ class AddClientDataController extends Controller
                  if ($suppliers->count() === 0) {
                      Transaction::destroy($transaction->id);
                      if (isset($giros)) {
-                         return redirect('/transactions/create?giros=1')->with('noSuppliers', 'No hay proveedores disponibles');
+                         return redirect('/giros/create?giros=1')->with('noSuppliers', 'No hay proveedores disponibles');
                      } else {
                          return redirect('/transactions/create')->with('noSuppliers', 'No hay proveedores disponibles');
                      }

@@ -32,9 +32,15 @@
                 <div class="col-lg-4 col-md-8 col-12 mx-auto">
                     <div class="card z-index-0 fadeIn3 fadeInBottom">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                                <h5 class="text-white font-weight-bolder text-center mt-2 mb-2">Un momento por favor ...</h5>
-                            </div>
+                            @if (isset(Auth::user()->brand_id))
+                                <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                                    <h5 class="text-white font-weight-bolder text-center mt-2 mb-2">Un momento por favor ...</h5>
+                                </div>
+                            @else
+                                <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                                    <h5 class="text-white font-weight-bolder text-center mt-2 mb-2">Un momento por favor ...</h5>
+                                </div>
+                            @endif
                         </div>
                         <div style="position: relative;"  class="card-body">
                             <a href="#" id="chatIcon" style="position: absolute; left:70%; bottom:85%; display:none;" class="btn btn-info" title="Comunicarse con proveedor" onclick="openSecondaryWindow()">Chat<i style="color: white; font-size: 30px !important;" class="material-icons opacity-10">forum</i></a>
@@ -148,7 +154,7 @@
 <script>
     setInterval(function () {
         getStatus({{$transaction->id}})
-    }, 30000 );
+    }, 10000 );
 
     function getStatus(id)
     {

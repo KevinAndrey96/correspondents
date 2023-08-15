@@ -626,9 +626,15 @@
                     <div class="col-lg-3 col-md-6 mt-4 mb-4">
                         <div class="card z-index-2 ">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                                <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
-                                    <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#ExcelModal" onclick="excelURL('Transacciones')"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
-                                </div>
+                                @if ((Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Distributor') && isset(Auth::user()->brand_id))
+                                    <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg text-center">
+                                        <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#ExcelModal" onclick="excelURL('Transacciones')"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
+                                    </div>
+                                @else
+                                    <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
+                                        <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#ExcelModal" onclick="excelURL('Transacciones')"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
+                                    </div>
+                                @endif
                             </div>
                             <div class="card-body">
                                 <h6 class="mb-0 ">Estadística 1°</h6>
@@ -647,10 +653,18 @@
                     <div class="col-lg-3 col-md-6 mt-4 mb-4">
                         <div class="card z-index-2  ">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                                <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
+                                @if (Auth::user()->role == 'Shopkeeper' && isset(Auth::user()->brand_id))
+                                <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg text-center">
                                     <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal"
                                             data-bs-target="#ExcelModal" onclick="excelURL('Saldos')"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
                                 </div>
+                                @else
+                                    <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
+                                        <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal"
+                                                data-bs-target="#ExcelModal" onclick="excelURL('Saldos')"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
+                                    </div>
+                                @endif
+
                             </div>
                             <div class="card-body">
                                 <h6 class="mb-0 "> Estadística 2° </h6>
@@ -668,10 +682,17 @@
                 <div class="col-lg-3 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2  ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                            <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
-                                <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal"
-                                        data-bs-target="#ExcelModal" onclick="excelURL('Extracto')"><a><i class="material-icons opacity-10 ">download</i> Excel</a></button>
-                            </div>
+                            @if (Auth::user()->role == 'Shopkeeper' && isset(Auth::user()->brand_id))
+                                <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg text-center">
+                                    <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal"
+                                            data-bs-target="#ExcelModal" onclick="excelURL('Extracto')"><a><i class="material-icons opacity-10 ">download</i> Excel</a></button>
+                                </div>
+                            @else
+                                <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
+                                    <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal"
+                                            data-bs-target="#ExcelModal" onclick="excelURL('Extracto')"><a><i class="material-icons opacity-10 ">download</i> Excel</a></button>
+                                </div>
+                            @endif
                         </div>
                         <div class="card-body">
                             <h6 class="mb-0 "> Estadística 3° </h6>
@@ -688,10 +709,18 @@
                     <div class="col-lg-3 mt-4 mb-3">
                         <div class="card z-index-2 ">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                                <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
-                                    <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal"
-                                            data-bs-target="#ExcelModal" onclick="excelURL('Ganancias')"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
-                                </div>
+                                @if ((Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Distributor') && isset(Auth::user()->brand_id))
+                                    <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg text-center">
+                                        <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal"
+                                                data-bs-target="#ExcelModal" onclick="excelURL('Ganancias')"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
+                                    </div>
+                                @else
+                                    <div class="bg-gradient-primary shadow-primary border-radius-lg text-center">
+                                        <button style="margin-top: 2px; margin-bottom: -2px;" type="button" class="btn text-white" data-bs-toggle="modal"
+                                                data-bs-target="#ExcelModal" onclick="excelURL('Ganancias')"><a ><i class="material-icons opacity-10 ">download</i> Excel</a></button>
+                                    </div>
+                                @endif
+
                             </div>
                             <div class="card-body">
                                 <h6 class="mb-0 ">Estadística 4°</h6>
@@ -741,6 +770,7 @@
             @endif
         </div>
         @hasrole('Shopkeeper')
+        @if (is_null(Auth::user()->brand_id))
         <div class="row mt-4">
         </div>
         <div class="container-fluid py-4">
@@ -748,9 +778,9 @@
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                                <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Publicidad</h6>
-                            </div>
+                                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                                    <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Publicidad</h6>
+                                </div>
                         </div>
                         <div class="card-body px-0 pb-2">
                             <div class="container">
@@ -780,6 +810,7 @@
                 </div>
             </div>
         </div>
+        @endif
         @endhasrole
         <script type="text/javascript">
             @if (Auth::user()->role == 'Administrator')
@@ -980,7 +1011,11 @@
                                 </div>
                                 <div class="col-md-12 text-center">
                                     <input class="btn btn-success" type="submit" value="Descargar excel">
-                                    <a class="btn btn-primary" href="{{ url('/home') }}"> Regresar</a>
+                                    @if ((Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Distributor') && isset(Auth::user()->brand_id))
+                                        <a style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="btn btn-primary" href="{{ url('/home') }}"> Regresar</a>
+                                    @else
+                                        <a class="btn btn-primary" href="{{ url('/home') }}"> Regresar</a>
+                                    @endif
                                 </div>
                             </div>
                         </form>
