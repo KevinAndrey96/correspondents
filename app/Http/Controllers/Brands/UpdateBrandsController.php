@@ -12,7 +12,6 @@ class UpdateBrandsController extends Controller
     {
         $brand = Brand::find($request->input('brand_id'));
         $brand->primary_color = $request->input('primary_color');
-        $brand->primary_color = $request->input('secondary_color');
         $brand->domain = $request->input('domain');
 
 

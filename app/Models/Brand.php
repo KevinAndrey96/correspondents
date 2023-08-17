@@ -14,7 +14,6 @@ class Brand extends Model
         'square_logo_url',
         'rectangular_logo_url',
         'primary_color',
-        'secondary_color',
         'banner'
     ];
 }

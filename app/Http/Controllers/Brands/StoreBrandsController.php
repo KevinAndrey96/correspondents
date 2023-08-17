@@ -13,7 +13,6 @@ class StoreBrandsController extends Controller
         $brand = new Brand();
         $brand->domain = $request->input('domain');
         $brand->primary_color = $request->input('primary_color');
-        $brand->secondary_color = $request->input('secondary_color');
         $brand->save();
 
         if ($request->hasFile('square_logo')) {
