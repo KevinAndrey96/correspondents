@@ -147,5 +147,8 @@ fix: balance increment to suppliers when transaction is withdrawal
 ## [Hotfix 1.4.8]
 fix: delete secondary_color in brands table
 
+## [Hotfix 1.4.9]
+fix: add brand style to receipt and password views
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
