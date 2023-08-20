@@ -111,7 +111,7 @@
                                                         </div>
                                                         <div class="col-md-8 d-flex flex-column ms-auto me-auto pe-2">
                                                             <div class="me-auto">
-                                                            <a class="btn btn-success text-center text-xs" href="/transaction/detail-pdf/{{$transaction->id}}"><i class="material-icons me-2">print</i>Imprimir comprobante</a>
+                                                            <a class="btn btn-success text-center text-xs" href="/transaction/detail-pdf/{{$transaction->id}}" target="_blank"><i class="material-icons me-2">print</i>Imprimir comprobante</a>
                                                             </div>
                                                             <div class="input-group input-group-static mb-2 mt-2">
                                                                 @if (Auth::user()->role == 'Shopkeeper')
