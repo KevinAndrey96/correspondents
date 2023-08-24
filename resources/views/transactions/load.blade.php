@@ -24,7 +24,7 @@
 
 <body class="bg-gray-200">
 <main class="main-content  mt-0">
-    <div class="page-header align-items-start min-vh-100" style="background-image: url('{{$pathBackground}}'); background-position: center;">
+    <div class="page-header align-items-start min-vh-100" style="background-image: url('/assets/img/transaction-load.png'); background-position: center;">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container my-auto">
 
@@ -76,6 +76,7 @@
         </div>
         <div>
         </div>
+        <!--
         <footer class="footer position-absolute bottom-2 py-2 w-100">
             <div class="container">
                 <div class="row justify-content-center">
@@ -92,6 +93,7 @@
                 </div>
             </div>
         </footer>
+        -->
     </div>
 </main>
 <!--   Core JS Files   -->
