@@ -87,6 +87,7 @@ class StoreUsersController extends Controller
 
         if (Auth::user()->role == 'Distributor') {
             $user->distributor_id = Auth::user()->id;
+            $user->brand_id = Auth::user()->brand_id;
         }
 
         if (isset($request->password)) {

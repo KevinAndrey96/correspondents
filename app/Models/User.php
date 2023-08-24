@@ -78,7 +78,8 @@ class User extends Authenticatable
         'public_receipt',
         'enabled_daily',
         'product_id',
-        'giros'
+        'giros',
+        'brand_id'
     ];
 
     /**

@@ -24,7 +24,7 @@
 
 <body class="bg-gray-200">
 <main class="main-content  mt-0" >
-    <div class="page-header align-items-start min-vh-100" style="background-image: url('/assets/img/bglogin.jpeg'); background-position: center;">
+    <div class="page-header align-items-start min-vh-100" style="background-image: url('/assets/img/brandbglogin.png'); background-position: center;">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container my-auto">
             <div class="row">
@@ -36,7 +36,7 @@
                                     <h6 class="text-white font-weight-bolder text-center mt-1 mb-1"><img src="{{getenv('URL_SERVER').Auth::user()->brand->rectangular_logo_url}}" width="70%" height="auto"></h6>
                                 </div>
                             @else
-                                <div class="bg-gradient-primary shadow-primary border-radius-lg py-2 pe-1">
+                                <div class="bg-gradient-secondary shadow-secondary border-radius-lg py-2 pe-1">
                                     <h6 class="text-white font-weight-bolder text-center mt-1 mb-1"><img src="/assets/img/LOGO-COMPLETO.png" width="70%" height="auto"></h6>
                                 </div>
                             @endif
