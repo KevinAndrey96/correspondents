@@ -150,5 +150,8 @@ fix: delete secondary_color in brands table
 ## [Hotfix 1.4.9]
 fix: add brand style to receipt and password views
 
+## [Hotfix 1.5.0]
+fix: change logo and background images 
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

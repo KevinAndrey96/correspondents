@@ -5,7 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="/assets/img/favicon1.png">
+    @if (isset($brand))
+        <link rel="icon" type="image/png" href="{{getenv('URL_SERVER').$brand->square_logo_url}}">
+    @else
+        <link rel="icon" type="image/png" href="/assets/img/favicon1.png">
+    @endif
     <title>
         Corresponsales
     </title>
@@ -24,7 +28,7 @@
 
 <body class="bg-gray-200">
 <main class="main-content  mt-0" >
-    <div class="page-header align-items-start min-vh-100" style="background-image: url('/assets/img/bglogin.jpeg'); background-position: center;">
+    <div class="page-header align-items-start min-vh-100" style="background-image: url('/assets/img/brandbglogin.png'); background-position: center;">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container my-auto">
             <div class="row">
@@ -32,11 +36,11 @@
                     <div class="card z-index-0 fadeIn3 fadeInBottom">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             @if (isset($brand))
-                                <div style="background-image: linear-gradient(195deg, {{$brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg py-2 pe-1">
+                                <div style="background-image: linear-gradient(195deg, {{$brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-secondary shadow-primary border-radius-lg py-2 pe-1">
                                     <h6 class="text-white font-weight-bolder text-center mt-1 mb-1"><img src="{{getenv('URL_SERVER').$brand->rectangular_logo_url}}" style="max-width:30%" height="auto"></h6>
                                 </div>
                             @else
-                                <div class="bg-gradient-primary shadow-primary border-radius-lg py-2 pe-1">
+                                <div class="bg-gradient-secondary shadow-primary border-radius-lg py-2 pe-1">
                                     <h6 class="text-white font-weight-bolder text-center mt-1 mb-1"><img src="/assets/img/LOGO-COMPLETO.png" width="70%" height="auto"></h6>
                                 </div>
                             @endif
@@ -108,6 +112,7 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-6 my-auto ">
+                        @if (!isset($brand))
                         <div style="margin-left: 30px;" class="copyright text-center text-sm text-white text-lg-start">
                             © <script>
                                 document.write(new Date().getFullYear())
@@ -116,6 +121,7 @@
                             <a href="https://asparecargas.net/" class="font-weight-bold text-white" target="_blank">Asparecargas</a>
                             Todos los derechos reservados.
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
