@@ -32,7 +32,6 @@
 </head>
 
 <body class="bg-gray-200">
-ok
 <main class="main-content  mt-0" >
     <div class="page-header align-items-start min-vh-100" style="background-position: center;">
         <span class="mask bg-gradient-dark opacity-6"></span>

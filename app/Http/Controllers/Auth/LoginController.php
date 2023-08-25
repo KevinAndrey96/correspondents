@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
@@ -113,8 +114,16 @@ class LoginController extends Controller
         $user = User::find(Auth::user()->id);
         $user->daily_verified = 0;
         $user->is_online = 0;
+
         $user->save();
+
         Auth::logout();
+
+        if (isset($user->brand_id)) {
+
+            return Redirect::away($user->brand->domain);
+        }
+
         return redirect('/login');
     }
 }

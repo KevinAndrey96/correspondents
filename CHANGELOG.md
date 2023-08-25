@@ -153,5 +153,11 @@ fix: add brand style to receipt and password views
 ## [Hotfix 1.5.0]
 fix: change logo and background images 
 
+## [Hotfix 1.5.1]
+fix: frames and icons
+
+## [Hotfix 1.5.2]
+fix: logout redirect
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
