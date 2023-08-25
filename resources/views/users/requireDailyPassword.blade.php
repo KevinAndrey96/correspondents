@@ -33,7 +33,13 @@
                                         <input type="password" autocomplete="new-password" spellcheck="false" class="form-control" name="password" placeholder="" required>
                                     </div>
                                 </div>
-                                <div class="text-center"><input type="submit" class="btn btn-primary text-center" value="Enviar"></div>
+                                <div class="text-center">
+                                @if (Auth::user()->role == 'Shopkeeper' && isset(Auth::user()->brand_id))
+                                    <input style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" type="submit" class="btn btn-primary text-center" value="Enviar">
+                                @else
+                                    <input type="submit" class="btn btn-primary text-center" value="Enviar">
+                                @endif
+                                </div>
                             </form>
                         </div>
                     </div>

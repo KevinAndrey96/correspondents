@@ -162,5 +162,8 @@ fix: logout redirect
 ## [Hotfix 1.5.3]
 fix: change text in redirect in logout method in LoginController
 
+## [Hotfix 1.5.4]
+fix: change color of submit input in requireDailyPassword view.
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
