@@ -35,7 +35,7 @@
                                     <tr class="align-middle text-center text-sm">
                                         <td>
                                             <a class="image-link" href="{{$urlServer.$card->cardIMG }}">
-                                                <img width="200px" class="rounded img-fluid m-4" src="{{ 'https://corresponsales.asparecargas.net'.$card->cardIMG  }}">
+                                                <img width="200px" class="rounded img-fluid m-4" src="{{ getenv('URL_SERVER').$card->cardIMG  }}">
                                             </a>
                                         </td>
                                         <td>

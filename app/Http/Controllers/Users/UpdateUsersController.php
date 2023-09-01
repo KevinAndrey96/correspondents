@@ -76,7 +76,9 @@ class UpdateUsersController extends Controller
                     $shopkeeperAdviser->save();
                 }
             } else {
-                ShopkeeperAdviser::destroy($shopkeeperAdviser->id);
+                if (isset($shopkeeperAdviser->id)) {
+                    ShopkeeperAdviser::destroy($shopkeeperAdviser->id);
+                }
             }
         }
 

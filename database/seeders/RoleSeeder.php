@@ -15,9 +15,11 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
+        /*
         $roleAdmin = Role::create(['name'=>'Administrator']);
         $roleShopkeeper = Role::create(['name'=>'Shopkeeper']);
         $roleSupplier = Role::create(['name'=>'Supplier']);
         $roleDistributor = Role::create(['name'=>'Distributor']);
+        */
     }
 }
