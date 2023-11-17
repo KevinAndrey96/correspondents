@@ -168,5 +168,8 @@ fix: change color of submit input in requireDailyPassword view.
 ## [Hotfix 1.5.5]
 fix: add validation to advisers in UpdateTransactionsController and change img src in index view in Cards folder
 
+## [Hotfix 1.5.6]
+fix: add is_deleted to cards table and add some validations with this boolean field in blade views
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
