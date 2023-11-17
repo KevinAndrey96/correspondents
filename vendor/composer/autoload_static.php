@@ -1080,6 +1080,7 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'Database\\Seeders\\AdministratorSeeder' => __DIR__ . '/../..' . '/database/seeders/AdministratorSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\DistributorSeeder' => __DIR__ . '/../..' . '/database/seeders/DistributorSeeder.php',
+        'Database\\Seeders\\ExchangeSeeder' => __DIR__ . '/../..' . '/database/seeders/ExchangeSeeder.php',
         'Database\\Seeders\\ProductSeeder' => __DIR__ . '/../..' . '/database/seeders/ProductSeeder.php',
         'Database\\Seeders\\RoleSeeder' => __DIR__ . '/../..' . '/database/seeders/RoleSeeder.php',
         'Database\\Seeders\\ShopkeeperSeeder' => __DIR__ . '/../..' . '/database/seeders/ShopkeeperSeeder.php',

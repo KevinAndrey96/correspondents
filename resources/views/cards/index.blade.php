@@ -31,21 +31,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($cards as $card)
-                                    <tr class="align-middle text-center text-sm">
-                                        <td>
-                                            <a class="image-link" href="{{$urlServer.$card->cardIMG }}">
-                                                <img width="200px" class="rounded img-fluid m-4" src="{{ getenv('URL_SERVER').$card->cardIMG  }}">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a style="color: darkgreen;" href="{{route('cards.delete',['id'=>$card->id])}}"
-                                               title="Detalle" class="btn btn-link px-3 mb-0"
-                                               onclick="return confirm('¿Esta seguro que quiere borrar esta tarjeta?');">
-                                                <i style="color: darkred;" class="material-icons opacity-10">delete</i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                @foreach ($cards as $card)
+                                    @if ($card->is_deleted !== 1)
+                                        <tr class="align-middle text-center text-sm">
+                                            <td>
+                                                <a class="image-link" href="{{$urlServer.$card->cardIMG }}">
+                                                    <img width="200px" class="rounded img-fluid m-4" src="{{ getenv('URL_SERVER').$card->cardIMG  }}">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a style="color: darkgreen;" href="{{route('cards.delete',['id'=>$card->id])}}"
+                                                   title="Detalle" class="btn btn-link px-3 mb-0"
+                                                   onclick="return confirm('¿Esta seguro que quiere borrar esta tarjeta?');">
+                                                    <i style="color: darkred;" class="material-icons opacity-10">delete</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
                             </table>

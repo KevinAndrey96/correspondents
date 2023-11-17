@@ -390,6 +390,7 @@ return array(
     'Database\\Seeders\\AdministratorSeeder' => $baseDir . '/database/seeders/AdministratorSeeder.php',
     'Database\\Seeders\\DatabaseSeeder' => $baseDir . '/database/seeders/DatabaseSeeder.php',
     'Database\\Seeders\\DistributorSeeder' => $baseDir . '/database/seeders/DistributorSeeder.php',
+    'Database\\Seeders\\ExchangeSeeder' => $baseDir . '/database/seeders/ExchangeSeeder.php',
     'Database\\Seeders\\ProductSeeder' => $baseDir . '/database/seeders/ProductSeeder.php',
     'Database\\Seeders\\RoleSeeder' => $baseDir . '/database/seeders/RoleSeeder.php',
     'Database\\Seeders\\ShopkeeperSeeder' => $baseDir . '/database/seeders/ShopkeeperSeeder.php',

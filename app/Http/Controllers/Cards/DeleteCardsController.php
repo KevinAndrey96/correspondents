@@ -10,8 +10,10 @@ class DeleteCardsController extends Controller
 {
     public function __invoke($id)
     {
-        Card::destroy($id);
+        $card = Card::find($id);
+        $card->is_deleted = 1;
+        $card->save();
 
-        return back()->with('CardDeleteSuccess', 'Tarjeta de recaudo borrada');
+        return back()->with('CardDeleteSuccess', 'Tarjeta de recaudo eliminada');
     }
 }
