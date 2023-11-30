@@ -171,5 +171,8 @@ fix: add validation to advisers in UpdateTransactionsController and change img s
 ## [Hotfix 1.5.6]
 fix: add is_deleted to cards table and add some validations with this boolean field in blade views
 
+## [Hotfix 1.5.7]
+fix: change card validations in addBalanceShopkeeper view and index view of card
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

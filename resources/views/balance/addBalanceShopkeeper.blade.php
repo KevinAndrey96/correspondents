@@ -71,7 +71,7 @@
                                           <select class="form-select" name="card_id" id="card_id" onchange="showCard()" required>
                                               <option selected disabled>Seleccione un banco</option>
                                               @foreach ($cards as $card)
-                                                  @if ($card->is_deleted !== 1)
+                                                  @if ($card->is_deleted != 1)
                                                       <option value="{{$card->id}}">{{strtoupper($card->bank)}}</option>
                                                   @endif
                                               @endforeach

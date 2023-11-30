@@ -32,7 +32,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach ($cards as $card)
-                                    @if ($card->is_deleted !== 1)
+                                    @if ($card->is_deleted != 1)
                                         <tr class="align-middle text-center text-sm">
                                             <td>
                                                 <a class="image-link" href="{{$urlServer.$card->cardIMG }}">
