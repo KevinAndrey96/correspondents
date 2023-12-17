@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use App\Models\Product;
 use App\Models\Platform;
 use App\Models\Exchange;
+use App\Models\SupplierProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,7 +44,12 @@ class CreateTransactionController extends Controller
 
             $exchange = Exchange::first();
 
-            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform', 'urlServer', 'giros', 'exchange'));
+            $shopkeeperProducts = SupplierProduct::where('user_id', Auth::user()->id)->get();
+
+
+
+
+            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform', 'urlServer', 'giros', 'exchange', 'shopkeeperProducts'));
         }
     }
 

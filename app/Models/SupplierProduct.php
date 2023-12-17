@@ -26,5 +26,14 @@ class SupplierProduct extends Model
         return $this->belongsToMany(Product::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 
 }

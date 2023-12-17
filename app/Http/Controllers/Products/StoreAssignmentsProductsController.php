@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Products;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SupplierProduct;
+use App\Models\User;
 
 class StoreAssignmentsProductsController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $userID = intVal($request->input('user_id'));
+        $user = User::find($request->input('user_id'));
+        $userID = intVal($user->id);
+        $userRole = $user->role;
         $supplierProducts = SupplierProduct::where('user_id', $userID)->get();
         $products = $request->input('products');
 
@@ -30,7 +33,20 @@ class StoreAssignmentsProductsController extends Controller
                 $supplierProduct->save();
             }
 
-            return redirect('/users?role=Supplier')->with('successfulAssignment', 'Asignación de productos satisfactoria');
+            if ($userRole == 'Distributor') {
+                $shopkeepers = User::where('distributor_id', $user->id)->get();
+
+                foreach ($shopkeepers as $shopkeeper) {
+                    for ($i = 0; $i < count($products); $i++) {
+                        $supplierProduct = new SupplierProduct();
+                        $supplierProduct->user_id = $shopkeeper->id;
+                        $supplierProduct->product_id = $products[$i];
+                        $supplierProduct->save();
+                    }
+                }
+            }
+
+            return redirect('/users?role='.$userRole)->with('successfulAssignment', 'Asignación de productos satisfactoria');
         }
 
         for ($i = 0; $i < count($products); $i++) {
@@ -40,6 +56,19 @@ class StoreAssignmentsProductsController extends Controller
             $supplierProduct->save();
         }
 
-        return redirect('/users?role=Supplier')->with('successfulAssignment', 'Asignación de productos satisfactoria');
+        if ($userRole == 'Distributor') {
+            $shopkeepers = User::where('distributor_id', $user->id)->get();
+
+            foreach ($shopkeepers as $shopkeeper) {
+                for ($i = 0; $i < count($products); $i++) {
+                    $supplierProduct = new SupplierProduct();
+                    $supplierProduct->user_id = $shopkeeper->id;
+                    $supplierProduct->product_id = $products[$i];
+                    $supplierProduct->save();
+                }
+            }
+        }
+
+        return redirect('/users?role='.$userRole)->with('successfulAssignment', 'Asignación de productos satisfactoria');
     }
 }

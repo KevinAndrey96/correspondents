@@ -160,22 +160,23 @@
                                             <div class="col-md-12 mb-4">
                                                 <p class="text-sm text-weight-bold text-center">Click en el logo para más información</p>
                                             </div>
-                                            @foreach($productsDeposit as $product)
+                                            @foreach($shopkeeperProducts as $shopkeeperProduct)
+                                                @if ($shopkeeperProduct->product->product_type == 'Deposit')
                                                 <div class="col-md-3 col-xs-6">
                                                     <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
+                                                        <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$shopkeeperProduct->product->id}}" required>
                                                         <label  style="width:50%;" class="custom-control-label text-center" for="customRadio1">
-                                                            <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$product->id}}"
-                                                                    data-id="{{$product->id}}">
+                                                            <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$shopkeeperProduct->product->id}}"
+                                                                    data-id="{{$shopkeeperProduct->product->id}}">
                                                                     <a>
-                                                                        <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{$urlServer.'/'.$product->product_logo}}" alt="No carga">
-                                                                        <p style="overflow-wrap: break-word;" class="text-xs mt-1" >{{ $product->product_name}}</p>
+                                                                        <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{$urlServer.'/'.$shopkeeperProduct->product->product_logo}}" alt="No carga">
+                                                                        <p style="overflow-wrap: break-word;" class="text-xs mt-1" >{{ $shopkeeperProduct->product->product_name}}</p>
                                                                     </a>
                                                             </button>
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="modal fade" id="DescriptionModal{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                                <div class="modal fade" id="DescriptionModal{{$shopkeeperProduct->product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -191,11 +192,11 @@
                                                                     <div class="col-md-8">
                                                                         <div class="card">
                                                                             <div class="card-header pb-0 px-3 text-center">
-                                                                                <h6 class="mb-0">{{$product->product_name}}</h6>
+                                                                                <h6 class="mb-0">{{$shopkeeperProduct->product->product_name}}</h6>
                                                                             </div>
                                                                             <div class="card-body pt-4 p-3">
                                                                                 <div class="d-flex flex-column">
-                                                                                        {!! $product->product_description !!}
+                                                                                        {!! $shopkeeperProduct->product->product_description !!}
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -207,6 +208,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endif
                                             @endforeach
                                         </div>
                                     </div>
@@ -216,51 +218,55 @@
                                             <div class="col-md-12 mb-4">
                                                 <p class="text-sm text-weight-bold text-center">Click en el logo para más información</p>
                                             </div>
-                                            @foreach( $productsWithdrawal as $product )
-                                                <div class="col-md-3 col-xs-6">
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$product->id}}" required>
-                                                        <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$product->id}}"
-                                                                data-id="{{$product->id}}">
-                                                                <a>
-                                                                    <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{ $urlServer.'/'.$product->product_logo }}" alt="No carga">
-                                                                    <p class="text-xs mt-1">{{ $product->product_name}}</p>
-                                                                </a>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="modal fade" id="DescriptionModal{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h6 class="modal-title" id="exampleModalLabel">Detalle del producto</h6>
-                                                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">×</span>
+                                            @foreach( $shopkeeperProducts as $shopkeeperProduct)
+                                                @if ($shopkeeperProduct->product->product_type == 'Withdrawal')
+                                                    <div class="col-md-3 col-xs-6">
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$shopkeeperProduct->product->id}}" required>
+                                                            <label  style="width:50%;" class="custom-control-label text-center" for="customRadio1">
+                                                                <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$shopkeeperProduct->product->id}}"
+                                                                        data-id="{{$shopkeeperProduct->product->id}}">
+                                                                    <a>
+                                                                        <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{$urlServer.'/'.$shopkeeperProduct->product->product_logo}}" alt="No carga">
+                                                                        <p style="overflow-wrap: break-word;" class="text-xs mt-1" >{{ $shopkeeperProduct->product->product_name}}</p>
+                                                                    </a>
                                                                 </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="container-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-md-2"></div>
-                                                                        <div class="col-md-8">
-                                                                            <div class="card">
-                                                                                <div class="card-header pb-0 px-3 text-center">
-                                                                                    <h6 class="mb-0">{{$product->product_name}}</h6>
-                                                                                </div>
-                                                                                <div class="card-body pt-4 p-3">
-                                                                                    <div class="d-flex flex-column">
-                                                                                        {!! $product->product_description !!}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="DescriptionModal{{$shopkeeperProduct->product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h6 class="modal-title" id="exampleModalLabel">Detalle del producto</h6>
+                                                                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">×</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="container-fluid">
+                                                                        <div class="row">
+                                                                            <div class="col-md-2"></div>
+                                                                            <div class="col-md-8">
+                                                                                <div class="card">
+                                                                                    <div class="card-header pb-0 px-3 text-center">
+                                                                                        <h6 class="mb-0">{{$shopkeeperProduct->product->product_name}}</h6>
+                                                                                    </div>
+                                                                                    <div class="card-body pt-4 p-3">
+                                                                                        <div class="d-flex flex-column">
+                                                                                            {!! $shopkeeperProduct->product->product_description !!}
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                @endif
                                             @endforeach
                                         </div>
                                     </div>
