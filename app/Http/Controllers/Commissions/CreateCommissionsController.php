@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Commission;
+use App\Models\SupplierProduct;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,6 +32,7 @@ class CreateCommissionsController extends Controller
         if ($userLogged->role == 'Supplier') {
             return redirect('/home')->with('deniedAccess', 'Acceso denegado');
         }
+
         $products = Product::all();
         foreach ($products as $product) {
             $commission = Commission::where('user_id', '=', $id)
@@ -46,8 +48,9 @@ class CreateCommissionsController extends Controller
         }
         $productsExcept = Product::where('is_enabled','=','0')->pluck('id')->toArray();
         $commissions = Commission::where('user_id', '=', $id)->whereNotIn('product_id',$productsExcept)->get();
+        $userProducts = SupplierProduct::where('user_id', $id)->get();
 
-        return view('commissions.create', compact('commissions', 'user'));
+        return view('commissions.create', compact('commissions', 'user', 'userProducts'));
     }
 
 }

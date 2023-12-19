@@ -174,5 +174,8 @@ fix: add is_deleted to cards table and add some validations with this boolean fi
 ## [Hotfix 1.5.7]
 fix: change card validations in addBalanceShopkeeper view and index view of card
 
+## [Hotfix 1.5.8]
+fix: limit quantity of products that can be used to assign to shopkeeper according to products assigned to its distributor 
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

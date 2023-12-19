@@ -19,19 +19,43 @@
                             <form method="POST" action="{{route('product.store.assignments')}}" enctype="multipart/form-data">
                                 <div class="row">
                                     @csrf
-                                        @foreach($products as $product)
+                                    @if (Auth::user()->role == 'Administrator')
+                                            @foreach($products as $product)
+                                                <div class="col-md-4 form-check mt-4">
+                                                    <input style=""type="checkbox" class="form-check-input" name="products[]"
+                                                           value="{{$product->id}}"
+                                                           @foreach($supplierProducts as $sProduct)
+                                                               @if($sProduct->product_id == $product->id)
+                                                                    checked
+                                                               @break
+                                                               @endif
+                                                           @endforeach
+                                                    >
+                                                    <label>{{$product->product_name}} -
+                                                        @if($product->product_type == 'Deposit')
+                                                            DEPOSITO
+                                                        @else
+                                                            RETIRO
+                                                        @endif
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        @endif
+
+                                    @if (Auth::user()->role == 'Distributor')
+                                        @foreach ($distributorProducts as $distributorProduct)
                                             <div class="col-md-4 form-check mt-4">
                                                 <input style=""type="checkbox" class="form-check-input" name="products[]"
-                                                       value="{{$product->id}}"
-                                                       @foreach($supplierProducts as $sProduct)
-                                                           @if($sProduct->product_id == $product->id)
+                                                       value="{{$distributorProduct->product->id}}"
+                                                        @foreach ($supplierProducts as $sProduct)
+                                                            @if ($sProduct->product_id == $distributorProduct->product->id)
                                                                 checked
-                                                           @break
-                                                           @endif
-                                                       @endforeach
+                                                                @break
+                                                            @endif
+                                                        @endforeach
                                                 >
-                                                <label>{{$product->product_name}} -
-                                                    @if($product->product_type == 'Deposit')
+                                                <label>{{$distributorProduct->product->product_name}} -
+                                                    @if ($distributorProduct->product->product_type == 'Deposit')
                                                         DEPOSITO
                                                     @else
                                                         RETIRO
@@ -39,6 +63,8 @@
                                                 </label>
                                             </div>
                                         @endforeach
+                                    @endif
+
                                     </div>
                                 <input type="hidden" name="user_id" value="{{$id}}">
                                 <input type="submit" class="btn btn-success bg-gradient m-4 float-end" value="Asignar">

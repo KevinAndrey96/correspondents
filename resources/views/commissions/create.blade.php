@@ -61,40 +61,44 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($commissions as $commission)
-                                    <tr>
-                                        <td class="align-middle text-center text-sm">
-                                            @if($commission->product->product_type == 'Deposit')
-                                                Deposito
-                                            @endif
-                                            @if($commission->product->product_type == 'Withdrawal')
-                                                Retiro
-                                            @endif
-                                        </td>
-                                        <td class="align-middle text-center text-sm">{{$commission->product->product_name}}</td>
-                                        @if (Auth::user()->role == 'Distributor')
-                                        <td class="align-middle text-center text-sm">
-                                            @foreach ($commission->user->distributor->commissions as $distCommission)
-                                                    @if ($distCommission->product_id == $commission->product->id)
-                                                        {{ $distCommission->amount }}
-                                                        @break
+                                @foreach ($userProducts as $userProduct)
+                                        @foreach ($commissions as $commission)
+                                            @if ($commission->product_id == $userProduct->product_id)
+                                            <tr>
+                                                <td class="align-middle text-center text-sm">
+                                                    @if($commission->product->product_type == 'Deposit')
+                                                        Deposito
                                                     @endif
-                                            @endforeach
-                                        </td>
-                                        @endif
-                                        @if (Auth::user()->role == 'Administrator')
-                                            <td class="align-middle text-center text-sm">{{$commission->product->product_commission}}</td>
-                                        @endif
-                                        <td class="align-middle text-center text-sm">{{$commission->amount}}</td>
-                                        <td class="align-middle text-center text-sm">
-                                            <div class="input-group input-group-lg input-group-outline">
-                                            <input class="form-control form-control-lg" type="number" id="amount{{$commission->id}}"
-                                                   onclick="amountChange({{ $commission->id }})"
-                                                   step="any" min="0">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                                    @if($commission->product->product_type == 'Withdrawal')
+                                                        Retiro
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center text-sm">{{$commission->product->product_name}}</td>
+                                                @if (Auth::user()->role == 'Distributor')
+                                                <td class="align-middle text-center text-sm">
+                                                    @foreach ($commission->user->distributor->commissions as $distCommission)
+                                                            @if ($distCommission->product_id == $commission->product->id)
+                                                                {{ $distCommission->amount }}
+                                                                @break
+                                                            @endif
+                                                    @endforeach
+                                                </td>
+                                                @endif
+                                                @if (Auth::user()->role == 'Administrator')
+                                                    <td class="align-middle text-center text-sm">{{$commission->product->product_commission}}</td>
+                                                @endif
+                                                <td class="align-middle text-center text-sm">{{$commission->amount}}</td>
+                                                <td class="align-middle text-center text-sm">
+                                                    <div class="input-group input-group-lg input-group-outline">
+                                                    <input class="form-control form-control-lg" type="number" id="amount{{$commission->id}}"
+                                                           onclick="amountChange({{ $commission->id }})"
+                                                           step="any" min="0">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
                             </tbody>
                         </table>
                             <div class="text-center p-1">

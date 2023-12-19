@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\SupplierProduct;
+use Illuminate\Support\Facades\Auth;
 
 class AssignProductsController extends Controller
 {
@@ -14,7 +15,8 @@ class AssignProductsController extends Controller
     {
         $products = Product::all();
         $supplierProducts = SupplierProduct::where('user_id', $id)->get();
+        $distributorProducts = SupplierProduct::where('user_id', Auth::user()->id)->get();
 
-        return view('product.assign', compact('id', 'products', 'supplierProducts'));
+        return view('product.assign', compact('id', 'products', 'supplierProducts', 'distributorProducts'));
     }
 }
