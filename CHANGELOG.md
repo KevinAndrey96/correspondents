@@ -177,5 +177,11 @@ fix: change card validations in addBalanceShopkeeper view and index view of card
 ## [Hotfix 1.5.8]
 fix: limit quantity of products that can be used to assign to shopkeeper according to products assigned to its distributor 
 
+## [Hotfix 1.5.9]
+fix: delete old assigned products to shopkeepers 
+
+## [Hotfix 1.6.0]
+fix: show the correct commissions on commission index
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

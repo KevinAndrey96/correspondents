@@ -26,6 +26,7 @@ class StoreAssignmentsProductsController extends Controller
             foreach ($supplierProducts as $value) {
                 SupplierProduct::destroy($value->id);
             }
+
             for ($i = 0; $i < count($products); $i++) {
                 $supplierProduct = new SupplierProduct();
                 $supplierProduct->user_id = $userID;
@@ -37,11 +38,27 @@ class StoreAssignmentsProductsController extends Controller
                 $shopkeepers = User::where('distributor_id', $user->id)->get();
 
                 foreach ($shopkeepers as $shopkeeper) {
-                    for ($i = 0; $i < count($products); $i++) {
-                        $supplierProduct = new SupplierProduct();
-                        $supplierProduct->user_id = $shopkeeper->id;
-                        $supplierProduct->product_id = $products[$i];
-                        $supplierProduct->save();
+                    $shopkeeperProducts = SupplierProduct::where('user_id', $shopkeeper->id)->get();
+
+                    if ($shopkeeperProducts->count() == 0) {
+
+                        for ($i = 0; $i < count($products); $i++) {
+                            $supplierProduct = new SupplierProduct();
+                            $supplierProduct->user_id = $shopkeeper->id;
+                            $supplierProduct->product_id = $products[$i];
+                            $supplierProduct->save();
+                        }
+                    }
+
+                    if ($shopkeeperProducts->count() > 0) {
+                        foreach ($shopkeeperProducts as $shopkeeperProduct) {
+                                $key = array_search($shopkeeperProduct->product_id, $products);
+
+                                if (! $key) {
+                                    $shopkeeperProduct->delete();
+                                }
+                        }
+
                     }
                 }
             }
@@ -59,7 +76,10 @@ class StoreAssignmentsProductsController extends Controller
         if ($userRole == 'Distributor') {
             $shopkeepers = User::where('distributor_id', $user->id)->get();
 
+
             foreach ($shopkeepers as $shopkeeper) {
+                //$shopkeeperProducts = SupplierProduct::where('user_id', $shopkeeper->id)->get();
+
                 for ($i = 0; $i < count($products); $i++) {
                     $supplierProduct = new SupplierProduct();
                     $supplierProduct->user_id = $shopkeeper->id;
