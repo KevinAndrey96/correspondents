@@ -26,7 +26,14 @@ class ModeSpectatorUsersController extends Controller
             return redirect()->route('complete.registration');
         }
 
+        $userRole = Auth::user()->role;
+
         Auth::user()->leaveImpersonation();
+
+        if ($userRole == 'Distributor' || $userRole == 'Supplier') {
+
+            return redirect('/users?role='.$userRole);
+        }
 
         return redirect('/users?role=allShopkeepers');
     }

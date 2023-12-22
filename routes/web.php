@@ -104,7 +104,7 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
 
 
 
-    Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index']);
+    Route::get('/commissionscommissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index']);
     Route::get('/commissions/users', [App\Http\Controllers\Commissions\UsersCommissionsController::class, 'usersCommissions']);
     Route::get('/commissions/create/{id}', [App\Http\Controllers\Commissions\CreateCommissionsController::class, 'create']);
     Route::post('/commissions/update', [App\Http\Controllers\Commissions\UpdateCommissionsController::class, 'update']);

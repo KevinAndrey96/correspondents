@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\DeleteProductAssigns' => $baseDir . '/app/Console/Commands/DeleteProductAssigns.php',
     'App\\Console\\Commands\\MoneyTablesTruncate' => $baseDir . '/app/Console/Commands/MoneyTablesTruncate.php',
     'App\\Console\\Commands\\SupplierInactivityMail' => $baseDir . '/app/Console/Commands/SupplierInactivityMail.php',
     'App\\Console\\Commands\\SupplierTurnOffPlatform' => $baseDir . '/app/Console/Commands/SupplierTurnOffPlatform.php',
@@ -389,6 +390,8 @@ return array(
     'Database\\Factories\\UserFactory' => $baseDir . '/database/factories/UserFactory.php',
     'Database\\Seeders\\AdministratorSeeder' => $baseDir . '/database/seeders/AdministratorSeeder.php',
     'Database\\Seeders\\DatabaseSeeder' => $baseDir . '/database/seeders/DatabaseSeeder.php',
+    'Database\\Seeders\\DeleteProductAssignments' => $baseDir . '/database/seeders/DeleteProductAssignments.php',
+    'Database\\Seeders\\DistributorProductsSeeder' => $baseDir . '/database/seeders/DistributorProductsSeeder.php',
     'Database\\Seeders\\DistributorSeeder' => $baseDir . '/database/seeders/DistributorSeeder.php',
     'Database\\Seeders\\ExchangeSeeder' => $baseDir . '/database/seeders/ExchangeSeeder.php',
     'Database\\Seeders\\ProductSeeder' => $baseDir . '/database/seeders/ProductSeeder.php',

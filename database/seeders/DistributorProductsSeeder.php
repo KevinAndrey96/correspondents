@@ -18,9 +18,9 @@ class DistributorProductsSeeder extends Seeder
      */
     public function run()
     {
-        /*
+
         $distributors = User::where('role', 'Distributor')->get();
-        $products = Product::all();
+        $products = Product::where('is_enabled', 1)->get();
 
         foreach ($distributors as $distributor) {
             $shopkeepers = User::where('distributor_id', $distributor->id)->get();
@@ -42,7 +42,6 @@ class DistributorProductsSeeder extends Seeder
                 }
             }
         }
-        */
 
     }
 }

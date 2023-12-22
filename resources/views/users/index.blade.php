@@ -41,7 +41,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         @if ($role !== 'Administrator' && $role !== 'Advisers')
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Estado</th>
                                         @endif
                                         @if ($role == 'Supplier')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Conexión</th>
@@ -49,8 +49,11 @@
                                         @if($role !== 'Administrator' && $role !== 'Advisers')
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Habilitar</th>
                                             @endif
+                                            @if(Auth::user()->role == 'Administrator')
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">QR</th>
+                                            @endif
                                             @if ($role == 'allShopkeepers')
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Contraseña diaria</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pl-auto pr-auto">Contraseña diaria</th>
                                             @endif
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
                                         @if ($role == 'allShopkeepers')
@@ -100,26 +103,33 @@
 
                                         @if ($role !== 'Administrator' &&  $role !== 'Advisers')
                                         <td class="align-middle text-center text-sm">
-                                            <div class="form-check form-switch align-middle text-center">
+                                            <div class="form-check form-switch align-middle text-center d-flex justify-content-center">
                                                 @if ($user->is_authorized == 1)
-                                                    <input class="form-check-input ms-auto" type="checkbox" id="toggleauthorized{{$user->id}}" checked onchange="getAuthorized({{$user->id}})">
-                                                    <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{$user->id}}"></label>
+                                                    <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleauthorized{{$user->id}}" checked onchange="getAuthorized({{$user->id}})">
                                                 @else
-                                                    <input class="form-check-input ms-auto" type="checkbox" id="toggleauthorized{{$user->id}}" onchange="getAuthorized({{$user->id}})">
-                                                    <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$user->id}}"></label>
+                                                    <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleauthorized{{$user->id}}" onchange="getAuthorized({{$user->id}})">
                                                 @endif
                                             </div>
                                         </td>
                                         @endif
+                                            @if(Auth::user()->role == 'Administrator')
+                                                <td class="align-middle text-center text-sm">
+                                                    <div class="form-check form-switch align-middle text-center d-flex justify-content-center">
+                                                    @if ($user->enabled_daily == 1)
+                                                            <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" checked onchange="getEnabledDaily({{$user->id}})">
+                                                        @else
+                                                            <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" onchange="getEnabledDaily({{$user->id}})">
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                            @endif
                                             @if ($role == 'allShopkeepers')
                                                 <td class="align-middle text-center text-sm">
-                                                    <div class="form-check form-switch align-middle text-center">
+                                                    <div class="form-check form-switch align-middle text-center d-flex justify-content-center">
                                                         @if ($user->enabled_daily == 1)
-                                                            <input class="form-check-input ms-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" checked onchange="getEnabledDaily({{$user->id}})">
-                                                            <label class="form-check-label text-body ms-0 text-truncate w-80 mb-0" for="togglestatus{{$user->id}}"></label>
+                                                            <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" checked onchange="getEnabledDaily({{$user->id}})">
                                                         @else
-                                                            <input class="form-check-input ms-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" onchange="getEnabledDaily({{$user->id}})">
-                                                            <label class="form-check-label text-body ms-0 text-truncate w-0 mb-80" for="togglestatus{{$user->id}}"></label>
+                                                            <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" onchange="getEnabledDaily({{$user->id}})">
                                                         @endif
                                                     </div>
                                                 </td>
@@ -196,8 +206,8 @@
                                                     data-id="{{$user->id}}"><i style="font-size: 25px !important;" class="material-icons opacity-10">monetization_on</i></button>
                                             @endif
                                                 <a style="color:#505050 ;" href="{{route('product.assign', ['id' => $user->id])}}" title="Asignar productos" class="btn btn-link px-1 mb-0"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10">assignment_turned_in</i></a>
-                                                @if ($role == 'allShopkeepers')
-                                                    <a style="color:#505050 ;" href="{{route('mode.spectator', ['id' => $user->id, 'isInspector' => 1])}}" title="Modo fantasma" class="btn btn-link px-1 mb-0" onclick="confirm('¿Está seguro que desea entrar en modo inspector y entrar en la cuenta del tendero?')"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10 text-primary">visibility</i></a>
+                                                @if ($role == 'allShopkeepers' || $role == 'Distributor' || $role == 'Supplier')
+                                                    <a style="color:#505050 ;" href="{{route('mode.spectator', ['id' => $user->id, 'isInspector' => 1])}}" title="Modo fantasma" class="btn btn-link px-1 mb-0" onclick="confirm('¿Está seguro que desea entrar en modo fantasma e iniciar sesión con este usuario?')"><i style="color: #505050; font-size: 25px !important;" class="material-icons opacity-10 text-primary">visibility</i></a>
                                                 <!--
                                                     <button type="button" class="btn btn-white px-1 mb-0" title="Ver información del tendero"  data-bs-toggle="modal" data-bs-target="#ShopkeeperInfoModal"
                                                             data-id="{{$user->id}}"><i style="font-size: 25px !important;" class="material-icons opacity-10 text-primary" data-userID={{$user->id}}>visibility</i></button>

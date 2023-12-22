@@ -696,6 +696,7 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\DeleteProductAssigns' => __DIR__ . '/../..' . '/app/Console/Commands/DeleteProductAssigns.php',
         'App\\Console\\Commands\\MoneyTablesTruncate' => __DIR__ . '/../..' . '/app/Console/Commands/MoneyTablesTruncate.php',
         'App\\Console\\Commands\\SupplierInactivityMail' => __DIR__ . '/../..' . '/app/Console/Commands/SupplierInactivityMail.php',
         'App\\Console\\Commands\\SupplierTurnOffPlatform' => __DIR__ . '/../..' . '/app/Console/Commands/SupplierTurnOffPlatform.php',
@@ -1079,6 +1080,8 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\AdministratorSeeder' => __DIR__ . '/../..' . '/database/seeders/AdministratorSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\DeleteProductAssignments' => __DIR__ . '/../..' . '/database/seeders/DeleteProductAssignments.php',
+        'Database\\Seeders\\DistributorProductsSeeder' => __DIR__ . '/../..' . '/database/seeders/DistributorProductsSeeder.php',
         'Database\\Seeders\\DistributorSeeder' => __DIR__ . '/../..' . '/database/seeders/DistributorSeeder.php',
         'Database\\Seeders\\ExchangeSeeder' => __DIR__ . '/../..' . '/database/seeders/ExchangeSeeder.php',
         'Database\\Seeders\\ProductSeeder' => __DIR__ . '/../..' . '/database/seeders/ProductSeeder.php',
