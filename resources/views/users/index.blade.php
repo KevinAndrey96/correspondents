@@ -115,10 +115,10 @@
                                             @if(Auth::user()->role == 'Administrator')
                                                 <td class="align-middle text-center text-sm">
                                                     <div class="form-check form-switch align-middle text-center d-flex justify-content-center">
-                                                    @if ($user->enabled_daily == 1)
-                                                            <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" checked onchange="getEnabledDaily({{$user->id}})">
+                                                    @if ($user->qr_enabled == 1)
+                                                            <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnableQR{{$user->id}}" checked onchange="getEnabledQR({{$user->id}})">
                                                         @else
-                                                            <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" onchange="getEnabledDaily({{$user->id}})">
+                                                            <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnableQR{{$user->id}}" onchange="getEnabledQR({{$user->id}})">
                                                         @endif
                                                     </div>
                                                 </td>
@@ -257,6 +257,13 @@
                                 <input type="hidden" name="id" id="shopkeeper_id">
                                 <input type="hidden" name="enabled_daily" id="enabled_daily">
                             </form>
+
+                            <form id="form-enable-qr" name="form-enable-qr" method="POST" action="{{route('users.enableQR')}}">
+                                @csrf
+                                <input type="hidden" name="id" id="general_user_id">
+                                <input type="hidden" name="enabledQR" id="enabledQR">
+                            </form>
+
                             <script>
                                 function getStatus(id)
                                 {
@@ -302,6 +309,23 @@
                                     user_id.value = id;
                                     form.submit();
                                 }
+
+                                function getEnabledQR(id)
+                                {
+                                    let toggle = document.getElementById("toggleEnableQR" + id);
+                                    let status = document.getElementById("enabledQR");
+                                    let form = document.getElementById("form-enable-qr");
+                                    let user_id = document.getElementById("general_user_id");
+
+                                    if (toggle.checked === true) {
+                                        status.value = 1;
+                                    } else {
+                                        status.value = 0;
+                                    }
+                                    user_id.value = id;
+                                    form.submit();
+                                }
+
                             </script>
                             <!-- Modal-->
                             <div class="modal fade" id="SaldoModal" tabindex="-1" role="dialog" aria-labelledby="SaldoModal" aria-hidden="true">

@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TwoFAController;
 use App\Http\Middleware\IsenabledMiddleware;
 use App\Http\Middleware\TransactionsMiddleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,8 @@ Route::get('/', App\Http\Controllers\Users\PersonalizeLoginUserController::class
 Auth::routes();
 Route::impersonate();
 
+
+//'disable2fa'
 Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorized']], static function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
         ->name('home')
@@ -101,6 +104,8 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
         ->name('users.shopkeeper.enabled.daily');
     Route::get('/mode-spectator/{id}/{isInspector}', App\Http\Controllers\Users\ModeSpectatorUsersController::class)
         ->name('mode.spectator');
+    Route::post('/user-enable-qr', App\Http\Controllers\Users\EnableQRUsersController::class)
+        ->name('users.enableQR');
 
 
 
@@ -141,11 +146,12 @@ Route::get('/transactions-transfer/{id}',
  * Middleware for 2FA
  */
 
-Route::middleware(['2fa'])->group(function () {
-    Route::post('/2fa', static function () {
-        return redirect(route('home'));
-    })->name('2fa');
-});
+    Route::middleware(['2fa'])->group(function () {
+        Route::post('/2fa', static function () {
+            return redirect(route('home'));
+        })->name('2fa');
+    });
+
 
 /**
  * Route for controller {@link TwoFAController} QR code view

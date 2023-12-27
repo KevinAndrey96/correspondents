@@ -34,9 +34,11 @@ class TwoFAController extends Controller
             );
             $user->google2fa_secret = $registration_data['google2fa_secret'];
             $user->qr = 1;
+
             if (session('impersonated_by')) {
                 $user->qr = 0;
             }
+
             $user->save();
 
             return view('google2fa.register', ['QR_Image' => $QR_Image, 'secret' => $registration_data['google2fa_secret']]);

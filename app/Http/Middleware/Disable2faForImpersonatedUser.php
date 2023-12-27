@@ -3,7 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use PragmaRX\Google2FA\Google2FA;
 
 class Disable2faForImpersonatedUser
 {
@@ -16,9 +19,11 @@ class Disable2faForImpersonatedUser
      */
     public function handle(Request $request, Closure $next)
     {
+        /*
         if (session('impersonated_by')) {
             $request->route()->forgetParameter('2fa');
         }
+        */
 
         return $next($request);
     }

@@ -86,6 +86,7 @@ class LoginController extends Controller
         /**
          * User first login
          */
+
         if ($this->guard()->user()->qr == 0) {
             return redirect('/complete-registration');
         }
