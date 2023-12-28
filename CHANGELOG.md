@@ -186,5 +186,8 @@ fix: show the correct commissions on commission index
 ## [Hotfix 1.6.1]
 fix: filter by is_enabled when get products on DeleteProductAssignments seeder
 
+## [Hotfix 1.6.2]
+fix: drop strict logical operator in update transaction
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

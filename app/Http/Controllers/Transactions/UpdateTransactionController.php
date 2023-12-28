@@ -24,7 +24,6 @@ class UpdateTransactionController extends Controller
 
     public function update(Request $request)
     {
-
             date_default_timezone_set('America/Bogota');
             $transaction = Transaction::find($request->input('transaction_id'));
             $shopkeeper = User::find($transaction->shopkeeper_id);
@@ -34,9 +33,9 @@ class UpdateTransactionController extends Controller
             $shopkeeper->daily_verified = 0;
             $shopkeeper->save();
             if (
-                $transaction->status !== self::SUCCESSFUL_STATUS
-                && $transaction->status !== self::FAILURE_STATUS
-                && Summary::where([['movement_id', $transaction->id],['movement_type','!=','Recarga de Saldo']])->first() === null
+                $transaction->status != self::SUCCESSFUL_STATUS
+                && $transaction->status != self::FAILURE_STATUS
+                && Summary::where([['movement_id', $transaction->id],['movement_type','!=','Recarga de Saldo']])->first() == null
             ) {
                 $transaction->status = $request->input('status');
                 $transaction->observation = $request->input('observation');
@@ -108,7 +107,6 @@ class UpdateTransactionController extends Controller
 
                     }
 
-
                     $supplierBalance = new Balance();
                     $shopkeeperBalance = new Balance();
                     $shopkeeperBalance->user_id = $shopkeeper->id;
@@ -155,8 +153,6 @@ class UpdateTransactionController extends Controller
                             $supplier->balance -= ($transaction->amount)/($exchange->value);
                         }
 
-
-
                         $shopkeeperBalance->type = 'Withdrawal';
                         $supplierBalance->type = 'Withdrawal';
                         $supplierSummary->movement_type = 'Deposito Realizado';
@@ -176,6 +172,8 @@ class UpdateTransactionController extends Controller
                     $shopkeeperSummary->movement_id = $transaction->id;
                     $supplierSummary->save();
                     $shopkeeperSummary->save();
+
+                    return redirect('/transactions');
                 }
 
                 return redirect('/transactions');
