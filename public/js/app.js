@@ -19651,7 +19651,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	var installedModules = {};
 /******/
 /******/ 	// The require function
-/******/ 	function __nested_webpack_require_669__(moduleId) {
+/******/ 	function __nested_webpack_require_692__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId]) {
@@ -19665,7 +19665,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		};
 /******/
 /******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_669__);
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_692__);
 /******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
@@ -19676,20 +19676,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__nested_webpack_require_669__.m = modules;
+/******/ 	__nested_webpack_require_692__.m = modules;
 /******/
 /******/ 	// expose the module cache
-/******/ 	__nested_webpack_require_669__.c = installedModules;
+/******/ 	__nested_webpack_require_692__.c = installedModules;
 /******/
 /******/ 	// define getter function for harmony exports
-/******/ 	__nested_webpack_require_669__.d = function(exports, name, getter) {
-/******/ 		if(!__nested_webpack_require_669__.o(exports, name)) {
+/******/ 	__nested_webpack_require_692__.d = function(exports, name, getter) {
+/******/ 		if(!__nested_webpack_require_692__.o(exports, name)) {
 /******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
 /******/ 	};
 /******/
 /******/ 	// define __esModule on exports
-/******/ 	__nested_webpack_require_669__.r = function(exports) {
+/******/ 	__nested_webpack_require_692__.r = function(exports) {
 /******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 		}
@@ -19701,35 +19701,35 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// mode & 2: merge all properties of value into the ns
 /******/ 	// mode & 4: return value when already ns object
 /******/ 	// mode & 8|1: behave like require
-/******/ 	__nested_webpack_require_669__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __nested_webpack_require_669__(value);
+/******/ 	__nested_webpack_require_692__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __nested_webpack_require_692__(value);
 /******/ 		if(mode & 8) return value;
 /******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
 /******/ 		var ns = Object.create(null);
-/******/ 		__nested_webpack_require_669__.r(ns);
+/******/ 		__nested_webpack_require_692__.r(ns);
 /******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __nested_webpack_require_669__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __nested_webpack_require_692__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
 /******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__nested_webpack_require_669__.n = function(module) {
+/******/ 	__nested_webpack_require_692__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
 /******/ 			function getDefault() { return module['default']; } :
 /******/ 			function getModuleExports() { return module; };
-/******/ 		__nested_webpack_require_669__.d(getter, 'a', getter);
+/******/ 		__nested_webpack_require_692__.d(getter, 'a', getter);
 /******/ 		return getter;
 /******/ 	};
 /******/
 /******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__nested_webpack_require_669__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/ 	__nested_webpack_require_692__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__nested_webpack_require_669__.p = "";
+/******/ 	__nested_webpack_require_692__.p = "";
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __nested_webpack_require_669__(__nested_webpack_require_669__.s = 2);
+/******/ 	return __nested_webpack_require_692__(__nested_webpack_require_692__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -20177,19 +20177,19 @@ exports.decode = decode;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __nested_webpack_require_19901__) {
+/***/ (function(module, exports, __nested_webpack_require_20450__) {
 
 // required so we don't have to do require('pusher').default etc.
-module.exports = __nested_webpack_require_19901__(3).default;
+module.exports = __nested_webpack_require_20450__(3).default;
 
 
 /***/ }),
 /* 3 */
-/***/ (function(module, __nested_webpack_exports__, __nested_webpack_require_20105__) {
+/***/ (function(module, __nested_webpack_exports__, __nested_webpack_require_20662__) {
 
 "use strict";
 // ESM COMPAT FLAG
-__nested_webpack_require_20105__.r(__nested_webpack_exports__);
+__nested_webpack_require_20662__.r(__nested_webpack_exports__);
 
 // CONCATENATED MODULE: ./src/runtimes/web/dom/script_receiver_factory.ts
 var ScriptReceiverFactory = (function () {
@@ -22247,10 +22247,10 @@ var presence_channel_PresenceChannel = (function (_super) {
 /* harmony default export */ var presence_channel = (presence_channel_PresenceChannel);
 
 // EXTERNAL MODULE: ./node_modules/@stablelib/utf8/lib/utf8.js
-var utf8 = __nested_webpack_require_20105__(1);
+var utf8 = __nested_webpack_require_20662__(1);
 
 // EXTERNAL MODULE: ./node_modules/@stablelib/base64/lib/base64.js
-var base64 = __nested_webpack_require_20105__(0);
+var base64 = __nested_webpack_require_20662__(0);
 
 // CONCATENATED MODULE: ./src/core/channels/encrypted_channel.ts
 var encrypted_channel_extends = ( false) || (function () {
