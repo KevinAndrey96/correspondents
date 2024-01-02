@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static find($id)
+ * @method static whereHas(string $string, \Closure $param)
  * @property int $product_id
  * @property mixed $amount
  * @property Carbon|mixed $date
@@ -69,4 +70,11 @@ class Transaction extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function shopkeepers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'shopkeeper_id');
+    }
+
+
 }

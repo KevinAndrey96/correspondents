@@ -315,50 +315,7 @@
             </div>
             @endhasrole
             @hasrole('Distributor')
-        <!-- <div  class="col-lg-3 col-sm-6 mb-xl-0 mb-4"></div>
-            <div style="margin-left: -14px;" class="col-lg-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">Saldo Tenderos</p>
-                                    <h5 class="font-weight-bolder text-xs">
-                                        ${{ $shopkeepersBalance }}
-            </h5>
 
-        </div>
-    </div>
-    <div class="col-3 text-end">
-        <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-            <i class="material-icons opacity-10">payments</i>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-3 col-sm-6 mb-xl-0 mb-4">
-<div class="card">
-<div class="card-body p-3">
-<div class="row">
-    <div class="col-8">
-        <div class="numbers">
-            <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Tenderos</p>
-            <h5 class="font-weight-bolder text-xs">
-{{ $shopkeeperCount }}
-            </h5>
-        </div>
-    </div>
-    <div class="col-4 text-end">
-        <div class="icon icon-shape bg-gradient-info shadow-info text-center rounded-circle">
-            <i class="material-icons opacity-10">group</i>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-</div> -->
             @endhasrole
             @hasrole('Shopkeeper')
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -766,43 +723,134 @@
                     </div>
                     {!! $htmlContainers !!}
                 </div>
-
             @endif
         </div>
         @hasrole('Shopkeeper')
         @if (is_null(Auth::user()->brand_id))
-        <div class="row mt-4">
-        </div>
+            <div class="row mt-4">
+            </div>
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card my-4">
+                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                                        <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Publicidad</h6>
+                                    </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="container">
+                                    <div class="row">
+                                        @foreach($publicity as $value)
+                                            <div class="col-md-3 m-2 ms-auto me-auto d-flex w-20">
+                                                <div class="card card-profile p-0 m-0">
+                                                    <div class="position-relative">
+                                                        <a class="image-link" href="{{getenv('URL_SERVER').$value->publicity_url}}">
+                                                            <img src="{{getenv('URL_SERVER').$value->publicity_url}}" alt="Image placeholder" class="card-img-top">
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-body text-center border-0 p-0">
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="d-inline">
+                                                                <a style="color: darkred;" href="{{route('publicity.download', ['id' => $value->id])}}" title="Descargar" class="btn btn-link px-1 mb-0"><i style="color: darkblue; font-size: 25px !important;" class="material-icons opacity-10">download</i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+        @endhasrole
+        @hasanyrole('Supplier|Shopkeeper|Administrator|Distributor')
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                                    <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Publicidad</h6>
+                            @if (isset(Auth::user()->brand_id))
+                                <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                                    <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Últimas transacciones</h6>
                                 </div>
+                            @else
+                                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                                    <h6 class="text-white text-center text-capitalize ps-2 mx-6 p-3">Últimas transacciones</h6>
+                                </div>
+                            @endif
                         </div>
                         <div class="card-body px-0 pb-2">
                             <div class="container">
                                 <div class="row">
-                                    @foreach($publicity as $value)
-                                        <div class="col-md-3 m-2 ms-auto me-auto d-flex w-20">
-                                            <div class="card card-profile p-0 m-0">
-                                                <div class="position-relative">
-                                                    <a class="image-link" href="{{getenv('URL_SERVER').$value->publicity_url}}">
-                                                        <img src="{{getenv('URL_SERVER').$value->publicity_url}}" alt="Image placeholder" class="card-img-top">
-                                                    </a>
-                                                </div>
-                                                <div class="card-body text-center border-0 p-0">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="d-inline">
-                                                            <a style="color: darkred;" href="{{route('publicity.download', ['id' => $value->id])}}" title="Descargar" class="btn btn-link px-1 mb-0"><i style="color: darkblue; font-size: 25px !important;" class="material-icons opacity-10">download</i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                    <div class="col-12"></div>
+                                    <div class="table-responsive p-0">
+                                        <table id="tabla1" class="table align-items-center mb-0">
+                                            <thead class="thead-light">
+                                            <tr class="text-center text-uppercase font-weight-bolder">
+                                                <th>Cantidad</th>
+                                                <th>Tipo</th>
+                                                <th>Producto</th>
+                                                @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Distributor')
+                                                    <th>Tendero</th>
+                                                @endif
+                                                <th>Estado</th>
+                                                <th>Fecha</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach ($lastTransactions as $transaction)
+                                                <tr class="text-center text-uppercase text-secondary">
+                                                    <td>${{number_format($transaction->amount, 2, ',', '.')}}</td>
+                                                    <td>
+                                                        @if ($transaction->type == 'Withdrawal')
+                                                            Retiro
+                                                        @endif
+                                                        @if ($transaction->type == 'Deposit')
+                                                            Deposito
+                                                        @endif
+                                                    </td>
+                                                    <td>{{$transaction->product->product_name}}</td>
+                                                    @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Distributor')
+                                                        <td>{{$transaction->shopkeeper->name}}</td>
+                                                    @endif
+                                                    <td>
+                                                        @if ($transaction->status == 'hold')
+                                                            <center>
+                                                                <p class="text-center text-dark text-xxs p-1" style="background-color:#f5df4d; width:80%; border-radius: 20px;">En espera</p>
+                                                            </center>
+                                                        @endif
+                                                        @if ($transaction->status == 'accepted')
+                                                            <center>
+                                                                <p class="text-center text-white text-xxs p-1" style="background-color:dodgerblue; width:80%;  border-radius: 20px;">Aceptada</p>
+                                                            </center>
+                                                        @endif
+                                                        @if ($transaction->status == 'successful')
+                                                            <center>
+                                                                <p class="text-center text-white text-xxs p-1" style="background-color:green; width:80%; border-radius: 20px;">Exitosa</p>
+                                                            </center>
+                                                        @endif
+                                                        @if ($transaction->status == 'failed')
+                                                            <center>
+                                                                <p class="text-center text-white text-xxs p-1" style="background-color:red; width:80%; border-radius: 20px;">Fallida</p>
+                                                            </center>
+                                                        @endif
+                                                        @if ($transaction->status == 'cancelled')
+                                                            <center>
+                                                                <p class="text-center text-white text-xxs p-1" style="background-color:#58696F; width:80%; border-radius: 20px;">Cancelada</p>
+                                                            </center>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{$transaction->updated_at}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -810,8 +858,7 @@
                 </div>
             </div>
         </div>
-        @endif
-        @endhasrole
+        @endhasanyrole
         <script type="text/javascript">
             @if (Auth::user()->role == 'Administrator')
             @for ($i = 0; $i < count($superProduct); $i++)

@@ -115,6 +115,7 @@ class HomeController extends Controller
                 }
             }
             $products = Product::all();
+            $lastTransactions = Transaction::orderBy('id', 'desc')->paginate(5);
 
             return view('home', compact(
                 'transactionCount',
@@ -135,7 +136,8 @@ class HomeController extends Controller
                 'htmlContainers',
                 'auxProducts',
                 'urlServer',
-                'products'
+                'products',
+                'lastTransactions'
                 ));
         }
 
@@ -153,6 +155,14 @@ class HomeController extends Controller
             if ($banners->count() > 0) {
                 $firstBanner = $banners[0];
             }
+
+            $lastTransactions = Transaction::with('shopkeeper')
+                ->whereHas('shopkeeper', function ($query) {
+                    $query->where('distributor_id', Auth::user()->id);})
+                ->latest()
+                ->take(5)
+                ->get();
+
             return view('home', compact(
                 'transactionCount',
                 'shopkeeperCount',
@@ -160,7 +170,8 @@ class HomeController extends Controller
                 'banners',
                 'firstBanner',
                 'urlServer',
-                'products'
+                'products',
+                'lastTransactions'
                 ));
         }
 
@@ -171,6 +182,8 @@ class HomeController extends Controller
             $holdTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $acceptedTransactionCount = Transaction::where('supplier_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $products = Product::all();
+            $lastTransactions = Transaction::where('supplier_id', Auth::user()->id)->orderBy('id', 'desc')->limit(5)->get();
+
 
             return view('home', compact(
                 'transactionCount',
@@ -179,7 +192,8 @@ class HomeController extends Controller
                 'holdTransactionCount',
                 'acceptedTransactionCount',
                 'urlServer',
-                'products'
+                'products',
+                'lastTransactions'
             ));
         }
 
@@ -189,6 +203,7 @@ class HomeController extends Controller
             $failedTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Failed')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $holdTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $acceptedTransactionCount = Transaction::where('shopkeeper_id', '=', Auth::user()->id)->where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
+            $lastTransactions = Transaction::where('shopkeeper_id', Auth::user()->id)->orderBy('id', 'desc')->limit(5)->get();
             $banners = Banner::all();
             $products = Product::all();
             $firstBanner = null;
@@ -209,7 +224,8 @@ class HomeController extends Controller
                 'firstBanner',
                 'products',
                 'urlServer',
-                'publicity'
+                'publicity',
+                'lastTransactions'
             ));
         }
 
