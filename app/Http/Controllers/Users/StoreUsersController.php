@@ -107,14 +107,6 @@ class StoreUsersController extends Controller
             if (isset($request->brand)) {
                 $user->brand_id = intval($request->input('brand'));
                 $user->save();
-                /*
-                $shopkeepers = User::where('distributor_id', $user->id)->get();
-
-                foreach ($shopkeepers as $shopkeeper) {
-                    $shopkeeper->brand_id = intval($request->input('brand'));
-                    $shopkeeper->save();
-                }
-                */
             }
         }
 
@@ -153,9 +145,16 @@ class StoreUsersController extends Controller
         $receiverEmail = $user->email;
         $emailBody = new stdClass();
         $emailBody->sender = 'Asparecargas';
+
+        if (! is_null($user->brand_id)) {
+            $emailBody->sender = $user->brand->domain;
+            $emailBody->userBrandDomain = $user->brand->domain;
+        }
+
         $emailBody->receiver = $user->name;
         $emailSubject = 'Su cuenta fue creada';
-        $emailBody->body = 'Su cuenta fue creada con éxito, gracias por elegirnos.';
+        $emailBody->body = 'Bienvenido a la plataforma, le confirmamos que se ha
+        activado su cuenta exitosamente en nuestra plataforma.';
         Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
 
         return redirect('/users?role='.$user->role);

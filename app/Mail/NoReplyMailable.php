@@ -12,7 +12,7 @@ class NoReplyMailable extends Mailable
     use Queueable, SerializesModels;
 
     public $body;
-    
+
     /**
      * Create a new message instance.
      *
@@ -31,6 +31,6 @@ class NoReplyMailable extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.body');//->text('emails.body_plain');
+        return $this->view('emails.body', ['body' => $this->body]);
     }
 }

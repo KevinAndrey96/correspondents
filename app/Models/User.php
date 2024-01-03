@@ -27,6 +27,7 @@ use Lab404\Impersonate\Models\Impersonate;
  * @property int|mixed $is_enabled
  * @property string $google2fa_secret
  * @property int|mixed $balance
+ * @property mixed $brand
  */
 class User extends Authenticatable
 {
