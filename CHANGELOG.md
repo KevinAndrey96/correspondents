@@ -192,5 +192,8 @@ fix: drop strict logical operator in update transaction
 ## [Hotfix 1.6.3]
 fix: add validation in users index to show assign products icon
 
+## [Hotfix 1.6.4]
+fix: mail disclaimer text when disabling qr
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

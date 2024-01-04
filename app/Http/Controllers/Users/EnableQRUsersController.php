@@ -30,9 +30,14 @@ class EnableQRUsersController extends Controller
         $emailSubject = 'Validación QR';
 
         if ($user->qr_enabled == 0) {
+            $provider = 'Asparecargas';
+
+            if (isset($user->brand_id)) {
+                $provider = $user->brand->domain;
+            }
+
             $emailBody->body = 'Yo, '.$user->name.', declaro que he decidido deshabilitar voluntariamente el sistema de
-            seguridad QR que me ofrecía el proveedor '.(isset($user->brand_id))
-                ? $user->brand->domain : 'Asparecargas'.'.Reconozco que este sistema de seguridad QR me
+            seguridad QR que me ofrecía el proveedor '.$provider.'. Reconozco que este sistema de seguridad QR me
             brindaba una mayor protección contra el fraude, el robo de identidad y otras amenazas cibernéticas.
             Al deshabilitar este sistema de seguridad QR, asumo la responsabilidad de cualquier daño o pérdida que pueda
             sufrir como consecuencia de esta decisión. También libero al proveedor de cualquier responsabilidad civil, penal
