@@ -141,8 +141,6 @@
                                                             <div class="row justify-content-center">
                                                                 <div class="col-md-8 ms-auto me-auto mt-4">
                                                                     <form id="form-wp" target="_blank" method="get" action="https://api.whatsapp.com/send">
-                                                                    <!--<a  href="{{route('number.whatsapp')}}?transactionID={{$transaction->id}}&voucher={{$transaction->voucher}}" class="link-primary">Enviar comprobante a Whatsapp</a>-->
-
                                                                         <div class="row">
                                                                             <div class="col-xs-12 col-sm-12 col-md-9 mb-3">
                                                                                 <img width="10%" src="{{$urlServer}}/assets/img/whatsapp.png" alt="">

@@ -640,7 +640,16 @@
                     </ul>
                 </div>
             </li>
-
+            @hasrole('Shopkeeper')
+            <li class="nav-item">
+                <a class="nav-link text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{Auth::user()->distributor->phone}}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">payments</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Contactar Distribuidor</span>
+                </a>
+            </li>
+            @endhasrole
         </ul>
     </div>
     @hasrole('Supplier')

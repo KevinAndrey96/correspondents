@@ -1047,13 +1047,13 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static mb-4">
                                         <label>Desde</label>
-                                        <input type="date" id="dateFrom" name="dateFrom">
+                                        <input type="date" id="dateFrom" name="dateFrom" value="{{ Illuminate\Support\Carbon::now()->format('Y-m-d') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static mb-4">
                                         <label>Hasta</label>
-                                        <input type="date" id="dateTo" name="dateTo">
+                                        <input type="date" id="dateTo" name="dateTo" value="{{ Illuminate\Support\Carbon::now()->format('Y-m-d') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-center">
@@ -1071,10 +1071,6 @@
             </div>
         </div>
         <!--end Modal-->
-        <!-- Modal-->
-
-
-    <!--end Modal-->
         <!--Modal-->
         @if (isset($balancesCount) || isset($profitsCount))
             @if ($balancesCount > 0 || $profitsCount > 0)
@@ -1082,7 +1078,6 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <!--<h6 class="modal-title" id="exampleModalLabel">Gestionar ganancias</h6>-->
                                 <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>

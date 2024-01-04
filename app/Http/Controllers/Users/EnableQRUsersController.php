@@ -28,15 +28,18 @@ class EnableQRUsersController extends Controller
 
         $emailBody->receiver = $user->name;
         $emailSubject = 'Validación QR';
-        $emailBody->body = 'Queremos informarle que la validación por QR ha sido desactivada para su usuario en la
-        plataforma.';
 
-        if ($user->qr_enabled == 1) {
-            $emailBody->body = 'Queremos informarle que la validación por QR ha sido activada para su usuario en
-            la plataforma.';
+        if ($user->qr_enabled == 0) {
+            $emailBody->body = 'Yo, '.$user->name.', declaro que he decidido deshabilitar voluntariamente el sistema de
+            seguridad QR que me ofrecía el proveedor '.(isset($user->brand_id))
+                ? $user->brand->domain : 'Asparecargas'.'.Reconozco que este sistema de seguridad QR me
+            brindaba una mayor protección contra el fraude, el robo de identidad y otras amenazas cibernéticas.
+            Al deshabilitar este sistema de seguridad QR, asumo la responsabilidad de cualquier daño o pérdida que pueda
+            sufrir como consecuencia de esta decisión. También libero al proveedor de cualquier responsabilidad civil, penal
+            o administrativa que pueda derivarse de mi deshabilitación del sistema de seguridad QR.';
+
+            Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
         }
-
-        Mail::to($receiverEmail)->send(new NoReplyMailable($emailBody, $emailSubject));
 
         if ($user->role == 'Distributor' || $user->role == 'Administrator' || $user->role == 'Supplier') {
 
