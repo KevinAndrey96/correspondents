@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static find(mixed $productID)
+ * @method static where(string $string, int $int)
  */
 class Product extends Model
 {

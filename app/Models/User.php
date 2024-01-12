@@ -28,6 +28,8 @@ use Lab404\Impersonate\Models\Impersonate;
  * @property string $google2fa_secret
  * @property int|mixed $balance
  * @property mixed $brand
+ * @method static find(int $intval)
+ * @method static where(string $string, $id)
  */
 class User extends Authenticatable
 {

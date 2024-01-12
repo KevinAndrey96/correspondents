@@ -26,29 +26,30 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="container">
-                            <form method="POST" action="{{route('cards.store')}}" enctype="multipart/form-data">
+                            <form method="POST" action="{{route('cards.update')}}" enctype="multipart/form-data">
                                 <div class="row">
                                     @csrf
                                     <div class="col-md-6 mb-5">
                                         <label for="cardIMG" >Seleccione una imagen con la tarjeta:</label>
-                                        <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="cardIMG" value="" id="cardIMG" required>
+                                        <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="cardIMG" value="" id="cardIMG">
                                     </div>
                                     <div class="col-md-6 mb-5">
                                         <label for="cardIMG" >Seleccione una imagen con el QR:</label>
-                                        <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="qrIMG" value="" id="qrIMG" required>
+                                        <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="qrIMG" value="" id="qrIMG">
                                     </div>
                                     <div class="col-md-6 mb-5">
                                         <label for="cardPDF" >Seleccione un pdf con la tarjeta:</label>
-                                        <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="cardPDF" value="" id="cardPDF" required>
+                                        <input style="border: gray 0.5px solid; border-radius: 20px" type="file" class="form-control form-control-sm" name="cardPDF" value="" id="cardPDF">
                                     </div>
                                     <div class="col-md-6 mt-4 mb-5">
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label">Banco</label>
-                                            <input id="bank" type="text" class="form-control" name="bank" required>
+                                            <input id="bank" type="text" class="form-control" name="bank" value="{{$card->bank}}">
                                         </div>
                                     </div>
                                 </div>
-                                <input type="submit" class="btn btn-success bg-gradient m-4 float-end" value="Crear">
+                                <input type="hidden" name="cardID" value="{{$card->id}}">
+                                <input type="submit" class="btn btn-success bg-gradient m-4 float-end" value="Modificar">
                             </form>
                         </div>
                     </div>

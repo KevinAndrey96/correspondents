@@ -107,12 +107,16 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     Route::post('/user-enable-qr', App\Http\Controllers\Users\EnableQRUsersController::class)
         ->name('users.enableQR');
 
-
-
-    Route::get('/commissionscommissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index']);
+    Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index']);
     Route::get('/commissions/users', [App\Http\Controllers\Commissions\UsersCommissionsController::class, 'usersCommissions']);
     Route::get('/commissions/create/{id}', [App\Http\Controllers\Commissions\CreateCommissionsController::class, 'create']);
     Route::post('/commissions/update', [App\Http\Controllers\Commissions\UpdateCommissionsController::class, 'update']);
+    Route::get('/commission-groups', App\Http\Controllers\Commissions\IndexGroupsCommissionsController::class)->name('commissions.groups');
+    Route::get('/create-commission-group', App\Http\Controllers\Commissions\CreateGroupCommissionsController::class)->name('commissions.create-group');
+    Route::post('/store-commission-group', App\Http\Controllers\Commissions\StoreGroupCommissionsController::class)->name('commissions.store-group');
+    Route::get('/commission-groups', App\Http\Controllers\Commissions\IndexGroupsCommissionsController::class)->name('commissions.groups');
+    Route::get('/assign-commissions-group/{id}', App\Http\Controllers\Commissions\AssignGroupCommissionsController::class)->name('commissions.assign-group');
+    Route::post('/store-commissions-group-assignment', App\Http\Controllers\Commissions\StoreGroupAssigmentCommissionsController::class)->name('commissions.store-group-assignment');
 
     /**
      * Routes for cards
@@ -122,16 +126,17 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
         ->name('cards.create');
     Route::post('/cards-store', App\Http\Controllers\Cards\StoreCardsController::class)
         ->name('cards.store');
+    Route::get('/cards-edit/{id}', App\Http\Controllers\Cards\EditCardsController::class)
+        ->name('cards.edit');
+    Route::post('/cards-update', App\Http\Controllers\Cards\UpdateCardsController::class)
+        ->name('cards.update');
     Route::get('/cards', App\Http\Controllers\Cards\IndexCardsController::class)
         ->name('cards');
     Route::get('/cards-delete/{id}', App\Http\Controllers\Cards\DeleteCardsController::class)
         ->name('cards.delete');
-
-
-
 });
-Route::post('/changeOnlineStatusUser', [App\Http\Controllers\Users\ChangeOnlineStatusUsersController::class, 'changeOnlineStatus'])->middleware('auth');
 
+Route::post('/changeOnlineStatusUser', [App\Http\Controllers\Users\ChangeOnlineStatusUsersController::class, 'changeOnlineStatus'])->middleware('auth');
 Route::get('/transactionLoad/{id}', [App\Http\Controllers\Transactions\LoadTransactionController::class, 'load'])->middleware('auth');
 Route::get('/transactionReasign', [App\Http\Controllers\Transactions\ReasignTransactionController::class, 'transactionReasign'])->middleware('auth');
 Route::get('/transaction/detail/{id}', [App\Http\Controllers\Transactions\DetailTransactionController::class, 'detail'])->middleware('auth');

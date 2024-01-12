@@ -105,16 +105,6 @@
                                 <span class="nav-link-text ms-1">Respuestas pre-cargadas</span>
                             </a>
                         </li>
-                        <!--
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="{{route('product.fields')}}">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">text_fields</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Campos de producto</span>
-                            </a>
-                        </li>
-                        -->
                         <li class="nav-item">
                             <a class="nav-link text-white " href="{{route('transactions.fields')}}">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -219,6 +209,26 @@
                     </div>
                     <span class="nav-link-text ms-1">G. Productos</span>
                 </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-8" aria-expanded="false" aria-controls="submenu-8">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">payments</i>
+                    </div>
+                    <span class="nav-link-text ms-2">Comisiones</span>
+                </a>
+                <div id="submenu-8" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{route('commissions.groups')}}">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">Grupos de comisiones</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             <li style="display: none;" class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-4" aria-expanded="false" aria-controls="submenu-2">
@@ -397,38 +407,6 @@
                     </ul>
                 </div>
             </li>
-            <!--
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-7" aria-expanded="false" aria-controls="submenu-2">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">price_check</i>
-                    </div>
-                    <span class="nav-link-text">Giros</span>
-                </a>
-                <div id="submenu-7" class="collapse " data-bs-parent="#menu-accordion">
-                    <ul class="submenu-list list-unstyled">
-                        @if (is_null(session('impersonated_by')))
-                            <li class="nav-item">
-                                <a class="nav-link text-white " href="/transactions/create?giros=1">
-                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="material-icons opacity-10">post_add</i>
-                                    </div>
-                                    <span class="nav-link-text ms-1">Nuevo Giro</span>
-                                </a>
-                            </li>
-                        @endif
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/transactions">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">currency_exchange</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Mis Giros</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            -->
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-5" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

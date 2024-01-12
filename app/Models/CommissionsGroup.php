@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property mixed $name
  * @property mixed $id
- * @method static find(int $cardID)
+ * @method static get()
+ * @method static find(int $intval)
  */
-class Card extends Model
+class CommissionsGroup extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'cardIMG',
-        'cardPDF',
-        'bank'
+      'name'
     ];
 }

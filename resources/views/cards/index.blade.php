@@ -26,7 +26,9 @@
                             <table id= "my_table" class="table align-items-center mb-0">
                                 <thead class="thead-light">
                                 <tr>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Banco</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Imagen</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">QR</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
                                 </tr>
                                 </thead>
@@ -34,17 +36,29 @@
                                 @foreach ($cards as $card)
                                     @if ($card->is_deleted != 1)
                                         <tr class="align-middle text-center text-sm">
+                                            <td class="font-weight-bold">{{strtoupper($card->bank)}}</td>
                                             <td>
                                                 <a class="image-link" href="{{$urlServer.$card->cardIMG }}">
-                                                    <img width="200px" class="rounded img-fluid m-4" src="{{ getenv('URL_SERVER').$card->cardIMG  }}">
+                                                    <img width="200px" class="rounded img-fluid m-4" src="{{ getenv('URL_SERVER').$card->cardIMG }}" onerror="this.src='../assets/img/onerror.png';">
                                                 </a>
                                             </td>
                                             <td>
-                                                <a style="color: darkgreen;" href="{{route('cards.delete',['id'=>$card->id])}}"
-                                                   title="Detalle" class="btn btn-link px-3 mb-0"
-                                                   onclick="return confirm('¿Esta seguro que quiere borrar esta tarjeta?');">
-                                                    <i style="color: darkred;" class="material-icons opacity-10">delete</i>
+                                                <a class="image-link" href="{{$urlServer.$card->qr_img }}">
+                                                    <img width="100px" class="rounded img-fluid m-4" src="{{ getenv('URL_SERVER').$card->qr_img }}" onerror="this.src='../assets/img/onerror.png';">
                                                 </a>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-center">
+                                                    <a style="color: darkgreen;" href="{{route('cards.edit',['id'=>$card->id])}}"
+                                                       title="Detalle" class="btn btn-link px-3 mb-0">
+                                                        <i style="color: darkgreen;" class="material-icons opacity-10">edit</i>
+                                                    </a>
+                                                    <a style="color: darkgreen;" href="{{route('cards.delete',['id'=>$card->id])}}"
+                                                       title="Detalle" class="btn btn-link px-3 mb-0"
+                                                       onclick="return confirm('¿Esta seguro que quiere borrar esta tarjeta?');">
+                                                        <i style="color: darkred;" class="material-icons opacity-10">delete</i>
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endif

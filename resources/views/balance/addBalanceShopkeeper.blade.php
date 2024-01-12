@@ -28,7 +28,7 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="container">
-                            <form action="{{ url('/balance/store') }}" method="post" enctype="multipart/form-data">
+                            <form action="#" method="post" enctype="multipart/form-data">
                               <div class="row">
                                 @csrf
                                 @if(count($errors)>0)
@@ -100,6 +100,11 @@
     <div id="card{{$card->id}}" style="display: none;" class="container-fluid py-4 bank-card">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
             <div class="row">
+                <div class="col-md-12 text-center mb-3">
+                    <a class="image-link" href="{{$urlServer.$card->qr_img }}">
+                        <button class="btn btn-success bg-gradient">Escanear código QR</button>
+                    </a>
+                </div>
                     <div class="col-md-6 text-center">
                         <img src="{{$urlServer.$card->cardIMG}}" width="80%" height="auto" class="border-radius-lg">
                     </div>

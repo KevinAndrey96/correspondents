@@ -4,33 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Product;
-use App\Models\User;
 
 /**
  * @property mixed $product_id
  * @property mixed $amount
- * @property mixed $user_id
- * @method static where(string $string)
+ * @property mixed $id
  */
-class Commission extends Model
+class GeneralCommission extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'amount',
         'product_id',
-        'user_id'
+        'amount'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function product()
+    //Creating logical relationships
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
+
 
 }
