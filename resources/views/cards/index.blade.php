@@ -44,7 +44,7 @@
                                             </td>
                                             <td>
                                                 <a class="image-link" href="{{$urlServer.$card->qr_img }}">
-                                                    <img width="100px" class="rounded img-fluid m-4" src="{{ getenv('URL_SERVER').$card->qr_img }}" onerror="this.src='../assets/img/onerror.png';">
+                                                    <img width="100px" class="rounded img-fluid m-4" src="{{ getenv('URL_SERVER').$card->qr_img }}" onerror="this.onerror=null;this.src='../assets/img/onerror.png';">
                                                 </a>
                                             </td>
                                             <td>

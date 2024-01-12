@@ -195,5 +195,8 @@ fix: add validation in users index to show assign products icon
 ## [Hotfix 1.6.4]
 fix: mail disclaimer text when disabling qr
 
+## [Hotfix 1.6.5]
+fix: cyclic front error due to onerror
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
