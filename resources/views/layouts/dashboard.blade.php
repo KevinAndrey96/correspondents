@@ -16,14 +16,16 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!--JQuery maskedinput-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
     <!--Highcharts-->
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
-
+    <!--autoNumeric.js-->
+    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.10.3/dist/autoNumeric.min.js"></script>
     <!-- magnific popup -->
     <link rel="stylesheet" href="/assets/Magnific-Popup-master/dist/magnific-popup.css">
     <!-- datatable -->
@@ -955,8 +957,42 @@
     CKEDITOR.replace( 'richText' );
 </script>
 
+                <!--Put figures in amount input-->
 
+                <script type="text/javascript">
+                    function formatNumber(id) {
+                        const amountInput = document.getElementById(id);
+                        amountInput.style.fontSize = "150%";
+                        let text = amountInput.value.replace(/[^0-9\.]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        amountInput.value = text;
 
+                        let spotIndex = text.indexOf('.');
+                        if (spotIndex != -1) {
+                            const charArray = text.split('');
+
+                            console.log(charArray);
+                            let count = 0;
+                            for (let i = 0; i < charArray.length; i++) {
+                                if (charArray[i] == '.') {
+                                    count++;
+                                    if (count > 1) {
+                                       delete charArray[i];
+                                    }
+                                }
+                            }
+
+                            text = charArray.join('');
+                            amountInput.value = text;
+
+                            let textArrayBySpot = text.split('.');
+
+                            if (textArrayBySpot[1].length > 2) {
+                                text = textArrayBySpot[0] + '.' + textArrayBySpot[1].slice(0, 2);
+                                amountInput.value = text;
+                            }
+                        }
+                    }
+                </script>
 
 </body>
 

@@ -29,3 +29,17 @@ function uploadFile(UploadedFile $file, string $fileName, string $path)
     ]);
     unlink(str_replace('\\', '/', storage_path('app/public/'.$path.'/'.$fileName.'.png')));
 }
+
+function amountFormat(string $amount)
+{
+    $amountLength = strlen($amount);
+    $spotPosition = strpos($amount, '.') + 1;
+
+    if ($amountLength == $spotPosition) {
+        $amount = substr($amount, 0, -1);
+    }
+
+    $amount = str_replace(',','', $amount);
+
+    return $amount;
+}

@@ -1,13 +1,18 @@
 @extends('layouts.dashboard')
 @section('content')
     @if(Session::has('existingProfit'))
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger text-white d-flex justify-content-center" role="alert">
             {{ Session::get('existingProfit') }}
         </div>
     @endif
     @if(Session::has('limitExceeded'))
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger text-white d-flex justify-content-center" role="alert">
             {{ Session::get('limitExceeded') }}
+        </div>
+    @endif
+    @if(Session::has('noAmount'))
+        <div class="alert alert-danger text-white d-flex justify-content-center" role="alert">
+            {{ Session::get('noAmount') }}
         </div>
     @endif
     <div class="row mt-4"></div>
@@ -43,14 +48,14 @@
                                 <div class="col-md-4">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="amount" class="form-label">Monto</label>
-                                        <input type="number" class="form-control" name="amount" value="" id="amount" step="any" min="0" placeholder="">
+                                        <input type="text" class="form-control" name="amount" value="" id="amount" oninput="formatNumber('amount')" placeholder="">
                                     </div>
                                 </div>
                                 @hasanyrole('Supplier|Distributor|Shopkeeper')
                                 <div class="col-md-4">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="transactionNumber" id="account_label" class="form-label">Numero de Cuenta</label>
-                                        <input type="text" class="form-control" name="acountNumber" value="" id="acountNumber" placeholder="">
+                                        <input type="text" class="form-control" name="accountNumber" value="" id="acountNumber" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-md-4">

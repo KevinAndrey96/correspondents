@@ -116,19 +116,14 @@
                                                 <input type="number" class="form-control" name="max_queue" min="1" value="" id="" placeholder="" required>
                                             </div>
                                         </div>
-                                    <!--
-                                        @if (getenv('COUNTRY_NAME') == 'ECUADOR')
+                                    @endif
+                                    @if ($role == 'Supplier' )
                                         <div class="col-md-4">
-                                            <div class="input-group input-group-static mb-3">
-                                                <label for="giros" class="ms-0">Giros</label>
-                                                <select id="giros" name="giros" class="form-control ms-0" aria-label="Default select example">
-                                                    <option Value=1>Si</option>
-                                                    <option Value=0>No</option>
-                                                </select>
+                                            <div class=" input-group input-group-outline my-3">
+                                                <label for="max_queue" class="form-label">Monto mínimo de solicitud de saldo</label>
+                                                <input type="number" class="form-control" name="balanceMinAmount" min="1" step="0.01" value="" id="" placeholder="" required>
                                             </div>
                                         </div>
-                                        @endif
-                                        -->
                                     @endif
                                     @if ($role == 'Saldos')
                                         <div class="container mt-3 mb-3 border ">

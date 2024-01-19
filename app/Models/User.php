@@ -28,6 +28,12 @@ use Lab404\Impersonate\Models\Impersonate;
  * @property string $google2fa_secret
  * @property int|mixed $balance
  * @property mixed $brand
+ * @property mixed $balance_min_amount
+ * @property mixed $max_queue
+ * @property mixed $priority
+ * @property mixed $distributor_id
+ * @property mixed $brand_id
+ * @property mixed $giros
  * @method static find(int $intval)
  * @method static where(string $string, $id)
  */
@@ -82,7 +88,8 @@ class User extends Authenticatable
         'enabled_daily',
         'product_id',
         'giros',
-        'brand_id'
+        'brand_id',
+        'balance_min_amount'
     ];
 
     /**

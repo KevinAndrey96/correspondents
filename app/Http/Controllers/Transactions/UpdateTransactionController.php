@@ -79,22 +79,26 @@ class UpdateTransactionController extends Controller
                             ['user_id', '=', $transaction->shopkeeper_id],
                             ['product_id', '=', $transaction->product_id]
                         ])->first();
+
                         $commissionDist = Commission::where([
                             ['user_id', '=', $transaction->distributor_id],
                             ['product_id', '=', $transaction->product_id]
                         ])->first();
+
                         $commissionSupp = Commission::where([
                             ['user_id', '=', $transaction->supplier_id],
                             ['product_id', '=', $transaction->product_id]
                         ])->first();
+
                         $transaction->com_shp = $commissionShop->amount;
                         $transaction->com_dis = $commissionDist->amount - $commissionShop->amount;
+
                         if (isset($commissionSupp)) {
                             $transaction->com_sup = $commissionSupp->amount;
                         }
+
                         $transaction->com_adm = $transaction->product->product_commission -
                             ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup);
-
 
 
                         if (isset($commissionSupp)) {
@@ -104,7 +108,6 @@ class UpdateTransactionController extends Controller
                         $administrator->profit += ($transaction->com_adm + $transaction->product->fixed_commission);
                         $distributor->profit = $distributor->profit + $commissionDist->amount - $commissionShop->amount;
                         $shopkeeper->profit += $commissionShop->amount;
-
                     }
 
                     $supplierBalance = new Balance();

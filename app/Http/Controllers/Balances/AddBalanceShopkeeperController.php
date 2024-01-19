@@ -16,17 +16,38 @@ class AddBalanceShopkeeperController extends Controller
     public function store(Request $request)
     {
         date_default_timezone_set('America/Bogota');
+
         if (Auth::user()->role == 'Shopkeeper' or Auth::user()->role == 'Supplier') {
+
             $fields = [
-                'amount'=>'required|numeric|min:0',
+                'amount'=>'required|string',
                 'image'=>'required',
                 'card_id' => 'required',
                 'payment_code' => 'required'
             ];
+
             $message = [
                 'required'=>':attribute es requerido',
             ];
+
             $this->validate($request, $fields, $message);
+
+            $amount = floatval(amountFormat($request->amount));
+
+            if ($amount == 0 || is_null($request->amount)) {
+
+                return back()->with('noAmount', 'Por favor ingrese el monto que desea.');
+            }
+
+            if (getenv('COUNTRY_NAME') == 'ECUADOR' && $amount > 5000) {
+
+                return back()->with('exceededAmountByCountry', 'El monto máximo que puede solicitar es de $5000');
+            }
+
+            if (isset(Auth::user()->balance_min_amount) && $amount < floatval(Auth::user()->balance_min_amount)) {
+
+                return back()->with('lowAmount', 'El monto mínimo requerido para solicitar saldo es de '. Auth::user()->balance_min_amount);
+            }
 
             $date = Carbon::now();
 
@@ -55,14 +76,16 @@ class AddBalanceShopkeeperController extends Controller
                 }
 
             }
+
             $balance = new Balance();
             $balance->user_id = Auth::user()->id;
-            $balance->amount = $request->input('amount');
+            $balance->amount = $amount;
             $balance->date = $date;
             $balance->type = 'Recharge';
             $balance->card_id = $request->input('card_id');
             $balance->payment_code =  $request->input('payment_code');
             $balance->save();
+
             if ($request->hasFile('image')) {
                 $pathName = Sprintf('balances/%s.png', $balance->id);
                 Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));

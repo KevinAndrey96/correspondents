@@ -54,18 +54,30 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="w-80 ms-auto me-auto">
+                                                    <div class="w100 ms-auto me-auto">
                                                     <div class="row justify-content-center">
-                                                        <div class="col-md-4 col-xs-3 text-center my-2 align-items-center">
+                                                        <div class="col-md-2 col-xs-3 text-center my-2 align-items-center">
                                                             <input type="checkbox" class="form-check-input"
                                                                    id="product{{$product->id}}"
                                                                    name="products[]" value="{{$product->id}}"
                                                                    onchange="enableInput({{$product->id}})">
                                                         </div>
                                                         <div  class="col-md-4 col-xs-3 rounded">
-                                                            <input style="border: 2px solid #E1D8D6" class="form-control
-                                                            text-center w-100" id="amount{{$product->id}}" step="0.01"
-                                                                   min="0" max="{{$product->product_commission}}" type="number" name="amounts[]" value="0" disabled>
+                                                            <div class="input-group input-group-outline mb-3">
+                                                                <label class="form-label">Distribuidor</label>
+                                                                <input style="border: 2px solid #E1D8D6" class="form-control
+                                                                text-center w-100" id="amountDis{{$product->id}}" step="0.01"
+                                                                       min="0" max="{{$product->product_commission}}" type="number" name="amountsDis[]" value="0" disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div  class="col-md-4 col-xs-3 rounded">
+                                                            <div class="input-group input-group-outline mb-3">
+                                                                <label class="form-label">Tendero</label>
+                                                                <input style="border: 2px solid #E1D8D6" class="form-control
+                                                                text-center w-100" id="amountShop{{$product->id}}" step="0.01"
+                                                                       min="0" max="{{$product->product_commission}}" type="number" name="amountsShop[]" value="0" disabled>
+
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     </div>
@@ -91,13 +103,19 @@
     <script type="text/javascript">
         function enableInput(productID)
         {
-            let productCheck = document.getElementById('product'+productID);
-            let amountInput = document.getElementById('amount'+productID);
+            console.log(productID);
 
-            amountInput.disabled = true;
+            let productCheck = document.getElementById('product'+productID);
+            let amountDisInput = document.getElementById('amountDis'+productID);
+            let amountShopInput = document.getElementById('amountShop'+productID);
+
+            amountDisInput.disabled = true;
+            amountShopInput.disabled = true;
 
             if (productCheck.checked == true) {
-                amountInput.disabled = false;
+                amountDisInput.disabled = false;
+                amountShopInput.disabled = false;
+
             }
         }
 

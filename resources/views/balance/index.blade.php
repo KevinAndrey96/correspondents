@@ -97,10 +97,12 @@
                                         <td class="align-middle text-center text-sm">
                                             @if(is_null($balance->is_valid))
                                                 <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal"
-                                                    data-id="{{$balance->id}}"
+                                                        data-id="{{$balance->id}}"
+                                                        data-amount="{{$balance->amount}}"
+                                                        data-user="{{$balance->user->name}}"
+                                                        data-date="{{$balance->date}}"
                                                 ><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i>Gestionar</a></button>
                                             @endif
-
                                         </td>
                                     @endif
                                     </tr>
@@ -119,11 +121,12 @@
                                     var status = document.getElementById("status");
                                     var form = document.getElementById("form-status");
 
+                                    status.value = 0;
+
                                     if (type == 'accepted') {
                                         status.value = 1;
-                                    } else {
-                                        status.value = 0;
                                     }
+
                                     form.submit();
                                 }
                                 function comment()
@@ -150,13 +153,48 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 text-center">
-                                                    <a style="color: green;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('accepted')">Aceptar</a>
+                                                    <!--onclick="validate('accepted')"-->
+                                                    <a style="color: green;" class="btn btn-link px-3 mb-0" id="acceptstatus"
+                                                       data-bs-toggle="modal"
+                                                       data-bs-target="#confirmModal"
+                                                       data-id = "#"
+                                                       data-user="#"
+                                                       data-amount="#"
+                                                       data-date="#">Aceptar</a>
                                                 </div>
                                                 <div class="col-md-4 text-center">
                                                     <a style="color: red;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('rejected')">Rechazar</a>
                                                 </div>
                                                 <div class="col-md-4 text-center">
                                                     <a id="assign-link" style="color: darkblue;" class="btn btn-link px-3 mb-0">Asignar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end Modal-->
+                            <!-- Modal-->
+                            <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLabel">Confirmación de aceptación</h6>
+                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-12 text-center mb-3">
+                                                    <p id="userNameSpan" class="text-center font-weight-bold text-uppercase text-dark"></p>
+                                                    <p id="amountSpan" class="text-center font-weight-bold text-uppercase text-dark"></p>
+                                                    <p id="dateSpan" class="text-center font-weight-bold text-uppercase text-dark"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-md-4 text-center">
+                                                    <a style="color: green;" class="btn btn-link px-3 mb-0" id="acceptstatus" onclick="validate('accepted')">Confirmar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -224,6 +262,7 @@
                                     @endif
                                     @endif
                                 });
+
                                 $(document).ready( function () {
                                     setTimeout("location.reload()", 60000);
                                     $('#my_table').DataTable({
@@ -241,14 +280,39 @@
                                         "aaSorting": [],
                                         "bDestroy": true
                                     });
-                                        $('#acceptModal').on('show.bs.modal', function (event) {
-                                        var button = $(event.relatedTarget)
-                                        var uID = button.data('id')
-                                        var modal = $(this)
+
+                                    $('#acceptModal').on('show.bs.modal', function (event) {
+                                        var button = $(event.relatedTarget);
+                                        var id = button.data('id');
+                                        var amount = button.data('amount');
+                                        var user = button.data('user');
+                                        var date = button.data('date');
+                                        var modal = $(this);
                                         var balance_id = document.getElementById("id");
-                                        balance_id.value = uID;
-                                        document.getElementById('assign-link').href = '/balance-assign-supplier/'+uID;
+                                        balance_id.value = id;
+                                        var acceptButton = $('#acceptstatus');
+                                        acceptButton.attr('data-user', user);
+                                        acceptButton.attr('data-amount', amount);
+                                        acceptButton.attr('data-date', date);
+                                        acceptButton.attr('data-id', id);
+
+                                        document.getElementById('assign-link').href = '/balance-assign-supplier/' + id;
                                     })
+
+                                    $('#confirmModal').on('show.bs.modal', function (event) {
+                                        let button = $(event.relatedTarget);
+                                        let user = button.data('user');
+                                        let amount = button.data('amount');
+                                        let date = button.data('date');
+                                        let balanceID = button.data('id');
+                                        let userSpan = document.getElementById("userNameSpan");
+                                        let amountSpan = document.getElementById("amountSpan");
+                                        let dateSpan = document.getElementById("dateSpan");
+                                        userSpan.innerHTML = 'Usuario: ' + user;
+                                        amountSpan.innerHTML = 'Monto: $' + new Intl.NumberFormat("en-IN").format(amount);
+                                        dateSpan.innerHTML = 'Fecha: ' + date;
+                                        //document.getElementById('assign-link').href = '/balance-assign-supplier/' + uID;
+                                    });
                                 });
                             </script>
 

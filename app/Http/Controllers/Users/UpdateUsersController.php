@@ -28,6 +28,7 @@ class UpdateUsersController extends Controller
         $user->city = $request->input('city');
         $user->address = $request->input('address');
         $user->product_id = $request->input('product_id');
+        $user->balance_min_amount = $request->input('balanceMinAmount');
 
         if (isset($request->card_ids)) {
             $userBanks = UserBank::where('user_id', $user->id)->get();
@@ -47,9 +48,11 @@ class UpdateUsersController extends Controller
         if (isset($request->max_queue)) {
             $user->max_queue = $request->input('max_queue');
         }
+
         if (isset($request->priority)) {
             $user->priority = $request->input('priority');
         }
+
         if (isset($request->password)) {
             if (strlen($request->password) < 7 || !preg_match('`[0-9]`',$request->password)
                 || !preg_match('`[a-z]`', $request->password) ) {
@@ -61,6 +64,7 @@ class UpdateUsersController extends Controller
             $user->first_login = 0;
             $user->daily_password_date = null;
         }
+
         $user->save();
 
         if ($user->role == 'Shopkeeper') {

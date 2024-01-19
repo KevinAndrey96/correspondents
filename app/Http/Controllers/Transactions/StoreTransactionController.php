@@ -25,20 +25,29 @@ class StoreTransactionController extends Controller
     //: Factory|View|Redirector|RedirectResponse|Application
     public function store(Request $request)
     {
-        /*
         $fields = [
-            'transactionAmount'=>'required|numeric|min:20000|max:200000',
+            'transactionAmount'=> 'required|string',
+            'transactionType'=> 'required|string',
+            "productID" => 'required|string'
         ];
+
         $message = [
-            'required'=>':attribute es requerido',
+            'transactionAmount.required' => 'El monto de la transacción es requerido',
+            'transactionType.required' => 'El tipo de la transacción es requerido',
+            'productID.required' => 'El id del producto es requerido'
         ];
 
         $this->validate($request, $fields, $message);
-        */
+
         $productID = $request->input('productID');
         $product = Product::find($productID);
-        $amount = $request->input('transactionAmount');
+        $amount = floatval(amountFormat($request->transactionAmount));
         $giros = $request->input('giros');
+
+        if ($amount == 0 || is_null($request->transactionAmount)) {
+
+            return back()->with('noAmount', 'Por favor ingrese un monto.');
+        }
 
         if ($amount < $product->min_amount || $amount > $product->max_amount) {
             if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1) {
@@ -85,11 +94,10 @@ class StoreTransactionController extends Controller
             }
         }
 
-
         $transactionFields = TransactionField::first();
         $transaction = new Transaction();
         $transaction->product_id = $product->id;
-        $transaction->amount = $request->input('transactionAmount');
+        $transaction->amount = $amount;
         $transaction->date = Carbon::now();
         $transaction->type = $product->product_type;
         $transaction->status = 'hold';

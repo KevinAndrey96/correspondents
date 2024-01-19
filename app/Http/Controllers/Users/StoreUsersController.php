@@ -12,10 +12,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\NoReplyMailable;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\ValidationException;
 use stdClass;
 
 class StoreUsersController extends Controller
 {
+    /**
+     * @throws ValidationException
+     */
     public function store(Request $request)
     {
         $fields = [
@@ -54,14 +58,18 @@ class StoreUsersController extends Controller
             $fields2 = [
                 'priority'=>'required',
                 'max_queue'=>'required',
+                'balanceMinAmount'=>'required',
             ];
             $fields = $fields + $fields2;
             $message2 = [
                 'priority.required'=>'La prioridad es requerida',
                 'max_queue.required'=>'El valor de cola maximo es requerido',
+                'balanceMinAmount.required' => 'El monto mínimo de saldos es requerido',
             ];
+
             $message = $message + $message2;
         }
+
         $this->validate($request, $fields, $message);
 
         $user = new User();
@@ -75,11 +83,11 @@ class StoreUsersController extends Controller
         $user->address = $request->input('address');
         $user->is_enabled = 1;
 
-
-
         if ($request->input('role') == 'Supplier') {
             $user->priority = $request->input('priority');
             $user->max_queue = $request->input('max_queue');
+            $user->balance_min_amount = floatval($request->input('balanceMinAmount'));
+
             if (isset($request->giros)) {
                 $user->giros = $request->input('giros');
             }

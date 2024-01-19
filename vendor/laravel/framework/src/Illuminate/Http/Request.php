@@ -19,6 +19,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  * @method array validate(array $rules, ...$params)
  * @method array validateWithBag(string $errorBag, array $rules, ...$params)
  * @method bool hasValidSignature(bool $absolute = true)
+ * @property mixed $role
+ * @property mixed $transactionAmount
+ * @property mixed $amount
  */
 class Request extends SymfonyRequest implements Arrayable, ArrayAccess
 {

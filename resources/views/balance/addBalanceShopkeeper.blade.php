@@ -10,7 +10,22 @@
             {{ Session::get('failedBalanceSaved') }}
         </div>
     @endif
-    <div class="row "></div>
+    @if(Session::has('lowAmount'))
+        <div class="alert alert-danger text-white text-center" role="alert">
+            {{ Session::get('lowAmount') }}
+        </div>
+    @endif
+    @if(Session::has('exceededAmountByCountry'))
+        <div class="alert alert-danger text-white text-center" role="alert">
+            {{ Session::get('exceededAmountByCountry') }}
+        </div>
+    @endif
+    @if(Session::has('noAmount'))
+        <div class="alert alert-danger text-white text-center" role="alert">
+            {{ Session::get('noAmount') }}
+        </div>
+    @endif
+    <div class="row"></div>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -28,7 +43,7 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="container">
-                            <form action="#" method="post" enctype="multipart/form-data">
+                            <form action="/balance/store" method="post" enctype="multipart/form-data">
                               <div class="row">
                                 @csrf
                                 @if(count($errors)>0)
@@ -42,13 +57,9 @@
                                 @endif
                                 <div class="col-md-6">
                                     <div class=" input-group input-group-outline my-3">
-                                        <label for="amount" class="form-label"></label>
-                                        <input type="number" class="form-control" name="amount" value="" id="amount"
-                                               step="any" min="0" placeholder="Monto"
-                                               @if ($countryName == 'ECUADOR')
-                                                   max="5000"
-                                               @endif
-                                               required>
+                                        <label for="amount" class="form-label">Monto</label>
+                                        <input type="text" class="form-control" name="amount" value="" id="amount"
+                                               placeholder="Monto" oninput="formatNumber('amount')" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

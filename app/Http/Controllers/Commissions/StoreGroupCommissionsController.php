@@ -23,7 +23,8 @@ class StoreGroupCommissionsController extends Controller
         $fields = [
             'name' => 'required|string',
             'products' => 'required',
-            'amounts' => 'required'
+            'amountsDis' => 'required',
+            'amountsShop' => 'required'
         ];
 
         $message = [

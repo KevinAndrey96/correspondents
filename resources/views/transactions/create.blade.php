@@ -25,6 +25,11 @@
             <p class="text-center text-sm text-white">{{ Session::get('limitExceeded') }}</p>
         </div>
     @endif
+    @if(Session::has('noAmount'))
+        <div class="alert alert-danger text-white" role="alert">
+            <p class="text-center text-sm text-white">{{ Session::get('noAmount') }}</p>
+        </div>
+    @endif
 
     <div class="container-fluid py-4">
         <div class="row">
@@ -109,11 +114,11 @@
                                 </div>
                                 <script>
                                     function showProducts() {
-                                        //al seleccionar el tipo de transacción mostar los productos que correspondan
+                                        //al seleccionar el tipo de transacción mostrar los productos que correspondan
                                         //si es deposito muestra los productos de deposito y si no muestra los de retiro
                                         //paso 1: saber que seleccionó el cliente
                                         var transactionType = document.getElementById('transactionType').value
-                                        //paso 2: mostrar el di que corresponda
+                                        //paso 2: mostrar el div que corresponda
                                         if (transactionType == 'Deposit') {
                                             document.getElementById('deposit').style.display = 'block'
                                             document.getElementById('withdrawal').style.display = 'none'
@@ -146,7 +151,7 @@
                                 <div class="col-md-5">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="transactionAmount" class="form-label">Monto</label>
-                                        <input type="number" class="form-control" name="transactionAmount" id="transactionAmount" step="any" placeholder="" min="0" required >
+                                        <input type="text" class="form-control" name="transactionAmount" id="transactionAmount" placeholder="" oninput="formatNumber(this.id)" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -160,16 +165,16 @@
                                             <div class="col-md-12 mb-4">
                                                 <p class="text-sm text-weight-bold text-center">Click en el logo para más información</p>
                                             </div>
-                                            @foreach($shopkeeperProducts as $shopkeeperProduct)
+                                            @foreach ($shopkeeperProducts as $shopkeeperProduct)
                                                 @if ($shopkeeperProduct->product->product_type == 'Deposit')
                                                 <div class="col-md-3 col-xs-6">
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$shopkeeperProduct->product->id}}" required>
+                                                    <div id="checkDiv{{$shopkeeperProduct->product->id}}" class="form-check mb-3 checkDiv">
+                                                        <input class="form-check-input radioProducts" type="radio" name="productID" id="productID{{$shopkeeperProduct->product->id}}" value="{{$shopkeeperProduct->product->id}}" onchange="hideProducts({{$shopkeeperProduct->product->id}})" required>
                                                         <label  style="width:50%;" class="custom-control-label text-center" for="customRadio1">
                                                             <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$shopkeeperProduct->product->id}}"
                                                                     data-id="{{$shopkeeperProduct->product->id}}">
                                                                     <a>
-                                                                        <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{$urlServer.'/'.$shopkeeperProduct->product->product_logo}}" alt="No carga">
+                                                                        <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1 imageProducts" src="{{$urlServer.'/'.$shopkeeperProduct->product->product_logo}}" alt="No carga">
                                                                         <p style="overflow-wrap: break-word;" class="text-xs mt-1" >{{ $shopkeeperProduct->product->product_name}}</p>
                                                                     </a>
                                                             </button>
@@ -221,13 +226,13 @@
                                             @foreach( $shopkeeperProducts as $shopkeeperProduct)
                                                 @if ($shopkeeperProduct->product->product_type == 'Withdrawal')
                                                     <div class="col-md-3 col-xs-6">
-                                                        <div class="form-check mb-3">
-                                                            <input class="form-check-input" type="radio" name="productID" id="productID" value="{{$shopkeeperProduct->product->id}}" required>
+                                                        <div id="checkDiv{{$shopkeeperProduct->product->id}}" class="form-check mb-3 checkDiv">
+                                                            <input class="form-check-input radioProducts" type="radio" name="productID" id="productID" value="{{$shopkeeperProduct->product->id}}" onchange="hideProducts({{$shopkeeperProduct->product->id}})" required>
                                                             <label  style="width:50%;" class="custom-control-label text-center" for="customRadio1">
                                                                 <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$shopkeeperProduct->product->id}}"
                                                                         data-id="{{$shopkeeperProduct->product->id}}">
                                                                     <a>
-                                                                        <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1" src="{{$urlServer.'/'.$shopkeeperProduct->product->product_logo}}" alt="No carga">
+                                                                        <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1 imageProducts" src="{{$urlServer.'/'.$shopkeeperProduct->product->product_logo}}" alt="No carga">
                                                                         <p style="overflow-wrap: break-word;" class="text-xs mt-1" >{{ $shopkeeperProduct->product->product_name}}</p>
                                                                     </a>
                                                                 </button>
@@ -298,9 +303,22 @@
             });
 
 
+        function hideProducts(id)
+        {
+            let checkDivs = document.querySelectorAll('.checkDiv');
+            let checkDiv = document.getElementById('checkDiv'+id);
 
+            checkDivs.forEach(function(checkDiv){
+                checkDiv.style.display = 'none';
+            });
+
+            checkDiv.style.display = 'block';
+            checkDiv.checked;
+
+            console.log(checkDivs);
+        }
         </script>
-            </div>
+    </div>
     <!--MODAL-->
 
 @endsection

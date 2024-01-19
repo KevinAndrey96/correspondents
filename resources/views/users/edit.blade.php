@@ -200,22 +200,6 @@
                                                 @endforeach
                                             </div>
                                         </div>
-
-                                        <!--
-                                        <div class="col-md-4">
-
-                                            <select class="form-select" name="card_ids[]" id="card_ids[]" multiple>
-                                                <option selected disabled>Seleccione bancos:</option>
-                                                @foreach ($cards as $card)
-                                                    <option value="{{$card->id}}">{{strtoupper($card->bank)}}</option>
-                                                @endforeach
-                                            </select>
-
-                                        </div>
-                                         -->
-
-
-
                                     @endif
 
                                     @if (isset($user->max_queue))
@@ -231,6 +215,20 @@
                                             <div class=" input-group input-group-outline my-3">
                                                 <label for="priority" class="form-label"></label>
                                                 <input type="number" class="form-control" name="priority" min="1" value="{{$user->priority}}" id="" placeholder="Prioridad">
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if (($user->role == 'Shopkeeper' || $user->role == 'Supplier') &&
+                                        Auth::user()->role == 'Administrator')
+                                        <div class="col-md-4">
+                                            <div class=" input-group input-group-outline my-3">
+                                                <label for="balanceMinAmount" class="form-label"></label>
+                                                <input type="number" class="form-control" name="balanceMinAmount" min="1"
+                                                       @if (isset($user->balance_min_amount))
+                                                           value="{{$user->balance_min_amount}}"
+                                                       @endif
+                                                       id="" placeholder="Monto mínimo de solicitud de saldo">
                                             </div>
                                         </div>
                                     @endif
