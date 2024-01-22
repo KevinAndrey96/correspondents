@@ -36,7 +36,8 @@
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Solicitud  </th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de Solicitud</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha de solicitud</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha de aceptación de administrador</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comentarios</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recibo</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
@@ -48,13 +49,22 @@
                                                     <td class="align-middle text-center text-xs">${{number_format($balance->user->balance, 2, ',', '.')}}</td>
                                                 @endif
                                                     <td class="align-middle text-center text-xs">{{$balance->id}}</td>
-                                                    @if($balance->type == 'Deposit')
+                                                    @if ($balance->type == 'Deposit')
                                                         <td class="align-middle text-center text-xs">Deposito</td>
-                                                    @elseif($balance->type == 'Withdrawal')
+                                                    @elseif ($balance->type == 'Withdrawal')
                                                         <td class="align-middle text-center text-xs">Retiro por Administrador</td>
+                                                        @elseif ($balance->type == 'Recharge')
+                                                        <td class="align-middle text-center text-xs">Recarga de Saldo</td>
                                                     @endif
                                                     <td class="align-middle text-center text-xs">${{number_format($balance->amount, 2, ',', '.')}}</td>
                                                     <td class="align-middle text-center text-xs">{{$balance->date}}</td>
+                                                    <td class="align-middle text-center text-xs">
+                                                        @if (isset($balance->admin_date))
+                                                            {{$balance->admin_date}}
+                                                        @else
+                                                            No info
+                                                        @endif
+                                                    </td>
                                                     <td class="align-middle text-center text-xs">
                                                         @if(is_null($balance->comment))
                                                             Sin comentarios

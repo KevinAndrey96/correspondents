@@ -44,6 +44,7 @@
 
                                     @if (Auth::user()->role == 'Distributor')
                                         @foreach ($distributorProducts as $distributorProduct)
+                                            @if (! $distributorProduct->product->is_deleted)
                                             <div class="col-md-4 form-check mt-4">
                                                 <input style=""type="checkbox" class="form-check-input" name="products[]"
                                                        value="{{$distributorProduct->product->id}}"
@@ -62,6 +63,7 @@
                                                     @endif
                                                 </label>
                                             </div>
+                                            @endif
                                         @endforeach
                                     @endif
 

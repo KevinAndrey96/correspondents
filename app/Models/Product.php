@@ -11,6 +11,30 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @method static find(mixed $productID)
  * @method static where(string $string, int $int)
+ * @method static whereIn(string $string, $shopkeeperProducts)
+ * @property mixed $product_name
+ * @property mixed $product_type
+ * @property mixed $product_description
+ * @property int|mixed $are_default_fields
+ * @property mixed $client_document
+ * @property mixed $account_type
+ * @property mixed $extra
+ * @property mixed $email
+ * @property mixed $code
+ * @property mixed $client_name
+ * @property mixed $product_commission
+ * @property mixed $min_amount
+ * @property mixed $max_amount
+ * @property mixed $priority
+ * @property mixed $num_jineteo
+ * @property mixed $hours
+ * @property mixed $reassignment_minutes
+ * @property mixed $com_shp
+ * @property mixed $com_dis
+ * @property mixed $com_sup
+ * @property mixed $fixed_commission
+ * @property mixed $giros
+ * @property mixed|string $field_names
  */
 class Product extends Model
 {
@@ -39,7 +63,10 @@ class Product extends Model
         'hours',
         'reassignment_minutes',
         'fixed_commission',
-        'giros'
+        'giros',
+        'is_deleted',
+        'are_default_fields',
+        'field_names'
     ];
 
 

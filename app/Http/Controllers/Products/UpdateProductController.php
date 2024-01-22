@@ -19,56 +19,98 @@ class UpdateProductController extends Controller
             'productType'=>'required|string',
             'productDescription'=>'required|string',
             'productCommission'=>'required',
-            'clientName'=>'required|boolean',
-            'clientDocument'=>'required|boolean',
-            'email'=>'required|boolean',
-            'accountType'=>'required|boolean',
-            'code'=>'required|boolean',
-            'extra'=>'required|boolean',
             'min_amount'=>'required',
             'max_amount'=>'required',
             'priority'=>'required',
             'num_jineteo'=>'required',
             'hours'=>'required',
             'reassignment_minutes' => 'required',
-            'fixed_commission' => 'required'
+            'fixed_commission' => 'required',
+            'defaultFieldsRadio' => 'required'
         ];
-        $message= [
-            'required'=>':attribute es requerido',
+
+        $defaultFields = [
+            'clientDocument'=>'required|boolean',
+            'accountType'=>'required|boolean',
+            'email'=>'required|boolean',
+            'extra'=>'required|boolean',
+            'code'=>'required|boolean',
+            'clientName'=>'required|boolean',
         ];
-        $this->validate($request, $fields, $message);
 
-        if (isset($request->giros))
-        {
-
+        if (! $request->defaultFieldsRadio) {
+            $defaultFields = [
+                'fieldNames' => 'required'
+            ];
         }
 
-        $productData = [
-            'product_name'=> $request->input('productName'),
-            'product_type'=> $request->input('productType'),
-            'product_description'=> $request->input('productDescription'),
-            'product_commission'=> $request->input('productCommission'),
-            'client_name'=> $request->input('clientName'),
-            'client_document'=> $request->input('clientDocument'),
-            'email'=> $request->input('email'),
-            'account_type'=> $request->input('accountType'),
-            'code'=> $request->input('code'),
-            'extra'=> $request->input('extra'),
-            'min_amount' => $request->input('min_amount'),
-            'max_amount' => $request->input('max_amount'),
-            'priority' => $request->input('priority'),
-            'num_jineteo' => $request->input('num_jineteo'),
-            'hours' => $request->input('hours'),
-            'reassignment_minutes' => $request->input('reassignment_minutes'),
-            'fixed_commission' => $request->input('fixed_commission'),
-            'giros' => isset($request->giros) ? $request->input('giros') : 0
+        $fields = array_merge($fields, $defaultFields);
+
+        $message= [
+            'required' => ':attribute es requerido',
+            'fieldNames.required' => 'Los nombres de los campos son requeridos',
+            'defaultFieldsRadio.required' => 'Por favor seleccione el tipo de campo para la transacción'
         ];
-        $product = Product::findOrFail($productId);
+
+        $this->validate($request, $fields, $message);
+
+        $product = Product::find($productId);
+
+        $product->product_name = $request->input('productName');
+        $product->product_type = $request->input('productType');
+        $product->product_description = $request->input('productDescription');
+        $product->are_default_fields = 1;
+
+        if (intval($request->defaultFieldsRadio)) {
+            $product->client_document = $request->input('clientDocument');
+            $product->account_type = $request->input('accountType');
+            $product->email = $request->input('email');
+            $product->extra = $request->input('extra');
+            $product->code = $request->input('code');
+            $product->client_name = $request->input('clientName');
+        }
+
+        if (! intval($request->defaultFieldsRadio)) {
+            $product->are_default_fields = 0;
+            $product->client_document = 0;
+            $product->account_type = 0;
+            $product->email = 0;
+
+            if (intval($request->accountType)) {
+                $product->account_type = 1;
+            }
+
+            if (intval($request->email)) {
+                $product->email = 1;
+            }
+
+            $product->extra = 0;
+            $product->code = 0;
+            $product->client_name = 0;
+            $product->field_names = implode(',', $request->fieldNames);
+        }
+
+        $product->product_commission = $request->input('productCommission');
+        $product->min_amount = $request->input('min_amount');
+        $product->max_amount = $request->input('max_amount');
+        $product->priority = $request->input('priority');
+        $product->num_jineteo = $request->input('num_jineteo');
+        $product->hours = $request->input('hours');
+        $product->reassignment_minutes = $request->input('reassignment_minutes');
+        $product->com_shp = $request->input('com_shp');
+        $product->com_dis = $request->input('com_dis');
+        $product->com_sup = $request->input('com_sup');
+        $product->fixed_commission = $request->input('fixed_commission');
+
+        if (isset($request->giros)) {
+            $product->giros = intval($request->input('giros'));
+        }
+
+        $product->save();
+
         if ($request->hasFile('image')) {
             $pathName = Sprintf('products/%s.png', $product->id);
             Storage::disk('public')->put($pathName, file_get_contents($request->file('image')));
-            //dd(Storage::path('products\\' .$product->id . '.png'));
-            //dd(Storage::disk('public')->path('products/' .$product->id . '.png'));
             $client = new Client();
             $urlServer = getenv('URL_SERVER');
             $url = $urlServer."/upload.php";
@@ -79,11 +121,6 @@ class UpdateProductController extends Controller
                         'name' => 'image',
                         'contents' => fopen(
                             str_replace('\\', '/', Storage::disk('public')->path('products/' .$product->id . '.png')),'r'),
-                        /*'contents' => fopen(
-                            Storage::disk('public')
-                                ->getDriver()
-                                ->getAdapter()
-                                ->getPathPrefix() . 'blogs/' . $blog->id . '.png', 'r'),*/
                     ],
                     [
                         'name' => 'path',
@@ -91,11 +128,12 @@ class UpdateProductController extends Controller
                     ]
                 ]
             ]);
+
             $product->product_logo = '/storage/products/' . $product->id . '.png';
             $product->save();
             unlink(str_replace('\\', '/', storage_path('app/public/products/'.$product->id.'.png')));
         }
-        Product::where('id', '=', $productId)->update($productData);
+
         return redirect('products');
     }
 }

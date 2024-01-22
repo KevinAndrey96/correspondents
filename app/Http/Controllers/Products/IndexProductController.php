@@ -10,7 +10,7 @@ class IndexProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::where('is_deleted', 0)->get();
         $urlServer = getenv('URL_SERVER');
         $url = $urlServer;
 

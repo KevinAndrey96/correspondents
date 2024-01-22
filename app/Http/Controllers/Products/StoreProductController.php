@@ -6,28 +6,27 @@ use App\Models\Product;
 use App\Models\Commission;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp\Client;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Request as RequestAlias;
 
 class StoreProductController extends Controller
 {
+    /**
+     * @throws GuzzleException
+     * @throws ValidationException
+     */
     public function store(Request $request)
     {
-        //return var_dump($request->input('giros'));
         $fields = [
             'productName'=>'required|string',
             'productType'=>'required|string',
             'productDescription'=>'required|string',
             'productCommission'=>'required',
-            'clientName'=>'required|boolean',
-            'clientDocument'=>'required|boolean',
-            'email'=>'required|boolean',
-            'accountType'=>'required|boolean',
-            'code'=>'required|boolean',
-            'extra'=>'required|boolean',
             'image'=>'required',
             'min_amount'=>'required',
             'max_amount'=>'required',
@@ -35,25 +34,71 @@ class StoreProductController extends Controller
             'num_jineteo'=>'required',
             'hours'=>'required',
             'reassignment_minutes' => 'required',
-            'fixed_commission' => 'required'
+            'fixed_commission' => 'required',
+            'defaultFieldsRadio' => 'required'
+         ];
 
+        $defaultFields = [
+            'clientDocument'=>'required|boolean',
+            'accountType'=>'required|boolean',
+            'email'=>'required|boolean',
+            'extra'=>'required|boolean',
+            'code'=>'required|boolean',
+            'clientName'=>'required|boolean',
         ];
-        $message = [
-            'required'=>':attribute es requerido',
+
+        if (! $request->defaultFieldsRadio) {
+            $defaultFields = [
+                'fieldNames' => 'required'
+            ];
+        }
+
+        $fields = array_merge($fields, $defaultFields);
+
+            $message = [
+                'required' => ':attribute es requerido',
+                'fieldNames.required' => 'Los nombres de los campos son requeridos',
+                'defaultFieldsRadio.required' => 'Por favor seleccione el tipo de campo para la transacción'
         ];
+
         $this->validate($request, $fields, $message);
 
         $product = new Product();
         $product->product_name = $request->input('productName');
         $product->product_type = $request->input('productType');
         $product->product_description = $request->input('productDescription');
-        $product->client_document = $request->input('clientDocument');
-        $product->account_type = $request->input('accountType');
-        $product->email = $request->input('email');
-        $product->client_name = $request->input('clientName');
+        $product->are_default_fields = 1;
+
+        if (intval($request->defaultFieldsRadio)) {
+            $product->client_document = $request->input('clientDocument');
+            $product->account_type = $request->input('accountType');
+            $product->email = $request->input('email');
+            $product->extra = $request->input('extra');
+            $product->code = $request->input('code');
+            $product->client_name = $request->input('clientName');
+        }
+
+        if (! intval($request->defaultFieldsRadio)) {
+            $product->are_default_fields = 0;
+            $product->client_document = 0;
+            $product->account_type = 0;
+            $product->email = 0;
+
+            if (intval($request->accountType)) {
+                $product->account_type = 1;
+            }
+
+            if (intval($request->email)) {
+                $product->email = 1;
+            }
+
+            $product->extra = 0;
+            $product->code = 0;
+            $product->client_name = 0;
+            $product->field_names = implode(',', $request->fieldNames);
+        }
+
         $product->product_commission = $request->input('productCommission');
-        $product->code = $request->input('code');
-        $product->extra = $request->input('extra');
         $product->min_amount = $request->input('min_amount');
         $product->max_amount = $request->input('max_amount');
         $product->priority = $request->input('priority');
@@ -66,7 +111,7 @@ class StoreProductController extends Controller
         $product->fixed_commission = $request->input('fixed_commission');
 
         if (isset($request->giros)) {
-            $product->giros = $request->input('giros');
+            $product->giros = intval($request->input('giros'));
         }
 
         $product->save();

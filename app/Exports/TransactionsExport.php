@@ -45,27 +45,7 @@ class TransactionsExport implements FromView, ShouldAutoSize
     }
 
     public function view(): View
-    {   /*
-        if ((Auth::user()->role == 'Administrator' ||  Auth::user()->role == 'Shopkeeper') && isset($this->product_id)) {
-            if (Auth::user()->role == 'Administrator') {
-                return view('transactions.excelExport', [
-                    'transactions' => Transaction::where('product_id', $this->product_id)->get()
-                ]);
-            }
-
-            if (Auth::user()->role == 'Shopkeeper') {
-
-                return view('transactions.excelExport', [
-                    'transactions' => Transaction::where('product_id', $this->product_id)
-                                                    ->where('shopkeeper_id', Auth::user()->id)
-                                                    ->whereBetween('created_at', [Carbon::parse($this->dateFrom), Carbon::parse($this->dateTo)])
-                                                    ->get()
-                ]);
-            }
-        }
-        */
-
-
+    {
         if (Auth::user()->role == 'Administrator') {
             if ($this->product_id == 'all' && $this->status == 'all') {
                 return view('transactions.excelExport',
@@ -81,7 +61,7 @@ class TransactionsExport implements FromView, ShouldAutoSize
             } elseif ($this->product_id != 'all' && $this->status != 'all') {
                 return view('transactions.excelExport', ['transactions' => Transaction::where([
                                                                                                     ['product_id', $this->product_id],
-                                                                                                    ['status', 'like', $this->status]
+                                                                                                    ['status', $this->status]
                                                                                             ])
                                                                                             ->whereBetween('date',[Carbon::parse($this->dateFrom), Carbon::parse($this->dateTo)])
                                                                                             ->get()]);

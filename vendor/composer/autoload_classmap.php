@@ -80,6 +80,7 @@ return array(
     'App\\Http\\Controllers\\Products\\AssignProductsController' => $baseDir . '/app/Http/Controllers/Products/AssignProductsController.php',
     'App\\Http\\Controllers\\Products\\ChangeStatusProductsController' => $baseDir . '/app/Http/Controllers/Products/ChangeStatusProductsController.php',
     'App\\Http\\Controllers\\Products\\CreateProductController' => $baseDir . '/app/Http/Controllers/Products/CreateProductController.php',
+    'App\\Http\\Controllers\\Products\\DeleteProductController' => $baseDir . '/app/Http/Controllers/Products/DeleteProductController.php',
     'App\\Http\\Controllers\\Products\\DestroyProductController' => $baseDir . '/app/Http/Controllers/Products/DestroyProductController.php',
     'App\\Http\\Controllers\\Products\\EditFieldsProductsController' => $baseDir . '/app/Http/Controllers/Products/EditFieldsProductsController.php',
     'App\\Http\\Controllers\\Products\\EditProductController' => $baseDir . '/app/Http/Controllers/Products/EditProductController.php',

@@ -15,6 +15,12 @@ class EditProductController extends Controller
         $product = Product::findOrFail($productId);
         $productFields = ProductField::first();
 
+        if (! $product->are_default_fields) {
+            $fieldNames = explode( ',',  $product->field_names);
+            return view('product.edit', compact('product', 'productFields', 'fieldNames'));
+
+        }
+
         return view('product.edit', compact('product', 'productFields'));
     }
 }

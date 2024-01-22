@@ -18,22 +18,28 @@ class CreateTransactionController extends Controller
         if (Auth::user()->role == 'Shopkeeper') {
             $urlServer = getenv('URL_SERVER');
             $giros = $request->input('giros');
+            $platform = Platform::find(1);
+            $exchange = Exchange::first();
+            $shopkeeperProducts = SupplierProduct::where('user_id', Auth::user()->id)->pluck('product_id');
 
-            $productsDeposit = Product::where('product_type','=','Deposit')
+            $productsDeposit = Product::whereIn('id', $shopkeeperProducts)
+                ->where('product_type','=', 'Deposit')
+                ->where('is_deleted', 0)
                 ->where('is_enabled','=','1')
                 ->where('giros', '=', '0')
                 ->orderBy('priority', 'asc')
                 ->get();
 
-            $productsWithdrawal = Product::where('product_type','=','Withdrawal')
+            $productsWithdrawal = Product::whereIn('id', $shopkeeperProducts)
+                ->where('product_type','=','Withdrawal')
+                ->where('is_deleted', 0)
                 ->where('is_enabled','=','1')
                 ->orderBy('priority', 'asc')
                 ->get();
 
-            $platform = Platform::find(1);
-
             if (isset($giros)) {
                 $productsDeposit = Product::where('product_type','=','Deposit')
+                    ->where('is_deleted', 0)
                     ->where('is_enabled','=','1')
                     ->where('giros', '=', 1)
                     ->orderBy('priority', 'asc')
@@ -42,14 +48,7 @@ class CreateTransactionController extends Controller
                 $productsWithdrawal = collect([]);
             }
 
-            $exchange = Exchange::first();
-
-            $shopkeeperProducts = SupplierProduct::where('user_id', Auth::user()->id)->get();
-
-
-
-
-            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform', 'urlServer', 'giros', 'exchange', 'shopkeeperProducts'));
+            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform', 'urlServer', 'giros', 'exchange'));
         }
     }
 

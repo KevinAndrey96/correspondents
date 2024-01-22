@@ -132,42 +132,147 @@
                                             <div class="col-md-3" id="girosDiv">
                                                 @else
                                                     <div style="display:none;" class="col-md-3" id="girosDiv">
-                                            @endif
+                                                        @endif
                                                         @else
                                                             <div style="display:none;" class="col-md-3" id="girosDiv">
-                                                            @endif
-                                        <div class="input-group input-group-static mb-3">
-                                            <label for="giros" class="ms-0">Giros</label>
-                                                @if ($mode=="Editar")
-                                                    @if ($product->product_type == 'Deposit')
-                                                    <select id="giros" name="giros" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
-                                                        @else
-                                                            <select id="giros" name="giros" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()" disabled>
-                                                            @endif
-                                                        @else
-                                                            <select id="giros" name="giros" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()" disabled>
                                                                 @endif
-                                                @if($mode=="Editar")
-                                                    @if($product->giros == 1)
-                                                        <option Value=1>Si</option>
-                                                        <option Value=0>No</option>
-                                                    @else
-                                                        <option Value=0>No</option>
-                                                        <option Value=1>Si</option>
-                                                    @endif
+                                                                <div class="input-group input-group-static mb-3">
+                                                                    <label for="giros" class="ms-0">Giros</label>
+                                                                    @if ($mode=="Editar")
+                                                                        @if ($product->product_type == 'Deposit')
+                                                                            <select id="giros" name="giros" class="form-control ms-0" aria-label="Default select example">
+                                                                                @else
+                                                                                    <select id="giros" name="giros" class="form-control ms-0" aria-label="Default select example" disabled>
+                                                                                        @endif
+                                                                                        @else
+                                                                                            <select id="giros" name="giros" class="form-control ms-0" aria-label="Default select example" disabled>
+                                                                                                @endif
+                                                                                                @if($mode=="Editar")
+                                                                                                    @if($product->giros == 1)
+                                                                                                        <option Value=1>Si</option>
+                                                                                                        <option Value=0>No</option>
+                                                                                                    @else
+                                                                                                        <option Value=0>No</option>
+                                                                                                        <option Value=1>Si</option>
+                                                                                                    @endif
+                                                                                                @else
+                                                                                                    <option Value=0>No</option>
+                                                                                                    <option Value=1>Si</option>
+                                                                                                @endif
+                                                                                            </select>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                <div class="col-md-3">
+                                    <div class="input-group input-group-static mb-4">
+                                        <label for="accountType" class="ms-0">¿Incluye tipo de cuenta?</label>
+                                        <select id="accountType" name="accountType" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
+                                            @if($mode=="Editar")
+                                                @if($product->account_type == 1)
+                                                    <option Value=1>Si</option>
+                                                    <option Value=0>No</option>
                                                 @else
                                                     <option Value=0>No</option>
                                                     <option Value=1>Si</option>
                                                 @endif
-                                            </select>
-                                        </div>
+                                            @else
+                                                <option Value=1>Si</option>
+                                                <option Value=0>No</option>
+                                            @endif
+                                        </select>
                                     </div>
-                                @endif
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group input-group-static mb-4">
+                                        <label for="email" class="ms-0">¿Incluye correo electrónico?</label>
+                                        <select id="email" name="email" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
+                                            @if($mode=="Editar")
+                                                @if($product->email == 1)
+                                                    <option Value=1>Si</option>
+                                                    <option Value=0>No</option>
+                                                @else
+                                                    <option Value=0>No</option>
+                                                    <option Value=1>Si</option>
+                                                @endif
+                                            @else
+                                                <option Value=1>Si</option>
+                                                <option Value=0>No</option>
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <hr>
+
+                                                    <div class="row mt-4 mb-4">
+                                                        <div class="col-md-12">
+                                                            <p style="font-size: 20px;" class="font-weight-bold ms-2 mt-3">Campos estandar de transacción</p>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="defaultFieldsRadio" value="1" id="enableDefaultFields" onchange="showDefaultFields(event)">
+                                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                                    Si
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="defaultFieldsRadio" value="0" id="disableDefaultFields" onchange="showDefaultFields(event)">
+                                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                                    No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            <div style="display: none;" id="openFields" class="row">
+                                                    <div class="col-md-12" id="openFieldsContainer">
+                                                        @if ($mode == 'Crear' || $mode == 'Editar' && $product->are_default_fields)
+                                                        <div class="row d-flex justify-content-center">
+                                                            <div class="col-md-7">
+                                                                <div class="input-group input-group-outline my-3">
+                                                                    <input type="text" style="font-size: 20px" class="form-control rounded border text-center" placeholder="Nombre del campo" name="fieldNames[]" id="fieldName" aria-label="fieldName" aria-describedby="basic-addon2" required>
+                                                                    <div class="input-group-append mt-2 ps-2">
+                                                                        <button class="btn btn-info" type="button" onclick="addField()"><i class="material-icons opacity-10">add</i></button>
+                                                                        <button class="btn btn-danger" type="button"><i class="material-icons opacity-10">remove</i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endif
+                                                            @if ($mode == 'Editar' && ! $product->are_default_fields)
+                                                                @for ($i = 0; $i < count($fieldNames); $i++)
+                                                                    @if ($i == 0)
+                                                                        <div class="row d-flex justify-content-center">
+                                                                            <div class="col-md-7">
+                                                                                <div class="input-group input-group-outline my-3">
+                                                                                    <input type="text" style="font-size: 20px" class="form-control rounded border text-center" placeholder="Nombre del campo" name="fieldNames[]" id="fieldName" value="{{$fieldNames[$i]}}" aria-label="fieldName" aria-describedby="basic-addon2" required>
+                                                                                    <div class="input-group-append mt-2 ps-2">
+                                                                                        <button class="btn btn-info" type="button" onclick="addField()"><i class="material-icons opacity-10">add</i></button>
+                                                                                        <button class="btn btn-danger" type="button"><i class="material-icons opacity-10">remove</i></button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        @else
+                                                                        <div class="row d-flex justify-content-center">
+                                                                            <div class="col-md-7">
+                                                                                <div class="input-group input-group-outline my-3">
+                                                                                    <input type="text" style="font-size: 20px" class="form-control rounded border text-center" placeholder="Nombre del campo" name="fieldNames[]" id="fieldName" value="{{$fieldNames[$i]}}" aria-label="fieldName" aria-describedby="basic-addon2" required>
+                                                                                    <div class="input-group-append mt-2 ps-2">
+                                                                                        <button class="btn btn-info" type="button" onclick="addField()"><i class="material-icons opacity-10">add</i></button>
+                                                                                        <button class="btn btn-danger" type="button" onclick="removeField(event)"><i class="material-icons opacity-10">remove</i></button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
+                                                                @endfor
+                                                            @endif
+                                                    </div>
+                                            </div>
+                                <div style="display:none" id="defaultFields" class="row">
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-3">
                                         <label for="clientDocument" class="ms-0">¿Incluye Documento o cedula del Cliente?</label>
-                                        <select id="clientDocument" name="clientDocument" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
-                                            @if($mode=="Editar")
+                                        <select id="clientDocument" name="clientDocument" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()" disabled>
+                                            @if ($mode == "Editar")
                                                 @if($product->client_document == 1)
                                                     <option Value=1>Si</option>
                                                     <option Value=0>No</option>
@@ -184,47 +289,9 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
-                                        <label for="accountType" class="ms-0">¿Incluye tipo de cuenta?</label>
-                                        <select id="accountType" name="accountType" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
-                                        @if($mode=="Editar")
-                                            @if($product->account_type == 1)
-                                            <option Value=1>Si</option>
-                                            <option Value=0>No</option>
-                                            @else
-                                            <option Value=0>No</option>
-                                            <option Value=1>Si</option>
-                                            @endif
-                                        @else
-                                            <option Value=1>Si</option>
-                                            <option Value=0>No</option>
-                                        @endif
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group input-group-static mb-4">
-                                        <label for="email" class="ms-0">¿Incluye correo electrónico?</label>
-                                        <select id="email" name="email" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
-                                        @if($mode=="Editar")
-                                            @if($product->email == 1)
-                                            <option Value=1>Si</option>
-                                            <option Value=0>No</option>
-                                            @else
-                                            <option Value=0>No</option>
-                                            <option Value=1>Si</option>
-                                            @endif
-                                        @else
-                                            <option Value=1>Si</option>
-                                            <option Value=0>No</option>
-                                        @endif
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group input-group-static mb-4">
-                                        <label for="extra" class="ms-0">¿Segundo código?</label>
-                                        <select id="extra" name="extra" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
-                                        @if($mode=="Editar")
+                                        <label for="extra" class="ms-0">¿Extra?</label>
+                                        <select id="extra" name="extra" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()" disabled>
+                                        @if($mode == "Editar")
                                             @if($product->extra == 1)
                                             <option Value=1>Si</option>
                                             <option Value=0>No</option>
@@ -241,9 +308,9 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
-                                        <label for="code" class="ms-0">¿Primer código?</label>
-                                        <select id="code" name="code" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
-                                        @if($mode=="Editar")
+                                        <label for="code" class="ms-0">¿Código?</label>
+                                        <select id="code" name="code" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()" disabled>
+                                        @if ($mode == "Editar")
                                             @if($product->code == 1)
                                             <option Value=1>Si</option>
                                             <option Value=0>No</option>
@@ -261,8 +328,8 @@
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
                                         <label for="clientName" class="ms-0">¿Incluye nombre del cliente?</label>
-                                        <select id="clientName" name="clientName" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()">
-                                        @if($mode=="Editar")
+                                        <select id="clientName" name="clientName" class="form-control ms-0" aria-label="Default select example" onchange="hiddenText()" disabled>
+                                        @if ($mode == "Editar")
                                             @if($product->client_name == 1)
                                             <option Value=1>Si</option>
                                             <option Value=0>No</option>
@@ -277,15 +344,18 @@
                                         </select>
                                     </div>
                                 </div>
+                                                    </div>
+                                                <hr>
                                 <div class="col-md-4">
-                                    <div class="form-group mb-4">
-                                        <label for="image">Logo:</label>
-                                        <input type="file" class="form-control-file" name="image" value="" id="image">
+                                    <div class="form-group mb-4 mt-5">
+                                        <p style="font-size: 20px;" class="font-weight-bold ms-2 mt-3">Logo</p>
+                                        <input type="file" class="form-control-file ms-3" name="image" value="" id="image">
                                     </div>
                                 </div>
+                                                <hr>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="productDescription">Descripción:</label>
+                                        <p style="font-size: 20px;" class="font-weight-bold ms-2 mt-3">Descripción</p>
                                         <textarea class="form-control" name="productDescription" id="richText" required>
                                             {{ isset($product->product_description)?$product->product_description:old('product_description') }}
                                         </textarea>
@@ -335,7 +405,101 @@
             console.log(girosInput.value)
         }
 
+        function showDefaultFields(event)
+        {
+            let defaultFieldsDiv = document.getElementById('defaultFields');
+            let openFieldsDiv = document.getElementById('openFields');
+            let defaultFieldsDivChildNodes = defaultFieldsDiv.getElementsByTagName('*');
+            let openFieldsDivChildNodes = openFieldsDiv.getElementsByTagName('*');
 
+            for (let node of defaultFieldsDivChildNodes) {
+                node.disabled = false;
+            }
+
+            for (let node of openFieldsDivChildNodes) {
+                node.disabled = true;
+            }
+
+            openFieldsDiv.style.display = 'none';
+            defaultFieldsDiv.style.display = 'block';
+
+            if (event.target.value == '0')
+            {
+                defaultFieldsDiv.style.display = 'none';
+                openFieldsDiv.style.display = 'block';
+
+                for (let node of defaultFieldsDivChildNodes) {
+                    node.disabled = true;
+                }
+
+                for (let node of openFieldsDivChildNodes) {
+                    node.disabled = false;
+                }
+            }
+        }
+
+        function addField()
+        {
+            let openFieldsContainerDiv = document.getElementById('openFieldsContainer');
+            let principalDiv = document.createElement('div');
+            principalDiv.classList.add('row', 'd-flex', 'justify-content-center');
+
+            let internalDiv = document.createElement('div');
+            internalDiv.classList.add('col-md-7');
+
+            let inputGroupDiv = document.createElement('div');
+            inputGroupDiv.classList.add("input-group", "input-group-outline", "my-3");
+
+            let fieldNameInput = document.createElement('input');
+            fieldNameInput.type = 'text';
+            fieldNameInput.style.fontSize = "20px";
+            fieldNameInput.classList.add("form-control", "rounded", "border", "text-center");
+            fieldNameInput.placeholder = "Nombre del campo";
+            fieldNameInput.required = true;
+            fieldNameInput.name = "fieldNames[]";
+            fieldNameInput.id = "fieldName";
+            fieldNameInput.setAttribute("aria-label", "fieldName");
+            fieldNameInput.setAttribute("aria-describedby", "basic-addon2");
+
+            let addButton = document.createElement('button');
+            addButton.classList.add("btn", "btn-info");
+            addButton.onclick = function() {
+                addField();
+            };
+
+            addButton.type = "button";
+            addButton.innerHTML = "<i class='material-icons opacity-10'>add</i>";
+
+            let dropButton = document.createElement('button');
+            dropButton.classList.add("btn", "btn-danger", "ms-1");
+            dropButton.type = "button";
+            dropButton.onclick = function() {
+                removeField(event);
+            }
+            dropButton.innerHTML = "<i class='material-icons opacity-10'>remove</i>";
+
+            let buttonsDiv = document.createElement("div");
+            buttonsDiv.classList.add("input-group-append", "mt-2", "ps-2");
+
+            buttonsDiv.append(addButton);
+            buttonsDiv.append(dropButton);
+
+            inputGroupDiv.appendChild(fieldNameInput);
+            inputGroupDiv.appendChild(buttonsDiv);
+
+            internalDiv.appendChild(inputGroupDiv);
+
+            principalDiv.appendChild(internalDiv);
+
+            openFieldsContainerDiv.appendChild(principalDiv);
+        }
+
+        function removeField(event)
+        {
+            let openFieldInput = event.target;
+            let principalDiv = openFieldInput.parentNode.parentNode.parentNode.parentNode;
+            principalDiv.remove();
+        }
     </script>
 @endsection
 

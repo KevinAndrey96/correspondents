@@ -36,7 +36,7 @@
                                         <input type="hidden" class="form-control" name="transactionState" value="{{$transaction->status}}" id="transactionState" readonly="readonly">
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <h6 style="margin-bottom: -10px;" class="text-sm text-center">N° de cuenta o teléfono</h6>
                                         <div class="input-group input-group-outline my-3">
                                             <label for="accountNumber" ></label>
@@ -55,50 +55,62 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @if($product->client_name == 1)
-                                      <div class="col-md-5">
-                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->client_name}}</h6>
-                                        <div class="input-group input-group-outline my-3">
-                                            <label for="clientName" ></label>
-                                            <input type="text" class="form-control" name="clientName" id="clientName" placeholder="{{$transactionFields->client_name}}">
-                                        </div>
-                                      </div>
-                                    @endif
-                                    @if($product->client_document == 1)
-                                      <div class="col-md-3">
-                                        <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->document}}</h6>
-                                        <div class="input-group input-group-outline my-3">
-                                            <label for="clientDocument"></label>
-                                            <input type="text" class="form-control" name="clientDocument" id="clientDocument" placeholder="{{$transactionFields->document}}">
-                                        </div>
-                                      </div>
-                                    @endif
                                     @if($product->email == 1)
                                         <div class="col-md-6">
                                             <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->email}}</h6>
                                             <div class="input-group input-group-outline my-3">
-                                               <label for="email" ></label>
-                                               <input type="email" class="form-control" name="email" value="" id="" placeholder="{{$transactionFields->email}}">
+                                                <label for="email" ></label>
+                                                <input type="email" class="form-control" name="email" value="" id="" placeholder="{{$transactionFields->email}}">
                                             </div>
                                         </div>
                                     @endif
-                                    @if($product->code == 1)
-                                        <div class="col-md-3">
-                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->first_code}}</h6>
+                                    @if ($product->are_default_fields)
+                                        @if($product->client_name == 1)
+                                          <div class="col-md-5">
+                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->client_name}}</h6>
                                             <div class="input-group input-group-outline my-3">
-                                                <label for="code" ></label>
-                                                <input type="text" class="form-control" name="code" id="code" placeholder="{{$transactionFields->first_code}}">
+                                                <label for="clientName" ></label>
+                                                <input type="text" class="form-control" name="clientName" id="clientName" placeholder="{{$transactionFields->client_name}}">
                                             </div>
-                                        </div>
-                                    @endif
-                                    @if($product->extra == 1)
-                                    <div class="col-md-12">
-                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">Info. extra</h6>
+                                          </div>
+                                        @endif
+                                        @if($product->client_document == 1)
+                                          <div class="col-md-3">
+                                            <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->document}}</h6>
                                             <div class="input-group input-group-outline my-3">
-                                                <label for="extra" ></label>
-                                                <input type="text" class="form-control" name="extra" id="extra" placeholder="Información extra">
-                                             </div>
-                                        </div>
+                                                <label for="clientDocument"></label>
+                                                <input type="text" class="form-control" name="clientDocument" id="clientDocument" placeholder="{{$transactionFields->document}}">
+                                            </div>
+                                          </div>
+                                        @endif
+                                        @if($product->code == 1)
+                                            <div class="col-md-3">
+                                                <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$transactionFields->first_code}}</h6>
+                                                <div class="input-group input-group-outline my-3">
+                                                    <label for="code" ></label>
+                                                    <input type="text" class="form-control" name="code" id="code" placeholder="{{$transactionFields->first_code}}">
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if($product->extra == 1)
+                                        <div class="col-md-12">
+                                                <h6 style="margin-bottom: -10px;" class="text-sm text-center">Info. extra</h6>
+                                                <div class="input-group input-group-outline my-3">
+                                                    <label for="extra" ></label>
+                                                    <input type="text" class="form-control" name="extra" id="extra" placeholder="Información extra">
+                                                 </div>
+                                            </div>
+                                        @endif
+                                    @else
+                                        @foreach ($fieldNames as $fieldName)
+                                            <div class="col-md-3">
+                                                <h6 style="margin-bottom: -10px;" class="text-sm text-center">{{$fieldName}}</h6>
+                                                <div class="input-group input-group-outline my-3">
+                                                    <label for="code"></label>
+                                                    <input type="text" class="form-control" name="{{$fieldName}}" id="{{$fieldName}}" placeholder="{{$fieldName}}">
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     @endif
                                     <div class="col-md-3">
                                         <h6 style="margin-bottom: -10px;" class="text-sm text-center">Comisión</h6>

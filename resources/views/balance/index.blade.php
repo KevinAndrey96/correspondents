@@ -35,7 +35,8 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Solicitud  </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipo de Solicitud</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto solicitado</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha de solicitud</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha de aceptación de Administrador</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comentarios</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Código de pago</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recibo</th>
@@ -63,6 +64,14 @@
                                         @endif
                                         <td class="align-middle text-center text-xs">${{number_format($balance->amount, 2, ',', '.')}}</td>
                                         <td class="align-middle text-center text-xs">{{$balance->date}}</td>
+                                            <td class="align-middle text-center text-xs">
+                                                @if (isset($balance->admin_date))
+                                                    {{$balance->admin_date}}
+                                                @else
+                                                    No info
+                                                @endif
+
+                                            </td>
                                         <td class="align-middle text-center text-xs">
                                         @if(is_null($balance->comment))
                                             Sin comentarios

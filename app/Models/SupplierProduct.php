@@ -10,6 +10,7 @@ use App\Models\Product;
 /**
  * @property mixed $user_id
  * @property \Illuminate\Database\Eloquent\HigherOrderBuilderProxy|mixed $product_id
+ * @method static where(string $string, $id)
  */
 class SupplierProduct extends Model
 {

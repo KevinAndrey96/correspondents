@@ -13,7 +13,7 @@ class AssignProductsController extends Controller
 {
     public function __invoke($id)
     {
-        $products = Product::all();
+        $products = Product::where('is_deleted', 0)->get();
         $supplierProducts = SupplierProduct::where('user_id', $id)->get();
         $distributorProducts = SupplierProduct::where('user_id', Auth::user()->id)->get();
 

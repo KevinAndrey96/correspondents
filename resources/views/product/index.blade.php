@@ -1,5 +1,10 @@
 @extends('layouts.dashboard')
 @section('content')
+    @if(Session::has('satisfactoryProductDisposal'))
+        <div class="alert alert-success" role="alert">
+            <p class="text-center text-sm text-white">{{ Session::get('satisfactoryProductDisposal') }}</p>
+        </div>
+    @endif
         <div class="row mt-4">
         </div>
 
@@ -88,6 +93,12 @@
                                                         data-commission="{{ $product->product_commission }}"
                                                         data-giros = "{{ $product->giros }}"
                                                 >Ver</button>
+                                                <a style="color: darkred;" href="{{ route('product.delete', ['id' => $product->id]) }}"
+                                                   title="Eliminar" class="btn btn-link px-0 mb-0"
+                                                   onclick="return confirm('¿Está seguro que quiere eliminar este producto?')">
+                                                    <i style="color: darkred; font-size: 25px !important;"
+                                                       class="material-icons opacity-10">delete</i></a>
+
                                             </td>
                                         </tr>
                                     @endforeach

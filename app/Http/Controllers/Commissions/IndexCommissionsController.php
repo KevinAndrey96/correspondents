@@ -15,7 +15,7 @@ class IndexCommissionsController extends Controller
         $shopkeeper_id = $request->input('shopkeeper_id');
         $userProducts = SupplierProduct::where('user_id', Auth::user()->id)->get();
         $productIDS = $userProducts->pluck('product_id')->toArray();
-        $commissions = Commission::where('user_id', '=', Auth::user()->id)
+        $commissions = Commission::where('user_id', Auth::user()->id)
             ->whereIn('product_id', $productIDS)
             ->get();
 

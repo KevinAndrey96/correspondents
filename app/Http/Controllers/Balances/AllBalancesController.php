@@ -12,6 +12,16 @@ class AllBalancesController extends Controller
     public function __invoke()
     {
         if (Auth::user()->role == 'Administrator') {
+            $balances = Balance::where('type', 'Deposit')
+                                ->orWhere('type', 'Recharge')
+                                ->where('is_valid', 1)
+                                ->orWhere('is_valid', 0)
+                                ->orderBy('created_at', 'desc')
+                                ->paginate(50);
+        }
+
+        /*
+        if (Auth::user()->role == 'Administrator') {
             $balances = Balance::where([
             ['type', 'Deposit'],
             ['is_valid', 1]
@@ -21,7 +31,7 @@ class AllBalancesController extends Controller
         ])->orderBy('created_at', 'desc')
             ->paginate(50);
         }
-
+           */
         if (Auth::user()->role == 'Saldos') {
             $balances = Balance::where([
                 ['administrator_id', Auth::user()->id],

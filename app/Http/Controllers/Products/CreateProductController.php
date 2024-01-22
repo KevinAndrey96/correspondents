@@ -13,6 +13,7 @@ class CreateProductController extends Controller
     {
         $productFields = ProductField::first();
 
+
         return view('product.create', compact('productFields'));
     }
 }

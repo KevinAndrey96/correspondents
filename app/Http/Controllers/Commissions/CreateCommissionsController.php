@@ -33,7 +33,8 @@ class CreateCommissionsController extends Controller
             return redirect('/home')->with('deniedAccess', 'Acceso denegado');
         }
 
-        $products = Product::all();
+        $products = Product::where('is_deleted', 0)->get();
+
         foreach ($products as $product) {
             $commission = Commission::where('user_id', '=', $id)
                 ->where('product_id', '=', $product->id)
@@ -46,7 +47,11 @@ class CreateCommissionsController extends Controller
                 $commission->save();
             }
         }
-        $productsExcept = Product::where('is_enabled','=','0')->pluck('id')->toArray();
+
+        $productsExcept = Product::where('is_enabled',0)
+            ->orWhere('is_deleted', 1)
+            ->pluck('id')->toArray();
+
         $commissions = Commission::where('user_id', '=', $id)->whereNotIn('product_id',$productsExcept)->get();
         $userProducts = SupplierProduct::where('user_id', $id)->get();
 

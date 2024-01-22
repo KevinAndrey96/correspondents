@@ -770,6 +770,7 @@ class ComposerStaticInite76524d5120fdef98e3590eebdc10a02
         'App\\Http\\Controllers\\Products\\AssignProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Products/AssignProductsController.php',
         'App\\Http\\Controllers\\Products\\ChangeStatusProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Products/ChangeStatusProductsController.php',
         'App\\Http\\Controllers\\Products\\CreateProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Products/CreateProductController.php',
+        'App\\Http\\Controllers\\Products\\DeleteProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Products/DeleteProductController.php',
         'App\\Http\\Controllers\\Products\\DestroyProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Products/DestroyProductController.php',
         'App\\Http\\Controllers\\Products\\EditFieldsProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Products/EditFieldsProductsController.php',
         'App\\Http\\Controllers\\Products\\EditProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Products/EditProductController.php',

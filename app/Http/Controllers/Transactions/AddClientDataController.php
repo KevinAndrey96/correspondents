@@ -26,23 +26,51 @@ class AddClientDataController extends Controller
                 $product = Product::find($productID);
                 $giros = intval($request->input('giros'));
 
-                if($product->account_type == 1){
+                if ($product->account_type == 1){
                     $detail = $detail.'Tipo de cuenta: '.$request->input('accountType').',';
                 }
-                if($product->client_name == 1){
+
+                if ($product->client_name == 1){
                     $detail = $detail.'Nombre: '.$request->input('clientName').',';
                 }
-                if($product->client_document == 1){
+
+                if ($product->client_document == 1){
                     $detail = $detail.'Documento: '.$request->input('clientDocument').',';
                 }
-                if($product->email == 1){
+
+                if ($product->email == 1){
                     $detail = $detail.'Email: '.$request->input('email').',';
                 }
-                if($product->code == 1){
+
+                if ($product->code == 1){
                     $detail = $detail.'Codigo: '.$request->input('code').',';
                 }
-                if($product->extra == 1){
+
+                if ($product->extra == 1){
                     $detail = $detail.'Extra: '.$request->input('extra').',';
+                }
+
+                if (! $product->are_default_fields) {
+                    foreach ($request->except([
+                        '_token',
+                        'productID',
+                        'accountType',
+                        'clientName',
+                        'clientDocument',
+                        'email',
+                        'code',
+                        'transactionAmount',
+                        'transactionDate',
+                        'transactionType',
+                        'transactionState',
+                        'accountNumber',
+                        'accountType',
+                        'email',
+                        'own_commission',
+                        'giros',
+                        'extra']) as $index => $value) {
+                        $detail .= str_replace('_', ' ',$index.': '.$value.',');
+                    }
                 }
 
                 $shopkeeperID = Auth::user()->id;
@@ -128,8 +156,6 @@ class AddClientDataController extends Controller
                 $transaction->own_commission = $request->input('own_commission');
                 $transaction->userIP = \Request::ip();
                 $transaction->save();
-
-
 
                 if ($transaction->type === 'Withdrawal') {
                     $suppliers = User::where([

@@ -36,17 +36,20 @@ class AddBalanceAdminController extends Controller
             ];
             $this->validate($request, $fields, $message);
 
+            date_default_timezone_set('America/Bogota');
             $date = Carbon::now();
             $balance = new Balance();
             $balance->user_id = $request->input('userID');
             $balance->amount = $request->input('amount');
-            date_default_timezone_set('America/Bogota');
-            $balance->date = $date;
+            $balance->date = '';
             $balance->type = $request->input('type');
             $balance->comment = $request->input('comment');
             $balance->administrator_id = Auth::user()->id;
             $balance->is_valid = 1;
             $balance->indirect = 1;
+            $balance->save();
+            $balance->admin_date = $balance->created_at;
+            $balance->date = $balance->created_at;
             $balance->save();
 
             $summary = new Summary();

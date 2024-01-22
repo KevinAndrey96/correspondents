@@ -85,6 +85,8 @@ class AddBalanceShopkeeperController extends Controller
             $balance->card_id = $request->input('card_id');
             $balance->payment_code =  $request->input('payment_code');
             $balance->save();
+            $balance->date = $balance->created_at;
+            $balance->save();
 
             if ($request->hasFile('image')) {
                 $pathName = Sprintf('balances/%s.png', $balance->id);

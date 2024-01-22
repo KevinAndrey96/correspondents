@@ -44,9 +44,9 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     Route::get('/products/{id}/edit', [App\Http\Controllers\Products\EditProductController::class, 'edit']);
     Route::patch('/products/{id}', [App\Http\Controllers\Products\UpdateProductController::class, 'update']);
     Route::post('/changeStatusProduct', [App\Http\Controllers\Products\ChangeStatusProductsController::class, 'changeStatus']);
-    //Route::delete('/products/delete/{id}', [App\Http\Controllers\Products\DestroyProductController::class, 'destroy']);
     Route::get('/products/{id}/edit', [App\Http\Controllers\Products\EditProductController::class, 'edit']);
     Route::get('/products-transactions-excel/{id}', [App\Http\Controllers\Products\TransactionsProductController::class, 'transactions']);
+    Route::get('/delete-product/{id}', App\Http\Controllers\Products\DeleteProductController::class)->name('product.delete');
 
     //Routes for translations
     Route::get('/translations', App\Http\Controllers\Translations\IndexTranslationsController::class)->name('translations.index');

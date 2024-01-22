@@ -102,6 +102,14 @@ class StoreTransactionController extends Controller
         $transaction->type = $product->product_type;
         $transaction->status = 'hold';
 
-        return view('transactions.clientDataCreate', compact('transaction', 'product', 'giros', 'transactionFields'));
+        if ($transaction->product->are_default_fields)
+        {
+            return view('transactions.clientDataCreate', compact('transaction', 'product', 'giros', 'transactionFields'));
+
+        }
+
+        $fieldNames = explode(',', $transaction->product->field_names);
+
+        return view('transactions.clientDataCreate', compact('transaction', 'product', 'giros', 'transactionFields', 'fieldNames'));
     }
 }

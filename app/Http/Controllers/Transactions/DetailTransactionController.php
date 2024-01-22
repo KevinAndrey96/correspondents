@@ -23,6 +23,7 @@ class DetailTransactionController extends Controller
         }
 
         $extras = explode(',', $transaction->detail);
+
         if (Auth::user()->role == 'Supplier' && is_null($detailSupplier) && ($transaction->status == 'hold' || $transaction->status == 'accepted')) {
             $transaction->status = 'accepted';
             $answers = Answer::where('is_deleted', 0)->get();
