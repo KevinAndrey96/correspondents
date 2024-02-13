@@ -969,9 +969,8 @@
                         let spotIndex = text.indexOf('.');
                         if (spotIndex != -1) {
                             const charArray = text.split('');
-
-                            console.log(charArray);
                             let count = 0;
+                            
                             for (let i = 0; i < charArray.length; i++) {
                                 if (charArray[i] == '.') {
                                     count++;

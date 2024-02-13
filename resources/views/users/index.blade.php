@@ -204,7 +204,10 @@
                                                     <a style="color: darkblue;" href="{{route('commissions.assign-group', ['id' => $user->id])}}" title="Grupos de comisiones" class="btn btn-link px-1 mb-0"><i style="color: darkblue; font-size: 25px !important;" class="material-icons opacity-15">group_work</i></a>
                                                 @endif
                                             <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen; font-size: 25px !important;" class="material-icons opacity-10">edit</i></a>
-                                            @if ($role == 'allShopkeepers' or $role == 'Supplier')
+                                                @if ($role == 'allShopkeepers')
+                                                    <a style="color: darkblue;" href="{{route('users.change-distributor', ['id' => $user->id])}}" title="Cambiar distribuidor" class="btn btn-link px-1 mb-0"><i style="color: darkblue; font-size: 25px !important;" class="material-icons opacity-10">change_circle</i></a>
+                                                @endif
+                                                @if ($role == 'allShopkeepers' or $role == 'Supplier')
                                                 <button type="button" class="btn btn-white px-1 mb-0" title="Gestionar saldo" data-bs-toggle="modal" data-bs-target="#SaldoModal"
                                                     data-id="{{$user->id}}"><i style="font-size: 25px !important;" class="material-icons opacity-10">monetization_on</i></button>
                                             @endif

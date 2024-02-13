@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     Route::get('/balance-all', App\Http\Controllers\Balances\AllBalancesController::class);
     Route::get('/balance-assign-supplier/{id}', App\Http\Controllers\Balances\AssignSupplierBalancesController::class);
     Route::post('/balance-store-assignment', App\Http\Controllers\Balances\StoreAssignmentBalanceController::class)->name('balance.store-assignment');
+    Route::get('/balance-detail-pdf/{id}', App\Http\Controllers\Balances\DetailPDFBalancesController::class)->name('balance.detail-pdf');
 
 
     Route::get('/profit', [App\Http\Controllers\Profits\IndexProfitController::class, 'index']);
@@ -106,6 +107,11 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
         ->name('mode.spectator');
     Route::post('/user-enable-qr', App\Http\Controllers\Users\EnableQRUsersController::class)
         ->name('users.enableQR');
+    Route::get('/change-distributor/{id}', App\Http\Controllers\Users\ChangeDistributorUsersController::class)
+        ->name('users.change-distributor');
+    Route::post('/store-distributor-change', App\Http\Controllers\Users\StoreDistributorChangeUsersController::class)
+        ->name('users.store-distributor-change');
+
 
     Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index']);
     Route::get('/commissions/users', [App\Http\Controllers\Commissions\UsersCommissionsController::class, 'usersCommissions']);
@@ -117,6 +123,10 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     Route::get('/commission-groups', App\Http\Controllers\Commissions\IndexGroupsCommissionsController::class)->name('commissions.groups');
     Route::get('/assign-commissions-group/{id}', App\Http\Controllers\Commissions\AssignGroupCommissionsController::class)->name('commissions.assign-group');
     Route::post('/store-commissions-group-assignment', App\Http\Controllers\Commissions\StoreGroupAssigmentCommissionsController::class)->name('commissions.store-group-assignment');
+    Route::get('/edit-commissions-group/{id}', App\Http\Controllers\Commissions\EditGroupCommissionsController::class)->name('commissions.edit-group');
+    Route::post('/update-commission-group', App\Http\Controllers\Commissions\UpdateGroupCommissionsController::class)->name('commissions.update-group');
+
+
 
     /**
      * Routes for cards

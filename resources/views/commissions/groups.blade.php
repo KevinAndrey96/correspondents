@@ -53,7 +53,7 @@
                                                                     @if ($item->comm_group_id == $commissionsGroup->id)
                                                                         <li class="nav-item">
                                                                             <span><strong>
-                                                                                    {{strtoupper($item->generalCommission->product->product_name.' - '. ($item->generalCommission->product->product_type == 'Withdrawal' ? 'Retiro' : 'Deposito') )}}: ${{number_format($item->generalCommission->amount, 2, ',', '.')}}
+                                                                                    {{strtoupper($item->generalCommission->product->product_name.' - '. ($item->generalCommission->product->product_type == 'Withdrawal' ? 'Retiro' : 'Deposito') )}} => DISTRIBUIDOR: ${{number_format($item->generalCommission->amount_dis, 2, ',', '.')}} | TENDERO: ${{number_format($item->generalCommission->amount_shop, 2, ',', '.')}}
                                                                                 </strong>
                                                                             </span>
                                                                         </li>
@@ -66,7 +66,7 @@
                                             </ul>
                                         </td>
                                         <td>
-                                            <a style="color: darkgreen;" href="#" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen; font-size: 25px !important;" class="material-icons opacity-10">edit</i></a>
+                                            <a style="color: darkgreen;" href="{{route('commissions.edit-group', ['id' => $commissionsGroup->id])}}" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen; font-size: 25px !important;" class="material-icons opacity-10">edit</i></a>
                                         </td>
                                     </tr>
                                 @endforeach

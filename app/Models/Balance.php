@@ -8,6 +8,7 @@ use App\Models\Card;
 
 /**
  * @method static where(array[] $array)
+ * @method static find($id)
  */
 class Balance extends Model
 {

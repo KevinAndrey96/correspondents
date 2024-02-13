@@ -33,8 +33,12 @@
                                             <div class="row">
                                                 @foreach ($commissionsGroupGeneralCommissions as $item)
                                                     @if ($item->comm_group_id == $commissionsGroup->id)
-                                                        <div class="col-md-4 text-center mb-3">
-                                                            <span class="font-weight-bold">{{strtoupper($item->generalCommission->product->product_name.' - '. ($item->generalCommission->product->product_type == 'Withdrawal' ? 'Retiro' : 'Deposito') )}}: ${{number_format($item->generalCommission->amount, 2, ',', '.')}}</span>
+                                                        <div class="col-md-6 text-center mb-3">
+                                                            <div class="w-100 border border-4 border-primary">
+                                                                <p class="font-weight-bold text-center">{{strtoupper($item->generalCommission->product->product_name.' - '. ($item->generalCommission->product->product_type == 'Withdrawal' ? 'Retiro' : 'Deposito'))}}</p>
+                                                                <p class="text-center">COMISIÓN DISTRIBUIDOR: ${{number_format($item->generalCommission->amount_dis, 2, ',', '.')}}</p>
+                                                                <p class="text-center">COMISIÓN TENDERO: ${{number_format($item->generalCommission->amount_shop, 2, ',', '.')}}</p>
+                                                            </div>
                                                         </div>
                                                     @endif
                                                 @endforeach

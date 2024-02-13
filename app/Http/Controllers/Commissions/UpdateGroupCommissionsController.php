@@ -8,23 +8,23 @@ use App\Models\CommissionsGroup;
 use App\Models\CommissionsGroupGeneralCommission;
 use App\Models\GeneralCommission;
 use App\Models\Product;
+use App\Models\SupplierProduct;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Validation\ValidationException;
 
-class StoreGroupCommissionsController extends Controller
+class UpdateGroupCommissionsController extends Controller
 {
-    /**
-     * @throws ValidationException
-     */
     public function __invoke(Request $request)
     {
+        set_time_limit(0);
         //Here it validates the request
         $fields = [
             'name' => 'required|string',
             'products' => 'required',
             'amountsDis' => 'required',
-            'amountsShop' => 'required'
+            'amountsShop' => 'required',
+            'commissionsGroupID' => 'required|string'
         ];
 
         $message = [
@@ -57,13 +57,17 @@ class StoreGroupCommissionsController extends Controller
             }
         }
 
-        //Assigning name input
-        $nameGroup = $request->input('name');
-
-        //Creating new commissionGroup register
-        $commissionsGroup = new CommissionsGroup();
-        $commissionsGroup->name = $nameGroup;
+        //Here we get commissionsGroup register by its id and assigning a new name;
+        $commissionsGroup = CommissionsGroup::find(intval($request->input('commissionsGroupID')));
+        $commissionsGroup->name = $request->input('name');
         $commissionsGroup->save();
+
+        $commissionsGPGeneralCommissions = CommissionsGroupGeneralCommission::where('comm_group_id', $commissionsGroup->id)->get();
+
+        //Delete general commissions of commissions group
+        foreach ($commissionsGPGeneralCommissions as $commission) {
+            $commission->delete();
+        }
 
         //Creating registers to general_commissions and commissions_group_general_commissions tables
         for ($i = 0; $i < count($products); $i++) {
@@ -79,6 +83,42 @@ class StoreGroupCommissionsController extends Controller
             $commGPGralComm->save();
         }
 
+        $commissionsGPGeneralCommissions = CommissionsGroupGeneralCommission::where('comm_group_id', $commissionsGroup->id)->get();
+
+        $users = User::where('commissions_group_id', $commissionsGroup->id)->get();
+
+        foreach ($users as $user) {
+            $commissions = Commission::where('user_id', $user->id)->get();
+            $userProducts = SupplierProduct::where('user_id', $user->id)->get();
+
+            foreach ($commissions as $commission) {
+                $commission->delete();
+            }
+
+            foreach ($userProducts as $userProduct) {
+                $userProduct->delete();
+            }
+
+            foreach ($commissionsGPGeneralCommissions as $item) {
+                $commission = new Commission();
+                $commission->product_id = $item->generalCommission->product_id;
+                $commission->user_id = $user->id;
+                $commission->amount = $item->generalCommission->amount_dis;
+
+                if ($user->role == 'Shopkeeper') {
+                    $commission->amount = $item->generalCommission->amount_shop;
+                }
+
+                $commission->save();
+
+                $userProduct = new SupplierProduct();
+                $userProduct->user_id = $user->id;
+                $userProduct->product_id = $item->generalCommission->product_id;
+                $userProduct->save();
+            }
+        }
+
         return redirect()->route('commissions.groups')->with('successfulGroupCommissionCreation', 'Creación de grupo de comisiones exitosa');
     }
+
 }

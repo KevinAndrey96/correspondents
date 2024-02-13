@@ -78,8 +78,6 @@ class StoreAssignmentsProductsController extends Controller
 
 
             foreach ($shopkeepers as $shopkeeper) {
-                //$shopkeeperProducts = SupplierProduct::where('user_id', $shopkeeper->id)->get();
-
                 for ($i = 0; $i < count($products); $i++) {
                     $supplierProduct = new SupplierProduct();
                     $supplierProduct->user_id = $shopkeeper->id;

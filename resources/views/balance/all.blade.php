@@ -41,6 +41,7 @@
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comentarios</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Recibo</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
                                     <tbody>
                                         @foreach( $balances as $balance )
                                             <tr>
@@ -92,6 +93,12 @@
                                                             <button class="btn btn-primary btn-sm"disabled style="background-color: lightcoral">Rechazada</button>
                                                         @endif
                                                     </td>
+                                                <td>
+                                                    <div class="d-flex justify-content-center">
+                                                        <a style="color: darkblue;" href="{{route('balance.detail-pdf', ['id' => $balance->id])}}" target="_blank" title="Imprimir comprobante" class="btn btn-link px-0 mb-0"><i style="color: darkblue;  font-size: 25px !important;" class="material-icons opacity-10">print</i></a>
+                                                    </div>
+
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

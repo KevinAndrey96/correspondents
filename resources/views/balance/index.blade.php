@@ -44,6 +44,7 @@
                                     @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos')
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gestionar solicitud</th>
                                     @endif
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
 
                                 </tr>
                                 </thead>
@@ -105,15 +106,24 @@
                                             @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos')
                                         <td class="align-middle text-center text-sm">
                                             @if(is_null($balance->is_valid))
-                                                <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#acceptModal"
+                                                <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white manageBalance"
+                                                        data-bs-toggle="modal"
+                                                        onclick="disableTimeout(event)"
+                                                        data-bs-target="#acceptModal"
                                                         data-id="{{$balance->id}}"
                                                         data-amount="{{$balance->amount}}"
                                                         data-user="{{$balance->user->name}}"
                                                         data-date="{{$balance->date}}"
-                                                ><a style="color: darkgreen;" ><i style="color: darkgreen;" class="material-icons opacity-10">edit</i>Gestionar</a></button>
+                                                ><a style="color: darkgreen;"><i style="color: darkgreen;" class="material-icons opacity-10">edit</i>Gestionar</a></button>
                                             @endif
                                         </td>
                                     @endif
+                                            <td>
+                                                <div class="d-flex justify-content-center">
+                                                    <a style="color: darkblue;" href="{{route('balance.detail-pdf', ['id' => $balance->id])}}" target="_blank" title="Imprimir comprobante" class="btn btn-link px-0 mb-0"><i style="color: darkblue;  font-size: 25px !important;" class="material-icons opacity-10">print</i></a>
+                                                </div>
+
+                                            </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -254,6 +264,7 @@
                                 }
                             </style>
                             <script>
+                                let timeout;
                                 window.addEventListener("load", function(event) {
                                     @if (isset($countBalances))
                                     @if ($countBalances > 0)
@@ -273,7 +284,7 @@
                                 });
 
                                 $(document).ready( function () {
-                                    setTimeout("location.reload()", 60000);
+                                    timeout = setTimeout("location.reload()", 60000);
                                     $('#my_table').DataTable({
                                         "language": {
                                             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
@@ -322,6 +333,12 @@
                                         dateSpan.innerHTML = 'Fecha: ' + date;
                                         //document.getElementById('assign-link').href = '/balance-assign-supplier/' + uID;
                                     });
+                                });
+
+                                $('.manageBalance').on('click', function() {
+                                    console.log(this);
+
+                                    clearTimeout(timeout);
                                 });
                             </script>
 

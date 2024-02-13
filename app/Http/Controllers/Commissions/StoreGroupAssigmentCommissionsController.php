@@ -51,8 +51,15 @@ class StoreGroupAssigmentCommissionsController extends Controller
             $commission->delete();
         }
 
-        //Delete shopkeepers commissions and delete on supplier_products table where user_id be equal to shopkeeper id
+        //Assigning commissions group id to distributor
+        $distributor->commissions_group_id = $commissionsGroup->id;
+        $distributor->save();
+
+        //Delete shopkeepers commissions, delete on supplier_products table where user_id be equal to shopkeeper id
+        //and assigning commissions group id to shopkeepers
         foreach ($shopkeepers as $shopkeeper) {
+            $shopkeeper->commissions_group_id = $commissionsGroup->id;
+            $shopkeeper->save();
             $shopkeeperCommissions = Commission::where('user_id', $shopkeeper->id)->get();
             $shopkeeperProducts = SupplierProduct::where('user_id', $shopkeeper->id)->get();
 
@@ -65,10 +72,11 @@ class StoreGroupAssigmentCommissionsController extends Controller
             }
         }
 
+
         //Assign commissions and create new register to supplier_products to distributor and shopkeepers
         foreach ($commissionsGroupGeneralCommissions as $item) {
             $distributorCommission = new Commission();
-            $distributorCommission->amount = $item->generalCommission->amount;
+            $distributorCommission->amount = $item->generalCommission->amount_dis;
             $distributorCommission->product_id = $item->generalCommission->product_id;
             $distributorCommission->user_id = $distributor->id;
             $distributorCommission->save();
@@ -80,7 +88,7 @@ class StoreGroupAssigmentCommissionsController extends Controller
 
             foreach ($shopkeepers as $shopkeeper) {
                 $shopkeeperCommission = new Commission();
-                $shopkeeperCommission->amount = $item->generalCommission->amount;
+                $shopkeeperCommission->amount = $item->generalCommission->amount_shop;
                 $shopkeeperCommission->product_id = $item->generalCommission->product_id;
                 $shopkeeperCommission->user_id = $shopkeeper->id;
                 $shopkeeperCommission->save();

@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $product_id
  * @property mixed $amount
  * @property mixed $id
+ * @property mixed $amount_dis
+ * @property mixed $amount_shop
  */
 class GeneralCommission extends Model
 {
@@ -16,7 +18,8 @@ class GeneralCommission extends Model
 
     protected $fillable = [
         'product_id',
-        'amount'
+        'amount_dis',
+        'amount_shop',
     ];
 
     //Creating logical relationships
