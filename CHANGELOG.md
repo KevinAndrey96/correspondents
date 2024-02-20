@@ -198,5 +198,8 @@ fix: mail disclaimer text when disabling qr
 ## [Hotfix 1.6.5]
 fix: cyclic front error due to onerror
 
+## [Hotfix 1.6.6]
+fix: drop date pickers to update statistics on distributors home 
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

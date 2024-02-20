@@ -47,6 +47,7 @@
     </div>
     <div class="container-fluid py-2">
         <div class="row">
+            @if (Auth::user()->role != 'Distributor')
                 <div class="col-md-12">
                     <div class="row justify-content-center pt-5 pb-5">
                         <div class="col-md-3 d-flex justify-content-center pt-2 mb-2">
@@ -64,6 +65,7 @@
                         </div>
                     </div>
                 </div>
+            @endif
             @hasrole('Administrator')
             <div class="col-xl-3 col-sm-2 mb-xl-2 mb-4">
                 <div class="card">
