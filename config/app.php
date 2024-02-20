@@ -179,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         PragmaRX\Google2FALaravel\ServiceProvider::class,
         Lab404\Impersonate\ImpersonateServiceProvider::class,
+        App\Providers\UseCasesServiceProvider::class
     ],
 
     /*

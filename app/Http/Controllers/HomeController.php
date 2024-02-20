@@ -50,8 +50,6 @@ class HomeController extends Controller
             $holdTransactionCount = Transaction::where('status', 'like', 'Hold')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $acceptedTransactionCount = Transaction::where('status', 'like', 'Accepted')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
             $cancelledTransactionCount = Transaction::where('status', 'like', 'cancelled')->whereYear('date','=', $date->year)->whereMonth('date','=', $date->month)->count();
-
-
             $administratorCount = User::where('role', 'like', 'Administrator')->count();
             $shopkeeperCount = User::where('role', 'like', 'Shopkeeper')->count();
             $supplierCount = User::where('role', 'like', 'Supplier')->count();

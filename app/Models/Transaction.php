@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @method static find($id)
  * @method static whereHas(string $string, \Closure $param)
+ * @method static where(string $string, string $string1)
  * @property int $product_id
  * @property mixed $amount
  * @property Carbon|mixed $date

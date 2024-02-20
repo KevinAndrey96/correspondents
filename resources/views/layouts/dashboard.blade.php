@@ -34,6 +34,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="/assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+    <!--Datepicker-->
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+</head>
 
 </head>
 <!--background-image: linear-gradient(195deg, #42924a 0%, #191919 100%);-->
@@ -970,7 +974,7 @@
                         if (spotIndex != -1) {
                             const charArray = text.split('');
                             let count = 0;
-                            
+
                             for (let i = 0; i < charArray.length; i++) {
                                 if (charArray[i] == '.') {
                                     count++;
@@ -992,6 +996,18 @@
                         }
                     }
                 </script>
+        <script type="text/javascript">
+            $('#datepickerSince').datepicker({
+                showOtherMonths: true,
+                format: 'yyyy/mm/dd',
+            });
+
+            $('#datepickerUntil').datepicker({
+                showOtherMonths: true,
+                format: 'yyyy/mm/dd',
+            });
+
+        </script>
 
 </body>
 

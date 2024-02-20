@@ -47,6 +47,23 @@
     </div>
     <div class="container-fluid py-2">
         <div class="row">
+                <div class="col-md-12">
+                    <div class="row justify-content-center pt-5 pb-5">
+                        <div class="col-md-3 d-flex justify-content-center pt-2 mb-2">
+                            <label><span class="me-1 font-weight-bold">Desde:</span></label>
+                            <input type="text" id="datepickerSince" name="dateFrom" value="{{Carbon\Carbon::now()->format('Y/m/d')}}" class="bg-white text-center" width="150px" readonly required>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center pt-2 mb-2">
+                            <label><span class="me-1 font-weight-bold">Hasta:</span></label>
+                            <input type="text" id="datepickerUntil" name="dateTo" value="{{Carbon\Carbon::now()->format('Y/m/d')}}" class="bg-white text-center" width="150px" readonly required>
+                        </div>
+                            <input type="hidden" name="userRole" id="userRole" value="{{Auth::user()->role}}">
+                            <input type="hidden" name="userID" id="userID" value="{{Auth::user()->id}}">
+                        <div class="col-md-2 col-xs-12 d-flex justify-content-md-start justify-content-center ps-0">
+                            <button id="sendDatesButton" class="btn btn-success bg-gradient">Enviar</button>
+                        </div>
+                    </div>
+                </div>
             @hasrole('Administrator')
             <div class="col-xl-3 col-sm-2 mb-xl-2 mb-4">
                 <div class="card">
@@ -55,7 +72,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. fallidas</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="failedTransactionsTitle">
                                         {{ $failedTransactionCount }}
                                     </h5>
                                 </div>
@@ -76,7 +93,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. exitosas</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="successTransactionsTitle">
                                         {{ $successfulTransactionCount }}
                                     </h5>
                                 </div>
@@ -97,50 +114,8 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. canceladas</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="cancelTransactionsTitle">
                                         {{ $cancelledTransactionCount }}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                                    <i class="material-icons opacity-10">currency_exchange</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-2 mb-xl-2 mb-4 ">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. en espera</p>
-                                    <h5 class="font-weight-bolder">
-                                        {{ $holdTransactionCount }}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                                    <i class="material-icons opacity-10">currency_exchange</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-2 mb-xl-2 mb-4 ">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. aceptadas</p>
-                                    <h5 class="font-weight-bolder">
-                                        {{ $acceptedTransactionCount }}
                                     </h5>
                                 </div>
                             </div>
@@ -159,8 +134,72 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. en espera</p>
+                                    <h5 class="font-weight-bolder" id="holdTransactionsTitle">
+                                        {{ $holdTransactionCount }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-2 mb-xl-2 mb-4 ms-auto">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. aceptadas</p>
+                                    <h5 class="font-weight-bolder" id="acceptedTransactionsTitle">
+                                        {{ $acceptedTransactionCount }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-2 mb-xl-2 mb-4 me-auto">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Total Transacciones</p>
+                                    <h5 class="font-weight-bolder" id="totalTransactionsTitle">
+                                        {{ $transactionCount }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 mb-4"></div>
+            <div class="col-xl-3 col-sm-2 mb-xl-2 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Administradores</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="numAdminsTitle">
                                         {{ $administratorCount }}
                                     </h5>
                                 </div>
@@ -181,7 +220,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Distribuidores</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="numDistributorsTitle">
                                         {{ $distributorCount }}
                                     </h5>
                                 </div>
@@ -202,7 +241,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Tenderos</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="numShopkeepersTitle">
                                         {{ $shopkeeperCount }}
                                     </h5>
                                 </div>
@@ -223,7 +262,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Proveedores</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="numSuppliersTitle">
                                         {{ $supplierCount }}
                                     </h5>
                                 </div>
@@ -244,7 +283,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Transacciones este mes</p>
-                                    <h5 class="font-weight-bolder">{{ $transactionCount }}</h5>
+                                    <h5 class="font-weight-bolder" id="transactionsPerMonthTitle">{{ $transactionCount }}</h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -263,7 +302,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">Saldo Tenderos</p>
-                                    <h5 class="font-weight-bolder">${{number_format($shopkeepersBalance, 2, ',', '.')}}</h5>
+                                    <h5 class="font-weight-bolder" id="shopkeepersBalanceTitle">${{number_format($shopkeepersBalance, 2, ',', '.')}}</h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -282,7 +321,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">Saldo Proveedores</p>
-                                    <h5 class="font-weight-bolder">${{number_format($suppliersBalance , 2, ',', '.')}}</h5>
+                                    <h5 class="font-weight-bolder" id="suppliersBalanceTitle">${{number_format($suppliersBalance , 2, ',', '.')}}</h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -301,7 +340,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">Ganancia en red</p>
-                                    <h5 class="font-weight-bolder">${{number_format($totalProfit , 2, ',', '.')}}</h5>
+                                    <h5 class="font-weight-bolder" id="profitTitle">${{number_format($totalProfit , 2, ',', '.')}}</h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -315,30 +354,8 @@
             </div>
             @endhasrole
             @hasrole('Distributor')
-
             @endhasrole
             @hasrole('Shopkeeper')
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Transacciones este mes</p>
-                                    <h5 class="font-weight-bolder">
-                                        {{ $transactionCount }}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-info shadow-info text-center rounded-circle">
-                                    <i class="material-icons opacity-10">currency_exchange</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
@@ -346,7 +363,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. fallidas</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="failedTransactionsTitle">
                                         {{ $failedTransactionCount }}
                                     </h5>
                                 </div>
@@ -367,7 +384,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. exitosas</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="successTransactionsTitle">
                                         {{ $successfulTransactionCount }}
                                     </h5>
                                 </div>
@@ -388,7 +405,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. en espera</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="holdTransactionsTitle">
                                         {{ $holdTransactionCount }}
                                     </h5>
                                 </div>
@@ -409,13 +426,56 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. aceptadas</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="acceptedTransactionsTitle">
                                         {{ $acceptedTransactionCount }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 mt-2 ms-auto">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Total Transacciones</p>
+                                    <h5 class="font-weight-bolder" id="totalTransactionsTitle">
+                                        {{ $transactionCount }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-info text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 mb-4"></div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Transacciones este mes</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{ $transactionCount }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-info shadow-info text-center rounded-circle">
                                     <i class="material-icons opacity-10">currency_exchange</i>
                                 </div>
                             </div>
@@ -425,27 +485,6 @@
             </div>
             @endhasrole
             @hasrole('Supplier')
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Transacciones este mes</p>
-                                    <h5 class="font-weight-bolder">
-                                        {{ $transactionCount }}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-info shadow-info text-center rounded-circle">
-                                    <i class="material-icons opacity-10">currency_exchange</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
@@ -453,7 +492,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. fallidas</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="failedTransactionsTitle">
                                         {{ $failedTransactionCount }}
                                     </h5>
                                 </div>
@@ -474,7 +513,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. exitosas</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="successTransactionsTitle">
                                         {{ $successfulTransactionCount }}
                                     </h5>
                                 </div>
@@ -495,7 +534,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. en espera</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="holdTransactionsTitle">
                                         {{ $holdTransactionCount }}
                                     </h5>
                                 </div>
@@ -516,13 +555,56 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Trans. aceptadas</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder" id="acceptedTransactionsTitle">
                                         {{ $acceptedTransactionCount }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 mt-2 ms-auto">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Total Transacciones</p>
+                                    <h5 class="font-weight-bolder" id="totalTransactionsTitle">
+                                        {{ $transactionCount }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-info text-center rounded-circle">
+                                    <i class="material-icons opacity-10">currency_exchange</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 mb-4"></div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-xs mb-0 text-uppercase font-weight-bold">N° Transacciones este mes</p>
+                                    <h5 class="font-weight-bolder">
+                                        {{ $transactionCount }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-info shadow-info text-center rounded-circle">
                                     <i class="material-icons opacity-10">currency_exchange</i>
                                 </div>
                             </div>
@@ -1123,7 +1205,7 @@
         <input type="button" style="display:none" id="btn2" value="reproducir">
         <input type="button" style="display:none" id="btn-modal" value="reproducir">
         <input type="button" style="display:none" id="btn-modal2" value="reproducir">
-        <script>
+        <script type="text/javascript">
             window.addEventListener("load", function(event) {
                 @if (isset($balancesCount) || isset($profitsCount))
                 let alert = document.getElementById('alert');
@@ -1154,5 +1236,37 @@
                 $('[data-slide-to=0]').trigger('click')
                 @endif
             });
+        </script>
+        <script type="text/javascript">
+            $('#sendDatesButton').click(function(){
+                var data = {
+                    dateFrom: $('#datepickerSince').val(),
+                    dateTo: $('#datepickerUntil').val(),
+                    userRole: $('#userRole').val(),
+                    userID: $('#userID').val()
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: data,
+                    url: '{{getenv('APP_URL')}}/api/get-statistics-data',
+                    success: function(response) {
+                        $('#failedTransactionsTitle').text(response.data.attributes.failedTransactions);
+                        $('#successTransactionsTitle').text(response.data.attributes.successTransactions);
+                        @if (Auth::user()->role == 'Administrator')
+                        $('#cancelTransactionsTitle').text(response.data.attributes.cancelledTransactions);
+                        @endif
+                        $('#holdTransactionsTitle').text(response.data.attributes.holdTransactions);
+                        $('#acceptedTransactionsTitle').text(response.data.attributes.acceptedTransactions);
+                        let totalTransactions = parseInt(response.data.attributes.failedTransactions) +
+                            parseInt(response.data.attributes.successTransactions) +
+                            parseInt(response.data.attributes.cancelledTransactions) +
+                            parseInt(response.data.attributes.holdTransactions) +
+                            parseInt(response.data.attributes.acceptedTransactions);
+                        $('#totalTransactionsTitle').text(String(totalTransactions));
+                    }
+                })
+            });
+
+
         </script>
 @endsection
