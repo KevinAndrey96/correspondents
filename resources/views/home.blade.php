@@ -1198,6 +1198,39 @@
         @endif
     @endif
     <!--end Modal-->
+        <!--Modal-->
+        <div class="modal fade" id="qrDisabledAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true" data-bs-show="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div style="overflow-y: auto; height: 80vh;" class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="d-flex justify-content-center">
+                                    <img width="30%" class="img-responsive" src="{{$urlServer}}/assets/img/danger_icon.png">
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 mt-3">
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-md-12">
+                                        <p style="font-size: 20px;" class="text-center pe-2">Yo, {{strtoupper(Auth::user()->name)}}, declaro que he decidido deshabilitar voluntariamente el sistema de seguridad QR que me ofrecía el proveedor
+                                            {{(isset(Auth::user()->distributor->brand)) ? Auth::user()->distributor->brand->domain : 'asparecargas.net'}}.
+                                            Reconozco que este sistema de seguridad QR me brindaba una mayor protección contra el fraude, el robo de identidad y otras amenazas cibernéticas.
+                                            Al deshabilitar este sistema de seguridad QR, asumo la responsabilidad de cualquier daño o pérdida que pueda sufrir como consecuencia de esta decisión.
+                                            También libero al proveedor de cualquier responsabilidad civil, penal o administrativa que pueda derivarse de mi deshabilitación del sistema de seguridad QR.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Modal-->
 
         <audio id="alert" style="display: none;" src="/assets/alerts/SD_ALERT_3.mp3"
                controls>
@@ -1237,6 +1270,9 @@
                 btnModal.click()
                 $('[data-slide-to=0]').trigger('click')
                 @endif
+                @if (! is_null($showQRDisabledAlert))
+                $('#qrDisabledAlert').modal('toggle');
+                @endif
             });
         </script>
         <script type="text/javascript">
@@ -1268,7 +1304,5 @@
                     }
                 })
             });
-
-
         </script>
 @endsection

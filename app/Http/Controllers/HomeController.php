@@ -37,6 +37,12 @@ class HomeController extends Controller
     {
         $date = Carbon::now();
         $urlServer = getenv('URL_SERVER');
+        $showQRDisabledAlert = null;
+
+        if (session()->has('qrDisabledLoginValidation')) {
+            $showQRDisabledAlert = 1;
+            session()->forget('qrDisabledLoginValidation');
+        }
 
         if (Auth::user()->role == 'Administrator') {
             if (Auth::user()->id !== 1) {
@@ -135,7 +141,8 @@ class HomeController extends Controller
                 'auxProducts',
                 'urlServer',
                 'products',
-                'lastTransactions'
+                'lastTransactions',
+                'showQRDisabledAlert'
                 ));
         }
 
@@ -169,7 +176,8 @@ class HomeController extends Controller
                 'firstBanner',
                 'urlServer',
                 'products',
-                'lastTransactions'
+                'lastTransactions',
+                'showQRDisabledAlert'
                 ));
         }
 
@@ -191,7 +199,8 @@ class HomeController extends Controller
                 'acceptedTransactionCount',
                 'urlServer',
                 'products',
-                'lastTransactions'
+                'lastTransactions',
+                'showQRDisabledAlert'
             ));
         }
 
@@ -223,7 +232,8 @@ class HomeController extends Controller
                 'products',
                 'urlServer',
                 'publicity',
-                'lastTransactions'
+                'lastTransactions',
+                'showQRDisabledAlert'
             ));
         }
 
@@ -253,7 +263,7 @@ class HomeController extends Controller
 
             $products = Product::all();
 
-            return view('home', compact('profitsCount', 'balancesCount', 'banners', 'firstBanner', 'urlServer', 'products'));
+            return view('home', compact('profitsCount', 'balancesCount', 'banners', 'firstBanner', 'urlServer', 'products', 'showQRDisabledAlert'));
         }
 
         return view('home');

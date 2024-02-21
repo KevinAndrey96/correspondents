@@ -626,7 +626,7 @@
             </li>
             @hasrole('Shopkeeper')
             <li class="nav-item">
-                <a class="nav-link text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{Auth::user()->distributor->phone}}">
+                <a class="nav-link text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{(getenv('COUNTRY_NAME') == 'COLOMBIA')  ? '57'.Auth::user()->distributor->phone : '593'.Auth::user()->distributor->phone}} ">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">payments</i>
                     </div>

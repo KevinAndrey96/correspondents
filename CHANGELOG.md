@@ -201,5 +201,8 @@ fix: cyclic front error due to onerror
 ## [Hotfix 1.6.6]
 fix: drop date pickers to update statistics on distributors home 
 
+## [Hotfix 1.6.7]
+fix: add country code to whatsapp phone on shopkeeper sidebar
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
