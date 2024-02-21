@@ -100,7 +100,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-5">
                                     <div class="input-group input-group-static mb-4 ">
-                                        <label  for="">Tipo de transacción</label>
+                                        <label for="">Tipo de transacción</label>
                                         <select id="transactionType" onchange="showProducts()" name="transactionType" class="form-control" aria-label="Default select example" required>
                                             <option class="text-center" value="off">seleccionar</option>
                                             @if($productsDeposit->isNotEmpty())
@@ -117,6 +117,12 @@
                                         //al seleccionar el tipo de transacción mostrar los productos que correspondan
                                         //si es deposito muestra los productos de deposito y si no muestra los de retiro
                                         //paso 1: saber que seleccionó el cliente
+                                        var checkDivs = document.querySelectorAll('.checkDiv');
+
+                                        checkDivs.forEach(checkDiv => {
+                                            checkDiv.style.display = 'block';
+                                        });
+
                                         var transactionType = document.getElementById('transactionType').value
                                         //paso 2: mostrar el div que corresponda
                                         if (transactionType == 'Deposit') {

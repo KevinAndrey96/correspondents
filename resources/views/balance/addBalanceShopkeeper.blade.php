@@ -111,18 +111,20 @@
     <div id="card{{$card->id}}" style="display: none;" class="container-fluid py-4 bank-card">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
             <div class="row">
-                <div class="col-md-12 text-center mb-3">
-                    <a class="image-link" href="{{$urlServer.$card->qr_img }}">
-                        <button class="btn btn-success bg-gradient">Escanear código QR</button>
-                    </a>
-                </div>
                     <div class="col-md-6 text-center">
                         <img src="{{$urlServer.$card->cardIMG}}" width="80%" height="auto" class="border-radius-lg">
                     </div>
                     <div class="col-md-6 text-center">
-                        <a href="{{$urlServer.$card->cardPDF}}" target="_blank" class="btn btn-primary
-                        btn-lg text-white active my-7 text-center" role="button" aria-pressed="true"><i class="material-icons mx-2">file_download</i>Descargar PDF</a>
-                    </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <img src="{{$urlServer.$card->qr_img}}" width="60%" height="auto" class="border-radius-lg">
+                            </div>
+                            <div class="col-md-12">
+                                <a href="{{$urlServer.$card->cardPDF}}" target="_blank" class="btn btn-primary
+                                   btn-lg text-white active my-7 text-center" role="button" aria-pressed="true"><i class="material-icons mx-2">file_download</i>Descargar PDF</a>
+                            </div>
+                            </div>
+                        </div>
             </div>
         </div>
     </div>
