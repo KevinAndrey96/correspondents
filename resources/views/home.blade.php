@@ -1225,6 +1225,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12 col-sm-12 mt-3 d-flex justify-content-center">
+                                <button class="btn btn-success bg-gradient" data-bs-dismiss="modal">Aceptar</button>
+                            </div>
                         </div>
                     </div>
                 </div>

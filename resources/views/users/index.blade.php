@@ -5,6 +5,16 @@
             {{ Session::get('successfulAssignment') }}
         </div>
     @endif
+    @if(Session::has('successfulAssignment'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('negativeBalance') }}
+        </div>
+    @endif
+    @if(Session::has('successfulAssignment'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('balanceNotAllowed') }}
+        </div>
+    @endif
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -369,11 +379,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group input-group-outline my-3">
                                                             <label for="amount"></label>
-                                                            @if (getenv('COUNTRY_NAME') == 'ECUADOR')
-                                                                <input type="number" class="form-control" name="amount" value="" id="amount" step="any" min="0" placeholder="Monto" max="10000">
-                                                            @else
-                                                                <input type="number" class="form-control" name="amount" value="" id="amount" step="any" min="0" placeholder="Monto">
-                                                            @endif
+                                                                <input type="text" class="form-control" name="amount" value="" id="amount" placeholder="Monto" oninput="formatNumber(this.id)">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">

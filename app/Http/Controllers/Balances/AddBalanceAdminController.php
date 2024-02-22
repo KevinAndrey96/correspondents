@@ -23,24 +23,34 @@ class AddBalanceAdminController extends Controller
             $user = User::find($request->input('userID'));
             if($request->input('type') == 'Withdrawal' and $user->role == 'Shopkeeper'){
                 $fields = [
-                    'amount'=>'required|numeric|min:0|max:'.$user->balance,
+                    'amount'=>'required',
                 ];
             }else{
                 $fields = [
-                    'amount'=>'required|numeric|min:0',
+                    'amount'=>'required',
                 ];
             }
             $message = [
                 'required'=>':attribute es requerido',
-                'amount.max'=>'El monto no puede ser mayor a :max',
             ];
             $this->validate($request, $fields, $message);
 
             date_default_timezone_set('America/Bogota');
+
+            $amount = floatval(amountFormat($request->amount));
+
+            if ($amount <= 0) {
+                return redirect('/users?role='.$user->role)->with('negativeBalance','El saldo a asignar no permitido');
+            }
+
+            if (getenv('COUNTRY_NAME') == 'ECUADOR' && $amount > 10000) {
+                return redirect('/users?role='.$user->role)->with('balanceNotAllowed','El máximo saldo que puedo asignar es de 10000');
+            }
+
             $date = Carbon::now();
             $balance = new Balance();
             $balance->user_id = $request->input('userID');
-            $balance->amount = $request->input('amount');
+            $balance->amount =  $amount;
             $balance->date = '';
             $balance->type = $request->input('type');
             $balance->comment = $request->input('comment');

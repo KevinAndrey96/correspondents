@@ -23,6 +23,24 @@ class StoreAssignmentsProductsController extends Controller
         }
 
         if ($supplierProducts->count() > 0) {
+            if ($userRole == 'Distributor') {
+                $assignedProducts = SupplierProduct::where('user_id', $user->id)->get();
+                $newProducts = array();
+
+                foreach ($products as $product) {
+                    $matchedProductID = 0;
+                    foreach ($assignedProducts as $assignedProduct) {
+                        if ($assignedProduct->product_id == intval($product)) {
+                            $matchedProductID++;
+                        }
+                    }
+
+                    if (! $matchedProductID) {
+                        array_push($newProducts, $product);
+                    }
+                }
+            }
+
             foreach ($supplierProducts as $value) {
                 SupplierProduct::destroy($value->id);
             }
@@ -59,6 +77,12 @@ class StoreAssignmentsProductsController extends Controller
                                 }
                         }
 
+                        for ($i = 0; $i < count($newProducts); $i++) {
+                            $supplierProduct = new SupplierProduct();
+                            $supplierProduct->user_id = $shopkeeper->id;
+                            $supplierProduct->product_id = $newProducts[$i];
+                            $supplierProduct->save();
+                        }
                     }
                 }
             }
@@ -75,7 +99,6 @@ class StoreAssignmentsProductsController extends Controller
 
         if ($userRole == 'Distributor') {
             $shopkeepers = User::where('distributor_id', $user->id)->get();
-
 
             foreach ($shopkeepers as $shopkeeper) {
                 for ($i = 0; $i < count($products); $i++) {

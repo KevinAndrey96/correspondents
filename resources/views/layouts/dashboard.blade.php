@@ -960,9 +960,7 @@
 <script>
     CKEDITOR.replace( 'richText' );
 </script>
-
                 <!--Put figures in amount input-->
-
                 <script type="text/javascript">
                     function formatNumber(id) {
                         const amountInput = document.getElementById(id);

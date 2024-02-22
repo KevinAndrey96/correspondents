@@ -206,7 +206,7 @@
 
                                                     <div class="row mt-4 mb-4">
                                                         <div class="col-md-12">
-                                                            <p style="font-size: 20px;" class="font-weight-bold ms-2 mt-3">Campos estandar de transacción</p>
+                                                            <p style="font-size: 20px;" class="font-weight-bold ms-2 mt-3">Campos estándar de transacción</p>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="defaultFieldsRadio" value="1" id="enableDefaultFields" onchange="showDefaultFields(event)">
                                                                 <label class="form-check-label" for="flexRadioDefault1">

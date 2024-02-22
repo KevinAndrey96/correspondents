@@ -1,5 +1,3 @@
-Duvan esto es un modal
-
 <div class="container">
     <form action="{{ url('/balance') }}" method="post" enctype="multipart/form-data">
         @csrf

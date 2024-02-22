@@ -19,10 +19,6 @@ use Illuminate\Validation\ValidationException;
 
 class StoreTransactionController extends Controller
 {
-    /**
-     * @throws ValidationException
-     */
-    //: Factory|View|Redirector|RedirectResponse|Application
     public function store(Request $request)
     {
         $fields = [

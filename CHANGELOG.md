@@ -208,5 +208,8 @@ fix: add country code to whatsapp phone on shopkeeper sidebar
 fix: show all products when changing type of them on select of transactions create view and add qr image on addBalance
 Shopkeeper view
 
+## [Hotfix 1.6.9]
+fix: assign product to shopkeeper when assigning product to distributor
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
