@@ -36,7 +36,7 @@
 
                                 <tbody>
                                 @foreach ( $commissions as $commission )
-                                    @if (! $commission->product->is_deleted)
+                                    @if (! $commission->product->is_deleted && $commission->product->is_enabled)
                                         <tr>
                                             <td class="align-middle text-center text-sm">{{ $commission->product->product_name}} - {{ ($commission->product->product_type) == 'Deposit' ? 'Depósito' : 'Retiro'}}</td>
                                             <td class="align-middle text-center text-sm">${{number_format($commission->amount, 2, ',', '.')}}</td>

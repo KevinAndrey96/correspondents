@@ -47,6 +47,10 @@ class AddBalanceAdminController extends Controller
                 return redirect('/users?role='.$user->role)->with('balanceNotAllowed','El máximo saldo que puedo asignar es de 10000');
             }
 
+            if ($request->type == 'Withdrawal' && $amount > $user->balance) {
+                return redirect('/users?role='.$user->role);
+            }
+
             $date = Carbon::now();
             $balance = new Balance();
             $balance->user_id = $request->input('userID');

@@ -113,7 +113,7 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
         ->name('users.store-distributor-change');
 
 
-    Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index']);
+    Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index'])->name('commissions.index');
     Route::get('/commissions/users', [App\Http\Controllers\Commissions\UsersCommissionsController::class, 'usersCommissions']);
     Route::get('/commissions/create/{id}', [App\Http\Controllers\Commissions\CreateCommissionsController::class, 'create']);
     Route::post('/commissions/update', [App\Http\Controllers\Commissions\UpdateCommissionsController::class, 'update']);
@@ -331,3 +331,15 @@ Route::get('/brands-edit/{id}', App\Http\Controllers\Brands\EditBrandsController
     ->name('brands.edit');
 Route::post('/brands-update', App\Http\Controllers\Brands\UpdateBrandsController::class)
     ->name('brands.update');
+
+/**
+ * Routes for roles and permissions
+ */
+
+//Roles
+Route::get('/roles', App\Http\Controllers\Roles\IndexRolesController::class)
+    ->name('roles.index');
+
+//Permissions
+Route::get('/permissions', App\Http\Controllers\Permissions\IndexPermissionsController::class)
+    ->name('permissions.index');

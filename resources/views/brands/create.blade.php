@@ -42,14 +42,6 @@
                                             <input type="color" class="form-control form-control-color" name="primary_color" value="#3355FF" title="Elige un color">
                                         </div>
                                     </div>
-                                    <!--
-                                    <div class="col-md-3 mb-3">
-                                        <label for="secondary_color" class="form-label">Color secundario</label>
-                                        <div class="d-flex justify-content-center">
-                                            <input type="color" class="form-control form-control-color" name="secondary_color" value="#33FF5E" title="Elige un color">
-                                        </div>
-                                    </div>
-                                    -->
                                 </div>
                                 <div class="d-flex justify-content-center mt-4">
                                     <input type="submit" class="btn btn-success bg-gradient" value="Guardar">

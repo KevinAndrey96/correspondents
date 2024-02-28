@@ -51,7 +51,7 @@ class UpdateGroupCommissionsController extends Controller
         for ($i = 0; $i < count($amountsDis); $i++) {
             $product = Product::find($products[$i]);
             if ($amountsDis[$i] > $product->product_commission || $amountsShop[$i] > $product->product_commission ||
-                $amountsDis[$i] + $amountsShop[$i] > $product->product_commission ) {
+                $amountsShop[$i] > $amountsDis[$i]) {
 
                 return redirect()->route('commissions.create-group')->with('notAllowedAmount', 'Monto de comisión no permitido');
             }
@@ -118,7 +118,7 @@ class UpdateGroupCommissionsController extends Controller
             }
         }
 
-        return redirect()->route('commissions.groups')->with('successfulGroupCommissionCreation', 'Creación de grupo de comisiones exitosa');
+        return redirect()->route('commissions.groups')->with('successfulCommissionsGroupUpdate', 'Modificación de grupo de comisiones exitosa');
     }
 
 }

@@ -210,7 +210,7 @@
                                             @if ($role != 'allShopkeepers' && $role != 'Administrator' && $role != 'Saldos' && $role != 'Advisers')
                                                 <a style="color: dodgerblue;" href="/commissions/create/{{$user->id}}" title="Comisiones" class="btn btn-link px-1 mb-0"><i style="color: dodgerblue; font-size: 25px !important;" class="material-icons opacity-15">price_change</i></a>
                                             @endif
-                                                @if ($role == 'Distributor')
+                                                @if ($role == 'Shopkeeper')
                                                     <a style="color: darkblue;" href="{{route('commissions.assign-group', ['id' => $user->id])}}" title="Grupos de comisiones" class="btn btn-link px-1 mb-0"><i style="color: darkblue; font-size: 25px !important;" class="material-icons opacity-15">group_work</i></a>
                                                 @endif
                                             <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen; font-size: 25px !important;" class="material-icons opacity-10">edit</i></a>

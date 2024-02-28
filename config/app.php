@@ -179,7 +179,11 @@ return [
         App\Providers\RouteServiceProvider::class,
         PragmaRX\Google2FALaravel\ServiceProvider::class,
         Lab404\Impersonate\ImpersonateServiceProvider::class,
-        App\Providers\UseCasesServiceProvider::class
+        App\Providers\UseCasesServiceProvider::class,
+        App\Providers\RepositoriesServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\ButtonsServiceProvider::class,
+        Yajra\DataTables\FractalServiceProvider::class
     ],
 
     /*

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $id
  * @method static get()
  * @method static find(int $intval)
+ * @method static where(string $string, $id)
  */
 class CommissionsGroup extends Model
 {

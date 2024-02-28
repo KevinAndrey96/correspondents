@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
+use App\Models\Commission;
 use Illuminate\Http\Request;
 use App\Models\SupplierProduct;
 use App\Models\User;
@@ -25,8 +26,8 @@ class StoreAssignmentsProductsController extends Controller
         if ($supplierProducts->count() > 0) {
             if ($userRole == 'Distributor') {
                 $assignedProducts = SupplierProduct::where('user_id', $user->id)->get();
+                $distributorCommissions = Commission::where('user_id', $user->id)->get();
                 $newProducts = array();
-
                 foreach ($products as $product) {
                     $matchedProductID = 0;
                     foreach ($assignedProducts as $assignedProduct) {
@@ -45,7 +46,15 @@ class StoreAssignmentsProductsController extends Controller
                 SupplierProduct::destroy($value->id);
             }
 
+            $userCommissions = Commission::where('user_id', $user->id)
+                ->whereNotIn('product_id', $products)->get();
+
+            foreach ($userCommissions as $commission) {
+                $commission->delete();
+            }
+
             for ($i = 0; $i < count($products); $i++) {
+
                 $supplierProduct = new SupplierProduct();
                 $supplierProduct->user_id = $userID;
                 $supplierProduct->product_id = $products[$i];
@@ -58,8 +67,14 @@ class StoreAssignmentsProductsController extends Controller
                 foreach ($shopkeepers as $shopkeeper) {
                     $shopkeeperProducts = SupplierProduct::where('user_id', $shopkeeper->id)->get();
 
-                    if ($shopkeeperProducts->count() == 0) {
+                    $shopkeeperCommissions = Commission::where('user_id', $shopkeeper->id)
+                        ->whereNotIn('product_id', $products)->get();
 
+                    foreach ($shopkeeperCommissions as $commission) {
+                        $commission->delete();
+                    }
+
+                    if ($shopkeeperProducts->count() == 0) {
                         for ($i = 0; $i < count($products); $i++) {
                             $supplierProduct = new SupplierProduct();
                             $supplierProduct->user_id = $shopkeeper->id;

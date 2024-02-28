@@ -10,9 +10,15 @@
             <div class="col-12">
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
-                            <h6 class="text-white text-center text-capitalize ps-2 mx-6 ">Asignar Productos</h6>
+                        @if (isset(Auth::user()->brand_id))
+                        <div style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                            <h6 class="text-white text-center text-capitalize ps-2 mx-6"><a href="/users?role=Distributor" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a>Asignar Productos</h6>
                         </div>
+                        @else
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-0">
+                                <h6 class="text-white text-center text-capitalize ps-2 mx-6 "><a href="/users?role=Distributor" class="btn btn-block"><i style="color: white; margin-top: 13px;" class="material-icons opacity-10">keyboard_return</i></a>Asignar Productos</h6>
+                            </div>
+                        @endif
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="container">

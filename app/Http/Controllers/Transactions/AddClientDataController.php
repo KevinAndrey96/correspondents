@@ -17,6 +17,8 @@ class AddClientDataController extends Controller
 {
     public function store(Request $request)
     {
+        return 'ok';
+
         try {
             date_default_timezone_set('America/Bogota');
 

@@ -32,74 +32,37 @@ class StoreGroupAssigmentCommissionsController extends Controller
 
         $this->validate($request, $fields, $message);
 
-        $distributor = User::find(intval($request->input('userID')));
-        $shopkeepers = User::where('distributor_id', $distributor->id)->get();
-        $distributorCommissions = Commission::where('user_id', $distributor->id)->get();
+        $shopkeeper = User::find(intval($request->input('userID')));
+        $shopkeeperCommissions = Commission::where('user_id', $shopkeeper->id)->get();
         $commissionsGroup = CommissionsGroup::find(intval($request->input('commissionsGroupID')));
         $commissionsGroupGeneralCommissions = CommissionsGroupGeneralCommission::with('generalCommission', 'commissionGroup')->
         where('comm_group_id', $commissionsGroup->id)->get();
+        $shopkeeperProducts = SupplierProduct::where('user_id', $shopkeeper->id)->get();
 
-        $distributorProducts = SupplierProduct::where('user_id', $distributor->id)->get();
-
-        //Delete on supplier_products table where user_id be equal to distributor id
-        foreach ($distributorProducts as $distributorProduct) {
-            $distributorProduct->delete();
+        foreach ($shopkeeperProducts as $shopkeeperProduct) {
+            $shopkeeperProduct->delete();
         }
 
-        //Delete distributor commissions
-        foreach ($distributorCommissions as $commission) {
+        foreach ($shopkeeperCommissions as $commission) {
             $commission->delete();
         }
 
-        //Assigning commissions group id to distributor
-        $distributor->commissions_group_id = $commissionsGroup->id;
-        $distributor->save();
+        $shopkeeper->commissions_group_id = $commissionsGroup->id;
+        $shopkeeper->save();
 
-        //Delete shopkeepers commissions, delete on supplier_products table where user_id be equal to shopkeeper id
-        //and assigning commissions group id to shopkeepers
-        foreach ($shopkeepers as $shopkeeper) {
-            $shopkeeper->commissions_group_id = $commissionsGroup->id;
-            $shopkeeper->save();
-            $shopkeeperCommissions = Commission::where('user_id', $shopkeeper->id)->get();
-            $shopkeeperProducts = SupplierProduct::where('user_id', $shopkeeper->id)->get();
-
-            foreach ($shopkeeperProducts as $shopkeeperProduct) {
-                $shopkeeperProduct->delete();
-            }
-
-            foreach ($shopkeeperCommissions as $commission) {
-                $commission->delete();
-            }
-        }
-
-
-        //Assign commissions and create new register to supplier_products to distributor and shopkeepers
         foreach ($commissionsGroupGeneralCommissions as $item) {
-            $distributorCommission = new Commission();
-            $distributorCommission->amount = $item->generalCommission->amount_dis;
-            $distributorCommission->product_id = $item->generalCommission->product_id;
-            $distributorCommission->user_id = $distributor->id;
-            $distributorCommission->save();
+            $shopkeeperCommission = new Commission();
+            $shopkeeperCommission->amount = $item->generalCommission->amount_shop;
+            $shopkeeperCommission->product_id = $item->generalCommission->product_id;
+            $shopkeeperCommission->user_id = $shopkeeper->id;
+            $shopkeeperCommission->save();
 
-            $distributorProduct = new SupplierProduct();
-            $distributorProduct->user_id = $distributor->id;
-            $distributorProduct->product_id = $item->generalCommission->product_id;
-            $distributorProduct->save();
-
-            foreach ($shopkeepers as $shopkeeper) {
-                $shopkeeperCommission = new Commission();
-                $shopkeeperCommission->amount = $item->generalCommission->amount_shop;
-                $shopkeeperCommission->product_id = $item->generalCommission->product_id;
-                $shopkeeperCommission->user_id = $shopkeeper->id;
-                $shopkeeperCommission->save();
-
-                $shopkeeperProduct = new SupplierProduct();
-                $shopkeeperProduct->user_id = $shopkeeper->id;
-                $shopkeeperProduct->product_id = $item->generalCommission->product_id;
-                $shopkeeperProduct->save();
-            }
+            $shopkeeperProduct = new SupplierProduct();
+            $shopkeeperProduct->user_id = $shopkeeper->id;
+            $shopkeeperProduct->product_id = $item->generalCommission->product_id;
+            $shopkeeperProduct->save();
         }
 
-        return redirect('/users?role=Distributor');
+        return redirect('/users?role=Shopkeeper');
     }
 }

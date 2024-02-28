@@ -10,6 +10,7 @@ use App\Models\GeneralCommission;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class StoreGroupCommissionsController extends Controller
@@ -51,7 +52,7 @@ class StoreGroupCommissionsController extends Controller
         for ($i = 0; $i < count($amountsDis); $i++) {
             $product = Product::find($products[$i]);
             if ($amountsDis[$i] > $product->product_commission || $amountsShop[$i] > $product->product_commission ||
-                $amountsDis[$i] + $amountsShop[$i] > $product->product_commission ) {
+                $amountsShop[$i] > $amountsDis[$i]) {
 
                 return redirect()->route('commissions.create-group')->with('notAllowedAmount', 'Monto de comisión no permitido');
             }
@@ -60,9 +61,10 @@ class StoreGroupCommissionsController extends Controller
         //Assigning name input
         $nameGroup = $request->input('name');
 
-        //Creating new commissionGroup register
+        //Creating new commissionsGroup register
         $commissionsGroup = new CommissionsGroup();
         $commissionsGroup->name = $nameGroup;
+        $commissionsGroup->user_id = Auth::user()->id;
         $commissionsGroup->save();
 
         //Creating registers to general_commissions and commissions_group_general_commissions tables

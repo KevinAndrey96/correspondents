@@ -69,7 +69,8 @@
                     <span class="nav-link-text ms-1">Inicio</span>
                 </a>
             </li>
-        @hasrole('Administrator')
+        <!--administrator-->
+            @if (auth()->user()->can('Ver top tenderos'))
             <li class="nav-item">
                 <a class="nav-link text-white " href="{{route('shopkeeper.top.date')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -78,6 +79,38 @@
                     <span class="nav-link-text ms-1">Top tenderos</span>
                 </a>
             </li>
+            @endif
+            @if (auth()->user()->can('Ver roles y permisos'))
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-25" aria-expanded="false" aria-controls="submenu-24">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="width:30px; margin-left: -5px;" class="far fa-address-book"></i>
+                    </div>
+                    <span class="nav-link-text">Roles y Permisos</span>
+                </a>
+                <div id="submenu-25" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{route('roles.index')}}"">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">Roles</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{route('permissions.index')}}">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">Permisos</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            @endif
+            @if (auth()->user()->can('Ver configuracion'))
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-24" aria-expanded="false" aria-controls="submenu-24">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -148,6 +181,8 @@
                     </ul>
                 </div>
             </li>
+                @endif
+            @if (auth()->user()->can('Ver usuarios'))
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -208,6 +243,8 @@
                     </ul>
                 </div>
             </li>
+            @endif
+            @if (auth()->user()->can('Ver grupo de productos'))
             <li class="nav-item">
                 <a class="nav-link text-white " href="/products">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -216,26 +253,7 @@
                     <span class="nav-link-text ms-1">G. Productos</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-8" aria-expanded="false" aria-controls="submenu-8">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">payments</i>
-                    </div>
-                    <span class="nav-link-text ms-2">Comisiones</span>
-                </a>
-                <div id="submenu-8" class="collapse " data-bs-parent="#menu-accordion">
-                    <ul class="submenu-list list-unstyled">
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="{{route('commissions.groups')}}">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10"></i>
-                                </div>
-                                <span class="nav-link-text ms-1">Grupos de comisiones</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+            @endif
             <li style="display: none;" class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-4" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -245,7 +263,6 @@
                 </a>
                 <div id="submenu-4" class="collapse " data-bs-parent="#menu-accordion">
                     <ul class="submenu-list list-unstyled">
-
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/products">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -262,12 +279,12 @@
                                 <span class="nav-link-text ms-1">G. Comisiones</span>
                             </a>
                         </li>
-
                     </ul>
                 </div>
             </li>
+            @if (auth()->user()->can('Ver transacciones'))
             <li class="nav-item">
-                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-6" aria-expanded="false" aria-controls="submenu-2">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-6" aria-expanded="false" aria-controls="submenu-6">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">price_check</i>
                     </div>
@@ -275,29 +292,81 @@
                 </a>
                 <div id="submenu-6" class="collapse " data-bs-parent="#menu-accordion">
                     <ul class="submenu-list list-unstyled">
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/transactions?id=record">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        @if (auth()->user()->can('Ver nueva transaccion') && is_null(session('impersonated_by')))
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/transactions/create">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">post_add</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Nueva Transacción</span>
+                                </a>
+                            </li>
+                            @if (getenv('COUNTRY_NAME') == 'ECUADOR')
+                                <li class="nav-item">
+                                    <a class="nav-link text-white " href="/giros/create?giros=1">
+                                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                            <i class="material-icons opacity-10">post_add</i>
+                                        </div>
+                                        <span class="nav-link-text ms-1">Nuevo Giro Internacional</span>
+                                    </a>
+                                </li>
+                            @endif
+                        @endif
+                        @if (auth()->user()->can('Ver mis transacciones'))
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/transactions">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">currency_exchange</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Mis Transacciones</span>
+                                </a>
+                            </li>
+                        @endif
+                            @if (auth()->user()->can('Ver ultimas transacciones'))
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/transactions?id=record">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 
-                                </div>
-                                <span class="nav-link-text ms-1">Últimas transacciones</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div id="submenu-6" class="collapse " data-bs-parent="#menu-accordion">
-                    <ul class="submenu-list list-unstyled">
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/transactions?id=record2">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">post_add</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Todas las transacciones</span>
-                            </a>
-                        </li>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Últimas transacciones</span>
+                                </a>
+                            </li>
+                            @endif
+                            @if (auth()->user()->can('Ver todas las transacciones'))
+                                <li class="nav-item">
+                                    <a class="nav-link text-white " href="/transactions?id=record2">
+                                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                            <i class="material-icons opacity-10">post_add</i>
+                                        </div>
+                                        <span class="nav-link-text ms-1">Todas las transacciones</span>
+                                    </a>
+                                </li>
+                            @endif
+                            @if (auth()->user()->can('Ver transacciones en espera'))
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/transactions">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">currency_exchange</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Transacciones en espera</span>
+                                </a>
+                            </li>
+                            @endif
+                            @if (auth()->user()->can('Ver historial de transacciones'))
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/transactions?id=record">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">post_add</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Historial de transacciones</span>
+                                </a>
+                            </li>
+                            @endif
                     </ul>
                 </div>
             </li>
+            @endif
+            @if (auth()->user()->can('Ver saldos'))
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-3" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -308,6 +377,8 @@
                 </a>
                 <div id="submenu-3" class="collapse " data-bs-parent="#menu-accordion">
                     <ul class="submenu-list list-unstyled">
+
+                        @if (auth()->user()->can('Ver solicitudes de saldo'))
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/balance">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -316,6 +387,8 @@
                                 <span class="nav-link-text ms-1">Solicitudes</span>
                             </a>
                         </li>
+                        @endif
+                            @if (auth()->user()->can('Ver historial de solicitudes de saldos'))
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/balance-all">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -324,20 +397,44 @@
                                 <span class="nav-link-text ms-1">Historial de solicitudes</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/balance/users">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">price_check</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Saldo por usuario</span>
-                            </a>
-                        </li>
+                            @endif
+                            @if (auth()->user()->can('Ver saldo por usuario'))
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/balance/users">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">price_check</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Saldo por usuario</span>
+                                </a>
+                            </li>
+                            @endif
+                            @if (auth()->user()->can('Ver recargar saldo') && is_null(session('impersonated_by')))
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/balance/create">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">new_label</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Recargar Saldo</span>
+                                </a>
+                            </li>
+                            @endif
+                            @if (auth()->user()->can('Ver historial de saldos'))
+                            <li class="nav-item">
+                                <a class="nav-link text-white " href="/balance">
+                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        <i class="material-icons opacity-10">history_edu</i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Historial Saldos</span>
+                                </a>
+                            </li>
+                                @endif
                     </ul>
                 </div>
             </li>
-        @endhasrole
-
-        @hasrole('Distributor')
+            @endif
+        <!--administrator-->
+            <!--distributor-->
+            @if (auth()->user()->can('Ver tenderos de distribuidor'))
             <li class="nav-item">
                 <a class="nav-link text-white " href="/users?role=Shopkeeper">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -346,6 +443,7 @@
                     <span class="nav-link-text ms-1">G. Tenderos</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item" style="display: none;">
                 <a class="nav-link text-white " href="/commissions/users?id=shopkeeper">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -354,6 +452,39 @@
                     <span class="nav-link-text ms-1">G. Comisiones</span>
                 </a>
             </li>
+            @if (auth()->user()->can('Ver comisiones desplegable'))
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-8" aria-expanded="false" aria-controls="submenu-8">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">payments</i>
+                    </div>
+                    <span class="nav-link-text ms-2">Comisiones</span>
+                </a>
+                <div id="submenu-8" class="collapse " data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{route('commissions.index')}}">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">Comisiones</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="{{route('commissions.groups')}}">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">Grupos de comisiones</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            @endif
+            <!--enddistributor-->
+            <!--shopkeeper-->
+            @if (auth()->user()->can('Ver comisiones'))
             <li class="nav-item">
                 <a class="nav-link text-white " href="/commissions">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -362,119 +493,10 @@
                     <span class="nav-link-text ms-1">Comisiones</span>
                 </a>
             </li>
-        @endhasrole
+            @endif
+        <!--endshopkeeper-->
 
-        @hasrole('Shopkeeper')
-            <li class="nav-item">
-                <a class="nav-link text-white " href="/commissions">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">payments</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Comisiones</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-6" aria-expanded="false" aria-controls="submenu-2">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">price_check</i>
-                    </div>
-                    <span class="nav-link-text">Transacciones</span>
-                </a>
-                <div id="submenu-6" class="collapse " data-bs-parent="#menu-accordion">
-                    <ul class="submenu-list list-unstyled">
-                        @if (is_null(session('impersonated_by')))
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/transactions/create">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">post_add</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Nueva Transacción</span>
-                            </a>
-                        </li>
-                        @if (getenv('COUNTRY_NAME') == 'ECUADOR')
-                            <li class="nav-item">
-                                <a class="nav-link text-white " href="/giros/create?giros=1">
-                                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="material-icons opacity-10">post_add</i>
-                                    </div>
-                                    <span class="nav-link-text ms-1">Nuevo Giro Internacional</span>
-                                </a>
-                            </li>
-                        @endif
-                        @endif
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/transactions">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">currency_exchange</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Mis Transacciones</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-5" aria-expanded="false" aria-controls="submenu-2">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">monetization_on</i>
-                    </div>
-                    <span class="nav-link-text">Saldos</span>
-                </a>
-                <div id="submenu-5" class="collapse " data-bs-parent="#menu-accordion">
-                    <ul class="submenu-list list-unstyled">
-                        @if (is_null(session('impersonated_by')))
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/balance/create">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">new_label</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Recargar Saldo</span>
-                            </a>
-                        </li>
-                        @endif
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/balance">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">history_edu</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Historial Saldos</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-            </li>
-        @endhasrole
-
-        @hasrole('Supplier')
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-6" aria-expanded="false" aria-controls="submenu-2">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">price_check</i>
-                    </div>
-                    <span class="nav-link-text">Transacciones</span>
-                </a>
-                <div id="submenu-6" class="collapse " data-bs-parent="#menu-accordion">
-                    <ul class="submenu-list list-unstyled">
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/transactions">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">currency_exchange</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Transacciones en espera</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/transactions?id=record">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">post_add</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Historial de transacciones</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+        <!--supplier-->
             @if (getenv('COUNTRY_NAME') == 'ECUADOR' && Auth::user()->giros == 1)
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-7" aria-expanded="false" aria-controls="submenu-2">
@@ -506,36 +528,6 @@
             </li>
             @endif
             <li class="nav-item">
-                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-5" aria-expanded="false" aria-controls="submenu-2">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">monetization_on</i>
-                    </div>
-                    <span class="nav-link-text">Saldos</span>
-                </a>
-                <div id="submenu-5" class="collapse " data-bs-parent="#menu-accordion">
-                    <ul class="submenu-list list-unstyled">
-
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/balance/create">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">new_label</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Recargar Saldo</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/balance">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">history_edu</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Historial Saldos</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link text-white " href="/commissions">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">payments</i>
@@ -543,7 +535,7 @@
                     <span class="nav-link-text ms-1">Comisiones</span>
                 </a>
             </li>
-        @endhasrole
+            <!--endsupplier-->
             @if (Auth::user()->role == 'Saldos')
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-3" aria-expanded="false" aria-controls="submenu-2">
@@ -584,6 +576,7 @@
                     </div>
                 </li>
             @endif
+            @if (auth()->user()->can('Ver ganancias'))
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-9" aria-expanded="false" aria-controls="submenu-2">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -624,7 +617,8 @@
                     </ul>
                 </div>
             </li>
-            @hasrole('Shopkeeper')
+            @endif
+            @if (auth()->user()->can('Ver contactar distribuidor'))
             <li class="nav-item">
                 <a class="nav-link text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{(getenv('COUNTRY_NAME') == 'COLOMBIA')  ? '57'.Auth::user()->distributor->phone : '593'.Auth::user()->distributor->phone}} ">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -633,7 +627,7 @@
                     <span class="nav-link-text ms-1">Contactar Distribuidor</span>
                 </a>
             </li>
-            @endhasrole
+            @endif
         </ul>
     </div>
     @hasrole('Supplier')
@@ -917,6 +911,29 @@
     });
 </script>
 <script>
+    @if (Auth::user()->role == 'Administrator')
+    $(document).ready(function() {
+        $('#my_table').DataTable({
+            "language": {
+                "lengthMenu": " Mostar _MENU_ registros por página",
+                "zeroRecords": "Nada encontrado - disculpa  ",
+                "info": "Mostrando la página _PAGE_ de _PAGES_",
+                "infoEmpty": "No records available",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+
+                }
+            },
+            "bDestroy": true,
+            responsive: true,
+            "aaSorting": []
+        });
+    });
+    @endif
+
     @if (Auth::user()->role == 'Supplier')
         var contadorAfk = 0;
         $(document).ready(function() {

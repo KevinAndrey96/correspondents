@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TransactionFieldsSeeder::class);
         $this->call(DistributorProductsSeeder::class);
         $this->call(DeleteProductAssignments::class);
+        $this->call(PermissionSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }

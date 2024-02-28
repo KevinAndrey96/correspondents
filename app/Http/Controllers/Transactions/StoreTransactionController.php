@@ -40,6 +40,11 @@ class StoreTransactionController extends Controller
         $amount = floatval(amountFormat($request->transactionAmount));
         $giros = $request->input('giros');
 
+        if ($amount > floatval(Auth::user()->balance) && $product->type == 'Deposit') {
+
+        }
+
+
         if ($amount == 0 || is_null($request->transactionAmount)) {
 
             return back()->with('noAmount', 'Por favor ingrese un monto.');
@@ -68,10 +73,7 @@ class StoreTransactionController extends Controller
             }
         }
 
-        if (
-            $request->input('transactionType') === Transaction::TYPE_DEPOSIT
-            && (double)Auth::user()->balance < (double)$request->input('transactionAmount')
-        ) {
+        if ($request->transactionType == Transaction::TYPE_DEPOSIT && floatval(Auth::user()->balance) < $amount) {
             if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1) {
                 return redirect('/giros/create?giros=1')->with('insufficientBalance', 'No tiene saldo suficiente para realizar el giro');
             } else {
