@@ -7,7 +7,7 @@
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-primary bg-gradient shadow-primary border-radius-lg pt-1 pb-0">
                             <h6 class="text-white text-center text-capitalize  mx-6 ">
-                               Permisos <a href="#" id="btn-add" class="btn pl-1 pt-1" ><i style="color: white; margin-top: 13px;" class="material-icons opacity-10 p-0">add</i></a>
+                               Permisos <a href="#" id="btn-add" class="btn pl-1 pt-1" ><!--<i style="color: white; margin-top: 13px;" class="material-icons opacity-10 p-0">add</i>--></a>
                             </h6>
                         </div>
                         <div id="cardBody" class="card-body px-0 pb-2">
@@ -126,9 +126,9 @@
                     {data: 'id', render: function(data, type, row) {
                             return '<div class="d-flex justify-content-center">' +
                                 '<div class="d-inline">' +
-                                '<a style="color: green;" href="#" title="Editar" class="btn btn-link px-1 mb-0" onclick="setEditFields('+data+')">' +
+                                '<!--<a style="color: green;" href="#" title="Editar" class="btn btn-link px-1 mb-0" onclick="setEditFields('+data+')">' +
                                 '<i style="color: green; font-size: 25px !important;" class="material-icons opacity-10">' +
-                                'edit</i></a>'+
+                                'edit</i></a>-->'+
                                 '</div>'+
                                 '<div class="d-flex justify-content-center">' +
                                 '<div class="d-inline">' +

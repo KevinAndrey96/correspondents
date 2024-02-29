@@ -13,12 +13,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Request as RequestAlias;
 
 class UpdateUsersController extends Controller
 {
     public function update(Request $request)
     {
+        $roleID = $request->input('roleID');
         $user = User::find($request->input('user_id'));
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -51,6 +53,14 @@ class UpdateUsersController extends Controller
 
         if (isset($request->priority)) {
             $user->priority = $request->input('priority');
+        }
+
+        if (! is_null($roleID)) {
+            $oldRoleID = $request->input('oldRoleID');
+            $oldRole = Role::findById($oldRoleID);
+            $user->removeRole($oldRole);
+            $role = Role::findById($roleID);
+            $user->assignRole($role);
         }
 
         if (isset($request->password)) {

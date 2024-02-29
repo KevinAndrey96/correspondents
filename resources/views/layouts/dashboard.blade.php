@@ -494,6 +494,16 @@
                 </a>
             </li>
             @endif
+            @if (auth()->user()->can('Ver contactar distribuidor'))
+                <li class="nav-item">
+                    <a class="nav-link text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{(getenv('COUNTRY_NAME') == 'COLOMBIA')  ? '57'.Auth::user()->distributor->phone : '593'.Auth::user()->distributor->phone}} ">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">payments</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Contactar Distribuidor</span>
+                    </a>
+                </li>
+            @endif
         <!--endshopkeeper-->
 
         <!--supplier-->
@@ -527,21 +537,13 @@
                 </div>
             </li>
             @endif
-            <li class="nav-item">
-                <a class="nav-link text-white " href="/commissions">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">payments</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Comisiones</span>
-                </a>
-            </li>
             <!--endsupplier-->
+            <!--saldos-->
             @if (Auth::user()->role == 'Saldos')
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-3" aria-expanded="false" aria-controls="submenu-2">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i style="width:30px; margin-left: -5px;" class="material-icons opacity-10">monetization_on</i>
-
                         </div>
                         <span class="nav-link-text">Saldos</span>
                     </a>
@@ -571,11 +573,11 @@
                                     <span class="nav-link-text ms-1">Saldo por usuario</span>
                                 </a>
                             </li>
-
                         </ul>
                     </div>
                 </li>
             @endif
+            <!---->
             @if (auth()->user()->can('Ver ganancias'))
             <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-9" aria-expanded="false" aria-controls="submenu-2">
@@ -586,7 +588,8 @@
                 </a>
                 <div id="submenu-9" class="collapse " data-bs-parent="#menu-accordion">
                     <ul class="submenu-list list-unstyled">
-                        @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Saldos')
+                        @if (auth()->user()->can('Ver solicitudes de ganancias') && (Auth::user()->role == 'Administrator'
+                        || Auth::user()->role == 'Saldos'))
                         <li class="nav-item">
                             <a class="nav-link text-white " href="/profit/users">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -596,16 +599,17 @@
                             </a>
                         </li>
                         @endif
-                        @if (Auth::user()->role !== 'Saldos' && is_null(session('impersonated_by')))
-                        <li class="nav-item">
-                            <a class="nav-link text-white " href="/profit/create">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="material-icons opacity-10">exit_to_app</i>
-                                </div>
-                                <span class="nav-link-text ms-1">Retirar Ganancia</span>
-                            </a>
-                        </li>
+                            @if (auth()->user()->can('Ver retirar ganancias') && Auth::user()->role !== 'Saldos' && is_null(session('impersonated_by')))
+                                <li class="nav-item">
+                                    <a class="nav-link text-white " href="/profit/create">
+                                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                            <i class="material-icons opacity-10">exit_to_app</i>
+                                        </div>
+                                        <span class="nav-link-text ms-1">Retirar Ganancia</span>
+                                    </a>
+                                </li>
                             @endif
+                            @if (auth()->user()->can('Ver historial retiros ganancia'))
                             <li class="nav-item">
                                 <a class="nav-link text-white " href="/profit">
                                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -614,23 +618,16 @@
                                     <span class="nav-link-text ms-1">Historial de Retiros</span>
                                 </a>
                             </li>
+                            @endif
                     </ul>
                 </div>
             </li>
             @endif
-            @if (auth()->user()->can('Ver contactar distribuidor'))
-            <li class="nav-item">
-                <a class="nav-link text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{(getenv('COUNTRY_NAME') == 'COLOMBIA')  ? '57'.Auth::user()->distributor->phone : '593'.Auth::user()->distributor->phone}} ">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">payments</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Contactar Distribuidor</span>
-                </a>
-            </li>
-            @endif
+
         </ul>
     </div>
-    @hasrole('Supplier')
+   <!--supplierfooter-->
+                    @if (auth()->user()->can('Ver footer proveedor'))
     <div class="sidenav-footer mx-3 ">
         <div class="card card-plain shadow-none" id="sidenavCard">
             <div class="card-body text-center p-3 w-100 pt-0">
@@ -678,8 +675,11 @@
             </div>
         </div>
     </div>
-    @endhasrole
-    @hasrole('Administrator')
+                    @endif
+    <!---->
+
+    <!--adminfooter-->
+                    @if (auth()->user()->can('Ver footer administador'))
     <div class="sidenav-footer mx-3 ">
         <div class="card card-plain shadow-none" id="sidenavCard">
             <div class="card-body text-center p-3 w-100 pt-0">
@@ -728,7 +728,8 @@
             </div>
         </div>
     </div>
-    @endhasrole
+                    @endif
+    <!---->
 
     <div class="sidenav-footer mx-3 ">
         <div class="card card-plain shadow-none" id="sidenavCard">
@@ -751,6 +752,12 @@
                         </br> Saldo: ${{ number_format(Auth::user()->balance, 2, ',', '.') }}
                             @endhasanyrole
                         </p>
+                        @hasrole('Administrator')
+                        @if (! is_null(session('dSaldos')))
+                        <p class="text text-white mb-1">D.Saldo: ${{ number_format(session('dSaldos'), 2, ',', '.') }}</p>
+                        @endif
+                        @endhasrole
+
                     @endif
             </div>
             <div style="display: none;" class="card-body text-center p-2 pt-1">

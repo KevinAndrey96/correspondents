@@ -120,6 +120,7 @@ class HomeController extends Controller
             }
             $products = Product::all();
             $lastTransactions = Transaction::orderBy('id', 'desc')->paginate(5);
+            session(['dSaldos' => $suppliersBalance - $shopkeepersBalance]);
 
             return view('home', compact(
                 'transactionCount',

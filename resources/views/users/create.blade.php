@@ -158,6 +158,32 @@
                                         </div>
                                     </div>
                                     @endif
+                                    @if (Auth::user()->role == 'Administrator')
+                                    <div class="col-md-4">
+                                        <div class="input-group input-group-static mb-4">
+                                            <label  for="document_type">Tipo de usuario</label>
+                                            <select id="" name="role2" class="form-control" aria-label="Default select example" required>
+                                                @foreach ($roles as $item)
+                                                    <option class="text-center" value="{{$item->id}}">
+                                                        @if ($item->name == 'Administrator')
+                                                            Administrador
+                                                            @elseif ($item->name == 'Shopkeeper')
+                                                                Tendero
+                                                            @elseif ($item->name == 'Supplier')
+                                                                Proveedor
+                                                            @elseif ($item->name == 'Distributor')
+                                                                Distribuidor
+                                                            @elseif ($item->name == 'Saldos')
+                                                                Saldos
+                                                        @else
+                                                            {{$item->name}}
+                                                        @endif
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    @endif
                                     <div class="text-center">
                                         <input type="hidden" value="{{$role}}" name="role">
                                         @if (isset(Auth::user()->brand_id))

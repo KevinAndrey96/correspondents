@@ -9,12 +9,15 @@ use App\Models\Product;
 use App\Models\Card;
 use App\Models\User;
 use App\Models\Brand;
+use Spatie\Permission\Models\Role;
 
 class CreateUsersController extends Controller
 {
     public function create(Request $request)
     {
         $role = $request->input('role');
+        $roles = Role::get();
+
         if (Auth::user()->role == 'Distributor' && $role == 'Supplier' || Auth::user()->role == 'Administrator' && $role == 'Shopkeeper'
             || Auth::user()->role == 'Distributor' && $role == 'Distributor' || Auth::user()->role == 'Distributor' && $role == 'Administrator'
             || Auth::user()->role == 'Supplier' || Auth::user()->role == 'Shopkeeper') {
@@ -24,28 +27,26 @@ class CreateUsersController extends Controller
 
         if ($role == 'Saldos') {
             $cards = Card::all();
-            return view('users.create', compact('role', 'cards'));
+            return view('users.create', compact('role', 'cards', 'roles'));
         }
 
         if ($role == 'Advisers') {
-            return view('users.create', compact('role'));
+            return view('users.create', compact('role', 'roles'));
         }
 
         if ($role == 'Shopkeeper') {
-            $advisers = User::where('role', 'Advisers')->get();
-
-            return view('users.create', compact('role', 'advisers'));
+            $advisers = User::where('role', 'Advisers', 'roles')->get();
+            return view('users.create', compact('role', 'advisers', 'roles'));
 
         }
-
 
         if ($role == 'Distributor') {
             $brands = Brand::all();
 
-            return view('users.create', compact('role', 'brands'));
+            return view('users.create', compact('role', 'brands', 'roles'));
 
         }
 
-        return view('users.create', compact('role'));
+        return view('users.create', compact('role', 'roles'));
     }
 }

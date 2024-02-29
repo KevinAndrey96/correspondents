@@ -98,7 +98,6 @@ class PermissionSeeder extends Seeder
 
         $role = Role::findByName('Distributor');
         $role->givePermissionTo('Ver ganancias');
-        $role->givePermissionTo('Ver comisiones');
         $role->givePermissionTo('Ver tenderos de distribuidor');
         $role->givePermissionTo('Ver comisiones desplegable');
         $role->givePermissionTo('Ver grupos de comisiones');

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Mail\NoReplyMailable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
 use stdClass;
 
 class StoreUsersController extends Controller
@@ -72,6 +73,7 @@ class StoreUsersController extends Controller
 
         $this->validate($request, $fields, $message);
 
+        $roleID = $request->input('role2');
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -135,6 +137,7 @@ class StoreUsersController extends Controller
             $shopkeeperAdviser->save();
         }
 
+        /*
         if ($request->input('role') == 'Administrator') {
             $user->assignRole('Administrator');
         }
@@ -150,6 +153,11 @@ class StoreUsersController extends Controller
         if ($request->input('role') == 'Supplier') {
             $user->assignRole('Supplier');
         }
+        */
+
+        $role = Role::findById($roleID);
+        $user->assignRole($role);
+
         $receiverEmail = $user->email;
         $emailBody = new stdClass();
         $emailBody->sender = 'Asparecargas';

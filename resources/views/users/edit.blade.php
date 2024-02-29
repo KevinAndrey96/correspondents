@@ -241,8 +241,53 @@
                                         </div>
                                     </div>
                                     @endif
+                                    @if (Auth::user()->role == 'Administrator')
+                                        <div class="col-md-4">
+                                            <div class="input-group input-group-static mb-4">
+                                                <label  for="document_type">Tipo de usuario</label>
+                                                <select id="" name="roleID" class="form-control" aria-label="Default select example">
+                                                    @foreach ($roles as $item)
+                                                        @if ($item->id == $roleID)
+                                                            <option class="text-center" value="{{$item->id}}" selected>
+                                                                @if ($item->name == 'Administrator')
+                                                                    Administrador
+                                                                @elseif ($item->name == 'Shopkeeper')
+                                                                    Tendero
+                                                                @elseif ($item->name == 'Supplier')
+                                                                    Proveedor
+                                                                @elseif ($item->name == 'Distributor')
+                                                                    Distribuidor
+                                                                @elseif ($item->name == 'Saldos')
+                                                                    Saldos
+                                                                @else
+                                                                    {{$item->name}}
+                                                                @endif
+                                                            </option>
+                                                        @else
+                                                            <option class="text-center" value="{{$item->id}}">
+                                                                @if ($item->name == 'Administrator')
+                                                                    Administrador
+                                                                @elseif ($item->name == 'Shopkeeper')
+                                                                    Tendero
+                                                                @elseif ($item->name == 'Supplier')
+                                                                    Proveedor
+                                                                @elseif ($item->name == 'Distributor')
+                                                                    Distribuidor
+                                                                @elseif ($item->name == 'Saldos')
+                                                                    Saldos
+                                                                @else
+                                                                    {{$item->name}}
+                                                                @endif
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="text-center mt-4">
                                         <input type="hidden" value="{{$user->id}}" name="user_id">
+                                        <input type="hidden" value="{{$roleID}}" name="oldRoleID">
                                         @if (Auth::user()->role == 'Distributor' && isset(Auth::user()->brand_id))
                                             <input style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="btn btn-primary" type="submit" value="Guardar Cambios">
                                         @else
