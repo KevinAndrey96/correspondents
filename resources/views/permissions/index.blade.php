@@ -126,7 +126,7 @@
                     {data: 'id', render: function(data, type, row) {
                             return '<div class="d-flex justify-content-center">' +
                                 '<div class="d-inline">' +
-                                '<!--<a style="color: green;" href="#" title="Editar" class="btn btn-link px-1 mb-0" onclick="setEditFields('+data+')">' +
+                                '<!--<a style="color: green;" hphp aref="#" title="Editar" class="btn btn-link px-1 mb-0" onclick="setEditFields('+data+')">' +
                                 '<i style="color: green; font-size: 25px !important;" class="material-icons opacity-10">' +
                                 'edit</i></a>-->'+
                                 '</div>'+

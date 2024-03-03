@@ -40,12 +40,8 @@ class StoreTransactionController extends Controller
         $amount = floatval(amountFormat($request->transactionAmount));
         $giros = $request->input('giros');
 
-        if ($amount > floatval(Auth::user()->balance) && $product->type == 'Deposit') {
-
-        }
-
-
         if ($amount == 0 || is_null($request->transactionAmount)) {
+            return $amount;
 
             return back()->with('noAmount', 'Por favor ingrese un monto.');
         }

@@ -33,6 +33,9 @@ function uploadFile(UploadedFile $file, string $fileName, string $path)
 function amountFormat(string $amount)
 {
     $amountLength = strlen($amount);
+
+    if ($amountLength > 1) {
+
     $spotPosition = strpos($amount, '.') + 1;
 
     if ($amountLength == $spotPosition) {
@@ -40,6 +43,7 @@ function amountFormat(string $amount)
     }
 
     $amount = str_replace(',','', $amount);
+    }
 
     return $amount;
 }

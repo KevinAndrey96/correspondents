@@ -214,5 +214,8 @@ fix: assign product to shopkeeper when assigning product to distributor
 ## [Hotfix 1.7.0]
 fix: negative balances by shopkeeper transactions
 
+## [Hotfix 1.7.1]
+fix: allow one digit in create transaction
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
