@@ -454,6 +454,40 @@
                                 </div>
                             </div>
                             <!--end Modal-->
+                            <!-- Modal-->
+                            @if (! is_null($balanceModificationData))
+                            <div class="modal fade" id="successBalanceModificationModal" tabindex="-1" role="dialog" aria-labelledby="SaldoModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-12 d-flex justify-content-center">
+                                                    <iframe style="width: 110%;" src="{{getenv('APP_URL')}}/balance-detail-pdf/{{$balanceModificationData['balanceID']}}" frameborder="0"></iframe>
+                                                </div>
+                                                <div class="col-md-12 d-flex justify-content-center mt-3">
+                                                    <p style="font-size: 24px;" class="text-center text-success font-weight-bold">MODIFICACIÓN DE SALDO EXITOSA</p>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 mt-3 d-flex justify-content-center">
+                                                    <button class="btn btn-success bg-gradient" data-bs-dismiss="modal">Aceptar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            <!--end Modal-->
+                            <script>
+                                $(document).ready(function(){
+                                    @if (! is_null($balanceModificationData))
+                                        $('#successBalanceModificationModal').modal('show');
+                                    @endif
+                                });
+
+                            </script>
+
+
                             <script>
                                 $('#SaldoModal').on('show.bs.modal', function (event) {
                                     var button = $(event.relatedTarget)

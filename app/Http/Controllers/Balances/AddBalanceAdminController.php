@@ -66,6 +66,10 @@ class AddBalanceAdminController extends Controller
             $balance->date = $balance->created_at;
             $balance->save();
 
+            session(
+                ['balanceModificationData' => ['balanceID' => $balance->id]]
+            );
+
             $summary = new Summary();
             $summary->movement_id = $balance->id;
             $summary->user_id = $request->input('userID');
