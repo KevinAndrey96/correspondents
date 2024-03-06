@@ -3,12 +3,17 @@
     @section('content')
         @if(Session::has('noChecked'))
             <div class="alert alert-danger" role="alert">
-                {{ Session::get('noChecked') }}
+                <p class="text-center text-white">{{ Session::get('noChecked') }}</p>
             </div>
         @endif
         @if(Session::has('notAllowedAmount'))
             <div class="alert alert-danger" role="alert">
-                {{ Session::get('notAllowedAmount') }}
+                <p class="text-center text-white">{{ Session::get('notAllowedAmount') }}</p>
+            </div>
+        @endif
+        @if (Session::has('systemError'))
+            <div class="alert alert-danger" role="alert">
+                <p class="text-center text-white">{{ Session::get('systemError') }}</p>
             </div>
         @endif
         <div class="container-fluid py-4">
@@ -43,7 +48,7 @@
                                             <p style="font-size: 20px;" class="font-weight-bold ms-2 mt-3">Seleccione las comisiones:</p>
                                             @for ($i = 0; $i < count($distributorCommissions); $i++)
                                                 @if (! $products[$i]->is_deleted && $products[$i]->is_enabled && $distributorCommissions[$i]->amount > 0)
-                                                <div class="col-md-4 form-check mt-4 mx-auto">
+                                                <div class="col-md-4 form-check mt-4 mx-auto px-1">
                                                     <div style="border: 4px solid blue" class="w-100 pb-2">
                                                         <div class="w-80 ms-auto me-auto">
                                                             <div class="row">

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Products;
 
+use App\Models\Commission;
+use App\Models\CommissionsGroupGeneralCommission;
+use App\Models\GeneralCommission;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -14,6 +17,7 @@ class UpdateProductController extends Controller
 {
     public function update(Request $request, $productId)
     {
+        set_time_limit(0);
         $fields = [
             'productName'=>'required|string',
             'productType'=>'required|string',
@@ -60,6 +64,11 @@ class UpdateProductController extends Controller
         $product->product_type = $request->input('productType');
         $product->product_description = $request->input('productDescription');
         $product->are_default_fields = 1;
+        $product->category = null;
+
+        if (! is_null($request->input('category'))) {
+            $product->category = strtolower($request->input('category'));
+        }
 
         if (intval($request->defaultFieldsRadio)) {
             $product->client_document = $request->input('clientDocument');
@@ -88,6 +97,29 @@ class UpdateProductController extends Controller
             $product->code = 0;
             $product->client_name = 0;
             $product->field_names = implode(',', $request->fieldNames);
+        }
+
+        if ($product->product_commission != $request->input('productCommission')) {
+            $productCommissions = Commission::where('product_id', $product->id)->get();
+            $generalCommissions = GeneralCommission::where('product_id', $product->id)->get();
+
+            if (count($productCommissions) > 0) {
+                foreach ($productCommissions as $commission) {
+                    $commission->delete();
+                }
+            }
+
+            if (count($generalCommissions) > 0) {
+                foreach ($generalCommissions as $generalCommission) {
+                    $commGPgralComm = CommissionsGroupGeneralCommission::where('gen_comm_id', $generalCommission->id)->get();
+
+                    foreach ($commGPgralComm as $item) {
+                        $item->delete();
+                    }
+
+                    $generalCommission->delete();
+                }
+            }
         }
 
         $product->product_commission = $request->input('productCommission');

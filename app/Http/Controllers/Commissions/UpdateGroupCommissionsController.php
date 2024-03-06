@@ -12,6 +12,7 @@ use App\Models\SupplierProduct;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateGroupCommissionsController extends Controller
 {
@@ -46,6 +47,21 @@ class UpdateGroupCommissionsController extends Controller
             return floatval($value);
         });
 
+        for ($i = 0; $i < count($amountsDis); $i++) {
+            $commission = Commission::where([
+                ['product_id', $products[$i]],
+                ['user_id', Auth::user()->id]
+            ])
+                ->first();
+
+            if ($amountsDis[$i] != floatval($commission->amount)) {
+                return redirect()->route('commissions.edit-group', ['id' => $request->input('commissionsGroupID')])
+                    ->with('systemError', 'Hubo un error en el sistema por favor intente de nuevo');
+            }
+        }
+
+
+
         //If exists a commission amount that exceeded its correspondent product commission amount it will return to
         //create commissions group with error message
         for ($i = 0; $i < count($amountsDis); $i++) {
@@ -53,7 +69,7 @@ class UpdateGroupCommissionsController extends Controller
             if ($amountsDis[$i] > $product->product_commission || $amountsShop[$i] > $product->product_commission ||
                 $amountsShop[$i] > $amountsDis[$i]) {
 
-                return redirect()->route('commissions.create-group')->with('notAllowedAmount', 'Monto de comisión no permitido');
+                return redirect()->route('commissions.edit-group')->with('notAllowedAmount', 'Monto de comisión no permitido');
             }
         }
 

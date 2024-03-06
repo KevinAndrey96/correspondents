@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $id
  * @property mixed $amount_dis
  * @property mixed $amount_shop
+ * @method static where(string $string, $id)
  */
 class GeneralCommission extends Model
 {

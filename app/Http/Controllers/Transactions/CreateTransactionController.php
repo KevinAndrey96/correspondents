@@ -48,7 +48,11 @@ class CreateTransactionController extends Controller
                 $productsWithdrawal = collect([]);
             }
 
-            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform', 'urlServer', 'giros', 'exchange'));
+            $categories = array_filter(array_unique(Product::get()->pluck('category')->toArray()), function($value){
+                return $value != null;
+            });
+
+            return view('transactions.create', compact('productsDeposit', 'productsWithdrawal', 'platform', 'urlServer', 'giros', 'exchange', 'categories'));
         }
     }
 

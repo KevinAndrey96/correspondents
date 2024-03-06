@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed $fixed_commission
  * @property mixed $giros
  * @property mixed|string $field_names
+ * @property mixed|string $category
  */
 class Product extends Model
 {

@@ -41,7 +41,6 @@ class StoreTransactionController extends Controller
         $giros = $request->input('giros');
 
         if ($amount == 0 || is_null($request->transactionAmount)) {
-            return $amount;
 
             return back()->with('noAmount', 'Por favor ingrese un monto.');
         }

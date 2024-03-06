@@ -60,7 +60,7 @@
                                                         <div id="submenucomm{{$commissionsGroup->id}}" class="collapse mt-3 border-2" data-bs-parent="#menu-accordion">
                                                             <ul class="submenu-list list-unstyled">
                                                                 @foreach ($commissionsGroupGeneralCommissions as $item)
-                                                                    @if ($item->comm_group_id == $commissionsGroup->id)
+                                                                    @if ($item->comm_group_id == $commissionsGroup->id && $item->generalCommission->product->is_enabled)
                                                                         <li class="nav-item">
                                                                             <span><strong>
                                                                                     {{strtoupper($item->generalCommission->product->product_name.' - '. ($item->generalCommission->product->product_type == 'Withdrawal' ? 'Retiro' : 'Deposito') )}} => DISTRIBUIDOR: ${{number_format($item->generalCommission->amount_dis - $item->generalCommission->amount_shop, 2, ',', '.')}} | TENDERO: ${{number_format($item->generalCommission->amount_shop, 2, ',', '.')}}

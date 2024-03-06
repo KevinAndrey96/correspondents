@@ -22,9 +22,9 @@
                             </div>
                         @endif
                             @if($mode=="Crear")
-                        <form action="{{ url('/products') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('/products') }}" method="post" id="form" enctype="multipart/form-data">
                             @elseif($mode=="Editar")
-                        <form action="{{ url('/products/'.$product->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('/products/'.$product->id) }}" id="form" method="post" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @endif
                             @csrf
@@ -59,9 +59,15 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
+                                    <div class=" input-group input-group-outline my-3">
+                                        <label for="productName" class="form-label">Categoría</label>
+                                        <input type="text" class="form-control" name="category" value="{{ isset($product->category)?$product->category:old('category') }}" id="productName" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label for="productCommission" class="form-label">Comisión del producto</label>
-                                        <input type="number" class="form-control" step="any" name="productCommission" value="{{ isset($product->product_commission)?$product->product_commission:old('product_commission') }}" id="productCommission" placeholder="" required>
+                                        <input type="number" class="form-control" step="any" id="productCommission" name="productCommission" value="{{ isset($product->product_commission)?$product->product_commission:old('product_commission') }}" id="productCommission" placeholder="" required>
                                     </div>
                                 </div>
                                 @if ($mode == 'Crear')
@@ -500,6 +506,28 @@
             let principalDiv = openFieldInput.parentNode.parentNode.parentNode.parentNode;
             principalDiv.remove();
         }
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            @if ($mode == 'Editar')
+                $('#form').submit(function(event) {
+                let newProductCommission = parseFloat($('#productCommission').val());
+                let oldProductCommission = parseFloat({{$product->product_commission}});
+                    console.log(newProductCommission+' '+oldProductCommission);
+
+                    if (newProductCommission != oldProductCommission) {
+                        if(confirm('Ha cambiado la comisión de producto, esta acción borrara todas las comisiones que lo' +
+                            ' tengan asociado, el cambio de comisión tambien eliminara este producto de todos los grupos de comisiones' +
+                            ' que lo contengan, ¿Desea continuar?')){
+                            // Code to execute if user confirms
+                        } else {
+                            event.preventDefault(); // Prevent form submission
+                        }
+                    }
+                })
+            @endif
+        });
     </script>
 @endsection
 

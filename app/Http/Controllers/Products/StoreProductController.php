@@ -35,7 +35,8 @@ class StoreProductController extends Controller
             'hours'=>'required',
             'reassignment_minutes' => 'required',
             'fixed_commission' => 'required',
-            'defaultFieldsRadio' => 'required'
+            'defaultFieldsRadio' => 'required',
+            'category' => 'string'
          ];
 
         $defaultFields = [
@@ -109,6 +110,7 @@ class StoreProductController extends Controller
         $product->com_dis = $request->input('com_dis');
         $product->com_sup = $request->input('com_sup');
         $product->fixed_commission = $request->input('fixed_commission');
+        $product->category = strtolower(strval($request->input('category')));
 
         if (isset($request->giros)) {
             $product->giros = intval($request->input('giros'));

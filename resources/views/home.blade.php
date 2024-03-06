@@ -944,92 +944,96 @@
         </div>
         @endhasanyrole
         <script type="text/javascript">
-            @if (Auth::user()->role == 'Administrator')
-            @for ($i = 0; $i < count($superProduct); $i++)
+            $(document).ready(function() {
+                @if (Auth::user()->role == 'Administrator')
+                @for ($i = 0; $i < count($superProduct); $i++)
 
-            var dates2 = {{ str_replace('"', "", json_encode($superProduct[$i][0])) }}
+                var dates2 = {{ str_replace('"', "", json_encode($superProduct[$i][0])) }};
 
-                dates2 = dates2.map(function(num){
-                if (num == 1) {
-                    num = 'Ene'
-                }
-                if (num == 2) {
-                    num = 'Feb'
-                }
-                if (num == 3) {
-                    num = 'Mar'
-                }
-                if (num == 4) {
-                    num = 'Abr'
-                }
-                if (num == 5) {
-                    num = 'May'
-                }
-                if (num == 6) {
-                    num = 'Jun'
-                }
-                if (num == 7) {
-                    num = 'Jul'
-                }
-                if (num == 8) {
-                    num = 'Ago'
-                }
-                if (num == 9) {
-                    num = 'Sep'
-                }
-                if (num == 10) {
-                    num = 'Oct'
-                }
-                if (num == 11) {
-                    num = 'Nov'
-                }
-                if (num == 12) {
-                    num = 'Dic'
-                }
+                dates2 = dates2.map(function (num) {
+                    if (num == 1) {
+                        num = 'Ene'
+                    }
+                    if (num == 2) {
+                        num = 'Feb'
+                    }
+                    if (num == 3) {
+                        num = 'Mar'
+                    }
+                    if (num == 4) {
+                        num = 'Abr'
+                    }
+                    if (num == 5) {
+                        num = 'May'
+                    }
+                    if (num == 6) {
+                        num = 'Jun'
+                    }
+                    if (num == 7) {
+                        num = 'Jul'
+                    }
+                    if (num == 8) {
+                        num = 'Ago'
+                    }
+                    if (num == 9) {
+                        num = 'Sep'
+                    }
+                    if (num == 10) {
+                        num = 'Oct'
+                    }
+                    if (num == 11) {
+                        num = 'Nov'
+                    }
+                    if (num == 12) {
+                        num = 'Dic'
+                    }
 
-                return num
-            });
+                    return num
+                });
 
-            var productCounts = {{ str_replace('"', "", json_encode($superProduct[$i][2])) }}
-            var amounts = {{ str_replace('"', "", json_encode($superProduct[$i][1])) }}
+                var productCounts = {{ str_replace('"', "", json_encode($superProduct[$i][2])) }};
+                var amounts = {{ str_replace('"', "", json_encode($superProduct[$i][1])) }};
 
-            Highcharts.chart('container{{$products[$i]}}', {
-                chart: {
-                    type: 'area'
-                },
-                title: {
-                    text: 'Dinero movido y cantidad de transacciones'
-                },
-                xAxis: {
-                    categories: dates2
-                },
-                yAxis: {
+                @if (count($products) < $i)
+                Highcharts.chart('container{{$products[$i]}}', {
+                    chart: {
+                        type: 'area'
+                    },
                     title: {
-                        text: 'Cantidad de dinero'
-                    }
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                },
-                plotOptions: {
-                    series: {
-                        allowPointSelect: true
-                    }
-                },
-                series: [{
-                    name: 'Monto',
-                    data: amounts
-                },
-                    {
-                        name: 'Cantidad transacciones',
-                        data: productCounts
-                    }
-                ]
+                        text: 'Dinero movido y cantidad de transacciones'
+                    },
+                    xAxis: {
+                        categories: dates2
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Cantidad de dinero'
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                    },
+                    plotOptions: {
+                        series: {
+                            allowPointSelect: true
+                        }
+                    },
+                    series: [{
+                        name: 'Monto',
+                        data: amounts
+                    },
+                        {
+                            name: 'Cantidad transacciones',
+                            data: productCounts
+                        }
+                    ]
+                });
+                @endif
+                @endfor
+                @endif
             });
-            @endfor
-            @endif
         </script>
         <script>
             $(document).ready(function () {

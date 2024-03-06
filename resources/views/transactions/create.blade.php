@@ -112,48 +112,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <script>
-                                    function showProducts() {
-                                        //al seleccionar el tipo de transacción mostrar los productos que correspondan
-                                        //si es deposito muestra los productos de deposito y si no muestra los de retiro
-                                        //paso 1: saber que seleccionó el cliente
-                                        var checkDivs = document.querySelectorAll('.checkDiv');
-
-                                        checkDivs.forEach(checkDiv => {
-                                            checkDiv.style.display = 'block';
-                                        });
-
-                                        var transactionType = document.getElementById('transactionType').value
-                                        //paso 2: mostrar el div que corresponda
-                                        if (transactionType == 'Deposit') {
-                                            document.getElementById('deposit').style.display = 'block'
-                                            document.getElementById('withdrawal').style.display = 'none'
-                                            document.getElementById('submitButton').disabled = false
-                                            resetRadioButtons("productID");
-                                        }
-                                        if (transactionType == 'Withdrawal') {
-                                            document.getElementById('withdrawal').style.display = 'block'
-                                            document.getElementById('deposit').style.display = 'none'
-                                            document.getElementById('submitButton').disabled = false
-                                            resetRadioButtons("productID");
-                                        }
-                                        if (transactionType == 'off') {
-                                            document.getElementById('withdrawal').style.display = 'none'
-                                            document.getElementById('deposit').style.display = 'none'
-                                            document.getElementById('submitButton').disabled = true
-                                            resetRadioButtons("productID");
-                                        }
-
-                                        function resetRadioButtons(groupName) {
-                                            var arRadioBtn = document.getElementsByName(groupName);
-
-                                            for (var ii = 0; ii < arRadioBtn.length; ii++) {
-                                                var radButton = arRadioBtn[ii];
-                                                radButton.checked = false;
-                                            }
-                                        }
-                                    }
-                                </script>
                                 <div class="col-md-5">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="transactionAmount" class="form-label">Monto</label>
@@ -270,7 +228,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -279,8 +236,293 @@
                                     </div>
                                     @endif
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-10 mt-4">
+                                            @if ($platform->is_enabled == 1)
+                                            <div class="accordion" id="accordionExample">
+                                                <div class="accordion-item mb-2">
+                                                    <h2 class="accordion-header" id="headingOthers">
+                                                        @if (isset(Auth::user()->brand_id))
+                                                            <button style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="accordion-button rounded-3" type="button"
+                                                                    data-bs-toggle="collapse" data-bs-target="#collapseOthers"
+                                                                    aria-expanded="true" aria-controls="collapseOthers">
+                                                                <span class="text-center text-white ms-auto">{{strtoupper('Otros')}}</span>
+                                                            </button>
+                                                        @else
+                                                            <button class="accordion-button bg-primary bg-gradient rounded-3" type="button"
+                                                                    data-bs-toggle="collapse" data-bs-target="#collapseOthers"
+                                                                    aria-expanded="true" aria-controls="collapseOthers">
+                                                                <span class="text-center text-white ms-auto">{{strtoupper('Otros')}}</span>
+                                                            </button>
+                                                        @endif
+                                                    </h2>
+                                                    <div id="collapseOthers" class="accordion-collapse collapse" aria-labelledby="headingOthers" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <div id="depositOthers" class="depositDiv" style=" display: none;">
+                                                                <p class="form-label">Depositos</p>
+                                                                <div class="row">
+                                                                    <div class="col-md-12 mb-4">
+                                                                        <p class="text-sm text-weight-bold text-center">Click en el logo para más información</p>
+                                                                    </div>
+                                                                    @foreach ($productsDeposit as $product)
+                                                                        @if (is_null($product->category))
+                                                                        <div class="col-md-3 col-xs-6">
+                                                                            <div id="checkDiv{{$product->id}}" class="form-check mb-3 checkDiv depositCheckDiv">
+                                                                                <input class="form-check-input radioProducts" type="radio" name="productID" id="productID{{$product->id}}" value="{{$product->id}}" onchange="hideProducts({{$product->id}})" required>
+                                                                                <label  style="width:50%;" class="custom-control-label text-center" for="customRadio1">
+                                                                                    <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModalOthers{{$product->id}}"
+                                                                                            data-id="{{$product->id}}">
+                                                                                        <a>
+                                                                                            <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1 imageProducts" src="{{$urlServer.'/'.$product->product_logo}}" alt="No carga">
+                                                                                            <p style="overflow-wrap: break-word;" class="text-xs mt-1" >{{ $product->product_name}}</p>
+                                                                                        </a>
+                                                                                    </button>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal fade" id="DescriptionModalOthers{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h6 class="modal-title" id="exampleModalLabel">Detalle del producto</h6>
+                                                                                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">×</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <div class="container-fluid">
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-2"></div>
+                                                                                                <div class="col-md-8">
+                                                                                                    <div class="card">
+                                                                                                        <div class="card-header pb-0 px-3 text-center">
+                                                                                                            <h6 class="mb-0">{{$product->product_name}}</h6>
+                                                                                                        </div>
+                                                                                                        <div class="card-body pt-4 p-3">
+                                                                                                            <div class="d-flex flex-column">
+                                                                                                                {!! $product->product_description !!}
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                            <div id="withdrawalOthers" class="withdrawalDiv" style="display: none;">
+                                                                <p class="form-label">Retiros</p>
+                                                                <div class="row">
+                                                                    <div class="col-md-12 mb-4">
+                                                                        <p class="text-sm text-weight-bold text-center">Click en el logo para más información</p>
+                                                                    </div>
+                                                                    @foreach($productsWithdrawal as $product)
+                                                                        @if (is_null($product->category))
+                                                                            <div class="col-md-3 col-xs-6">
+                                                                                <div id="checkDiv{{$product->id}}" class="form-check mb-3 checkDiv depositCheckDiv">
+                                                                                    <input class="form-check-input radioProducts" type="radio" name="productID" id="productID" value="{{$product->id}}" onchange="hideProducts({{$product->id}})" required>
+                                                                                    <label  style="width:50%;" class="custom-control-label text-center" for="customRadio1">
+                                                                                        <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModalOthers{{$product->id}}"
+                                                                                                data-id="{{$product->id}}">
+                                                                                            <a>
+                                                                                                <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1 imageProducts" src="{{$urlServer.'/'.$product->product_logo}}" alt="No carga">
+                                                                                                <p style="overflow-wrap: break-word;" class="text-xs mt-1" >{{ $product->product_name}}</p>
+                                                                                            </a>
+                                                                                        </button>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal fade" id="DescriptionModalOthers{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h6 class="modal-title" id="exampleModalLabel">Detalle del producto</h6>
+                                                                                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">×</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <div class="container-fluid">
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-2"></div>
+                                                                                                <div class="col-md-8">
+                                                                                                    <div class="card">
+                                                                                                        <div class="card-header pb-0 px-3 text-center">
+                                                                                                            <h6 class="mb-0">{{$product->product_name}}</h6>
+                                                                                                        </div>
+                                                                                                        <div class="card-body pt-4 p-3">
+                                                                                                            <div class="d-flex flex-column">
+                                                                                                                {!! $product->product_description !!}
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @foreach ($categories as $category)
+                                                    <div class="accordion-item mt-2 mb-2">
+                                                        <h2 class="accordion-header" id="heading{{$category}}">
+                                                            @if (isset(Auth::user()->brand_id))
+                                                                <button style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="accordion-button rounded-3" type="button"
+                                                                        data-bs-toggle="collapse" data-bs-target="#collapse{{$category}}"
+                                                                        aria-expanded="true" aria-controls="collapse{{$category}}">
+                                                                    <span class="text-center text-white ms-auto">{{strtoupper($category)}}</span>
+                                                                </button>
+                                                            @else
+                                                                <button class="accordion-button bg-primary bg-gradient rounded-3" type="button"
+                                                                        data-bs-toggle="collapse" data-bs-target="#collapse{{$category}}"
+                                                                        aria-expanded="true" aria-controls="collapse{{$category}}">
+                                                                    <span class="text-center text-white ms-auto">{{strtoupper($category)}}</span>
+                                                                </button>
+                                                            @endif
+                                                        </h2>
+                                                        <div id="collapse{{$category}}" class="accordion-collapse collapse" aria-labelledby="heading{{$category}}" data-bs-parent="#accordionExample">
+                                                            <div class="accordion-body">
+                                                                <div id="deposit{{$category}}" class="depositDiv" style=" display: none;">
+                                                                    <p class="form-label">Depositos</p>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 mb-4">
+                                                                            <p class="text-sm text-weight-bold text-center">Click en el logo para más información</p>
+                                                                        </div>
+                                                                        @foreach ($productsDeposit as $product)
+                                                                            @if ($product->category == $category)
+                                                                            <div class="col-md-3 col-xs-6">
+                                                                                <div id="checkDiv{{$product->id}}" class="form-check mb-3 checkDiv depositCheckDiv">
+                                                                                    <input class="form-check-input radioProducts" type="radio" name="productID" id="productID{{$product->id}}" value="{{$product->id}}" onchange="hideProducts({{$product->id}})" required>
+                                                                                    <label  style="width:50%;" class="custom-control-label text-center" for="customRadio1">
+                                                                                        <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$category.$product->id}}"
+                                                                                                data-id="{{$product->id}}">
+                                                                                            <a>
+                                                                                                <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1 imageProducts" src="{{$urlServer.'/'.$product->product_logo}}" alt="No carga">
+                                                                                                <p style="overflow-wrap: break-word;" class="text-xs mt-1" >{{ $product->product_name}}</p>
+                                                                                            </a>
+                                                                                        </button>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal fade" id="DescriptionModal{{$category.$product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h6 class="modal-title" id="exampleModalLabel">Detalle del producto</h6>
+                                                                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">×</span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div class="container-fluid">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-2"></div>
+                                                                                                    <div class="col-md-8">
+                                                                                                        <div class="card">
+                                                                                                            <div class="card-header pb-0 px-3 text-center">
+                                                                                                                <h6 class="mb-0">{{$product->product_name}}</h6>
+                                                                                                            </div>
+                                                                                                            <div class="card-body pt-4 p-3">
+                                                                                                                <div class="d-flex flex-column">
+                                                                                                                    {!! $product->product_description !!}
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </div>
+                                                                </div>
+                                                                <div id="withdrawal{{$category}}" class="withdrawalDiv" style="display: none;">
+                                                                    <p class="form-label">Retiros</p>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 mb-4">
+                                                                            <p class="text-sm text-weight-bold text-center">Click en el logo para más información</p>
+                                                                        </div>
+                                                                        @foreach($productsWithdrawal as $product)
+                                                                            @if ($product->category == $category)
+                                                                            <div class="col-md-3 col-xs-6">
+                                                                                <div id="checkDiv{{$product->id}}" class="form-check mb-3 checkDiv depositCheckDiv">
+                                                                                    <input class="form-check-input radioProducts" type="radio" name="productID" id="productID" value="{{$product->id}}" onchange="hideProducts({{$product->id}})" required>
+                                                                                    <label  style="width:50%;" class="custom-control-label text-center" for="customRadio1">
+                                                                                        <button style="padding: 6px; font-size: 11px; margin-top: 12px; margin-left: 10px; " type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#DescriptionModal{{$category.$product->id}}"
+                                                                                                data-id="{{$product->id}}">
+                                                                                            <a>
+                                                                                                <img style=" height: auto !important; width: 60px !important;" class="avatar avatar-sm rounded-circle mx-1 imageProducts" src="{{$urlServer.'/'.$product->product_logo}}" alt="No carga">
+                                                                                                <p style="overflow-wrap: break-word;" class="text-xs mt-1" >{{ $product->product_name}}</p>
+                                                                                            </a>
+                                                                                        </button>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal fade" id="DescriptionModal{{$category.$product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h6 class="modal-title" id="exampleModalLabel">Detalle del producto</h6>
+                                                                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">×</span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div class="container-fluid">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-2"></div>
+                                                                                                    <div class="col-md-8">
+                                                                                                        <div class="card">
+                                                                                                            <div class="card-header pb-0 px-3 text-center">
+                                                                                                                <h6 class="mb-0">{{$product->product_name}}</h6>
+                                                                                                            </div>
+                                                                                                            <div class="card-body pt-4 p-3">
+                                                                                                                <div class="d-flex flex-column">
+                                                                                                                    {!! $product->product_description !!}
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="col-md-12 text-center">
+                            <div class="col-md-12 text-center mt-5">
                                 <input type="hidden" name="giros" value="{{$giros}}">
                                 <input class="btn btn-success" type="submit" id="submitButton" disabled value="continuar">
 
@@ -295,7 +537,67 @@
                         </div>
                     </div>
                 </div>
+        <script>
+            function showProducts() {
+                //al seleccionar el tipo de transacción mostrar los productos que correspondan
+                //si es deposito muestra los productos de deposito y si no muestra los de retiro
+                //paso 1: saber que seleccionó el cliente
+                var checkDivs = document.querySelectorAll('.checkDiv');
+                let depositDivs = document.querySelectorAll('.depositDiv');
+                let withdrawalDivs = document.querySelectorAll('.withdrawalDiv');
 
+                checkDivs.forEach(checkDiv => {
+                    checkDiv.style.display = 'block';
+                });
+
+                var transactionType = document.getElementById('transactionType').value
+                //paso 2: mostrar el div que corresponda
+                if (transactionType == 'Deposit') {
+                    depositDivs.forEach(depositDiv => {
+                        depositDiv.style.display = 'block';
+                        depositDiv.disabled = false;
+                    });
+
+                    withdrawalDivs.forEach(withdrawalDiv => {
+                        withdrawalDiv.style.display = 'none';
+                        withdrawalDiv.disabled = true;
+                    });
+
+                    document.getElementById('submitButton').disabled = false
+                    resetRadioButtons("productID");
+                }
+                if (transactionType == 'Withdrawal') {
+
+                    depositDivs.forEach(depositDiv => {
+                        depositDiv.style.display = 'none';
+                        depositDiv.disabled = true;
+                    });
+
+                    withdrawalDivs.forEach(withdrawalDiv => {
+                        withdrawalDiv.style.display = 'block';
+                        withdrawalDiv.disabled = false;
+                    });
+
+                    document.getElementById('submitButton').disabled = false
+                    resetRadioButtons("productID");
+                }
+                if (transactionType == 'off') {
+                    document.getElementById('withdrawal').style.display = 'none'
+                    document.getElementById('deposit').style.display = 'none'
+                    document.getElementById('submitButton').disabled = true
+                    resetRadioButtons("productID");
+                }
+
+                function resetRadioButtons(groupName) {
+                    var arRadioBtn = document.getElementsByName(groupName);
+
+                    for (var ii = 0; ii < arRadioBtn.length; ii++) {
+                        var radButton = arRadioBtn[ii];
+                        radButton.checked = false;
+                    }
+                }
+            }
+        </script>
         <script type="text/javascript">
             var exchangeInput = document.getElementById('exchange');
             var pesosValueSpan = document.getElementById('pesos_value');
@@ -304,7 +606,7 @@
                 pesosValueSpan.innerHTML = ' $'+JSON.parse(parseFloat(exchangeInput.value) * parseFloat({{$exchange->value}}));
             });
 
-
+        /*
         function hideProducts(id)
         {
             let checkDivs = document.querySelectorAll('.checkDiv');
@@ -319,6 +621,7 @@
 
             console.log(checkDivs);
         }
+         */
         </script>
     </div>
     <!--MODAL-->

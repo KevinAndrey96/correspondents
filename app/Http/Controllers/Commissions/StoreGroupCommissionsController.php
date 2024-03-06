@@ -47,6 +47,19 @@ class StoreGroupCommissionsController extends Controller
             return floatval($value);
         });
 
+        for ($i = 0; $i < count($amountsDis); $i++) {
+            $commission = Commission::where([
+                ['product_id', $products[$i]],
+                ['user_id', Auth::user()->id]
+                ])
+            ->first();
+
+            if ($amountsDis[$i] != floatval($commission->amount)) {
+                return redirect()->route('commissions.create-group')->with('systemError', 'Hubo un error en el sistema
+                por favor intente de nuevo');
+            }
+        }
+
         //If exists a commission amount that exceeded its correspondent product commission amount it will return to
         //create commissions group with error message
         for ($i = 0; $i < count($amountsDis); $i++) {
