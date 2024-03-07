@@ -19,6 +19,10 @@ class ValidateBalanceController extends Controller
             date_default_timezone_set('America/Bogota');
             $balance = Balance::find($request->input('id'));
 
+            session(
+                ['balanceModificationData' => ['balanceID' => $balance->id]]
+            );
+
             if(is_null($balance->is_valid)){
                 $balance->is_valid = $request->input('status');
                 $balance->comment = $request->input('comment');

@@ -455,7 +455,7 @@
                             </div>
                             <!--end Modal-->
                             <!-- Modal-->
-                            @if (! is_null($balanceModificationData))
+                            @if (isset($balanceModificationData))
                             <div class="modal fade" id="successBalanceModificationModal" tabindex="-1" role="dialog" aria-labelledby="SaldoModal" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">

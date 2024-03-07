@@ -26,8 +26,15 @@ class IndexBalanceController extends Controller
         if (Auth::user()->role == 'Administrator') {
             $balances = Balance::whereNull('is_valid')->orderBy('created_at', 'desc')->get();
             $countBalances = $balances->count();
+            $balanceModificationData = null;
 
-            return view('balance.index', compact('balances', 'countBalances', 'urlServer'));
+            if (session()->has('balanceModificationData')) {
+                $balanceModificationData = session('balanceModificationData');
+
+                session()->forget('balanceModificationData');
+            }
+
+            return view('balance.index', compact('balances', 'countBalances', 'urlServer', 'balanceModificationData'));
         }
 
         if (Auth::user()->role == 'Saldos') {
