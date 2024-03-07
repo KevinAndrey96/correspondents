@@ -16,6 +16,8 @@ class Card extends Model
     protected $fillable = [
         'cardIMG',
         'cardPDF',
-        'bank'
+        'bank',
+        'min_amount',
+        'penalty'
     ];
 }

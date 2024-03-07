@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Balances;
 
 use App\Models\Balance;
 use App\Http\Controllers\Controller;
+use App\Models\Card;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -33,6 +35,14 @@ class AddBalanceShopkeeperController extends Controller
             $this->validate($request, $fields, $message);
 
             $amount = floatval(amountFormat($request->amount));
+            $card = Card::find($request->input('card_id'));
+            $minAmount = floatval($card->min_amount);
+            $penalty = floatval($card->penalty);
+
+            if ($minAmount && $amount < $penalty) {
+
+                return back()->with('wrongBalance', 'Saldo erroneo.');
+            }
 
             if ($amount == 0 || is_null($request->amount)) {
 
@@ -47,6 +57,13 @@ class AddBalanceShopkeeperController extends Controller
             if (isset(Auth::user()->balance_min_amount) && $amount < floatval(Auth::user()->balance_min_amount)) {
 
                 return back()->with('lowAmount', 'El monto mínimo requerido para solicitar saldo es de '. Auth::user()->balance_min_amount);
+            }
+
+            if ($minAmount && $amount < $minAmount) {
+                $amount -= $penalty;
+                $administrator = User::find(1);
+                $administrator->profit += $penalty;
+                $administrator->save();
             }
 
             $date = Carbon::now();

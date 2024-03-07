@@ -47,6 +47,18 @@
                                             <input id="bank" type="text" class="form-control" name="bank" value="{{$card->bank}}">
                                         </div>
                                     </div>
+                                    <div class="col-md-6 mt-4 mb-5">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label">Monto mínimo</label>
+                                            <input id="minAmount" type="number" class="form-control" step="0.1" name="minAmount" min="0" value="{{$card->min_amount}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-4 mb-5">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <label class="form-label">Penalidad</label>
+                                            <input id="penalty" type="number" class="form-control" step="0.1" name="penalty" min="0" value="{{$card->penalty}}">
+                                        </div>
+                                    </div>
                                 </div>
                                 <input type="hidden" name="cardID" value="{{$card->id}}">
                                 <input type="submit" class="btn btn-success bg-gradient m-4 float-end" value="Modificar">

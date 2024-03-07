@@ -25,6 +25,11 @@
             {{ Session::get('noAmount') }}
         </div>
     @endif
+    @if(Session::has('wrongBalance'))
+        <div class="alert alert-danger text-white text-center" role="alert">
+            {{ Session::get('wrongBalance') }}
+        </div>
+    @endif
     <div class="row"></div>
     <div class="container-fluid py-4">
         <div class="row">
@@ -43,7 +48,7 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="container">
-                            <form action="/balance/store" method="post" enctype="multipart/form-data">
+                            <form action="/balance/store" id="form" method="post" enctype="multipart/form-data">
                               <div class="row">
                                 @csrf
                                 @if(count($errors)>0)
@@ -89,15 +94,18 @@
                                           </select>
                                       </div>
                                   </div>
+                                  <input type="hidden" id="minAmount" name="minAmount">
+                                  <input type="hidden" id="penalty" name="penalty">
+                                  <input type="hidden" id="finalBalance" name="finalBalance">
+
                                   <div class="text-center">
                                       @if (Auth::user()->brand_id)
-                                        <input style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="btn btn-primary" type="submit" value="Enviar solicitud">
+                                          <input style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="btn btn-primary" type="submit" value="Enviar solicitud">
                                       @else
                                           <input class="btn btn-primary" type="submit" value="Enviar solicitud">
                                       @endif
                                       <a style="background-color: gray" class="btn text-white" href="{{ url('/home') }}"> Regresar</a>
                                   </div>
-
                               </div>
                             </form>
                         </div>
@@ -142,9 +150,34 @@
             </div>
         </div>
     </div>
+    <!-- Modal-->
+        <div class="modal fade" id="penaltyAlert" tabindex="-1" role="dialog" aria-labelledby="SaldoModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4 d-flex">
+                                <img width="70%" class="img-responsive ms-5" src="{{$urlServer}}/assets/img/danger_icon.png">
+                            </div>
+                            <div class="col-md-8">
+                                <p style="font-size:20px; font-family:monospace;" id="alertText" class="text-primary"></p>
+                            </div>
+                            <div class="col-md-12 col-sm-12 mt-3 d-flex justify-content-center">
+                                @if (Auth::user()->brand_id)
+                                    <button style="background-image: linear-gradient(195deg, {{Auth::user()->brand->primary_color}} 0%, #191919 100%);" class="btn mx-1 text-white" id="acceptButton" data-bs-dismiss="modal">Aceptar</button>
+                                @else
+                                    <button class="btn btn-success bg-gradient mx-1" id="acceptButton" data-bs-dismiss="modal">Aceptar</button>
+                                @endif
+                                <button class="btn btn-secondary mx-2" data-bs-dismiss="modal">Rechazar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--end Modal-->
 
     <script type="text/javascript">
-
         function showCard()
         {
             bank = document.getElementById('card_id');
@@ -158,7 +191,61 @@
 
             card.style.display = 'block';
 
+            @foreach ($cards as $card)
+                var cardID = parseInt({{$card->id}});
 
+                if (cardID == parseInt($('#card_id').val())) {
+                    $('#minAmount').val({{$card->min_amount}});
+                    $('#penalty').val({{$card->penalty}});
+                    $('#finalBalance').val(parseFloat($('#amount').val().toString().replace(',','')) - parseFloat('{{$card->penalty}}'));
+                }
+            @endforeach
+            //console.log('minamount: ' + $('#minAmount').val()+', penalty: '+ $('#penalty').val() + ', finalbalance: '+ $('#finalBalance').val().toString());
         }
+    </script>
+
+    <script type="text/javascript">
+        let modalShown = false;
+
+        $(document).ready(function(){
+            $('#form').on('submit', function(e){
+                if (! modalShown) {
+                    let amount = parseFloat($('#amount').val().toString().replace(',', ''));
+
+
+                    @foreach ($cards as $card)
+                    var cardID = parseInt({{$card->id}});
+
+                    if (cardID == parseInt($('#card_id').val())) {
+                        var minAmount = parseFloat({{$card->min_amount}});
+                        var penalty = parseFloat({{$card->penalty}});
+                    }
+                    @endforeach
+                    console.log(amount);
+                    if (!isNaN(minAmount) && !isNaN(penalty) && amount < minAmount) {
+                        e.preventDefault();
+                        $('#penaltyAlert').modal('show');
+                        modalShown = true;
+                    }
+
+                    $('#penaltyAlert').on('shown.bs.modal', function (e) {
+                        console.log('ok');
+                        $('#alertText').text('Está ingresando un monto para recarga de saldo con un valor menor que el monto ' +
+                            'mínimo aceptado ($' + $('#minAmount').val().toString() + ') por el banco seleccionado, si continúa con ' +
+                            'este proceso se aplicará una penalización al monto de saldo descontándole $' + $('#penalty').val().toString() +
+                            ', el monto final de recarga saldo será de: $' + $('#finalBalance').val().toString() + '.')
+                    });
+                }
+            });
+
+            $('#acceptButton').click(function(e){
+                $('#form').submit();
+            });
+
+            $("#amount").on("keyup", function() {
+                modalShown = false;
+            } );
+
+        });
     </script>
 @endsection

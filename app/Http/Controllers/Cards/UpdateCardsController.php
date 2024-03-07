@@ -31,6 +31,8 @@ class UpdateCardsController extends Controller
         $bank = $request->input('bank');
         $card = Card::find($cardID);
         $card->bank = $bank;
+        $card->min_amount = floatval($request->input('minAmount'));
+        $card->penalty = floatval($request->input('penalty'));
         $card->save();
 
         if ($request->hasFile('cardPDF')) {

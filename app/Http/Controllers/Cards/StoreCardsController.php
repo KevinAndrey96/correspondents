@@ -17,7 +17,9 @@ class StoreCardsController extends Controller
             'cardIMG'=>'required|mimes:jpg,jpeg,png',
             'cardPDF'=>'required|mimes:pdf',
             'qrIMG' => 'required|mimes:jpg,jpeg,png',
-            'bank'=>'required'
+            'bank'=>'required',
+            'minAmount'=>'required',
+            'penalty'=>'required'
         ];
         $message = [
             'required'=>':attribute es requerido',
@@ -28,6 +30,8 @@ class StoreCardsController extends Controller
         $card->bank = $request->input('bank');
         $card->cardIMG = '';
         $card->cardPDF = '';
+        $card->min_amount = floatval($request->input('minAmount'));
+        $card->penalty = floatval($request->input('penalty'));
         $card->save();
 
         if ($request->hasFile('cardPDF')) {
