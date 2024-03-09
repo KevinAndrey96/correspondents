@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use App\Models\Product;
 use App\Models\Commission;
 use App\Models\TransactionField;
+use App\Models\UserTransactionLimit;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -38,22 +39,35 @@ class StoreTransactionController extends Controller
         $productID = $request->input('productID');
         $product = Product::find($productID);
         $amount = floatval(amountFormat($request->transactionAmount));
+        $minAmount = floatval($product->min_amount);
+        $maxAmount = floatval($product->max_amount);
+
         $giros = $request->input('giros');
+
+        $userTransactionLimits = UserTransactionLimit::where([
+            ['user_id', Auth::user()->id],
+            ['product_id', $productID]
+        ])->first();
+
+        if (isset($userTransactionLimits)) {
+            $minAmount = $userTransactionLimits->lower_limit;
+            $maxAmount = $userTransactionLimits->upper_limit;
+        }
 
         if ($amount == 0 || is_null($request->transactionAmount)) {
 
             return back()->with('noAmount', 'Por favor ingrese un monto.');
         }
 
-        if ($amount < $product->min_amount || $amount > $product->max_amount) {
+        if ($amount < $minAmount || $amount > $maxAmount) {
             if (getenv('COUNTRY_NAME') == 'ECUADOR' && $giros == 1) {
                 return redirect('/giros/create?giros=1')
                     ->with('limitExceeded', 'Supero el límite del monto permitido por transacción para el producto seleccionado,
-                        el monto mínimo debe ser de $' . number_format($product->min_amount, 2, ',', '.') . ' y el monto máximo de $' . number_format($product->max_amount, 2, ',', '.'));
+                        el monto mínimo debe ser de $' . number_format(strval($minAmount), 2, ',', '.') . ' y el monto máximo de $' . number_format(strval($maxAmount), 2, ',', '.'));
             } else {
                 return redirect('/transactions/create')
                     ->with('limitExceeded', 'Supero el límite del monto permitido por transacción para el producto seleccionado,
-                        el monto mínimo debe ser de $' . number_format($product->min_amount, 2, ',', '.') . ' y el monto máximo de $' . number_format($product->max_amount, 2, ',', '.'));
+                        el monto mínimo debe ser de $' . number_format(strval($minAmount), 2, ',', '.') . ' y el monto máximo de $' . number_format(strval($maxAmount), 2, ',', '.'));
             }
         }
 
@@ -97,12 +111,12 @@ class StoreTransactionController extends Controller
 
         if ($transaction->product->are_default_fields)
         {
-            return view('transactions.clientDataCreate', compact('transaction', 'product', 'giros', 'transactionFields'));
+            return view('transactions.clientDataCreate', compact('transaction', 'product', 'giros', 'transactionFields', 'userTransactionLimits'));
 
         }
 
         $fieldNames = explode(',', $transaction->product->field_names);
 
-        return view('transactions.clientDataCreate', compact('transaction', 'product', 'giros', 'transactionFields', 'fieldNames'));
+        return view('transactions.clientDataCreate', compact('transaction', 'product', 'giros', 'transactionFields', 'fieldNames', 'userTransactionLimits'));
     }
 }

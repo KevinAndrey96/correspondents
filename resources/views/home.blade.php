@@ -1221,7 +1221,7 @@
                             <div class="col-md-12 col-sm-12 mt-3">
                                 <div class="row justify-content-center align-items-center">
                                     <div class="col-md-12">
-                                        <p style="font-size: 20px;" class="text-center pe-2">Yo, {{strtoupper(Auth::user()->name)}}, declaro que he decidido deshabilitar voluntariamente el sistema de seguridad QR que me ofrecía el proveedor
+                                        <p style="font-size:20px; font-family:monospace;" class="text-center pe-2">Yo, {{strtoupper(Auth::user()->name)}}, declaro que he decidido deshabilitar voluntariamente el sistema de seguridad QR que me ofrecía el proveedor
                                             {{(isset(Auth::user()->distributor->brand)) ? Auth::user()->distributor->brand->domain : 'asparecargas.net'}}.
                                             Reconozco que este sistema de seguridad QR me brindaba una mayor protección contra el fraude, el robo de identidad y otras amenazas cibernéticas.
                                             Al deshabilitar este sistema de seguridad QR, asumo la responsabilidad de cualquier daño o pérdida que pueda sufrir como consecuencia de esta decisión.

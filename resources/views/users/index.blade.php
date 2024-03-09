@@ -216,6 +216,7 @@
                                             <a style="color: darkgreen;" href="/user/edit/{{$user->id}}" title="Editar" class="btn btn-link px-1 mb-0"><i style="color: darkgreen; font-size: 25px !important;" class="material-icons opacity-10">edit</i></a>
                                                 @if ($role == 'allShopkeepers')
                                                     <a style="color: darkblue;" href="{{route('users.change-distributor', ['id' => $user->id])}}" title="Cambiar distribuidor" class="btn btn-link px-1 mb-0"><i style="color: darkblue; font-size: 25px !important;" class="material-icons opacity-10">change_circle</i></a>
+                                                    <a style="color: darkblue;" href="{{route('users.change-transaction-limit', ['id' => $user->id])}}" title="Cambiar límite de monto de transacción" class="btn btn-link px-1 mb-0"><i style="color: darkblue; font-size: 25px !important;" class="material-icons opacity-10">expand</i></a>
                                                 @endif
                                                 @if ($role == 'allShopkeepers' or $role == 'Supplier')
                                                 <button type="button" class="btn btn-white px-1 mb-0" title="Gestionar saldo" data-bs-toggle="modal" data-bs-target="#SaldoModal"

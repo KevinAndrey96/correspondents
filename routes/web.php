@@ -97,7 +97,6 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     Route::post('/user/store', [App\Http\Controllers\Users\StoreUsersController::class, 'store']);
     Route::get('/user/edit/{id}', [App\Http\Controllers\Users\EditUsersController::class, 'edit']);
     Route::post('/user/update', [App\Http\Controllers\Users\UpdateUsersController::class, 'update']);
-    //Route::get('/user/delete/{id}', [App\Http\Controllers\Users\DeleteUsersController::class, 'delete']);
     Route::post('/changeStatusUser', [App\Http\Controllers\Users\ChangeStatusUsersController::class, 'changeStatus']);
     Route::get('/changePassword', [App\Http\Controllers\Users\ChangePasswordUsersController::class, 'changePassword']);
     Route::post('/updatePassword', [App\Http\Controllers\Users\UpdatePasswordUsersController::class, 'updatePassword']);
@@ -111,6 +110,12 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
         ->name('users.change-distributor');
     Route::post('/store-distributor-change', App\Http\Controllers\Users\StoreDistributorChangeUsersController::class)
         ->name('users.store-distributor-change');
+    Route::get('/users-change-transaction-limit/{id}', App\Http\Controllers\Users\ChangeTransactionLimitUsersController::class)
+        ->name('users.change-transaction-limit');
+    Route::post('/users-store-transaction-limits', App\Http\Controllers\Users\StoreTransactionLimitsUsersController::class)
+        ->name('users.store-transaction-limits');
+    Route::get('/users-delete-transaction-limits/{id}', App\Http\Controllers\Users\DeleteTransactionLimitsUsersController::class)
+        ->name('users.delete-transaction-limits');
 
 
     Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index'])->name('commissions.index');
