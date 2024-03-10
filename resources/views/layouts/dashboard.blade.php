@@ -790,10 +790,13 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                    @if (Auth::user()->role == 'Shopkeeper')
+                    <a style="color: dodgerblue;" href="/balance/create" title="Recargar saldo" class="btn btn-link px-1 mb-0"><i style="color: dodgerblue; font-size: 25px !important;" class="material-icons opacity-15">qr_code_2</i></a>
                     <!--<div class="input-group input-group-outline">
                       <label class="form-label">Buscar...</label>
                       <input type="text" class="form-control">
                     </div>-->
+                    @endif
                 </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">

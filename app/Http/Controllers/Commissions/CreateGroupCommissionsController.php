@@ -12,7 +12,9 @@ class CreateGroupCommissionsController extends Controller
 {
     public function __invoke()
     {
-        $commissions = Commission::where('user_id', Auth::user()->id)->get();
+        $commissions = Commission::with('product')->where('user_id', Auth::user()->id)->get();
+
+        return $commissions;
 
         $commissions = $commissions->map(function($commission){
             if ($commission->product->is_deleted == 1 || $commission->product->is_enabled == 0) {
