@@ -60,6 +60,7 @@ class IndexBalanceController extends Controller
         if (Auth::user()->role == 'Shopkeeper') {
             $balances = Balance::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         }
+
         if (Auth::user()->role == 'Supplier') {
             $balances = Balance::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         }

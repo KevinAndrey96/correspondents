@@ -94,7 +94,7 @@
     </div>
     <!--End Modal-->
     <!-- Modal-->
-    <div class="modal fade draggable resizable" id="assignPermissionsRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+    <div  style="height:100%;" class="modal fade draggable resizable" id="assignPermissionsRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -103,9 +103,9 @@
                         <span id="closeAssignPermissionsRoleModal" aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div  class="modal-body">
                     <div class="container">
-                        <div style="overflow-y: scroll;" class="row">
+                        <div class="row">
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
 
             $("#my_table").dataTable().fnDestroy();
 
-            $('#assignPermissionsRoleModal').draggable();
+            //$('#assignPermissionsRoleModal').draggable();
 
             $('#btn-add').on('click', function(){
                 $('#createRoleModal').modal('show');
@@ -220,6 +220,7 @@
                 });
                 $('#createRoleModal').modal('hide');
             });
+
             $("#my_table").dataTable().fnDestroy();
 
             $('#btn-update').on('click', function(){
@@ -295,12 +296,25 @@
                     $('#roleID').val(id);
                     var html = '';
 
+                    html += '<div class="col-md-12">';
+                    html += '<select id="roleNameSelect" class="form-select mt-6 mb-5 bg-white text-center border" aria-label="Default select example" onchange="enablePermissions()">'
+                    html += '<option value="" selected disabled>Seleccione un rol</option>'
+                    html += '<option value="Administrator">Administrador</option>'
+                    html += '<option value="Distributor">Distribuidor</option>'
+                    html += '<option value="Supplier">Proveedor</option>'
+                    html += '<option value="Shopkeeper">Tendero</option>'
+                    html += '<option value="Saldos">Saldos</option>'
+                    html += '</select>'
+                    html += '</div>';
+
                     $.each(permissions, function(index, permission) {
                         var checked = '';
+
                         if ($.inArray(permission.id, assignedPermissions) !== -1) {
                             checked = 'checked';
                         }
-                        html += '<div class="col-md-4">';
+
+                        html += '<div class="col-md-4 checkDivs" id="checkDiv'+ permission.id +'" style="display:none;" disabled>';
                         html += '<div class="form-group form-check ps-1 w-100">';
                         html += '<input class="form-check-input mt-2" style="transform: scale(1)" type="checkbox" name="permissionIDs" id="permissionIDs" value="' + permission.id + '" ' + checked + '>';
                         html += '<label class="form-check-label font-weight-bold ms-2 mt-1" style="font-size: 100%; ' +
@@ -371,6 +385,39 @@
 
         }
 
+        function enablePermissions()
+        {
+            let checkDivs = document.querySelectorAll('.checkDivs');
+
+            checkDivs.forEach(function(checkDiv) {
+                checkDiv.style.display = 'none';
+                checkDiv.children[0].firstElementChild.disabled = true;
+            })
+
+            console.log(checkDivs);
+
+            let roleNameSelect = document.getElementById('roleNameSelect');
+            let roleNamesArray = ('{{$rolesPermissionsArray['roleNames']}}'
+                .replaceAll("&quot;", "").replaceAll('[','').replaceAll(']','')
+                .split(','))
+                .map((item,index) => {
+                    if (item == roleNameSelect.value) {
+                        return item;
+                    } else {
+                        return null;
+                    }
+                });
+
+            let permissionIDsArray = '{{$rolesPermissionsArray['permissionIDs']}}'.replaceAll("&quot;", "").replaceAll('[','').replaceAll(']','').split(',');
+
+            for (let i = 0; i < roleNamesArray.length; i++) {
+                if (roleNamesArray[i] != null) {
+                    let checkDiv = document.getElementById('checkDiv'+permissionIDsArray[i]);
+                    checkDiv.style.display = 'block';
+                    checkDiv.children[0].firstElementChild.disabled = false;
+                }
+            }
+        }
     </script>
 
 

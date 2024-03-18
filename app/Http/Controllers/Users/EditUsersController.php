@@ -16,7 +16,14 @@ class EditUsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::get();
+        $roles = Role::where([
+            ['name', '!=', 'Administrator'],
+            ['name', '!=', 'Shopkeeper'],
+            ['name', '!=', 'Supplier'],
+            ['name', '!=', 'Distributor'],
+            ['name', '!=', 'Saldos'],
+        ])->get();
+
         $roleID = $user->roles[0]->id;
         $cards = Card::all();
 

@@ -21,7 +21,7 @@ class UpdateRolesController extends Controller
         $roleID = $request->input('id');
         $role = $this->roleRepository->getRegisterByID($roleID);
         $this->roleRepository->update($role, $name);
-        $roles = $this->roleRepository->getAll();
+        $roles = $this->roleRepository->getNoBaseRoles();
 
         return datatables()->collection($roles)->toJson();
     }

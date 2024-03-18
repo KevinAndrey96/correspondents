@@ -9,6 +9,7 @@ use App\Models\Card;
 /**
  * @method static where(array[] $array)
  * @method static find($id)
+ * @method static whereNull(string $string)
  */
 class Balance extends Model
 {

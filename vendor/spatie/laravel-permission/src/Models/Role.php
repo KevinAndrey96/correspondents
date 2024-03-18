@@ -19,6 +19,7 @@ use Spatie\Permission\Traits\RefreshesPermissionCache;
  * @property string $guard_name
  * @property ?\Illuminate\Support\Carbon $created_at
  * @property ?\Illuminate\Support\Carbon $updated_at
+ * @method static where(array[] $array)
  */
 class Role extends Model implements RoleContract
 {

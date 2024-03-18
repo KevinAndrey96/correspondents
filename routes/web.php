@@ -348,3 +348,7 @@ Route::get('/roles', App\Http\Controllers\Roles\IndexRolesController::class)
 //Permissions
 Route::get('/permissions', App\Http\Controllers\Permissions\IndexPermissionsController::class)
     ->name('permissions.index');
+
+
+//test
+

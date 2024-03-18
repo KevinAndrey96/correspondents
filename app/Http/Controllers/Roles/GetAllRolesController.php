@@ -17,7 +17,7 @@ class GetAllRolesController extends Controller
 
     public function __invoke()
     {
-        $roles = $this->roleRepository->getAll();
+        $roles = $this->roleRepository->getNoBaseRoles();
 
         return datatables()->collection($roles)->toJson();
 

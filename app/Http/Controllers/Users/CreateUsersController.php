@@ -16,7 +16,13 @@ class CreateUsersController extends Controller
     public function create(Request $request)
     {
         $role = $request->input('role');
-        $roles = Role::get();
+        $roles = Role::where([
+            ['name', '!=', 'Administrator'],
+            ['name', '!=', 'Shopkeeper'],
+            ['name', '!=', 'Supplier'],
+            ['name', '!=', 'Distributor'],
+            ['name', '!=', 'Saldos'],
+        ])->get();
 
         if (Auth::user()->role == 'Distributor' && $role == 'Supplier' || Auth::user()->role == 'Administrator' && $role == 'Shopkeeper'
             || Auth::user()->role == 'Distributor' && $role == 'Distributor' || Auth::user()->role == 'Distributor' && $role == 'Administrator'

@@ -98,6 +98,7 @@
                                 <span class="nav-link-text ms-1">Roles</span>
                             </a>
                         </li>
+                        <!--
                         <li class="nav-item">
                             <a class="nav-link text-white " href="{{route('permissions.index')}}">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -106,6 +107,7 @@
                                 <span class="nav-link-text ms-1">Permisos</span>
                             </a>
                         </li>
+                        -->
                     </ul>
                 </div>
             </li>
@@ -470,6 +472,7 @@
                                 <span class="nav-link-text ms-1">Comisiones</span>
                             </a>
                         </li>
+                        @if (auth()->user()->can('Ver grupos de comisiones'))
                         <li class="nav-item">
                             <a class="nav-link text-white " href="{{route('commissions.groups')}}">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -478,6 +481,7 @@
                                 <span class="nav-link-text ms-1">Grupos de comisiones</span>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </li>

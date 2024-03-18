@@ -10,6 +10,7 @@ interface RoleRepositoryInterface
     public function save(string $name): bool;
     public function getRegisterByID(int $id): \Spatie\Permission\Contracts\Role;
     public function update(Role $role, string $name): bool;
-    function assignPermissions(Role $role, $permissionIDs);
-
+    public function assignPermissions(Role $role, $permissionIDs);
+    public function getAllRoleHasPermissionRegisters();
+    public function getNoBaseRoles();
 }
