@@ -217,5 +217,8 @@ fix: negative balances by shopkeeper transactions
 ## [Hotfix 1.7.1]
 fix: allow one digit in create transaction
 
+## [Hotfix 1.7.2]
+fix: validate if transaction status is cancelled and add return to function in UpdateTransactionController
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

@@ -498,7 +498,7 @@
                 </a>
             </li>
             @endif
-            @if (auth()->user()->can('Ver contactar distribuidor'))
+            @if (auth()->user()->can('Ver contactar distribuidor') && isset(Auth::user()->distributor))
                 <li class="nav-item">
                     <a class="nav-link text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{(getenv('COUNTRY_NAME') == 'COLOMBIA')  ? '57'.Auth::user()->distributor->phone : '593'.Auth::user()->distributor->phone}} ">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -752,9 +752,9 @@
                 @endif
                     @if (Auth::user()->role !== 'Saldos')
                         <p class="text text-white mb-1">Ganancia: ${{ number_format(Auth::user()->profit, 2, ',', '.') }}
-                            @hasanyrole('Supplier|Shopkeeper')
+                            @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Supplier')
                         </br> Saldo: ${{ number_format(Auth::user()->balance, 2, ',', '.') }}
-                            @endhasanyrole
+                           @endif
                         </p>
                         @hasrole('Administrator')
                         @if (! is_null(session('dSaldos')))

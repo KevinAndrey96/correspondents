@@ -217,13 +217,11 @@
                                 @endif
                             });
                             $(document).ready( function () {
-
                                 @if (! isset($id))
                                     setTimeout("location.reload()", 30000);
                                 @elseif ($id == 'record')
                                         setTimeout("location.reload()", 30000);
                                 @endif
-
                                 $('#my_table').DataTable({
                                     "language": {
                                         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"

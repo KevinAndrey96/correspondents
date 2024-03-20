@@ -825,6 +825,7 @@
                             <div class="card-body px-0 pb-2">
                                 <div class="container">
                                     <div class="row">
+                                        @if (isset($publicity))
                                         @foreach($publicity as $value)
                                             <div class="col-md-3 m-2 ms-auto me-auto d-flex w-20">
                                                 <div class="card card-profile p-0 m-0">
@@ -843,6 +844,7 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>

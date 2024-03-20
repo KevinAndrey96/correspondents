@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Balance;
 
+/**
+ * @method static where(array $array)
+ */
 class Summary extends Model
 {
     use HasFactory;

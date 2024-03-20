@@ -74,7 +74,14 @@ class IndexTransactionController extends Controller
         */
 
         if (Auth::user()->role == 'Shopkeeper') {
+
             $transactions = Transaction::where('shopkeeper_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+
+            foreach ($transactions as $transaction) {
+                if (! isset($transaction->product)) {
+                    return $transaction;
+                }
+            }
 
             return view('transactions.index', compact('transactions'));
         }

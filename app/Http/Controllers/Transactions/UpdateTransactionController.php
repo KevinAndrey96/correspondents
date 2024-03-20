@@ -22,6 +22,8 @@ class UpdateTransactionController extends Controller
 
     private const FAILURE_STATUS = 'failure';
 
+    private const CANCELLED_STATUS = 'cancelled';
+
     public function update(Request $request)
     {
             date_default_timezone_set('America/Bogota');
@@ -35,6 +37,7 @@ class UpdateTransactionController extends Controller
             if (
                 $transaction->status != self::SUCCESSFUL_STATUS
                 && $transaction->status != self::FAILURE_STATUS
+                && $transaction->status != self::CANCELLED_STATUS
                 && Summary::where([['movement_id', $transaction->id],['movement_type','!=','Recarga de Saldo']])->first() == null
             ) {
                 $transaction->status = $request->input('status');
@@ -73,7 +76,7 @@ class UpdateTransactionController extends Controller
                     unlink(str_replace('\\', '/', storage_path('app/public/voucher_images/'.$transaction->id.'.png')));
                 }
 
-                if ($transaction->status === self::SUCCESSFUL_STATUS) {
+                if ($transaction->status == self::SUCCESSFUL_STATUS) {
                     if ($transaction->giros == 0) {
                         $commissionShop = Commission::where([
                             ['user_id', '=', $transaction->shopkeeper_id],
@@ -99,7 +102,6 @@ class UpdateTransactionController extends Controller
 
                         $transaction->com_adm = $transaction->product->product_commission -
                             ($transaction->com_shp + $transaction->com_dis + $transaction->com_sup);
-
 
                         if (isset($commissionSupp)) {
                             $supplier->profit += $commissionSupp->amount;
@@ -138,7 +140,7 @@ class UpdateTransactionController extends Controller
                     $supplierSummary->fixed_commission = $transaction->product->fixed_commission;
                     $exchange = Exchange::find(1);
 
-                    if ($transaction->type === 'Withdrawal') {
+                    if ($transaction->type == 'Withdrawal') {
                         $shopkeeper->balance += $transaction->amount - $transaction->product->fixed_commission;
                         $supplier->balance += $transaction->amount;
                         $shopkeeperBalance->type = 'Deposit';
@@ -182,5 +184,6 @@ class UpdateTransactionController extends Controller
                 return redirect('/transactions');
             }
 
+        return redirect('/transactions')->with('finalizedTransaction', 'La transacción ya ha sido finalizada');
     }
 }
