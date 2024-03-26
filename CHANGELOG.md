@@ -223,5 +223,8 @@ fix: validate if transaction status is cancelled and add return to function in U
 ## [Hotfix 1.7.3]
 fix: show only Recharge balances on all balances
 
+## [Hotfix 1.7.4]
+fix: show print button to show balance voucher on balances index 
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

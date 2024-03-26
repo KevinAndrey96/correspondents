@@ -267,6 +267,7 @@
                                                     </div>
                                                     <div class="col-md-12 col-sm-12 mt-3 d-flex justify-content-center">
                                                         <button class="btn btn-success bg-gradient" data-bs-dismiss="modal">Aceptar</button>
+                                                        <a target="_blank" href="{{getenv('APP_URL')}}/balance-detail-pdf/{{$balanceModificationData['balanceID']}}" class="btn btn-primary btn-gradient ms-2">Imprimir</a>
                                                     </div>
                                                 </div>
                                             </div>
