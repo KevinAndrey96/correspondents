@@ -220,5 +220,8 @@ fix: allow one digit in create transaction
 ## [Hotfix 1.7.2]
 fix: validate if transaction status is cancelled and add return to function in UpdateTransactionController
 
+## [Hotfix 1.7.3]
+fix: show only Recharge balances on all balances
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
