@@ -67,7 +67,8 @@
                                             @endif
                                         </td>
                                         @endhasrole
-                                        <td class="align-middle text-center text-sm">{{ $transaction->product->product_name }}</td>
+
+                                        <td class="align-middle text-center text-sm">{{ (isset($transaction->product)) ? $transaction->product->product_name : ''}}</td>
                                         @hasanyrole('Administrator|Supplier')
                                         <td class="align-middle text-center text-sm">{{ $transaction->shopkeeper->name }}</td>
                                         @endhasanyrole

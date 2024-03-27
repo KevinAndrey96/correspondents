@@ -17,6 +17,10 @@ class TransactionsMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        if (session('impersonated_by')) {
+            return $next($request);
+        }
+
         if (Auth::user()->role == 'Shopkeeper') {
             $transaction = Transaction::where([['shopkeeper_id', '=',  Auth::user()->id], ['status', '=', 'hold']])
                                         ->orWhere([['shopkeeper_id', '=',  Auth::user()->id], ['status', '=', 'accepted']])->first();

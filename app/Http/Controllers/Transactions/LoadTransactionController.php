@@ -9,7 +9,6 @@ use App\Models\Transaction;
 class LoadTransactionController extends Controller
 {
     public function load($id) {
-
         $transaction = Transaction::find($id);
         $url = getenv('URL_SERVER');
         $pathBackground = getenv('LOAD_BACKGROUND');

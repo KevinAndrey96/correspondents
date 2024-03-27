@@ -226,5 +226,8 @@ fix: show only Recharge balances on all balances
 ## [Hotfix 1.7.4]
 fix: show print button to show balance voucher on balances index 
 
+## [Hotfix 1.7.5]
+fix: don't show transaction load when in phantom mode 
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
