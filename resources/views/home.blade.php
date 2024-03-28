@@ -66,7 +66,7 @@
                     </div>
                 </div>
             @endif
-            @hasrole('Administrator')
+            @if (Auth::user()->role == 'Administrator')
             <div class="col-xl-3 col-sm-2 mb-xl-2 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
@@ -354,10 +354,8 @@
                     </div>
                 </div>
             </div>
-            @endhasrole
-            @hasrole('Distributor')
-            @endhasrole
-            @hasrole('Shopkeeper')
+            @endif
+                @if (Auth::user()->role == 'Shopkeeper')
             <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
@@ -485,8 +483,8 @@
                     </div>
                 </div>
             </div>
-            @endhasrole
-            @hasrole('Supplier')
+            @endif
+                @if (Auth::user()->role == 'Supplier')
             <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
@@ -614,9 +612,9 @@
                     </div>
                 </div>
             </div>
-            @endhasrole
+            @endif
             <div class="row mt-4">
-                @hasrole('Distributor')
+                @if (Auth::user()->role == 'Distributor')
                 <div class="col-lg-4 row">
                     <div class="col-lg-12 col-sm-6 mb-xl-0 mb-4">
                         <div class="card">
@@ -662,7 +660,7 @@
                         </div>
                     </div>
                 </div>
-                @endhasrole
+                @endif
                 @if (Auth::user()->role !== 'Saldos')
                     <div class="col-lg-3 col-md-6 mt-4 mb-4">
                         <div class="card z-index-2 ">
@@ -719,7 +717,7 @@
                         </div>
                     </div>
                 @endif
-                @hasanyrole('Shopkeeper|Supplier')
+                    @if (Auth::user()->role == 'Shopkeeper' || Auth::user()->role == 'Supplier')
                 <div class="col-lg-3 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2  ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -746,7 +744,7 @@
                         </div>
                     </div>
                 </div>
-                @endhasanyrole
+                @endif
                     <div class="col-lg-3 mt-4 mb-3">
                         <div class="card z-index-2 ">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -809,8 +807,7 @@
                 </div>
             @endif
         </div>
-        @hasrole('Shopkeeper')
-        @if (is_null(Auth::user()->brand_id))
+        @if (Auth::user()->role == 'Shopkeeper' && is_null(Auth::user()->brand_id))
             <div class="row mt-4">
             </div>
             <div class="container-fluid py-4">
@@ -853,8 +850,9 @@
                 </div>
             </div>
         @endif
-        @endhasrole
-        @hasanyrole('Supplier|Shopkeeper|Administrator|Distributor')
+
+        @if (Auth::user()->role == 'Supplier' || Auth::user()->role == 'Shopkeeper'
+        || Auth::user()->role == 'Administrator' || Auth::user()->role == 'Distributor')
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
@@ -944,7 +942,7 @@
                 </div>
             </div>
         </div>
-        @endhasanyrole
+        @endif
         <script type="text/javascript">
             $(document).ready(function() {
                 @if (Auth::user()->role == 'Administrator')

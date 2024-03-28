@@ -76,24 +76,6 @@
         </div>
         <div>
         </div>
-        <!--
-        <footer class="footer position-absolute bottom-2 py-2 w-100">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-6 my-auto ">
-                        <div style="margin-left: 30px;" class="copyright text-center text-sm text-white text-lg-start">
-                            © <script>
-                                document.write(new Date().getFullYear())
-                            </script>
-                            Desarrollado por
-                            <a href="{{$url}}" class="font-weight-bold text-white" target="_blank">Asparecargas</a>
-                            Todos los derechos reservados.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        -->
     </div>
 </main>
 <!--   Core JS Files   -->
@@ -179,13 +161,8 @@
                     }
                     if (res.data.status == 'successful' || res.data.status == 'failed' || res.data.status == 'cancelled') {
                         window.location.replace("{{$url}}/transaction/detail/{{$transaction->id}}");
-                        //pStatus.innerHTML = 'Exitosa';
-                        //pStatus.style.backgroundColor = 'green';
                     }
                     pSupplierID.innerHTML = res.data.supplier_id;
-
-
-
             });
     }
 

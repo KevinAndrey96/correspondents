@@ -51,7 +51,8 @@
                                         <input type="text" class="form-control" name="amount" value="" id="amount" oninput="formatNumber('amount')" placeholder="">
                                     </div>
                                 </div>
-                                @hasanyrole('Supplier|Distributor|Shopkeeper')
+                                  @if (Auth::user()->role == 'Supplier' || Auth::user()->role == 'Distributor'
+                                  || Auth::user()->role == 'Shopkeeper')
                                 <div class="col-md-4">
                                     <div class=" input-group input-group-outline my-3">
                                         <label for="transactionNumber" id="account_label" class="form-label">Numero de Cuenta</label>
@@ -64,7 +65,7 @@
                                         <input type="text" class="form-control" name="entity" value="" id="entity" placeholder="">
                                     </div>
                                 </div>
-                                @endhasanyrole
+                                @endif
                                 <div class="col-md-4"></div>
 
                                   <div class="text-center">

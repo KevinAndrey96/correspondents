@@ -5,6 +5,11 @@
             {{ Session::get('LimitExceeded') }}
         </div>
     @endif
+    @if(Session::has('finalizedTransaction'))
+        <div class="alert alert-danger text-white text-center" role="alert">
+            {{ Session::get('finalizedTransaction') }}
+        </div>
+    @endif
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -32,17 +37,17 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Cantidad</th>
-                                    @hasrole('Administrator')
+                                    @if (Auth::user()->role == 'Administrator')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo</th>
-                                    @endhasrole
+                                    @endif
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Producto</th>
-                                    @hasanyrole('Administrator|Supplier')
+                                    @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Supplier')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tendero</th>
-                                    @endhasanyrole
-                                    @hasrole('Administrator')
+                                    @endif
+                                    @if (Auth::user()->role == 'Administrator')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Proveedor</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Distribuidor</th>
-                                    @endhasrole
+                                    @endif
                                     @if (Auth::user()->role == 'Shopkeeper')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >Tipo</th>
                                     @endif
@@ -58,7 +63,7 @@
                                 @foreach( $transactions as $transaction )
                                     <tr>
                                         <td class="align-middle text-center text-sm">${{ number_format($transaction->amount, 2, ',', '.') }}</td>
-                                        @hasrole('Administrator')
+                                        @if (Auth::user()->role == 'Administrator')
                                         <td class="align-middle text-center text-sm">
                                             @if ($transaction->type == 'Deposit')
                                                 Depósito
@@ -66,20 +71,20 @@
                                                 Retiro
                                             @endif
                                         </td>
-                                        @endhasrole
+                                        @endif
 
                                         <td class="align-middle text-center text-sm">{{ (isset($transaction->product)) ? $transaction->product->product_name : ''}}</td>
-                                        @hasanyrole('Administrator|Supplier')
+                                        @if (Auth::user()->role == 'Administrator' || Auth::user()->role == 'Supplier')
                                         <td class="align-middle text-center text-sm">{{ $transaction->shopkeeper->name }}</td>
-                                        @endhasanyrole
-                                        @hasrole('Administrator')
+                                        @endif
+                                        @if (Auth::user()->role == 'Administrator')
                                         <td class="align-middle text-center text-sm">
                                             @if (isset($transaction->supplier))
                                                 {{ $transaction->supplier->name }}
                                             @endif
                                         </td>
                                         <td class="align-middle text-center text-sm">{{ $transaction->distributor->name }}</td>
-                                        @endhasrole
+                                        @endif
                                         @if (Auth::user()->role == 'Shopkeeper')
                                         <td class="align-middle text-center text-sm">
                                             @if ($transaction->type == 'Deposit')

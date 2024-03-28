@@ -28,11 +28,11 @@
                             <table id="my_table" class="table align-items-center mb-0">
                                 <thead class="thead-light">
                                 <tr>
-                                    @hasrole('Administrator')
+                                    @if (Auth::user()->role == 'Administrator')
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Administrador</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Saldo Acumulado</th>
-                                    @endhasrole
+                                    @endif
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">N° de Solicitud  </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Monto a retirar</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha</th>
@@ -45,7 +45,7 @@
                                 <tbody>
                                 @foreach( $profits as $profit )
                                     <tr>
-                                        @hasrole('Administrator')
+                                        @if (Auth::user()->role == 'Administrator')
                                         <td class="align-middle text-center text-sm">{{ $profit->user->name}}</td>
                                         <td class="align-middle text-center text-sm">
                                             @if (isset($profit->administrator))
@@ -53,7 +53,7 @@
                                             @endif
                                         </td>
                                         <td class="align-middle text-center text-sm">${{number_format($profit->user->profit, 2, ',', '.')}}</td>
-                                        @endhasrole
+                                        @endif
                                         <td class="align-middle text-center text-sm">{{ $profit->id}}</td>
                                         <td class="align-middle text-center text-sm">${{number_format($profit->amount, 2, ',', '.')}}</td>
                                         <td class="align-middle text-center text-sm">{{ $profit->date}}</td>

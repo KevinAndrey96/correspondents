@@ -229,5 +229,8 @@ fix: show print button to show balance voucher on balances index
 ## [Hotfix 1.7.5]
 fix: don't show transaction load when in phantom mode 
 
+## [Hotfix 1.7.6]
+fix: add redirect at the end of upload method on UpdateTransactionController to avoid white screen
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

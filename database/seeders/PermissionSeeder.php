@@ -112,6 +112,5 @@ class PermissionSeeder extends Seeder
         $role->givePermissionTo('Ver saldo por usuario');
         $role->givePermissionTo('Ver solicitudes de ganancias');
         $role->givePermissionTo('Ver historial retiros ganancia');
-
     }
 }

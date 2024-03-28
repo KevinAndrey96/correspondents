@@ -756,12 +756,9 @@
                         </br> Saldo: ${{ number_format(Auth::user()->balance, 2, ',', '.') }}
                            @endif
                         </p>
-                        @hasrole('Administrator')
-                        @if (! is_null(session('dSaldos')))
-                        <p class="text text-white mb-1">D.Saldo: ${{ number_format(session('dSaldos'), 2, ',', '.') }}</p>
+                        @if (Auth::user()->role == 'Administrator' && ! is_null(session('dSaldos')))
+                            <p class="text text-white mb-1">D.Saldo: ${{ number_format(session('dSaldos'), 2, ',', '.') }}</p>
                         @endif
-                        @endhasrole
-
                     @endif
             </div>
             <div style="display: none;" class="card-body text-center p-2 pt-1">

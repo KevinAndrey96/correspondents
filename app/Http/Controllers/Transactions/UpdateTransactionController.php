@@ -13,6 +13,7 @@ use App\Models\Balance;
 use App\Models\Summary;
 use App\Models\Exchange;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Request as RequestAlias;
 

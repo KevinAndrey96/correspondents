@@ -1,11 +1,11 @@
 <table id="my_table" >
     <thead>
         <tr>
-            @hasrole('Administrator')
+            @if (Auth::user()->role == 'Administrator')
             <th>Usuario</th>
             <th>Rol</th>
             <th>Saldo Acumulado</th>
-            @endhasrole
+            @endif
             <th>N° de Solicitud</th>
             <th>Monto a retirar</th>
             <th>Fecha y hora</th>
@@ -16,7 +16,7 @@
     <tbody>
         @foreach ($profits as $profit)
         <tr>
-            @hasrole('Administrator')
+            @if (Auth::user()->role == 'Administrator')
             <td>{{ $profit->user->name}}</td>
             <td>
                 @if($profit->user->role == 'Administrator')
@@ -33,7 +33,7 @@
                 @endif
             </td>
             <td>${{number_format($profit->user->profit, 2, ',', '.')}}</td>
-            @endhasrole
+            @endif
             <td>{{ $profit->id}}</td>
             <td>${{number_format($profit->amount, 2, ',', '.')}}</td>
             <td>{{ $profit->created_at}}</td>
