@@ -24,13 +24,13 @@ class StoreUsersController extends Controller
     public function store(Request $request)
     {
         $fields = [
-            'name'=>'required',
-            'email'=>'required|unique:users,email',
-            'phone'=>'required',
-            'document'=>'required',
-            'city'=>'required',
-            'address'=>'required',
-            'password'=>'required',
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'phone' => 'required',
+            'document' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'password' => 'required',
         ];
 
         if ($request->role == 'Advisers') {
@@ -73,7 +73,7 @@ class StoreUsersController extends Controller
 
         $this->validate($request, $fields, $message);
 
-        $roleID = $request->input('role2');
+        $roleID = $request->input('roleID');
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -120,7 +120,6 @@ class StoreUsersController extends Controller
             }
         }
 
-
         if (isset($request->card_ids)) {
             foreach ($request->card_ids as $id) {
                 $userBank = new UserBank();
@@ -137,26 +136,27 @@ class StoreUsersController extends Controller
             $shopkeeperAdviser->save();
         }
 
-        /*
-        if ($request->input('role') == 'Administrator') {
+
+        if (! isset($roleID) && $request->input('role') == 'Administrator') {
             $user->assignRole('Administrator');
         }
 
-        if ($request->input('role') == 'Shopkeeper') {
+        if (! isset($roleID) && $request->input('role') == 'Shopkeeper') {
             $user->assignRole('Shopkeeper');
         }
 
-        if ($request->input('role') == 'Distributor') {
+        if (! isset($roleID) && $request->input('role') == 'Distributor') {
             $user->assignRole('Distributor');
         }
 
-        if ($request->input('role') == 'Supplier') {
+        if (! isset($roleID) && $request->input('role') == 'Supplier') {
             $user->assignRole('Supplier');
         }
-        */
 
-        $role = Role::findById($roleID);
-        $user->assignRole($role);
+        if (isset($roleID)) {
+            $role = Role::findById($roleID);
+            $user->assignRole($role);
+        }
 
         $receiverEmail = $user->email;
         $emailBody = new stdClass();

@@ -21,6 +21,8 @@ class UpdateUsersController extends Controller
     public function update(Request $request)
     {
         $roleID = $request->input('roleID');
+        $oldRoleID = $request->input('oldRoleID');
+        $oldRole = Role::findById($oldRoleID);
         $user = User::find($request->input('user_id'));
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -55,9 +57,13 @@ class UpdateUsersController extends Controller
             $user->priority = $request->input('priority');
         }
 
-        if (! is_null($roleID)) {
-            $oldRoleID = $request->input('oldRoleID');
-            $oldRole = Role::findById($oldRoleID);
+        if (! isset($roleID)) {
+            $role = Role::findByName($user->role);
+            $user->removeRole($oldRole);
+            $user->assignRole($role);
+        }
+
+        if (isset($roleID)) {
             $user->removeRole($oldRole);
             $role = Role::findById($roleID);
             $user->assignRole($role);

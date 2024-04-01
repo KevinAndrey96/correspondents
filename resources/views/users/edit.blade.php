@@ -245,7 +245,9 @@
                                         <div class="col-md-4">
                                             <div class="input-group input-group-static mb-4">
                                                 <label  for="document_type">Tipo de usuario</label>
-                                                <select id="" name="roleID" class="form-control" aria-label="Default select example">
+                                                <select id="" name="roleID" class="form-control" aria-label="Default select example" required>
+                                                    <option class="text-center" value="" disabled>Tipo de usuario</option>
+                                                    <option class="text-center" value="" selected>Sin tipo de usuario</option>
                                                     @foreach ($roles as $item)
                                                         @if ($item->id == $roleID)
                                                             <option class="text-center" value="{{$item->id}}" selected>

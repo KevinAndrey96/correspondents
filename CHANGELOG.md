@@ -235,5 +235,8 @@ fix: add redirect at the end of upload method on UpdateTransactionController to 
 ## [Hotfix 1.7.7]
 fix: delete return on CreateGroupCommissionsController 
 
+## [Hotfix 1.7.8]
+fix: store and update type of user on Users module
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

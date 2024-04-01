@@ -24,7 +24,10 @@ class EditUsersController extends Controller
             ['name', '!=', 'Saldos'],
         ])->get();
 
-        $roleID = $user->roles[0]->id;
+        if (isset($user->roles[0])) {
+            $roleID = $user->roles[0]->id;
+        }
+
         $cards = Card::all();
 
         if ($user->role == 'Shopkeeper') {
