@@ -38,3 +38,7 @@ Route::post('/permission-store', App\Http\Controllers\Permissions\StorePermissio
 Route::get('/get-permission-register/{id}', App\Http\Controllers\Permissions\GetRegisterPermissionsController::class)->name('permissions.getRegister');
 Route::post('/permission-update', App\Http\Controllers\Permissions\UpdatePermissionsController::class)->name('permissions.update');
 Route::post('/save-role-assignments', App\Http\Controllers\Permissions\SaveRoleAssignmentsPermissionsController::class)->name('permissions.saveRoleAssignments');
+
+
+// APIS for the transaction section
+Route::post('v1/user/login', App\Http\Controllers\API\Users\LoginUsersController::class);

@@ -111,8 +111,8 @@ class StoreTransactionController extends Controller
 
         if ($transaction->product->are_default_fields)
         {
-            return view('transactions.clientDataCreate', compact('transaction', 'product', 'giros', 'transactionFields', 'userTransactionLimits'));
 
+            return view('transactions.clientDataCreate', compact('transaction', 'product', 'giros', 'transactionFields', 'userTransactionLimits'));
         }
 
         $fieldNames = explode(',', $transaction->product->field_names);

@@ -55,6 +55,19 @@ class StoreUsersController extends Controller
             'unique'=>'El :attribute debe ser unico',
         ];
 
+        if ($request->input('role') == 'Distributor') {
+            $fields2 = [
+                'developerMode'=>'required',
+            ];
+
+            $fields = $fields + $fields2;
+            $message2 = [
+                'developerMode.required' => 'El modo desarrollador es requerido'
+            ];
+
+            $message = $message + $message2;
+        }
+
         if ($request->input('role') == 'Supplier') {
             $fields2 = [
                 'priority'=>'required',
@@ -84,6 +97,11 @@ class StoreUsersController extends Controller
         $user->city = $request->input('city');
         $user->address = $request->input('address');
         $user->is_enabled = 1;
+        $developerMode = intval($request->input('developerMode'));
+
+        if (isset($developerMode)) {
+            $user->developer_mode = $developerMode;
+        }
 
         if ($request->input('role') == 'Supplier') {
             $user->priority = $request->input('priority');
@@ -111,6 +129,7 @@ class StoreUsersController extends Controller
         } else {
             $user->password =  Hash::make($request->input('adviser'));
         }
+
         $user->save();
 
         if ($user->role == 'Distributor') {

@@ -33,6 +33,11 @@ class UpdateUsersController extends Controller
         $user->address = $request->input('address');
         $user->product_id = $request->input('product_id');
         $user->balance_min_amount = $request->input('balanceMinAmount');
+        $developerMode = intval($request->input('developerMode'));
+
+        if (isset($developerMode)) {
+            $user->developer_mode = $developerMode;
+        }
 
         if (isset($request->card_ids)) {
             $userBanks = UserBank::where('user_id', $user->id)->get();

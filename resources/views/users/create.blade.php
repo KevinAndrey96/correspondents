@@ -185,6 +185,18 @@
                                         </div>
                                     </div>
                                     @endif
+                                    @if ((Auth::user()->role == 'Administrator' && $role == 'Distributor') || (Auth::user()->role == 'Distributor' && Auth::user()->developer_mode == true && $role == 'Shopkeeper'))
+                                        <div class="col-md-4">
+                                            <div class="input-group input-group-static mb-4">
+                                                <select name="developerMode" id="developerMode" class="form-control" aria-label="Default select example" required>
+                                                    <option class="text-center" value="" disabled selected>Modo desarrollador</option>
+                                                    <option class="text-center" value="1">Si</option>
+                                                    <option class="text-center" value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <div class="text-center">
                                         <input type="hidden" value="{{$role}}" name="role">
                                         @if (isset(Auth::user()->brand_id))
