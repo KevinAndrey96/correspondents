@@ -64,6 +64,7 @@
                                             @endif
                                             @if ($role == 'allShopkeepers')
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pl-auto pr-auto">Contraseña diaria</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 pl-auto pr-auto">Modo desarrollador</th>
                                             @endif
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
                                         @if ($role == 'allShopkeepers')
@@ -140,6 +141,15 @@
                                                             <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" checked onchange="getEnabledDaily({{$user->id}})">
                                                         @else
                                                             <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" onchange="getEnabledDaily({{$user->id}})">
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    <div class="form-check form-switch align-middle text-center d-flex justify-content-center">
+                                                        @if ($user->developer_mode == 1)
+                                                            <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" checked onchange="getEnabledDevMode({{$user->id}})">
+                                                        @else
+                                                            <input class="form-check-input ml-auto mr-auto" type="checkbox" id="toggleEnabledDaily{{$user->id}}" onchange="getEnabledDevMode({{$user->id}})">
                                                         @endif
                                                     </div>
                                                 </td>
@@ -272,8 +282,12 @@
                                 <input type="hidden" name="id" id="shopkeeper_id">
                                 <input type="hidden" name="enabled_daily" id="enabled_daily">
                             </form>
-
                             <form id="form-enable-qr" name="form-enable-qr" method="POST" action="{{route('users.enableQR')}}">
+                                @csrf
+                                <input type="hidden" name="id" id="general_user_id">
+                                <input type="hidden" name="enabledQR" id="enabledQR">
+                            </form>
+                            <form id="form-enable-dev-mode" name="form-enable-dev-mode" method="POST" action="{{route('users.enableQR')}}">
                                 @csrf
                                 <input type="hidden" name="id" id="general_user_id">
                                 <input type="hidden" name="enabledQR" id="enabledQR">
@@ -340,6 +354,23 @@
                                     user_id.value = id;
                                     form.submit();
                                 }
+
+                                function getEnabledDevMode(id)
+                                {
+                                    let toggle = document.getElementById("toggleEnableQR" + id);
+                                    let status = document.getElementById("enabledQR");
+                                    let form = document.getElementById("form-enable-qr");
+                                    let user_id = document.getElementById("general_user_id");
+
+                                    if (toggle.checked === true) {
+                                        status.value = 1;
+                                    } else {
+                                        status.value = 0;
+                                    }
+                                    user_id.value = id;
+                                    form.submit();
+                                }
+
 
                             </script>
                             <!-- Modal-->

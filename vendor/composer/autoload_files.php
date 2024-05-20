@@ -35,6 +35,7 @@ return array(
     '3109cb1a231dcd04bee1f9f620d46975' => $vendorDir . '/paragonie/sodium_compat/autoload.php',
     'decc78cc4436b1292c6c0d151b19445c' => $vendorDir . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
     '801c31d8ed748cfa537fa45402288c95' => $vendorDir . '/psy/psysh/src/functions.php',
+    '9be1c2bab389f876c8b9376199151a90' => $vendorDir . '/binarytorch/larecipe/src/Helpers/helpers.php',
     '507d7a825db0ba8319f9dd335c46057a' => $vendorDir . '/lab404/laravel-impersonate/src/helpers.php',
     '40275907c8566c390185147049ef6e5d' => $vendorDir . '/livewire/livewire/src/helpers.php',
     'c72349b1fe8d0deeedd3a52e8aa814d8' => $vendorDir . '/mockery/mockery/library/helpers.php',

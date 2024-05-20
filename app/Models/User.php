@@ -90,7 +90,7 @@ class User extends Authenticatable
         'giros',
         'brand_id',
         'balance_min_amount',
-        'developer_mode'
+        'developer_mode',
     ];
 
     /**

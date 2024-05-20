@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "bacon/bacon-qr-code": "^2.0",
         "barryvdh/laravel-dompdf": "^1.0",
+        "binarytorch/larecipe": "^2.7",
         "doctrine/dbal": "^3.4",
         "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
