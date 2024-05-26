@@ -18,12 +18,30 @@ namespace Symfony\Component\DomCrawler\Field;
  */
 abstract class FormField
 {
-    protected \DOMElement $node;
-    protected string $name;
-    protected string|array|null $value = null;
-    protected \DOMDocument $document;
-    protected \DOMXPath $xpath;
-    protected bool $disabled = false;
+    /**
+     * @var \DOMElement
+     */
+    protected $node;
+    /**
+     * @var string
+     */
+    protected $name;
+    /**
+     * @var string
+     */
+    protected $value;
+    /**
+     * @var \DOMDocument
+     */
+    protected $document;
+    /**
+     * @var \DOMXPath
+     */
+    protected $xpath;
+    /**
+     * @var bool
+     */
+    protected $disabled;
 
     /**
      * @param \DOMElement $node The node associated with this field
@@ -75,7 +93,7 @@ abstract class FormField
     /**
      * Sets the value of the field.
      */
-    public function setValue(?string $value): void
+    public function setValue(?string $value)
     {
         $this->value = $value ?? '';
     }
@@ -99,5 +117,5 @@ abstract class FormField
     /**
      * Initializes the form field.
      */
-    abstract protected function initialize(): void;
+    abstract protected function initialize();
 }
