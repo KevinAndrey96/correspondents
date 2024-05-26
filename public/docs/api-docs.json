@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Título prueba",
-        "description": "Descripcion",
+        "title": "User Login",
+        "description": "Here is endpoint to login user",
         "version": "1.0"
     },
     "servers": [
@@ -11,47 +11,77 @@
         }
     ],
     "paths": {
-        "api/v1/user/login": {
+        "/api/v1/user/login": {
             "post": {
                 "tags": [
-                    "Usuario"
+                    "Login"
                 ],
-                "summary": "Logueo de usuario",
-                "operationId": "501fb1ad6ffe47f9ef7f7d77d23f178f",
+                "summary": "User Login",
+                "operationId": "f8cb634ff438083cd231d25a056e3497",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "ok",
+                        "description": "Success Login",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "rows": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "number",
-                                                        "example": "1"
-                                                    },
-                                                    "nombres": {
-                                                        "type": "string",
-                                                        "example": "Aderson Felix"
-                                                    },
-                                                    "apellidos": {
-                                                        "type": "string",
-                                                        "example": "Jara Lazaro"
-                                                    },
-                                                    "created_at": {
-                                                        "type": "string",
-                                                        "example": "2023-02-23T00:09:16.000000Z"
-                                                    },
-                                                    "updated_at": {
-                                                        "type": "string",
-                                                        "example": "2023-02-23T12:33:45.000000Z"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Success Login"
+                                        },
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNWM5NzZhMWJkYjNhMjdiNjBjZDEyNWU2OTQ5ZWY5YjQ3MWE1ZTA4MzQyODJlNDAwNmU4MzJkODY5ODYyMTg0M2FhMzkzMDMwYjI1YzM1MGYiLCJpYXQiOjE3MTY2OTMyMzQuNzA2NjksIm5iZiI6MTcxNjY5MzIzNC43MDY2OTUsImV4cCI6MTc0ODIyOTIzNC40MjkzODcsInN1YiI6IjI3Iiwic2NvcGVzIjpbXX0.5XcEdol8IOx7Z8ot3jnK9BsmIRlTo5mDUSTcl3dOOlTY40kWmi26OULLjwXLDBWVW0SmwXxYM8c6zhpXo0I-ahEAmUMrIXtzYQGZIV4fsJeFjnVyBUJocTSydfp96dmYPNxgqbYHYIR-dZaBSrXKFU1yJ_R3ozz_1K4UlGv2i5eDHOSmqMS_vFTEQWUeTYuDc9gppmqTOn9IV3CXQRGi_8cTlHhdSGlb2Fx8rj2ccUh5Lenrc59A79euPEl0Gh09xJZLvaIFd0ZvwCQnmA-ZVhsv5CRk0ReC4QGBqOPpOmPc_z_yK_F5gpiUMGEWzZy33tn1JVe92sfdAhpGyYulr4Kpxa8cpgvOSQ45HyE0bwpoSL0008S_nEQiMTdvnNr-lcdyMRpYM__nanXiOpQFl3U3N-1R5oiOb83-bh0U5elrdqnhmEECiluFN1T2Mkd97C4IeHmA4lpHI8dZGVyYeou34JKG30Ht2qeU8V84Gtn6DX6JZWzQjgk9Ryn4PlecA-rIuQdLzeSWbQpDTuInuz0s51srnIY4s0FIoTCFNVOdK10Tkd9eRHk-UDJvaufk8FapNqMWIn16PjLbQ9hnRMdkKq9JwmIvOkq7Ory96h0JuyAQ0SLxP6GdjNhp8rtEiqbyNtLGUTNrfPmhw18HP-3rQ4mlKPdrym1U2gdjqAM"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid Credentials"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden Access",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Forbidden Access"
                                         }
                                     },
                                     "type": "object"
