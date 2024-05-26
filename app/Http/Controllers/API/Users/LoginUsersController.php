@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
  *             description="Here is endpoint to login user"
  * )
  *
- * @OA\Server(url="http://127.0.0.1:8000")
+ * @OA\Server(url="https://testing.asparecargas.net")
  */
 class LoginUsersController extends Controller
 {

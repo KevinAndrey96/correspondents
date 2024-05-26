@@ -238,5 +238,8 @@ fix: delete return on CreateGroupCommissionsController
 ## [Hotfix 1.7.8]
 fix: store and update type of user on Users module
 
+## [Hotfix 1.7.9]
+fix: change url to swagger code on loginUsersController
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
