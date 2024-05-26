@@ -183,7 +183,8 @@ return [
         App\Providers\RepositoriesServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
-        Yajra\DataTables\FractalServiceProvider::class
+        Yajra\DataTables\FractalServiceProvider::class,
+        L5Swagger\L5SwaggerServiceProvider::class,
     ],
 
     /*
