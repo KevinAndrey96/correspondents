@@ -116,6 +116,9 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
         ->name('users.store-transaction-limits');
     Route::get('/users-delete-transaction-limits/{id}', App\Http\Controllers\Users\DeleteTransactionLimitsUsersController::class)
         ->name('users.delete-transaction-limits');
+    Route::post('/user-enable-dev-mode', App\Http\Controllers\Users\EnableDevModeUsersController::class)
+        ->name('users.enableDevMode');
+
 
 
     Route::get('/commissions', [App\Http\Controllers\Commissions\IndexCommissionsController::class, 'index'])->name('commissions.index');
