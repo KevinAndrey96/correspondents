@@ -14,7 +14,7 @@ return [
     */
 
     'docs'        => [
-        'route'   => '/docs2',
+        'route'   => '/correspondents-documentation',
         'path'    => '/resources/docs',
         'landing' => 'overview',
         'middleware' => ['web'],
