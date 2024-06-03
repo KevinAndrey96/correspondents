@@ -7941,6 +7941,74 @@
             "install-path": "../ramsey/uuid"
         },
         {
+            "name": "ronasit/laravel-swagger",
+            "version": "2.2",
+            "version_normalized": "2.2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RonasIT/laravel-swagger.git",
+                "reference": "ccda21b896fe5b96d3902d43e5b43b7a79fc8b9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RonasIT/laravel-swagger/zipball/ccda21b896fe5b96d3902d43e5b43b7a79fc8b9e",
+                "reference": "ccda21b896fe5b96d3902d43e5b43b7a79fc8b9e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": ">=5.3.0",
+                "php": ">=7.3.0",
+                "phpunit/phpunit": ">=7.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.25",
+                "php-coveralls/php-coveralls": "^2.5",
+                "php-mock/php-mock-phpunit": "^2.7"
+            },
+            "time": "2023-11-07T03:20:06+00:00",
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RonasIT\\Support\\AutoDoc\\AutoDocServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "RonasIT\\Support\\AutoDoc\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "src/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ronas IT",
+                    "homepage": "https://github.com/RonasIT/laravel-swagger/graphs/contributors"
+                }
+            ],
+            "description": "Provided middleware for generating of swagger-documentation file by run testing of restful API.",
+            "keywords": [
+                "auto-documentation",
+                "laravel",
+                "rest-api",
+                "swagger",
+                "testing"
+            ],
+            "support": {
+                "issues": "https://github.com/RonasIT/laravel-swagger/issues",
+                "source": "https://github.com/RonasIT/laravel-swagger/tree/2.2"
+            },
+            "install-path": "../ronasit/laravel-swagger"
+        },
+        {
             "name": "sabberworm/php-css-parser",
             "version": "v8.5.1",
             "version_normalized": "8.5.1.0",
@@ -12967,42 +13035,15 @@
     ],
     "dev": true,
     "dev-package-names": [
-        "doctrine/instantiator",
         "fakerphp/faker",
         "filp/whoops",
         "hamcrest/hamcrest-php",
         "laravel/sail",
         "mockery/mockery",
-        "myclabs/deep-copy",
         "nunomaduro/collision",
-        "phar-io/manifest",
-        "phar-io/version",
-        "phpunit/php-code-coverage",
-        "phpunit/php-file-iterator",
-        "phpunit/php-invoker",
-        "phpunit/php-text-template",
-        "phpunit/php-timer",
-        "phpunit/phpunit",
-        "sebastian/cli-parser",
-        "sebastian/code-unit",
-        "sebastian/code-unit-reverse-lookup",
-        "sebastian/comparator",
-        "sebastian/complexity",
-        "sebastian/diff",
-        "sebastian/environment",
-        "sebastian/exporter",
-        "sebastian/global-state",
-        "sebastian/lines-of-code",
-        "sebastian/object-enumerator",
-        "sebastian/object-reflector",
-        "sebastian/recursion-context",
-        "sebastian/resource-operations",
-        "sebastian/type",
-        "sebastian/version",
         "spatie/backtrace",
         "spatie/flare-client-php",
         "spatie/ignition",
-        "spatie/laravel-ignition",
-        "theseer/tokenizer"
+        "spatie/laravel-ignition"
     ]
 }

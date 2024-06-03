@@ -12,8 +12,8 @@ class ComposerStaticInit6c3eaa3b0aa6c2bd5f8f3a19e95d6a5f
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
@@ -21,20 +21,21 @@ class ComposerStaticInit6c3eaa3b0aa6c2bd5f8f3a19e95d6a5f
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
-        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '3109cb1a231dcd04bee1f9f620d46975' => __DIR__ . '/..' . '/paragonie/sodium_compat/autoload.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
+        'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '9be1c2bab389f876c8b9376199151a90' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Helpers/helpers.php',
         'ac0aa5b57142c92aeadc397fa46b9d39' => __DIR__ . '/..' . '/darkaonline/l5-swagger/src/helpers.php',
@@ -42,7 +43,6 @@ class ComposerStaticInit6c3eaa3b0aa6c2bd5f8f3a19e95d6a5f
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
         'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
-        'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
         'b4e3f29b106af37a2bb239f73cdf68c7' => __DIR__ . '/../..' . '/app/helpers.php',
@@ -119,6 +119,7 @@ class ComposerStaticInit6c3eaa3b0aa6c2bd5f8f3a19e95d6a5f
         ),
         'R' => 
         array (
+            'RonasIT\\Support\\AutoDoc\\' => 24,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -270,11 +271,11 @@ class ComposerStaticInit6c3eaa3b0aa6c2bd5f8f3a19e95d6a5f
         ),
         'Yajra\\DataTables\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
-            1 => __DIR__ . '/..' . '/yajra/laravel-datatables-html/src',
+            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
+            1 => __DIR__ . '/..' . '/yajra/laravel-datatables-editor/src',
             2 => __DIR__ . '/..' . '/yajra/laravel-datatables-fractal/src',
-            3 => __DIR__ . '/..' . '/yajra/laravel-datatables-editor/src',
-            4 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
+            3 => __DIR__ . '/..' . '/yajra/laravel-datatables-html/src',
+            4 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
         ),
         'Whoops\\' => 
         array (
@@ -448,6 +449,10 @@ class ComposerStaticInit6c3eaa3b0aa6c2bd5f8f3a19e95d6a5f
         array (
             0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
         ),
+        'RonasIT\\Support\\AutoDoc\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ronasit/laravel-swagger/src',
+        ),
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
@@ -474,8 +479,8 @@ class ComposerStaticInit6c3eaa3b0aa6c2bd5f8f3a19e95d6a5f
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -571,8 +576,8 @@ class ComposerStaticInit6c3eaa3b0aa6c2bd5f8f3a19e95d6a5f
         ),
         'League\\Uri\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/uri-interfaces/src',
-            1 => __DIR__ . '/..' . '/league/uri/src',
+            0 => __DIR__ . '/..' . '/league/uri/src',
+            1 => __DIR__ . '/..' . '/league/uri-interfaces/src',
         ),
         'League\\OAuth2\\Server\\' => 
         array (
@@ -690,8 +695,8 @@ class ComposerStaticInit6c3eaa3b0aa6c2bd5f8f3a19e95d6a5f
         ),
         'Fruitcake\\Cors\\' => 
         array (
-            0 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
-            1 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
+            0 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
+            1 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
         ),
         'FontLib\\' => 
         array (
@@ -991,6 +996,7 @@ class ComposerStaticInit6c3eaa3b0aa6c2bd5f8f3a19e95d6a5f
         'App\\Http\\Controllers\\Users\\DeleteUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/DeleteUsersController.php',
         'App\\Http\\Controllers\\Users\\DistributorExtrainfoUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/DistributorExtrainfoUsersController.php',
         'App\\Http\\Controllers\\Users\\EditUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/EditUsersController.php',
+        'App\\Http\\Controllers\\Users\\EnableDevModeUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/EnableDevModeUsersController.php',
         'App\\Http\\Controllers\\Users\\EnableQRUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/EnableQRUsersController.php',
         'App\\Http\\Controllers\\Users\\EnabledDailyUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/EnabledDailyUsersController.php',
         'App\\Http\\Controllers\\Users\\FirstPasswordUsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Users/FirstPasswordUsersController.php',
@@ -7166,6 +7172,42 @@ class ComposerStaticInit6c3eaa3b0aa6c2bd5f8f3a19e95d6a5f
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
+        'RonasIT\\Support\\AutoDoc\\AutoDocServiceProvider' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/AutoDocServiceProvider.php',
+        'RonasIT\\Support\\AutoDoc\\Commands\\PushDocumentationCommand' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Commands/PushDocumentationCommand.php',
+        'RonasIT\\Support\\AutoDoc\\Drivers\\BaseDriver' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Drivers/BaseDriver.php',
+        'RonasIT\\Support\\AutoDoc\\Drivers\\LocalDriver' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Drivers/LocalDriver.php',
+        'RonasIT\\Support\\AutoDoc\\Drivers\\RemoteDriver' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Drivers/RemoteDriver.php',
+        'RonasIT\\Support\\AutoDoc\\Drivers\\StorageDriver' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Drivers/StorageDriver.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\DocFileNotExistsException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/DocFileNotExistsException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\EmptyContactEmailException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/EmptyContactEmailException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\EmptyDocFileException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/EmptyDocFileException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\InvalidDriverClassException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/InvalidDriverClassException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\LegacyConfigException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/LegacyConfigException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\MissedProductionFilePathException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/MissedProductionFilePathException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\MissedRemoteDocumentationUrlException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/MissedRemoteDocumentationUrlException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\DuplicateFieldException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/DuplicateFieldException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\DuplicateParamException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/DuplicateParamException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\DuplicatePathPlaceholderException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/DuplicatePathPlaceholderException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\InvalidFieldValueException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/InvalidFieldValueException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\InvalidPathException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/InvalidPathException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\InvalidStatusCodeException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/InvalidStatusCodeException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\InvalidSwaggerSpecException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/InvalidSwaggerSpecException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\InvalidSwaggerVersionException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/InvalidSwaggerVersionException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\MissingExternalRefException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/MissingExternalRefException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\MissingFieldException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/MissingFieldException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\MissingLocalRefException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/MissingLocalRefException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\MissingPathParamException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/MissingPathParamException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\MissingPathPlaceholderException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/MissingPathPlaceholderException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SpecValidation\\MissingRefFileException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SpecValidation/MissingRefFileException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\SwaggerDriverClassNotFoundException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/SwaggerDriverClassNotFoundException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\UnsupportedDocumentationViewerException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/UnsupportedDocumentationViewerException.php',
+        'RonasIT\\Support\\AutoDoc\\Exceptions\\WrongSecurityConfigException' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Exceptions/WrongSecurityConfigException.php',
+        'RonasIT\\Support\\AutoDoc\\Http\\Controllers\\AutoDocController' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Http/Controllers/AutoDocController.php',
+        'RonasIT\\Support\\AutoDoc\\Http\\Middleware\\AutoDocMiddleware' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Http/Middleware/AutoDocMiddleware.php',
+        'RonasIT\\Support\\AutoDoc\\Interfaces\\SwaggerDriverInterface' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Interfaces/SwaggerDriverInterface.php',
+        'RonasIT\\Support\\AutoDoc\\Services\\SwaggerService' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Services/SwaggerService.php',
+        'RonasIT\\Support\\AutoDoc\\Traits\\GetDependenciesTrait' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Traits/GetDependenciesTrait.php',
+        'RonasIT\\Support\\AutoDoc\\Validators\\SwaggerSpecValidator' => __DIR__ . '/..' . '/ronasit/laravel-swagger/src/Validators/SwaggerSpecValidator.php',
         'Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/AtRuleBlockList.php',
         'Sabberworm\\CSS\\CSSList\\CSSBlockList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/CSSBlockList.php',
         'Sabberworm\\CSS\\CSSList\\CSSList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/CSSList.php',
