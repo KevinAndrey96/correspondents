@@ -13,7 +13,7 @@ return [
     |
     | Route which will return documentation
     */
-    'route' => '',
+    'route' => '/correspondents-apis-documentation',
 
     /*
     |--------------------------------------------------------------------------
@@ -47,7 +47,7 @@ return [
         'title' => env('APP_NAME', 'Name of Your Application'),
         'termsOfService' => '',
         'contact' => [
-            'email' => null
+            'email' => 'asparecargas.net'
         ],
         'license' => [
             'name' => '',
