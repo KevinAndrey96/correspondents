@@ -138,7 +138,7 @@
 <script>
     setInterval(function () {
         getStatus({{$transaction->id}})
-    }, 10000 );
+    }, 5000 );
 
     function getStatus(id)
     {
