@@ -1,4 +1,4 @@
-p# Changelog
+# Changelog
 
 ## [Hotfix 1.0.1]
 fix: balance and profit fields on database (users table) are fixed to accept null values
@@ -240,6 +240,13 @@ fix: store and update type of user on Users module
 
 ## [Hotfix 1.7.9]
 fix: change url to swagger code on loginUsersController
+
+## [Hotfix 1.7.9]
+fix: change url to swagger code on loginUsersController
+
+## [Hotfix 1.8.0]
+fix: change strict equality
+
 
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

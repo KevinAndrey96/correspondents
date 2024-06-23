@@ -78,7 +78,7 @@ trait ReassignTransaction
                     ])->orderBy('priority', 'asc')->get();
                 }
 
-                if ($users->count() === 0) {
+                if ($users->count() == 0) {
                     $transaction->supplier_id = null;
                     $transaction->status = 'cancelled';
                     $transaction->save();
