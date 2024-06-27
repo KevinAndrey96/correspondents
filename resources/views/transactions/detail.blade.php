@@ -1,5 +1,11 @@
 @extends('layouts.dashboard')
 @section('content')
+    @if(Session::has('existingTransaction'))
+        <div class="alert alert-danger text-white text-center" role="alert">
+            {{ Session::get('existingTransaction') }}
+        </div>
+    @endif
+
     <div class="container-fluid py-2">
         <div class="row">
             <div class="col-12">
@@ -36,6 +42,7 @@
                                                   @if (Auth::user()->role == 'Supplier' && is_null($detailSupplier))
                                                 <div class="col-md-4 d-flex flex-column ">
                                                     <h6 class="mb-3 text-sm">Información</h6>
+                                                    <p class="mb-2 text-xs font-weight-bold text-dark">Estado transacción: {{$transaction->status}}</p>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Producto: {{$transaction->product->product_name}}</p>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Número de cuenta: {{$transaction->account_number}}</p>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">

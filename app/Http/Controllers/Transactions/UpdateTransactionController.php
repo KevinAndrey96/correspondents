@@ -35,6 +35,7 @@ class UpdateTransactionController extends Controller
             $distributor = User::find($transaction->distributor_id);
             $shopkeeper->daily_verified = 0;
             $shopkeeper->save();
+
             if (
                 $transaction->status != self::SUCCESSFUL_STATUS
                 && $transaction->status != self::FAILURE_STATUS
@@ -183,6 +184,12 @@ class UpdateTransactionController extends Controller
                 }
 
                 return redirect('/transactions');
+            }
+
+        $summaryCount = Summary::where([['movement_id', $transaction->id],['movement_type','!=','Recarga de Saldo']])->get();
+
+            if ($summaryCount > 0) {
+                return redirect('/transaction/detail/'+$transaction->id)->with('existingTransaction', 'Esta transacción ya existe contacte al admin');
             }
 
         return redirect('/transactions')->with('finalizedTransaction', 'La transacción ya ha sido finalizada');

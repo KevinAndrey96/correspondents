@@ -31,8 +31,9 @@ class TransactionsMiddleware
 
             return $next($request);
         }
+
         if (Auth::user()->role == 'Supplier') {
-            $transaction = Transaction::where([['supplier_id', '=',  Auth::user()->id], ['status', '=', 'accepted']])->first();
+            $transaction = Transaction::where([['supplier_id',  Auth::user()->id], ['status', 'accepted']])->first();
             if (! is_null($transaction)) {
 
                 return redirect('/transaction/detail/' . $transaction->id);
