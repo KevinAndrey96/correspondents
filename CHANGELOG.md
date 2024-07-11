@@ -247,6 +247,5 @@ fix: change url to swagger code on loginUsersController
 ## [Hotfix 1.8.0]
 fix: change strict equality
 
-
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

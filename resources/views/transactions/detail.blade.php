@@ -42,7 +42,8 @@
                                                   @if (Auth::user()->role == 'Supplier' && is_null($detailSupplier))
                                                 <div class="col-md-4 d-flex flex-column ">
                                                     <h6 class="mb-3 text-sm">Información</h6>
-                                                    <p class="mb-2 text-xs font-weight-bold text-dark">Estado transacción: {{$transaction->status}}</p>
+                                                    <p class="mb-2 text-xs font-weight-bold text-dark">Estado transacción: {{$transaction->status}}
+                                                    <p class="mb-2 text-xs font-weight-bold text-dark">Count by movement ID: {{$summariesCount}}</p>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Producto: {{$transaction->product->product_name}}</p>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">Número de cuenta: {{$transaction->account_number}}</p>
                                                     <p class="mb-2 text-xs font-weight-bold text-dark">
