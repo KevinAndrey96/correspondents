@@ -1,1 +1,0 @@
-a:5:{s:6:"_token";s:40:"TgKjtuhhySv0XWa8qVFohiSLwpmEjtLB1UGkVxl9";s:9:"_previous";a:1:{s:3:"url";s:44:"http://127.0.0.1:8000/require-daily-password";}s:6:"_flash";a:2:{s:3:"old";a:0:{}s:3:"new";a:0:{}}s:4:"auth";a:1:{s:21:"password_confirmed_at";i:1719183362;}s:9:"google2fa";a:2:{s:11:"auth_passed";b:1;s:9:"auth_time";s:25:"2024-06-23T20:38:01-05:00";}}

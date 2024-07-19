@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API\Users;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginUserDataRequest;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Info(
@@ -71,19 +73,16 @@ class LoginUsersController extends Controller
      *
      */
 
-    public function __invoke(Request $request)
+    public function __invoke(LoginUserDataRequest $request)
     {
-        $loginData = $request->validate([
-            'email' => 'email|required',
-            'password' => 'required'
-        ]);
+        $loginData = $request->all();
 
         if (! auth()->attempt($loginData)) {
             return response(['message' => 'Invalid Credentials'], 400);
         }
 
         if (auth()->user()->developer_mode != 1) {
-            return response(['message' => 'Forbidden Access'], 403);
+            return response(['message' => 'Forbidden Access'], Response::HTTP_FORBIDDEN);
         }
 
         $accessToken = auth()->user()->createToken('authToken')->accessToken;

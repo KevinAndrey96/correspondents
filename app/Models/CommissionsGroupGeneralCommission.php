@@ -22,7 +22,7 @@ class CommissionsGroupGeneralCommission extends Model
 
     public function commissionGroup()
     {
-        return $this->belongsTo(commissionsGroup::class, 'comm_group_id');
+        return $this->belongsTo(CommissionsGroup::class, 'comm_group_id');
     }
 
     public function generalCommission()
