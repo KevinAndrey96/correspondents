@@ -247,6 +247,9 @@ fix: change url to swagger code on loginUsersController
 ## [Hotfix 1.8.0]
 fix: change strict equality
 
+## [Hotfix 1.8.1]
+fix: name of CommissionsGroup class
+
 
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

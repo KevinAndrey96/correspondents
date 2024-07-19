@@ -26,7 +26,7 @@ class StoreTransactionLimitsUsersController extends Controller
         $userID = intval($request->input('userID'));
         $productID = intval($request->input('productID'));
         $lowerLimit = floatval($request->input('lowerLimit'));
-        $upperLimit = floatval($request->input('upperLimit'));
+        $upperLimit = $request->input('upperLimit');
 
         $userTransactionLimits = UserTransactionLimit::where([
             ['user_id', $userID],
