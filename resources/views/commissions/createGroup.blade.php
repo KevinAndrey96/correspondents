@@ -47,7 +47,7 @@
                                     @if (Auth::user()->role == 'Distributor')
                                         <p style="font-size: 20px;" class="font-weight-bold ms-2 mt-3">Seleccione las comisiones:</p>
                                         @foreach($commissions as $commission)
-                                            @if (! $commission->product->is_deleted && $commission->product->is_enabled &&
+                                            @if (isset($commission->product->is_deleted) && ! $commission->product->is_deleted && isset($commission->product->is_enabled) && $commission->product->is_enabled &&
                                             $commission->amount > 0)
                                             <div class="col-md-4 form-check mt-4 mx-auto">
                                                 <div style="border: 4px solid blue" class="w-100 pb-2">

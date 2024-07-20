@@ -250,5 +250,8 @@ fix: change strict equality
 ## [Hotfix 1.8.1]
 fix: name of CommissionsGroup class
 
+## [Hotfix 1.8.2]
+fix: add isset methods to validate product attributes
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

@@ -14,8 +14,11 @@ class CreateGroupCommissionsController extends Controller
     {
         $commissions = Commission::with('product')->where('user_id', Auth::user()->id)->get();
 
+        //return $commissions[0]->product['is_deleted'];
+
         $commissions = $commissions->map(function($commission){
-            if ($commission->product->is_deleted == 1 || $commission->product->is_enabled == 0) {
+
+            if (isset($commission->product->is_deleted) && $commission->product->is_deleted == 1 || isset($commission->product->is_enabled) && $commission->product->is_enabled == 0) {
 
                 return null;
             }
