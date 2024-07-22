@@ -63,7 +63,7 @@
                             <tbody>
                                 @foreach ($userProducts as $userProduct)
                                         @foreach ($commissions as $commission)
-                                            @if ($commission->product_id == $userProduct->product_id)
+                                            @if (isset($commission->product) && ($commission->product_id == $userProduct->product_id))
                                             <tr>
                                                 <td class="align-middle text-center text-sm">
                                                     @if($commission->product->product_type == 'Deposit')

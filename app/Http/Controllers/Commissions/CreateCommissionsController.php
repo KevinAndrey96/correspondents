@@ -52,7 +52,7 @@ class CreateCommissionsController extends Controller
             ->orWhere('is_deleted', 1)
             ->pluck('id')->toArray();
 
-        $commissions = Commission::where('user_id', '=', $id)->whereNotIn('product_id',$productsExcept)->get();
+        $commissions = Commission::where('user_id', $id)->whereNotIn('product_id',$productsExcept)->get();
         $userProducts = SupplierProduct::where('user_id', $id)->get();
 
         return view('commissions.create', compact('commissions', 'user', 'userProducts'));

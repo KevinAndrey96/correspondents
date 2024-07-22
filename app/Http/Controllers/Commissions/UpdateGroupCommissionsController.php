@@ -69,7 +69,8 @@ class UpdateGroupCommissionsController extends Controller
             if ($amountsDis[$i] > $product->product_commission || $amountsShop[$i] > $product->product_commission ||
                 $amountsShop[$i] > $amountsDis[$i]) {
 
-                return redirect()->route('commissions.edit-group')->with('notAllowedAmount', 'Monto de comisión no permitido');
+                return redirect()->route('commissions.edit-group', ['id' => $request->input('commissionsGroupID')])
+                    ->with('notAllowedAmount', 'Monto de comisión no permitido');
             }
         }
 
