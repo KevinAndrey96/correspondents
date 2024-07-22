@@ -256,6 +256,8 @@ fix: add isset methods to validate product attributes
 ## [Hotfix 1.8.3]
 fix: add validation to create and edit of commissionsGroup controllers which reject commissions with product on null
 
+## [Hotfix 1.8.4]
+fix: add validation to edit of commissionsGroup controllers which reject commissions with product on null
 
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

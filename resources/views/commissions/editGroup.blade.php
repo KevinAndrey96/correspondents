@@ -47,7 +47,7 @@
                                         @if (Auth::user()->role == 'Distributor')
                                             <p style="font-size: 20px;" class="font-weight-bold ms-2 mt-3">Seleccione las comisiones:</p>
                                             @for ($i = 0; $i < count($distributorCommissions); $i++)
-                                                @if (! $products[$i]->is_deleted && $products[$i]->is_enabled && $distributorCommissions[$i]->amount > 0)
+                                                @if (isset($distributorCommissions[$i]->product) && ! $products[$i]->is_deleted && $products[$i]->is_enabled && $distributorCommissions[$i]->amount > 0)
                                                 <div class="col-md-4 form-check mt-4 mx-auto px-1">
                                                     <div style="border: 4px solid blue" class="w-100 pb-2">
                                                         <div class="w-80 ms-auto me-auto">

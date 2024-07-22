@@ -26,7 +26,7 @@ class EditGroupCommissionsController extends Controller
 
 
         foreach ($commissions as $commission) {
-            if ($commission->product->is_enabled == 1 &&  $commission->product->is_deleted == 0) {
+            if (isset($commission->product) && $commission->product->is_enabled == 1 && $commission->product->is_deleted == 0) {
                 array_push($products, $commission->product);
                 array_push( $distributorCommissions, $commission);
             }
@@ -50,7 +50,6 @@ class EditGroupCommissionsController extends Controller
 
             return $product;
         });
-
 
         return view('commissions.editGroup', ['commissionsGPGeneralCommission' => $commissionsGPGeneralCommission,
         'products' => $products, 'commissionsGroup' => $commissionsGroup, 'distributorCommissions' => $distributorCommissions]);
