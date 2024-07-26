@@ -309,6 +309,12 @@
 
                                 $(document).ready( function () {
                                     timeout = setTimeout("location.reload()", 60000);
+
+                                    let formatter = new Intl.NumberFormat("en-US", {
+                                        style: 'currency',
+                                        currency: 'USD'
+                                    })
+
                                     $('#my_table').DataTable({
                                         "language": {
                                             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json",
@@ -353,7 +359,7 @@
                                         let amountSpan = document.getElementById("amountSpan");
                                         let dateSpan = document.getElementById("dateSpan");
                                         userSpan.innerHTML = 'Usuario: ' + user;
-                                        amountSpan.innerHTML = 'Monto: $' + new Intl.NumberFormat("en-IN").format(amount);
+                                        amountSpan.innerHTML = 'Monto: ' + formatter.format(amount);
                                         dateSpan.innerHTML = 'Fecha: ' + date;
                                         //document.getElementById('assign-link').href = '/balance-assign-supplier/' + uID;
                                     });
