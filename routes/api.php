@@ -42,3 +42,4 @@ Route::post('/save-role-assignments', App\Http\Controllers\Permissions\SaveRoleA
 
 // APIS for the transaction section
 Route::post('v1/user/login', App\Http\Controllers\API\Users\LoginUsersController::class)->name('api.user-login');
+Route::get('v1/products', App\Http\Controllers\API\Products\GetProductsController::class)->name('api.products');

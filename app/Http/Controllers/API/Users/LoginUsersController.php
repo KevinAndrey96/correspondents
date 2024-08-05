@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Info(
- *             title="User Login",
+ *             title="Asparecargas Endpoints",
  *             version="1.0",
- *             description="Here is endpoint to login user"
+ *             description="Here are the endpoints of Asparecargas"
  * )
  *
  * @OA\Server(url="https://testing.asparecargas.net")

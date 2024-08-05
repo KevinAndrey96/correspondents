@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "User Login",
-        "description": "Here is endpoint to login user",
+        "title": "Asparecargas Endpoints",
+        "description": "Here are the endpoints of Asparecargas",
         "version": "1.0"
     },
     "servers": [
@@ -11,6 +11,20 @@
         }
     ],
     "paths": {
+        "/api/v1/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get enabled products",
+                "operationId": "52f07b5c504cf5dead737602311e23a8",
+                "responses": {
+                    "200": {
+                        "description": "Get enable products"
+                    }
+                }
+            }
+        },
         "/api/v1/user/login": {
             "post": {
                 "tags": [

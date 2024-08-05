@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Repositories\Contracts\Permissions\PermissionRepositoryInterface;
+use App\Repositories\Contracts\Products\ProductRepositoryInterface;
 use App\Repositories\Contracts\Roles\RoleRepositoryInterface;
 use App\Repositories\Permissions\PermissionRepository;
+use App\Repositories\Products\ProductRepository;
 use App\Repositories\Roles\RoleRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,6 +21,7 @@ class RepositoriesServiceProvider extends ServiceProvider
     protected array $classes = [
         RoleRepositoryInterface::class => RoleRepository::class,
         PermissionRepositoryInterface::class => PermissionRepository::class,
+        ProductRepositoryInterface::class => ProductRepository::class,
         ];
 
     public function register()

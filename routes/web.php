@@ -134,8 +134,6 @@ Route::group(['middleware' => ['auth', 'transactions', 'isenabled', 'isAuthorize
     Route::get('/edit-commissions-group/{id}', App\Http\Controllers\Commissions\EditGroupCommissionsController::class)->name('commissions.edit-group');
     Route::post('/update-commission-group', App\Http\Controllers\Commissions\UpdateGroupCommissionsController::class)->name('commissions.update-group');
 
-
-
     /**
      * Routes for cards
      */
