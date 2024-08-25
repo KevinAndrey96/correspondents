@@ -17,8 +17,11 @@ class GetProductsController extends Controller
      *     tags={"Products"},
      *     @OA\Response(
      *         response=200,
-     *         description="Get enable products",
-     *     )
+     *         description="Get enabled products",
+     *     ),
+     *     security={
+     *     {"passport": {}}
+     *     }
      * )
      */
 
@@ -32,8 +35,10 @@ class GetProductsController extends Controller
 
     public function __invoke()
     {
-        $products = $this->productRepository->getAll();
+        $products = ProductsResource::collection($this->productRepository->getAll());
 
-        return response(ProductsResource::collection($products));
+        return response()->json([
+            'data' => $products
+            ], 200);
     }
 }

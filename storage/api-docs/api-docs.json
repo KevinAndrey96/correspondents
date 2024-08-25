@@ -20,9 +20,14 @@
                 "operationId": "52f07b5c504cf5dead737602311e23a8",
                 "responses": {
                     "200": {
-                        "description": "Get enable products"
+                        "description": "Get enabled products"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
             }
         },
         "/api/v1/user/login": {
@@ -106,5 +111,20 @@
                 }
             }
         }
-    }
+    },
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "apiKey",
+                "description": "Ingrese el token en el formato (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        {
+            "passport": []
+        }
+    ]
 }

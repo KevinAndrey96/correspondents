@@ -153,6 +153,13 @@ return [
         */
         'securityDefinitions' => [
             'securitySchemes' => [
+                'passport' => [
+                    'type' => 'apiKey',
+                    'description' => 'Ingrese el token en el formato (Bearer <token>)',
+                    'name' => 'Authorization',
+                    'in' => 'header',
+                ],
+
                 /*
                  * Examples of Security schemes
                 */
@@ -209,9 +216,9 @@ return [
                         'read',
                         'write'
                     ],
-
-                    'passport' => []
                     */
+                    'passport' => []
+
                 ],
             ],
         ],
