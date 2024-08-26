@@ -30,19 +30,9 @@ class ProductsResource extends JsonResource
                 'account_number' => $this->account_number,
                 'code' => $this->code,
                 'extra' => $this->extra,
+                'are_default_fields' => $this->are_default_fields,
                 'min_amount' => $this->min_amount,
                 'max_amount' => $this->max_amount,
-                'priority' => $this->priority,
-                'num_jineteo' => $this->num_jineteo,
-                'hours' => $this->hours,
-                'reassignment_minutes' => $this->reassignment_minutes,
-                'com_dis' => $this->com_dis,
-                'com_shp' => $this->com_shp,
-                'com_sup' => $this->com_sup,
-                'fixed_commission' => $this->fixed_commission,
-                'giros' => $this->giros,
-                'are_default_fields' => $this->are_default_fields,
-                'field_names' => $this->field_names,
                 'category' => $this->category
             ]
         ];

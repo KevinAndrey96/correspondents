@@ -265,5 +265,8 @@ fix: change currency formatter
 ## [Hotfix 1.8.6]
 fix: add to products endpoint swagger a example 
 
+## [Hotfix 1.8.7]
+fix: remove fields on products json
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
