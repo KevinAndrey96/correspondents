@@ -262,5 +262,8 @@ fix: add validation to edit of commissionsGroup controllers which reject commiss
 ## [Hotfix 1.8.5]
 fix: change currency formatter 
 
+## [Hotfix 1.8.6]
+fix: add to products endpoint swagger a example 
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

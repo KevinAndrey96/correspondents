@@ -20,7 +20,137 @@
                 "operationId": "52f07b5c504cf5dead737602311e23a8",
                 "responses": {
                     "200": {
-                        "description": "Get enabled products"
+                        "description": "Get enabled products",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "products"
+                                                    },
+                                                    "attributes": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "product_name": {
+                                                                "type": "string",
+                                                                "example": "BANCOLOMBIA"
+                                                            },
+                                                            "product_description": {
+                                                                "type": "string",
+                                                                "example": "<p>DEPOSITO BANCOLOMBIA</p>"
+                                                            },
+                                                            "product_logo": {
+                                                                "type": "string",
+                                                                "example": "/storage/products/1.png"
+                                                            },
+                                                            "product_commission": {
+                                                                "type": "integer",
+                                                                "example": 800
+                                                            },
+                                                            "client_name": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "client_document": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "phone_number": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "email": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "account_type": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "account_number": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "extra": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "min_amount": {
+                                                                "type": "integer",
+                                                                "example": 5000
+                                                            },
+                                                            "max_amount": {
+                                                                "type": "integer",
+                                                                "example": 300000
+                                                            },
+                                                            "priority": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "num_jineteo": {
+                                                                "type": "integer",
+                                                                "example": 3
+                                                            },
+                                                            "hours": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "reassignment_minutes": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "com_dis": {
+                                                                "type": "null"
+                                                            },
+                                                            "com_shp": {
+                                                                "type": "null"
+                                                            },
+                                                            "com_sup": {
+                                                                "type": "null"
+                                                            },
+                                                            "fixed_commission": {
+                                                                "type": "number",
+                                                                "example": 200
+                                                            },
+                                                            "giros": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "are_default_fields": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "field_names": {
+                                                                "type": "null"
+                                                            },
+                                                            "category": {
+                                                                "type": "string",
+                                                                "example": "bancos"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
