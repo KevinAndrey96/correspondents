@@ -42,18 +42,8 @@ class GetProductsController extends Controller
      *                         @OA\Property(property="extra", type="integer", example=0),
      *                         @OA\Property(property="min_amount", type="integer", example=5000),
      *                         @OA\Property(property="max_amount", type="integer", example=300000),
-     *                         @OA\Property(property="priority", type="integer", example=1),
-     *                         @OA\Property(property="num_jineteo", type="integer", example=3),
-     *                         @OA\Property(property="hours", type="integer", example=1),
-     *                         @OA\Property(property="reassignment_minutes", type="integer", example=2),
-     *                         @OA\Property(property="com_dis", type="null"),
-     *                         @OA\Property(property="com_shp", type="null"),
-     *                         @OA\Property(property="com_sup", type="null"),
-     *                         @OA\Property(property="fixed_commission", type="number", example=200),
-     *                         @OA\Property(property="giros", type="integer", example=0),
-     *                         @OA\Property(property="are_default_fields", type="integer", example=1),
-     *                         @OA\Property(property="field_names", type="null"),
      *                         @OA\Property(property="category", type="string", example="bancos")
+     *
      *                     )
      *                 )
      *             )

@@ -95,46 +95,6 @@
                                                                 "type": "integer",
                                                                 "example": 300000
                                                             },
-                                                            "priority": {
-                                                                "type": "integer",
-                                                                "example": 1
-                                                            },
-                                                            "num_jineteo": {
-                                                                "type": "integer",
-                                                                "example": 3
-                                                            },
-                                                            "hours": {
-                                                                "type": "integer",
-                                                                "example": 1
-                                                            },
-                                                            "reassignment_minutes": {
-                                                                "type": "integer",
-                                                                "example": 2
-                                                            },
-                                                            "com_dis": {
-                                                                "type": "null"
-                                                            },
-                                                            "com_shp": {
-                                                                "type": "null"
-                                                            },
-                                                            "com_sup": {
-                                                                "type": "null"
-                                                            },
-                                                            "fixed_commission": {
-                                                                "type": "number",
-                                                                "example": 200
-                                                            },
-                                                            "giros": {
-                                                                "type": "integer",
-                                                                "example": 0
-                                                            },
-                                                            "are_default_fields": {
-                                                                "type": "integer",
-                                                                "example": 1
-                                                            },
-                                                            "field_names": {
-                                                                "type": "null"
-                                                            },
                                                             "category": {
                                                                 "type": "string",
                                                                 "example": "bancos"

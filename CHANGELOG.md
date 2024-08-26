@@ -268,5 +268,8 @@ fix: add to products endpoint swagger a example
 ## [Hotfix 1.8.7]
 fix: remove fields on products json
 
+## [Hotfix 1.8.8]
+fix: remove fields of product swagger script on GetProductsController
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
