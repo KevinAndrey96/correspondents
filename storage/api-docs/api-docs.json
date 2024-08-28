@@ -55,6 +55,10 @@
                                                                 "type": "integer",
                                                                 "example": 800
                                                             },
+                                                            "product_type": {
+                                                                "type": "string",
+                                                                "example": "Deposit"
+                                                            },
                                                             "client_name": {
                                                                 "type": "integer",
                                                                 "example": 0

@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000"
+            "url": "https://testing.asparecargas.net"
         }
     ],
     "paths": {
@@ -54,6 +54,10 @@
                                                             "product_commission": {
                                                                 "type": "integer",
                                                                 "example": 800
+                                                            },
+                                                            "product_type": {
+                                                                "type": "string",
+                                                                "example": "Deposit"
                                                             },
                                                             "client_name": {
                                                                 "type": "integer",

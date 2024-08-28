@@ -32,6 +32,7 @@ class GetProductsController extends Controller
      *                         @OA\Property(property="product_description", type="string", example="<p>DEPOSITO BANCOLOMBIA</p>"),
      *                         @OA\Property(property="product_logo", type="string", example="/storage/products/1.png"),
      *                         @OA\Property(property="product_commission", type="integer", example=800),
+     *                         @OA\Property(property="product_type", type="string", example="Deposit"),
      *                         @OA\Property(property="client_name", type="integer", example=0),
      *                         @OA\Property(property="client_document", type="integer", example=0),
      *                         @OA\Property(property="phone_number", type="integer", example=0),
@@ -43,7 +44,6 @@ class GetProductsController extends Controller
      *                         @OA\Property(property="min_amount", type="integer", example=5000),
      *                         @OA\Property(property="max_amount", type="integer", example=300000),
      *                         @OA\Property(property="category", type="string", example="bancos")
-     *
      *                     )
      *                 )
      *             )
