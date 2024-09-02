@@ -31,7 +31,7 @@
                                                 "properties": {
                                                     "type": {
                                                         "type": "string",
-                                                        "example": "products"
+                                                        "example": "product"
                                                     },
                                                     "attributes": {
                                                         "properties": {
@@ -49,13 +49,13 @@
                                                             },
                                                             "product_logo": {
                                                                 "type": "string",
-                                                                "example": "/storage/products/1.png"
+                                                                "example": "https://example.com/storage/products/1.png"
                                                             },
                                                             "product_commission": {
                                                                 "type": "integer",
                                                                 "example": 800
                                                             },
-                                                            "product_type": {
+                                                            "producType": {
                                                                 "type": "string",
                                                                 "example": "Deposit"
                                                             },

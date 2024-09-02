@@ -274,5 +274,8 @@ fix: remove fields of product swagger script on GetProductsController
 ## [Hotfix 1.8.9]
 fix: add product_commission and product_type to products swagger example
 
+## [Hotfix 1.9.0]
+fix: change attribute on product resource 
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
