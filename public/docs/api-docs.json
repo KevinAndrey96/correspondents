@@ -91,6 +91,14 @@
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
+                                                            "are_default_fields": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "field_names": {
+                                                                "type": "string",
+                                                                "example": "Número de seguro,Número de NIT,Número de registro civil"
+                                                            },
                                                             "min_amount": {
                                                                 "type": "integer",
                                                                 "example": 5000
@@ -206,6 +214,16 @@
             }
         }
     },
+    "tags": [
+        {
+            "name": "Products",
+            "description": "Products"
+        },
+        {
+            "name": "Login",
+            "description": "Login"
+        }
+    ],
     "components": {
         "securitySchemes": {
             "passport": {
