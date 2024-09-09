@@ -41,6 +41,8 @@ class GetProductsController extends Controller
      *                         @OA\Property(property="account_number", type="integer", example=1),
      *                         @OA\Property(property="code", type="integer", example=0),
      *                         @OA\Property(property="extra", type="integer", example=0),
+     *                         @OA\Property(property="are_default_fields", type="integer", example=1),
+     *                         @OA\Property(property="field_names", type="string", example="Número de seguro,Número de NIT,Número de registro civil"),
      *                         @OA\Property(property="min_amount", type="integer", example=5000),
      *                         @OA\Property(property="max_amount", type="integer", example=300000),
      *                         @OA\Property(property="category", type="string", example="bancos")
@@ -61,7 +63,6 @@ class GetProductsController extends Controller
     {
         $this->productRepository = $productRepository;
     }
-
 
     public function __invoke()
     {

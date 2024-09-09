@@ -56,7 +56,7 @@ class StoreProductController extends Controller
 
         $fields = array_merge($fields, $defaultFields);
 
-            $message = [
+        $message = [
                 'required' => ':attribute es requerido',
                 'fieldNames.required' => 'Los nombres de los campos son requeridos',
                 'defaultFieldsRadio.required' => 'Por favor seleccione el tipo de campo para la transacción'

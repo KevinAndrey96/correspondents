@@ -32,6 +32,7 @@ class ProductsResource extends JsonResource
                 'code' => $this->code,
                 'extra' => $this->extra,
                 'are_default_fields' => $this->are_default_fields,
+                'field_names' => $this->field_names,
                 'min_amount' => $this->min_amount,
                 'max_amount' => $this->max_amount,
                 'category' => $this->category

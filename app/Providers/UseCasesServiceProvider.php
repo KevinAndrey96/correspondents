@@ -4,15 +4,21 @@ namespace App\Providers;
 
 use App\UseCases\Contracts\Roles\GetRoleIDsPermissionIDsUseCaseInterface;
 use App\UseCases\Contracts\Statistics\GetStatisticsDataUseCaseInterface;
+use App\UseCases\Contracts\Transactions\CreateTransactionUseCaseInterface;
+use App\UseCases\Contracts\Transactions\ValidateLimitOfTransactionsByAccountUseCaseInterface;
 use App\UseCases\Roles\GetRoleIDsPermissionIDsUseCase;
 use App\UseCases\Statistics\GetStatisticsDataUseCase;
+use App\UseCases\Transactions\CreateTransactionUseCase;
+use App\UseCases\Transactions\ValidateLimitOfTransactionsByAccountUseCase;
 use Illuminate\Support\ServiceProvider;
 
 class UseCasesServiceProvider extends ServiceProvider
 {
     protected array $classes = [
             GetStatisticsDataUseCaseInterface::class => GetStatisticsDataUseCase::class,
-            GetRoleIDsPermissionIDsUseCaseInterface::class => GetRoleIDsPermissionIDsUseCase::class
+            GetRoleIDsPermissionIDsUseCaseInterface::class => GetRoleIDsPermissionIDsUseCase::class,
+            ValidateLimitOfTransactionsByAccountUseCaseInterface::class => ValidateLimitOfTransactionsByAccountUseCase::class,
+            CreateTransactionUseCaseInterface::class => CreateTransactionUseCase::class
         ];
 
 

@@ -16,6 +16,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon|mixed $date
  * @property mixed $type
  * @property mixed|string $status
+ * @property mixed|string|null $userIP
+ * @property float|mixed|null $own_commission
+ * @property mixed|string|null $detail
+ * @property mixed|string $account_number
+ * @property int|mixed $admin_id
+ * @property mixed $distributor_id
+ * @property mixed $shopkeeper_id
+ * @property int|mixed $supplier_id
+ * @property int|mixed $first_transaction
  */
 class Transaction extends Model
 {
@@ -76,6 +85,4 @@ class Transaction extends Model
     {
         return $this->belongsToMany(User::class, 'shopkeeper_id');
     }
-
-
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Users;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginUserDataRequest;
+use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -86,6 +87,7 @@ class LoginUsersController extends Controller
         }
 
         $accessToken = auth()->user()->createToken('authToken')->accessToken;
+
 
         return response([
             'message' => 'Success Login',
