@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property mixed $shopkeeper_id
  * @property int|mixed $supplier_id
  * @property int|mixed $first_transaction
+ * @property mixed $id
  */
 class Transaction extends Model
 {

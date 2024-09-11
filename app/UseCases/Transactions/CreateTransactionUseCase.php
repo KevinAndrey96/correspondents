@@ -16,6 +16,74 @@ use Carbon\Carbon;
 
 class CreateTransactionUseCase implements CreateTransactionUseCaseInterface
 {
+    /**
+     * Create Transaction
+     * @OA\Post (
+     *     path="/api/v1/transaction/create",
+     *     tags={"Transaction"},
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="productID", type="integer"),
+     *              @OA\Property(property="accountNumber", type="string"),
+     *              @OA\Property(property="amount", type="number", format="float"),
+     *              @OA\Property(property="type", type="string"),
+     *              @OA\Property(property="detail", type="string"),
+     *              @OA\Property(property="date", type="string")
+     *          )
+     *      ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success Transaction Creation",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                  property="transactionID",
+     *                  type="integer",
+     *                  example="3111"
+     *              ),
+     *              @OA\Property(
+     *                   property="message",
+     *                   type="string",
+     *                   example="Transacción asignada a proveedor"
+     *              )
+     *           )
+     *        ),
+     *     @OA\Response(
+     *          response=204,
+     *          description="There are no suppliers",
+     *          @OA\JsonContent(
+     *              @OA\Property(
+     *                   property="transactionID",
+     *                   type="integer",
+     *                   example="3111"
+     *               ),
+     *               @OA\Property(
+     *                    property="message",
+     *                    type="string",
+     *                    example="No hay proveedores disponibles"
+     *               )
+     *            )
+     *         ),
+     *     @OA\Response(
+     *           response=429,
+     *           description="Transaction limit per period exceeded",
+     *           @OA\JsonContent(
+     *               @OA\Property(
+     *                    property="transactionID",
+     *                    type="integer",
+     *                    example="3111"
+     *                ),
+     *                @OA\Property(
+     *                     property="message",
+     *                     type="string",
+     *                     example="Esta cuenta superó el límite de transacciones por periodo, podrá realizar transacciones con la misma a partir de las 11:06 PM"
+     *                )
+     *             )
+     *          )
+     *       )
+     */
+
     protected TransactionRepositoryInterface $transactionRepository;
     protected ProductRepositoryInterface $productRepository;
     protected UserRepositoryInterface $userRepository;
@@ -75,8 +143,9 @@ class CreateTransactionUseCase implements CreateTransactionUseCaseInterface
         }
 
         if ($allowedTransaction == 0) {
+            $this->transactionRepository->update($transaction, 'cancelled', null, null);
             return [
-                'transaction' => null,
+                'transactionID' => $transaction->id,
                 'message' => 'Esta cuenta superó el límite de transacciones por periodo, podra realizar transacciones con la misma a partir de las '.$allowedHour
             ];
         }
@@ -88,8 +157,9 @@ class CreateTransactionUseCase implements CreateTransactionUseCaseInterface
         }
 
         if (! $suppliers->count()) {
+            $this->transactionRepository->update($transaction, 'cancelled', null, null);
             return [
-                'transaction' => null,
+                'transactionID' => $transaction->id,
                 'message' => 'No hay proveedores disponibles'
             ];
         }
@@ -109,7 +179,7 @@ class CreateTransactionUseCase implements CreateTransactionUseCaseInterface
         }
 
         return [
-            'transaction' => $transaction,
+            'transactionID' => $transaction->id,
             'message' => 'Transacción asignada a proveedor'
         ];
 

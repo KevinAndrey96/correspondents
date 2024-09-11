@@ -212,6 +212,108 @@
                     }
                 }
             }
+        },
+        "/api/v1/transaction/create": {
+            "post": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Create Transaction",
+                "operationId": "5c951fbd49d5f4aa953fc7a99866e293",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "productID": {
+                                        "type": "integer"
+                                    },
+                                    "accountNumber": {
+                                        "type": "string"
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "detail": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success Transaction Creation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "transactionID": {
+                                            "type": "integer",
+                                            "example": "3111"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Transacción asignada a proveedor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "There are no suppliers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "transactionID": {
+                                            "type": "integer",
+                                            "example": "3111"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No hay proveedores disponibles"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Transaction limit per period exceeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "transactionID": {
+                                            "type": "integer",
+                                            "example": "3111"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Esta cuenta superó el límite de transacciones por periodo, podrá realizar transacciones con la misma a partir de las 11:06 PM"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -222,6 +324,10 @@
         {
             "name": "Login",
             "description": "Login"
+        },
+        {
+            "name": "Transaction",
+            "description": "Transaction"
         }
     ],
     "components": {
