@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://testing.asparecargas.net"
+            "url": "http://127.0.0.1:8000"
         }
     ],
     "paths": {
@@ -39,19 +39,19 @@
                                                                 "type": "integer",
                                                                 "example": 1
                                                             },
-                                                            "product_name": {
+                                                            "productName": {
                                                                 "type": "string",
                                                                 "example": "BANCOLOMBIA"
                                                             },
-                                                            "product_description": {
+                                                            "productDescription": {
                                                                 "type": "string",
                                                                 "example": "<p>DEPOSITO BANCOLOMBIA</p>"
                                                             },
-                                                            "product_logo": {
+                                                            "productLogo": {
                                                                 "type": "string",
                                                                 "example": "https://example.com/storage/products/1.png"
                                                             },
-                                                            "product_commission": {
+                                                            "productCommission": {
                                                                 "type": "integer",
                                                                 "example": 800
                                                             },
@@ -59,15 +59,15 @@
                                                                 "type": "string",
                                                                 "example": "Deposit"
                                                             },
-                                                            "client_name": {
+                                                            "clientName": {
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
-                                                            "client_document": {
+                                                            "clientDocument": {
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
-                                                            "phone_number": {
+                                                            "phoneNumber": {
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
@@ -75,11 +75,11 @@
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
-                                                            "account_type": {
+                                                            "accountType": {
                                                                 "type": "integer",
                                                                 "example": 1
                                                             },
-                                                            "account_number": {
+                                                            "accountNumber": {
                                                                 "type": "integer",
                                                                 "example": 1
                                                             },
@@ -91,19 +91,19 @@
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
-                                                            "are_default_fields": {
+                                                            "areDefaultFields": {
                                                                 "type": "integer",
                                                                 "example": 1
                                                             },
-                                                            "field_names": {
+                                                            "fieldNames": {
                                                                 "type": "string",
                                                                 "example": "Número de seguro,Número de NIT,Número de registro civil"
                                                             },
-                                                            "min_amount": {
+                                                            "minAmount": {
                                                                 "type": "integer",
                                                                 "example": 5000
                                                             },
-                                                            "max_amount": {
+                                                            "maxAmount": {
                                                                 "type": "integer",
                                                                 "example": 300000
                                                             },
@@ -130,6 +130,114 @@
                         "passport": []
                     }
                 ]
+            }
+        },
+        "/api/v1/transaction/create": {
+            "post": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Create Transaction",
+                "operationId": "1638ec919252ee286da613c58cdc91b6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "productID": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "accountNumber": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 20000.5
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "Deposit"
+                                    },
+                                    "detail": {
+                                        "type": "string",
+                                        "example": "Tipo de cuenta: Ahorros,Nit: 332435,"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "example": "2024-09-10"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success Transaction Creation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "transactionID": {
+                                            "type": "integer",
+                                            "example": "3111"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Transacción asignada a proveedor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "There are no suppliers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "transactionID": {
+                                            "type": "integer",
+                                            "example": "3111"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No hay proveedores disponibles"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Transaction limit per period exceeded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "transactionID": {
+                                            "type": "integer",
+                                            "example": "3111"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Esta cuenta superó el límite de transacciones por periodo, podrá realizar transacciones con la misma a partir de las 11:06 PM"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/v1/user/login": {
@@ -212,108 +320,6 @@
                     }
                 }
             }
-        },
-        "/api/v1/transaction/create": {
-            "post": {
-                "tags": [
-                    "Transaction"
-                ],
-                "summary": "Create Transaction",
-                "operationId": "5c951fbd49d5f4aa953fc7a99866e293",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "productID": {
-                                        "type": "integer"
-                                    },
-                                    "accountNumber": {
-                                        "type": "string"
-                                    },
-                                    "amount": {
-                                        "type": "number",
-                                        "format": "float"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "detail": {
-                                        "type": "string"
-                                    },
-                                    "date": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success Transaction Creation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "transactionID": {
-                                            "type": "integer",
-                                            "example": "3111"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Transacción asignada a proveedor"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "204": {
-                        "description": "There are no suppliers",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "transactionID": {
-                                            "type": "integer",
-                                            "example": "3111"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "No hay proveedores disponibles"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "429": {
-                        "description": "Transaction limit per period exceeded",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "transactionID": {
-                                            "type": "integer",
-                                            "example": "3111"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Esta cuenta superó el límite de transacciones por periodo, podrá realizar transacciones con la misma a partir de las 11:06 PM"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     },
     "tags": [
@@ -322,12 +328,12 @@
             "description": "Products"
         },
         {
-            "name": "Login",
-            "description": "Login"
-        },
-        {
             "name": "Transaction",
             "description": "Transaction"
+        },
+        {
+            "name": "Login",
+            "description": "Login"
         }
     ],
     "components": {
