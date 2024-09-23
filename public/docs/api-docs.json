@@ -39,35 +39,35 @@
                                                                 "type": "integer",
                                                                 "example": 1
                                                             },
-                                                            "productName": {
+                                                            "product_name": {
                                                                 "type": "string",
                                                                 "example": "BANCOLOMBIA"
                                                             },
-                                                            "productDescription": {
+                                                            "product_description": {
                                                                 "type": "string",
                                                                 "example": "<p>DEPOSITO BANCOLOMBIA</p>"
                                                             },
-                                                            "productLogo": {
+                                                            "product_logo": {
                                                                 "type": "string",
                                                                 "example": "https://example.com/storage/products/1.png"
                                                             },
-                                                            "productCommission": {
+                                                            "product_commission": {
                                                                 "type": "integer",
                                                                 "example": 800
                                                             },
-                                                            "producType": {
+                                                            "product_type": {
                                                                 "type": "string",
                                                                 "example": "Deposit"
                                                             },
-                                                            "clientName": {
+                                                            "client_name": {
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
-                                                            "clientDocument": {
+                                                            "client_document": {
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
-                                                            "phoneNumber": {
+                                                            "phone_number": {
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
@@ -75,11 +75,11 @@
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
-                                                            "accountType": {
+                                                            "account_type": {
                                                                 "type": "integer",
                                                                 "example": 1
                                                             },
-                                                            "accountNumber": {
+                                                            "account_number": {
                                                                 "type": "integer",
                                                                 "example": 1
                                                             },
@@ -91,19 +91,19 @@
                                                                 "type": "integer",
                                                                 "example": 0
                                                             },
-                                                            "areDefaultFields": {
+                                                            "are_default_fields": {
                                                                 "type": "integer",
                                                                 "example": 1
                                                             },
-                                                            "fieldNames": {
+                                                            "field_names": {
                                                                 "type": "string",
                                                                 "example": "Número de seguro,Número de NIT,Número de registro civil"
                                                             },
-                                                            "minAmount": {
+                                                            "min_amount": {
                                                                 "type": "integer",
                                                                 "example": 5000
                                                             },
-                                                            "maxAmount": {
+                                                            "max_amount": {
                                                                 "type": "integer",
                                                                 "example": 300000
                                                             },
@@ -145,11 +145,11 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "productID": {
+                                    "product_id": {
                                         "type": "integer",
                                         "example": 1
                                     },
-                                    "accountNumber": {
+                                    "account_number": {
                                         "type": "string",
                                         "example": "1234567890"
                                     },
@@ -160,7 +160,10 @@
                                     },
                                     "type": {
                                         "type": "string",
-                                        "example": "Deposit"
+                                        "enum": [
+                                            "Deposit",
+                                            "Withdrawal"
+                                        ]
                                     },
                                     "detail": {
                                         "type": "string",
@@ -183,7 +186,7 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "transactionID": {
+                                        "transaction_id": {
                                             "type": "integer",
                                             "example": "3111"
                                         },
@@ -203,7 +206,7 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "transactionID": {
+                                        "transaction_id": {
                                             "type": "integer",
                                             "example": "3111"
                                         },
@@ -223,7 +226,7 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "transactionID": {
+                                        "transaction_id": {
                                             "type": "integer",
                                             "example": "3111"
                                         },

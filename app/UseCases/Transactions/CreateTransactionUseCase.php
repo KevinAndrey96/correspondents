@@ -79,7 +79,7 @@ class CreateTransactionUseCase implements CreateTransactionUseCaseInterface
         if ($allowedTransaction == 0) {
             $this->transactionRepository->update($transaction, 'cancelled', null, null);
             return [
-                'transactionID' => $transaction->id,
+                'transaction_id' => $transaction->id,
                 'message' => 'Esta cuenta superó el límite de transacciones por periodo, podra realizar transacciones con la misma a partir de las '.$allowedHour
             ];
         }
@@ -93,7 +93,7 @@ class CreateTransactionUseCase implements CreateTransactionUseCaseInterface
         if (! $suppliers->count()) {
             $this->transactionRepository->update($transaction, 'cancelled', null, null);
             return [
-                'transactionID' => $transaction->id,
+                'transaction_id' => $transaction->id,
                 'message' => 'No hay proveedores disponibles'
             ];
         }
@@ -107,14 +107,20 @@ class CreateTransactionUseCase implements CreateTransactionUseCaseInterface
                 if ($supplier->max_queue > $numTransactions) {
                     $transaction->supplier_id = $supplier->id;
                     $transaction->save();
-                    break;
+
+                    return [
+                        'transaction_id' => $transaction->id,
+                        'message' => 'Transacción asignada a proveedor'
+                    ];
                 }
             }
         }
 
+        $this->transactionRepository->update($transaction, 'cancelled', null, null);
+
         return [
-            'transactionID' => $transaction->id,
-            'message' => 'Transacción asignada a proveedor'
+            'transaction_id' => $transaction->id,
+            'message' => 'No hay proveedores disponibles'
         ];
 
     }

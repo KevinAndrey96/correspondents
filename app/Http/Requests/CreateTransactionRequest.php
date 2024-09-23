@@ -24,14 +24,12 @@ class CreateTransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            'productID' => 'required|numeric',
-            'accountNumber' => 'required|string',
+            'product_id' => 'required|numeric',
+            'account_number' => 'required|string',
             'amount' => 'required|numeric',
             'type' => 'required|string',
-            'status' => 'required|string',
             'detail' => 'string',
             'date' => 'required',
-            //'ownCommission' => 'numeric'
         ];
     }
 

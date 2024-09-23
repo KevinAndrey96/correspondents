@@ -24,10 +24,10 @@ class CreateTransactionsController extends Controller
      *          required=true,
      *          @OA\JsonContent(
      *              type="object",
-     *              @OA\Property(property="productID", type="integer", example=1),
-     *              @OA\Property(property="accountNumber", type="string", example="1234567890"),
+     *              @OA\Property(property="product_id", type="integer", example=1),
+     *              @OA\Property(property="account_number", type="string", example="1234567890"),
      *              @OA\Property(property="amount", type="number", format="float", example=20000.50),
-     *              @OA\Property(property="type", type="string", example="Deposit"),
+     *              @OA\Property(property="type", type="string", enum={"Deposit","Withdrawal"}),
      *              @OA\Property(property="detail", type="string", example="Tipo de cuenta: Ahorros,Nit: 332435,"),
      *              @OA\Property(property="date", type="string", example="2024-09-10")
      *          )
@@ -37,7 +37,7 @@ class CreateTransactionsController extends Controller
      *         description="Success Transaction Creation",
      *         @OA\JsonContent(
      *             @OA\Property(
-     *                  property="transactionID",
+     *                  property="transaction_id",
      *                  type="integer",
      *                  example="3111"
      *              ),
@@ -53,7 +53,7 @@ class CreateTransactionsController extends Controller
      *          description="There are no suppliers",
      *          @OA\JsonContent(
      *              @OA\Property(
-     *                   property="transactionID",
+     *                   property="transaction_id",
      *                   type="integer",
      *                   example="3111"
      *               ),
@@ -69,7 +69,7 @@ class CreateTransactionsController extends Controller
      *           description="Transaction limit per period exceeded",
      *           @OA\JsonContent(
      *               @OA\Property(
-     *                    property="transactionID",
+     *                    property="transaction_id",
      *                    type="integer",
      *                    example="3111"
      *                ),
@@ -94,14 +94,14 @@ class CreateTransactionsController extends Controller
         $shopkeeper = $request->user();
         $createTransactionDTO = new CreateTransactionDTO;
         $createTransactionDTO->shopkeeper = $shopkeeper;
-        $createTransactionDTO->productID = intval($request->input('productID'));
-        $createTransactionDTO->accountNumber = strval($request->input('accountNumber'));
+        $createTransactionDTO->productID = intval($request->input('product_id'));
+        $createTransactionDTO->accountNumber = strval($request->input('account_number'));
         $createTransactionDTO->amount = floatval($request->input('amount'));
         $createTransactionDTO->type = strval($request->input('type'));
         $createTransactionDTO->status = 'hold';
         $createTransactionDTO->detail = strval($request->input('detail'));
         $createTransactionDTO->date = strval($request->input('date'));
-        $createTransactionDTO->ownCommission = floatval($request->input('ownCommission'));
+        $createTransactionDTO->ownCommission = floatval($request->input('own_commission'));
         $createTransactionDTO->userIP = \Request::ip();
 
         $transactionCreationData = $this->createTransactionUseCase->handle($createTransactionDTO);
