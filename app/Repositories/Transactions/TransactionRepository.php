@@ -55,6 +55,11 @@ class TransactionRepository implements TransactionRepositoryInterface
         return true;
     }
 
+    public function getByID(int $id): Transaction
+    {
+        return Transaction::find($id);
+    }
+
     public function getFirstTransactionsByAccountNumber(string $accountNumber, int $productID)
     {
         return Transaction::where([

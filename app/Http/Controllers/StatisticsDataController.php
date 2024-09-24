@@ -34,15 +34,6 @@ class StatisticsDataController extends Controller
         $userRole = $data['userRole'];
         $userID = $data['userID'];
 
-        /*
-        $statisticsDataDTO = (new StatisticsDataDTO())
-            ->setAcceptedTransactions($acceptedTransactions)
-            ->setFailedTransactions($acceptedTransactions)
-            ->setSuccessTransactions($acceptedTransactions)
-            ->setCancelledTransactions($acceptedTransactions)
-            ->setHoldTransactions($holdTransactions);
-        */
-
         return new StatisticsResource(
             $failedTransactions,
             $successTransactions,

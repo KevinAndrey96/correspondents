@@ -14,4 +14,6 @@ interface TransactionRepositoryInterface
 
     public function delete(Transaction $transaction): bool;
     public function getHoldTransactionsBySupplierID(int $userID);
+
+    public function getByID(int $id): Transaction;
 }

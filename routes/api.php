@@ -46,6 +46,7 @@ Route::post('v1/user/login', App\Http\Controllers\API\Users\LoginUsersController
 Route::middleware('auth:api')->group(function(){
     Route::get('v1/products', App\Http\Controllers\API\Products\GetProductsController::class)->name('api.products');
     Route::post('v1/transaction/create', App\Http\Controllers\API\Transactions\CreateTransactionsController::class)->name('transactions.create');
+    Route::get('v1/transaction/detail/{id}', App\Http\Controllers\API\Transactions\DetailTransactionsController::class)->name('transactions.detail');
 });
 
 

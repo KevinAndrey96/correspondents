@@ -243,6 +243,88 @@
                 }
             }
         },
+        "/api/v1/transaction/detail/{id}": {
+            "get": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Get transaction detail",
+                "operationId": "466a752f509d1a679e0cc3e3727460ee",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the transaction to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get transaction detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "transaction_detail"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "transaction_id": {
+                                                            "type": "integer",
+                                                            "example": 3817
+                                                        },
+                                                        "transaction_status": {
+                                                            "type": "string",
+                                                            "example": "cancelled"
+                                                        },
+                                                        "account_number": {
+                                                            "type": "string",
+                                                            "example": "1234567810"
+                                                        },
+                                                        "transaction_type": {
+                                                            "type": "string",
+                                                            "example": "Deposit"
+                                                        },
+                                                        "amount": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 20000.5
+                                                        },
+                                                        "transaction_detail": {
+                                                            "type": "string",
+                                                            "example": "Tipo de cuenta: Ahorros,Nit: 332435,"
+                                                        },
+                                                        "product_id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "product_name": {
+                                                            "type": "string",
+                                                            "example": "BANCOLOMBIA"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/user/login": {
             "post": {
                 "tags": [
