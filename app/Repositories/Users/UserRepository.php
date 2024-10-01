@@ -29,4 +29,9 @@ class UserRepository implements UserRepositoryInterface
             ->orderBy('priority', 'asc')
             ->get();
     }
+
+    public function getByID(int $id): User
+    {
+        return User::find($id);
+    }
 }

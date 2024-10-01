@@ -86,4 +86,38 @@ class TransactionRepository implements TransactionRepositoryInterface
             ['status', '=', 'hold']
         ])->get();
     }
+
+    public function getBetweenDates(?bool $shopkeeper, ?bool $supplier, ?bool $distributor,
+                                    string $dateFrom, string $dateTo, int $userID)
+    {
+        if (isset($shopkeeper)) {
+            $transactions = Transaction::where('shopkeeper_id', $userID)
+                ->whereBetween('date', [$dateFrom, $dateTo])
+                ->orderBy('id', 'desc')
+                ->get();
+        }
+
+        if (isset($supplier)) {
+            $transactions = Transaction::where('supplier_id', $userID)
+                ->whereBetween('date', [$dateFrom, $dateTo])
+                ->orderBy('id', 'desc')
+                ->get();
+        }
+
+        if (isset($distributor)) {
+            $transactions = Transaction::where('distributor_id', $userID)
+                ->whereBetween('date', [$dateFrom, $dateTo])
+                ->orderBy('id', 'desc')
+                ->get();
+        }
+
+        if (is_null($distributor) && is_null($shopkeeper) && is_null($supplier)) {
+            $transactions = Transaction::where('admin_id', $userID)
+                ->whereBetween('date', [$dateFrom, $dateTo])
+                ->orderBy('id', 'desc')
+                ->get();
+        }
+
+        return $transactions;
+    }
 }

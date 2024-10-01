@@ -29,9 +29,6 @@ class RoleResource extends JsonResource
             'relationships' => [
                 'permissions' => [
                     'data' => $this->permissions->pluck('id')->toArray()
-                    //->mapWithKeys(function ($id) {
-                       //     return ['id' => $id, 'type' => 'permissions'];
-                        //})->toArray(),
                 ],
             ],
         ];

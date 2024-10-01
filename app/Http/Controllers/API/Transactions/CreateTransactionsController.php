@@ -17,6 +17,11 @@ class CreateTransactionsController extends Controller
 {
     /**
      * Create Transaction
+     * @OA\Schema(
+     *      schema="TransactionType",
+     *      type="string",
+     *      enum={"Deposit","Withdrawal"}
+     *  ),
      * @OA\Post (
      *     path="/api/v1/transaction/create",
      *     tags={"Transaction"},
@@ -27,7 +32,7 @@ class CreateTransactionsController extends Controller
      *              @OA\Property(property="product_id", type="integer", example=1),
      *              @OA\Property(property="account_number", type="string", example="1234567890"),
      *              @OA\Property(property="amount", type="number", format="float", example=20000.50),
-     *              @OA\Property(property="type", type="string", enum={"Deposit","Withdrawal"}),
+     *              @OA\Property(property="type", ref="#/components/schemas/TransactionType"),
      *              @OA\Property(property="detail", type="string", example="Tipo de cuenta: Ahorros,Nit: 332435,"),
      *              @OA\Property(property="date", type="string", example="2024-09-10")
      *          )
@@ -82,6 +87,7 @@ class CreateTransactionsController extends Controller
      *          )
      *       )
      */
+
     protected CreateTransactionUseCaseInterface $createTransactionUseCase;
 
     public function __construct(CreateTransactionUseCaseInterface $createTransactionUseCase)

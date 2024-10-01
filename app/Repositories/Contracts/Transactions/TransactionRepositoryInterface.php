@@ -16,4 +16,7 @@ interface TransactionRepositoryInterface
     public function getHoldTransactionsBySupplierID(int $userID);
 
     public function getByID(int $id): Transaction;
+
+    public function getBetweenDates(?bool $shopkeeper, ?bool $supplier, ?bool $distributor,
+                                    string $dateFrom, string $dateTo, int $userID);
 }

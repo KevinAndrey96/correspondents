@@ -41,9 +41,15 @@ use Illuminate\Http\Request;
  *                      )
  *                  )
  *              )
+ *          ),
+ *      @OA\Response(
+ *          response=401,
+ *          description="Error: Unauthorized",
+ *          @OA\JsonContent(
+ *              @OA\Property(property="message", type="string", example="Unauthenticated.")
  *          )
  *      )
- *  )
+ *   )
  */
 
 class DetailTransactionsController extends Controller

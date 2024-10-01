@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000"
+            "url": "https://testing.asparecargas.net"
         }
     ],
     "paths": {
@@ -159,11 +159,7 @@
                                         "example": 20000.5
                                     },
                                     "type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "Deposit",
-                                            "Withdrawal"
-                                        ]
+                                        "$ref": "#/components/schemas/TransactionType"
                                     },
                                     "detail": {
                                         "type": "string",
@@ -321,6 +317,22 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Error: Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -407,6 +419,25 @@
             }
         }
     },
+    "components": {
+        "schemas": {
+            "TransactionType": {
+                "type": "string",
+                "enum": [
+                    "Deposit",
+                    "Withdrawal"
+                ]
+            }
+        },
+        "securitySchemes": {
+            "passport": {
+                "type": "apiKey",
+                "description": "Ingrese el token en el formato (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
     "tags": [
         {
             "name": "Products",
@@ -421,16 +452,6 @@
             "description": "Login"
         }
     ],
-    "components": {
-        "securitySchemes": {
-            "passport": {
-                "type": "apiKey",
-                "description": "Ingrese el token en el formato (Bearer <token>)",
-                "name": "Authorization",
-                "in": "header"
-            }
-        }
-    },
     "security": [
         {
             "passport": []
