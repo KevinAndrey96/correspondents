@@ -44,7 +44,7 @@ use Illuminate\Http\Request;
  *          ),
  *      @OA\Response(
  *          response=401,
- *          description="Error: Unauthorized",
+ *          description="Unauthenticated",
  *          @OA\JsonContent(
  *              @OA\Property(property="message", type="string", example="Unauthenticated.")
  *          )

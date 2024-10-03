@@ -284,7 +284,7 @@ fix: transaction swagger
 fix: change to snake-case on swagger examples
 
 ## [Hotfix 1.9.3]
-fix: change enums implementation
+fix: change enums implementation.
 
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
