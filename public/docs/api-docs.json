@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://testing.asparecargas.net"
+            "url": "http://127.0.0.1:8000"
         }
     ],
     "paths": {
@@ -337,25 +337,13 @@
                 }
             }
         },
-        "/api/v1/transactions/user/{id}": {
+        "/api/v1/transactions/user": {
             "get": {
                 "tags": [
                     "Transaction"
                 ],
                 "summary": "Get all transactions by user",
-                "operationId": "56351f5e482ec94689b9d478d344eb88",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of user",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
+                "operationId": "9945a46ae368011a58649d0ee1575760",
                 "responses": {
                     "200": {
                         "description": "Get all transactions by user",

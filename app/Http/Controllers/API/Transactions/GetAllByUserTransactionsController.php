@@ -15,18 +15,8 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 /**
  * Get all transactions by user
  * @OA\Get(
- *     path="/api/v1/transactions/user/{id}",
+ *     path="/api/v1/transactions/user",
  *     tags={"Transaction"},
- *     @OA\Parameter(
- *          name="id",
- *          in="path",
- *          required=true,
- *          description="ID of user",
- *          @OA\Schema(
- *              type="integer",
- *              format="int64"
- *          )
- *      ),
  *      @OA\Response(
  *          response=200,
  *          description="Get all transactions by user",
@@ -75,8 +65,9 @@ class GetAllByUserTransactionsController extends Controller
     {
         $this->getAllTransactionsByUserUseCase = $getAllTransactionsByUserUseCase;
     }
-    public function __invoke(int $id): AnonymousResourceCollection
+    public function __invoke(Request $request)
     {
-        return $this->getAllTransactionsByUserUseCase->handle($id);
+        $userID = $request->user()->id;
+        return $this->getAllTransactionsByUserUseCase->handle($userID);
     }
 }

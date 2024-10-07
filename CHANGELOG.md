@@ -286,5 +286,8 @@ fix: change to snake-case on swagger examples
 ## [Hotfix 1.9.3]
 fix: change enums implementation.
 
+## [Hotfix 1.9.4]
+fix: delete parameter on invoke method from GetAllByUserTransactionsController and get it implicitly by jwt token.
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests
