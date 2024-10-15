@@ -269,7 +269,7 @@
                                             "properties": {
                                                 "type": {
                                                     "type": "string",
-                                                    "example": "transaction_detail"
+                                                    "example": "transaction"
                                                 },
                                                 "attributes": {
                                                     "properties": {

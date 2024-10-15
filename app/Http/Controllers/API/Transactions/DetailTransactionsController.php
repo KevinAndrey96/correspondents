@@ -28,7 +28,7 @@ use Illuminate\Http\Request;
  *              @OA\Property(
  *                  property="data",
  *                      type="object",
- *                      @OA\Property(property="type", type="string", example="transaction_detail"),
+ *                      @OA\Property(property="type", type="string", example="transaction"),
  *                      @OA\Property(property="attributes", type="object",
  *                          @OA\Property(property="transaction_id", type="integer", example=3817),
  *                          @OA\Property(property="transaction_status", type="string", example="cancelled"),
@@ -62,7 +62,6 @@ class DetailTransactionsController extends Controller
     {
         $this->getTransactionDetailUseCase = $getTransactionDetailUseCase;
     }
-
 
     public function __invoke(int $id)
     {

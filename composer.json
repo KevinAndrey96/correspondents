@@ -8,6 +8,7 @@
         "php": "^8.1",
         "bacon/bacon-qr-code": "^2.0",
         "barryvdh/laravel-dompdf": "^1.0",
+        "beyondcode/laravel-websockets": "^1.14",
         "binarytorch/larecipe": "^2.7",
         "darkaonline/l5-swagger": "^8.6",
         "doctrine/dbal": "^3.4",
@@ -24,7 +25,7 @@
         "maatwebsite/excel": "^3.1",
         "pragmarx/google2fa-laravel": "^2.0",
         "psr/simple-cache": "^1.0",
-        "pusher/pusher-php-server": "^7.2",
+        "pusher/pusher-php-server": "*",
         "ronasit/laravel-swagger": "^2.2",
         "spatie/laravel-permission": "^5.5",
         "yajra/laravel-datatables": "^9.0"

@@ -11,10 +11,11 @@
     },
     "devDependencies": {
         "axios": "^0.25",
+        "laravel-echo": "^1.16.1",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
-        "pusher-js": "^8.0.2"
+        "pusher-js": "^8.3.0"
     },
     "dependencies": {
         "jquery.maskedinput": "^1.4.1"
