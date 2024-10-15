@@ -54,8 +54,6 @@ use Illuminate\Http\Request;
 
 class DetailTransactionsController extends Controller
 {
-
-
     protected GetTransactionDetailUseCaseInterface $getTransactionDetailUseCase;
 
     public function __construct(GetTransactionDetailUseCaseInterface $getTransactionDetailUseCase)
