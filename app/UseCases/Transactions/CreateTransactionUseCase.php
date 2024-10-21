@@ -13,6 +13,8 @@ use App\Repositories\Products\ProductRepository;
 use App\Repositories\Transactions\TransactionRepository;
 use App\UseCases\Contracts\Transactions\CreateTransactionUseCaseInterface;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
+use Symfony\Component\HttpFoundation\Request as RequestAlias;
 
 class CreateTransactionUseCase implements CreateTransactionUseCaseInterface
 {
@@ -35,6 +37,27 @@ class CreateTransactionUseCase implements CreateTransactionUseCaseInterface
     public function handle(CreateTransactionDTO $DTO)
     {
         $transaction = $this->transactionRepository->store($DTO);
+        $shopkeeper = $this->userRepository->getByID($transaction->shopkeeper_id);
+
+        try{
+
+        if (isset($shopkeeper) && $shopkeeper->developer_mode && !empty($shopkeeper->webhook_url)) {
+
+            $client = new Client();
+
+            $client->requestAsync(RequestAlias::METHOD_POST, $shopkeeper->webhook_url, [
+                'json' => [
+                    'webhook_type' => 'TRANSACTION',
+                    'webhook_code' => 'STATUS_UPDATED',
+                    'transaction_id' => $transaction->id,
+                    'environment' => getenv('PROJECT_ENVIRONMENT')
+                ]
+            ]);
+        }
+        }catch(\Exception $e) {
+            echo $e;
+        }
+
         $product = $this->productRepository->getByID($transaction->product_id);
 
         $allowedTransaction = 0;

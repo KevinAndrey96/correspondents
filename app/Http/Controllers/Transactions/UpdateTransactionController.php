@@ -180,7 +180,33 @@ class UpdateTransactionController extends Controller
                     $supplierSummary->save();
                     $shopkeeperSummary->save();
 
+                    if ($shopkeeper->developer_mode && !empty($shopkeeper->webhook_url)) {
+                        $client = new Client();
+
+                        $client->requestAsync(RequestAlias::METHOD_POST, $shopkeeper->webhook_url, [
+                            'json' => [
+                                'webhook_type' => 'TRANSACTION',
+                                'webhook_code' => 'STATUS_UPDATED',
+                                'transaction_id' => $transaction->id,
+                                'environment' => getenv('PROJECT_ENVIRONMENT')
+                            ]
+                        ]);
+                    }
+
                     return redirect('/transactions');
+                }
+
+                if ($shopkeeper->developer_mode && !empty($shopkeeper->webhook_url)) {
+                    $client = new Client();
+
+                    $client->requestAsync(RequestAlias::METHOD_POST, $shopkeeper->webhook_url, [
+                        'json' => [
+                            'webhook_type' => 'TRANSACTION',
+                            'webhook_code' => 'STATUS_UPDATED',
+                            'transaction_id' => $transaction->id,
+                            'environment' => getenv('PROJECT_ENVIRONMENT')
+                        ]
+                    ]);
                 }
 
                 return redirect('/transactions');

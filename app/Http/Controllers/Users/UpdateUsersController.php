@@ -34,9 +34,11 @@ class UpdateUsersController extends Controller
         $user->product_id = $request->input('product_id');
         $user->balance_min_amount = $request->input('balanceMinAmount');
         $developerMode = intval($request->input('developerMode'));
+        $webhookURL = strval($request->input('webhookURL'));
 
         if (isset($developerMode)) {
             $user->developer_mode = $developerMode;
+            $user->webhook_url = $webhookURL;
         }
 
         if (isset($request->card_ids)) {

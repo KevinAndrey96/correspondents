@@ -91,6 +91,7 @@ class User extends Authenticatable
         'brand_id',
         'balance_min_amount',
         'developer_mode',
+        'webhook_url'
     ];
 
     /**

@@ -244,7 +244,7 @@
                                     @if (Auth::user()->role == 'Administrator')
                                         <div class="col-md-4">
                                             <div class="input-group input-group-static mb-4">
-                                                <label  for="document_type">Tipo de usuario</label>
+                                                <label  for="userType">Tipo de usuario</label>
                                                 <select id="" name="roleID" class="form-control" aria-label="Default select example" required>
                                                     <option class="text-center" value="" disabled>Tipo de usuario</option>
                                                     <option class="text-center" value="" selected>Sin tipo de usuario</option>
@@ -293,13 +293,27 @@
                                         (Auth::user()->role == 'Distributor' && Auth::user()->developer_mode && $user->role == 'Shopkeeper'))
                                         <div class="col-md-4">
                                             <div class="input-group input-group-static mb-4">
-                                                <select name="developerMode" id="developerMode" class="form-control" aria-label="Default select example" required>
+                                                <label for="developerMode">Modo desarrollador</label>
+                                                <select name="developerMode" id="developerMode" class="form-control" aria-label="Default select example" onchange="showDeveloperModeInputs(this.id)" required>
                                                     <option class="text-center" value="" disabled>Modo desarrollador</option>
-                                                    <option class="text-center" value="1"
-                                                        {{($user->developer_mode) ? 'selected' : ''}}>Si</option>
                                                     <option class="text-center" value="0"
                                                         {{(! $user->developer_mode) ? 'selected' : ''}}>No</option>
+                                                    <option class="text-center" value="1"
+                                                        {{($user->developer_mode) ? 'selected' : ''}}>Si</option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" style="{{($user->developer_mode) ? 'display:block;' : 'display:none;'}};" id="webhookURLDiv">
+                                            <div class="input-group input-group-static mb-4">
+                                                <label for="webhookURL"></label>
+                                                <input type="text" class="form-control" name="webhookURL"
+                                                       @if (! is_null($user->webhook_url))
+                                                           value="{{$user->webhook_url}}"
+                                                       @endif
+                                                       id="webhookURL"
+                                                       placeholder="Webhook URL"
+                                                    {{(!$user->developer_mode) ? 'disabled' : ''}}
+                                                >
                                             </div>
                                         </div>
                                     @endif
@@ -321,4 +335,25 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+
+        function showDeveloperModeInputs(id)
+        {
+            let developerModeSelect = document.getElementById(id);
+            let webhookURLDiv = document.getElementById('webhookURLDiv');
+            let webhookURLInput = document.getElementById('webhookURL');
+
+            console.log(webhookURLInput);
+            webhookURLDiv.style.display = 'none';
+            webhookURLInput.disabled = true;
+
+            if (developerModeSelect.value == "1") {
+                webhookURLDiv.style.display = 'block';
+                webhookURLInput.disabled = false;
+            }
+        }
+
+    </script>
+
 @endsection
