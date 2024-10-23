@@ -14,6 +14,7 @@ use App\Repositories\Transactions\TransactionRepository;
 use App\UseCases\Contracts\Transactions\CreateTransactionUseCaseInterface;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\Request as RequestAlias;
 
 class CreateTransactionUseCase implements CreateTransactionUseCaseInterface
@@ -39,23 +40,22 @@ class CreateTransactionUseCase implements CreateTransactionUseCaseInterface
         $transaction = $this->transactionRepository->store($DTO);
         $shopkeeper = $this->userRepository->getByID($transaction->shopkeeper_id);
 
-        try{
+        try {
+            if (isset($shopkeeper) && $shopkeeper->developer_mode && !empty($shopkeeper->webhook_url)) {
 
-        if (isset($shopkeeper) && $shopkeeper->developer_mode && !empty($shopkeeper->webhook_url)) {
+                $client = new Client();
 
-            $client = new Client();
-
-            $client->requestAsync(RequestAlias::METHOD_POST, $shopkeeper->webhook_url, [
-                'json' => [
-                    'webhook_type' => 'TRANSACTION',
-                    'webhook_code' => 'STATUS_UPDATED',
-                    'transaction_id' => $transaction->id,
-                    'environment' => getenv('PROJECT_ENVIRONMENT')
-                ]
-            ]);
-        }
-        }catch(\Exception $e) {
-            echo $e;
+                $client->request(RequestAlias::METHOD_POST, $shopkeeper->webhook_url, [
+                    'json' => [
+                        'webhook_type' => 'TRANSACTION',
+                        'webhook_code' => 'STATUS_UPDATED',
+                        'transaction_id' => $transaction->id,
+                        'environment' => getenv('PROJECT_ENVIRONMENT')
+                    ]
+                ]);
+            }
+        } catch(GuzzleException $e) {
+            error_log($e);
         }
 
         $product = $this->productRepository->getByID($transaction->product_id);

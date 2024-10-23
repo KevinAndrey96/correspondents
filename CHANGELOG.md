@@ -289,5 +289,8 @@ fix: change enums implementation.
 ## [Hotfix 1.9.4]
 fix: delete parameter on invoke method from GetAllByUserTransactionsController and get it implicitly by jwt token.
 
+## [Hotfix 1.9.5]
+fix: change echo by error_log on guzzle exception
+
 ## [Release 1.0.0]
 ## Jun-09-2022 App is ready for tests

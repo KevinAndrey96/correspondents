@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Transactions;
 use App\Http\Controllers\Controller;
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Commission;
@@ -179,11 +180,29 @@ class UpdateTransactionController extends Controller
                     $shopkeeperSummary->movement_id = $transaction->id;
                     $supplierSummary->save();
                     $shopkeeperSummary->save();
+                    try {
+                        if ($shopkeeper->developer_mode && !empty($shopkeeper->webhook_url)) {
+                            $client = new Client();
 
+                            $client->request(RequestAlias::METHOD_POST, $shopkeeper->webhook_url, [
+                                'json' => [
+                                    'webhook_type' => 'TRANSACTION',
+                                    'webhook_code' => 'STATUS_UPDATED',
+                                    'transaction_id' => $transaction->id,
+                                    'environment' => getenv('PROJECT_ENVIRONMENT')
+                                ]
+                            ]);
+                        }
+                    } catch(GuzzleException $e) {
+                        error_log($e);
+                    }
+                    return redirect('/transactions');
+                }
+                try {
                     if ($shopkeeper->developer_mode && !empty($shopkeeper->webhook_url)) {
                         $client = new Client();
 
-                        $client->requestAsync(RequestAlias::METHOD_POST, $shopkeeper->webhook_url, [
+                        $client->request(RequestAlias::METHOD_POST, $shopkeeper->webhook_url, [
                             'json' => [
                                 'webhook_type' => 'TRANSACTION',
                                 'webhook_code' => 'STATUS_UPDATED',
@@ -192,21 +211,8 @@ class UpdateTransactionController extends Controller
                             ]
                         ]);
                     }
-
-                    return redirect('/transactions');
-                }
-
-                if ($shopkeeper->developer_mode && !empty($shopkeeper->webhook_url)) {
-                    $client = new Client();
-
-                    $client->requestAsync(RequestAlias::METHOD_POST, $shopkeeper->webhook_url, [
-                        'json' => [
-                            'webhook_type' => 'TRANSACTION',
-                            'webhook_code' => 'STATUS_UPDATED',
-                            'transaction_id' => $transaction->id,
-                            'environment' => getenv('PROJECT_ENVIRONMENT')
-                        ]
-                    ]);
+                } catch (GuzzleException $e) {
+                    error_log($e);
                 }
 
                 return redirect('/transactions');
